@@ -356,7 +356,12 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
                           <FormItem>
                             <FormLabel>Phone</FormLabel>
                             <FormControl>
-                              <Input type="tel" {...field} data-testid="input-booking-phone" />
+                              <Input 
+                                type="tel" 
+                                {...field} 
+                                value={field.value || ''} 
+                                data-testid="input-booking-phone" 
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -429,6 +434,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
                           <FormControl>
                             <Textarea 
                               {...field} 
+                              value={field.value || ''}
                               placeholder="Any special instructions or requests..."
                               data-testid="textarea-booking-instructions"
                             />
