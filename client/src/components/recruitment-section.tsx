@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import recruitmentBanner from '@assets/Superhero Sponges Clean the Day!_1757704445189.png';
+import recruitmentBanner from '@assets/ChatGPT Image Sep 12, 2025, 04_21_53 PM_1757710579426.png';
 
 export function RecruitmentSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +15,7 @@ export function RecruitmentSection() {
             <div className="mb-8">
               <img 
                 src={recruitmentBanner} 
-                alt="Join the Clean Team - Superhero Sponges recruitment banner" 
+                alt="Join the Clean Team - Superhero sponge mascot with cleaning supply team characters" 
                 className="max-w-4xl mx-auto w-full h-auto rounded-lg shadow-lg"
                 data-testid="recruitment-banner-image"
               />

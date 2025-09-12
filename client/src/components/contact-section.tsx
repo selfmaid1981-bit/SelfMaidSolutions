@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import spongeHeroImage from '@assets/Super Sponge Cleaning Hero Logo_1757704445187.png';
+import spongeHeroImage from '@assets/ChatGPT Image Sep 11, 2025, 04_03_55 AM_1757710625361.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -242,14 +242,10 @@ export function ContactSection() {
               <div className="relative">
                 <img 
                   src={spongeHeroImage} 
-                  alt="Super Sponge Hero" 
+                  alt="Self-Maid superhero sponge mascot holding phone and waving - Get in Touch with the Clean Team" 
                   className="w-64 h-64 object-contain"
                   data-testid="mascot-image"
                 />
-                {/* Add a phone to the mascot's hand using CSS positioning */}
-                <div className="absolute top-16 right-12 w-8 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform rotate-12">
-                  <Phone className="w-4 h-4 text-white" />
-                </div>
               </div>
             </div>
             

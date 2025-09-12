@@ -1,5 +1,6 @@
 import { Shield, UserCheck, Leaf, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import aboutImage from '@assets/ChatGPT Image Sep 11, 2025, 03_48_23 AM_1757710354914.png';
 
 export function AboutSection() {
   const features = [
@@ -74,8 +75,8 @@ export function AboutSection() {
           
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Professional cleaning team working" 
+              src={aboutImage} 
+              alt="Self-Maid mascot sponge superhero with cleaning spray - We Make Your World Shine" 
               className="rounded-lg shadow-lg w-full h-auto" 
               data-testid="about-image"
             />

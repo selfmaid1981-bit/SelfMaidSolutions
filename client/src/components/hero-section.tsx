@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import bannerImage from '@assets/5F50A5D5-32E3-442D-8233-C452952080EB_1757708087312.png';
+import bannerImage from '@assets/Homepage banner and services section mockup for \'Self-Maid Cleaning Solutions\' featuring sponge masc_1757710271981.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -16,7 +16,7 @@ export function HeroSection() {
             <div className="mb-8">
               <img 
                 src={bannerImage} 
-                alt="Self-Maid Cleaning Solutions - Three superhero sponge mascots with capes and cleaning supplies" 
+                alt="Self-Maid Cleaning Solutions - Three superhero sponge mascots with cleaning tools against starry background" 
                 className="max-w-lg mx-auto w-full h-auto"
                 data-testid="hero-banner-image"
               />
