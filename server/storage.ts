@@ -43,7 +43,9 @@ export class MemStorage implements IStorage {
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
     const id = randomUUID();
     const message: ContactMessage = { 
-      ...insertMessage, 
+      ...insertMessage,
+      phone: insertMessage.phone ?? null,
+      message: insertMessage.message ?? null,
       id, 
       createdAt: new Date() 
     };
@@ -54,7 +56,9 @@ export class MemStorage implements IStorage {
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
     const id = randomUUID();
     const booking: Booking = { 
-      ...insertBooking, 
+      ...insertBooking,
+      phone: insertBooking.phone ?? null,
+      specialInstructions: insertBooking.specialInstructions ?? null,
       id, 
       status: "pending",
       paymentIntentId: null,
