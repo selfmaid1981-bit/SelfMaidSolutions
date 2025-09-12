@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
+import mascotImage from '@assets/5F50A5D5-32E3-442D-8233-C452952080EB_1757704137596.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -12,6 +13,14 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
+            <div className="mb-8">
+              <img 
+                src={mascotImage} 
+                alt="Self-Maid Cleaning Solutions mascot characters" 
+                className="max-w-lg mx-auto w-full h-auto"
+                data-testid="hero-mascot-image"
+              />
+            </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
               Professional Cleaning <br className="hidden sm:block" />
               <span className="text-secondary">You Can Trust</span>
