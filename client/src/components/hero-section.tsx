@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import bannerImage from '@assets/44622554-9DC2-4D53-A29F-52D22BACC128_1757705959396.png';
+import bannerImage from '@assets/IMG_0579(2)_1757707506439.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -16,7 +16,7 @@ export function HeroSection() {
             <div className="mb-8">
               <img 
                 src={bannerImage} 
-                alt="Self-Maid Cleaning Solutions - Three mascot sponges with cleaning tools" 
+                alt="Self-Maid Cleaning Solutions - Dustice League superhero sponge mascots with Mission Accepted" 
                 className="max-w-lg mx-auto w-full h-auto"
                 data-testid="hero-banner-image"
               />
