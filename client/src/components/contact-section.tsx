@@ -181,7 +181,12 @@ export function ContactSection() {
                       <FormItem>
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
-                          <Input type="tel" {...field} data-testid="input-phone" />
+                          <Input 
+                            type="tel" 
+                            {...field} 
+                            value={field.value || ''} 
+                            data-testid="input-phone" 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -223,6 +228,7 @@ export function ContactSection() {
                         <FormControl>
                           <Textarea 
                             {...field} 
+                            value={field.value || ''}
                             rows={4} 
                             placeholder="Tell us about your cleaning needs..."
                             data-testid="textarea-message"
