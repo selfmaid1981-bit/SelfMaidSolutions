@@ -180,9 +180,7 @@ const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => 
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
               COMMERCIAL/OFFICE<br />CLEANING
             </h3>
-            <p className="text-xl md:text-2xl text-primary font-medium">
-              Expert Cleaning Services<br />for Businesses
-            </p>
+            
           </div>
           
           <div className="space-y-6">
