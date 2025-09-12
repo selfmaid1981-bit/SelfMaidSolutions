@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import mascotPoses from '@assets/ChatGPT Image Sep 11, 2025, 04_03_42 AM_1757704445185.png';
+import residentialBg from '@assets/D6E85900-DEB4-4C6D-B91A-C36A8887DD8D_1757705959397.png';
 
 interface Service {
   id: string;
@@ -90,6 +91,68 @@ const getMascotPositionClass = (pose: Service['mascotPose']) => {
   }
 };
 
+// Special Residential Service Card Component
+const ResidentialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
+  return (
+    <Card 
+      className="residential-service-card overflow-hidden relative min-h-[400px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-200 to-sky-300"
+      data-testid="service-card-residential"
+      style={{
+        backgroundImage: `url(${residentialBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <CardContent className="p-8 h-full flex items-center justify-between relative">
+        {/* Sparkle decorations */}
+        <div className="absolute top-6 left-8 w-4 h-4 bg-white rounded-full opacity-80"></div>
+        <div className="absolute top-12 right-16 w-3 h-3 bg-white rounded-full opacity-60"></div>
+        <div className="absolute bottom-20 left-12 w-2 h-2 bg-white rounded-full opacity-70"></div>
+        <div className="absolute bottom-16 right-32 w-3 h-3 bg-white rounded-full opacity-50"></div>
+        
+        <div className="flex-1 max-w-xl">
+          <div className="mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
+              BRING SHINE HOME<br />
+              WITH SELF-MAID!
+            </h2>
+          </div>
+          
+          <div className="mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+              RESIDENTIAL<br />CLEANING
+            </h3>
+            <p className="text-lg text-primary font-medium">
+              Expert Cleaning Services<br />for Your Home
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <Button 
+              onClick={onBookClick}
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
+              data-testid="service-button-residential"
+            >
+              BOOK NOW
+            </Button>
+            <div className="text-2xl font-bold text-primary">
+              334-877-9513
+            </div>
+          </div>
+        </div>
+        
+        {/* Mascot area - visible on larger screens */}
+        <div className="hidden md:flex flex-1 justify-center items-center">
+          <div className="w-48 h-48 relative">
+            {/* The mascot is part of the background image, so we just ensure space for it */}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
@@ -98,6 +161,10 @@ export function ServicesSection() {
     setSelectedService(serviceId);
     setIsBookingModalOpen(true);
   };
+
+  // Filter services to separate residential from others
+  const residentialService = services.find(service => service.id === 'residential');
+  const otherServices = services.filter(service => service.id !== 'residential');
 
   return (
     <>
@@ -110,57 +177,67 @@ export function ServicesSection() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <Card 
-                  key={service.id} 
-                  className={`service-card transition-all duration-300 hover:scale-105 hover:shadow-lg ${service.bgClass || ''}`}
-                  data-testid={`service-card-${service.id}`}
-                >
-                  <CardContent className="p-6">
-                    <div className="text-center mb-4">
-                      <div className="relative w-20 h-20 mx-auto mb-4">
-                        <div 
-                          className={`mascot-sprite ${getMascotPositionClass(service.mascotPose)} w-full h-full transition-transform duration-300 hover:scale-110`}
-                          style={{ backgroundImage: `url(${mascotPoses})` }}
-                          data-testid={`mascot-${service.id}`}
-                        />
-                        {/* Fallback icon for accessibility */}
-                        <Icon className="sr-only" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
-                      <p className="text-muted-foreground">{service.description}</p>
-                    </div>
-                    <div className="space-y-2 mb-6">
-                      {service.features.map((feature, index) => (
-                        <div key={index} className="flex items-center text-sm text-muted-foreground">
-                          <div className={`w-2 h-2 rounded-full mr-3 ${service.id === 'addon' ? 'bg-secondary' : 'bg-secondary'}`}></div>
-                          <span>{feature}</span>
+          <div className="space-y-8">
+            {/* Special Residential Service Card */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+              <ResidentialServiceCard 
+                onBookClick={() => handleServiceClick('residential')}
+              />
+            </div>
+            
+            {/* Regular Service Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {otherServices.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <Card 
+                    key={service.id} 
+                    className={`service-card transition-all duration-300 hover:scale-105 hover:shadow-lg ${service.bgClass || ''}`}
+                    data-testid={`service-card-${service.id}`}
+                  >
+                    <CardContent className="p-6">
+                      <div className="text-center mb-4">
+                        <div className="relative w-20 h-20 mx-auto mb-4">
+                          <div 
+                            className={`mascot-sprite ${getMascotPositionClass(service.mascotPose)} w-full h-full transition-transform duration-300 hover:scale-110`}
+                            style={{ backgroundImage: `url(${mascotPoses})` }}
+                            data-testid={`mascot-${service.id}`}
+                          />
+                          {/* Fallback icon for accessibility */}
+                          <Icon className="sr-only" />
                         </div>
-                      ))}
-                    </div>
-                    <div className="text-center">
-                      <div className={`text-2xl font-bold mb-2 ${service.id === 'addon' ? 'text-secondary' : 'text-primary'}`}>
-                        {service.price}
+                        <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
+                        <p className="text-muted-foreground">{service.description}</p>
                       </div>
-                      <Button 
-                        onClick={() => handleServiceClick(service.id)}
-                        className={`w-full ${
-                          service.id === 'addon' 
-                            ? 'bg-secondary hover:bg-secondary/90 text-white' 
-                            : 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                        }`}
-                        data-testid={`service-button-${service.id}`}
-                      >
-                        {service.id === 'addon' ? 'Learn More' : 'Get Quote'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                      <div className="space-y-2 mb-6">
+                        {service.features.map((feature, index) => (
+                          <div key={index} className="flex items-center text-sm text-muted-foreground">
+                            <div className={`w-2 h-2 rounded-full mr-3 ${service.id === 'addon' ? 'bg-secondary' : 'bg-secondary'}`}></div>
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-center">
+                        <div className={`text-2xl font-bold mb-2 ${service.id === 'addon' ? 'text-secondary' : 'text-primary'}`}>
+                          {service.price}
+                        </div>
+                        <Button 
+                          onClick={() => handleServiceClick(service.id)}
+                          className={`w-full ${
+                            service.id === 'addon' 
+                              ? 'bg-secondary hover:bg-secondary/90 text-white' 
+                              : 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                          }`}
+                          data-testid={`service-button-${service.id}`}
+                        >
+                          {service.id === 'addon' ? 'Learn More' : 'Get Quote'}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
