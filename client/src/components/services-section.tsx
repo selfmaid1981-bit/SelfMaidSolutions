@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import mascotPoses from '@assets/ChatGPT Image Sep 11, 2025, 04_03_42 AM_1757704445185.png';
-import commercialBg from '@assets/DC920807-7C0A-42AF-877B-C5EAEDD978DA_1757705959398.png';
 import airbnbBg from '@assets/ChatGPT Image Sep 11, 2025, 03_48_23 AM_1757706116037.png';
 
 interface Service {
@@ -148,65 +147,6 @@ const AirbnbServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
   );
 };
 
-// Special Commercial Service Card Component
-const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
-  return (
-    <Card 
-      className="commercial-service-card overflow-hidden relative min-h-[600px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-200 to-sky-300"
-      data-testid="service-card-commercial"
-      style={{
-        backgroundImage: `url(${commercialBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <CardContent className="p-12 h-full flex items-center justify-between relative">
-        {/* Sparkle decorations - like stars in the original image */}
-        <div className="absolute top-8 left-16 w-4 h-4 bg-white rounded-full opacity-80" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute top-16 right-24 w-3 h-3 bg-white rounded-full opacity-60" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute bottom-32 left-20 w-2 h-2 bg-white rounded-full opacity-70" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute bottom-24 right-32 w-3 h-3 bg-white rounded-full opacity-50" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        
-        <div className="flex-1 max-w-2xl">
-          <div className="mb-8">
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary mb-6 leading-tight">
-              KEEP YOUR WORK<br />
-              SPACE SUPR CLEAN!
-            </h2>
-          </div>
-          
-          <div className="mb-10">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-              COMMERCIAL/OFFICE<br />CLEANING
-            </h3>
-            
-          </div>
-          
-          <div className="space-y-6">
-            <Button 
-              onClick={onBookClick}
-              className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-xl font-bold rounded-full transition-all duration-300 hover:scale-105"
-              data-testid="service-button-commercial"
-            >
-              BOOK NOW
-            </Button>
-            <div className="text-3xl font-bold text-primary">
-              334-877-9513
-            </div>
-          </div>
-        </div>
-        
-        {/* Mascot area - visible on larger screens */}
-        <div className="hidden md:flex flex-1 justify-center items-center">
-          <div className="w-64 h-64 relative">
-            {/* The three mascots are part of the background image, so we just ensure space for them */}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -217,9 +157,8 @@ export function ServicesSection() {
     setIsBookingModalOpen(true);
   };
 
-  // Filter services to separate commercial from others
-  const commercialService = services.find(service => service.id === 'commercial');
-  const otherServices = services.filter(service => service.id !== 'commercial');
+  // Show all services as regular cards
+  const allServices = services;
 
   return (
     <>
@@ -233,17 +172,9 @@ export function ServicesSection() {
           </div>
           
           <div className="space-y-8">
-            {/* Special Service Cards */}
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-              <CommercialServiceCard 
-                onBookClick={() => handleServiceClick('commercial')}
-              />
-            </div>
-            
             {/* Regular Service Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherServices.map((service) => {
+              {allServices.map((service) => {
                 const Icon = service.icon;
                 return (
                   <Card 
