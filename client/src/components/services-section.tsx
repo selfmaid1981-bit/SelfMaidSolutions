@@ -6,6 +6,7 @@ import { BookingModal } from './booking-modal';
 import mascotPoses from '@assets/ChatGPT Image Sep 11, 2025, 04_03_42 AM_1757704445185.png';
 import residentialBg from '@assets/D6E85900-DEB4-4C6D-B91A-C36A8887DD8D_1757705959397.png';
 import commercialBg from '@assets/DC920807-7C0A-42AF-877B-C5EAEDD978DA_1757705959398.png';
+import airbnbBg from '@assets/ChatGPT Image Sep 11, 2025, 03_48_23 AM_1757706116037.png';
 
 interface Service {
   id: string;
@@ -147,6 +148,61 @@ const ResidentialServiceCard = ({ onBookClick }: { onBookClick: () => void }) =>
         <div className="hidden md:flex flex-1 justify-center items-center">
           <div className="w-48 h-48 relative">
             {/* The mascot is part of the background image, so we just ensure space for it */}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+// Special Airbnb Service Card Component
+const AirbnbServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
+  return (
+    <Card 
+      className="airbnb-service-card overflow-hidden relative min-h-[400px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-100 to-sky-300"
+      data-testid="service-card-airbnb"
+      style={{
+        backgroundImage: `url(${airbnbBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <CardContent className="p-8 h-full flex flex-col justify-center relative">
+        {/* Sparkle decorations */}
+        <div className="absolute top-8 right-16 w-4 h-4 bg-white rounded-full opacity-90"></div>
+        <div className="absolute top-16 right-32 w-3 h-3 bg-white rounded-full opacity-70"></div>
+        <div className="absolute bottom-32 right-24 w-2 h-2 bg-white rounded-full opacity-80"></div>
+        <div className="absolute bottom-20 left-32 w-3 h-3 bg-white rounded-full opacity-60"></div>
+        <div className="absolute top-20 left-16 w-2 h-2 bg-white rounded-full opacity-75"></div>
+        
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="mb-6">
+            <div className="text-sm font-bold text-primary mb-2 tracking-wider">
+              SELF-MAID CLEANING SOLUTIONS
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6 leading-tight">
+              We Make<br />
+              Your World<br />
+              Shine!
+            </h2>
+          </div>
+          
+          <div className="mb-8">
+            <p className="text-lg text-primary font-medium mb-6">
+              Professional cleaning with a<br />
+              personal touch. Service you can trust.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <Button 
+              onClick={onBookClick}
+              className="bg-yellow-400 hover:bg-yellow-500 text-primary px-8 py-3 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
+              data-testid="service-button-airbnb"
+            >
+              BOOK YOUR CLEAN TODAY
+            </Button>
           </div>
         </div>
       </CardContent>
