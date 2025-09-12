@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import bannerImage from '@assets/ChatGPT Image Sep 11, 2025, 03_48_23 AM_1757704445186.png';
+import bannerImage from '@assets/44622554-9DC2-4D53-A29F-52D22BACC128_1757705959396.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -16,27 +16,26 @@ export function HeroSection() {
             <div className="mb-8">
               <img 
                 src={bannerImage} 
-                alt="We Make Your World Shine - Self-Maid Cleaning Solutions banner" 
+                alt="Self-Maid Cleaning Solutions - Three mascot sponges with cleaning tools" 
                 className="max-w-lg mx-auto w-full h-auto"
                 data-testid="hero-banner-image"
               />
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-              Professional Cleaning <br className="hidden sm:block" />
-              <span className="text-secondary">You Can Trust</span>
+              SELF-MAID CLEANING SOLUTIONS
             </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Reliable, thorough, and affordable cleaning services across Alabama. 
-              From homes to offices, we make everything spotless.
-            </p>
+            <div className="text-lg text-white/90 mb-8 max-w-4xl mx-auto">
+              <p className="mb-2">Residential • Commercial/Office • Turnovers/Student and Apartment</p>
+              <p>Move in and Out • Air BnB</p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
-                href="tel:334-413-9029" 
+                href="tel:334-877-9513" 
                 className="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center"
                 data-testid="hero-call-button"
               >
                 <Phone className="w-5 h-5 mr-3" />
-                Call Now: (334) 413-9029
+Call Now: (334) 877-9513
               </a>
               <Button 
                 onClick={() => setIsBookingModalOpen(true)}
@@ -44,7 +43,7 @@ export function HeroSection() {
                 data-testid="hero-book-button"
               >
                 <Calendar className="w-5 h-5 mr-3" />
-                Book Online
+BOOK NOW
               </Button>
             </div>
             <div className="mt-8 flex justify-center items-center space-x-8 text-white/80">
