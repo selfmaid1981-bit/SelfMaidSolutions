@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import mascotPoses from '@assets/ChatGPT Image Sep 11, 2025, 04_03_42 AM_1757704445185.png';
 import residentialBg from '@assets/D6E85900-DEB4-4C6D-B91A-C36A8887DD8D_1757705959397.png';
-import commercialBg from '@assets/DC920807-7C0A-42AF-877B-C5EAEDD978DA_1757705959398.png';
 import airbnbBg from '@assets/ChatGPT Image Sep 11, 2025, 03_48_23 AM_1757706116037.png';
 
 interface Service {
@@ -210,67 +209,6 @@ const AirbnbServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
   );
 };
 
-// Special Commercial Service Card Component
-const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
-  return (
-    <Card 
-      className="commercial-service-card overflow-hidden relative min-h-[400px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-200 to-sky-300"
-      data-testid="service-card-commercial"
-      style={{
-        backgroundImage: `url(${commercialBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <CardContent className="p-8 h-full flex items-center justify-between relative">
-        {/* Sparkle decorations - like stars in the original image */}
-        <div className="absolute top-8 left-16 w-4 h-4 bg-white rounded-full opacity-80" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute top-16 right-24 w-3 h-3 bg-white rounded-full opacity-60" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute bottom-32 left-20 w-2 h-2 bg-white rounded-full opacity-70" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        <div className="absolute bottom-24 right-32 w-3 h-3 bg-white rounded-full opacity-50" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
-        
-        <div className="flex-1 max-w-xl">
-          <div className="mb-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
-              KEEP YOUR WORK<br />
-              SPACE SUPR CLEAN!
-            </h2>
-          </div>
-          
-          <div className="mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">
-              COMMERCIAL/OFFICE<br />CLEANING
-            </h3>
-            <p className="text-lg text-primary font-medium">
-              Expert Cleaning Services<br />for Businesses
-            </p>
-          </div>
-          
-          <div className="space-y-4">
-            <Button 
-              onClick={onBookClick}
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
-              data-testid="service-button-commercial"
-            >
-              BOOK NOW
-            </Button>
-            <div className="text-2xl font-bold text-primary">
-              334-877-9513
-            </div>
-          </div>
-        </div>
-        
-        {/* Mascot area - visible on larger screens */}
-        <div className="hidden md:flex flex-1 justify-center items-center">
-          <div className="w-48 h-48 relative">
-            {/* The three mascots are part of the background image, so we just ensure space for them */}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -281,10 +219,9 @@ export function ServicesSection() {
     setIsBookingModalOpen(true);
   };
 
-  // Filter services to separate residential and commercial from others
+  // Filter services to separate residential from others
   const residentialService = services.find(service => service.id === 'residential');
-  const commercialService = services.find(service => service.id === 'commercial');
-  const otherServices = services.filter(service => service.id !== 'residential' && service.id !== 'commercial');
+  const otherServices = services.filter(service => service.id !== 'residential');
 
   return (
     <>
@@ -305,11 +242,6 @@ export function ServicesSection() {
               />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-              <CommercialServiceCard 
-                onBookClick={() => handleServiceClick('commercial')}
-              />
-            </div>
             
             {/* Regular Service Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
