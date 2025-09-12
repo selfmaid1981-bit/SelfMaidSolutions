@@ -21,9 +21,7 @@ export function HeroSection() {
                 data-testid="hero-banner-image"
               />
             </div>
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-              SELF-MAID CLEANING SOLUTIONS
-            </h1>
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">Self-Maid Cleaning Solutions</h1>
             <div className="text-lg text-white/90 mb-8 max-w-4xl mx-auto">
               <p className="mb-2">Residential • Commercial/Office • Turnovers/Student and Apartment</p>
               <p>Move in and Out • Air BnB</p>
@@ -63,7 +61,6 @@ BOOK NOW
           </div>
         </div>
       </section>
-      
       <BookingModal 
         isOpen={isBookingModalOpen} 
         onClose={() => setIsBookingModalOpen(false)} 

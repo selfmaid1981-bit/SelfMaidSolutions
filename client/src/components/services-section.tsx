@@ -322,42 +322,49 @@ export function ServicesSection() {
                     data-testid={`service-card-${service.id}`}
                   >
                     <CardContent className="p-6">
-                      <div className="text-center mb-4">
-                        <div className="relative w-20 h-20 mx-auto mb-4">
-                          <div 
-                            className={`mascot-sprite ${getMascotPositionClass(service.mascotPose)} w-full h-full transition-transform duration-300 hover:scale-110`}
-                            style={{ backgroundImage: `url(${mascotPoses})` }}
-                            data-testid={`mascot-${service.id}`}
-                          />
-                          {/* Fallback icon for accessibility */}
-                          <Icon className="sr-only" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
-                        <p className="text-muted-foreground">{service.description}</p>
-                      </div>
-                      <div className="space-y-2 mb-6">
-                        {service.features.map((feature, index) => (
-                          <div key={index} className="flex items-center text-sm text-muted-foreground">
-                            <div className={`w-2 h-2 rounded-full mr-3 ${service.id === 'addon' ? 'bg-secondary' : 'bg-secondary'}`}></div>
-                            <span>{feature}</span>
+                      <div className="flex items-start gap-4 mb-4">
+                        {/* Mascot Image */}
+                        <div className="flex-shrink-0">
+                          <div className="relative w-24 h-24">
+                            <div 
+                              className={`mascot-sprite ${getMascotPositionClass(service.mascotPose)} w-full h-full transition-transform duration-300 hover:scale-110`}
+                              style={{ backgroundImage: `url(${mascotPoses})` }}
+                              data-testid={`mascot-${service.id}`}
+                            />
+                            {/* Fallback icon for accessibility */}
+                            <Icon className="sr-only" />
                           </div>
-                        ))}
-                      </div>
-                      <div className="text-center">
-                        <div className={`text-2xl font-bold mb-2 ${service.id === 'addon' ? 'text-secondary' : 'text-primary'}`}>
-                          {service.price}
                         </div>
-                        <Button 
-                          onClick={() => handleServiceClick(service.id)}
-                          className={`w-full ${
-                            service.id === 'addon' 
-                              ? 'bg-secondary hover:bg-secondary/90 text-white' 
-                              : 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                          }`}
-                          data-testid={`service-button-${service.id}`}
-                        >
-                          {service.id === 'addon' ? 'Learn More' : 'Get Quote'}
-                        </Button>
+                        
+                        {/* Service Info */}
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
+                          <p className="text-muted-foreground mb-3">{service.description}</p>
+                          <div className="space-y-2 mb-4">
+                            {service.features.map((feature, index) => (
+                              <div key={index} className="flex items-center text-sm text-muted-foreground">
+                                <div className={`w-2 h-2 rounded-full mr-3 ${service.id === 'addon' ? 'bg-secondary' : 'bg-secondary'}`}></div>
+                                <span>{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className={`text-2xl font-bold ${service.id === 'addon' ? 'text-secondary' : 'text-primary'}`}>
+                              {service.price}
+                            </div>
+                            <Button 
+                              onClick={() => handleServiceClick(service.id)}
+                              className={`${
+                                service.id === 'addon' 
+                                  ? 'bg-secondary hover:bg-secondary/90 text-white' 
+                                  : 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                              }`}
+                              data-testid={`service-button-${service.id}`}
+                            >
+                              {service.id === 'addon' ? 'Learn More' : 'Get Quote'}
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
