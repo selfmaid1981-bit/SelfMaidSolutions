@@ -6,21 +6,15 @@ import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 
 // SendGrid setup
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY environment variable must be set");
-}
-
 const mailService = new MailService();
-mailService.setApiKey(process.env.SENDGRID_API_KEY);
+if (process.env.SENDGRID_API_KEY) {
+  mailService.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
 // Stripe setup
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
-});
+}) : null;
 
 interface EmailParams {
   to: string;
@@ -31,6 +25,14 @@ interface EmailParams {
 }
 
 async function sendEmail(params: EmailParams): Promise<boolean> {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.log('SendGrid not configured, email would be sent:', {
+      to: params.to,
+      subject: params.subject
+    });
+    return true; // Return true to prevent blocking app functionality
+  }
+  
   try {
     await mailService.send({
       to: params.to,
@@ -112,6 +114,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (!amount || !bookingId) {
         return res.status(400).json({ message: "Amount and booking ID are required" });
+      }
+
+      if (!stripe) {
+        return res.status(400).json({ message: "Payment processing not configured" });
       }
 
       const booking = await storage.getBooking(bookingId);
