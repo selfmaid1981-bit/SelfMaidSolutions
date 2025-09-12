@@ -3,6 +3,7 @@ import { Home, Building, Key, Truck, GraduationCap, Plus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
+import mascotPoses from '@assets/ChatGPT Image Sep 11, 2025, 04_03_42 AM_1757704445185.png';
 
 interface Service {
   id: string;
@@ -12,6 +13,7 @@ interface Service {
   features: string[];
   price: string;
   bgClass?: string;
+  mascotPose: 'thumbs-up' | 'running' | 'flexing' | 'pointing';
 }
 
 const services: Service[] = [
@@ -21,7 +23,8 @@ const services: Service[] = [
     title: 'Residential Cleaning',
     description: 'Keep your home spotless with our regular or one-time cleaning services.',
     features: ['Weekly, bi-weekly, monthly', 'Deep cleaning available', 'Eco-friendly products'],
-    price: 'From $80'
+    price: 'From $80',
+    mascotPose: 'thumbs-up'
   },
   {
     id: 'commercial',
@@ -29,7 +32,8 @@ const services: Service[] = [
     title: 'Commercial & Office',
     description: 'Professional office cleaning to maintain a productive work environment.',
     features: ['Daily, weekly cleaning', 'Restroom sanitization', 'Window cleaning'],
-    price: 'From $120'
+    price: 'From $120',
+    mascotPose: 'pointing'
   },
   {
     id: 'airbnb',
@@ -37,7 +41,8 @@ const services: Service[] = [
     title: 'Airbnb Cleaning',
     description: 'Fast turnaround cleaning between guests to maximize your bookings.',
     features: ['Same-day service', 'Linen service available', 'Inventory restocking'],
-    price: 'From $65'
+    price: 'From $65',
+    mascotPose: 'running'
   },
   {
     id: 'moveout',
@@ -45,7 +50,8 @@ const services: Service[] = [
     title: 'Move In/Out',
     description: 'Deep cleaning for moving day to get your deposit back or welcome home.',
     features: ['Deep clean all areas', 'Inside appliances', 'Deposit guarantee'],
-    price: 'From $150'
+    price: 'From $150',
+    mascotPose: 'flexing'
   },
   {
     id: 'dorm',
@@ -53,7 +59,8 @@ const services: Service[] = [
     title: 'Student Dorm Turnover',
     description: 'Quick and efficient dorm cleaning between semesters and student moves.',
     features: ['Fast turnaround', 'Student-friendly rates', 'Sanitization included'],
-    price: 'From $45'
+    price: 'From $45',
+    mascotPose: 'thumbs-up'
   },
   {
     id: 'addon',
@@ -62,9 +69,26 @@ const services: Service[] = [
     description: 'Enhance your cleaning with our additional specialty services.',
     features: ['Carpet cleaning', 'Window washing', 'Garage cleaning'],
     price: 'Custom',
-    bgClass: 'bg-secondary/5 border-secondary/20'
+    bgClass: 'bg-secondary/5 border-secondary/20',
+    mascotPose: 'pointing'
   }
 ];
+
+// Helper function to get mascot position class
+const getMascotPositionClass = (pose: Service['mascotPose']) => {
+  switch (pose) {
+    case 'thumbs-up':
+      return 'mascot-thumbs-up'; // Top left
+    case 'running':
+      return 'mascot-running'; // Top right
+    case 'flexing':
+      return 'mascot-flexing'; // Bottom left
+    case 'pointing':
+      return 'mascot-pointing'; // Bottom right
+    default:
+      return 'mascot-thumbs-up';
+  }
+};
 
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -97,10 +121,14 @@ export function ServicesSection() {
                 >
                   <CardContent className="p-6">
                     <div className="text-center mb-4">
-                      <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                        service.id === 'addon' ? 'bg-secondary/10' : 'bg-primary/10'
-                      }`}>
-                        <Icon className={`w-8 h-8 ${service.id === 'addon' ? 'text-secondary' : 'text-primary'}`} />
+                      <div className="relative w-20 h-20 mx-auto mb-4">
+                        <div 
+                          className={`mascot-sprite ${getMascotPositionClass(service.mascotPose)} w-full h-full transition-transform duration-300 hover:scale-110`}
+                          style={{ backgroundImage: `url(${mascotPoses})` }}
+                          data-testid={`mascot-${service.id}`}
+                        />
+                        {/* Fallback icon for accessibility */}
+                        <Icon className="sr-only" />
                       </div>
                       <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
                       <p className="text-muted-foreground">{service.description}</p>

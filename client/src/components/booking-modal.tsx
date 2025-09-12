@@ -29,6 +29,7 @@ interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultService?: string;
+  isRecruitment?: boolean;
 }
 
 const serviceOptions = [
@@ -47,7 +48,7 @@ const timeSlots = [
   '4:00 PM',
 ];
 
-export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingModalProps) {
+export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitment = false }: BookingModalProps) {
   const [step, setStep] = useState(1);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -150,7 +151,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="booking-modal">
         <DialogHeader>
           <div className="flex justify-between items-center">
-            <DialogTitle>Book Your Cleaning Service</DialogTitle>
+            <DialogTitle>{isRecruitment ? 'Join Our Team' : 'Book Your Cleaning Service'}</DialogTitle>
             <Button 
               variant="ghost" 
               size="sm" 
@@ -163,34 +164,149 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
         </DialogHeader>
         
         <div className="py-6">
-          {/* Progress indicator */}
-          <div className="flex items-center justify-center mb-8">
-            <div className="flex items-center space-x-4">
-              {[1, 2, 3].map((stepNumber) => (
-                <div key={stepNumber} className="flex items-center">
-                  <div 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      step >= stepNumber 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted text-muted-foreground'
-                    }`}
-                  >
-                    {stepNumber}
+          {/* Progress indicator - only show for booking, not recruitment */}
+          {!isRecruitment && (
+            <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center space-x-4">
+                {[1, 2, 3].map((stepNumber) => (
+                  <div key={stepNumber} className="flex items-center">
+                    <div 
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                        step >= stepNumber 
+                          ? 'bg-primary text-primary-foreground' 
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {stepNumber}
+                    </div>
+                    {stepNumber < 3 && (
+                      <div className={`w-12 h-0.5 mx-2 ${
+                        step > stepNumber ? 'bg-primary' : 'bg-muted'
+                      }`} />
+                    )}
                   </div>
-                  {stepNumber < 3 && (
-                    <div className={`w-12 h-0.5 mx-2 ${
-                      step > stepNumber ? 'bg-primary' : 'bg-muted'
-                    }`} />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Recruitment Form */}
+              {isRecruitment && (
+                <div data-testid="recruitment-form">
+                  <h3 className="text-lg font-semibold mb-4">Tell Us About Yourself</h3>
+                  <p className="text-muted-foreground mb-6">
+                    We're always looking for dedicated individuals to join our cleaning team. 
+                    Fill out this form and we'll get back to you soon!
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>First Name *</FormLabel>
+                            <FormControl>
+                              <Input {...field} data-testid="input-recruitment-firstName" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Last Name *</FormLabel>
+                            <FormControl>
+                              <Input {...field} data-testid="input-recruitment-lastName" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email *</FormLabel>
+                            <FormControl>
+                              <Input type="email" {...field} data-testid="input-recruitment-email" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Phone *</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="tel" 
+                                {...field} 
+                                value={field.value || ''} 
+                                data-testid="input-recruitment-phone" 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="specialInstructions"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tell us why you'd like to join our team</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              {...field} 
+                              value={field.value || ''}
+                              placeholder="Share your experience, availability, or why you're interested in joining Self-Maid Cleaning Solutions..."
+                              rows={4}
+                              data-testid="textarea-recruitment-message"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <Button 
+                    type="button"
+                    onClick={() => {
+                      // Handle recruitment submission
+                      const formData = form.getValues();
+                      toast({
+                        title: "Application Submitted!",
+                        description: "Thank you for your interest! We'll contact you within 2 business days.",
+                      });
+                      handleClose();
+                    }}
+                    className="w-full mt-6 bg-secondary hover:bg-secondary/90 text-white"
+                    data-testid="submit-recruitment"
+                  >
+                    Submit Application
+                  </Button>
+                </div>
+              )}
+
               {/* Step 1: Service Selection */}
-              {step === 1 && (
+              {!isRecruitment && step === 1 && (
                 <div data-testid="booking-step-1">
                   <h3 className="text-lg font-semibold mb-4">1. Select Your Service</h3>
                   <FormField
@@ -233,7 +349,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
               )}
 
               {/* Step 2: Scheduling */}
-              {step === 2 && (
+              {!isRecruitment && step === 2 && (
                 <div data-testid="booking-step-2">
                   <h3 className="text-lg font-semibold mb-4">2. Choose Date & Time</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -301,7 +417,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '' }: BookingMo
               )}
 
               {/* Step 3: Contact & Address Details */}
-              {step === 3 && (
+              {!isRecruitment && step === 3 && (
                 <div data-testid="booking-step-3">
                   <h3 className="text-lg font-semibold mb-4">3. Contact & Address Information</h3>
                   

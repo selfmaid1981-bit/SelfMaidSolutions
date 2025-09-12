@@ -117,3 +117,27 @@
     transform: scale(1.05);
   }
 }
+
+/* Mascot sprite positioning */
+.mascot-sprite {
+  background-size: 200% 200%; /* Scale to show 2x2 grid */
+  background-repeat: no-repeat;
+  border-radius: 0.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.mascot-thumbs-up {
+  background-position: 0% 0%; /* Top left */
+}
+
+.mascot-running {
+  background-position: 100% 0%; /* Top right */
+}
+
+.mascot-flexing {
+  background-position: 0% 100%; /* Bottom left */
+}
+
+.mascot-pointing {
+  background-position: 100% 100%; /* Bottom right */
+}

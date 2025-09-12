@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,11 +11,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { insertContactMessageSchema } from '@shared/schema';
 import { z } from 'zod';
+import spongeHeroImage from '@assets/Super Sponge Cleaning Hero Logo_1757704445187.png';
 
-const contactFormSchema = insertContactMessageSchema.extend({
+const contactFormSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Please enter a valid email'),
+  phone: z.string().optional(),
   serviceType: z.string().min(1, 'Please select a service type'),
+  message: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -26,8 +30,7 @@ export function ContactSection() {
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       phone: '',
       serviceType: '',
@@ -36,7 +39,23 @@ export function ContactSection() {
   });
 
   const contactMutation = useMutation({
-    mutationFn: (data: ContactFormData) => apiRequest('POST', '/api/contact', data),
+    mutationFn: (data: ContactFormData) => {
+      // Split name into firstName and lastName for backend compatibility
+      const nameParts = data.name.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      const backendData = {
+        firstName,
+        lastName,
+        email: data.email,
+        phone: data.phone || null,
+        serviceType: data.serviceType,
+        message: data.message || null,
+      };
+      
+      return apiRequest('POST', '/api/contact', backendData);
+    },
     onSuccess: () => {
       toast({
         title: "Message Sent!",
@@ -60,197 +79,235 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Phone',
-      primary: '(334) 413-9029',
-      secondary: 'Call or text for immediate response',
+      value: '334-413-9029',
       href: 'tel:334-413-9029'
     },
     {
       icon: Mail,
-      title: 'Email',
-      primary: 'selfmaidclean@outlook.com',
-      secondary: "We'll respond within 24 hours",
+      value: 'selfmaidclean@outlook.com',
       href: 'mailto:selfmaidclean@outlook.com'
     },
     {
       icon: MapPin,
-      title: 'Service Area',
-      primary: 'Alabama Statewide',
-      secondary: 'Birmingham, Montgomery, Huntsville & surrounding areas'
-    },
-    {
-      icon: Clock,
-      title: 'Hours',
-      primary: 'Monday - Saturday: 8 AM - 6 PM',
-      secondary: 'Emergency service available'
+      value: '123 Sparkle St, Clean City, USA'
     }
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24">
+    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-sky-100 to-blue-200 dark:from-sky-900 dark:to-blue-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Get In Touch</h2>
-          <p className="text-muted-foreground text-lg">Ready to book? Have questions? We're here to help!</p>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-6">Contact Information</h3>
-            
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <div key={index} className="flex items-start" data-testid={`contact-info-${index}`}>
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                      <Icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1">{info.title}</h4>
-                      {info.href ? (
-                        <a href={info.href} className="text-primary hover:text-primary/80 text-lg">
-                          {info.primary}
-                        </a>
-                      ) : (
-                        <p className="text-foreground">{info.primary}</p>
-                      )}
-                      <p className="text-sm text-muted-foreground">{info.secondary}</p>
-                    </div>
-                  </div>
-                );
-              })}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Form and Title */}
+          <div className="order-2 lg:order-1">
+            <div className="mb-8">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Get in Touch with the Clean Team!
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300">
+                Questions? Ready to book? We're just a sponge-swipe away.
+              </p>
             </div>
+            
+            {/* Contact Form */}
+            <Card className="bg-white dark:bg-gray-800 shadow-lg border-0 rounded-2xl">
+              <CardContent className="p-8">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="contact-form">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 dark:text-gray-300">Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              {...field} 
+                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              data-testid="input-name" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="email" 
+                              {...field} 
+                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              data-testid="input-email" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 dark:text-gray-300">
+                            Phone <span className="text-gray-500 text-sm">(optional)</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="tel" 
+                              {...field} 
+                              value={field.value || ''} 
+                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              data-testid="input-phone" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="serviceType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger 
+                                className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                                data-testid="select-serviceType"
+                              >
+                                <SelectValue placeholder="House Cleaning" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="residential">Residential Cleaning</SelectItem>
+                              <SelectItem value="commercial">Commercial/Office</SelectItem>
+                              <SelectItem value="airbnb">Airbnb Cleaning</SelectItem>
+                              <SelectItem value="moveout">Move In/Out</SelectItem>
+                              <SelectItem value="dorm">Student Dorm</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 dark:text-gray-300">Message</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              {...field} 
+                              value={field.value || ''}
+                              rows={4} 
+                              placeholder="Tell us about your cleaning needs..."
+                              className="border-gray-200 dark:border-gray-600 rounded-lg resize-none"
+                              data-testid="textarea-message"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded-xl text-lg shadow-lg transition-colors" 
+                      disabled={contactMutation.isPending}
+                      data-testid="button-submit"
+                    >
+                      {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
           </div>
           
-          {/* Contact Form */}
-          <Card className="shadow-md border border-border">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold text-foreground mb-6">Request a Quote</h3>
+          {/* Right Side - Mascot and Contact Info */}
+          <div className="order-1 lg:order-2 text-center lg:text-left">
+            {/* Mascot Character */}
+            <div className="flex justify-center lg:justify-end mb-8">
+              <div className="relative">
+                <img 
+                  src={spongeHeroImage} 
+                  alt="Super Sponge Hero" 
+                  className="w-64 h-64 object-contain"
+                  data-testid="mascot-image"
+                />
+                {/* Add a phone to the mascot's hand using CSS positioning */}
+                <div className="absolute top-16 right-12 w-8 h-12 bg-gray-800 rounded-lg flex items-center justify-center transform rotate-12">
+                  <Phone className="w-4 h-4 text-white" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Info</h3>
               
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="contact-form">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>First Name</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-firstName" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Last Name</FormLabel>
-                          <FormControl>
-                            <Input {...field} data-testid="input-lastName" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+              <div className="space-y-4">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  return (
+                    <div key={index} className="flex items-center" data-testid={`contact-info-${index}`}>
+                      <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
+                        <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div className="text-left">
+                        {info.href ? (
+                          <a 
+                            href={info.href} 
+                            className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+                          >
+                            {info.value}
+                          </a>
+                        ) : (
+                          <p className="text-gray-900 dark:text-white font-medium">{info.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              {/* Small decorative map with mini mascot */}
+              <div className="mt-6 bg-green-100 dark:bg-green-900 rounded-lg p-4 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20">
+                  <div className="w-full h-full bg-gradient-to-br from-green-200 to-green-300 dark:from-green-800 dark:to-green-700"></div>
+                  {/* Simple map grid lines */}
+                  <div className="absolute inset-0">
+                    <div className="grid grid-cols-4 grid-rows-3 h-full w-full">
+                      {Array.from({length: 12}).map((_, i) => (
+                        <div key={i} className="border border-green-300/50 dark:border-green-600/50"></div>
+                      ))}
+                    </div>
                   </div>
-                  
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" {...field} data-testid="input-email" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Phone</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="tel" 
-                            {...field} 
-                            value={field.value || ''} 
-                            data-testid="input-phone" 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="serviceType"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Service Type</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger data-testid="select-serviceType">
-                              <SelectValue placeholder="Select a service" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="residential">Residential Cleaning</SelectItem>
-                            <SelectItem value="commercial">Commercial/Office</SelectItem>
-                            <SelectItem value="airbnb">Airbnb Cleaning</SelectItem>
-                            <SelectItem value="moveout">Move In/Out</SelectItem>
-                            <SelectItem value="dorm">Student Dorm</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            {...field} 
-                            value={field.value || ''}
-                            rows={4} 
-                            placeholder="Tell us about your cleaning needs..."
-                            data-testid="textarea-message"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={contactMutation.isPending}
-                    data-testid="button-submit"
-                  >
-                    {contactMutation.isPending ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
+                </div>
+                <div className="relative flex items-center justify-between">
+                  <div className="text-xs text-green-800 dark:text-green-200 font-semibold">
+                    Service Area Map
+                  </div>
+                  <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                    <div className="w-6 h-6 bg-yellow-400 rounded border-2 border-blue-600 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

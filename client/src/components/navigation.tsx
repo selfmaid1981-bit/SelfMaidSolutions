@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logoImage from '@assets/Super Sponge Cleaning Hero Logo_1757704445187.png';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,8 +29,14 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-primary" data-testid="logo-link">
-              Self-Maid Cleaning
+            <Link href="/" className="flex items-center space-x-3 text-xl font-bold text-primary hover:opacity-80 transition-opacity" data-testid="logo-link">
+              <img 
+                src={logoImage} 
+                alt="Self-Maid Cleaning Logo" 
+                className="h-10 w-auto"
+                data-testid="logo-image"
+              />
+              <span className="hidden sm:block" data-testid="brand-text">Self-Maid Cleaning</span>
             </Link>
           </div>
           
