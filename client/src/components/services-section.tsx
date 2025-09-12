@@ -152,7 +152,7 @@ const AirbnbServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
 const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => {
   return (
     <Card 
-      className="commercial-service-card overflow-hidden relative min-h-[400px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-200 to-sky-300"
+      className="commercial-service-card overflow-hidden relative min-h-[600px] md:col-span-2 lg:col-span-3 bg-gradient-to-br from-sky-200 to-sky-300"
       data-testid="service-card-commercial"
       style={{
         backgroundImage: `url(${commercialBg})`,
@@ -161,39 +161,39 @@ const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => 
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <CardContent className="p-8 h-full flex items-center justify-between relative">
+      <CardContent className="p-12 h-full flex items-center justify-between relative">
         {/* Sparkle decorations - like stars in the original image */}
         <div className="absolute top-8 left-16 w-4 h-4 bg-white rounded-full opacity-80" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
         <div className="absolute top-16 right-24 w-3 h-3 bg-white rounded-full opacity-60" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
         <div className="absolute bottom-32 left-20 w-2 h-2 bg-white rounded-full opacity-70" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
         <div className="absolute bottom-24 right-32 w-3 h-3 bg-white rounded-full opacity-50" style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}></div>
         
-        <div className="flex-1 max-w-xl">
-          <div className="mb-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
+        <div className="flex-1 max-w-2xl">
+          <div className="mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary mb-6 leading-tight">
               KEEP YOUR WORK<br />
               SPACE SUPR CLEAN!
             </h2>
           </div>
           
-          <div className="mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+          <div className="mb-10">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
               COMMERCIAL/OFFICE<br />CLEANING
             </h3>
-            <p className="text-lg text-primary font-medium">
+            <p className="text-xl md:text-2xl text-primary font-medium">
               Expert Cleaning Services<br />for Businesses
             </p>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Button 
               onClick={onBookClick}
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-xl font-bold rounded-full transition-all duration-300 hover:scale-105"
               data-testid="service-button-commercial"
             >
               BOOK NOW
             </Button>
-            <div className="text-2xl font-bold text-primary">
+            <div className="text-3xl font-bold text-primary">
               334-877-9513
             </div>
           </div>
@@ -201,7 +201,7 @@ const CommercialServiceCard = ({ onBookClick }: { onBookClick: () => void }) => 
         
         {/* Mascot area - visible on larger screens */}
         <div className="hidden md:flex flex-1 justify-center items-center">
-          <div className="w-48 h-48 relative">
+          <div className="w-64 h-64 relative">
             {/* The three mascots are part of the background image, so we just ensure space for them */}
           </div>
         </div>
