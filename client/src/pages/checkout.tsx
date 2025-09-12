@@ -12,10 +12,9 @@ import { Loader2, CreditCard, Shield } from 'lucide-react';
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+  : null;
 
 const CheckoutForm = ({ bookingId, amount }: { bookingId: string; amount: number }) => {
   const stripe = useStripe();
@@ -109,6 +108,17 @@ export default function Checkout() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
+    // Check if Stripe is configured
+    if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
+      toast({
+        title: "Payment Not Available",
+        description: "Payment processing is not currently configured. Please contact us directly.",
+        variant: "destructive",
+      });
+      setLocation('/');
+      return;
+    }
+
     // Get booking details from URL params
     const urlParams = new URLSearchParams(window.location.search);
     const bookingIdParam = urlParams.get('bookingId');
@@ -187,9 +197,15 @@ export default function Checkout() {
 
             <Card>
               <CardContent className="p-8">
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm bookingId={bookingId} amount={amount} />
-                </Elements>
+                {stripePromise ? (
+                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <CheckoutForm bookingId={bookingId} amount={amount} />
+                  </Elements>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-muted-foreground">Payment processing is not available at this time.</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
