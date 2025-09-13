@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer';
 import { ServicesSection } from '@/components/services-section';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
+import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 
 const serviceDetails = [
   {
@@ -142,13 +143,20 @@ export default function Services() {
                       }`}>
                         <div className="text-center">
                           <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <div className="text-4xl text-primary">
-                              {service.id === 'residential' && '🏠'}
-                              {service.id === 'commercial' && '🏢'}
-                              {service.id === 'airbnb' && '🔑'}
-                              {service.id === 'moveout' && '📦'}
-                              {service.id === 'dorm' && '🎓'}
-                            </div>
+                            {service.id === 'residential' ? (
+                              <img 
+                                src={residentialMascot} 
+                                alt="Residential cleaning sponge mascot with glasses, mop and bucket" 
+                                className="w-24 h-24 object-contain"
+                              />
+                            ) : (
+                              <div className="text-4xl text-primary">
+                                {service.id === 'commercial' && '🏢'}
+                                {service.id === 'airbnb' && '🔑'}
+                                {service.id === 'moveout' && '📦'}
+                                {service.id === 'dorm' && '🎓'}
+                              </div>
+                            )}
                           </div>
                           <p className="text-muted-foreground">
                             Professional {service.title.toLowerCase()} service with guaranteed satisfaction
