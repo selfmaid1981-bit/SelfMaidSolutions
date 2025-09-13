@@ -243,7 +243,7 @@ export function ContactSection() {
                 <img 
                   src={spongeHeroImage} 
                   alt="Self-Maid superhero sponge mascot holding phone and waving - Get in Touch with the Clean Team" 
-                  className="w-64 h-64 object-contain"
+                  className="w-[32rem] h-[32rem] object-contain"
                   data-testid="mascot-image"
                 />
               </div>
