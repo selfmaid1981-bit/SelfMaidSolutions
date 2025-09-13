@@ -94,7 +94,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-sky-100 to-blue-200 dark:from-sky-900 dark:to-blue-800">
+    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-sky-200 via-blue-100 to-blue-200 dark:from-sky-900 dark:to-blue-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Form and Title */}
@@ -103,13 +103,13 @@ export function ContactSection() {
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Get in Touch with the Clean Team!
               </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300">
+              <p className="text-lg text-gray-600 dark:text-gray-300">
                 Questions? Ready to book? We're just a sponge-swipe away.
               </p>
             </div>
             
             {/* Contact Form */}
-            <Card className="bg-white dark:bg-gray-800 shadow-lg border-0 rounded-2xl">
+            <Card className="bg-white/90 dark:bg-gray-800 shadow-lg border-0 rounded-2xl backdrop-blur-sm">
               <CardContent className="p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="contact-form">
@@ -223,7 +223,7 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded-xl text-lg shadow-lg transition-colors" 
+                      className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 rounded-xl text-lg shadow-lg transition-colors" 
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >
@@ -250,57 +250,32 @@ export function ContactSection() {
             </div>
             
             {/* Contact Info */}
-            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Info</h3>
+            <div className="bg-slate-800/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
               
               <div className="space-y-4">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
                   return (
                     <div key={index} className="flex items-center" data-testid={`contact-info-${index}`}>
-                      <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                        <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                      <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4">
+                        <Icon className="w-5 h-5 text-blue-300" />
                       </div>
                       <div className="text-left">
                         {info.href ? (
                           <a 
                             href={info.href} 
-                            className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+                            className="text-white hover:text-blue-300 font-medium transition-colors"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-gray-900 dark:text-white font-medium">{info.value}</p>
+                          <p className="text-white font-medium">{info.value}</p>
                         )}
                       </div>
                     </div>
                   );
                 })}
-              </div>
-              
-              {/* Small decorative map with mini mascot */}
-              <div className="mt-6 bg-green-100 dark:bg-green-900 rounded-lg p-4 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="w-full h-full bg-gradient-to-br from-green-200 to-green-300 dark:from-green-800 dark:to-green-700"></div>
-                  {/* Simple map grid lines */}
-                  <div className="absolute inset-0">
-                    <div className="grid grid-cols-4 grid-rows-3 h-full w-full">
-                      {Array.from({length: 12}).map((_, i) => (
-                        <div key={i} className="border border-green-300/50 dark:border-green-600/50"></div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="relative flex items-center justify-between">
-                  <div className="text-xs text-green-800 dark:text-green-200 font-semibold">
-                    Service Area Map
-                  </div>
-                  <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <div className="w-6 h-6 bg-yellow-400 rounded border-2 border-blue-600 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
