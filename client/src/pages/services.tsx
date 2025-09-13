@@ -119,7 +119,7 @@ export default function Services() {
         </section>
 
         {/* Team Mascot Section */}
-        <section className="py-12 bg-gradient-to-b from-primary/5 to-transparent">
+        <section className="py-2 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <img 
               src={teamMascot} 
