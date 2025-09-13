@@ -7,6 +7,7 @@ import { Check } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_1757726454751.png';
+import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
 
 const serviceDetails = [
   {
@@ -170,11 +171,13 @@ export default function Services() {
                                 alt="Moving and dorm cleaning sponge mascot with boxes and moving supplies" 
                                 className="w-[28rem] h-[28rem] object-contain"
                               />
-                            ) : (
-                              <div className="text-[10rem] text-primary">
-                                {service.id === 'airbnb' && '🔑'}
-                              </div>
-                            )}
+                            ) : service.id === 'airbnb' ? (
+                              <img 
+                                src={airbnbMascot} 
+                                alt="Airbnb cleaning sponge mascot with sanitization supplies and medical cross" 
+                                className="w-[28rem] h-[28rem] object-contain"
+                              />
+                            ) : null}
                           </div>
                           <p className="text-muted-foreground">
                             Professional {service.title.toLowerCase()} service with guaranteed satisfaction
