@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
+import { serviceOptions, timeSlots, getTomorrowDate } from '@/lib/services';
 import { insertBookingSchema } from '@shared/schema';
 import { z } from 'zod';
 import { useLocation } from 'wouter';
@@ -25,30 +26,24 @@ const bookingFormSchema = insertBookingSchema.extend({
 
 type BookingFormData = z.infer<typeof bookingFormSchema>;
 
+interface UserData {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  preferredDate?: string;
+  serviceType?: string;
+}
+
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultService?: string;
+  userData?: UserData;
   isRecruitment?: boolean;
 }
 
-const serviceOptions = [
-  { value: 'residential', label: 'Residential Cleaning', price: 80 },
-  { value: 'commercial', label: 'Commercial/Office', price: 120 },
-  { value: 'airbnb', label: 'Airbnb Cleaning', price: 65 },
-  { value: 'moveout', label: 'Move In/Out', price: 150 },
-  { value: 'dorm', label: 'Student Dorm', price: 45 },
-];
 
-const timeSlots = [
-  '8:00 AM',
-  '10:00 AM',
-  '12:00 PM',
-  '2:00 PM',
-  '4:00 PM',
-];
-
-export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitment = false }: BookingModalProps) {
+export function BookingModal({ isOpen, onClose, defaultService = '', userData, isRecruitment = false }: BookingModalProps) {
   const [step, setStep] = useState(1);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -56,16 +51,16 @@ export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitme
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      firstName: userData?.firstName || '',
+      lastName: userData?.lastName || '',
       email: '',
-      phone: '',
-      serviceType: defaultService,
+      phone: userData?.phone || '',
+      serviceType: userData?.serviceType || defaultService,
       address: '',
       city: '',
       state: 'AL',
       zipCode: '',
-      preferredDate: '',
+      preferredDate: userData?.preferredDate || '',
       preferredTime: '',
       specialInstructions: '',
       amount: 80,
@@ -82,10 +77,17 @@ export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitme
   }, [selectedService, selectedServiceData, form]);
 
   useEffect(() => {
-    if (defaultService && isOpen) {
+    if (isOpen && userData) {
+      // Prefill form with user data from quick booking form
+      if (userData.firstName) form.setValue('firstName', userData.firstName);
+      if (userData.lastName) form.setValue('lastName', userData.lastName);
+      if (userData.phone) form.setValue('phone', userData.phone);
+      if (userData.preferredDate) form.setValue('preferredDate', userData.preferredDate);
+      if (userData.serviceType) form.setValue('serviceType', userData.serviceType);
+    } else if (defaultService && isOpen) {
       form.setValue('serviceType', defaultService);
     }
-  }, [defaultService, isOpen, form]);
+  }, [defaultService, userData, isOpen, form]);
 
   const bookingMutation = useMutation({
     mutationFn: async (data: BookingFormData) => {
@@ -143,8 +145,8 @@ export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitme
     onClose();
   };
 
-  // Set minimum date to today
-  const today = new Date().toISOString().split('T')[0];
+  // Set minimum date to tomorrow for consistency with quick booking form
+  const minDate = getTomorrowDate();
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -362,7 +364,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', isRecruitme
                           <FormControl>
                             <Input 
                               type="date" 
-                              min={today} 
+                              min={minDate} 
                               {...field}
                               data-testid="input-preferredDate"
                             />

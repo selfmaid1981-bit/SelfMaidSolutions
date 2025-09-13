@@ -1,7 +1,7 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
-import { ServicesSection } from '@/components/services-section';
+import { QuickBookingForm } from '@/components/quick-booking-form';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
@@ -112,6 +112,13 @@ export default function Services() {
               Professional cleaning solutions with transparent pricing and guaranteed satisfaction. 
               Choose from our comprehensive range of services designed for Alabama homes and businesses.
             </p>
+          </div>
+        </section>
+
+        {/* Quick Booking Form */}
+        <section className="py-16 lg:py-24 bg-muted/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <QuickBookingForm />
           </div>
         </section>
 
