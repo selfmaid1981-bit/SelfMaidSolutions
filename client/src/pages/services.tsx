@@ -3,7 +3,7 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { QuickBookingForm } from '@/components/quick-booking-form';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check } from 'lucide-react';
+import { Check, Home, ArrowRightLeft, Sparkles } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757729898302.png';
@@ -183,10 +183,18 @@ export default function Services() {
                                 alt="Commercial office cleaning sponge mascot with spray bottle and clipboard" 
                                 className="w-[28rem] h-[28rem] object-contain"
                               />
-                            ) : (service.id === 'moveout' || service.id === 'dorm') ? (
+                            ) : service.id === 'moveout' ? (
+                              <div className="flex flex-col items-center space-y-4">
+                                <div className="relative">
+                                  <Home className="w-24 h-24 text-primary/70" />
+                                  <ArrowRightLeft className="w-12 h-12 text-secondary absolute -bottom-2 -right-2" />
+                                </div>
+                                <Sparkles className="w-16 h-16 text-primary" />
+                              </div>
+                            ) : service.id === 'dorm' ? (
                               <img 
                                 src={dormMascot} 
-                                alt="Apartment and student dorm cleaning sponge mascot with boxes, clothing, and dorm furniture" 
+                                alt="Student dorm cleaning sponge mascot team with cleaning tools" 
                                 className="w-[28rem] h-[28rem] object-contain"
                               />
                             ) : service.id === 'airbnb' ? (
