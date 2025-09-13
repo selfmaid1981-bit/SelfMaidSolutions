@@ -106,7 +106,7 @@ export default function Services() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-primary/5 py-8 lg:py-12">
+        <section className="bg-primary/5 py-4 lg:py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Our Cleaning Services
