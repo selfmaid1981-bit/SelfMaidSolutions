@@ -7,6 +7,7 @@ import { Check, Home, ArrowRightLeft, Sparkles } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757729898302.png';
+import moveoutMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757730261066.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
 import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728436450.webp';
 
@@ -184,13 +185,11 @@ export default function Services() {
                                 className="w-[28rem] h-[28rem] object-contain"
                               />
                             ) : service.id === 'moveout' ? (
-                              <div className="flex flex-col items-center space-y-4">
-                                <div className="relative">
-                                  <Home className="w-24 h-24 text-primary/70" />
-                                  <ArrowRightLeft className="w-12 h-12 text-secondary absolute -bottom-2 -right-2" />
-                                </div>
-                                <Sparkles className="w-16 h-16 text-primary" />
-                              </div>
+                              <img 
+                                src={moveoutMascot} 
+                                alt="Move in/out cleaning sponge mascot team in action with moving and cleaning tools" 
+                                className="w-[28rem] h-[28rem] object-contain"
+                              />
                             ) : service.id === 'dorm' ? (
                               <img 
                                 src={dormMascot} 
