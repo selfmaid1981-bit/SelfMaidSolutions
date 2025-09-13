@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
-import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_1757726454751.png';
+import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_35_49 PM_1757726604830.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
 
 const serviceDetails = [
@@ -168,7 +168,7 @@ export default function Services() {
                             ) : (service.id === 'moveout' || service.id === 'dorm') ? (
                               <img 
                                 src={dormMascot} 
-                                alt="Moving and dorm cleaning sponge mascot with boxes and moving supplies" 
+                                alt="Superhero sponge mascot flying with cape for move-out and dorm cleaning services" 
                                 className="w-[28rem] h-[28rem] object-contain"
                               />
                             ) : service.id === 'airbnb' ? (
