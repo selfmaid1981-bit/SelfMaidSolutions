@@ -47,7 +47,7 @@ export function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-colors"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -56,7 +56,7 @@ export function Navigation() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`px-3 py-2 rounded-md text-lg font-medium transition-colors ${
                       location === item.href 
                         ? 'text-primary' 
                         : 'text-muted-foreground hover:text-primary'
@@ -69,7 +69,7 @@ export function Navigation() {
               ))}
               <a 
                 href="tel:334-413-9029" 
-                className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center"
+                className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center"
                 data-testid="nav-phone"
               >
                 <Phone className="w-4 h-4 mr-2" />

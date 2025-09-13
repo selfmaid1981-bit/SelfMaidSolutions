@@ -8,7 +8,7 @@ import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_1757727839055.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
-import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728012075.webp';
+import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728436450.webp';
 
 const serviceDetails = [
   {
@@ -121,7 +121,11 @@ export default function Services() {
         {/* Team Mascot Section */}
         <section className="py-12 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
+            <img 
+              src={teamMascot} 
+              alt="Three superhero sponge mascots working together with cleaning tools and spray bottles" 
+              className="w-[48rem] h-[48rem] object-contain mx-auto mb-6"
+            />
             <h2 className="text-2xl font-bold text-foreground mb-2">
               Join the Clean Team!
             </h2>
