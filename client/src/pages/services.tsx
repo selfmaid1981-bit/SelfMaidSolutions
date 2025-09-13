@@ -124,7 +124,7 @@ export default function Services() {
             <img 
               src={teamMascot} 
               alt="Three superhero sponge mascots working together with cleaning tools and spray bottles" 
-              className="w-[48rem] h-[48rem] object-contain mx-auto mb-6"
+              className="w-[96rem] h-[96rem] object-contain mx-auto mb-6"
             />
             <h2 className="text-2xl font-bold text-foreground mb-2">
               Join the Clean Team!
