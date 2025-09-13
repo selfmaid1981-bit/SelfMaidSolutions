@@ -8,6 +8,7 @@ import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_35_49 PM_1757726604830.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
+import teamMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757726681918.png';
 
 const serviceDetails = [
   {
@@ -113,6 +114,23 @@ export default function Services() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Professional cleaning solutions with transparent pricing and guaranteed satisfaction. 
               Choose from our comprehensive range of services designed for Alabama homes and businesses.
+            </p>
+          </div>
+        </section>
+
+        {/* Team Mascot Section */}
+        <section className="py-12 bg-gradient-to-b from-primary/5 to-transparent">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img 
+              src={teamMascot} 
+              alt="Three superhero cleaning sponges working together as a team" 
+              className="w-96 h-96 object-contain mx-auto mb-6"
+            />
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Join the Clean Team!
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Ready to experience superhero-level cleaning? Let's get started!
             </p>
           </div>
         </section>
