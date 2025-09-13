@@ -5,6 +5,7 @@ import { ServicesSection } from '@/components/services-section';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
+import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 
 const serviceDetails = [
   {
@@ -147,11 +148,16 @@ export default function Services() {
                               <img 
                                 src={residentialMascot} 
                                 alt="Residential cleaning sponge mascot with glasses, mop and bucket" 
-                                className="w-24 h-24 object-contain"
+                                className="w-28 h-28 object-contain"
+                              />
+                            ) : service.id === 'commercial' ? (
+                              <img 
+                                src={commercialMascot} 
+                                alt="Commercial office cleaning sponge mascot with spray bottle and clipboard" 
+                                className="w-28 h-28 object-contain"
                               />
                             ) : (
                               <div className="text-4xl text-primary">
-                                {service.id === 'commercial' && '🏢'}
                                 {service.id === 'airbnb' && '🔑'}
                                 {service.id === 'moveout' && '📦'}
                                 {service.id === 'dorm' && '🎓'}
