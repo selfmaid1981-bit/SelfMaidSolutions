@@ -121,11 +121,7 @@ export default function Services() {
         {/* Team Mascot Section */}
         <section className="py-12 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <img 
-              src={teamMascot} 
-              alt="Three superhero sponge mascots working together with cleaning tools and spray bottles" 
-              className="w-[96rem] h-[96rem] object-contain mx-auto mb-6"
-            />
+            
             <h2 className="text-2xl font-bold text-foreground mb-2">
               Join the Clean Team!
             </h2>
