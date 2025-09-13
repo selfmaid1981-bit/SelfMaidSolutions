@@ -106,7 +106,7 @@ export default function Services() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-primary/5 py-16 lg:py-24">
+        <section className="bg-primary/5 py-8 lg:py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Our Cleaning Services
@@ -136,21 +136,21 @@ export default function Services() {
         </section>
 
         {/* Quick Booking Form */}
-        <section className="py-16 lg:py-24 bg-muted/20">
+        <section className="py-8 lg:py-12 bg-muted/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <QuickBookingForm />
           </div>
         </section>
 
         {/* Detailed Services */}
-        <section className="py-16 lg:py-24">
+        <section className="py-8 lg:py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-16">
+            <div className="space-y-8">
               {serviceDetails.map((service, index) => (
                 <Card key={service.id} className="overflow-hidden" data-testid={`service-detail-${service.id}`}>
                   <CardContent className="p-0">
                     <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                      <div className="p-8 lg:p-12">
+                      <div className="p-6 lg:p-8">
                         <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
                         <p className="text-muted-foreground text-lg mb-6">{service.description}</p>
                         <div className="text-2xl font-bold text-primary mb-6">{service.pricing}</div>
@@ -166,7 +166,7 @@ export default function Services() {
                         </div>
                       </div>
                       
-                      <div className={`bg-muted/30 p-8 lg:p-12 flex items-center justify-center ${
+                      <div className={`bg-muted/30 p-6 lg:p-8 flex items-center justify-center ${
                         index % 2 === 1 ? 'lg:col-start-1' : ''
                       }`}>
                         <div className="text-center">
