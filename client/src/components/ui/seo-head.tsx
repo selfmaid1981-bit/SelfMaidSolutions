@@ -8,6 +8,8 @@ interface SEOHeadProps {
   ogDescription?: string;
   ogImage?: string;
   structuredData?: object;
+  canonical?: string;
+  noindex?: boolean;
 }
 
 export function SEOHead({ 
@@ -17,7 +19,9 @@ export function SEOHead({
   ogTitle,
   ogDescription,
   ogImage,
-  structuredData 
+  structuredData,
+  canonical,
+  noindex
 }: SEOHeadProps) {
   useEffect(() => {
     // Set page title
@@ -49,6 +53,37 @@ export function SEOHead({
     updateMetaTag('twitter:title', ogTitle || title);
     updateMetaTag('twitter:description', ogDescription || description);
 
+    // Handle robots meta tag (noindex)
+    if (noindex) {
+      updateMetaTag('robots', 'noindex, nofollow');
+    } else {
+      // Remove noindex if previously set
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) {
+        robotsMeta.remove();
+      }
+    }
+
+    // Handle canonical URL
+    if (canonical) {
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonical);
+    } else {
+      // Set current page URL as canonical if not specified
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', `${window.location.origin}${window.location.pathname}`);
+    }
+
     // Add structured data
     if (structuredData) {
       let script = document.querySelector('script[type="application/ld+json"]');
@@ -59,7 +94,7 @@ export function SEOHead({
       }
       script.textContent = JSON.stringify(structuredData);
     }
-  }, [title, description, keywords, ogTitle, ogDescription, ogImage, structuredData]);
+  }, [title, description, keywords, ogTitle, ogDescription, ogImage, structuredData, canonical, noindex]);
 
   return null;
 }

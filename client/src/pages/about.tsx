@@ -4,7 +4,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone } from 'lucide-react';
-import aboutImage from '@assets/We Make Your World Shine Hero Section_1757706821742.png';
+import aboutImage from '@assets/Homepage banner and services section mockup for \'Self-Maid Cleaning Solutions\' featuring sponge masc_1757704230182.jpeg';
 
 const features = [
   {

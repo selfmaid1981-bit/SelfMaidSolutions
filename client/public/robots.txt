@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://self-maid-cleaning.com/sitemap.xml

@@ -162,6 +162,7 @@ export default function Checkout() {
         <SEOHead
           title="Checkout | Self-Maid Cleaning Solutions"
           description="Complete your cleaning service booking with secure payment processing."
+          noindex={true}
         />
         <div className="min-h-screen bg-background">
           <Navigation />
@@ -182,6 +183,7 @@ export default function Checkout() {
       <SEOHead
         title="Checkout | Self-Maid Cleaning Solutions"
         description="Complete your cleaning service booking with secure payment processing."
+        noindex={true}
       />
       <div className="min-h-screen bg-background">
         <Navigation />
