@@ -1,4 +1,6 @@
-import { type User, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking } from "@shared/schema";
+import { type User, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, users, contactMessages, bookings } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -12,85 +14,63 @@ export interface IStorage {
   getBooking(id: string): Promise<Booking | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private contactMessages: Map<string, ContactMessage>;
-  private bookings: Map<string, Booking>;
-
-  constructor() {
-    this.users = new Map();
-    this.contactMessages = new Map();
-    this.bookings = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = randomUUID();
-    const message: ContactMessage = { 
-      ...insertMessage,
-      phone: insertMessage.phone ?? null,
-      message: insertMessage.message ?? null,
-      id, 
-      createdAt: new Date() 
-    };
-    this.contactMessages.set(id, message);
+    const [message] = await db
+      .insert(contactMessages)
+      .values(insertMessage)
+      .returning();
     return message;
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const id = randomUUID();
-    const booking: Booking = { 
-      ...insertBooking,
-      phone: insertBooking.phone ?? null,
-      specialInstructions: insertBooking.specialInstructions ?? null,
-      id, 
-      status: "pending",
-      paymentIntentId: null,
-      createdAt: new Date() 
-    };
-    this.bookings.set(id, booking);
+    const [booking] = await db
+      .insert(bookings)
+      .values(insertBooking)
+      .returning();
     return booking;
   }
 
   async updateBookingPaymentIntent(id: string, paymentIntentId: string): Promise<Booking | undefined> {
-    const booking = this.bookings.get(id);
-    if (booking) {
-      booking.paymentIntentId = paymentIntentId;
-      this.bookings.set(id, booking);
-      return booking;
-    }
-    return undefined;
+    const [booking] = await db
+      .update(bookings)
+      .set({ paymentIntentId })
+      .where(eq(bookings.id, id))
+      .returning();
+    return booking || undefined;
   }
 
   async updateBookingStatus(id: string, status: string): Promise<Booking | undefined> {
-    const booking = this.bookings.get(id);
-    if (booking) {
-      booking.status = status;
-      this.bookings.set(id, booking);
-      return booking;
-    }
-    return undefined;
+    const [booking] = await db
+      .update(bookings)
+      .set({ status })
+      .where(eq(bookings.id, id))
+      .returning();
+    return booking || undefined;
   }
 
   async getBooking(id: string): Promise<Booking | undefined> {
-    return this.bookings.get(id);
+    const [booking] = await db.select().from(bookings).where(eq(bookings.id, id));
+    return booking || undefined;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
