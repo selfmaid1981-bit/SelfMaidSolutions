@@ -6,7 +6,7 @@ import { z } from "zod";
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  passwordHash: text("password_hash").notNull(),
 });
 
 export const contactMessages = pgTable("contact_messages", {
@@ -42,7 +42,13 @@ export const bookings = pgTable("bookings", {
 
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
-  password: true,
+}).extend({
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+});
+
+export const selectUserSchema = createInsertSchema(users).pick({
+  id: true,
+  username: true,
 });
 
 export const insertContactMessageSchema = createInsertSchema(contactMessages).omit({
@@ -58,7 +64,8 @@ export const insertBookingSchema = createInsertSchema(bookings).omit({
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export type User = z.infer<typeof selectUserSchema>;
+export type UserWithPasswordHash = typeof users.$inferSelect;
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type Booking = typeof bookings.$inferSelect;

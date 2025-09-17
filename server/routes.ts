@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema, insertBookingSchema } from "@shared/schema";
+import { insertContactMessageSchema, insertBookingSchema, insertUserSchema } from "@shared/schema";
 import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 
@@ -13,7 +13,7 @@ if (process.env.SENDGRID_API_KEY) {
 
 // Stripe setup
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16",
+  apiVersion: "2025-08-27.basil",
 }) : null;
 
 interface EmailParams {
@@ -34,13 +34,21 @@ async function sendEmail(params: EmailParams): Promise<boolean> {
   }
   
   try {
-    await mailService.send({
+    const mailData = {
       to: params.to,
       from: params.from,
       subject: params.subject,
-      text: params.text,
-      html: params.html,
-    });
+    } as any;
+    
+    if (params.text) mailData.text = params.text;
+    if (params.html) mailData.html = params.html;
+    
+    // Ensure at least one content type is present
+    if (!params.text && !params.html) {
+      mailData.text = params.subject; // Fallback to subject as text
+    }
+    
+    await mailService.send(mailData);
     return true;
   } catch (error) {
     console.error('SendGrid email error:', error);
@@ -49,6 +57,62 @@ async function sendEmail(params: EmailParams): Promise<boolean> {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // User registration endpoint
+  app.post("/api/auth/register", async (req, res) => {
+    try {
+      const validatedData = insertUserSchema.parse(req.body);
+      
+      const user = await storage.createUser(validatedData);
+      
+      res.json({ 
+        success: true, 
+        message: "User registered successfully", 
+        user: { id: user.id, username: user.username }
+      });
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      if (error.message === 'Username already exists') {
+        res.status(400).json({ message: "Username already exists" });
+      } else {
+        res.status(400).json({ message: "Registration failed: " + error.message });
+      }
+    }
+  });
+
+  // User login endpoint
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+      }
+
+      const userWithHash = await storage.getUserWithPasswordHash(username);
+      
+      if (!userWithHash) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+
+      const isValidPassword = await storage.verifyPassword(password, userWithHash.passwordHash);
+      
+      if (!isValidPassword) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+
+      // Return user without password hash
+      const user = await storage.getUserByUsername(username);
+      res.json({ 
+        success: true, 
+        message: "Login successful", 
+        user: user
+      });
+    } catch (error: any) {
+      console.error('Login error:', error);
+      res.status(500).json({ message: "Login failed: " + error.message });
+    }
+  });
+
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
