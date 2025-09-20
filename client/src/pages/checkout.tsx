@@ -212,7 +212,7 @@ export default function Checkout() {
             </Card>
 
             <div className="text-center mt-8 text-sm text-muted-foreground">
-              <p>Need help? Call us at <a href="tel:334-413-9029" className="text-primary hover:underline">(334) 413-9029</a></p>
+              <p>Need help? Call us at <a href="tel:334-877-9513" className="text-primary hover:underline">(334) 413-9029</a></p>
             </div>
           </div>
         </section>

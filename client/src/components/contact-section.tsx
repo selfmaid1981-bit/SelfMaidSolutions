@@ -79,8 +79,8 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: Phone,
-      value: '334-413-9029',
-      href: 'tel:334-413-9029'
+      value: '334-877-9513',
+      href: 'tel:334-877-9513'
     },
     {
       icon: Mail,

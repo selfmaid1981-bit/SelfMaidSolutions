@@ -69,7 +69,7 @@ export function Footer() {
             <ul className="space-y-2 text-background/80">
               <li>
                 <a 
-                  href="tel:334-413-9029" 
+                  href="tel:334-877-9513" 
                   className="hover:text-background transition-colors flex items-center"
                   data-testid="footer-phone"
                 >

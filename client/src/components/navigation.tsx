@@ -69,7 +69,7 @@ export function Navigation() {
                 )
               ))}
               <a 
-                href="tel:334-413-9029" 
+                href="tel:334-877-9513" 
                 className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center"
                 data-testid="nav-phone"
               >
@@ -122,7 +122,7 @@ export function Navigation() {
               )
             ))}
             <a 
-              href="tel:334-413-9029" 
+              href="tel:334-877-9513" 
               className="bg-primary text-primary-foreground block px-3 py-2 rounded-md text-base font-medium text-center"
               data-testid="mobile-nav-phone"
             >

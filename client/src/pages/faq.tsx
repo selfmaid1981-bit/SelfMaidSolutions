@@ -149,7 +149,7 @@ export default function FAQ() {
               <CardContent className="pt-0">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a 
-                    href="tel:334-413-9029" 
+                    href="tel:334-877-9513" 
                     className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center justify-center"
                     data-testid="faq-cta-phone"
                   >

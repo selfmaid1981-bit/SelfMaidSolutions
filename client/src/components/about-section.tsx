@@ -57,7 +57,7 @@ export function AboutSection() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="tel:334-413-9029" 
+                href="tel:334-877-9513" 
                 className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors text-center"
                 data-testid="about-call-button"
               >

@@ -152,7 +152,7 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="tel:334-413-9029" 
+                href="tel:334-877-9513" 
                 className="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center"
                 data-testid="about-cta-phone"
               >

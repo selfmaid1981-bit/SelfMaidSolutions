@@ -16,7 +16,7 @@ const structuredData = {
   "name": "Self-Maid Cleaning Solutions",
   "description": "Professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning.",
   "url": "https://self-maid-cleaning.com",
-  "telephone": "+1-334-413-9029",
+  "telephone": "+1-334-877-9513",
   "email": "selfmaidclean@outlook.com",
   "address": {
     "@type": "PostalAddress",
@@ -76,7 +76,7 @@ export default function Home() {
         {/* Floating CTA for mobile */}
         <div className="floating-cta lg:hidden fixed bottom-4 right-4 z-50 animate-pulse">
           <a 
-            href="tel:334-413-9029" 
+            href="tel:334-877-9513" 
             className="bg-primary text-primary-foreground px-6 py-3 rounded-full shadow-lg inline-flex items-center font-semibold"
             data-testid="floating-cta"
           >
