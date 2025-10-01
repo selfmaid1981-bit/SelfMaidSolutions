@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone } from 'lucide-react';
 import aboutImage from '@assets/Homepage banner and services section mockup for \'Self-Maid Cleaning Solutions\' featuring sponge masc_1757704230182.jpeg';
 import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
-import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759307230507.png';
+import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759308549711.png';
 
 const features = [
   {
