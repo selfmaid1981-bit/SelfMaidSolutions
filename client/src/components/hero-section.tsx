@@ -3,8 +3,6 @@ import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import heroBanner from '@assets/793F560B-3E81-474C-9196-6C977F28E5C3_1759307212932.png';
-import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
-import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759307230507.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -68,34 +66,6 @@ export function HeroSection() {
                     <span className="text-sm font-medium">Same Day Service</span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Battle Scene Showcase */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative group">
-              <img 
-                src={battleScene1}
-                alt="Superhero sponge mascot battling dirt with cleaning supplies" 
-                className="w-full h-auto rounded-lg shadow-xl transform transition-transform group-hover:scale-105"
-                data-testid="hero-battle-scene-1"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
-                <p className="text-white font-bold text-xl">We Fight Dirt So You Don't Have To!</p>
-              </div>
-            </div>
-            <div className="relative group">
-              <img 
-                src={battleScene2}
-                alt="Cleaning hero conquering mess and grime" 
-                className="w-full h-auto rounded-lg shadow-xl transform transition-transform group-hover:scale-105"
-                data-testid="hero-battle-scene-2"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
-                <p className="text-white font-bold text-xl">Your Cleaning Superheroes Are Here!</p>
               </div>
             </div>
           </div>
