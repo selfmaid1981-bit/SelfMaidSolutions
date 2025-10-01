@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import spongeHeroImage from '@assets/Shyne superhero char_1759328084073.png';
+import spongeHeroImage from '@assets/Shyne superhero char_1759328265491.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -235,8 +235,20 @@ export function ContactSection() {
             </Card>
           </div>
           
-          {/* Right Side - Contact Info */}
+          {/* Right Side - Mascot and Contact Info */}
           <div className="order-1 lg:order-2 text-center lg:text-left">
+            {/* Mascot Character */}
+            <div className="flex justify-center lg:justify-end mb-8">
+              <div className="relative">
+                <img 
+                  src={spongeHeroImage} 
+                  alt="Shyne superhero sponge mascot holding phone - Contact us today!" 
+                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain"
+                  data-testid="contact-mascot-image"
+                />
+              </div>
+            </div>
+            
             {/* Contact Info */}
             <div className="bg-slate-800/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
