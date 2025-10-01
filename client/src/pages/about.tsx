@@ -157,7 +157,7 @@ export default function About() {
                 data-testid="about-cta-phone"
               >
                 <Phone className="w-5 h-5 mr-2" />
-                Call (334) 413-9029
+                Call (334) 877-9513
               </a>
               <a 
                 href="/#contact" 

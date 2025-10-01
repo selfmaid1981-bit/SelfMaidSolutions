@@ -61,7 +61,7 @@ export function AboutSection() {
                 className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold hover:bg-primary/90 transition-colors text-center"
                 data-testid="about-call-button"
               >
-                Call (334) 413-9029
+                Call (334) 877-9513
               </a>
               <Button 
                 variant="outline" 

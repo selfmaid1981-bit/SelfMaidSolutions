@@ -232,7 +232,7 @@ export default function Services() {
                 className="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
                 data-testid="services-cta-phone"
               >
-                Call (334) 413-9029
+                Call (334) 877-9513
               </a>
               <a 
                 href="/#contact" 

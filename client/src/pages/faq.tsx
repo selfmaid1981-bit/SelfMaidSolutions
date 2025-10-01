@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     question: "How do I schedule a cleaning service?",
-    answer: "Scheduling is easy! You can book online through our website, call us at (334) 413-9029, or fill out our contact form. We offer flexible scheduling including evenings and weekends to work around your busy schedule."
+    answer: "Scheduling is easy! You can book online through our website, call us at (334) 877-9513, or fill out our contact form. We offer flexible scheduling including evenings and weekends to work around your busy schedule."
   },
   {
     question: "What should I do to prepare for a cleaning service?",
@@ -154,7 +154,7 @@ export default function FAQ() {
                     data-testid="faq-cta-phone"
                   >
                     <Phone className="w-5 h-5 mr-2" />
-                    Call (334) 413-9029
+                    Call (334) 877-9513
                   </a>
                   <a 
                     href="/#contact" 

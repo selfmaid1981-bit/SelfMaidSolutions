@@ -56,7 +56,7 @@ export default function Home() {
     <>
       <SEOHead
         title="Self-Maid Cleaning Solutions | Professional Cleaning Services in Alabama"
-        description="Professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning. Book online or call (334) 413-9029."
+        description="Professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning. Book online or call (334) 877-9513."
         keywords="cleaning services Alabama, residential cleaning, commercial cleaning, Airbnb cleaning, move out cleaning, Birmingham cleaning, Montgomery cleaning, Huntsville cleaning"
         ogTitle="Self-Maid Cleaning Solutions - Alabama's Trusted Cleaning Service"
         ogDescription="Reliable, thorough, and affordable cleaning services across Alabama. From homes to offices, we make everything spotless."

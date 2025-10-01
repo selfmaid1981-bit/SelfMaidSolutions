@@ -238,7 +238,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   <li><strong>Amount:</strong> $${(booking.amount / 100).toFixed(2)}</li>
                 </ul>
                 <p>We'll contact you 24 hours before your appointment to confirm the details.</p>
-                <p>Questions? Call us at (334) 413-9029</p>
+                <p>Questions? Call us at (334) 877-9513</p>
                 <p>Thank you for choosing Self-Maid Cleaning!</p>
               `,
             });
