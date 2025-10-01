@@ -106,37 +106,30 @@ export default function Services() {
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero Section */}
-        <section className="bg-primary/5 py-4 lg:py-6">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Our Cleaning Services
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Professional cleaning solutions with transparent pricing and guaranteed satisfaction. 
-              Choose from our comprehensive range of services designed for Alabama homes and businesses.
-            </p>
-          </div>
-        </section>
-
-        {/* Team Mascot Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-transparent">
+        {/* Team Mascot Hero Section */}
+        <section className="relative">
           <div 
-            className="min-h-[400px] lg:min-h-[500px]"
+            className="min-h-[500px] lg:min-h-[600px] relative"
             style={{
               backgroundImage: `url(${teamMascot})`,
               backgroundSize: 'contain',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center top',
               backgroundRepeat: 'no-repeat'
             }}
           >
+            {/* Fade gradient overlay at bottom */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
           </div>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <div className="relative -mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
+            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+              Our Cleaning Services
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+              Professional cleaning solutions with transparent pricing and guaranteed satisfaction. 
+              Choose from our comprehensive range of services designed for Alabama homes and businesses.
+            </p>
+            <p className="text-2xl lg:text-3xl font-bold text-primary">
               Join the Clean Team!
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Ready to experience superhero-level cleaning? Let's get started!
             </p>
           </div>
         </section>
