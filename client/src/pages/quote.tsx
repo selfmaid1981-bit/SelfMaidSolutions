@@ -47,23 +47,30 @@ export default function Quote() {
   const [showQuote, setShowQuote] = useState(false);
 
   const calculateQuote = () => {
-    if (!serviceType || !size) return 0;
+    if (!serviceType) return 0;
 
     const service = serviceTypes.find(s => s.value === serviceType);
-    const sizeOption = sizeOptions.find(s => s.value === size);
     const freq = frequencyOptions.find(f => f.value === frequency);
 
-    if (!service || !sizeOption || !freq) return 0;
+    if (!service || !freq) return 0;
 
-    // Calculate base price
-    let basePrice = service.minCharge * sizeOption.multiplier;
+    let basePrice = 0;
 
-    // If custom square footage is provided, calculate based on that
+    // If custom square footage is provided, use that
     if (customSqFt) {
-      const sqFt = parseInt(customSqFt);
+      const sqFt = Math.max(0, parseInt(customSqFt) || 0);
       if (sqFt > 0) {
         basePrice = Math.max(service.minCharge, sqFt * service.baseRate);
+      } else {
+        return 0;
       }
+    } else if (size) {
+      // Otherwise use size selection
+      const sizeOption = sizeOptions.find(s => s.value === size);
+      if (!sizeOption) return 0;
+      basePrice = service.minCharge * sizeOption.multiplier;
+    } else {
+      return 0;
     }
 
     // Apply frequency discount
@@ -135,7 +142,11 @@ export default function Quote() {
                         </SelectTrigger>
                         <SelectContent>
                           {serviceTypes.map(service => (
-                            <SelectItem key={service.value} value={service.value}>
+                            <SelectItem 
+                              key={service.value} 
+                              value={service.value}
+                              data-testid={`option-service-${service.value}`}
+                            >
                               {service.label}
                             </SelectItem>
                           ))}
@@ -152,7 +163,11 @@ export default function Quote() {
                         </SelectTrigger>
                         <SelectContent>
                           {sizeOptions.map(option => (
-                            <SelectItem key={option.value} value={option.value}>
+                            <SelectItem 
+                              key={option.value} 
+                              value={option.value}
+                              data-testid={`option-size-${option.value}`}
+                            >
                               {option.label}
                             </SelectItem>
                           ))}
@@ -166,13 +181,15 @@ export default function Quote() {
                       <Input 
                         id="sqft"
                         type="number"
+                        min="0"
+                        step="1"
                         placeholder="e.g., 1500"
                         value={customSqFt}
                         onChange={(e) => setCustomSqFt(e.target.value)}
                         data-testid="quote-sqft-input"
                       />
                       <p className="text-sm text-muted-foreground">
-                        Enter exact square footage for a more accurate quote
+                        Enter exact square footage to override size selection
                       </p>
                     </div>
 
@@ -185,7 +202,11 @@ export default function Quote() {
                         </SelectTrigger>
                         <SelectContent>
                           {frequencyOptions.map(option => (
-                            <SelectItem key={option.value} value={option.value}>
+                            <SelectItem 
+                              key={option.value} 
+                              value={option.value}
+                              data-testid={`option-frequency-${option.value}`}
+                            >
                               {option.label}
                             </SelectItem>
                           ))}
@@ -217,7 +238,7 @@ export default function Quote() {
 
                     <Button 
                       onClick={() => setShowQuote(true)} 
-                      disabled={!serviceType || !size}
+                      disabled={!serviceType || (!size && !(Number(customSqFt) > 0))}
                       className="w-full"
                       data-testid="calculate-quote-button"
                     >
@@ -234,7 +255,7 @@ export default function Quote() {
                     <CardTitle>Your Estimated Quote</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {showQuote && serviceType && size ? (
+                    {showQuote && serviceType && (size || Number(customSqFt) > 0) ? (
                       <div className="space-y-6">
                         <div className="text-center py-8 border-b">
                           <p className="text-sm text-muted-foreground mb-2">Estimated Total</p>
@@ -256,7 +277,7 @@ export default function Quote() {
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Size:</span>
                               <span className="font-medium">
-                                {sizeOptions.find(s => s.value === size)?.label}
+                                {size ? sizeOptions.find(s => s.value === size)?.label : 'Custom'}
                               </span>
                             </div>
                             {customSqFt && (
@@ -316,7 +337,7 @@ export default function Quote() {
                       <div className="text-center py-12">
                         <Calculator className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                         <p className="text-muted-foreground">
-                          Select a service type and size to calculate your quote
+                          Select a service and size or enter square footage to calculate your quote
                         </p>
                       </div>
                     )}
