@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone } from 'lucide-react';
 import aboutImage from '@assets/Homepage banner and services section mockup for \'Self-Maid Cleaning Solutions\' featuring sponge masc_1757704230182.jpeg';
+import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
+import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759307230507.png';
 
 const features = [
   {
@@ -120,6 +122,63 @@ export default function About() {
                   <div className="text-muted-foreground font-medium">{stat.label}</div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Battle Scene Section */}
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                We Fight Dirt So You Don't Have To!
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Our cleaning superheroes are equipped and ready to tackle even the toughest messes. 
+                No job is too big or too dirty for our expert team.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group">
+                <CardContent className="p-0">
+                  <div className="relative">
+                    <img 
+                      src={battleScene1}
+                      alt="Superhero sponge mascot battling dirt with cleaning supplies" 
+                      className="w-full h-auto transform transition-transform group-hover:scale-105"
+                      data-testid="about-battle-scene-1"
+                    />
+                  </div>
+                  <div className="p-6 bg-primary/5">
+                    <h3 className="text-xl font-bold text-foreground mb-2">Armed & Ready</h3>
+                    <p className="text-muted-foreground">
+                      Our team comes fully equipped with professional-grade cleaning tools and eco-friendly 
+                      solutions to defeat dirt, grime, and germs in every corner.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group">
+                <CardContent className="p-0">
+                  <div className="relative">
+                    <img 
+                      src={battleScene2}
+                      alt="Cleaning hero conquering mess and grime" 
+                      className="w-full h-auto transform transition-transform group-hover:scale-105"
+                      data-testid="about-battle-scene-2"
+                    />
+                  </div>
+                  <div className="p-6 bg-secondary/5">
+                    <h3 className="text-xl font-bold text-foreground mb-2">No Mess Too Tough</h3>
+                    <p className="text-muted-foreground">
+                      Whether it's stubborn stains, accumulated dust, or deep-seated grime, 
+                      our superheroes tackle every challenge with skill and determination.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
