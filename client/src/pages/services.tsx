@@ -169,36 +169,36 @@ export default function Services() {
                         index % 2 === 1 ? 'lg:col-start-1' : ''
                       }`}>
                         <div className="text-center">
-                          <div className="w-[32rem] h-[32rem] bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                          <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                             {service.id === 'residential' ? (
                               <img 
                                 src={residentialMascot} 
                                 alt="Residential cleaning sponge mascot with glasses, mop and bucket" 
-                                className="w-[28rem] h-[28rem] object-contain"
+                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
                             ) : service.id === 'commercial' ? (
                               <img 
                                 src={commercialMascot} 
                                 alt="Commercial office cleaning sponge mascot with spray bottle and clipboard" 
-                                className="w-[28rem] h-[28rem] object-contain"
+                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
                             ) : service.id === 'moveout' ? (
                               <img 
                                 src={moveoutMascot} 
                                 alt="Move in/out cleaning sponge mascot team in action with moving and cleaning tools" 
-                                className="w-[28rem] h-[28rem] object-contain"
+                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
                             ) : service.id === 'dorm' ? (
                               <img 
                                 src={dormMascot} 
                                 alt="Student dorm cleaning sponge mascot with moving boxes, clothing, and dorm furniture" 
-                                className="w-[28rem] h-[28rem] object-contain"
+                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
                             ) : service.id === 'airbnb' ? (
                               <img 
                                 src={airbnbMascot} 
                                 alt="Airbnb cleaning sponge mascot with sanitization supplies and medical cross" 
-                                className="w-[28rem] h-[28rem] object-contain"
+                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
                             ) : null}
                           </div>

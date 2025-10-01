@@ -33,7 +33,7 @@ const features = [
 
 const stats = [
   { number: '500+', label: 'Happy Customers' },
-  { number: '5 Years', label: 'Experience' },
+  { number: '16 Years', label: 'Experience' },
   { number: '24/7', label: 'Support Available' },
   { number: '100%', label: 'Satisfaction Guarantee' }
 ];
