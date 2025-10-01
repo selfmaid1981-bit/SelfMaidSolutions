@@ -74,7 +74,7 @@ export function Navigation() {
                 data-testid="nav-phone"
               >
                 <Phone className="w-4 h-4 mr-2" />
-                (334) 413-9029
+                (334) 877-9513
               </a>
             </div>
           </div>
@@ -127,7 +127,7 @@ export function Navigation() {
               data-testid="mobile-nav-phone"
             >
               <Phone className="w-4 h-4 mr-2 inline" />
-              (334) 413-9029
+              (334) 877-9513
             </a>
           </div>
         </div>

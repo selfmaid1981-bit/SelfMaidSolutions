@@ -74,7 +74,7 @@ export function Footer() {
                   data-testid="footer-phone"
                 >
                   <Phone className="w-4 h-4 mr-2" />
-                  (334) 413-9029
+                  (334) 877-9513
                 </a>
               </li>
               <li>
