@@ -2,66 +2,101 @@ import { useState } from 'react';
 import { Phone, Calendar, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascotImage from '@assets/IMG_0585_1757723061263.png';
+import heroBanner from '@assets/793F560B-3E81-474C-9196-6C977F28E5C3_1759307212932.png';
+import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
+import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759307230507.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   return (
     <>
-      <section className="hero-bg relative overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Content */}
-            <div className="text-center lg:text-left">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">Self-Maid Cleaning Solutions</h1>
-              <div className="text-lg text-white/90 mb-8">
-                <p className="mb-2">Residential • Commercial/Office • Turnovers/Student and Apartment</p>
-                <p>Move in and Out • Air BnB</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                <a 
-                  href="tel:334-877-9513" 
-                  className="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center"
-                  data-testid="hero-call-button"
-                >
-                  <Phone className="w-5 h-5 mr-3" />
-                  Call Now: (334) 877-9513
-                </a>
-                <Button 
-                  onClick={() => setIsBookingModalOpen(true)}
-                  className="bg-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-secondary/90 transition-colors h-auto"
-                  data-testid="hero-book-button"
-                >
-                  <Calendar className="w-5 h-5 mr-3" />
-                  BOOK NOW
-                </Button>
-              </div>
-              <div className="mt-8 flex justify-center lg:justify-start items-center space-x-8 text-white/80">
-                <div className="flex items-center">
-                  <Shield className="w-5 h-5 mr-2" />
-                  <span>Insured & Bonded</span>
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-600 dark:from-blue-950 dark:via-blue-900 dark:to-cyan-900">
+        {/* Main Hero Banner */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left Side - Hero Banner Image */}
+            <div className="order-2 lg:order-1">
+              <img 
+                src={heroBanner}
+                alt="Self-Maid Cleaning Solutions - Spotless Every Time" 
+                className="w-full h-auto rounded-lg shadow-2xl"
+                data-testid="hero-banner-image"
+              />
+            </div>
+            
+            {/* Right Side - CTA Buttons & Trust Badges */}
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                  Ready for a Spotless Space?
+                </h2>
+                <p className="text-lg text-white/90 mb-8">
+                  Professional cleaning services across Alabama. From homes to offices, we make everything shine!
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                  <a 
+                    href="tel:334-877-9513" 
+                    className="bg-white text-blue-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center shadow-lg"
+                    data-testid="hero-call-button"
+                  >
+                    <Phone className="w-5 h-5 mr-3" />
+                    Call Now: (334) 877-9513
+                  </a>
+                  <Button 
+                    onClick={() => setIsBookingModalOpen(true)}
+                    className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors h-auto shadow-lg"
+                    data-testid="hero-book-button"
+                  >
+                    <Calendar className="w-5 h-5 mr-3" />
+                    BOOK NOW
+                  </Button>
                 </div>
-                <div className="flex items-center">
-                  <Star className="w-5 h-5 mr-2" />
-                  <span>5-Star Rated</span>
-                </div>
-                <div className="hidden sm:flex items-center">
-                  <Clock className="w-5 h-5 mr-2" />
-                  <span>Same Day Service</span>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white">
+                  <div className="flex items-center justify-center lg:justify-start">
+                    <Shield className="w-5 h-5 mr-2" />
+                    <span className="text-sm font-medium">Insured & Bonded</span>
+                  </div>
+                  <div className="flex items-center justify-center lg:justify-start">
+                    <Star className="w-5 h-5 mr-2" />
+                    <span className="text-sm font-medium">5-Star Rated</span>
+                  </div>
+                  <div className="flex items-center justify-center lg:justify-start">
+                    <Clock className="w-5 h-5 mr-2" />
+                    <span className="text-sm font-medium">Same Day Service</span>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            {/* Right Side - Mascot */}
-            <div className="flex justify-center lg:justify-end">
+          </div>
+        </div>
+
+        {/* Battle Scene Showcase */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative group">
               <img 
-                src={mascotImage} 
-                alt="Self-Maid superhero sponge mascot saying MESS? I'M ON IT! with cleaning spray" 
-                className="max-w-md w-full h-auto"
-                data-testid="hero-mascot-image"
+                src={battleScene1}
+                alt="Superhero sponge mascot battling dirt with cleaning supplies" 
+                className="w-full h-auto rounded-lg shadow-xl transform transition-transform group-hover:scale-105"
+                data-testid="hero-battle-scene-1"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+                <p className="text-white font-bold text-xl">We Fight Dirt So You Don't Have To!</p>
+              </div>
+            </div>
+            <div className="relative group">
+              <img 
+                src={battleScene2}
+                alt="Cleaning hero conquering mess and grime" 
+                className="w-full h-auto rounded-lg shadow-xl transform transition-transform group-hover:scale-105"
+                data-testid="hero-battle-scene-2"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+                <p className="text-white font-bold text-xl">Your Cleaning Superheroes Are Here!</p>
+              </div>
             </div>
           </div>
         </div>
