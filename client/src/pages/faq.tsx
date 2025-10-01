@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Phone, MessageCircle, HelpCircle } from 'lucide-react';
+import battleScene from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759308397289.png';
 
 const faqs = [
   {
@@ -131,6 +132,28 @@ export default function FAQ() {
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+        </section>
+
+        {/* Battle Scene Section */}
+        <section className="bg-gradient-to-b from-primary/5 to-muted/20">
+          <div 
+            className="min-h-[400px] lg:min-h-[500px]"
+            style={{
+              backgroundImage: `url(${battleScene})`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+          </div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              We Fight Dirt So You Don't Have To!
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Armed with professional tools and expertise, we tackle every cleaning challenge with superhero-level determination.
+            </p>
           </div>
         </section>
 
