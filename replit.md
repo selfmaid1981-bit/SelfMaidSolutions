@@ -8,6 +8,16 @@ Preferred communication style: Simple, everyday language.
 
 # Recent Changes
 
+## October 1, 2025 - Dynamic Quote Calculator
+- **Quote Page**: Created new /quote page with instant quote calculator based on service type and property size
+- **Flexible Pricing**: Supports both preset size categories and custom square footage input for accurate quotes
+- **Service Options**: All five cleaning services (Residential, Commercial, Airbnb, Move-in/out, Student Dorm) with service-specific pricing rates
+- **Frequency Discounts**: Weekly (15%), Bi-weekly (10%), and Monthly (5%) recurring service discounts
+- **Add-on Services**: Optional extras including Deep Cleaning, Carpet Cleaning, Window Cleaning, and Appliance Cleaning
+- **Smart Logic**: Custom square footage overrides size selection for precise pricing
+- **Call to Action**: Direct phone call and contact form links from quote display
+- **Navigation**: Added "Get Quote" link to main navigation menu
+
 ## December 12, 2025 - Complete Mascot Branding Integration
 - **Hero Section**: Replaced homepage banner with "We Make Your World Shine" mascot design featuring superhero sponge character
 - **Navigation Header**: Added company logo (Super Sponge Cleaning Hero) to navigation with responsive behavior
