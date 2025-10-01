@@ -235,20 +235,8 @@ export function ContactSection() {
             </Card>
           </div>
           
-          {/* Right Side - Mascot and Contact Info */}
+          {/* Right Side - Contact Info */}
           <div className="order-1 lg:order-2 text-center lg:text-left">
-            {/* Mascot Character */}
-            <div className="flex justify-center lg:justify-end mb-8">
-              <div className="relative">
-                <img 
-                  src={spongeHeroImage} 
-                  alt="Self-Maid superhero sponge mascot holding phone and waving - Get in Touch with the Clean Team" 
-                  className="w-[32rem] h-[32rem] object-contain"
-                  data-testid="mascot-image"
-                />
-              </div>
-            </div>
-            
             {/* Contact Info */}
             <div className="bg-slate-800/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
