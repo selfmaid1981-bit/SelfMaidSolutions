@@ -10,11 +10,11 @@ import { Button } from '@/components/ui/button';
 import { Calculator, Phone, Check } from 'lucide-react';
 
 const serviceTypes = [
-  { value: 'residential', label: 'Residential Cleaning', baseRate: 0.15, minCharge: 80 },
-  { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.18, minCharge: 120 },
-  { value: 'airbnb', label: 'Airbnb Cleaning', baseRate: 0.20, minCharge: 65 },
-  { value: 'moveout', label: 'Move In/Out Cleaning', baseRate: 0.25, minCharge: 150 },
-  { value: 'dorm', label: 'Student Dorm Turnover', baseRate: 0.12, minCharge: 45 }
+  { value: 'residential', label: 'Residential Cleaning', baseRate: 0.10, minCharge: 100 },
+  { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.12, minCharge: 150 },
+  { value: 'airbnb', label: 'Airbnb Cleaning', baseRate: 0.08, minCharge: 80 },
+  { value: 'moveout', label: 'Move In/Out Cleaning', baseRate: 0.15, minCharge: 175 },
+  { value: 'dorm', label: 'Student Dorm Turnover', baseRate: 0.07, minCharge: 60 }
 ];
 
 const sizeOptions = [
