@@ -120,21 +120,22 @@ export default function Services() {
         </section>
 
         {/* Team Mascot Section */}
-        <section 
-          className="py-24 lg:py-32 relative bg-gradient-to-b from-primary/5 to-transparent"
-          style={{
-            backgroundImage: `url(${teamMascot})`,
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background/80"></div>
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 drop-shadow-lg">
+        <section className="bg-gradient-to-b from-primary/5 to-transparent">
+          <div 
+            className="min-h-[400px] lg:min-h-[500px]"
+            style={{
+              backgroundImage: `url(${teamMascot})`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+          </div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Join the Clean Team!
             </h2>
-            <p className="text-xl text-muted-foreground drop-shadow-md">
+            <p className="text-xl text-muted-foreground">
               Ready to experience superhero-level cleaning? Let's get started!
             </p>
           </div>
