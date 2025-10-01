@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Phone, MessageCircle, HelpCircle } from 'lucide-react';
 import battleScene from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759308397289.png';
+import heroImage from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1759310042131.png';
 
 const faqs = [
   {
@@ -83,11 +84,14 @@ export default function FAQ() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-primary/5 py-12 lg:py-16">
+        <section className="bg-gradient-to-b from-cyan-400 to-primary/5 py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
-              <HelpCircle className="w-8 h-8 text-primary" />
-            </div>
+            <img 
+              src={heroImage}
+              alt="Self-Maid cleaning superhero mascot team with mops and cleaning supplies" 
+              className="w-full max-w-2xl mx-auto mb-8 h-auto"
+              data-testid="faq-hero-image"
+            />
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Frequently Asked Questions
             </h1>
