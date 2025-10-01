@@ -9,32 +9,21 @@ export function HeroSection() {
 
   return (
     <>
-      <section 
-        className="relative overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center"
-        style={{
-          backgroundImage: `url(${heroBanner})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-transparent"></div>
-        
-        {/* Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-              Self-Maid Cleaning Solutions
-            </h1>
-            <p className="text-2xl lg:text-3xl text-white font-semibold mb-4 drop-shadow-lg">
-              Spotless Every Time.
-            </p>
-            <p className="text-lg lg:text-xl text-white/95 mb-8 drop-shadow-md">
-              Residential • Commercial • Move-In/Out Turnovers
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-600 dark:from-blue-950 dark:via-blue-900 dark:to-cyan-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          {/* Hero Banner Image - No Overlay */}
+          <div className="mb-8">
+            <img 
+              src={heroBanner}
+              alt="Self-Maid Cleaning Solutions - Spotless Every Time" 
+              className="w-full h-auto rounded-lg shadow-2xl"
+              data-testid="hero-banner-image"
+            />
+          </div>
+          
+          {/* CTA Buttons & Trust Badges Below Image */}
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a 
                 href="tel:334-877-9513" 
                 className="bg-white text-blue-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center shadow-xl"
@@ -53,16 +42,16 @@ export function HeroSection() {
               </Button>
             </div>
             
-            <div className="flex flex-wrap gap-6 text-white">
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <div className="flex flex-wrap gap-4 justify-center text-white">
+              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
                 <Shield className="w-5 h-5 mr-2" />
                 <span className="text-sm font-medium">Insured & Bonded</span>
               </div>
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
                 <Star className="w-5 h-5 mr-2" />
                 <span className="text-sm font-medium">5-Star Rated</span>
               </div>
-              <div className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
                 <Clock className="w-5 h-5 mr-2" />
                 <span className="text-sm font-medium">Same Day Service</span>
               </div>
