@@ -4,7 +4,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone } from 'lucide-react';
-import aboutImage from '@assets/Homepage banner and services section mockup for \'Self-Maid Cleaning Solutions\' featuring sponge masc_1757704230182.jpeg';
+import aboutImage from '@assets/Copilot_20250927_160848_1759309660777.png';
 import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
 import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759308549711.png';
 
@@ -98,7 +98,7 @@ export default function About() {
               <div className="relative">
                 <img 
                   src={aboutImage} 
-                  alt="Self-Maid mascot sponge superhero with cleaning spray - We Make Your World Shine" 
+                  alt="Meet Shyne - Self-Maid Cleaning mascot superhero sponge - Let's light up this mess!" 
                   className="rounded-lg shadow-lg w-full h-auto" 
                   data-testid="about-image"
                 />
