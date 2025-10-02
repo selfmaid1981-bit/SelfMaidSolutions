@@ -18,6 +18,12 @@ Preferred communication style: Simple, everyday language.
 - **Call to Action**: Direct phone call and contact form links from quote display
 - **Navigation**: Added "Get Quote" link to main navigation menu
 
+## October 2, 2025 - JotForm Agent Integration & Updates
+- **JotForm Agent**: Integrated JotForm AI chat agent as floating widget on all pages for instant customer support
+- **Experience Update**: Changed company experience from 5 years to 16 years in About page statistics
+- **Contact Section Updates**: Added new Shyne superhero mascot holding phone to contact section
+- **Mobile Optimization**: Fixed services page mascot images to display properly on mobile devices with responsive sizing
+
 ## December 12, 2025 - Complete Mascot Branding Integration
 - **Hero Section**: Replaced homepage banner with "We Make Your World Shine" mascot design featuring superhero sponge character
 - **Navigation Header**: Added company logo (Super Sponge Cleaning Hero) to navigation with responsive behavior
