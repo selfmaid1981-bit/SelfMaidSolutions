@@ -33,6 +33,15 @@ Preferred communication style: Simple, everyday language.
 - **Visual Consistency**: Maintained responsive design, dark mode support, and consistent branding throughout all sections
 - **Functionality Preserved**: All existing booking, contact, and payment functionality maintained while enhancing visual appeal
 
+## October 5, 2025 - Save My Quote Feature
+- **Quote Persistence**: Added "Save My Quote" functionality allowing customers to save their quote calculations to the database
+- **Customer Information Form**: Collects name, email, and phone number before saving quote for follow-up
+- **Dual Email Notifications**: Automatically sends quote details to customer and business owner (selfmaidclean@outlook.com) via SendGrid
+- **Contact Form Pre-fill**: "Request This Quote" link includes URL parameters to auto-populate contact form with service type and quote amount
+- **Database Schema**: Added quotes table with fields for customer info, service details, property size, frequency, add-ons, and estimated price
+- **Storage Interface**: Extended IStorage with saveQuote method for data persistence
+- **API Endpoint**: Created POST /api/quotes route with validation and email dispatch functionality
+
 # System Architecture
 
 ## Frontend Architecture
@@ -55,7 +64,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Data Storage
 - **Primary Database**: PostgreSQL hosted on Neon (serverless)
-- **Schema**: Three main entities - users, contact_messages, and bookings
+- **Schema**: Four main entities - users, contact_messages, bookings, and quotes
 - **Data Validation**: Zod schemas shared between frontend and backend
 - **Storage Pattern**: Repository pattern with interface abstraction allowing for memory or database storage
 
@@ -73,7 +82,8 @@ Preferred communication style: Simple, everyday language.
 
 ## Email Communication
 - **Email Service**: SendGrid for transactional emails
-- **Use Cases**: Contact form submissions, booking confirmations, payment receipts
+- **Use Cases**: Contact form submissions, booking confirmations, payment receipts, quote notifications
+- **Quote Notifications**: Dual email dispatch to both customer and business owner with detailed quote information
 - **Fallback**: Graceful degradation when email service is unavailable
 
 ## Service Architecture
