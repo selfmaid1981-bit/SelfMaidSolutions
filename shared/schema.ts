@@ -40,6 +40,20 @@ export const bookings = pgTable("bookings", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const quotes = pgTable("quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  serviceType: text("service_type").notNull(),
+  propertySize: text("property_size"),
+  customSqFt: integer("custom_sq_ft"),
+  frequency: text("frequency").notNull(),
+  addOns: text("add_ons").array().default(sql`ARRAY[]::text[]`),
+  estimatedPrice: integer("estimated_price").notNull(), // in dollars
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
 }).extend({
@@ -63,6 +77,11 @@ export const insertBookingSchema = createInsertSchema(bookings).omit({
   paymentIntentId: true,
 });
 
+export const insertQuoteSchema = createInsertSchema(quotes).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = z.infer<typeof selectUserSchema>;
 export type UserWithPasswordHash = typeof users.$inferSelect;
@@ -70,3 +89,5 @@ export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
+export type Quote = typeof quotes.$inferSelect;
+export type InsertQuote = z.infer<typeof insertQuoteSchema>;
