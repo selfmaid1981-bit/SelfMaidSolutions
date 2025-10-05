@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
@@ -7,7 +8,9 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Calculator, Phone, Check } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { apiRequest } from '@/lib/queryClient';
+import { Calculator, Phone, Check, Mail, Save } from 'lucide-react';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.10, minCharge: 120 },
@@ -40,12 +43,17 @@ const addOns = [
 ];
 
 export default function Quote() {
+  const { toast } = useToast();
   const [serviceType, setServiceType] = useState('');
   const [size, setSize] = useState('');
   const [frequency, setFrequency] = useState('onetime');
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [customSqFt, setCustomSqFt] = useState('');
   const [showQuote, setShowQuote] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [showSaveForm, setShowSaveForm] = useState(false);
 
   const calculateQuote = () => {
     if (!serviceType) return 0;
@@ -92,6 +100,60 @@ export default function Quote() {
         ? prev.filter(id => id !== addOnId)
         : [...prev, addOnId]
     );
+  };
+
+  const saveQuoteMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest('POST', '/api/quotes', {
+        name: customerName,
+        email: customerEmail,
+        phone: customerPhone || null,
+        serviceType: selectedService?.label || serviceType,
+        propertySize: size ? sizeOptions.find(s => s.value === size)?.label : null,
+        customSqFt: customSqFt ? parseInt(customSqFt) : null,
+        frequency: frequencyOptions.find(f => f.value === frequency)?.label || frequency,
+        addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
+        estimatedPrice: quote,
+      });
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Quote Saved!",
+        description: "Your quote has been saved and sent to your email. We'll be in touch soon!",
+      });
+      setShowSaveForm(false);
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to save quote. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSaveQuote = () => {
+    if (!customerName || !customerEmail) {
+      toast({
+        title: "Missing Information",
+        description: "Please provide your name and email to save your quote.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(customerEmail)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    saveQuoteMutation.mutate();
   };
 
   const quote = calculateQuote();
@@ -317,21 +379,92 @@ export default function Quote() {
                           <p className="text-sm text-muted-foreground text-center">
                             This is an estimate. Final price may vary based on specific conditions.
                           </p>
-                          <a 
-                            href="tel:334-877-9513"
-                            className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center"
-                            data-testid="quote-call-button"
-                          >
-                            <Phone className="w-4 h-4 mr-2" />
-                            Call to Book: (334) 877-9513
-                          </a>
-                          <a 
-                            href="/#contact"
-                            className="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors flex items-center justify-center"
-                            data-testid="quote-contact-button"
-                          >
-                            Request This Quote
-                          </a>
+                          
+                          {!showSaveForm ? (
+                            <>
+                              <Button
+                                onClick={() => setShowSaveForm(true)}
+                                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                data-testid="show-save-form-button"
+                              >
+                                <Save className="w-4 h-4 mr-2" />
+                                Save My Quote
+                              </Button>
+                              <a 
+                                href="tel:334-877-9513"
+                                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center"
+                                data-testid="quote-call-button"
+                              >
+                                <Phone className="w-4 h-4 mr-2" />
+                                Call to Book: (334) 877-9513
+                              </a>
+                              <a 
+                                href={`/#contact?service=${encodeURIComponent(selectedService?.label || '')}&quote=${quote}`}
+                                className="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors flex items-center justify-center"
+                                data-testid="quote-contact-button"
+                              >
+                                Request This Quote
+                              </a>
+                            </>
+                          ) : (
+                            <div className="space-y-4 bg-muted/30 p-4 rounded-lg">
+                              <h4 className="font-semibold text-foreground flex items-center">
+                                <Mail className="w-4 h-4 mr-2" />
+                                Your Information
+                              </h4>
+                              <div className="space-y-3">
+                                <div>
+                                  <Label htmlFor="customer-name">Name *</Label>
+                                  <Input
+                                    id="customer-name"
+                                    value={customerName}
+                                    onChange={(e) => setCustomerName(e.target.value)}
+                                    placeholder="Your name"
+                                    data-testid="input-customer-name"
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="customer-email">Email *</Label>
+                                  <Input
+                                    id="customer-email"
+                                    type="email"
+                                    value={customerEmail}
+                                    onChange={(e) => setCustomerEmail(e.target.value)}
+                                    placeholder="your@email.com"
+                                    data-testid="input-customer-email"
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="customer-phone">Phone (Optional)</Label>
+                                  <Input
+                                    id="customer-phone"
+                                    type="tel"
+                                    value={customerPhone}
+                                    onChange={(e) => setCustomerPhone(e.target.value)}
+                                    placeholder="(334) 555-0100"
+                                    data-testid="input-customer-phone"
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button
+                                  onClick={handleSaveQuote}
+                                  disabled={saveQuoteMutation.isPending}
+                                  className="flex-1 bg-green-600 hover:bg-green-700"
+                                  data-testid="button-save-quote"
+                                >
+                                  {saveQuoteMutation.isPending ? 'Saving...' : 'Save & Email Quote'}
+                                </Button>
+                                <Button
+                                  onClick={() => setShowSaveForm(false)}
+                                  variant="outline"
+                                  data-testid="button-cancel-save"
+                                >
+                                  Cancel
+                                </Button>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ) : (
