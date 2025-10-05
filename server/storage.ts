@@ -1,4 +1,4 @@
-import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, users, contactMessages, bookings } from "@shared/schema";
+import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, users, contactMessages, bookings, quotes } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 import * as bcrypt from "bcrypt";
@@ -14,6 +14,7 @@ export interface IStorage {
   updateBookingPaymentIntent(id: string, paymentIntentId: string): Promise<Booking | undefined>;
   updateBookingStatus(id: string, status: string): Promise<Booking | undefined>;
   getBooking(id: string): Promise<Booking | undefined>;
+  createQuote(quote: InsertQuote): Promise<Quote>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -103,6 +104,14 @@ export class DatabaseStorage implements IStorage {
   async getBooking(id: string): Promise<Booking | undefined> {
     const [booking] = await db.select().from(bookings).where(eq(bookings.id, id));
     return booking || undefined;
+  }
+
+  async createQuote(insertQuote: InsertQuote): Promise<Quote> {
+    const [quote] = await db
+      .insert(quotes)
+      .values(insertQuote)
+      .returning();
+    return quote;
   }
 }
 
