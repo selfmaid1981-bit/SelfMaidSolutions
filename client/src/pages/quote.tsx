@@ -39,7 +39,12 @@ const addOns = [
   { id: 'deep', label: 'Deep Cleaning', price: 50 },
   { id: 'carpet', label: 'Carpet Cleaning', price: 75 },
   { id: 'windows', label: 'Window Cleaning', price: 40 },
-  { id: 'appliances', label: 'Appliance Cleaning', price: 35 }
+  { id: 'appliances', label: 'Appliance Cleaning', price: 35 },
+  { id: 'refrigerator', label: 'Refrigerator Cleaning', price: 30 },
+  { id: 'stove', label: 'Stove Cleaning', price: 25 },
+  { id: 'garage', label: 'Garage Cleaning', price: 60 },
+  { id: 'blinds', label: 'Blind Cleaning', price: 35 },
+  { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 }
 ];
 
 export default function Quote() {
