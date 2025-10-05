@@ -190,10 +190,10 @@ export default function About() {
             <Card className="p-8 bg-primary/5 border-primary/20">
               <CardContent className="p-0">
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  To transform the cleaning industry in Alabama by providing reliable, eco-friendly, and 
-                  personalized cleaning services that give our customers more time to focus on what matters 
-                  most to them. We believe everyone deserves a clean, healthy environment without the stress 
-                  of maintaining it themselves.
+                  Through hard work and meticulous attention to detail, we're committed to serving our 
+                  Alabama community by creating clean, peaceful spaces where families and businesses can thrive. 
+                  We believe that a spotless environment fosters peace of mind, and we're dedicated to helping 
+                  our neighbors enjoy the comfort and tranquility they deserve.
                 </p>
               </CardContent>
             </Card>
