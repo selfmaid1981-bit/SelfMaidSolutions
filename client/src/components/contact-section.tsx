@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -37,6 +37,21 @@ export function ContactSection() {
       message: '',
     },
   });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service');
+    const quoteAmount = urlParams.get('quote');
+    
+    if (service) {
+      form.setValue('serviceType', service);
+      
+      if (quoteAmount) {
+        const message = `I received a quote of $${quoteAmount} for ${service} and would like to proceed with booking.`;
+        form.setValue('message', message);
+      }
+    }
+  }, [form]);
 
   const contactMutation = useMutation({
     mutationFn: (data: ContactFormData) => {
