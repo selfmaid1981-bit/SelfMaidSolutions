@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema, insertBookingSchema, insertUserSchema } from "@shared/schema";
+import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema } from "@shared/schema";
 import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 
@@ -250,6 +250,128 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Webhook error:', error);
       res.status(400).json({ message: "Webhook error" });
+    }
+  });
+
+  // Save and email quote
+  app.post("/api/quotes", async (req, res) => {
+    try {
+      const validatedData = insertQuoteSchema.parse(req.body);
+      
+      // Save quote to database
+      const quote = await storage.createQuote(validatedData);
+      
+      // Format add-ons for display
+      const addOnsText = quote.addOns && quote.addOns.length > 0 
+        ? quote.addOns.join(', ') 
+        : 'None';
+      
+      // Format property size info
+      const sizeInfo = quote.customSqFt 
+        ? `${quote.customSqFt} sq ft` 
+        : quote.propertySize || 'Not specified';
+      
+      // Send email to customer with their quote
+      await sendEmail({
+        to: quote.email,
+        from: "selfmaidclean@outlook.com",
+        subject: "Your Cleaning Service Quote - Self-Maid Cleaning",
+        html: `
+          <h3>Your Cleaning Service Quote</h3>
+          <p>Hi ${quote.name},</p>
+          <p>Thank you for requesting a quote! Here are your details:</p>
+          <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2 style="color: #0284c7; margin-top: 0;">Estimated Total: $${quote.estimatedPrice}</h2>
+          </div>
+          <h4>Quote Details:</h4>
+          <ul>
+            <li><strong>Service Type:</strong> ${quote.serviceType}</li>
+            <li><strong>Property Size:</strong> ${sizeInfo}</li>
+            <li><strong>Frequency:</strong> ${quote.frequency}</li>
+            <li><strong>Add-ons:</strong> ${addOnsText}</li>
+          </ul>
+          <p><em>This is an estimate. Final price may vary based on specific conditions.</em></p>
+          <hr />
+          <h4>Ready to Book?</h4>
+          <p>Call us at <strong>(334) 877-9513</strong> or reply to this email to schedule your cleaning service!</p>
+          <p>We look forward to making your world shine!</p>
+          <p>- The Self-Maid Cleaning Team</p>
+        `,
+        text: `
+          Your Cleaning Service Quote
+          
+          Hi ${quote.name},
+          
+          Thank you for requesting a quote! Here are your details:
+          
+          Estimated Total: $${quote.estimatedPrice}
+          
+          Quote Details:
+          - Service Type: ${quote.serviceType}
+          - Property Size: ${sizeInfo}
+          - Frequency: ${quote.frequency}
+          - Add-ons: ${addOnsText}
+          
+          This is an estimate. Final price may vary based on specific conditions.
+          
+          Ready to Book?
+          Call us at (334) 877-9513 or reply to this email to schedule your cleaning service!
+          
+          We look forward to making your world shine!
+          - The Self-Maid Cleaning Team
+        `
+      });
+      
+      // Send notification email to business owner
+      await sendEmail({
+        to: "selfmaidclean@outlook.com",
+        from: "selfmaidclean@outlook.com",
+        subject: `New Quote Request - $${quote.estimatedPrice} - ${quote.serviceType}`,
+        html: `
+          <h3>New Quote Request</h3>
+          <p><strong>Customer:</strong> ${quote.name}</p>
+          <p><strong>Email:</strong> ${quote.email}</p>
+          <p><strong>Phone:</strong> ${quote.phone || 'Not provided'}</p>
+          <hr />
+          <h4>Quote Details:</h4>
+          <ul>
+            <li><strong>Service Type:</strong> ${quote.serviceType}</li>
+            <li><strong>Property Size:</strong> ${sizeInfo}</li>
+            <li><strong>Frequency:</strong> ${quote.frequency}</li>
+            <li><strong>Add-ons:</strong> ${addOnsText}</li>
+          </ul>
+          <div style="background-color: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+            <h3 style="color: #92400e; margin: 0;">Estimated Price: $${quote.estimatedPrice}</h3>
+          </div>
+          <p><strong>Action:</strong> Follow up with customer at ${quote.email} or ${quote.phone || 'email only'}</p>
+        `,
+        text: `
+          New Quote Request
+          
+          Customer: ${quote.name}
+          Email: ${quote.email}
+          Phone: ${quote.phone || 'Not provided'}
+          
+          Quote Details:
+          - Service Type: ${quote.serviceType}
+          - Property Size: ${sizeInfo}
+          - Frequency: ${quote.frequency}
+          - Add-ons: ${addOnsText}
+          
+          Estimated Price: $${quote.estimatedPrice}
+          
+          Action: Follow up with customer at ${quote.email} or ${quote.phone || 'email only'}
+        `
+      });
+      
+      res.json({ 
+        success: true, 
+        message: "Quote saved and sent to your email",
+        quoteId: quote.id 
+      });
+    } catch (error: any) {
+      console.error('Quote submission error:', error);
+      res.status(400).json({ message: "Invalid quote data: " + error.message });
     }
   });
 
