@@ -104,7 +104,7 @@ export default function Quote() {
 
   const saveQuoteMutation = useMutation({
     mutationFn: async () => {
-      const response = await apiRequest('POST', '/api/quotes', {
+      return apiRequest('POST', '/api/quotes', {
         name: customerName,
         email: customerEmail,
         phone: customerPhone || null,
@@ -115,7 +115,6 @@ export default function Quote() {
         addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
         estimatedPrice: quote,
       });
-      return response.json();
     },
     onSuccess: () => {
       toast({
