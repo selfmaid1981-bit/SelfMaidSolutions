@@ -214,7 +214,7 @@ export function ServicesSection() {
                               {service.price}
                             </div>
                             <Button 
-                              onClick={() => handleServiceClick(service.id)}
+                              onClick={() => service.id === 'addon' ? handleServiceClick(service.id) : window.location.href = '/quote'}
                               className={`${
                                 service.id === 'addon' 
                                   ? 'bg-secondary hover:bg-secondary/90 text-white' 
