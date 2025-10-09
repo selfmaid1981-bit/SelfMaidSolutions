@@ -233,7 +233,7 @@ export default function Services() {
                 Call (334) 877-9513
               </a>
               <a 
-                href="/#contact" 
+                href="/quote" 
                 className="bg-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-secondary/90 transition-colors"
                 data-testid="services-cta-quote"
               >
