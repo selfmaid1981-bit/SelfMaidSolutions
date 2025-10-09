@@ -109,7 +109,7 @@ export default function Services() {
         {/* Team Mascot Hero Section */}
         <section className="relative">
           <div 
-            className="min-h-[500px] lg:min-h-[600px] relative"
+            className="min-h-[350px] sm:min-h-[450px] lg:min-h-[600px] relative"
             style={{
               backgroundImage: `url(${teamMascot})`,
               backgroundSize: 'contain',
@@ -120,7 +120,7 @@ export default function Services() {
             {/* Fade gradient overlay at bottom */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
           </div>
-          <div className="relative -mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
+          <div className="relative -mt-16 sm:-mt-20 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Our Cleaning Services
             </h1>
