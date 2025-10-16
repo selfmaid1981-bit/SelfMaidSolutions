@@ -15,7 +15,7 @@ const serviceDetails = [
   {
     id: 'residential',
     title: 'Residential Cleaning',
-    description: 'Complete home cleaning services tailored to your schedule and preferences.',
+    description: 'Complete home cleaning services tailored to your schedule and preferences. Serving Montgomery and Prattville homes with professional care.',
     pricing: 'Starting at $80',
     features: [
       'Living rooms and bedrooms',
@@ -31,7 +31,7 @@ const serviceDetails = [
   {
     id: 'commercial',
     title: 'Commercial & Office Cleaning',
-    description: 'Professional cleaning services to maintain a clean and productive workplace.',
+    description: 'Professional cleaning services to maintain a clean and productive workplace in Montgomery and Prattville business districts.',
     pricing: 'Starting at $120',
     features: [
       'Office spaces and workstations',
@@ -47,7 +47,7 @@ const serviceDetails = [
   {
     id: 'airbnb',
     title: 'Airbnb Cleaning',
-    description: 'Fast and thorough turnover cleaning to keep your property booking-ready.',
+    description: 'Fast and thorough turnover cleaning to keep your Montgomery or Prattville rental property booking-ready with same-day service.',
     pricing: 'Starting at $65',
     features: [
       'Same-day turnaround service',
