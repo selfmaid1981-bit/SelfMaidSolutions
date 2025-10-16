@@ -1,0 +1,17 @@
+Section,Focus Area,Findings / To Audit,Recommendations,Priority
+Technical SEO,Indexation & Crawlability,Ensure all service and location pages are indexable in Google Search Console,"Submit sitemap, fix noindex tags, and verify canonical URLs",High
+Technical SEO,Site Speed & Core Web Vitals,Likely unoptimized images and unminified CSS/JS,"Use PageSpeed Insights, compress images, minify CSS/JS, and lazy load",High
+Technical SEO,Mobile Usability,Mobile layout may have tight spacing on buttons,Increase touch target sizes and fix responsive layout issues,Medium
+On-Page SEO,Titles & Meta Descriptions,Generic titles missing local keywords,Include 'Montgomery' or 'Prattville' and services in meta titles,High
+On-Page SEO,Content Depth,Thin service pages with low content volume,"Expand service pages to 800–1,200 words with FAQs and location terms",High
+On-Page SEO,Internal Linking,Few interlinks between services and blog posts,Add contextual links between related pages,Medium
+On-Page SEO,Schema Markup,No structured data found,"Add LocalBusiness, Service, and Review schema using JSON-LD",Medium
+Local SEO,Google Business Profile,May not be optimized for all service areas,"Add service areas (Montgomery, Prattville), photos, and collect reviews",High
+Local SEO,Citations / Directories,NAP may be inconsistent across directories,"Ensure consistent Name, Address, Phone across Yelp, YellowPages, etc.",Medium
+Off-Page SEO,Backlinks,Few high-quality referring domains,"Pursue local backlinks from blogs, realtors, and partnerships",High
+Off-Page SEO,Guest Posts / Partnerships,No evidence of content collaborations,Write guest blogs for cleaning/home service websites,Medium
+Conversion Optimization,Calls-to-Action (CTAs),CTAs not prominent enough,Add above-the-fold CTA buttons and phone number on all pages,High
+Conversion Optimization,Trust Signals,Limited visible reviews/testimonials,"Display Google reviews, before/after images, and satisfaction guarantees",High
+Content Strategy,Blog Topics,No blog posts targeting local or long-tail queries,Create blogs like 'Top 5 Cleaning Tips in Montgomery' and 'Move-out Cleaning Checklist',Medium
+Action Plan (30 Days),Immediate Fixes,"Optimize homepage, compress images, claim GBP, fix NAP issues",Focus on technical fixes and local optimization,High
+Action Plan (90 Days),Growth Plan,"Add long-form content, earn backlinks, run local outreach campaigns",Scale content and authority gradually,Medium

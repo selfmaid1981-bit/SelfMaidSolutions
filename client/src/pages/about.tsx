@@ -42,9 +42,9 @@ export default function About() {
   return (
     <>
       <SEOHead
-        title="About Us | Self-Maid Cleaning Solutions Alabama"
-        description="Learn about Self-Maid Cleaning Solutions - Alabama's trusted cleaning service. Fully insured, background-checked team with eco-friendly products and flexible scheduling."
-        keywords="Alabama cleaning company, about Self-Maid, cleaning service team, insured cleaners, background checked, eco-friendly cleaning"
+        title="About Self-Maid Cleaning | 16 Years Serving Montgomery & Prattville AL"
+        description="Family-owned cleaning company serving Montgomery and Prattville, AL for 16 years. Fully insured, background-checked team. Eco-friendly products. 500+ happy customers."
+        keywords="cleaning company Montgomery AL, Prattville cleaning service, insured cleaners Alabama, background checked cleaners, eco-friendly cleaning Montgomery, family owned cleaning business"
       />
       
       <div className="min-h-screen bg-background">

@@ -98,9 +98,9 @@ export default function Services() {
   return (
     <>
       <SEOHead
-        title="Cleaning Services | Self-Maid Cleaning Solutions Alabama"
-        description="Detailed information about our professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning with transparent pricing."
-        keywords="Alabama cleaning services pricing, residential cleaning cost, commercial cleaning Alabama, Airbnb cleaning rates, move out cleaning price"
+        title="Cleaning Services Montgomery & Prattville AL | Pricing & Details | Self-Maid"
+        description="Professional cleaning services in Montgomery and Prattville, AL. Transparent pricing for residential, commercial, Airbnb, move-in/out cleaning. Free quotes. Call (334) 877-9513."
+        keywords="cleaning services Montgomery AL, Prattville cleaning prices, residential cleaning cost Montgomery, commercial cleaning Prattville, Airbnb cleaning rates Alabama, move out cleaning Montgomery pricing"
       />
       
       <div className="min-h-screen bg-background">

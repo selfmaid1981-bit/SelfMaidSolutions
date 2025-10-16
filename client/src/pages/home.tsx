@@ -14,16 +14,27 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Self-Maid Cleaning Solutions",
-  "description": "Professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning.",
+  "description": "Professional cleaning services serving Montgomery and Prattville, Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning with 16 years of experience.",
   "url": "https://self-maid-cleaning.com",
   "telephone": "+1-334-877-9513",
   "email": "selfmaidclean@outlook.com",
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Montgomery",
     "addressRegion": "AL",
     "addressCountry": "US"
   },
   "areaServed": [
+    {
+      "@type": "City",
+      "name": "Montgomery",
+      "sameAs": "https://en.wikipedia.org/wiki/Montgomery,_Alabama"
+    },
+    {
+      "@type": "City",
+      "name": "Prattville",
+      "sameAs": "https://en.wikipedia.org/wiki/Prattville,_Alabama"
+    },
     {
       "@type": "State",
       "name": "Alabama"
@@ -33,8 +44,11 @@ const structuredData = {
     "Residential Cleaning",
     "Commercial Cleaning", 
     "Airbnb Cleaning",
+    "Short Term Rental Cleaning",
     "Move In/Out Cleaning",
-    "Student Dorm Cleaning"
+    "Student Dorm Cleaning",
+    "Deep Cleaning",
+    "Construction Cleanup"
   ],
   "hasCredential": [
     {
@@ -46,20 +60,24 @@ const structuredData = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
-    "reviewCount": "500"
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
   },
-  "priceRange": "$45-$150"
+  "priceRange": "$45-$400",
+  "openingHours": "Mo-Su 00:00-23:59",
+  "paymentAccepted": "Cash, Credit Card, Debit Card"
 };
 
 export default function Home() {
   return (
     <>
       <SEOHead
-        title="Self-Maid Cleaning Solutions | Professional Cleaning Services in Alabama"
-        description="Professional cleaning services in Alabama. Residential, commercial, Airbnb, move-in/out, and student dorm cleaning. Book online or call (334) 877-9513."
-        keywords="cleaning services Alabama, residential cleaning, commercial cleaning, Airbnb cleaning, move out cleaning, Birmingham cleaning, Montgomery cleaning, Huntsville cleaning"
-        ogTitle="Self-Maid Cleaning Solutions - Alabama's Trusted Cleaning Service"
-        ogDescription="Reliable, thorough, and affordable cleaning services across Alabama. From homes to offices, we make everything spotless."
+        title="Professional Cleaning Services Montgomery & Prattville AL | Self-Maid Cleaning"
+        description="Top-rated cleaning services in Montgomery and Prattville, Alabama. Residential, commercial, Airbnb, move-in/out cleaning. 16 years experience. Call (334) 877-9513 for a free quote!"
+        keywords="cleaning services Montgomery AL, cleaning services Prattville AL, residential cleaning Montgomery, commercial cleaning Prattville, Airbnb cleaning Alabama, move out cleaning Montgomery, house cleaning Prattville"
+        ogTitle="Self-Maid Cleaning Solutions - Montgomery & Prattville's Trusted Cleaning Service"
+        ogDescription="Professional cleaning services serving Montgomery and Prattville, AL. From homes to offices, we make everything spotless with 16 years of experience."
         structuredData={structuredData}
       />
       

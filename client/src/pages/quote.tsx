@@ -166,9 +166,9 @@ export default function Quote() {
   return (
     <>
       <SEOHead
-        title="Get a Free Quote | Self-Maid Cleaning Solutions Alabama"
-        description="Calculate your cleaning service cost instantly. Get a free quote based on your space size and service needs in Alabama."
-        keywords="cleaning quote Alabama, cleaning cost calculator, free cleaning estimate, cleaning service pricing"
+        title="Free Cleaning Quote Calculator | Montgomery & Prattville AL | Self-Maid"
+        description="Instant cleaning quote calculator for Montgomery and Prattville, AL. Get accurate pricing for residential, commercial, Airbnb cleaning services. Free estimates!"
+        keywords="cleaning quote Montgomery AL, cleaning cost calculator Prattville, free cleaning estimate Alabama, cleaning service pricing Montgomery, instant quote Prattville cleaning"
       />
       
       <div className="min-h-screen bg-background">
