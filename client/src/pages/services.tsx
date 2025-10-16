@@ -215,6 +215,147 @@ export default function Services() {
           </div>
         </section>
 
+        {/* FAQ Section */}
+        <section className="py-16 lg:py-24 bg-muted/20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 text-center">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground text-center mb-12">
+              Common questions about our cleaning services in Montgomery and Prattville, AL
+            </p>
+            
+            <div className="space-y-6">
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    What areas do you serve in Alabama?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    We proudly serve Montgomery, Prattville, and surrounding areas in central Alabama. Our cleaning teams are familiar with local neighborhoods and can provide same-day or next-day service in most locations. Call us at (334) 877-9513 to confirm service availability in your specific area.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    Are you insured and bonded?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Yes! Self-Maid Cleaning Solutions is fully insured and bonded for your protection. All our team members undergo comprehensive background checks and are trained in professional cleaning techniques. We carry liability insurance to protect your property and give you complete peace of mind.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    Do I need to provide cleaning supplies?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    No! We bring all necessary cleaning supplies and equipment. We use professional-grade, eco-friendly cleaning products that are safe for your family and pets. If you have specific products you'd like us to use or any allergies we should know about, just let us know when booking.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    How do I get a quote for my property in Montgomery or Prattville?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Getting a quote is easy! Use our online quote calculator for instant pricing based on your property size and service needs. You can also call us at (334) 877-9513 for a free phone estimate, or schedule an in-person assessment for larger commercial properties or special projects.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    What if I'm not satisfied with the cleaning?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Your satisfaction is our priority! We offer a 100% satisfaction guarantee. If you're not completely happy with our service, contact us within 24 hours and we'll return to re-clean the areas of concern at no additional charge. With 16 years of experience and 500+ happy customers, we're confident you'll love the results.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    Can you accommodate same-day or emergency cleaning requests?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Yes! We understand that cleaning emergencies happen. We offer same-day cleaning services in Montgomery and Prattville, subject to availability. Contact us as early as possible for the best chance of accommodating your request. Our Airbnb turnover service is specifically designed for quick turnarounds.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    Do you offer recurring cleaning services?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Absolutely! We offer weekly, bi-weekly, and monthly recurring cleaning services with discounted rates. Weekly service receives 15% off, bi-weekly gets 10% off, and monthly service gets 5% off. Regular customers enjoy priority scheduling and consistent service from the same cleaning team.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Location-Specific Section */}
+        <section className="py-16 lg:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6 text-center">
+              Serving Montgomery & Prattville, Alabama
+            </h2>
+            <p className="text-muted-foreground text-lg text-center max-w-3xl mx-auto mb-12">
+              With 16 years of experience serving the greater Montgomery area, we understand the unique cleaning needs of Alabama homes and businesses.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Card>
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Montgomery, AL</h3>
+                  <p className="text-muted-foreground mb-4">
+                    From downtown historic districts to suburban neighborhoods, we provide comprehensive cleaning services throughout Montgomery. Whether you're in Garden District, Old Cloverdale, or Hampstead, our local team knows your area and can provide reliable, efficient service.
+                  </p>
+                  <p className="text-muted-foreground">
+                    <strong>Popular services in Montgomery:</strong> Residential cleaning, commercial office cleaning, move-in/out cleaning for apartments and homes, and deep cleaning for historic properties.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Prattville, AL</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Serving the "Fountain City" with pride! We clean homes and businesses throughout Prattville, from established neighborhoods to new developments. Our team is familiar with local property types and can handle everything from single-family homes to multi-unit properties.
+                  </p>
+                  <p className="text-muted-foreground">
+                    <strong>Popular services in Prattville:</strong> Weekly home cleaning, Airbnb turnover for rental properties, student housing cleaning, and commercial cleaning for local businesses.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-muted-foreground text-lg mb-6">
+                <strong>Also serving:</strong> Millbrook, Wetumpka, Pike Road, and surrounding communities in Autauga and Montgomery counties.
+              </p>
+              <a 
+                href="/quote" 
+                className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors"
+              >
+                Get Your Free Quote Today
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="bg-primary py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
