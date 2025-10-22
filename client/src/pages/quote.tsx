@@ -360,7 +360,7 @@ export default function Quote() {
                     <CardTitle>Your Estimated Quote</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {showQuote && serviceType && (size || Number(customSqFt) > 0) ? (
+                    {showQuote && serviceType && (serviceType === 'studentdorm' ? Number(numberOfRooms) > 0 : (size || Number(customSqFt) > 0)) ? (
                       <div className="space-y-6">
                         <div className="text-center py-8 border-b">
                           <p className="text-sm text-muted-foreground mb-2">Estimated Total</p>
@@ -379,17 +379,26 @@ export default function Quote() {
                               <span className="text-muted-foreground">Service:</span>
                               <span className="font-medium">{selectedService?.label}</span>
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">Size:</span>
-                              <span className="font-medium">
-                                {size ? sizeOptions.find(s => s.value === size)?.label : 'Custom'}
-                              </span>
-                            </div>
-                            {customSqFt && (
+                            {serviceType === 'studentdorm' ? (
                               <div className="flex justify-between">
-                                <span className="text-muted-foreground">Square Footage:</span>
-                                <span className="font-medium">{customSqFt} sq ft</span>
+                                <span className="text-muted-foreground">Number of Rooms:</span>
+                                <span className="font-medium">{numberOfRooms} rooms</span>
                               </div>
+                            ) : (
+                              <>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Size:</span>
+                                  <span className="font-medium">
+                                    {size ? sizeOptions.find(s => s.value === size)?.label : 'Custom'}
+                                  </span>
+                                </div>
+                                {customSqFt && (
+                                  <div className="flex justify-between">
+                                    <span className="text-muted-foreground">Square Footage:</span>
+                                    <span className="font-medium">{customSqFt} sq ft</span>
+                                  </div>
+                                )}
+                              </>
                             )}
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Frequency:</span>
