@@ -80,7 +80,7 @@ const serviceDetails = [
     id: 'dorm',
     title: 'Student Dorm Turnover',
     description: 'Quick and efficient cleaning between semesters and student moves.',
-    pricing: 'Starting at $45',
+    pricing: '$45 per room',
     features: [
       'Fast 2-4 hour turnaround',
       'Student-friendly pricing',
