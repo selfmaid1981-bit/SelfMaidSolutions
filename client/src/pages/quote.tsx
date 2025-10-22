@@ -18,7 +18,8 @@ const serviceTypes = [
   { value: 'moveout', label: 'Move-Out Cleaning', baseRate: 0.228, minCharge: 325 },
   { value: 'shorttermrental', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
   { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
-  { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 }
+  { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
+  { value: 'studentdorm', label: 'Student Dorm/Apartment Turnover', perRoom: 45, minCharge: 45 }
 ];
 
 const sizeOptions = [
@@ -54,6 +55,7 @@ export default function Quote() {
   const [frequency, setFrequency] = useState('onetime');
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [customSqFt, setCustomSqFt] = useState('');
+  const [numberOfRooms, setNumberOfRooms] = useState('');
   const [showQuote, setShowQuote] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
@@ -70,11 +72,22 @@ export default function Quote() {
 
     let basePrice = 0;
 
+    // Handle student dorm/apartment turnover with room-based pricing
+    if (serviceType === 'studentdorm') {
+      const rooms = Math.max(0, parseInt(numberOfRooms) || 0);
+      if (rooms > 0) {
+        const perRoomRate = (service as any).perRoom || 45;
+        basePrice = rooms * perRoomRate;
+      } else {
+        return 0;
+      }
+    }
     // If custom square footage is provided, use that
-    if (customSqFt) {
+    else if (customSqFt) {
       const sqFt = Math.max(0, parseInt(customSqFt) || 0);
       if (sqFt > 0) {
-        basePrice = Math.max(service.minCharge, sqFt * service.baseRate);
+        const rate = (service as any).baseRate || 0;
+        basePrice = Math.max(service.minCharge, sqFt * rate);
       } else {
         return 0;
       }
@@ -114,7 +127,7 @@ export default function Quote() {
         email: customerEmail,
         phone: customerPhone || null,
         serviceType: selectedService?.label || serviceType,
-        propertySize: size ? sizeOptions.find(s => s.value === size)?.label : null,
+        propertySize: serviceType === 'studentdorm' ? `${numberOfRooms} rooms` : (size ? sizeOptions.find(s => s.value === size)?.label : null),
         customSqFt: customSqFt ? parseInt(customSqFt) : null,
         frequency: frequencyOptions.find(f => f.value === frequency)?.label || frequency,
         addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
@@ -221,44 +234,66 @@ export default function Quote() {
                       </Select>
                     </div>
 
-                    {/* Size */}
-                    <div className="space-y-2">
-                      <Label htmlFor="size">Property Size</Label>
-                      <Select value={size} onValueChange={setSize}>
-                        <SelectTrigger id="size" data-testid="quote-size-select">
-                          <SelectValue placeholder="Select property size" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {sizeOptions.map(option => (
-                            <SelectItem 
-                              key={option.value} 
-                              value={option.value}
-                              data-testid={`option-size-${option.value}`}
-                            >
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    {/* Room Count for Student Dorm */}
+                    {serviceType === 'studentdorm' ? (
+                      <div className="space-y-2">
+                        <Label htmlFor="rooms">Number of Rooms</Label>
+                        <Input 
+                          id="rooms"
+                          type="number"
+                          min="1"
+                          step="1"
+                          placeholder="e.g., 3 (kitchen, living room, bathroom)"
+                          value={numberOfRooms}
+                          onChange={(e) => setNumberOfRooms(e.target.value)}
+                          data-testid="quote-rooms-input"
+                        />
+                        <p className="text-sm text-muted-foreground">
+                          $45 per room. Count all rooms including kitchen, living room, bedrooms, bathrooms, etc.
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Size */}
+                        <div className="space-y-2">
+                          <Label htmlFor="size">Property Size</Label>
+                          <Select value={size} onValueChange={setSize}>
+                            <SelectTrigger id="size" data-testid="quote-size-select">
+                              <SelectValue placeholder="Select property size" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {sizeOptions.map(option => (
+                                <SelectItem 
+                                  key={option.value} 
+                                  value={option.value}
+                                  data-testid={`option-size-${option.value}`}
+                                >
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
 
-                    {/* Custom Square Footage */}
-                    <div className="space-y-2">
-                      <Label htmlFor="sqft">Custom Square Footage (Optional)</Label>
-                      <Input 
-                        id="sqft"
-                        type="number"
-                        min="0"
-                        step="1"
-                        placeholder="e.g., 1500"
-                        value={customSqFt}
-                        onChange={(e) => setCustomSqFt(e.target.value)}
-                        data-testid="quote-sqft-input"
-                      />
-                      <p className="text-sm text-muted-foreground">
-                        Enter exact square footage to override size selection
-                      </p>
-                    </div>
+                        {/* Custom Square Footage */}
+                        <div className="space-y-2">
+                          <Label htmlFor="sqft">Custom Square Footage (Optional)</Label>
+                          <Input 
+                            id="sqft"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="e.g., 1500"
+                            value={customSqFt}
+                            onChange={(e) => setCustomSqFt(e.target.value)}
+                            data-testid="quote-sqft-input"
+                          />
+                          <p className="text-sm text-muted-foreground">
+                            Enter exact square footage to override size selection
+                          </p>
+                        </div>
+                      </>
+                    )}
 
                     {/* Frequency */}
                     <div className="space-y-2">
@@ -305,7 +340,10 @@ export default function Quote() {
 
                     <Button 
                       onClick={() => setShowQuote(true)} 
-                      disabled={!serviceType || (!size && !(Number(customSqFt) > 0))}
+                      disabled={
+                        !serviceType || 
+                        (serviceType === 'studentdorm' ? !(Number(numberOfRooms) > 0) : (!size && !(Number(customSqFt) > 0)))
+                      }
                       className="w-full"
                       data-testid="calculate-quote-button"
                     >
