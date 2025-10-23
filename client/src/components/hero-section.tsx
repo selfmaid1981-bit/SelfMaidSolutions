@@ -9,54 +9,60 @@ export function HeroSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-600 dark:from-blue-950 dark:via-blue-900 dark:to-cyan-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-          {/* Hero Banner Image - No Overlay */}
-          <div className="mb-8">
+      <section className="relative overflow-hidden premium-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          {/* Hero Banner Image */}
+          <div className="mb-10 fade-in">
             <img 
               src={heroBanner}
-              alt="Self-Maid Cleaning Solutions - Spotless Every Time" 
-              className="w-full h-auto rounded-lg shadow-2xl"
+              alt="Self-Maid Cleaning Solutions - We Make Your World Shine" 
+              className="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
               data-testid="hero-banner-image"
             />
           </div>
           
-          {/* CTA Buttons & Trust Badges Below Image */}
-          <div className="text-center">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          {/* CTA Buttons & Trust Badges */}
+          <div className="text-center fade-in">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
               <a 
                 href="tel:334-877-9513" 
-                className="bg-white text-blue-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center shadow-xl"
+                className="glass-effect text-blue-700 px-10 py-5 rounded-xl text-lg font-bold hover:shadow-2xl transition-all duration-300 inline-flex items-center justify-center transform hover:scale-105 group"
                 data-testid="hero-call-button"
               >
-                <Phone className="w-5 h-5 mr-3" />
+                <Phone className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform" />
                 Call Now: (334) 877-9513
               </a>
               <Button 
                 onClick={() => setIsBookingModalOpen(true)}
-                className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors h-auto shadow-xl"
+                className="premium-button text-white px-10 py-5 rounded-xl text-lg font-bold h-auto group"
                 data-testid="hero-book-button"
               >
-                <Calendar className="w-5 h-5 mr-3" />
-                BOOK NOW
+                <Calendar className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                BOOK ONLINE
               </Button>
             </div>
             
-            <div className="flex flex-wrap gap-4 justify-center text-white">
-              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Shield className="w-5 h-5 mr-2" />
-                <span className="text-sm font-medium">Insured & Bonded</span>
+            <div className="flex flex-wrap gap-6 justify-center">
+              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                <Shield className="w-6 h-6 mr-3 text-white" />
+                <span className="text-base font-semibold text-white">Fully Insured & Bonded</span>
               </div>
-              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Star className="w-5 h-5 mr-2" />
-                <span className="text-sm font-medium">5-Star Rated</span>
+              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                <Star className="w-6 h-6 mr-3 text-yellow-300" />
+                <span className="text-base font-semibold text-white">500+ 5-Star Reviews</span>
               </div>
-              <div className="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Clock className="w-5 h-5 mr-2" />
-                <span className="text-sm font-medium">Same Day Service</span>
+              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                <Clock className="w-6 h-6 mr-3 text-white" />
+                <span className="text-base font-semibold text-white">Same-Day Service Available</span>
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-200 rounded-full blur-3xl"></div>
         </div>
       </section>
       <BookingModal 

@@ -28,18 +28,18 @@ export function Navigation() {
   };
 
   return (
-    <nav className="bg-card shadow-sm sticky top-0 z-40">
+    <nav className="glass-effect shadow-lg sticky top-0 z-50 border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-18 lg:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3 text-xl font-bold text-primary hover:opacity-80 transition-opacity" data-testid="logo-link">
+            <Link href="/" className="flex items-center space-x-3 text-xl font-bold text-primary hover:opacity-90 transition-all transform hover:scale-105" data-testid="logo-link">
               <img 
                 src={logoImage} 
                 alt="Self-Maid Cleaning Logo" 
-                className="h-10 w-auto"
+                className="h-12 w-auto"
                 data-testid="logo-image"
               />
-              <span className="hidden sm:block" data-testid="brand-text">Self-Maid Cleaning</span>
+              <span className="hidden sm:block font-serif text-2xl" data-testid="brand-text">Self-Maid Cleaning</span>
             </Link>
           </div>
           
@@ -72,10 +72,10 @@ export function Navigation() {
               ))}
               <a 
                 href="tel:334-877-9513" 
-                className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center"
+                className="premium-button text-white px-6 py-3 rounded-xl text-base font-bold inline-flex items-center group"
                 data-testid="nav-phone"
               >
-                <Phone className="w-4 h-4 mr-2" />
+                <Phone className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
                 (334) 877-9513
               </a>
             </div>
