@@ -13,6 +13,14 @@ export function Footer() {
     { name: 'Student Dorms', href: '/services' },
   ];
 
+  const quickLinks = [
+    { name: 'About Us', href: '/about' },
+    { name: 'Blog & Tips', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Get a Quote', href: '/quote' },
+    { name: 'Service Areas', href: '/services' },
+  ];
+
   const socialLinks = [
     { icon: FaFacebookF, href: '#', label: 'Facebook' },
     { icon: FaInstagram, href: '#', label: 'Instagram' },
@@ -22,14 +30,13 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">Self-Maid Cleaning Solutions</h3>
             <p className="text-background/80 mb-4">
-              Professional cleaning services you can trust. Serving Alabama with reliable, 
-              thorough, and affordable cleaning solutions for homes and businesses.
+              Professional cleaning services you can trust. Serving Montgomery, Prattville, and surrounding Alabama communities with 16 years of experience.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-4">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
                 return (
@@ -45,6 +52,9 @@ export function Footer() {
                 );
               })}
             </div>
+            <p className="text-sm text-background/60">
+              <strong>Service Areas:</strong> Montgomery, Prattville, Millbrook, Wetumpka, Pike Road & More
+            </p>
           </div>
           
           <div>
@@ -58,6 +68,23 @@ export function Footer() {
                     data-testid={`footer-service-${index}`}
                   >
                     {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-background/80">
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  <Link 
+                    href={link.href} 
+                    className="hover:text-background transition-colors"
+                    data-testid={`footer-quick-link-${index}`}
+                  >
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -87,9 +114,9 @@ export function Footer() {
                   selfmaidclean@outlook.com
                 </a>
               </li>
-              <li className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
-                <span data-testid="footer-location">Alabama Statewide</span>
+              <li className="flex items-start">
+                <MapPin className="w-4 h-4 mr-2 mt-1" />
+                <span data-testid="footer-location">Montgomery & Prattville, AL</span>
               </li>
             </ul>
           </div>

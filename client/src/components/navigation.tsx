@@ -12,6 +12,7 @@ export function Navigation() {
     { href: '/', label: 'Home' },
     { href: '/services', label: 'Services' },
     { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
     { href: '/faq', label: 'FAQ' },
     { href: '/quote', label: 'Get Quote' },
     { href: '/#contact', label: 'Contact' },
