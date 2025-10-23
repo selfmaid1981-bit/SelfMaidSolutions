@@ -43,17 +43,17 @@ export function HeroSection() {
             </div>
             
             <div className="flex flex-wrap gap-6 justify-center">
-              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                <Shield className="w-6 h-6 mr-3 text-white" />
-                <span className="text-base font-semibold text-white">Fully Insured & Bonded</span>
+              <div className="flex items-center bg-white/30 backdrop-blur-md px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all border border-white/40">
+                <Shield className="w-6 h-6 mr-3 text-blue-900" />
+                <span className="text-base font-bold text-blue-900">Fully Insured & Bonded</span>
               </div>
-              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                <Star className="w-6 h-6 mr-3 text-yellow-300" />
-                <span className="text-base font-semibold text-white">500+ 5-Star Reviews</span>
+              <div className="flex items-center bg-white/30 backdrop-blur-md px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all border border-white/40">
+                <Star className="w-6 h-6 mr-3 text-yellow-500" />
+                <span className="text-base font-bold text-blue-900">500+ 5-Star Reviews</span>
               </div>
-              <div className="flex items-center glass-effect px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                <Clock className="w-6 h-6 mr-3 text-white" />
-                <span className="text-base font-semibold text-white">Same-Day Service Available</span>
+              <div className="flex items-center bg-white/30 backdrop-blur-md px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all border border-white/40">
+                <Clock className="w-6 h-6 mr-3 text-blue-900" />
+                <span className="text-base font-bold text-blue-900">Same-Day Service Available</span>
               </div>
             </div>
           </div>
