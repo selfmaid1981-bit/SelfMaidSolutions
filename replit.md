@@ -42,6 +42,28 @@ Preferred communication style: Simple, everyday language.
 - **Storage Interface**: Extended IStorage with saveQuote method for data persistence
 - **API Endpoint**: Created POST /api/quotes route with validation and email dispatch functionality
 
+## October 22, 2025 - Student Dorm Room-Based Pricing
+- **New Pricing Model**: Added Student Dorm/Apartment Turnover service with $45 per room pricing
+- **Dynamic Form**: Quote calculator shows room count input for student dorm, hides square footage fields
+- **Calculation Logic**: Room-based pricing (rooms × $45) with frequency discounts applied
+- **Quote Display**: Shows room count in quote details instead of property size for student dorm service
+- **Services Page Update**: Updated pricing display to "$45 per room" with clear explanation
+
+## October 23, 2025 - Content Marketing & SEO Enhancement
+- **Blog Section**: Created comprehensive blog with SEO-optimized articles targeting Montgomery/Prattville keywords
+- **Blog Posts**: Added detailed guides including "Ultimate Guide to Home Cleaning in Montgomery, AL" and "Complete Airbnb Cleaning Checklist for Prattville Hosts"
+- **Navigation Update**: Added "Blog" link to main navigation menu
+- **Footer Enhancement**: Expanded footer with Quick Links section, service areas, and improved local SEO
+- **SEO Strategy Document**: Created comprehensive SEO_BACKLINK_STRATEGY.md with actionable steps for:
+  - Google Business Profile optimization
+  - Local citation building (30+ directories)
+  - Backlink acquisition strategies
+  - Social media marketing plan
+  - Review generation system
+  - Partnership opportunities
+  - 90-day action plan
+- **Content Focus**: All content optimized for Montgomery and Prattville local search visibility
+
 # System Architecture
 
 ## Frontend Architecture
