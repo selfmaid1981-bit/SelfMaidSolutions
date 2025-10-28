@@ -20,7 +20,7 @@ const serviceTypes = [
   { value: 'shorttermrental', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
   { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
   { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
-  { value: 'studentdorm', label: 'Student Dorm/Apartment Turnover', perRoom: 45, minCharge: 45 }
+  { value: 'studentdorm', label: 'Student Dorm/Apartment Turnover (Call for Pricing)', perRoom: 45, minCharge: 45 }
 ];
 
 const sizeOptions = [
