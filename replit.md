@@ -1,218 +1,54 @@
 # Overview
 
-Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service business operating in Alabama. The application provides a complete business website with service showcases, online booking functionality, payment processing, and contact management. Built as a modern React SPA with Express.js backend, it serves both marketing and operational needs for the cleaning business.
+Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service business operating in Alabama. The application provides a complete business website with service showcases, online booking functionality, payment processing, and contact management. Built as a modern React SPA with an Express.js backend, it serves both marketing and operational needs for the cleaning business, aiming to attract customers and streamline operations in the Montgomery/Prattville/Selma area.
 
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-# Recent Changes
-
-## October 1, 2025 - Dynamic Quote Calculator
-- **Quote Page**: Created new /quote page with instant quote calculator based on service type and property size
-- **Flexible Pricing**: Supports both preset size categories and custom square footage input for accurate quotes
-- **Service Options**: All five cleaning services (Residential, Commercial, Airbnb, Move-in/out, Student Dorm) with service-specific pricing rates
-- **Frequency Discounts**: Weekly (15%), Bi-weekly (10%), and Monthly (5%) recurring service discounts
-- **Add-on Services**: Optional extras including Deep Cleaning, Carpet Cleaning, Window Cleaning, and Appliance Cleaning
-- **Smart Logic**: Custom square footage overrides size selection for precise pricing
-- **Call to Action**: Direct phone call and contact form links from quote display
-- **Navigation**: Added "Get Quote" link to main navigation menu
-
-## October 2, 2025 - JotForm Agent Integration & Updates
-- **JotForm Agent**: Integrated JotForm AI chat agent as floating widget on all pages for instant customer support
-- **Experience Update**: Changed company experience from 5 years to 16 years in About page statistics
-- **Contact Section Updates**: Added new Shyne superhero mascot holding phone to contact section
-- **Mobile Optimization**: Fixed services page mascot images to display properly on mobile devices with responsive sizing
-
-## December 12, 2025 - Complete Mascot Branding Integration
-- **Hero Section**: Replaced homepage banner with "We Make Your World Shine" mascot design featuring superhero sponge character
-- **Navigation Header**: Added company logo (Super Sponge Cleaning Hero) to navigation with responsive behavior
-- **Contact Section**: Complete redesign with "Get in Touch with the Clean Team" layout, mascot character with phone, and tagline "Questions? Ready to book? We're just a sponge-swipe away"
-- **Services Section**: Integrated individual mascot poses for each service card using CSS sprite technique (thumbs up, running, flexing, pointing poses)
-- **Recruitment Banner**: Added "JOIN THE CLEAN TEAM!" section with three mascots and recruitment modal functionality
-- **Visual Consistency**: Maintained responsive design, dark mode support, and consistent branding throughout all sections
-- **Functionality Preserved**: All existing booking, contact, and payment functionality maintained while enhancing visual appeal
-
-## October 5, 2025 - Save My Quote Feature
-- **Quote Persistence**: Added "Save My Quote" functionality allowing customers to save their quote calculations to the database
-- **Customer Information Form**: Collects name, email, and phone number before saving quote for follow-up
-- **Dual Email Notifications**: Automatically sends quote details to customer and business owner (selfmaidclean@outlook.com) via SendGrid
-- **Contact Form Pre-fill**: "Request This Quote" link includes URL parameters to auto-populate contact form with service type and quote amount
-- **Database Schema**: Added quotes table with fields for customer info, service details, property size, frequency, add-ons, and estimated price
-- **Storage Interface**: Extended IStorage with saveQuote method for data persistence
-- **API Endpoint**: Created POST /api/quotes route with validation and email dispatch functionality
-
-## October 22, 2025 - Student Dorm Room-Based Pricing
-- **New Pricing Model**: Added Student Dorm/Apartment Turnover service with $45 per room pricing
-- **Dynamic Form**: Quote calculator shows room count input for student dorm, hides square footage fields
-- **Calculation Logic**: Room-based pricing (rooms × $45) with frequency discounts applied
-- **Quote Display**: Shows room count in quote details instead of property size for student dorm service
-- **Services Page Update**: Updated pricing display to "$45 per room" with clear explanation
-
-## October 23, 2025 - Content Marketing & SEO Enhancement
-- **Blog Section**: Created comprehensive blog with SEO-optimized articles targeting Montgomery/Prattville keywords
-- **Blog Posts**: Added detailed guides including "Ultimate Guide to Home Cleaning in Montgomery, AL" and "Complete Airbnb Cleaning Checklist for Prattville Hosts"
-- **Navigation Update**: Added "Blog" link to main navigation menu
-- **Footer Enhancement**: Expanded footer with Quick Links section, service areas, and improved local SEO
-- **SEO Strategy Document**: Created comprehensive SEO_BACKLINK_STRATEGY.md with actionable steps for:
-  - Google Business Profile optimization
-  - Local citation building (30+ directories)
-  - Backlink acquisition strategies
-  - Social media marketing plan
-  - Review generation system
-  - Partnership opportunities
-  - 90-day action plan
-- **Content Focus**: All content optimized for Montgomery and Prattville local search visibility
-
-## October 23, 2025 - Premium Design Transformation & Free Traffic Guide
-- **Typography Upgrade**: Implemented Playfair Display serif font for all headings with refined letter-spacing and line-height
-- **Premium Color Palette**: Refined HSL color values for cleaner, more professional appearance
-- **Advanced Animations**: Added fade-in, float, shimmer, and glass-effect animations with cubic-bezier easing
-- **Hero Section Polish**: 
-  - Premium gradient background with decorative blur elements
-  - Glass-effect CTAs with micro-interactions (icon rotations, scale on hover)
-  - Enhanced trust badges with translucent backgrounds and high-contrast dark text
-  - Improved spacing and visual hierarchy
-- **Navigation Enhancement**:
-  - Glass-effect with backdrop blur and subtle shadow
-  - Larger logo (h-12) with serif brand text
-  - Premium gradient buttons with hover effects
-  - Increased navigation height for better proportions
-- **Button Styling**: Gradient buttons with smooth transitions, shadows, and transform effects
-- **Service Cards**: Gradient backgrounds, elevated hover states with scale and shadow effects
-- **Glass Effects**: Translucent backgrounds with backdrop blur for modern aesthetic
-- **Immediate Traffic Guide**: Created IMMEDIATE_FREE_TRAFFIC_WINS.md with:
-  - 10 quick-win strategies (30 minutes each)
-  - Google Business Profile setup (critical #1 priority)
-  - Social media platform guides (Facebook, Instagram, Nextdoor, LinkedIn, Pinterest)
-  - Craigslist posting templates
-  - Review generation system
-  - 30-day free traffic challenge
-  - Success checklist for first 48 hours
-
-## October 28, 2025 - Apartment Turnover Service Addition
-- **New Service**: Added Apartment Turnover as standalone service option
-- **Pricing**: $108 starting price (average between Airbnb $65 and Move-out $150)
-- **Features**: Same-day service, make-ready cleaning, volume discounts for property managers
-- **Quote Calculator**: Integrated with square footage-based pricing (baseRate: 0.171, minCharge: 108)
-- **Target Market**: Property managers, landlords, and apartment complexes in Montgomery/Prattville/Selma
-
-## October 28, 2025 - Student Dorm Pricing Update
-- **Pricing Model Change**: Updated Student Dorm service from "$45 per room" to "Call for pricing"
-- **Services Page**: Pricing display now shows "Call for pricing" instead of specific per-room rate
-- **Quote Calculator**: Label updated to indicate custom pricing required
-
-## October 28, 2025 - Marketing Automation System
-- **Strategy Document**: Created comprehensive MARKETING_AUTOMATION_GUIDE.md with email and social media automation workflows
-- **Email Marketing**: Using existing SendGrid for bulk email campaigns and customer list management
-- **Social Media Tools**: Documented Buffer, Meta Business Suite, Hootsuite, and Zapier for automated posting
-- **Content Integration**: Connected SEO_CONTENT_LIBRARY.md and VIDEO_CONTENT_SCRIPTS.md templates with scheduling workflows
-- **Quick Start Guide**: 30-day implementation plan with weekly tasks and daily maintenance routines
-- **ROI Tracking**: KPIs and metrics for email (open rates, CTR) and social media (engagement, followers, conversions)
-- **Tool Recommendations**: Free tier options (Buffer, Meta Business Suite) and paid alternatives (Hootsuite $99/mo)
-- **Note**: User declined Resend integration in favor of continuing with existing SendGrid setup
-
-## October 27, 2025 - Complete SEO Content Marketing Library
-- **SEO Content Library**: Created comprehensive SEO_CONTENT_LIBRARY.md with ready-to-use marketing content:
-  - 2 additional SEO-optimized blog posts (Spring Cleaning Checklist 850 words, Office Cleaning Benefits 900 words)
-  - Social media templates for Facebook (5 post types), Instagram (3 formats), LinkedIn (2 B2B posts)
-  - Email marketing sequences (welcome, follow-up, re-engagement)
-  - Google Ads copy templates for 3 service categories
-  - Press release template for local media and backlinks
-  - Nextdoor community engagement templates
-  - 30-day content calendar for consistent posting
-  - Backlink building strategies and guest post pitches
-- **Video Content Scripts**: Created VIDEO_CONTENT_SCRIPTS.md with video marketing assets:
-  - 5 short-form video scripts (15-60 seconds) for TikTok/Instagram Reels/YouTube Shorts
-  - 2 long-form YouTube video scripts (6-10 minutes) with full production details
-  - TikTok series ideas for follower growth
-  - Content repurposing guide (turn 1 blog into 20+ pieces)
-  - Video SEO optimization checklist
-  - Weekly posting schedule with best times for Montgomery/Prattville timezone
-  - 15 evergreen video content ideas
-  - Performance tracking metrics and goals
-- **Marketing Impact**: All content optimized for Montgomery/Prattville local keywords to drive targeted organic traffic and quality backlinks
-
 # System Architecture
 
-## Frontend Architecture
-- **Framework**: React 18 with TypeScript for type safety and modern development
-- **Routing**: Wouter for lightweight client-side routing
-- **Styling**: Tailwind CSS with custom design system variables for consistent theming
-- **UI Components**: Radix UI primitives with shadcn/ui component library for accessible, customizable components
-- **State Management**: TanStack Query (React Query) for server state management and caching
-- **Forms**: React Hook Form with Zod validation for type-safe form handling
-- **Build Tool**: Vite for fast development and optimized production builds
+## UI/UX Decisions
+The application features a premium design with a consistent brand identity based on a "Super Sponge Cleaning Hero" mascot. It utilizes Playfair Display serif font for headings, a refined HSL color palette, and advanced animations (fade-in, float, shimmer, glass-effect) for a modern, professional appearance. Key UI components are built with Radix UI and shadcn/ui for accessibility and customizability, ensuring responsive design across devices and dark mode support.
 
-## Backend Architecture
-- **Runtime**: Node.js with Express.js framework
-- **Language**: TypeScript with ES modules for modern JavaScript features
-- **Database ORM**: Drizzle ORM for type-safe database operations
-- **Database**: PostgreSQL with Neon serverless hosting
-- **Schema Management**: Drizzle Kit for database migrations and schema management
-- **Session Storage**: In-memory storage with PostgreSQL session store option
-- **API Design**: RESTful endpoints with JSON responses
+## Technical Implementations
+- **Frontend**: React 18 with TypeScript, Wouter for routing, Tailwind CSS for styling, Radix UI/shadcn/ui for components, TanStack Query for state management, React Hook Form with Zod for forms, and Vite for building.
+- **Backend**: Node.js with Express.js and TypeScript, Drizzle ORM for PostgreSQL (Neon serverless), RESTful API design.
+- **Data Storage**: PostgreSQL on Neon, using Drizzle ORM for type-safe operations. Schema includes `users`, `contact_messages`, `bookings`, and `quotes`.
+- **Authentication & Security**: Express sessions with secure cookies, server-side Zod validation, CORS configuration, and input sanitization.
+- **Payment Processing**: Stripe integration for secure transactions, using Stripe Elements for PCI-compliant forms and webhooks for payment intent confirmation.
+- **Email Communication**: SendGrid handles all transactional and marketing emails, including contact form submissions, booking confirmations, payment receipts, and dual quote notifications to customers and the business owner.
+- **Quote Calculator**: A dynamic quote calculator provides instant pricing based on service type (Residential, Commercial, Airbnb, Move-in/out, Apartment Turnover, Student Dorm - "Call for pricing"), property size/room count, frequency discounts, and add-on services.
+- **Content & SEO**: Integrated blog section and comprehensive SEO strategies targeting local keywords (Montgomery, Prattville). Marketing content includes blog posts, social media templates, email sequences, Google Ads copy, and video scripts.
 
-## Data Storage
-- **Primary Database**: PostgreSQL hosted on Neon (serverless)
-- **Schema**: Four main entities - users, contact_messages, bookings, and quotes
-- **Data Validation**: Zod schemas shared between frontend and backend
-- **Storage Pattern**: Repository pattern with interface abstraction allowing for memory or database storage
-
-## Authentication & Security
-- **Session Management**: Express sessions with secure cookie configuration
-- **Data Validation**: Server-side validation using Zod schemas
-- **CORS**: Configured for production deployment
-- **Input Sanitization**: Built-in through Zod validation and TypeScript types
-
-## Payment Processing
-- **Payment Provider**: Stripe for secure payment processing
-- **Integration**: Stripe Elements for PCI-compliant payment forms
-- **Webhook Support**: Payment intent confirmation handling
-- **Booking Flow**: Integration between booking system and payment processing
-
-## Email Communication
-- **Email Service**: SendGrid for transactional emails and marketing campaigns
-- **Use Cases**: Contact form submissions, booking confirmations, payment receipts, quote notifications, marketing email blasts
-- **Quote Notifications**: Dual email dispatch to both customer and business owner with detailed quote information
-- **Marketing Automation**: Email list collected from contact forms, quotes, and bookings for bulk campaigns
-- **Note**: User declined Resend integration, continuing with SendGrid for all email needs
-- **Fallback**: Graceful degradation when email service is unavailable
-
-## Service Architecture
-- **Service Types**: Five distinct cleaning services (residential, commercial, Airbnb, move-in/out, student dorms)
-- **Pricing Structure**: Dynamic pricing based on service type with base rates
-- **Booking System**: Multi-step booking process with payment integration
-- **Contact Management**: Lead capture through contact forms
+## Feature Specifications
+- **Service Offerings**: Five distinct cleaning services with dynamic pricing structures.
+- **Online Booking**: Multi-step booking process integrated with payment.
+- **Contact Management**: Lead capture through contact forms, "Save My Quote" functionality that collects customer info and sends email notifications.
+- **Content Marketing**: Blog, SEO-optimized articles, and various marketing content templates (social media, email, video).
+- **Marketing Automation**: Strategy document outlining email and social media automation workflows using SendGrid, Buffer, Meta Business Suite, Hootsuite, and Zapier.
 
 # External Dependencies
 
 ## Third-Party Services
-- **Neon Database**: Serverless PostgreSQL hosting with connection pooling
-- **Stripe**: Payment processing platform for secure transactions
-- **SendGrid**: Email delivery service for transactional communications
-- **Google Fonts**: Web font delivery (Inter, DM Sans, Fira Code, Geist Mono)
-
-## Development Tools
-- **Replit Integration**: Development environment support with runtime error overlay
-- **TypeScript Compiler**: Type checking and transpilation
-- **ESBuild**: Production bundling for server code
-- **PostCSS**: CSS processing with Tailwind and Autoprefixer
+- **Neon Database**: Serverless PostgreSQL hosting.
+- **Stripe**: Payment processing.
+- **SendGrid**: Email delivery and marketing campaigns.
+- **Google Fonts**: Web font delivery (Inter, DM Sans, Fira Code, Geist Mono).
 
 ## Frontend Libraries
-- **React Ecosystem**: React 18, React DOM, React Router (Wouter)
-- **UI Framework**: Radix UI primitives, Lucide React icons, React Icons
-- **Form Handling**: React Hook Form, Hookform Resolvers
-- **Validation**: Zod for runtime type validation
-- **Styling**: Tailwind CSS, Class Variance Authority, clsx
-- **Data Fetching**: TanStack React Query
-- **Payment UI**: Stripe React components
+- **React Ecosystem**: React, React DOM, Wouter.
+- **UI Framework**: Radix UI, Lucide React, React Icons.
+- **Form Handling**: React Hook Form, Hookform Resolvers.
+- **Validation**: Zod.
+- **Styling**: Tailwind CSS, Class Variance Authority, clsx.
+- **Data Fetching**: TanStack React Query.
+- **Payment UI**: Stripe React components.
 
 ## Backend Dependencies
-- **Core Framework**: Express.js with TypeScript support
-- **Database**: Drizzle ORM, PostgreSQL driver, connection pooling
-- **Session Management**: Express session with PostgreSQL store
-- **Validation**: Zod schemas
-- **Email**: SendGrid Mail API
-- **Payment**: Stripe Node.js SDK
-- **Development**: TSX for development server, Nodemon alternative
+- **Core Framework**: Express.js.
+- **Database**: Drizzle ORM, node-postgres.
+- **Session Management**: express-session, connect-pg-simple.
+- **Validation**: Zod.
+- **Email**: SendGrid Mail API.
+- **Payment**: Stripe Node.js SDK.
