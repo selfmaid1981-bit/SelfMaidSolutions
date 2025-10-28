@@ -427,14 +427,23 @@ Self-Maid Cleaning Solutions has served Montgomery, Prattville, and the River Re
 
 **Services for Property Managers:**
 
-**Turnover Cleaning (Move-Out/Make-Ready):**
-- Full deep clean top-to-bottom
+**Apartment Turnover (Make-Ready):**
+- Same-day or next-day service
+- Make-ready deep cleaning
 - Kitchen (inside appliances, cabinets)
 - Bathrooms (grout, fixtures, sanitized)
 - Living areas, bedrooms
 - Baseboard, trim, ceiling fans
 - Window cleaning (interior)
 - Carpet spot cleaning
+- Move-in ready photos for listings
+
+**Move-Out Deep Cleaning:**
+- Full deep clean top-to-bottom
+- Inside appliance cleaning
+- Cabinet and drawer cleaning
+- Comprehensive sanitization
+- Deposit-back guarantee level clean
 
 **Recurring Maintenance Cleaning:**
 - Weekly, bi-weekly, or monthly service
@@ -451,12 +460,17 @@ Self-Maid Cleaning Solutions has served Montgomery, Prattville, and the River Re
 
 **Pricing Structure:**
 
-**Standard Turnover Rates:**
+**Apartment Turnover Rates (Make-Ready):**
 - Studio/1BR: $85-110
-- 2BR: $120-150
-- 3BR: $150-180
-- 4BR: $180-220
-- 5BR+: Custom quote
+- 2BR: $110-135
+- 3BR: $135-165
+- 4BR: $165-200
+
+**Move-Out Deep Clean:**
+- Studio/1BR: $150-180
+- 2BR: $180-220
+- 3BR: $220-280
+- 4BR: $280-350
 
 **Volume Discounts:**
 - 5-10 units/month: 10% off

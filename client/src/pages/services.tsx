@@ -77,6 +77,22 @@ const serviceDetails = [
     ]
   },
   {
+    id: 'apartment',
+    title: 'Apartment Turnover',
+    description: 'Professional turnover cleaning for property managers and landlords in Montgomery and Prattville.',
+    pricing: 'Starting at $108',
+    features: [
+      'Same-day or next-day service',
+      'Make-ready deep cleaning',
+      'All rooms sanitized',
+      'Kitchen and appliances',
+      'Bathroom deep clean',
+      'Carpet spot cleaning',
+      'Move-in ready photos',
+      'Volume discounts for property managers'
+    ]
+  },
+  {
     id: 'dorm',
     title: 'Student Dorm Turnover',
     description: 'Quick and efficient cleaning between semesters and student moves.',

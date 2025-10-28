@@ -90,6 +90,13 @@ Preferred communication style: Simple, everyday language.
   - 30-day free traffic challenge
   - Success checklist for first 48 hours
 
+## October 28, 2025 - Apartment Turnover Service Addition
+- **New Service**: Added Apartment Turnover as standalone service option
+- **Pricing**: $108 starting price (average between Airbnb $65 and Move-out $150)
+- **Features**: Same-day service, make-ready cleaning, volume discounts for property managers
+- **Quote Calculator**: Integrated with square footage-based pricing (baseRate: 0.171, minCharge: 108)
+- **Target Market**: Property managers, landlords, and apartment complexes in Montgomery/Prattville/Selma
+
 ## October 27, 2025 - Complete SEO Content Marketing Library
 - **SEO Content Library**: Created comprehensive SEO_CONTENT_LIBRARY.md with ready-to-use marketing content:
   - 2 additional SEO-optimized blog posts (Spring Cleaning Checklist 850 words, Office Cleaning Benefits 900 words)

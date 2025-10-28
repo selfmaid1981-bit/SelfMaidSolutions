@@ -16,6 +16,7 @@ const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
   { value: 'deep', label: 'Deep Cleaning', baseRate: 0.195, minCharge: 250 },
   { value: 'moveout', label: 'Move-Out Cleaning', baseRate: 0.228, minCharge: 325 },
+  { value: 'apartment', label: 'Apartment Turnover', baseRate: 0.171, minCharge: 108 },
   { value: 'shorttermrental', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
   { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
   { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
