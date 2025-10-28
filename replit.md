@@ -97,6 +97,21 @@ Preferred communication style: Simple, everyday language.
 - **Quote Calculator**: Integrated with square footage-based pricing (baseRate: 0.171, minCharge: 108)
 - **Target Market**: Property managers, landlords, and apartment complexes in Montgomery/Prattville/Selma
 
+## October 28, 2025 - Student Dorm Pricing Update
+- **Pricing Model Change**: Updated Student Dorm service from "$45 per room" to "Call for pricing"
+- **Services Page**: Pricing display now shows "Call for pricing" instead of specific per-room rate
+- **Quote Calculator**: Label updated to indicate custom pricing required
+
+## October 28, 2025 - Marketing Automation System
+- **Strategy Document**: Created comprehensive MARKETING_AUTOMATION_GUIDE.md with email and social media automation workflows
+- **Email Marketing**: Using existing SendGrid for bulk email campaigns and customer list management
+- **Social Media Tools**: Documented Buffer, Meta Business Suite, Hootsuite, and Zapier for automated posting
+- **Content Integration**: Connected SEO_CONTENT_LIBRARY.md and VIDEO_CONTENT_SCRIPTS.md templates with scheduling workflows
+- **Quick Start Guide**: 30-day implementation plan with weekly tasks and daily maintenance routines
+- **ROI Tracking**: KPIs and metrics for email (open rates, CTR) and social media (engagement, followers, conversions)
+- **Tool Recommendations**: Free tier options (Buffer, Meta Business Suite) and paid alternatives (Hootsuite $99/mo)
+- **Note**: User declined Resend integration in favor of continuing with existing SendGrid setup
+
 ## October 27, 2025 - Complete SEO Content Marketing Library
 - **SEO Content Library**: Created comprehensive SEO_CONTENT_LIBRARY.md with ready-to-use marketing content:
   - 2 additional SEO-optimized blog posts (Spring Cleaning Checklist 850 words, Office Cleaning Benefits 900 words)
