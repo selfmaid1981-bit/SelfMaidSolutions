@@ -157,9 +157,11 @@ Preferred communication style: Simple, everyday language.
 - **Booking Flow**: Integration between booking system and payment processing
 
 ## Email Communication
-- **Email Service**: SendGrid for transactional emails
-- **Use Cases**: Contact form submissions, booking confirmations, payment receipts, quote notifications
+- **Email Service**: SendGrid for transactional emails and marketing campaigns
+- **Use Cases**: Contact form submissions, booking confirmations, payment receipts, quote notifications, marketing email blasts
 - **Quote Notifications**: Dual email dispatch to both customer and business owner with detailed quote information
+- **Marketing Automation**: Email list collected from contact forms, quotes, and bookings for bulk campaigns
+- **Note**: User declined Resend integration, continuing with SendGrid for all email needs
 - **Fallback**: Graceful degradation when email service is unavailable
 
 ## Service Architecture
