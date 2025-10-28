@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logoImage from '@assets/Super Sponge Cleaning Hero Logo_1757704445187.png';
+import logoImage from '@assets/SMLLC LOGO_1761598219650.png';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
