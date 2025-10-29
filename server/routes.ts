@@ -159,10 +159,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create booking
   app.post("/api/bookings", async (req, res) => {
     try {
-      const validatedData = insertBookingSchema.parse(req.body);
+      const { skipPayment, ...bookingData } = req.body;
+      const validatedData = insertBookingSchema.parse(bookingData);
       
       // Create booking
       const booking = await storage.createBooking(validatedData);
+      
+      // If skipping payment, send confirmation email immediately
+      if (skipPayment) {
+        await storage.updateBookingStatus(booking.id, 'pending');
+        
+        // Send confirmation email to customer
+        await sendEmail({
+          to: booking.email,
+          from: "selfmaidclean@outlook.com",
+          subject: "Booking Request Received - Self-Maid Cleaning",
+          html: `
+            <h3>Booking Request Received!</h3>
+            <p>Dear ${booking.firstName},</p>
+            <p>We've received your cleaning service booking request. Here are the details:</p>
+            <ul>
+              <li><strong>Service:</strong> ${booking.serviceType}</li>
+              <li><strong>Date:</strong> ${booking.preferredDate}</li>
+              <li><strong>Time:</strong> ${booking.preferredTime}</li>
+              <li><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</li>
+              <li><strong>Estimated Amount:</strong> $${booking.amount}.00</li>
+            </ul>
+            <p><strong>Next Steps:</strong> We'll contact you within 24 hours to confirm your booking and discuss payment options.</p>
+            <p>Questions? Call us at (334) 877-9513 or reply to this email.</p>
+            <p>Thank you for choosing Self-Maid Cleaning!</p>
+          `,
+        });
+        
+        // Send notification to business owner
+        await sendEmail({
+          to: "selfmaidclean@outlook.com",
+          from: "selfmaidclean@outlook.com",
+          subject: `New Booking Request - ${booking.firstName} ${booking.lastName}`,
+          html: `
+            <h3>New Booking Request (Payment Pending)</h3>
+            <p><strong>Customer:</strong> ${booking.firstName} ${booking.lastName}</p>
+            <p><strong>Email:</strong> ${booking.email}</p>
+            <p><strong>Phone:</strong> ${booking.phone || 'Not provided'}</p>
+            <p><strong>Service:</strong> ${booking.serviceType}</p>
+            <p><strong>Date:</strong> ${booking.preferredDate}</p>
+            <p><strong>Time:</strong> ${booking.preferredTime}</p>
+            <p><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</p>
+            <p><strong>Amount:</strong> $${booking.amount}.00</p>
+            <p><strong>Special Instructions:</strong> ${booking.specialInstructions || 'None'}</p>
+            <p><strong>Status:</strong> Pending - Customer chose to pay later</p>
+            <p><em>Action Required: Contact customer within 24 hours to confirm booking and collect payment.</em></p>
+          `,
+        });
+      }
       
       res.json({ success: true, bookingId: booking.id });
     } catch (error: any) {

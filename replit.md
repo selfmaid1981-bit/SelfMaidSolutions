@@ -52,3 +52,16 @@ The application features a premium design with a consistent brand identity based
 - **Validation**: Zod.
 - **Email**: SendGrid Mail API.
 - **Payment**: Stripe Node.js SDK.
+
+# Recent Changes
+
+## October 29, 2025 - Flexible Booking Payment Options
+- **Dual Booking Flow**: Implemented two booking options in the booking modal
+  - "Book Now (Pay Later)": Creates booking with 'pending' status, sends confirmation emails, payment collected later
+  - "Book & Pay Now": Original flow with immediate Stripe payment processing
+- **Email Notifications**: Both customer and business owner receive notification emails for pay-later bookings
+  - Customer email: Booking confirmation with 24-hour callback promise
+  - Owner email: New booking alert with "Payment Pending" status and action reminder
+- **Backend Logic**: `/api/bookings` endpoint handles `skipPayment` parameter to branch between immediate payment and deferred payment flows
+- **User Experience**: Clear button labels and helper text explaining the two options
+- **Implementation**: Fixed async state race condition by using dedicated handlers instead of state-based approach

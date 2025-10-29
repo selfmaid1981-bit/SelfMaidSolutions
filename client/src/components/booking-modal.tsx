@@ -90,14 +90,23 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
   }, [defaultService, userData, isOpen, form]);
 
   const bookingMutation = useMutation({
-    mutationFn: async (data: BookingFormData) => {
+    mutationFn: async (data: BookingFormData & { skipPayment?: boolean }) => {
       const response = await apiRequest('POST', '/api/bookings', data);
       return response.json();
     },
-    onSuccess: (result) => {
-      // Redirect to checkout with booking ID
+    onSuccess: (result, variables) => {
       onClose();
-      setLocation(`/checkout?bookingId=${result.bookingId}&amount=${selectedServiceData?.price || 80}`);
+      if (variables.skipPayment) {
+        // Booking without payment - show success message
+        toast({
+          title: "Booking Submitted!",
+          description: "We've received your booking request. We'll contact you within 24 hours to confirm.",
+        });
+        setLocation('/');
+      } else {
+        // Redirect to checkout with booking ID
+        setLocation(`/checkout?bookingId=${result.bookingId}&amount=${selectedServiceData?.price || 80}`);
+      }
     },
     onError: (error: any) => {
       toast({
@@ -108,8 +117,16 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
     },
   });
 
-  const onSubmit = (data: BookingFormData) => {
-    bookingMutation.mutate(data);
+  const handleBookWithoutPayment = () => {
+    form.handleSubmit((data) => {
+      bookingMutation.mutate({ ...data, skipPayment: true });
+    })();
+  };
+
+  const handleBookWithPayment = () => {
+    form.handleSubmit((data) => {
+      bookingMutation.mutate({ ...data, skipPayment: false });
+    })();
   };
 
   const nextStep = () => {
@@ -193,7 +210,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
           )}
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form className="space-y-6">
               {/* Recruitment Form */}
               {isRecruitment && (
                 <div data-testid="recruitment-form">
@@ -572,24 +589,39 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                     </div>
                   </div>
 
-                  <div className="flex gap-4 mt-6">
+                  <div className="space-y-4 mt-6">
+                    <div className="flex gap-3">
+                      <Button 
+                        type="button"
+                        onClick={handleBookWithoutPayment}
+                        className="flex-1 bg-primary hover:bg-primary/90 text-white font-semibold"
+                        disabled={bookingMutation.isPending}
+                        data-testid="book-without-payment"
+                      >
+                        {bookingMutation.isPending ? 'Processing...' : 'Book Now (Pay Later)'}
+                      </Button>
+                      <Button 
+                        type="button"
+                        onClick={handleBookWithPayment}
+                        className="flex-1 bg-secondary hover:bg-secondary/90 text-white font-semibold"
+                        disabled={bookingMutation.isPending}
+                        data-testid="book-with-payment"
+                      >
+                        {bookingMutation.isPending ? 'Processing...' : 'Book & Pay Now'}
+                      </Button>
+                    </div>
                     <Button 
                       type="button" 
                       variant="outline" 
                       onClick={prevStep} 
-                      className="flex-1"
+                      className="w-full"
                       data-testid="step-3-back"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" /> Back
                     </Button>
-                    <Button 
-                      type="submit" 
-                      className="flex-1 bg-secondary hover:bg-secondary/90 text-white"
-                      disabled={bookingMutation.isPending}
-                      data-testid="complete-booking"
-                    >
-                      {bookingMutation.isPending ? 'Processing...' : 'Proceed to Payment'}
-                    </Button>
+                    <p className="text-xs text-muted-foreground text-center">
+                      Choose "Book Now" to reserve your time and pay later, or "Book & Pay Now" to complete payment immediately.
+                    </p>
                   </div>
                 </div>
               )}
