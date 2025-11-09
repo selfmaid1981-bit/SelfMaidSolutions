@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import { DollarSign, Clock, Users, Briefcase, Award, Heart } from 'lucide-react';
-import cleaningTeamImage from '@assets/stock_images/professional_cleanin_384f93e4.jpg';
 
 export function RecruitmentSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +43,7 @@ export function RecruitmentSection() {
     <>
       <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-slate-900 dark:to-sky-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="mb-16">
             <div>
               <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-serif">
                 Join Our Team
@@ -87,15 +86,6 @@ export function RecruitmentSection() {
                   <span className="font-semibold">Trust</span>
                 </div>
               </div>
-            </div>
-            
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={cleaningTeamImage} 
-                alt="Professional cleaning team at work" 
-                className="w-full h-auto object-cover"
-                data-testid="recruitment-team-image"
-              />
             </div>
           </div>
           
