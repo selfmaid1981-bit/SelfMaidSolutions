@@ -1,9 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema } from "@shared/schema";
+import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
 import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
+import { getUncachableSendGridClient } from "./sendgrid";
 
 // SendGrid setup
 const mailService = new MailService();
@@ -421,6 +422,131 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error('Quote submission error:', error);
       res.status(400).json({ message: "Invalid quote data: " + error.message });
+    }
+  });
+
+  // Get all email subscribers (unique emails from all sources)
+  app.get("/api/marketing/subscribers", async (req, res) => {
+    try {
+      const subscribers = await storage.getAllEmailSubscribers();
+      res.json(subscribers);
+    } catch (error: any) {
+      console.error('Error fetching subscribers:', error);
+      res.status(500).json({ message: "Failed to fetch subscribers: " + error.message });
+    }
+  });
+
+  // Get all email campaigns
+  app.get("/api/marketing/campaigns", async (req, res) => {
+    try {
+      const campaigns = await storage.getEmailCampaigns();
+      res.json(campaigns);
+    } catch (error: any) {
+      console.error('Error fetching campaigns:', error);
+      res.status(500).json({ message: "Failed to fetch campaigns: " + error.message });
+    }
+  });
+
+  // Create email campaign
+  app.post("/api/marketing/campaigns", async (req, res) => {
+    try {
+      const validatedData = insertEmailCampaignSchema.parse(req.body);
+      const campaign = await storage.createEmailCampaign(validatedData);
+      res.json({ 
+        success: true, 
+        message: "Campaign created successfully",
+        campaign 
+      });
+    } catch (error: any) {
+      console.error('Campaign creation error:', error);
+      res.status(400).json({ message: "Invalid campaign data: " + error.message });
+    }
+  });
+
+  // Send email campaign
+  app.post("/api/marketing/campaigns/:id/send", async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      // Get campaign
+      const campaigns = await storage.getEmailCampaigns();
+      const campaign = campaigns.find(c => c.id === id);
+      
+      if (!campaign) {
+        return res.status(404).json({ message: "Campaign not found" });
+      }
+
+      if (campaign.status === 'sent') {
+        return res.status(400).json({ message: "Campaign already sent" });
+      }
+
+      // Get all subscribers
+      const subscribers = await storage.getAllEmailSubscribers();
+      
+      if (subscribers.length === 0) {
+        return res.status(400).json({ message: "No subscribers found" });
+      }
+
+      // Update campaign status to sending
+      await storage.updateEmailCampaignStatus(id, 'sending', subscribers.length);
+
+      // Get SendGrid client
+      const { client: sgMail, fromEmail } = await getUncachableSendGridClient();
+
+      // Send emails in batches
+      const batchSize = 10;
+      let sentCount = 0;
+      let failedCount = 0;
+
+      for (let i = 0; i < subscribers.length; i += batchSize) {
+        const batch = subscribers.slice(i, i + batchSize);
+        
+        try {
+          await Promise.all(batch.map(async (subscriber) => {
+            try {
+              await sgMail.send({
+                to: subscriber.email,
+                from: fromEmail,
+                subject: campaign.subject,
+                html: campaign.htmlContent,
+              });
+              sentCount++;
+            } catch (error) {
+              console.error(`Failed to send to ${subscriber.email}:`, error);
+              failedCount++;
+            }
+          }));
+        } catch (error) {
+          console.error('Batch send error:', error);
+        }
+
+        // Small delay between batches to avoid rate limits
+        if (i + batchSize < subscribers.length) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+
+      // Update campaign status to sent
+      await storage.updateEmailCampaignStatus(id, 'sent', sentCount, new Date());
+
+      res.json({ 
+        success: true, 
+        message: `Campaign sent to ${sentCount} subscribers`,
+        sentCount,
+        failedCount
+      });
+    } catch (error: any) {
+      console.error('Campaign send error:', error);
+      
+      // Try to update campaign status to failed
+      try {
+        const { id } = req.params;
+        await storage.updateEmailCampaignStatus(id, 'failed', 0);
+      } catch (updateError) {
+        console.error('Failed to update campaign status:', updateError);
+      }
+      
+      res.status(500).json({ message: "Failed to send campaign: " + error.message });
     }
   });
 

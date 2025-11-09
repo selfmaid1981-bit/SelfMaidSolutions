@@ -1,6 +1,6 @@
-import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, users, contactMessages, bookings, quotes } from "@shared/schema";
+import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, type EmailCampaign, type InsertEmailCampaign, users, contactMessages, bookings, quotes, emailCampaigns } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import * as bcrypt from "bcrypt";
 
 export interface IStorage {
@@ -15,6 +15,10 @@ export interface IStorage {
   updateBookingStatus(id: string, status: string): Promise<Booking | undefined>;
   getBooking(id: string): Promise<Booking | undefined>;
   createQuote(quote: InsertQuote): Promise<Quote>;
+  getAllEmailSubscribers(): Promise<{ email: string; name: string; source: string }[]>;
+  getEmailCampaigns(): Promise<EmailCampaign[]>;
+  createEmailCampaign(campaign: InsertEmailCampaign): Promise<EmailCampaign>;
+  updateEmailCampaignStatus(id: string, status: string, recipientCount?: number, sentAt?: Date): Promise<EmailCampaign | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -112,6 +116,75 @@ export class DatabaseStorage implements IStorage {
       .values(insertQuote)
       .returning();
     return quote;
+  }
+
+  async getAllEmailSubscribers(): Promise<{ email: string; name: string; source: string }[]> {
+    // Get unique emails from all sources: contact messages, bookings, and quotes
+    const contactEmails = await db
+      .selectDistinct({
+        email: contactMessages.email,
+        name: sql<string>`${contactMessages.firstName} || ' ' || ${contactMessages.lastName}`,
+        source: sql<string>`'contact'`,
+      })
+      .from(contactMessages);
+
+    const bookingEmails = await db
+      .selectDistinct({
+        email: bookings.email,
+        name: sql<string>`${bookings.firstName} || ' ' || ${bookings.lastName}`,
+        source: sql<string>`'booking'`,
+      })
+      .from(bookings);
+
+    const quoteEmails = await db
+      .selectDistinct({
+        email: quotes.email,
+        name: quotes.name,
+        source: sql<string>`'quote'`,
+      })
+      .from(quotes);
+
+    // Combine and deduplicate by email
+    const allEmails = [...contactEmails, ...bookingEmails, ...quoteEmails];
+    const uniqueEmailMap = new Map<string, { email: string; name: string; source: string }>();
+
+    allEmails.forEach(item => {
+      if (!uniqueEmailMap.has(item.email)) {
+        uniqueEmailMap.set(item.email, item);
+      }
+    });
+
+    return Array.from(uniqueEmailMap.values());
+  }
+
+  async getEmailCampaigns(): Promise<EmailCampaign[]> {
+    return db.select().from(emailCampaigns).orderBy(emailCampaigns.createdAt);
+  }
+
+  async createEmailCampaign(insertCampaign: InsertEmailCampaign): Promise<EmailCampaign> {
+    const [campaign] = await db
+      .insert(emailCampaigns)
+      .values(insertCampaign)
+      .returning();
+    return campaign;
+  }
+
+  async updateEmailCampaignStatus(
+    id: string,
+    status: string,
+    recipientCount?: number,
+    sentAt?: Date
+  ): Promise<EmailCampaign | undefined> {
+    const updateData: any = { status };
+    if (recipientCount !== undefined) updateData.recipientCount = recipientCount;
+    if (sentAt !== undefined) updateData.sentAt = sentAt;
+
+    const [campaign] = await db
+      .update(emailCampaigns)
+      .set(updateData)
+      .where(eq(emailCampaigns.id, id))
+      .returning();
+    return campaign || undefined;
   }
 }
 
