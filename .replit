@@ -39,6 +39,10 @@ localPort = 40673
 externalPort = 6800
 
 [[ports]]
+localPort = 43895
+externalPort = 8000
+
+[[ports]]
 localPort = 44047
 externalPort = 6000
 
@@ -54,7 +58,7 @@ externalPort = 4200
 PORT = "5000"
 
 [agent]
-integrations = ["javascript_database:1.0.0"]
+integrations = ["javascript_database:1.0.0", "sendgrid:1.0.0"]
 
 [workflows]
 runButton = "Start application"
