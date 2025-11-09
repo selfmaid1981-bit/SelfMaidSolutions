@@ -13,6 +13,7 @@ import Quote from "@/pages/quote";
 import Checkout from "@/pages/checkout";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
+import MarketingPage from "@/pages/marketing-page";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -38,6 +39,7 @@ function Router() {
         <Route path="/checkout" component={Checkout} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/admin/marketing" component={MarketingPage} />
         <Route component={NotFound} />
       </Switch>
     </>
