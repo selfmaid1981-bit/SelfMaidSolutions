@@ -55,6 +55,13 @@ The application features a premium, professional design with realistic photograp
 
 # Recent Changes
 
+## November 9, 2025 - Real Before/After Gallery Photos
+- **Authentic Visual Proof**: Replaced stock photography in before/after gallery with actual customer job photos
+  - Shower renovation: Old green tiled shower → pristine white modern shower (complete transformation)
+  - Window & door detailing: Dirty window sills and frames → spotless glass and hardware
+  - Gallery descriptions updated to accurately reflect real work shown in photos
+  - Maintains all interactive features: click-to-toggle comparison, carousel navigation, and CTAs
+
 ## November 9, 2025 - Conversion Optimization & Marketing Toolkit
 - **Conversion-Focused Enhancements**: Major homepage improvements to boost customer acquisition and conversions
   - **Before/After Gallery**: Interactive photo gallery showcasing cleaning transformations with click-to-toggle functionality, carousel navigation, and prominent CTAs
