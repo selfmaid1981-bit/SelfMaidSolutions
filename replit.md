@@ -55,6 +55,18 @@ The application features a premium, professional design with realistic photograp
 
 # Recent Changes
 
+## November 9, 2025 - Conversion Optimization & Marketing Toolkit
+- **Conversion-Focused Enhancements**: Major homepage improvements to boost customer acquisition and conversions
+  - **Before/After Gallery**: Interactive photo gallery showcasing cleaning transformations with click-to-toggle functionality, carousel navigation, and prominent CTAs
+  - **Enhanced Testimonials**: Expanded from 3 to 6 customer reviews with service type tags, improved visual design with quote icons and star ratings, and integrated CTAs driving to phone/quote
+  - **Trust Badges Section**: New section immediately after hero displaying 6 key trust signals (16 years in business, fully insured, 500+ customers, same-day service, 100% guarantee, 2-hour response time)
+  - **Optimized CTAs**: Enhanced hero section with green special offer banner ($20 off first clean), urgency messaging on CTAs, improved phone number prominence, and redesigned mobile floating CTA with better visibility
+- **Complete Marketing Toolkit**: Created 4 comprehensive marketing documents for customer acquisition without Google
+  - **SOCIAL_MEDIA_TEMPLATES.md**: 30+ ready-to-post templates for Facebook/Instagram, weekly posting schedule, engagement strategies, and hashtag guidelines
+  - **DOOR_HANGER_TEMPLATE.md**: 3 professional designs with distribution strategy, targeting recommendations, ROI calculations (300% expected), and legal guidelines
+  - **REFERRAL_PROGRAM_EMAILS.md**: 6 automated email sequences for customer referrals, tracking spreadsheet templates, and referral card designs
+  - **FACEBOOK_AD_COPY.md**: 6 complete ad campaigns with targeting strategies, budget recommendations ($5/day = 5-8 customers/month), setup guides, and 380% ROI projections
+
 ## November 9, 2025 - Professional Website Redesign
 - **Visual Identity Update**: Removed childish superhero sponge mascot throughout the entire website
 - **Professional Photography**: Replaced all mascot images with realistic professional stock photography
