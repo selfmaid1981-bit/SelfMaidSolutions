@@ -1,7 +1,9 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
+import TrustBadges from '@/components/trust-badges';
 import { ServicesSection } from '@/components/services-section';
+import BeforeAfterGallery from '@/components/before-after-gallery';
 import { AboutSection } from '@/components/about-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { RecruitmentSection } from '@/components/recruitment-section';
@@ -84,7 +86,9 @@ export default function Home() {
       <div className="min-h-screen bg-background">
         <Navigation />
         <HeroSection />
+        <TrustBadges />
         <ServicesSection />
+        <BeforeAfterGallery />
         <AboutSection />
         <TestimonialsSection />
         <RecruitmentSection />
@@ -92,14 +96,17 @@ export default function Home() {
         <Footer />
         
         {/* Floating CTA for mobile */}
-        <div className="floating-cta lg:hidden fixed bottom-4 right-4 z-50 animate-pulse">
+        <div className="floating-cta lg:hidden fixed bottom-4 right-4 z-50">
           <a 
             href="tel:334-877-9513" 
-            className="bg-primary text-primary-foreground px-6 py-3 rounded-full shadow-lg inline-flex items-center font-semibold"
+            className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4 rounded-full shadow-2xl inline-flex items-center font-bold text-lg hover:shadow-xl transition-all hover:scale-105 animate-bounce"
             data-testid="floating-cta"
           >
-            <Phone className="w-4 h-4 mr-2" />
-            Call Now
+            <Phone className="w-5 h-5 mr-2" />
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-normal">Call Now</span>
+              <span>(334) 877-9513</span>
+            </div>
           </a>
         </div>
       </div>

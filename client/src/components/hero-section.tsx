@@ -21,24 +21,34 @@ export function HeroSection() {
             />
           </div>
           
+          {/* Special Offer Banner */}
+          <div className="mb-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <p className="text-center font-bold text-lg">
+              🎉 NEW CUSTOMERS: $20 OFF Your First Cleaning! 🎉
+            </p>
+          </div>
+
           {/* CTA Buttons & Trust Badges */}
           <div className="text-center fade-in">
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
               <a 
                 href="tel:334-877-9513" 
-                className="glass-effect text-blue-700 px-10 py-5 rounded-xl text-lg font-bold hover:shadow-2xl transition-all duration-300 inline-flex items-center justify-center transform hover:scale-105 group"
+                className="glass-effect text-blue-700 px-10 py-5 rounded-xl text-lg font-bold hover:shadow-2xl transition-all duration-300 inline-flex items-center justify-center transform hover:scale-105 group relative"
                 data-testid="hero-call-button"
               >
                 <Phone className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform" />
-                Call Now: (334) 877-9513
+                <div className="flex flex-col">
+                  <span className="text-sm opacity-80">Call Now For Same-Day Service</span>
+                  <span className="text-xl">(334) 877-9513</span>
+                </div>
               </a>
               <Button 
                 onClick={() => setIsBookingModalOpen(true)}
-                className="premium-button text-white px-10 py-5 rounded-xl text-lg font-bold h-auto group"
+                className="premium-button text-white px-10 py-5 rounded-xl text-lg font-bold h-auto group relative overflow-hidden"
                 data-testid="hero-book-button"
               >
                 <Calendar className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                BOOK ONLINE
+                <span>BOOK ONLINE - GET INSTANT QUOTE</span>
               </Button>
             </div>
             
