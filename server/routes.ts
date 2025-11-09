@@ -232,10 +232,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
         
         // Send SMS notification to business owner
-        await sendSMS(
-          '3348779513',
+        const smsSuccess = await sendSMS(
+          '+13348779513',
           `NEW BOOKING (Pay Later)\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nAmount: $${booking.amount}`
         );
+        if (!smsSuccess) {
+          console.warn('Failed to send SMS notification for booking:', booking.id);
+        }
       }
       
       res.json({ success: true, bookingId: booking.id });
@@ -309,7 +312,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   <li><strong>Date:</strong> ${booking.preferredDate}</li>
                   <li><strong>Time:</strong> ${booking.preferredTime}</li>
                   <li><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</li>
-                  <li><strong>Amount:</strong> $${(booking.amount / 100).toFixed(2)}</li>
+                  <li><strong>Amount:</strong> $${booking.amount}.00</li>
                 </ul>
                 <p>We'll contact you 24 hours before your appointment to confirm the details.</p>
                 <p>Questions? Call us at (334) 877-9513</p>
@@ -331,17 +334,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 <p><strong>Date:</strong> ${booking.preferredDate}</p>
                 <p><strong>Time:</strong> ${booking.preferredTime}</p>
                 <p><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</p>
-                <p><strong>Amount:</strong> $${(booking.amount / 100).toFixed(2)}</p>
+                <p><strong>Amount:</strong> $${booking.amount}.00</p>
                 <p><strong>Special Instructions:</strong> ${booking.specialInstructions || 'None'}</p>
                 <p><strong>Status:</strong> Confirmed - Payment received</p>
               `,
             });
             
             // Send SMS notification to business owner
-            await sendSMS(
-              '3348779513',
-              `NEW BOOKING CONFIRMED!\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nPaid: $${(booking.amount / 100).toFixed(2)}`
+            const smsSuccess = await sendSMS(
+              '+13348779513',
+              `NEW BOOKING CONFIRMED!\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nPaid: $${booking.amount}`
             );
+            if (!smsSuccess) {
+              console.warn('Failed to send SMS notification for confirmed booking:', booking.id);
+            }
           }
         }
       }

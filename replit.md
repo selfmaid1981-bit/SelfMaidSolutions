@@ -34,6 +34,7 @@ The application features a premium, professional design with realistic photograp
 - **Neon Database**: Serverless PostgreSQL hosting.
 - **Stripe**: Payment processing.
 - **SendGrid**: Email delivery and marketing campaigns.
+- **Twilio**: SMS text message notifications for booking alerts.
 - **Google Fonts**: Web font delivery (Inter, DM Sans, Fira Code, Geist Mono).
 
 ## Frontend Libraries
@@ -51,9 +52,24 @@ The application features a premium, professional design with realistic photograp
 - **Session Management**: express-session, connect-pg-simple.
 - **Validation**: Zod.
 - **Email**: SendGrid Mail API.
+- **SMS**: Twilio Node.js SDK.
 - **Payment**: Stripe Node.js SDK.
 
 # Recent Changes
+
+## November 9, 2025 - SMS & Email Notifications for Bookings
+- **Dual Notification System**: Business owner now receives BOTH email and SMS text messages for all new bookings
+  - **Twilio Integration**: Configured Replit Twilio connector for SMS notifications to (334) 877-9513
+  - **Email Notifications**: SendGrid sends emails to selfmaidclean@outlook.com for all bookings
+  - **Pay Later Bookings**: SMS format: "NEW BOOKING (Pay Later)" with customer details, service type, date/time, phone, and amount
+  - **Paid Bookings**: SMS format: "NEW BOOKING CONFIRMED!" with customer details and paid amount after Stripe payment success
+  - **Error Handling**: SMS failures are logged but don't block booking creation; warnings written to console for monitoring
+  - **E.164 Phone Format**: SMS uses proper international format (+13348779513) for reliable Twilio delivery
+- **Mandatory Contact Fields**: All booking form fields now required for data completeness
+  - Enhanced frontend validation: firstName, lastName, email, phone (min 10 chars), address, city, state, zipCode all mandatory
+  - Database schema updated: phone field changed from nullable to notNull in bookings table
+  - Existing null phone records backfilled with 'N/A' before schema migration
+  - Server-side Zod validation ensures all contact data is captured before booking creation
 
 ## November 9, 2025 - Real Before/After Gallery Photos
 - **Authentic Visual Proof**: Replaced stock photography in before/after gallery with actual customer job photos
