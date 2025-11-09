@@ -5,6 +5,7 @@ import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, inse
 import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 import { getUncachableSendGridClient } from "./sendgrid";
+import { sendSMS } from "./twilio";
 
 // SendGrid setup
 const mailService = new MailService();
@@ -209,7 +210,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           `,
         });
         
-        // Send notification to business owner
+        // Send notification to business owner via email
         await sendEmail({
           to: "selfmaidclean@outlook.com",
           from: "selfmaidclean@outlook.com",
@@ -218,7 +219,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             <h3>New Booking Request (Payment Pending)</h3>
             <p><strong>Customer:</strong> ${booking.firstName} ${booking.lastName}</p>
             <p><strong>Email:</strong> ${booking.email}</p>
-            <p><strong>Phone:</strong> ${booking.phone || 'Not provided'}</p>
+            <p><strong>Phone:</strong> ${booking.phone}</p>
             <p><strong>Service:</strong> ${booking.serviceType}</p>
             <p><strong>Date:</strong> ${booking.preferredDate}</p>
             <p><strong>Time:</strong> ${booking.preferredTime}</p>
@@ -229,6 +230,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
             <p><em>Action Required: Contact customer within 24 hours to confirm booking and collect payment.</em></p>
           `,
         });
+        
+        // Send SMS notification to business owner
+        await sendSMS(
+          '3348779513',
+          `NEW BOOKING (Pay Later)\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nAmount: $${booking.amount}`
+        );
       }
       
       res.json({ success: true, bookingId: booking.id });
@@ -309,6 +316,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 <p>Thank you for choosing Self-Maid Cleaning!</p>
               `,
             });
+            
+            // Send email notification to business owner
+            await sendEmail({
+              to: "selfmaidclean@outlook.com",
+              from: "selfmaidclean@outlook.com",
+              subject: `New Booking Confirmed - ${booking.firstName} ${booking.lastName}`,
+              html: `
+                <h3>New Booking Confirmed (Payment Received)</h3>
+                <p><strong>Customer:</strong> ${booking.firstName} ${booking.lastName}</p>
+                <p><strong>Email:</strong> ${booking.email}</p>
+                <p><strong>Phone:</strong> ${booking.phone}</p>
+                <p><strong>Service:</strong> ${booking.serviceType}</p>
+                <p><strong>Date:</strong> ${booking.preferredDate}</p>
+                <p><strong>Time:</strong> ${booking.preferredTime}</p>
+                <p><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</p>
+                <p><strong>Amount:</strong> $${(booking.amount / 100).toFixed(2)}</p>
+                <p><strong>Special Instructions:</strong> ${booking.specialInstructions || 'None'}</p>
+                <p><strong>Status:</strong> Confirmed - Payment received</p>
+              `,
+            });
+            
+            // Send SMS notification to business owner
+            await sendSMS(
+              '3348779513',
+              `NEW BOOKING CONFIRMED!\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nPaid: $${(booking.amount / 100).toFixed(2)}`
+            );
           }
         }
       }
