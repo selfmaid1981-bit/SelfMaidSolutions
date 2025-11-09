@@ -57,6 +57,23 @@ async function sendEmail(params: EmailParams): Promise<boolean> {
   }
 }
 
+// Simple authentication middleware for admin routes
+function requireAdmin(req: any, res: any, next: any) {
+  const adminKey = process.env.ADMIN_API_KEY;
+  
+  if (!adminKey) {
+    return res.status(500).json({ message: "Server configuration error: Admin API key not set" });
+  }
+  
+  const apiKey = req.headers['x-admin-api-key'];
+  
+  if (apiKey === adminKey) {
+    next();
+  } else {
+    res.status(401).json({ message: "Unauthorized: Invalid admin credentials" });
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // User registration endpoint
   app.post("/api/auth/register", async (req, res) => {
@@ -426,7 +443,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all email subscribers (unique emails from all sources)
-  app.get("/api/marketing/subscribers", async (req, res) => {
+  app.get("/api/marketing/subscribers", requireAdmin, async (req, res) => {
     try {
       const subscribers = await storage.getAllEmailSubscribers();
       res.json(subscribers);
@@ -437,7 +454,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all email campaigns
-  app.get("/api/marketing/campaigns", async (req, res) => {
+  app.get("/api/marketing/campaigns", requireAdmin, async (req, res) => {
     try {
       const campaigns = await storage.getEmailCampaigns();
       res.json(campaigns);
@@ -448,7 +465,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Create email campaign
-  app.post("/api/marketing/campaigns", async (req, res) => {
+  app.post("/api/marketing/campaigns", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertEmailCampaignSchema.parse(req.body);
       const campaign = await storage.createEmailCampaign(validatedData);
@@ -464,7 +481,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Send email campaign
-  app.post("/api/marketing/campaigns/:id/send", async (req, res) => {
+  app.post("/api/marketing/campaigns/:id/send", requireAdmin, async (req, res) => {
     try {
       const { id } = req.params;
       

@@ -144,13 +144,18 @@ export class DatabaseStorage implements IStorage {
       })
       .from(quotes);
 
-    // Combine and deduplicate by email
+    // Combine and deduplicate by normalized email (lowercase, trimmed)
     const allEmails = [...contactEmails, ...bookingEmails, ...quoteEmails];
     const uniqueEmailMap = new Map<string, { email: string; name: string; source: string }>();
 
     allEmails.forEach(item => {
-      if (!uniqueEmailMap.has(item.email)) {
-        uniqueEmailMap.set(item.email, item);
+      const normalizedEmail = item.email.toLowerCase().trim();
+      if (!uniqueEmailMap.has(normalizedEmail)) {
+        uniqueEmailMap.set(normalizedEmail, {
+          email: normalizedEmail,
+          name: item.name,
+          source: item.source
+        });
       }
     });
 

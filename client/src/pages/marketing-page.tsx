@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Users, Send, Clock, CheckCircle, XCircle } from "lucide-react";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Mail, Users, Send, Clock, CheckCircle, XCircle, Lock } from "lucide-react";
+import { queryClient } from "@/lib/queryClient";
 import type { EmailCampaign } from "@shared/schema";
 
 const EMAIL_TEMPLATES = {
@@ -199,18 +199,57 @@ export default function MarketingPage() {
   const [campaignName, setCampaignName] = useState("");
   const [subject, setSubject] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
+  const [adminKey, setAdminKey] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const savedKey = localStorage.getItem('adminApiKey');
+    if (savedKey) {
+      setAdminKey(savedKey);
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const { data: subscribers = [], isLoading: loadingSubscribers } = useQuery<{ email: string; name: string; source: string }[]>({
     queryKey: ["/api/marketing/subscribers"],
+    queryFn: async () => {
+      const res = await fetch('/api/marketing/subscribers', {
+        headers: {
+          'x-admin-api-key': adminKey
+        }
+      });
+      if (!res.ok) throw new Error("Failed to fetch subscribers");
+      return res.json();
+    },
+    enabled: isAuthenticated,
   });
 
   const { data: campaigns = [], isLoading: loadingCampaigns } = useQuery<EmailCampaign[]>({
     queryKey: ["/api/marketing/campaigns"],
+    queryFn: async () => {
+      const res = await fetch('/api/marketing/campaigns', {
+        headers: {
+          'x-admin-api-key': adminKey
+        }
+      });
+      if (!res.ok) throw new Error("Failed to fetch campaigns");
+      return res.json();
+    },
+    enabled: isAuthenticated,
   });
 
   const createCampaignMutation = useMutation({
     mutationFn: async (data: any) => {
-      return apiRequest("/api/marketing/campaigns", "POST", data);
+      const res = await fetch('/api/marketing/campaigns', {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          'x-admin-api-key': adminKey
+        },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to create campaign");
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/marketing/campaigns"] });
@@ -234,7 +273,16 @@ export default function MarketingPage() {
 
   const sendCampaignMutation = useMutation({
     mutationFn: async (campaignId: string) => {
-      return apiRequest(`/api/marketing/campaigns/${campaignId}/send`, "POST", {});
+      const res = await fetch(`/api/marketing/campaigns/${campaignId}/send`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          'x-admin-api-key': adminKey
+        },
+        body: JSON.stringify({}),
+      });
+      if (!res.ok) throw new Error("Failed to send campaign");
+      return res.json();
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["/api/marketing/campaigns"] });
@@ -251,6 +299,41 @@ export default function MarketingPage() {
       });
     },
   });
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const inputKey = (e.target as any).elements.apiKey.value;
+    
+    try {
+      const res = await fetch('/api/marketing/subscribers', {
+        headers: {
+          'x-admin-api-key': inputKey
+        }
+      });
+      
+      if (res.ok) {
+        localStorage.setItem('adminApiKey', inputKey);
+        setAdminKey(inputKey);
+        setIsAuthenticated(true);
+        toast({
+          title: "Access granted",
+          description: "Welcome to the marketing dashboard!",
+        });
+      } else {
+        toast({
+          title: "Access denied",
+          description: "Invalid API key. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to authenticate. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleTemplateChange = (value: string) => {
     setSelectedTemplate(value as keyof typeof EMAIL_TEMPLATES | "custom");
@@ -306,6 +389,42 @@ export default function MarketingPage() {
         return <Badge variant="outline">{status}</Badge>;
     }
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-slate-950 dark:via-slate-900 dark:to-sky-950 flex items-center justify-center px-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <div className="flex items-center gap-2 mb-2">
+              <Lock className="w-6 h-6 text-slate-600 dark:text-slate-400" />
+              <CardTitle>Admin Access Required</CardTitle>
+            </div>
+            <CardDescription>
+              Enter your admin API key to access the marketing dashboard
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="apiKey">Admin API Key</Label>
+                <Input
+                  id="apiKey"
+                  name="apiKey"
+                  type="password"
+                  placeholder="Enter your API key"
+                  data-testid="input-api-key"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" data-testid="button-login">
+                Access Dashboard
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-slate-950 dark:via-slate-900 dark:to-sky-950 py-12 px-4">
