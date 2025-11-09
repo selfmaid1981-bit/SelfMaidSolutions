@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-import kitchenBefore1 from '@assets/stock_images/messy_dirty_kitchen__d6fe30c0.jpg';
-import kitchenAfter1 from '@assets/stock_images/spotless_clean_moder_9ef4ad4d.jpg';
-import bathroomBefore1 from '@assets/stock_images/dirty_bathroom_befor_1f12c64e.jpg';
-import bathroomAfter1 from '@assets/stock_images/sparkling_clean_bath_ddbff972.jpg';
+import showerBefore from '@assets/IMG_1409_1762692280479.jpeg';
+import showerAfter from '@assets/IMG_1404_1762692280479.jpeg';
+import windowBefore from '@assets/IMG_1411_1762692280479.jpeg';
+import doorAfter from '@assets/IMG_1437_1762692280479.jpeg';
 
 interface BeforeAfterItem {
   before: string;
@@ -16,16 +16,16 @@ interface BeforeAfterItem {
 
 const galleryItems: BeforeAfterItem[] = [
   {
-    before: kitchenBefore1,
-    after: kitchenAfter1,
-    title: 'Kitchen Deep Clean',
-    description: 'From grimy to gleaming in just 2 hours'
+    before: showerBefore,
+    after: showerAfter,
+    title: 'Shower Renovation Clean',
+    description: 'From old green tiles to pristine white - complete transformation'
   },
   {
-    before: bathroomBefore1,
-    after: bathroomAfter1,
-    title: 'Bathroom Transformation',
-    description: 'Spotless results you can see and feel'
+    before: windowBefore,
+    after: doorAfter,
+    title: 'Window & Door Detailing',
+    description: 'Every surface scrubbed spotless - windows, frames, and hardware'
   }
 ];
 
