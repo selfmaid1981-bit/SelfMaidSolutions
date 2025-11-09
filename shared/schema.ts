@@ -54,6 +54,18 @@ export const quotes = pgTable("quotes", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const emailCampaigns = pgTable("email_campaigns", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  subject: text("subject").notNull(),
+  htmlContent: text("html_content").notNull(),
+  templateType: text("template_type"), // newsletter, seasonal, re-engagement, referral, review-request, custom
+  recipientCount: integer("recipient_count").default(0),
+  sentAt: timestamp("sent_at"),
+  status: text("status").notNull().default("draft"), // draft, sending, sent, failed
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
 }).extend({
@@ -82,6 +94,12 @@ export const insertQuoteSchema = createInsertSchema(quotes).omit({
   createdAt: true,
 });
 
+export const insertEmailCampaignSchema = createInsertSchema(emailCampaigns).omit({
+  id: true,
+  createdAt: true,
+  sentAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = z.infer<typeof selectUserSchema>;
 export type UserWithPasswordHash = typeof users.$inferSelect;
@@ -91,3 +109,5 @@ export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
 export type Quote = typeof quotes.$inferSelect;
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
+export type EmailCampaign = typeof emailCampaigns.$inferSelect;
+export type InsertEmailCampaign = z.infer<typeof insertEmailCampaignSchema>;
