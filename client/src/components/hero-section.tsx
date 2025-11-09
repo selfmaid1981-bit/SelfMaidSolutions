@@ -5,6 +5,8 @@ import { BookingModal } from './booking-modal';
 import heroImage from '@assets/stock_images/professional_house_c_5be17032.jpg';
 import logoImage from '@assets/SMLLC LOGO_1761598219650.png';
 
+import _793F560B_3E81_474C_9196_6C977F28E5C3 from "@assets/793F560B-3E81-474C-9196-6C977F28E5C3.png";
+
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
@@ -71,7 +73,7 @@ export function HeroSection() {
             {/* Right Column - Hero Image */}
             <div className="fade-in">
               <img 
-                src={heroImage}
+                src={_793F560B_3E81_474C_9196_6C977F28E5C3}
                 alt="Professional house cleaning service - sparkling clean modern kitchen" 
                 className="w-full h-auto rounded-2xl shadow-2xl object-cover"
                 data-testid="hero-banner-image"
