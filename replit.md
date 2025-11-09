@@ -9,7 +9,7 @@ Preferred communication style: Simple, everyday language.
 # System Architecture
 
 ## UI/UX Decisions
-The application features a premium design with a consistent brand identity based on a "Super Sponge Cleaning Hero" mascot. It utilizes Playfair Display serif font for headings, a refined HSL color palette, and advanced animations (fade-in, float, shimmer, glass-effect) for a modern, professional appearance. Key UI components are built with Radix UI and shadcn/ui for accessibility and customizability, ensuring responsive design across devices and dark mode support.
+The application features a premium, professional design with realistic photography and clean modern aesthetics. It utilizes serif fonts for headings (professional typography), a refined slate/blue color palette, and subtle animations for a polished, corporate appearance. Professional stock photography showcases real cleaning scenarios (kitchens, bathrooms, offices, vacation rentals, cleaning teams). Key UI components are built with Radix UI and shadcn/ui for accessibility and customizability, ensuring responsive design across devices and dark mode support.
 
 ## Technical Implementations
 - **Frontend**: React 18 with TypeScript, Wouter for routing, Tailwind CSS for styling, Radix UI/shadcn/ui for components, TanStack Query for state management, React Hook Form with Zod for forms, and Vite for building.
@@ -54,6 +54,20 @@ The application features a premium design with a consistent brand identity based
 - **Payment**: Stripe Node.js SDK.
 
 # Recent Changes
+
+## November 9, 2025 - Professional Website Redesign
+- **Visual Identity Update**: Removed childish superhero sponge mascot throughout the entire website
+- **Professional Photography**: Replaced all mascot images with realistic professional stock photography
+  - Hero section: Professional kitchen cleaning results
+  - About section: Modern bathroom and office cleaning photos
+  - Services section: Clean card-based layout with professional icons
+  - Recruitment section: Real cleaning team photos
+- **Design Refinement**: Updated to corporate-professional aesthetic with slate/blue color palette
+- **Service Updates**: 
+  - Window cleaning marked as custom add-on (pricing depends on quantity and height)
+  - Student Dorm pricing shows "Call for pricing"
+  - Apartment Turnover service starting at $108
+- **Brand Assets**: Incorporated SMLLC Logo for professional branding
 
 ## October 29, 2025 - Flexible Booking Payment Options
 - **Dual Booking Flow**: Implemented two booking options in the booking modal

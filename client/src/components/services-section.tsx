@@ -29,7 +29,7 @@ const services: Service[] = [
     icon: Building,
     title: 'Commercial & Office',
     description: 'Professional office cleaning to maintain a productive work environment.',
-    features: ['Daily, weekly cleaning', 'Restroom sanitization', 'Window cleaning'],
+    features: ['Daily, weekly cleaning', 'Restroom sanitization', 'Floor care & vacuuming'],
     price: 'From $150',
     bgGradient: 'from-slate-50 to-gray-50 dark:from-slate-900 dark:to-gray-900'
   },
@@ -168,7 +168,6 @@ export function ServicesSection() {
       <BookingModal 
         isOpen={isBookingModalOpen} 
         onClose={() => setIsBookingModalOpen(false)} 
-        preSelectedService={selectedService}
       />
     </>
   );

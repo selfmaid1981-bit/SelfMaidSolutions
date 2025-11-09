@@ -40,7 +40,7 @@ const frequencyOptions = [
 const addOns = [
   { id: 'deep', label: 'Deep Cleaning', price: 50 },
   { id: 'carpet', label: 'Carpet Cleaning', price: 75 },
-  { id: 'windows', label: 'Window Cleaning', price: 40 },
+  { id: 'windows', label: 'Window Cleaning (Custom Quote - depends on quantity & height)', price: 0 },
   { id: 'appliances', label: 'Appliance Cleaning', price: 35 },
   { id: 'refrigerator', label: 'Refrigerator Cleaning', price: 30 },
   { id: 'stove', label: 'Stove Cleaning', price: 25 },

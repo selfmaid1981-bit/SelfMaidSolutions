@@ -39,8 +39,8 @@ const serviceDetails = [
       'Reception areas',
       'Restroom sanitization',
       'Kitchen/break room cleaning',
-      'Window cleaning',
       'Floor care and maintenance',
+      'Dusting and surface cleaning',
       'Trash and recycling service'
     ]
   },
@@ -69,7 +69,7 @@ const serviceDetails = [
       'Deep clean all rooms',
       'Inside appliance cleaning',
       'Cabinet and drawer cleaning',
-      'Window and sill cleaning',
+      'Sill and ledge cleaning',
       'Baseboard and trim cleaning',
       'Light fixture cleaning',
       'Carpet cleaning available',
