@@ -19,6 +19,14 @@ import { z } from 'zod';
 import { useLocation } from 'wouter';
 
 const bookingFormSchema = insertBookingSchema.extend({
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  email: z.string().email('Valid email is required'),
+  phone: z.string().min(10, 'Phone number is required'),
+  address: z.string().min(1, 'Address is required'),
+  city: z.string().min(1, 'City is required'),
+  state: z.string().min(1, 'State is required'),
+  zipCode: z.string().min(5, 'ZIP code is required'),
   serviceType: z.string().min(1, 'Please select a service'),
   preferredDate: z.string().min(1, 'Please select a date'),
   preferredTime: z.string().min(1, 'Please select a time'),
