@@ -29,6 +29,22 @@ const serviceDetails = [
     ]
   },
   {
+    id: 'deepcleaning',
+    title: 'Deep Cleaning Service',
+    description: 'Our most intensive cleaning service - a comprehensive top-to-bottom transformation of your entire home. Perfect for spring cleaning, post-renovation, or when your home needs extra attention.',
+    pricing: 'Starting at $200',
+    features: [
+      'KITCHEN: Clean inside/outside all appliances (oven, microwave, refrigerator), degrease cabinets, scrub countertops & backsplash, sanitize sink & faucets',
+      'BATHROOMS: Scrub tile & grout, descale shower doors, deep clean toilets, disinfect all surfaces, polish fixtures & mirrors',
+      'BEDROOMS: Dust ceiling fans & light fixtures, wipe baseboards & door frames, vacuum under furniture, organize closets (optional)',
+      'LIVING AREAS: Vacuum/shampoo upholstery, dust all surfaces including high areas, clean window sills & tracks, polish wood furniture',
+      'FLOORS: Vacuum all carpets & rugs, mop & polish hard floors, clean corners & edges, baseboards wiped down',
+      'EXTRAS: Dust blinds & window treatments, wipe light switches & outlets, clean interior windows, remove cobwebs',
+      'All rooms receive thorough dusting, vacuuming, and sanitization',
+      'Typical time: 4-8 hours depending on home size'
+    ]
+  },
+  {
     id: 'commercial',
     title: 'Commercial & Office Cleaning',
     description: 'Professional cleaning services to maintain a clean and productive workplace in Montgomery and Prattville business districts.',

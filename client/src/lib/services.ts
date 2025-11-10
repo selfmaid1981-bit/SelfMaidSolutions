@@ -5,6 +5,12 @@ export const SERVICES = {
     basePrice: 80,
     description: 'Professional home cleaning services',
   },
+  deepcleaning: {
+    id: 'deepcleaning',
+    name: 'Deep Cleaning',
+    basePrice: 200,
+    description: 'Intensive top-to-bottom cleaning service',
+  },
   commercial: {
     id: 'commercial',
     name: 'Commercial/Office',
