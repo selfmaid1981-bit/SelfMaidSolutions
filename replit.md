@@ -57,16 +57,20 @@ The application features a premium, professional design with realistic photograp
 
 # Recent Changes
 
-## November 10, 2025 - Automated Google Review Request System
-- **Automated Review Requests**: Comprehensive system to automatically request Google reviews from satisfied customers
+## November 10, 2025 - Automated Google Review Request System (FULLY ACTIVE)
+- **Automated Review Requests**: Fully operational system automatically requests Google reviews from satisfied customers immediately after booking confirmation
+  - **Automatic Triggering**: Fires automatically when Stripe payment succeeds via webhook - no manual action required
   - **Email Review Requests**: Beautiful HTML email templates sent via SendGrid with direct Google review link, personalized customer name, service details, and helpful prompts for what to mention in reviews
   - **SMS Review Requests**: Text messages sent via Twilio with direct review link for instant one-tap access from mobile devices
-  - **Database Tracking**: New `review_requests` table tracks all sent requests, completion status, and timestamps for analytics
+  - **Database Tracking**: New `review_requests` table logs all sent requests with bookingId, customer info, send status (email/SMS), and timestamps for complete audit trail
+  - **Non-Blocking**: Review request failures are logged but don't interrupt booking confirmation process - resilient design ensures customer experience isn't affected
+  - **Integration Points**: Wired into `/api/stripe-webhook` endpoint in `server/routes.ts`, uses `sendAutomatedReviewRequests()` from `server/review-automation.ts`
   - **Review Management Page**: Admin dashboard at `/admin/reviews` with QR code generator, copyable review links, usage tips, and automation status
   - **Physical Marketing Tools**: Downloadable QR code (400x400px) for business cards, thank-you cards, flyers, vehicle magnets, and invoices
-  - **Direct Google Link**: Pre-configured review URL using business Google Place ID for seamless customer experience
-  - **Best Practices Implementation**: Follows industry standards - dual channel approach (email + SMS), optimal timing (2-4 hours after service), direct links (no extra steps), and professional friendly messaging
+  - **Direct Google Link**: Pre-configured review URL using business Google Place ID (ChIJ-erVoU0XiYgR8ZsW5vCBzL4) for seamless customer experience
+  - **Best Practices Implementation**: Follows industry standards - dual channel approach (email + SMS), immediate timing after payment, direct links (no extra steps), and professional friendly messaging
   - **Expected Results**: Industry-standard 10-15% conversion rate, targeting 4.8+ star rating with 50+ total reviews
+  - **Current Scope**: Triggers only for paid bookings (Stripe payment success); pay-later bookings receive booking confirmations but not immediate review requests
 - **Deep Cleaning Service Added**: New premium service offering with comprehensive room-by-room duty descriptions
   - **Pricing**: Starting at $250, based on square footage ($0.195/sqft) for fair, accurate quotes
   - **Detailed Duties**: KITCHEN (appliances, cabinets, counters), BATHROOMS (tile/grout, fixtures), BEDROOMS (fans, baseboards, under furniture), LIVING AREAS (upholstery, high surfaces), FLOORS (vacuum, mop, edges), EXTRAS (blinds, switches, windows, cobwebs)
