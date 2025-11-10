@@ -130,6 +130,24 @@ export const referrals = pgTable("referrals", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const reviewRequests = pgTable("review_requests", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  bookingId: varchar("booking_id").notNull(),
+  customerName: text("customer_name").notNull(),
+  customerEmail: text("customer_email").notNull(),
+  customerPhone: text("customer_phone"),
+  serviceType: text("service_type").notNull(),
+  serviceDate: text("service_date").notNull(),
+  emailSent: boolean("email_sent").default(false),
+  emailSentAt: timestamp("email_sent_at"),
+  smsSent: boolean("sms_sent").default(false),
+  smsSentAt: timestamp("sms_sent_at"),
+  reviewCompleted: boolean("review_completed").default(false),
+  reviewCompletedAt: timestamp("review_completed_at"),
+  status: text("status").notNull().default("pending"), // pending, sent, completed
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
 }).extend({
@@ -180,6 +198,14 @@ export const insertReferralSchema = createInsertSchema(referrals).omit({
   createdAt: true,
 });
 
+export const insertReviewRequestSchema = createInsertSchema(reviewRequests).omit({
+  id: true,
+  createdAt: true,
+  emailSentAt: true,
+  smsSentAt: true,
+  reviewCompletedAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = z.infer<typeof selectUserSchema>;
 export type UserWithPasswordHash = typeof users.$inferSelect;
@@ -197,3 +223,5 @@ export type RecurringBooking = typeof recurringBookings.$inferSelect;
 export type InsertRecurringBooking = z.infer<typeof insertRecurringBookingSchema>;
 export type Referral = typeof referrals.$inferSelect;
 export type InsertReferral = z.infer<typeof insertReferralSchema>;
+export type ReviewRequest = typeof reviewRequests.$inferSelect;
+export type InsertReviewRequest = z.infer<typeof insertReviewRequestSchema>;

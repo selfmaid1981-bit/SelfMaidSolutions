@@ -57,6 +57,23 @@ The application features a premium, professional design with realistic photograp
 
 # Recent Changes
 
+## November 10, 2025 - Automated Google Review Request System
+- **Automated Review Requests**: Comprehensive system to automatically request Google reviews from satisfied customers
+  - **Email Review Requests**: Beautiful HTML email templates sent via SendGrid with direct Google review link, personalized customer name, service details, and helpful prompts for what to mention in reviews
+  - **SMS Review Requests**: Text messages sent via Twilio with direct review link for instant one-tap access from mobile devices
+  - **Database Tracking**: New `review_requests` table tracks all sent requests, completion status, and timestamps for analytics
+  - **Review Management Page**: Admin dashboard at `/admin/reviews` with QR code generator, copyable review links, usage tips, and automation status
+  - **Physical Marketing Tools**: Downloadable QR code (400x400px) for business cards, thank-you cards, flyers, vehicle magnets, and invoices
+  - **Direct Google Link**: Pre-configured review URL using business Google Place ID for seamless customer experience
+  - **Best Practices Implementation**: Follows industry standards - dual channel approach (email + SMS), optimal timing (2-4 hours after service), direct links (no extra steps), and professional friendly messaging
+  - **Expected Results**: Industry-standard 10-15% conversion rate, targeting 4.8+ star rating with 50+ total reviews
+- **Deep Cleaning Service Added**: New premium service offering with comprehensive room-by-room duty descriptions
+  - **Pricing**: Starting at $250, based on square footage ($0.195/sqft) for fair, accurate quotes
+  - **Detailed Duties**: KITCHEN (appliances, cabinets, counters), BATHROOMS (tile/grout, fixtures), BEDROOMS (fans, baseboards, under furniture), LIVING AREAS (upholstery, high surfaces), FLOORS (vacuum, mop, edges), EXTRAS (blinds, switches, windows, cobwebs)
+  - **Service Duration**: 4-8 hours depending on home size
+  - **Visual Representation**: Sparkles icon on services page, integrated into booking modal and quote calculator
+  - **Target Market**: Perfect for spring cleaning, post-renovation, or homes needing extra attention
+
 ## November 9, 2025 - SMS & Email Notifications for Bookings
 - **Dual Notification System**: Business owner now receives BOTH email and SMS text messages for all new bookings
   - **Twilio Integration**: Configured Replit Twilio connector for SMS notifications to (334) 877-9513

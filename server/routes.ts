@@ -6,6 +6,7 @@ import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 import { getUncachableSendGridClient } from "./sendgrid";
 import { sendSMS } from "./twilio";
+import { sendAutomatedReviewRequests } from "./review-automation";
 
 // SendGrid setup
 const mailService = new MailService();
@@ -347,6 +348,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
             );
             if (!smsSuccess) {
               console.warn('Failed to send SMS notification for confirmed booking:', booking.id);
+            }
+
+            // Send automated Google review request (immediate for MVP)
+            try {
+              const reviewResults = await sendAutomatedReviewRequests({
+                customerName: `${booking.firstName} ${booking.lastName}`,
+                customerEmail: booking.email,
+                customerPhone: booking.phone || undefined,
+                serviceType: booking.serviceType,
+                serviceDate: booking.preferredDate,
+              });
+
+              // Log review request to database for tracking
+              await storage.createReviewRequest({
+                bookingId: booking.id,
+                customerName: `${booking.firstName} ${booking.lastName}`,
+                customerEmail: booking.email,
+                customerPhone: booking.phone || undefined,
+                serviceType: booking.serviceType,
+                serviceDate: booking.preferredDate,
+                emailSent: reviewResults.emailSent,
+                smsSent: reviewResults.smsSent,
+                status: (reviewResults.emailSent || reviewResults.smsSent) ? 'sent' : 'pending',
+              });
+
+              console.log(`Review request sent for booking ${booking.id}: Email=${reviewResults.emailSent}, SMS=${reviewResults.smsSent}`);
+            } catch (reviewError) {
+              console.error('Failed to send automated review request:', reviewError);
+              // Non-blocking: review request failure shouldn't break booking confirmation
             }
           }
         }

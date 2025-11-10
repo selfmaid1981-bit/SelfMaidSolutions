@@ -1,4 +1,4 @@
-import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, type EmailCampaign, type InsertEmailCampaign, users, contactMessages, bookings, quotes, emailCampaigns } from "@shared/schema";
+import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, type EmailCampaign, type InsertEmailCampaign, type ReviewRequest, type InsertReviewRequest, users, contactMessages, bookings, quotes, emailCampaigns, reviewRequests } from "@shared/schema";
 import { db } from "./db";
 import { eq, sql } from "drizzle-orm";
 import * as bcrypt from "bcrypt";
@@ -19,6 +19,10 @@ export interface IStorage {
   getEmailCampaigns(): Promise<EmailCampaign[]>;
   createEmailCampaign(campaign: InsertEmailCampaign): Promise<EmailCampaign>;
   updateEmailCampaignStatus(id: string, status: string, recipientCount?: number, sentAt?: Date): Promise<EmailCampaign | undefined>;
+  createReviewRequest(reviewRequest: InsertReviewRequest): Promise<ReviewRequest>;
+  getAllReviewRequests(): Promise<ReviewRequest[]>;
+  getReviewRequestsByBooking(bookingId: string): Promise<ReviewRequest[]>;
+  updateReviewRequestStatus(id: string, emailSent: boolean, smsSent: boolean): Promise<ReviewRequest | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -190,6 +194,45 @@ export class DatabaseStorage implements IStorage {
       .where(eq(emailCampaigns.id, id))
       .returning();
     return campaign || undefined;
+  }
+
+  async createReviewRequest(insertReviewRequest: InsertReviewRequest): Promise<ReviewRequest> {
+    const [reviewRequest] = await db
+      .insert(reviewRequests)
+      .values(insertReviewRequest)
+      .returning();
+    return reviewRequest;
+  }
+
+  async getAllReviewRequests(): Promise<ReviewRequest[]> {
+    return db.select().from(reviewRequests).orderBy(reviewRequests.createdAt);
+  }
+
+  async getReviewRequestsByBooking(bookingId: string): Promise<ReviewRequest[]> {
+    return db.select().from(reviewRequests).where(eq(reviewRequests.bookingId, bookingId));
+  }
+
+  async updateReviewRequestStatus(id: string, emailSent: boolean, smsSent: boolean): Promise<ReviewRequest | undefined> {
+    const updateData: any = {};
+    
+    if (emailSent) {
+      updateData.emailSent = true;
+      updateData.emailSentAt = new Date();
+      updateData.status = 'sent';
+    }
+    
+    if (smsSent) {
+      updateData.smsSent = true;
+      updateData.smsSentAt = new Date();
+      updateData.status = 'sent';
+    }
+
+    const [reviewRequest] = await db
+      .update(reviewRequests)
+      .set(updateData)
+      .where(eq(reviewRequests.id, id))
+      .returning();
+    return reviewRequest || undefined;
   }
 }
 
