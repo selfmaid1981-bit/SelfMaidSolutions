@@ -29,10 +29,10 @@ const serviceDetails = [
     ]
   },
   {
-    id: 'deepcleaning',
+    id: 'deep',
     title: 'Deep Cleaning Service',
-    description: 'Our most intensive cleaning service - a comprehensive top-to-bottom transformation of your entire home. Perfect for spring cleaning, post-renovation, or when your home needs extra attention.',
-    pricing: 'Starting at $200',
+    description: 'Our most intensive cleaning service - a comprehensive top-to-bottom transformation of your entire home. Perfect for spring cleaning, post-renovation, or when your home needs extra attention. Priced based on square footage for fair, accurate quotes.',
+    pricing: 'Starting at $250 (based on square footage)',
     features: [
       'KITCHEN: Clean inside/outside all appliances (oven, microwave, refrigerator), degrease cabinets, scrub countertops & backsplash, sanitize sink & faucets',
       'BATHROOMS: Scrub tile & grout, descale shower doors, deep clean toilets, disinfect all surfaces, polish fixtures & mirrors',
@@ -208,6 +208,8 @@ export default function Services() {
                                 alt="Residential cleaning sponge mascot with glasses, mop and bucket" 
                                 className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
+                            ) : service.id === 'deep' ? (
+                              <Sparkles className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 text-primary" />
                             ) : service.id === 'commercial' ? (
                               <img 
                                 src={commercialMascot} 
@@ -232,6 +234,8 @@ export default function Services() {
                                 alt="Airbnb cleaning sponge mascot with sanitization supplies and medical cross" 
                                 className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
                               />
+                            ) : service.id === 'apartment' ? (
+                              <Home className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 text-primary" />
                             ) : null}
                           </div>
                           <p className="text-muted-foreground">
