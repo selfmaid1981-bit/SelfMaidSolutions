@@ -2,62 +2,17 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
-import { MailService } from '@sendgrid/mail';
 import Stripe from "stripe";
 import { getUncachableSendGridClient } from "./sendgrid";
 import { sendSMS } from "./twilio";
 import { sendAutomatedReviewRequests } from "./review-automation";
-
-// SendGrid setup
-const mailService = new MailService();
-if (process.env.SENDGRID_API_KEY) {
-  mailService.setApiKey(process.env.SENDGRID_API_KEY);
-}
+import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
+import { sendEmail } from "./email";
 
 // Stripe setup
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-08-27.basil",
 }) : null;
-
-interface EmailParams {
-  to: string;
-  from: string;
-  subject: string;
-  text?: string;
-  html?: string;
-}
-
-async function sendEmail(params: EmailParams): Promise<boolean> {
-  if (!process.env.SENDGRID_API_KEY) {
-    console.log('SendGrid not configured, email would be sent:', {
-      to: params.to,
-      subject: params.subject
-    });
-    return true; // Return true to prevent blocking app functionality
-  }
-  
-  try {
-    const mailData = {
-      to: params.to,
-      from: params.from,
-      subject: params.subject,
-    } as any;
-    
-    if (params.text) mailData.text = params.text;
-    if (params.html) mailData.html = params.html;
-    
-    // Ensure at least one content type is present
-    if (!params.text && !params.html) {
-      mailData.text = params.subject; // Fallback to subject as text
-    }
-    
-    await mailService.send(mailData);
-    return true;
-  } catch (error) {
-    console.error('SendGrid email error:', error);
-    return false;
-  }
-}
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -141,7 +96,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save to storage
       const message = await storage.createContactMessage(validatedData);
       
-      // Send email notification
+      // Send email notification to business owner
       const emailSuccess = await sendEmail({
         to: "selfmaidclean@outlook.com",
         from: "selfmaidclean@outlook.com", // Must be verified sender
@@ -167,6 +122,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (!emailSuccess) {
         console.warn('Failed to send email notification for contact form');
+      }
+
+      // AUTOMATED MARKETING: Send welcome email to new contact
+      try {
+        await sendWelcomeEmail(`${validatedData.firstName} ${validatedData.lastName}`, validatedData.email);
+        console.log(`Welcome email sent to ${validatedData.email}`);
+      } catch (error) {
+        console.error('Failed to send automated welcome email:', error);
+        // Non-blocking: don't fail the contact form submission
       }
 
       res.json({ success: true, message: "Message sent successfully" });
@@ -499,6 +463,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           Action: Follow up with customer at ${quote.email} or ${quote.phone || 'email only'}
         `
       });
+
+      // AUTOMATED MARKETING: Send follow-up email after quote
+      // NOTE: In production, this should be scheduled 24-48 hours after quote request
+      // For MVP, sending immediately to demonstrate functionality
+      try {
+        await sendFollowUpEmail(quote.name, quote.email, quote.estimatedPrice, quote.serviceType);
+        console.log(`Follow-up email sent to ${quote.email}`);
+      } catch (error) {
+        console.error('Failed to send automated follow-up email:', error);
+        // Non-blocking: don't fail the quote submission
+      }
       
       res.json({ 
         success: true, 
