@@ -204,6 +204,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (!smsSuccess) {
           console.warn('Failed to send SMS notification for booking:', booking.id);
         }
+
+        // NOTE: Review automation is NOT sent for pay-later bookings
+        // Review requests are only sent after payment is confirmed via Stripe webhook
+        // This ensures customers receive review requests AFTER service is completed
       }
       
       res.json({ success: true, bookingId: booking.id });

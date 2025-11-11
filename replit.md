@@ -1,6 +1,6 @@
 # Overview
 
-Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service business operating in Alabama. The application provides a complete business website with service showcases, online booking functionality, payment processing, and contact management. Built as a modern React SPA with an Express.js backend, it serves both marketing and operational needs for the cleaning business, aiming to attract customers and streamline operations in the Montgomery/Prattville/Selma area.
+Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service operating in Alabama. It provides a comprehensive business website featuring service showcases, an instant quote calculator, online booking with flexible payment options, and secure payment processing. The application aims to attract customers and streamline operations in the Montgomery, Prattville, and Selma areas, serving both marketing and operational needs for the cleaning business. Key capabilities include lead capture, marketing automation, and customer relationship management through an integrated admin dashboard.
 
 # User Preferences
 
@@ -9,24 +9,28 @@ Preferred communication style: Simple, everyday language.
 # System Architecture
 
 ## UI/UX Decisions
-The application features a premium, professional design with realistic photography and clean modern aesthetics. It utilizes serif fonts for headings (professional typography), a refined slate/blue color palette, and subtle animations for a polished, corporate appearance. Professional stock photography showcases real cleaning scenarios (kitchens, bathrooms, offices, vacation rentals, cleaning teams). Key UI components are built with Radix UI and shadcn/ui for accessibility and customizability, ensuring responsive design across devices and dark mode support.
+The application features a premium, professional design using a refined slate/blue color palette, serif fonts for headings, and subtle animations. It incorporates realistic stock photography showcasing cleaning scenarios. Key UI components are built with Radix UI and shadcn/ui for accessibility, responsiveness, and dark mode support.
 
 ## Technical Implementations
 - **Frontend**: React 18 with TypeScript, Wouter for routing, Tailwind CSS for styling, Radix UI/shadcn/ui for components, TanStack Query for state management, React Hook Form with Zod for forms, and Vite for building.
-- **Backend**: Node.js with Express.js and TypeScript, Drizzle ORM for PostgreSQL (Neon serverless), RESTful API design.
-- **Data Storage**: PostgreSQL on Neon, using Drizzle ORM for type-safe operations. Schema includes `users`, `contact_messages`, `bookings`, and `quotes`.
+- **Backend**: Node.js with Express.js and TypeScript, Drizzle ORM for PostgreSQL (Neon serverless), and a RESTful API design.
+- **Data Storage**: PostgreSQL on Neon, managing schemas for `users`, `contact_messages`, `bookings`, `quotes`, `review_requests`, and marketing campaigns.
 - **Authentication & Security**: Express sessions with secure cookies, server-side Zod validation, CORS configuration, and input sanitization.
-- **Payment Processing**: Stripe integration for secure transactions, using Stripe Elements for PCI-compliant forms and webhooks for payment intent confirmation.
-- **Email Communication**: SendGrid handles all transactional and marketing emails, including contact form submissions, booking confirmations, payment receipts, and dual quote notifications to customers and the business owner.
-- **Quote Calculator**: A dynamic quote calculator provides instant pricing based on service type (Residential, Commercial, Airbnb, Move-in/out, Apartment Turnover, Student Dorm - "Call for pricing"), property size/room count, frequency discounts, and add-on services.
-- **Content & SEO**: Integrated blog section and comprehensive SEO strategies targeting local keywords (Montgomery, Prattville). Marketing content includes blog posts, social media templates, email sequences, Google Ads copy, and video scripts.
+- **Payment Processing**: Stripe integration for secure transactions, utilizing Stripe Elements for PCI-compliant forms and webhooks for payment intent confirmation.
+- **Email Communication**: SendGrid handles all transactional and marketing emails (e.g., contact form submissions, booking confirmations, payment receipts, quote notifications, automated review requests, marketing campaigns).
+- **Quote Calculator**: A dynamic calculator provides instant pricing based on service type (Residential, Commercial, Airbnb, Move-in/out, Apartment Turnover, Student Dorm), property size/room count, frequency discounts, and add-on services.
+- **Content & SEO**: Includes a blog section, comprehensive SEO strategies targeting local keywords, and various marketing content templates (social media, email, Google Ads, video scripts).
+- **Marketing Automation**: Strategy for email and social media automation workflows using SendGrid, Buffer, Meta Business Suite, Hootsuite, and Zapier.
+- **Admin Dashboard**: Features for managing email marketing campaigns, subscribers (with CSV export), and tracking automated review requests.
+- **Automated Review System**: Triggers Google review requests via email and SMS after successful Stripe payments, logging requests in a dedicated table.
+- **SMS Notifications**: Twilio integration for business owner notifications on new bookings and automated customer review requests.
 
 ## Feature Specifications
-- **Service Offerings**: Five distinct cleaning services with dynamic pricing structures.
-- **Online Booking**: Multi-step booking process integrated with payment.
-- **Contact Management**: Lead capture through contact forms, "Save My Quote" functionality that collects customer info and sends email notifications.
-- **Content Marketing**: Blog, SEO-optimized articles, and various marketing content templates (social media, email, video).
-- **Marketing Automation**: Strategy document outlining email and social media automation workflows using SendGrid, Buffer, Meta Business Suite, Hootsuite, and Zapier.
+- **Service Offerings**: Five distinct cleaning services with dynamic pricing, including a new "Deep Cleaning" service.
+- **Online Booking**: A multi-step process with "Book Now (Pay Later)" and "Book & Pay Now" options.
+- **Contact Management**: Lead capture via contact forms and "Save My Quote" functionality.
+- **Content Marketing**: Blog, SEO-optimized articles, and a complete marketing toolkit (social media templates, door hanger designs, referral program emails, Facebook ad copy).
+- **Conversion Optimization**: Homepage enhancements include an interactive Before/After gallery, expanded testimonials, trust badges, and optimized CTAs.
 
 # External Dependencies
 
@@ -34,12 +38,13 @@ The application features a premium, professional design with realistic photograp
 - **Neon Database**: Serverless PostgreSQL hosting.
 - **Stripe**: Payment processing.
 - **SendGrid**: Email delivery and marketing campaigns.
-- **Twilio**: SMS text message notifications for booking alerts.
+- **Twilio**: SMS text message notifications.
 - **Google Fonts**: Web font delivery (Inter, DM Sans, Fira Code, Geist Mono).
+- **Google Place ID**: For direct Google review links.
 
 ## Frontend Libraries
 - **React Ecosystem**: React, React DOM, Wouter.
-- **UI Framework**: Radix UI, Lucide React, React Icons.
+- **UI Framework**: Radix UI, shadcn/ui, Lucide React, React Icons.
 - **Form Handling**: React Hook Form, Hookform Resolvers.
 - **Validation**: Zod.
 - **Styling**: Tailwind CSS, Class Variance Authority, clsx.
@@ -54,84 +59,3 @@ The application features a premium, professional design with realistic photograp
 - **Email**: SendGrid Mail API.
 - **SMS**: Twilio Node.js SDK.
 - **Payment**: Stripe Node.js SDK.
-
-# Recent Changes
-
-## November 10, 2025 - Automated Google Review Request System (FULLY ACTIVE)
-- **Automated Review Requests**: Fully operational system automatically requests Google reviews from satisfied customers immediately after booking confirmation
-  - **Automatic Triggering**: Fires automatically when Stripe payment succeeds via webhook - no manual action required
-  - **Email Review Requests**: Beautiful HTML email templates sent via SendGrid with direct Google review link, personalized customer name, service details, and helpful prompts for what to mention in reviews
-  - **SMS Review Requests**: Text messages sent via Twilio with direct review link for instant one-tap access from mobile devices
-  - **Database Tracking**: New `review_requests` table logs all sent requests with bookingId, customer info, send status (email/SMS), and timestamps for complete audit trail
-  - **Non-Blocking**: Review request failures are logged but don't interrupt booking confirmation process - resilient design ensures customer experience isn't affected
-  - **Integration Points**: Wired into `/api/stripe-webhook` endpoint in `server/routes.ts`, uses `sendAutomatedReviewRequests()` from `server/review-automation.ts`
-  - **Review Management Page**: Admin dashboard at `/admin/reviews` with QR code generator, copyable review links, usage tips, and automation status
-  - **Physical Marketing Tools**: Downloadable QR code (400x400px) for business cards, thank-you cards, flyers, vehicle magnets, and invoices
-  - **Direct Google Link**: Pre-configured review URL using business Google Place ID (ChIJ-erVoU0XiYgR8ZsW5vCBzL4) for seamless customer experience
-  - **Best Practices Implementation**: Follows industry standards - dual channel approach (email + SMS), immediate timing after payment, direct links (no extra steps), and professional friendly messaging
-  - **Expected Results**: Industry-standard 10-15% conversion rate, targeting 4.8+ star rating with 50+ total reviews
-  - **Current Scope**: Triggers only for paid bookings (Stripe payment success); pay-later bookings receive booking confirmations but not immediate review requests
-- **Deep Cleaning Service Added**: New premium service offering with comprehensive room-by-room duty descriptions
-  - **Pricing**: Starting at $250, based on square footage ($0.195/sqft) for fair, accurate quotes
-  - **Detailed Duties**: KITCHEN (appliances, cabinets, counters), BATHROOMS (tile/grout, fixtures), BEDROOMS (fans, baseboards, under furniture), LIVING AREAS (upholstery, high surfaces), FLOORS (vacuum, mop, edges), EXTRAS (blinds, switches, windows, cobwebs)
-  - **Service Duration**: 4-8 hours depending on home size
-  - **Visual Representation**: Sparkles icon on services page, integrated into booking modal and quote calculator
-  - **Target Market**: Perfect for spring cleaning, post-renovation, or homes needing extra attention
-
-## November 9, 2025 - SMS & Email Notifications for Bookings
-- **Dual Notification System**: Business owner now receives BOTH email and SMS text messages for all new bookings
-  - **Twilio Integration**: Configured Replit Twilio connector for SMS notifications to (334) 877-9513
-  - **Email Notifications**: SendGrid sends emails to selfmaidclean@outlook.com for all bookings
-  - **Pay Later Bookings**: SMS format: "NEW BOOKING (Pay Later)" with customer details, service type, date/time, phone, and amount
-  - **Paid Bookings**: SMS format: "NEW BOOKING CONFIRMED!" with customer details and paid amount after Stripe payment success
-  - **Error Handling**: SMS failures are logged but don't block booking creation; warnings written to console for monitoring
-  - **E.164 Phone Format**: SMS uses proper international format (+13348779513) for reliable Twilio delivery
-- **Mandatory Contact Fields**: All booking form fields now required for data completeness
-  - Enhanced frontend validation: firstName, lastName, email, phone (min 10 chars), address, city, state, zipCode all mandatory
-  - Database schema updated: phone field changed from nullable to notNull in bookings table
-  - Existing null phone records backfilled with 'N/A' before schema migration
-  - Server-side Zod validation ensures all contact data is captured before booking creation
-
-## November 9, 2025 - Real Before/After Gallery Photos
-- **Authentic Visual Proof**: Replaced stock photography in before/after gallery with actual customer job photos
-  - Shower renovation: Old green tiled shower → pristine white modern shower (complete transformation)
-  - Window & door detailing: Dirty window sills and frames → spotless glass and hardware
-  - Gallery descriptions updated to accurately reflect real work shown in photos
-  - Maintains all interactive features: click-to-toggle comparison, carousel navigation, and CTAs
-
-## November 9, 2025 - Conversion Optimization & Marketing Toolkit
-- **Conversion-Focused Enhancements**: Major homepage improvements to boost customer acquisition and conversions
-  - **Before/After Gallery**: Interactive photo gallery showcasing cleaning transformations with click-to-toggle functionality, carousel navigation, and prominent CTAs
-  - **Enhanced Testimonials**: Expanded from 3 to 6 customer reviews with service type tags, improved visual design with quote icons and star ratings, and integrated CTAs driving to phone/quote
-  - **Trust Badges Section**: New section immediately after hero displaying 6 key trust signals (16 years in business, fully insured, 500+ customers, same-day service, 100% guarantee, 2-hour response time)
-  - **Optimized CTAs**: Enhanced hero section with green special offer banner ($20 off first clean), urgency messaging on CTAs, improved phone number prominence, and redesigned mobile floating CTA with better visibility
-- **Complete Marketing Toolkit**: Created 4 comprehensive marketing documents for customer acquisition without Google
-  - **SOCIAL_MEDIA_TEMPLATES.md**: 30+ ready-to-post templates for Facebook/Instagram, weekly posting schedule, engagement strategies, and hashtag guidelines
-  - **DOOR_HANGER_TEMPLATE.md**: 3 professional designs with distribution strategy, targeting recommendations, ROI calculations (300% expected), and legal guidelines
-  - **REFERRAL_PROGRAM_EMAILS.md**: 6 automated email sequences for customer referrals, tracking spreadsheet templates, and referral card designs
-  - **FACEBOOK_AD_COPY.md**: 6 complete ad campaigns with targeting strategies, budget recommendations ($5/day = 5-8 customers/month), setup guides, and 380% ROI projections
-
-## November 9, 2025 - Professional Website Redesign
-- **Visual Identity Update**: Removed childish superhero sponge mascot throughout the entire website
-- **Professional Photography**: Replaced all mascot images with realistic professional stock photography
-  - Hero section: Professional kitchen cleaning results
-  - About section: Modern bathroom and office cleaning photos
-  - Services section: Clean card-based layout with professional icons
-  - Recruitment section: Real cleaning team photos
-- **Design Refinement**: Updated to corporate-professional aesthetic with slate/blue color palette
-- **Service Updates**: 
-  - Window cleaning marked as custom add-on (pricing depends on quantity and height)
-  - Student Dorm pricing shows "Call for pricing"
-  - Apartment Turnover service starting at $108
-- **Brand Assets**: Incorporated SMLLC Logo for professional branding
-
-## October 29, 2025 - Flexible Booking Payment Options
-- **Dual Booking Flow**: Implemented two booking options in the booking modal
-  - "Book Now (Pay Later)": Creates booking with 'pending' status, sends confirmation emails, payment collected later
-  - "Book & Pay Now": Original flow with immediate Stripe payment processing
-- **Email Notifications**: Both customer and business owner receive notification emails for pay-later bookings
-  - Customer email: Booking confirmation with 24-hour callback promise
-  - Owner email: New booking alert with "Payment Pending" status and action reminder
-- **Backend Logic**: `/api/bookings` endpoint handles `skipPayment` parameter to branch between immediate payment and deferred payment flows
-- **User Experience**: Clear button labels and helper text explaining the two options
-- **Implementation**: Fixed async state race condition by using dedicated handlers instead of state-based approach
