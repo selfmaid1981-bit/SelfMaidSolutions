@@ -23,7 +23,17 @@ import {
   XCircle,
   Loader2,
   Sparkles,
+  UserCheck,
+  Download,
 } from "lucide-react";
+
+interface Subscriber {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  source: 'contact' | 'booking' | 'quote';
+  createdAt: string;
+}
 
 export default function AdminCampaigns() {
   const { toast } = useToast();
@@ -37,7 +47,7 @@ export default function AdminCampaigns() {
     queryKey: ['/api/marketing/campaigns'],
   });
 
-  const { data: subscribers, isLoading: subscribersLoading } = useQuery<any[]>({
+  const { data: subscribers, isLoading: subscribersLoading, error: subscribersError } = useQuery<Subscriber[]>({
     queryKey: ['/api/marketing/subscribers'],
   });
 
@@ -366,6 +376,145 @@ export default function AdminCampaigns() {
               </CardContent>
             </Card>
           </div>
+
+          <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 mb-8">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle className="text-2xl font-bold flex items-center gap-2">
+                  <UserCheck className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  Email Subscribers
+                </CardTitle>
+                <CardDescription>
+                  All contacts who've provided their email address across your website
+                </CardDescription>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  if (!subscribers || subscribers.length === 0) {
+                    toast({
+                      title: "No Subscribers",
+                      description: "No subscriber data to export",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
+                  
+                  const sanitizeCSVField = (value: string): string => {
+                    if (!value) return '""';
+                    let sanitized = value;
+                    if (sanitized.match(/^[=+\-@]/)) {
+                      sanitized = "'" + sanitized;
+                    }
+                    sanitized = sanitized.replace(/"/g, '""');
+                    return `"${sanitized}"`;
+                  };
+                  
+                  const csv = [
+                    ['Email', 'First Name', 'Last Name', 'Source', 'Date Added'].map(sanitizeCSVField).join(','),
+                    ...subscribers.map(s => [
+                      sanitizeCSVField(s.email),
+                      sanitizeCSVField(s.firstName || ''),
+                      sanitizeCSVField(s.lastName || ''),
+                      sanitizeCSVField(s.source),
+                      sanitizeCSVField(new Date(s.createdAt).toLocaleDateString())
+                    ].join(','))
+                  ].join('\n');
+                  const blob = new Blob([csv], { type: 'text/csv' });
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `subscribers-${new Date().toISOString().split('T')[0]}.csv`;
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                  toast({
+                    title: "Export Successful",
+                    description: `Exported ${subscribers.length} subscribers to CSV`,
+                  });
+                }}
+                data-testid="button-export-subscribers"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export CSV
+              </Button>
+            </CardHeader>
+            <CardContent>
+              {subscribersLoading ? (
+                <div className="text-center py-12">
+                  <Loader2 className="h-12 w-12 animate-spin mx-auto text-slate-400" />
+                  <p className="text-slate-600 dark:text-slate-400 mt-4">Loading subscribers...</p>
+                </div>
+              ) : subscribersError ? (
+                <div className="text-center py-12">
+                  <XCircle className="h-16 w-16 mx-auto text-red-500 dark:text-red-400 mb-4" />
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                    Error Loading Subscribers
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    {subscribersError instanceof Error ? subscribersError.message : 'Failed to load subscriber data'}
+                  </p>
+                </div>
+              ) : subscribers && subscribers.length > 0 ? (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                      <tr>
+                        <th className="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300">Email</th>
+                        <th className="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300">Name</th>
+                        <th className="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300">Source</th>
+                        <th className="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300">Date Added</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                      {subscribers.map((subscriber, index) => (
+                        <tr 
+                          key={`${subscriber.email}-${index}`}
+                          className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                          data-testid={`row-subscriber-${index}`}
+                        >
+                          <td className="px-4 py-3 text-sm text-slate-900 dark:text-white font-medium">
+                            {subscriber.email}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                            {subscriber.firstName || subscriber.lastName 
+                              ? `${subscriber.firstName || ''} ${subscriber.lastName || ''}`.trim()
+                              : '—'}
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              subscriber.source === 'booking' 
+                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                                : subscriber.source === 'quote'
+                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                : 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
+                            }`}>
+                              {subscriber.source === 'booking' && '💼 Booking'}
+                              {subscriber.source === 'quote' && '💰 Quote'}
+                              {subscriber.source === 'contact' && '✉️ Contact'}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                            {new Date(subscriber.createdAt).toLocaleDateString()}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <Users className="h-16 w-16 mx-auto text-slate-300 dark:text-slate-600 mb-4" />
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                    No subscribers yet
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Subscribers will appear here when customers fill out contact forms, request quotes, or make bookings
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
             <CardHeader>
