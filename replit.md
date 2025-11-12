@@ -59,3 +59,27 @@ The application features a premium, professional design using a refined slate/bl
 - **Email**: SendGrid Mail API.
 - **SMS**: Twilio Node.js SDK.
 - **Payment**: Stripe Node.js SDK.
+
+# Recent Changes
+
+## November 11, 2025 - SEO & Google Business Profile Optimization
+- **Local Keyword Optimization**: Enhanced all pages with 120+ targeted Alabama cleaning keywords for maximum local search visibility
+  - Home, Services, Quote, About, FAQ, and Blog pages optimized
+  - Targets Montgomery, Prattville, Selma, Millbrook, Wetumpka + all service types
+  - Includes pricing terms, trust factors, and common customer questions
+- **Google Business Profile Guide**: Complete optimization playbook in `GOOGLE_BUSINESS_PROFILE_OPTIMIZATION.md`
+  - 30-day action plan for dominating local search rankings
+  - Photo strategy (50+ photos), video content guidelines
+  - Google Posts calendar (2-3x weekly posting schedule)
+  - Review collection strategies (automated + manual)
+  - Q&A pre-seeding with location-rich answers
+  - Expected results: Top 3 Local Pack within 3-6 months
+
+## November 11, 2025 - Marketing Campaigns Admin Dashboard
+- **Email Marketing Hub**: Full-featured dashboard at `/admin/campaigns` for campaign management
+  - Subscriber list with email, name, source, date (from contacts/bookings/quotes)
+  - CSV export with security (prevents CSV injection attacks)
+  - Campaign builder with templates (Win-Back, Seasonal, Referral, Custom)
+  - Bulk email sending with batch processing for rate limits
+  - Campaign tracking with status badges and metrics
+  - Real-time statistics dashboard
