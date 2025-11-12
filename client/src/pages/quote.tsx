@@ -182,7 +182,7 @@ export default function Quote() {
       <SEOHead
         title="Free Cleaning Quote Calculator | Montgomery & Prattville AL | Self-Maid"
         description="Instant cleaning quote calculator for Montgomery and Prattville, AL. Get accurate pricing for residential, commercial, Airbnb cleaning services. Free estimates!"
-        keywords="cleaning quote Montgomery AL, cleaning cost calculator Prattville, free cleaning estimate Alabama, cleaning service pricing Montgomery, instant quote Prattville cleaning"
+        keywords="cleaning quote Montgomery AL, cleaning cost calculator Prattville, free cleaning estimate Alabama, cleaning service pricing Montgomery, instant quote Prattville cleaning, how much does cleaning cost Montgomery, house cleaning estimate Prattville AL, cleaning price calculator Alabama, get cleaning quote Montgomery, free estimate house cleaning Prattville, cleaning service cost estimator Montgomery AL, calculate cleaning cost Alabama, residential cleaning quote Montgomery, commercial cleaning estimate Prattville, Airbnb cleaning pricing Montgomery, move out cleaning quote Alabama, deep cleaning cost calculator Prattville, apartment cleaning estimate Montgomery"
       />
       
       <div className="min-h-screen bg-background">

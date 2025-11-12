@@ -68,7 +68,7 @@ export default function Blog() {
       <SEOHead
         title="Cleaning Tips & Resources | Self-Maid Cleaning Blog Montgomery AL"
         description="Expert cleaning tips, guides, and resources for Montgomery and Prattville, AL residents. Learn from 16 years of professional cleaning experience."
-        keywords="cleaning tips Montgomery AL, cleaning guides Prattville, Alabama cleaning advice, home cleaning tips, commercial cleaning best practices"
+        keywords="cleaning tips Montgomery AL, cleaning guides Prattville, Alabama cleaning advice, home cleaning tips, commercial cleaning best practices, house cleaning hacks Montgomery, deep cleaning tips Prattville, spring cleaning guide Alabama, cleaning tricks Montgomery AL, professional cleaning advice Prattville, how to clean house Montgomery, cleaning checklist Alabama, eco friendly cleaning tips Prattville, kitchen cleaning Montgomery AL, bathroom cleaning tips Alabama, stain removal guide Montgomery, carpet cleaning tips Prattville AL, Airbnb cleaning guide Montgomery"
       />
       
       <div className="min-h-screen bg-background">

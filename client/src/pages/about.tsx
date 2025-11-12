@@ -44,7 +44,7 @@ export default function About() {
       <SEOHead
         title="About Self-Maid Cleaning | 16 Years Serving Montgomery & Prattville AL"
         description="Family-owned cleaning company serving Montgomery and Prattville, AL for 16 years. Fully insured, background-checked team. Eco-friendly products. 500+ happy customers."
-        keywords="cleaning company Montgomery AL, Prattville cleaning service, insured cleaners Alabama, background checked cleaners, eco-friendly cleaning Montgomery, family owned cleaning business"
+        keywords="cleaning company Montgomery AL, Prattville cleaning service, insured cleaners Alabama, background checked cleaners, eco-friendly cleaning Montgomery, family owned cleaning business, trusted cleaners Prattville AL, experienced cleaning company Montgomery, professional cleaning team Alabama, licensed and insured cleaners Montgomery, bonded cleaning service Prattville, local cleaning company Montgomery AL, established cleaning business Alabama, reliable cleaners Prattville, Montgomery area cleaning service, best cleaning company Montgomery, top rated cleaners Prattville AL, 5 star cleaning service Montgomery"
       />
       
       <div className="min-h-screen bg-background">

@@ -77,7 +77,7 @@ export default function FAQ() {
       <SEOHead
         title="Frequently Asked Questions | Self-Maid Cleaning Solutions Alabama"
         description="Find answers to common questions about Self-Maid Cleaning Solutions' services, pricing, scheduling, and more. Get the information you need about our Alabama cleaning services."
-        keywords="cleaning service FAQ, Alabama cleaning questions, Self-Maid cleaning answers, cleaning service information, residential cleaning FAQ"
+        keywords="cleaning service FAQ, Alabama cleaning questions, Self-Maid cleaning answers, cleaning service information, residential cleaning FAQ, Montgomery cleaning FAQ, Prattville cleaning questions, how much does house cleaning cost Alabama, cleaning service pricing Montgomery, how often should I clean my house, professional cleaning questions Prattville, do cleaners bring supplies Montgomery, what does deep cleaning include Alabama, cleaning service schedule Prattville AL, residential cleaning questions Montgomery, commercial cleaning FAQ Alabama, Airbnb cleaning questions Montgomery, move out cleaning FAQ Prattville"
       />
       
       <div className="min-h-screen bg-background">

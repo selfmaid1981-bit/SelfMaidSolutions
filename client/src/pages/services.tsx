@@ -132,7 +132,7 @@ export default function Services() {
       <SEOHead
         title="Cleaning Services Montgomery & Prattville AL | Pricing & Details | Self-Maid"
         description="Professional cleaning services in Montgomery and Prattville, AL. Transparent pricing for residential, commercial, Airbnb, move-in/out cleaning. Free quotes. Call (334) 877-9513."
-        keywords="cleaning services Montgomery AL, Prattville cleaning prices, residential cleaning cost Montgomery, commercial cleaning Prattville, Airbnb cleaning rates Alabama, move out cleaning Montgomery pricing"
+        keywords="cleaning services Montgomery AL, Prattville cleaning prices, residential cleaning cost Montgomery, commercial cleaning Prattville, Airbnb cleaning rates Alabama, move out cleaning Montgomery pricing, move in cleaning cost Prattville, deep cleaning prices Montgomery, apartment cleaning rates Prattville AL, office cleaning cost Montgomery, house cleaning prices Alabama, maid service rates Montgomery, cleaning service cost Prattville, affordable cleaning Montgomery AL, same day cleaning rates Prattville, recurring cleaning discounts Montgomery, weekly cleaning service Prattville, bi-weekly cleaning Montgomery, monthly cleaning rates Alabama, vacation rental cleaning Montgomery, short term rental cleaning Prattville, student dorm cleaning Montgomery AL, post construction cleaning Prattville, spring cleaning rates Montgomery, apartment turnover cleaning Alabama"
       />
       
       <div className="min-h-screen bg-background">
