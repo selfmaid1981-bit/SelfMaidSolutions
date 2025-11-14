@@ -1,50 +1,7 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-import showerBefore from '@assets/IMG_1409_1762692280479.jpeg';
-import showerAfter from '@assets/IMG_1404_1762692280479.jpeg';
-import windowBefore from '@assets/IMG_1411_1762692280479.jpeg';
-import doorAfter from '@assets/IMG_1437_1762692280479.jpeg';
-
-interface BeforeAfterItem {
-  before: string;
-  after: string;
-  title: string;
-  description: string;
-}
-
-const galleryItems: BeforeAfterItem[] = [
-  {
-    before: showerBefore,
-    after: showerAfter,
-    title: 'Shower Renovation Clean',
-    description: 'From old green tiles to pristine white - complete transformation'
-  },
-  {
-    before: windowBefore,
-    after: doorAfter,
-    title: 'Window & Door Detailing',
-    description: 'Every surface scrubbed spotless - windows, frames, and hardware'
-  }
-];
+import kitchenTransformation from '@assets/IMG_1852_1763084552552.png';
 
 export default function BeforeAfterGallery() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAfter, setShowAfter] = useState(false);
-
-  const currentItem = galleryItems[currentIndex];
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % galleryItems.length);
-    setShowAfter(false);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
-    setShowAfter(false);
-  };
-
   return (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,86 +10,41 @@ export default function BeforeAfterGallery() {
             See the Difference
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Real results from real homes. This is the level of quality we deliver every single time.
+            Real results from real homes in Montgomery, Alabama. This is the level of quality we deliver every single time.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto">
           <div className="relative bg-slate-100 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div className="relative aspect-[16/9]">
+            <div className="relative">
               <img
-                src={showAfter ? currentItem.after : currentItem.before}
-                alt={showAfter ? `${currentItem.title} - After` : `${currentItem.title} - Before`}
-                className="w-full h-full object-cover transition-opacity duration-300"
-                data-testid={`gallery-image-${showAfter ? 'after' : 'before'}`}
+                src={kitchenTransformation}
+                alt="Kitchen cleaning before and after - Montgomery Alabama"
+                className="w-full h-auto object-cover"
+                data-testid="gallery-image-kitchen"
               />
               
               <div className="absolute top-4 left-4 z-10">
                 <span className="bg-black/70 text-white px-4 py-2 rounded-lg font-bold text-lg">
-                  {showAfter ? 'AFTER' : 'BEFORE'}
+                  BEFORE
                 </span>
               </div>
 
-              <button
-                onClick={() => setShowAfter(!showAfter)}
-                className="absolute inset-0 cursor-pointer hover:bg-black/10 transition-colors group"
-                aria-label={showAfter ? 'Show before photo' : 'Show after photo'}
-                data-testid="toggle-before-after"
-              >
-              </button>
-            </div>
-
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
-              <Button
-                onClick={prevSlide}
-                variant="secondary"
-                size="icon"
-                className="h-12 w-12 rounded-full shadow-lg bg-white/90 hover:bg-white dark:bg-slate-800/90 dark:hover:bg-slate-800"
-                data-testid="gallery-prev"
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </Button>
-            </div>
-
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
-              <Button
-                onClick={nextSlide}
-                variant="secondary"
-                size="icon"
-                className="h-12 w-12 rounded-full shadow-lg bg-white/90 hover:bg-white dark:bg-slate-800/90 dark:hover:bg-slate-800"
-                data-testid="gallery-next"
-              >
-                <ChevronRight className="h-6 w-6" />
-              </Button>
+              <div className="absolute bottom-4 left-4 z-10">
+                <span className="bg-black/70 text-white px-4 py-2 rounded-lg font-bold text-lg">
+                  AFTER
+                </span>
+              </div>
             </div>
           </div>
 
           <div className="mt-6 text-center">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              {currentItem.title}
+              Kitchen Deep Clean Transformation
             </h3>
             <p className="text-lg text-slate-600 dark:text-slate-300">
-              {currentItem.description}
+              From cluttered and messy to spotless and organized - complete kitchen cleaning service in Montgomery
             </p>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-6">
-            {galleryItems.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  setShowAfter(false);
-                }}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'bg-blue-600 w-8'
-                    : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-                data-testid={`gallery-indicator-${index}`}
-              />
-            ))}
           </div>
 
           <div className="mt-12 text-center">
