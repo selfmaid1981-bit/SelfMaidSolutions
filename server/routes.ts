@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import { timingSafeEqual } from "crypto";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
 import Stripe from "stripe";
@@ -24,11 +25,21 @@ function requireAdmin(req: any, res: any, next: any) {
   
   const apiKey = req.headers['x-admin-api-key'];
   
-  if (apiKey === adminKey) {
-    next();
-  } else {
-    res.status(401).json({ message: "Unauthorized: Invalid admin credentials" });
+  // Use constant-time comparison to prevent timing attacks
+  if (typeof apiKey === 'string' && apiKey.length === adminKey.length) {
+    try {
+      const apiKeyBuffer = Buffer.from(apiKey);
+      const adminKeyBuffer = Buffer.from(adminKey);
+      
+      if (timingSafeEqual(apiKeyBuffer, adminKeyBuffer)) {
+        return next();
+      }
+    } catch {
+      // Fall through to unauthorized
+    }
   }
+  
+  res.status(401).json({ message: "Unauthorized: Invalid admin credentials" });
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
