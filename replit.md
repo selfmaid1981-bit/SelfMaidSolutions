@@ -62,6 +62,16 @@ The application features a premium, professional design using a refined slate/bl
 
 # Recent Changes
 
+## November 20, 2025 - Server-Side SEO Meta Tags & Crawler Optimization
+- **Fixed Blank Page Issue**: Added comprehensive server-side SEO meta tags to `client/index.html` to ensure crawlers and social media platforms can read site information before JavaScript loads
+  - Added title, description, keywords, author, robots, and canonical URL tags
+  - Added Open Graph tags for social media sharing (Facebook, LinkedIn)
+  - Added Twitter Card tags for Twitter/X sharing
+  - Added geographic meta tags for local SEO (Montgomery/Prattville coordinates)
+  - Added noscript fallback with contact information and services for users without JavaScript
+- **Dependency Updates**: Reinstalled `tsx` package after security-related `glob` dependency update to restore application functionality
+- **Future Enhancement**: Add custom Open Graph image (1200x630px) to `client/public/og-image.jpg` for improved social media previews
+
 ## November 11, 2025 - SEO & Google Business Profile Optimization
 - **Local Keyword Optimization**: Enhanced all pages with 120+ targeted Alabama cleaning keywords for maximum local search visibility
   - Home, Services, Quote, About, FAQ, and Blog pages optimized
