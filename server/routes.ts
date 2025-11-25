@@ -268,109 +268,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Webhook to handle successful payments
-  app.post("/api/stripe-webhook", async (req, res) => {
-    try {
-      const { type, data } = req.body;
-      
-      if (type === 'payment_intent.succeeded') {
-        const paymentIntent = data.object;
-        const bookingId = paymentIntent.metadata?.bookingId;
-        
-        if (bookingId) {
-          await storage.updateBookingStatus(bookingId, 'confirmed');
-          
-          // Send confirmation email to customer
-          const booking = await storage.getBooking(bookingId);
-          if (booking) {
-            await sendEmail({
-              to: booking.email,
-              from: "selfmaidclean@outlook.com",
-              subject: "Booking Confirmation - Self-Maid Cleaning",
-              html: `
-                <h3>Booking Confirmed!</h3>
-                <p>Dear ${booking.firstName},</p>
-                <p>Your cleaning service booking has been confirmed. Here are the details:</p>
-                <ul>
-                  <li><strong>Service:</strong> ${booking.serviceType}</li>
-                  <li><strong>Date:</strong> ${booking.preferredDate}</li>
-                  <li><strong>Time:</strong> ${booking.preferredTime}</li>
-                  <li><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</li>
-                  <li><strong>Amount:</strong> $${booking.amount}.00</li>
-                </ul>
-                <p>We'll contact you 24 hours before your appointment to confirm the details.</p>
-                <p>Questions? Call us at (334) 877-9513</p>
-                <p>Thank you for choosing Self-Maid Cleaning!</p>
-              `,
-            });
-            
-            // Send email notification to business owner
-            await sendEmail({
-              to: "selfmaidclean@outlook.com",
-              from: "selfmaidclean@outlook.com",
-              subject: `New Booking Confirmed - ${booking.firstName} ${booking.lastName}`,
-              html: `
-                <h3>New Booking Confirmed (Payment Received)</h3>
-                <p><strong>Customer:</strong> ${booking.firstName} ${booking.lastName}</p>
-                <p><strong>Email:</strong> ${booking.email}</p>
-                <p><strong>Phone:</strong> ${booking.phone}</p>
-                <p><strong>Service:</strong> ${booking.serviceType}</p>
-                <p><strong>Date:</strong> ${booking.preferredDate}</p>
-                <p><strong>Time:</strong> ${booking.preferredTime}</p>
-                <p><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</p>
-                <p><strong>Amount:</strong> $${booking.amount}.00</p>
-                <p><strong>Special Instructions:</strong> ${booking.specialInstructions || 'None'}</p>
-                <p><strong>Status:</strong> Confirmed - Payment received</p>
-              `,
-            });
-            
-            // Send SMS notification to business owner
-            const smsSuccess = await sendSMS(
-              '+13348779513',
-              `NEW BOOKING CONFIRMED!\n${booking.firstName} ${booking.lastName}\n${booking.serviceType}\n${booking.preferredDate} at ${booking.preferredTime}\nPhone: ${booking.phone}\nPaid: $${booking.amount}`
-            );
-            if (!smsSuccess) {
-              console.warn('Failed to send SMS notification for confirmed booking:', booking.id);
-            }
-
-            // Send automated Google review request (immediate for MVP)
-            try {
-              const reviewResults = await sendAutomatedReviewRequests({
-                customerName: `${booking.firstName} ${booking.lastName}`,
-                customerEmail: booking.email,
-                customerPhone: booking.phone || undefined,
-                serviceType: booking.serviceType,
-                serviceDate: booking.preferredDate,
-              });
-
-              // Log review request to database for tracking
-              await storage.createReviewRequest({
-                bookingId: booking.id,
-                customerName: `${booking.firstName} ${booking.lastName}`,
-                customerEmail: booking.email,
-                customerPhone: booking.phone || undefined,
-                serviceType: booking.serviceType,
-                serviceDate: booking.preferredDate,
-                emailSent: reviewResults.emailSent,
-                smsSent: reviewResults.smsSent,
-                status: (reviewResults.emailSent || reviewResults.smsSent) ? 'sent' : 'pending',
-              });
-
-              console.log(`Review request sent for booking ${booking.id}: Email=${reviewResults.emailSent}, SMS=${reviewResults.smsSent}`);
-            } catch (reviewError) {
-              console.error('Failed to send automated review request:', reviewError);
-              // Non-blocking: review request failure shouldn't break booking confirmation
-            }
-          }
-        }
-      }
-      
-      res.json({ received: true });
-    } catch (error) {
-      console.error('Webhook error:', error);
-      res.status(400).json({ message: "Webhook error" });
-    }
-  });
+  // NOTE: Stripe webhooks are now handled via the managed webhook at /api/stripe/webhook/:uuid
+  // The managed webhook in server/index.ts provides:
+  // 1. Signature verification via stripe-replit-sync
+  // 2. Data syncing to the stripe schema
+  // 3. Business logic via WebhookHandlers (booking confirmation, emails, SMS, review requests)
 
   // Save and email quote
   app.post("/api/quotes", async (req, res) => {
