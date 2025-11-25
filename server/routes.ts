@@ -3,17 +3,12 @@ import { createServer, type Server } from "http";
 import { timingSafeEqual } from "crypto";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
-import Stripe from "stripe";
+import { getUncachableStripeClient } from "./stripeClient";
 import { getUncachableSendGridClient } from "./sendgrid";
 import { sendSMS } from "./twilio";
 import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
-
-// Stripe setup
-const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-08-27.basil",
-}) : null;
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -43,6 +38,18 @@ function requireAdmin(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Get Stripe publishable key
+  app.get("/api/stripe/public-key", async (req, res) => {
+    try {
+      const { getStripePublishableKey } = await import("./stripeClient");
+      const publishableKey = await getStripePublishableKey();
+      res.json({ publishableKey });
+    } catch (error: any) {
+      console.error('Error getting Stripe publishable key:', error);
+      res.status(500).json({ message: "Error retrieving Stripe configuration" });
+    }
+  });
+
   // User registration endpoint
   app.post("/api/auth/register", async (req, res) => {
     try {
@@ -237,15 +244,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Amount and booking ID are required" });
       }
 
-      if (!stripe) {
-        return res.status(400).json({ message: "Payment processing not configured" });
-      }
-
       const booking = await storage.getBooking(bookingId);
       if (!booking) {
         return res.status(404).json({ message: "Booking not found" });
       }
 
+      const stripe = await getUncachableStripeClient();
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Convert to cents
         currency: "usd",

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useStripe, Elements, PaymentElement, useElements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, type Stripe } from '@stripe/stripe-js';
 import { useLocation } from 'wouter';
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
@@ -10,11 +10,16 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { Loader2, CreditCard, Shield } from 'lucide-react';
 
-// Make sure to call `loadStripe` outside of a component's render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
-  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
-  : null;
+let stripePromise: Promise<Stripe | null> | null = null;
+
+const getStripe = async () => {
+  if (!stripePromise) {
+    const response = await fetch('/api/stripe/public-key');
+    const { publishableKey } = await response.json();
+    stripePromise = loadStripe(publishableKey);
+  }
+  return stripePromise;
+};
 
 const CheckoutForm = ({ bookingId, amount }: { bookingId: string; amount: number }) => {
   const stripe = useStripe();
@@ -104,20 +109,23 @@ export default function Checkout() {
   const [clientSecret, setClientSecret] = useState("");
   const [bookingId, setBookingId] = useState("");
   const [amount, setAmount] = useState(0);
+  const [stripeReady, setStripeReady] = useState<Promise<Stripe | null> | null>(null);
   const { toast } = useToast();
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Check if Stripe is configured
-    if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-      toast({
-        title: "Payment Not Available",
-        description: "Payment processing is not currently configured. Please contact us directly.",
-        variant: "destructive",
-      });
-      setLocation('/');
-      return;
-    }
+    getStripe().then((stripe) => {
+      if (!stripe) {
+        toast({
+          title: "Payment Not Available",
+          description: "Payment processing is not currently configured. Please contact us directly.",
+          variant: "destructive",
+        });
+        setLocation('/');
+        return;
+      }
+      setStripeReady(Promise.resolve(stripe));
+    });
 
     // Get booking details from URL params
     const urlParams = new URLSearchParams(window.location.search);
@@ -199,8 +207,8 @@ export default function Checkout() {
 
             <Card>
               <CardContent className="p-8">
-                {stripePromise ? (
-                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                {stripeReady ? (
+                  <Elements stripe={stripeReady} options={{ clientSecret }}>
                     <CheckoutForm bookingId={bookingId} amount={amount} />
                   </Elements>
                 ) : (
