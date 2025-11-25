@@ -62,6 +62,28 @@ The application features a premium, professional design using a refined slate/bl
 
 # Recent Changes
 
+## November 25, 2025 - Stripe Integration Upgrade (Replit Connector)
+- **Migrated to Replit's Official Stripe Connector**: Upgraded from environment variable-based Stripe configuration to use `stripe-replit-sync` for automatic key management
+  - Created `server/stripeClient.ts` with Replit connection API integration
+  - Automatically fetches Stripe keys from Replit's secure connection system
+  - Supports both development and production environments
+  - Uses `getUncachableStripeClient()` for fresh API credentials on each request
+- **Managed Webhook System**: Implemented secure webhook handling with UUID-based routing
+  - Webhook endpoint: `/api/stripe/webhook/:uuid` (registered before express.json() middleware)
+  - Created `server/webhookHandlers.ts` for centralized webhook processing
+  - Automatic signature verification via stripe-replit-sync
+  - Handles `payment_intent.succeeded` events with full business logic (booking confirmation, email/SMS notifications, review requests)
+- **Dynamic Publishable Key Retrieval**: Frontend fetches Stripe publishable key from `/api/stripe/public-key` endpoint instead of environment variables
+  - Checkout page (`client/src/pages/checkout.tsx`) updated for dynamic key loading
+  - Removes need for `VITE_STRIPE_PUBLIC_KEY` environment variable
+- **Database Sync**: Stripe data automatically synced to PostgreSQL `stripe` schema
+  - Products, prices, customers, subscriptions, invoices, charges, payment intents tracked
+  - Schema managed by stripe-replit-sync (never modify `stripe` schema manually)
+- **Important Notes**:
+  - Webhook route must be registered BEFORE `express.json()` middleware to receive raw Buffer
+  - Never create tables in the `stripe` schema - stripe-replit-sync manages this automatically
+  - Use `getUncachableStripeClient()` for all Stripe API calls to ensure fresh credentials
+
 ## November 20, 2025 - Server-Side SEO Meta Tags & Crawler Optimization
 - **Fixed Blank Page Issue**: Added comprehensive server-side SEO meta tags to `client/index.html` to ensure crawlers and social media platforms can read site information before JavaScript loads
   - Added title, description, keywords, author, robots, and canonical URL tags
