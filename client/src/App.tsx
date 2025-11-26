@@ -10,6 +10,7 @@ import Services from "@/pages/services";
 import About from "@/pages/about";
 import FAQ from "@/pages/faq";
 import Quote from "@/pages/quote";
+import Booking from "@/pages/booking";
 import Checkout from "@/pages/checkout";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
@@ -38,6 +39,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/faq" component={FAQ} />
         <Route path="/quote" component={Quote} />
+        <Route path="/booking" component={Booking} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />

@@ -171,6 +171,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (skipPayment) {
         await storage.updateBookingStatus(booking.id, 'pending');
         
+        // Get quote data if this booking came from a quote
+        let quoteInfo = '';
+        if (booking.quoteId) {
+          const quote = await storage.getQuote(booking.quoteId);
+          if (quote) {
+            quoteInfo = `
+              <h4>Quote Details:</h4>
+              <ul>
+                <li><strong>Service Details:</strong> ${quote.serviceType}</li>
+                <li><strong>Property Size:</strong> ${quote.propertySize || 'Not specified'}</li>
+                <li><strong>Frequency:</strong> ${quote.frequency}</li>
+                ${quote.addOns && quote.addOns.length > 0 ? `<li><strong>Add-ons:</strong> ${quote.addOns.join(', ')}</li>` : ''}
+              </ul>
+            `;
+          }
+        }
+        
         // Send confirmation email to customer
         await sendEmail({
           to: booking.email,
@@ -187,6 +204,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <li><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</li>
               <li><strong>Estimated Amount:</strong> $${booking.amount}.00</li>
             </ul>
+            ${quoteInfo}
+            <p><strong>Important:</strong> This booking request must be approved by Self-Maid. We will contact you within 24 hours to confirm availability and discuss any final details. Booking is not guaranteed until we confirm with you directly.</p>
             <p><strong>Next Steps:</strong> We'll contact you within 24 hours to confirm your booking and discuss payment options.</p>
             <p>Questions? Call us at (334) 877-9513 or reply to this email.</p>
             <p>Thank you for choosing Self-Maid Cleaning!</p>
@@ -209,8 +228,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             <p><strong>Address:</strong> ${booking.address}, ${booking.city}, ${booking.state} ${booking.zipCode}</p>
             <p><strong>Amount:</strong> $${booking.amount}.00</p>
             <p><strong>Special Instructions:</strong> ${booking.specialInstructions || 'None'}</p>
-            <p><strong>Status:</strong> Pending - Customer chose to pay later</p>
-            <p><em>Action Required: Contact customer within 24 hours to confirm booking and collect payment.</em></p>
+            <p><strong>Status:</strong> Pending - Requires approval and payment</p>
+            <p><em>Action Required: Review and contact customer within 24 hours to confirm availability and collect payment.</em></p>
           `,
         });
         

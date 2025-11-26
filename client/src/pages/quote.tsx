@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Calculator, Phone, Check, Mail, Save } from 'lucide-react';
+import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen } from 'lucide-react';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
@@ -51,6 +53,7 @@ const addOns = [
 
 export default function Quote() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const [serviceType, setServiceType] = useState('');
   const [size, setSize] = useState('');
   const [frequency, setFrequency] = useState('onetime');
@@ -172,6 +175,29 @@ export default function Quote() {
     }
     
     saveQuoteMutation.mutate();
+  };
+
+  const handleBookThisQuote = () => {
+    if (!customerName || !customerEmail) {
+      toast({
+        title: "Missing Information",
+        description: "Please provide your name and email to book this quote.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Build booking URL with quote data
+    const params = new URLSearchParams({
+      quoteId: Math.random().toString(36).substr(2, 9), // Temporary quote ID
+      serviceType: selectedService?.label || '',
+      estimatedPrice: quote.toString(),
+      quoteName: customerName,
+      quoteEmail: customerEmail,
+      quotePhone: customerPhone,
+    });
+
+    setLocation(`/booking?${params.toString()}`);
   };
 
   const quote = calculateQuote();
@@ -428,20 +454,29 @@ export default function Quote() {
                         </div>
 
                         <div className="pt-6 border-t space-y-3">
+                          <Alert className="bg-amber-50 border-amber-200">
+                            <AlertTriangle className="h-4 w-4 text-amber-600" />
+                            <AlertDescription className="text-amber-800 text-xs space-y-1">
+                              <p><strong>Important:</strong> Each quote must be approved by Self-Maid. You will be contacted as soon as your booking request is received. Booking is not guaranteed by this website.</p>
+                            </AlertDescription>
+                          </Alert>
+
                           <p className="text-sm text-muted-foreground text-center">
                             This is an estimate. Final price may vary based on specific conditions.
                           </p>
                           
                           {!showSaveForm ? (
                             <>
-                              <Button
-                                onClick={() => setShowSaveForm(true)}
-                                className="w-full bg-green-600 hover:bg-green-700 text-white"
-                                data-testid="show-save-form-button"
-                              >
-                                <Save className="w-4 h-4 mr-2" />
-                                Save My Quote
-                              </Button>
+                              <div className="space-y-3">
+                                <Button
+                                  onClick={() => setShowSaveForm(true)}
+                                  className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                  data-testid="show-save-form-button"
+                                >
+                                  <Save className="w-4 h-4 mr-2" />
+                                  Save My Quote
+                                </Button>
+                              </div>
                               <a 
                                 href="tel:334-877-9513"
                                 className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center"
@@ -450,6 +485,14 @@ export default function Quote() {
                                 <Phone className="w-4 h-4 mr-2" />
                                 Call to Book: (334) 877-9513
                               </a>
+                              <Button
+                                onClick={handleBookThisQuote}
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                data-testid="button-book-this-quote"
+                              >
+                                <BookOpen className="w-4 h-4 mr-2" />
+                                Book This Quote
+                              </Button>
                               <a 
                                 href={`/#contact?service=${encodeURIComponent(selectedService?.label || '')}&quote=${quote}`}
                                 className="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors flex items-center justify-center"
