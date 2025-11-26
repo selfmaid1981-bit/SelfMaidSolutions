@@ -44,6 +44,7 @@ export const bookings = pgTable("bookings", {
   amount: integer("amount").notNull(), // in whole dollars
   status: text("status").notNull().default("pending"), // pending, confirmed, completed, cancelled
   paymentIntentId: text("payment_intent_id"),
+  quoteId: varchar("quote_id"), // Link to quote if booking from quote
   assignedCleanerId: varchar("assigned_cleaner_id"),
   customerId: varchar("customer_id"),
   recurringBookingId: varchar("recurring_booking_id"),

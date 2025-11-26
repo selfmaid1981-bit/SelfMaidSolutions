@@ -114,6 +114,11 @@ export class DatabaseStorage implements IStorage {
     return booking || undefined;
   }
 
+  async getQuote(id: string): Promise<Quote | undefined> {
+    const [quote] = await db.select().from(quotes).where(eq(quotes.id, id));
+    return quote || undefined;
+  }
+
   async createQuote(insertQuote: InsertQuote): Promise<Quote> {
     const [quote] = await db
       .insert(quotes)
