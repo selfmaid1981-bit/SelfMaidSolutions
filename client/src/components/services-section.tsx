@@ -21,7 +21,7 @@ const services: Service[] = [
     title: 'Residential Cleaning',
     description: 'Keep your home spotless with our regular or one-time cleaning services.',
     features: ['Weekly, bi-weekly, monthly', 'Deep cleaning available', 'Eco-friendly products'],
-    price: 'From $120',
+    price: 'Starting at $80',
     bgGradient: 'from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950'
   },
   {
@@ -30,7 +30,7 @@ const services: Service[] = [
     title: 'Commercial & Office',
     description: 'Professional office cleaning to maintain a productive work environment.',
     features: ['Daily, weekly cleaning', 'Restroom sanitization', 'Floor care & vacuuming'],
-    price: 'From $150',
+    price: 'Starting at $120',
     bgGradient: 'from-slate-50 to-gray-50 dark:from-slate-900 dark:to-gray-900'
   },
   {
@@ -39,7 +39,7 @@ const services: Service[] = [
     title: 'Airbnb Cleaning',
     description: 'Fast turnaround cleaning between guests to maximize your bookings.',
     features: ['Same-day service', 'Linen service available', 'Inventory restocking'],
-    price: 'From $95',
+    price: 'Starting at $65',
     bgGradient: 'from-sky-50 to-blue-50 dark:from-sky-950 dark:to-blue-950'
   },
   {
@@ -48,7 +48,7 @@ const services: Service[] = [
     title: 'Move In/Out',
     description: 'Deep cleaning for moving day to get your deposit back or welcome home.',
     features: ['Deep clean all areas', 'Inside appliances', 'Deposit guarantee'],
-    price: 'From $180',
+    price: 'Starting at $150',
     bgGradient: 'from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950'
   },
   {
@@ -66,7 +66,7 @@ const services: Service[] = [
     title: 'Apartment Turnover',
     description: 'Professional apartment make-ready for property managers.',
     features: ['Fast turnaround', 'Volume discounts', 'Sanitization included'],
-    price: 'From $108',
+    price: 'Starting at $108',
     bgGradient: 'from-orange-50 to-amber-50 dark:from-orange-950 dark:to-amber-950'
   }
 ];
