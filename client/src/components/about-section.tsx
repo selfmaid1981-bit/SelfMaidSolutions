@@ -1,6 +1,6 @@
 import { Shield, UserCheck, Leaf, Clock, Award, Users } from 'lucide-react';
 import bathroomImage from '@assets/stock_images/clean_modern_bathroo_821537ee.jpg';
-import officeImage from '@assets/stock_images/professional_commerc_ae6b0576.jpg';
+import officeImage from '@assets/photo-1507089947368-19c1da9775ae_1764233361201.avif';
 
 export function AboutSection() {
   const features = [
