@@ -27,7 +27,7 @@ export function AboutSection() {
     {
       icon: Award,
       title: '16 Years Experience',
-      description: 'Serving Montgomery and Prattville with proven expertise'
+      description: 'Serving Montgomery, Prattville, Selma, Homewood, and Clanton with proven expertise'
     },
     {
       icon: Users,

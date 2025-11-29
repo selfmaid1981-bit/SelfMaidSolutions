@@ -55,7 +55,7 @@ const faqs = [
   },
   {
     question: "What areas do you service in Alabama?",
-    answer: "We proudly serve communities throughout Alabama. Contact us to confirm service availability in your specific area - we're always expanding our service zones to help more customers experience our superhero-level cleaning!"
+    answer: "We proudly serve Montgomery, Prattville, Selma, Homewood, Clanton, Millbrook, Wetumpka, Pike Road, and surrounding communities throughout central Alabama. Contact us to confirm service availability in your specific area - we're always expanding our service zones to help more customers experience our superhero-level cleaning!"
   },
   {
     question: "How long does a typical cleaning session take?",

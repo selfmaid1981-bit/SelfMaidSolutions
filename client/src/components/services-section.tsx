@@ -89,7 +89,7 @@ export function ServicesSection() {
               Our Cleaning Services
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Professional cleaning solutions tailored to your needs across Montgomery, Prattville, and Selma
+              Professional cleaning solutions tailored to your needs across Montgomery, Prattville, Selma, Homewood, and Clanton
             </p>
           </div>
           

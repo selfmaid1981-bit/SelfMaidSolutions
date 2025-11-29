@@ -75,11 +75,11 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="Professional Cleaning Services Montgomery & Prattville AL | Self-Maid Cleaning"
-        description="Top-rated cleaning services in Montgomery and Prattville, Alabama. Residential, commercial, Airbnb, move-in/out cleaning. 16 years experience. Call (334) 877-9513 for a free quote!"
-        keywords="cleaning services Montgomery AL, cleaning services Prattville AL, house cleaning Montgomery, maid service Prattville, professional cleaners Montgomery Alabama, residential cleaning Montgomery, commercial cleaning Prattville, Airbnb cleaning Alabama, move out cleaning Montgomery, move in cleaning Prattville, deep cleaning services Montgomery, apartment cleaning Prattville, office cleaning Montgomery AL, cleaning company near me Montgomery, best cleaning service Prattville, affordable house cleaning Montgomery, same day cleaning service Alabama, eco friendly cleaning Montgomery, recurring cleaning service Prattville, one time deep clean Montgomery, spring cleaning Prattville AL, cleaning lady Montgomery, housekeeping services Prattville, Montgomery cleaning company, Prattville maid service, Selma cleaning services, Millbrook house cleaning, Wetumpka cleaning service"
-        ogTitle="Self-Maid Cleaning Solutions - Montgomery & Prattville's Trusted Cleaning Service"
-        ogDescription="Professional cleaning services serving Montgomery and Prattville, AL. From homes to offices, we make everything spotless with 16 years of experience."
+        title="Professional Cleaning Services Montgomery, Prattville, Selma & Central Alabama | Self-Maid"
+        description="Top-rated cleaning services in Montgomery, Prattville, Selma, Homewood, and Clanton, Alabama. Residential, commercial, Airbnb, move-in/out cleaning. 16 years experience. Call (334) 877-9513 for a free quote!"
+        keywords="cleaning services Montgomery AL, cleaning services Prattville AL, cleaning services Selma Alabama, house cleaning Montgomery, maid service Prattville, professional cleaners Montgomery Alabama, residential cleaning Montgomery, commercial cleaning Prattville, Airbnb cleaning Alabama, move out cleaning Montgomery, move in cleaning Prattville, deep cleaning services Montgomery, apartment cleaning Prattville, office cleaning Montgomery AL, cleaning company near me Montgomery, best cleaning service Prattville, affordable house cleaning Montgomery, same day cleaning service Alabama, eco friendly cleaning Montgomery, recurring cleaning service Prattville, one time deep clean Montgomery, spring cleaning Prattville AL, cleaning lady Montgomery, housekeeping services Prattville, Montgomery cleaning company, Prattville maid service, Selma cleaning services, Homewood cleaning Alabama, Clanton cleaning service, Millbrook house cleaning, Wetumpka cleaning service"
+        ogTitle="Self-Maid Cleaning Solutions - Central Alabama's Trusted Cleaning Service"
+        ogDescription="Professional cleaning services serving Montgomery, Prattville, Selma, Homewood, and Clanton, AL. From homes to offices, we make everything spotless with 16 years of experience."
         structuredData={structuredData}
       />
       

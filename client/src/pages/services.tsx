@@ -324,7 +324,7 @@ export default function Services() {
                     Can you accommodate same-day or emergency cleaning requests?
                   </h3>
                   <p className="text-muted-foreground">
-                    Yes! We understand that cleaning emergencies happen. We offer same-day cleaning services in Montgomery and Prattville, subject to availability. Contact us as early as possible for the best chance of accommodating your request. Our Airbnb turnover service is specifically designed for quick turnarounds.
+                    Yes! We understand that cleaning emergencies happen. We offer same-day cleaning services throughout our service areas including Montgomery, Prattville, Selma, Homewood, and Clanton, subject to availability. Contact us as early as possible for the best chance of accommodating your request. Our Airbnb turnover service is specifically designed for quick turnarounds.
                   </p>
                 </CardContent>
               </Card>
@@ -347,10 +347,10 @@ export default function Services() {
         <section className="py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6 text-center">
-              Serving Montgomery & Prattville, Alabama
+              Serving Central Alabama Communities
             </h2>
             <p className="text-muted-foreground text-lg text-center max-w-3xl mx-auto mb-12">
-              With 16 years of experience serving the greater Montgomery area, we understand the unique cleaning needs of Alabama homes and businesses.
+              With 16 years of experience serving Montgomery, Prattville, Selma, Homewood, Clanton, and surrounding areas, we understand the unique cleaning needs of Alabama homes and businesses.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -381,7 +381,7 @@ export default function Services() {
 
             <div className="mt-12 text-center">
               <p className="text-muted-foreground text-lg mb-6">
-                <strong>Also serving:</strong> Millbrook, Wetumpka, Pike Road, and surrounding communities in Autauga and Montgomery counties.
+                <strong>Also serving:</strong> Millbrook, Wetumpka, Pike Road, and all surrounding communities in Autauga, Montgomery, and St. Clair counties.
               </p>
               <a 
                 href="/quote" 
