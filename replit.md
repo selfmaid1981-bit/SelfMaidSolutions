@@ -1,6 +1,6 @@
 # Overview
 
-Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service operating in Alabama. It provides a comprehensive business website featuring service showcases, an instant quote calculator, online booking with flexible payment options, and secure payment processing. The application aims to attract customers and streamline operations in the Montgomery, Prattville, and Selma areas, serving both marketing and operational needs for the cleaning business. Key capabilities include lead capture, marketing automation, and customer relationship management through an integrated admin dashboard.
+Self-Maid Cleaning Solutions is a full-stack web application for a professional cleaning service operating in Alabama. It provides a comprehensive business website featuring service showcases, an instant quote calculator, online booking with flexible payment options, and secure payment processing. The application aims to attract customers and streamline operations in the Montgomery, Prattville, Selma, Homewood, and Clanton areas, serving both marketing and operational needs for the cleaning business. Key capabilities include lead capture, marketing automation, and customer relationship management through an integrated admin dashboard.
 
 # User Preferences
 
@@ -61,6 +61,21 @@ The application features a premium, professional design using a refined slate/bl
 - **Payment**: Stripe Node.js SDK.
 
 # Recent Changes
+
+## December 1, 2025 - Comprehensive SEO & AI Crawler Optimization
+- **Service Areas Expanded**: Added Clanton, Selma, and Homewood to all service area references across the site
+- **AI Crawler Optimization**: Added support for AI search engines and LLM crawlers
+  - robots.txt updated with GPTBot, ChatGPT-User, CCBot, Google-Extended, PerplexityBot, ClaudeBot permissions
+  - Comprehensive JSON-LD structured data for AI understanding
+- **Enhanced Structured Data**: Complete schema.org markup in index.html and home.tsx
+  - LocalBusiness schema with full service catalog, reviews, and areaServed
+  - FAQPage schema with common questions and answers
+  - WebSite and WebPage schemas with publisher and search action
+  - GeoCoordinates for local SEO
+- **Directory Backlinks**: Footer now includes links to Google Maps, Yelp, BBB, Angi, Thumbtack, HomeAdvisor with proper rel attributes
+- **Google Maps Integration**: Embedded Google Maps iframe in contact section for local SEO and user convenience
+- **Sitemap & Robots**: Updated sitemap.xml with correct domain and all pages, robots.txt with AI crawler permissions
+- **Meta Tags Cleanup**: Removed nonstandard meta tags, kept only recognized SEO-relevant tags
 
 ## November 25, 2025 - Stripe Integration Upgrade (Replit Connector)
 - **Migrated to Replit's Official Stripe Connector**: Upgraded from environment variable-based Stripe configuration to use `stripe-replit-sync` for automatic key management
