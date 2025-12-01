@@ -1,7 +1,59 @@
+# Robots.txt for Self-Maid Cleaning Solutions
+# https://selfmaidllc.com
+
 User-agent: *
 Allow: /
 Disallow: /checkout
 Disallow: /api/
+Disallow: /admin/
 
-# Sitemap
-Sitemap: https://self-maid-cleaning.com/sitemap.xml
+# Major search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# AI/LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://selfmaidllc.com/sitemap.xml
+
+# Host directive
+Host: https://selfmaidllc.com

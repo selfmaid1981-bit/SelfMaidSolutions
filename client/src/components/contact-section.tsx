@@ -94,7 +94,7 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: Phone,
-      value: '334-877-9513',
+      value: '(334) 877-9513',
       href: 'tel:334-877-9513'
     },
     {
@@ -104,7 +104,8 @@ export function ContactSection() {
     },
     {
       icon: MapPin,
-      value: '123 Sparkle St, Clean City, USA'
+      value: 'Montgomery & Prattville, AL',
+      href: 'https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL'
     }
   ];
 
@@ -280,6 +281,8 @@ export function ContactSection() {
                         {info.href ? (
                           <a 
                             href={info.href} 
+                            target={info.href.startsWith('http') ? '_blank' : undefined}
+                            rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                             className="text-white hover:text-blue-300 font-medium transition-colors"
                           >
                             {info.value}
@@ -291,6 +294,28 @@ export function ContactSection() {
                     </div>
                   );
                 })}
+              </div>
+              
+              {/* Google Maps Embed */}
+              <div className="mt-6 pt-6 border-t border-white/20">
+                <h4 className="text-sm font-semibold text-white/80 mb-3">Service Areas</h4>
+                <div className="rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    title="Self-Maid Cleaning Solutions Service Areas - Montgomery, Prattville, Selma, Alabama"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d426458.8894091447!2d-86.62654674999999!3d32.3617899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888e8194b0d481f9%3A0x8e1b511d354285ff!2sMontgomery%2C%20AL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-lg"
+                    data-testid="google-maps-embed"
+                  />
+                </div>
+                <p className="text-xs text-white/60 mt-2 text-center">
+                  Serving Montgomery, Prattville, Selma, Homewood, Clanton & surrounding areas
+                </p>
               </div>
             </div>
           </div>
