@@ -3,7 +3,7 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Shield, Users, Leaf, Clock, Star, Phone } from 'lucide-react';
+import { Shield, Users, Leaf, Clock, Star, Phone, Heart, Award, CheckCircle } from 'lucide-react';
 import aboutImage from '@assets/Copilot_20250927_160848_1759309660777.png';
 import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
 import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759308549711.png';
@@ -38,13 +38,22 @@ const stats = [
   { number: '100%', label: 'Satisfaction Guarantee' }
 ];
 
+const certifications = [
+  'Fully Licensed & Insured',
+  'Bonded for Your Protection',
+  'All Staff Background Checked',
+  'Ongoing Professional Training',
+  'Eco-Friendly Certified Products',
+  'COVID-19 Safety Protocols'
+];
+
 export default function About() {
   return (
     <>
       <SEOHead
-        title="About Self-Maid Cleaning | 16 Years Serving Montgomery & Prattville AL"
-        description="Family-owned cleaning company serving Montgomery and Prattville, AL for 16 years. Fully insured, background-checked team. Eco-friendly products. 500+ happy customers."
-        keywords="cleaning company Montgomery AL, Prattville cleaning service, insured cleaners Alabama, background checked cleaners, eco-friendly cleaning Montgomery, family owned cleaning business, trusted cleaners Prattville AL, experienced cleaning company Montgomery, professional cleaning team Alabama, licensed and insured cleaners Montgomery, bonded cleaning service Prattville, local cleaning company Montgomery AL, established cleaning business Alabama, reliable cleaners Prattville, Montgomery area cleaning service, best cleaning company Montgomery, top rated cleaners Prattville AL, 5 star cleaning service Montgomery"
+        title="About Self-Maid Cleaning | Family-Owned Since 2009 | Montgomery, Prattville, Selma AL"
+        description="Family-owned cleaning company serving Montgomery, Prattville, Selma, Homewood, and Clanton, AL for 16 years. Fully insured, background-checked team. Eco-friendly products. 500+ happy customers."
+        keywords="cleaning company Montgomery AL, Prattville cleaning service, Selma cleaning company, Homewood cleaners Alabama, Clanton cleaning service, insured cleaners Alabama, background checked cleaners, eco-friendly cleaning Montgomery, family owned cleaning business, trusted cleaners Prattville AL, experienced cleaning company Montgomery, professional cleaning team Alabama, licensed and insured cleaners Montgomery, bonded cleaning service Prattville, local cleaning company Montgomery AL, established cleaning business Alabama, reliable cleaners Prattville, Montgomery area cleaning service, best cleaning company Montgomery, top rated cleaners Prattville AL, 5 star cleaning service Montgomery"
       />
       
       <div className="min-h-screen bg-background">
@@ -53,12 +62,99 @@ export default function About() {
         {/* Hero Section */}
         <section className="bg-primary/5 py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Heart className="w-4 h-4" />
+              Family-Owned Since 2009
+            </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               About Self-Maid Cleaning
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Your trusted cleaning partner in Alabama, dedicated to making your world shine with superhero-level service.
             </p>
+          </div>
+        </section>
+
+        {/* Founder Story Section */}
+        <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 text-primary font-medium mb-4">
+                  <Star className="w-5 h-5 fill-primary" />
+                  Our Story
+                </div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
+                  From Humble Beginnings to Alabama's Trusted Cleaners
+                </h2>
+                <div className="space-y-4 text-muted-foreground text-lg">
+                  <p>
+                    Self-Maid Cleaning Solutions started in 2009 with a simple mission: to provide honest, reliable cleaning services that busy families and business owners could truly count on.
+                  </p>
+                  <p>
+                    What began as a one-person operation has grown into a trusted team serving hundreds of homes and businesses across Montgomery, Prattville, Selma, Homewood, Clanton, and surrounding Alabama communities.
+                  </p>
+                  <p>
+                    As a <strong>family-owned business</strong>, we understand the trust you place in us when you invite us into your home. That's why every team member is personally vetted, background-checked, and trained to our high standards.
+                  </p>
+                  <p>
+                    After 16 years, our commitment remains the same: treat every home like it's our own, and every customer like family.
+                  </p>
+                </div>
+              </div>
+              <div className="relative">
+                <Card className="bg-white shadow-xl overflow-hidden">
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                        <Award className="w-8 h-8 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground">Our Values</h3>
+                        <p className="text-muted-foreground">What drives us every day</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-foreground"><strong>Integrity</strong> — Honest pricing, no hidden fees</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-foreground"><strong>Excellence</strong> — Meticulous attention to detail</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-foreground"><strong>Trust</strong> — Background-checked, insured team</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-foreground"><strong>Community</strong> — Proudly serving Central Alabama</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span className="text-foreground"><strong>Reliability</strong> — On time, every time</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Certifications & Trust Badges */}
+        <section className="py-12 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 className="text-center text-2xl font-bold text-foreground mb-8">Why You Can Trust Us In Your Home</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {certifications.map((cert, index) => (
+                <div key={index} className="bg-white rounded-xl p-4 text-center shadow-sm hover:shadow-md transition-shadow" data-testid={`certification-${index}`}>
+                  <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                  <p className="text-sm font-medium text-foreground">{cert}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

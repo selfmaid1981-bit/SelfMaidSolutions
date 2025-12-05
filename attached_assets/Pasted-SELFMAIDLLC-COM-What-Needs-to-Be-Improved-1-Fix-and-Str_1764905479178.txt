@@ -1,0 +1,228 @@
+SELFMAIDLLC.COM — What Needs to Be Improved
+1. Fix and Strengthen the Homepage (Most Important)
+
+Your homepage must answer three questions in 5 seconds:
+
+What do you do?
+
+Who do you serve?
+
+Why should I choose you?
+
+Add or improve:
+
+Clear headline:
+“Premium Home & Commercial Cleaning Services in [Your City] — Reliable, Insured, and 5-Star Rated.”
+
+High-quality photos (before/after, real cleaners, team images)
+
+Strong call-to-action (CTA):
+“Book a Cleaning” or “Get an Instant Quote”
+
+Display your service areas clearly.
+
+2. Add Trust & Credibility (Critical for Cleaning Businesses)
+
+Cleaning customers care about safety and quality.
+
+Add:
+
+Real Google reviews (embed your review widget)
+
+Before/after photos
+
+Staff photos
+
+“Bonded, Licensed, Insured” badge (if applicable)
+
+Satisfaction guarantee badge
+
+Detailed “Our Cleaning Process” section
+
+Bonus:
+
+Client video testimonials → massive conversion boost.
+
+3. Improve SEO & Local Ranking
+
+Right now your site likely needs stronger local optimization.
+
+Add SEO pages:
+
+House cleaning
+
+Deep cleaning
+
+Move-in / move-out cleaning
+
+Airbnb / STR cleaning
+
+Office cleaning
+
+Post-construction cleaning
+
+Service areas (one page per city)
+
+Include:
+
+Keyword-rich titles
+
+LocalBusiness schema markup
+
+City/ZIP references
+
+FAQs with AI-friendly natural language
+
+Example SEO phrase:
+
+“Professional home cleaning in Savannah, GA — Self-Maid LLC.”
+
+4. Improve Booking & Lead Capture
+
+Most cleaning customers book quickly — don’t make them think.
+
+Add:
+
+Instant quote form
+
+“Text us” button
+
+Sticky mobile CTA
+
+Short lead form (Name, Address, Email, Phone)
+
+Online booking system (I can help choose one if needed)
+
+If your competitors allow instant booking, you must match or beat that.
+
+5. Improve Your About Page
+
+People want to know:
+
+Who is behind the company?
+
+How long have you been doing it?
+
+Why should they trust you in their home?
+
+Add:
+
+Founder story
+
+Team photos
+
+Mission + values (“family-owned”, “women-owned”, etc.)
+
+Background checks, training, certifications
+
+This makes a massive difference for home services.
+
+6. Improve Service Pages
+
+Each service page should include:
+
+What’s included
+
+What’s NOT included
+
+How long it takes
+
+Pricing or price ranges
+
+Photos
+
+FAQs
+
+CTA buttons
+
+AI systems prefer structured, clear, detailed service descriptions.
+
+7. Improve Mobile Experience
+
+Check:
+
+Are CTAs large enough?
+
+Is the booking form simple?
+
+Do photos load fast?
+
+Does text wrap properly?
+
+Most customers will visit on mobile.
+
+8. Add Blog / Resource Content
+
+AI and Google use long-form content for authority ranking.
+
+Write blog posts such as:
+
+“How often should you deep clean your home?”
+
+“Move-out cleaning checklist for renters”
+
+“How to prepare your home for professional cleaners”
+
+“Benefits of hiring a recurring cleaning service”
+
+This is how you show up in AI Overviews & ChatGPT responses.
+
+9. Improve Speed & Technical Health
+
+Cleaning sites must load fast or users bounce.
+
+Fix:
+
+Compress images
+
+Remove unused scripts
+
+Add caching
+
+Optimize hosting
+
+I can run a speed test if you want.
+
+10. Add Social Proof Across Pages
+
+Examples:
+
+“Trusted by 200+ homes in Georgia”
+
+“5-star rated on Google & Facebook”
+
+“Serving Savannah, Richmond Hill, Hinesville, and surrounding areas”
+
+Sprinkle trust signals everywhere.
+
+11. Add Local Schema & Business Data
+
+Schema needed:
+
+LocalBusiness
+
+Service
+
+ReviewRating
+
+FAQ
+
+ServiceArea
+
+This helps AI recommend you.
+
+12. Add Lead Converters
+
+Add:
+
+Exit popup (“Get 10% off your first cleaning”)
+
+Chat widget
+
+Email capture form
+
+Social proof floating bar
+
+Referral link program
+
+More ways for customers to say yes.
