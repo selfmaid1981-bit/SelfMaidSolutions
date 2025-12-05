@@ -2,8 +2,9 @@ import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { QuickBookingForm } from '@/components/quick-booking-form';
+import { SocialProofBar } from '@/components/social-proof-bar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, Home, ArrowRightLeft, Sparkles } from 'lucide-react';
+import { Check, X, Home, ArrowRightLeft, Sparkles, Star, Shield, Clock, AlertCircle } from 'lucide-react';
 import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
 import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
 import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_1757730283479.png';
@@ -16,7 +17,7 @@ const serviceDetails = [
   {
     id: 'residential',
     title: 'Residential Cleaning',
-    description: 'Complete home cleaning services tailored to your schedule and preferences. Serving Montgomery and Prattville homes with professional care.',
+    description: 'Complete home cleaning services tailored to your schedule and preferences. Serving Montgomery, Prattville, Selma, Homewood, and Clanton homes with professional care.',
     pricing: 'Starting at $80',
     features: [
       'Living rooms and bedrooms',
@@ -27,7 +28,15 @@ const serviceDetails = [
       'Trash removal',
       'Weekly, bi-weekly, or monthly service',
       'One-time deep cleaning available'
-    ]
+    ],
+    notIncluded: [
+      'Exterior window cleaning',
+      'Garage or outdoor areas',
+      'Moving heavy furniture',
+      'Biohazard or mold remediation',
+      'Organizing or decluttering (can add on)'
+    ],
+    idealFor: 'Busy families, working professionals, and anyone who wants to come home to a clean space without lifting a finger.'
   },
   {
     id: 'deep',
@@ -43,12 +52,20 @@ const serviceDetails = [
       'EXTRAS: Dust blinds & window treatments, wipe light switches & outlets, clean interior windows, remove cobwebs',
       'All rooms receive thorough dusting, vacuuming, and sanitization',
       'Typical time: 4-8 hours depending on home size'
-    ]
+    ],
+    notIncluded: [
+      'Exterior windows and outdoor areas',
+      'Professional carpet steam cleaning (can add on)',
+      'Mold remediation or biohazard cleanup',
+      'Hoarding situations',
+      'Garage cleaning (can add on)'
+    ],
+    idealFor: 'First-time customers, seasonal deep cleans, post-party or event cleanup, and homes that haven\'t been professionally cleaned in 6+ months.'
   },
   {
     id: 'commercial',
     title: 'Commercial & Office Cleaning',
-    description: 'Professional cleaning services to maintain a clean and productive workplace in Montgomery and Prattville business districts.',
+    description: 'Professional cleaning services to maintain a clean and productive workplace in Montgomery, Prattville, Selma, Homewood, and Clanton business districts.',
     pricing: 'Starting at $120',
     features: [
       'Office spaces and workstations',
@@ -59,12 +76,20 @@ const serviceDetails = [
       'Floor care and maintenance',
       'Dusting and surface cleaning',
       'Trash and recycling service'
-    ]
+    ],
+    notIncluded: [
+      'Industrial equipment cleaning',
+      'Medical-grade sterilization',
+      'Warehouse or factory floors',
+      'IT equipment interior cleaning',
+      'High-rise window cleaning'
+    ],
+    idealFor: 'Small to medium offices, retail stores, medical/dental offices, real estate offices, and professional service businesses.'
   },
   {
     id: 'airbnb',
     title: 'Airbnb Cleaning',
-    description: 'Fast and thorough turnover cleaning to keep your Montgomery or Prattville rental property booking-ready with same-day service.',
+    description: 'Fast and thorough turnover cleaning to keep your Montgomery, Prattville, Selma, or Clanton rental property booking-ready with same-day service.',
     pricing: 'Starting at $65',
     features: [
       'Same-day turnaround service',
@@ -75,7 +100,15 @@ const serviceDetails = [
       'Quality check and photos',
       'Flexible scheduling',
       'Emergency cleaning available'
-    ]
+    ],
+    notIncluded: [
+      'Deep cleaning tasks (separate service)',
+      'Laundry pickup/delivery off-site',
+      'Stocking groceries or personal items',
+      'Major property repairs',
+      'Pet care or pet cleaning'
+    ],
+    idealFor: 'Airbnb hosts, VRBO owners, vacation rental managers, and anyone with short-term rental properties.'
   },
   {
     id: 'moveout',
@@ -91,12 +124,20 @@ const serviceDetails = [
       'Light fixture cleaning',
       'Carpet cleaning available',
       'Deposit back guarantee'
-    ]
+    ],
+    notIncluded: [
+      'Moving or packing belongings',
+      'Junk removal or hauling',
+      'Professional carpet replacement',
+      'Wall painting or repairs',
+      'Pest control services'
+    ],
+    idealFor: 'Renters moving out, new homeowners, landlords preparing units, and anyone transitioning between properties.'
   },
   {
     id: 'apartment',
     title: 'Apartment Turnover',
-    description: 'Professional turnover cleaning for property managers and landlords in Montgomery and Prattville.',
+    description: 'Professional turnover cleaning for property managers and landlords in Montgomery, Prattville, Selma, Homewood, and Clanton.',
     pricing: 'Starting at $108',
     features: [
       'Same-day or next-day service',
@@ -107,7 +148,15 @@ const serviceDetails = [
       'Carpet spot cleaning',
       'Move-in ready photos',
       'Volume discounts for property managers'
-    ]
+    ],
+    notIncluded: [
+      'Major renovation cleanup',
+      'Full carpet replacement',
+      'Paint touch-ups or repairs',
+      'HVAC duct cleaning',
+      'Junk removal or haul away'
+    ],
+    idealFor: 'Property managers, landlords, real estate investors, and housing authorities.'
   },
   {
     id: 'dorm',
@@ -123,7 +172,15 @@ const serviceDetails = [
       'Bathroom deep clean',
       'Trash removal',
       'End-of-semester specials'
-    ]
+    ],
+    notIncluded: [
+      'Personal belongings packing',
+      'Moving services',
+      'Storage or shipping',
+      'Furniture repairs',
+      'Exterior building cleaning'
+    ],
+    idealFor: 'Universities, student housing, parents helping students move, and campus housing managers.'
   }
 ];
 
@@ -131,9 +188,9 @@ export default function Services() {
   return (
     <>
       <SEOHead
-        title="Cleaning Services Montgomery & Prattville AL | Pricing & Details | Self-Maid"
-        description="Professional cleaning services in Montgomery and Prattville, AL. Transparent pricing for residential, commercial, Airbnb, move-in/out cleaning. Free quotes. Call (334) 877-9513."
-        keywords="cleaning services Montgomery AL, Prattville cleaning prices, residential cleaning cost Montgomery, commercial cleaning Prattville, Airbnb cleaning rates Alabama, move out cleaning Montgomery pricing, move in cleaning cost Prattville, deep cleaning prices Montgomery, apartment cleaning rates Prattville AL, office cleaning cost Montgomery, house cleaning prices Alabama, maid service rates Montgomery, cleaning service cost Prattville, affordable cleaning Montgomery AL, same day cleaning rates Prattville, recurring cleaning discounts Montgomery, weekly cleaning service Prattville, bi-weekly cleaning Montgomery, monthly cleaning rates Alabama, vacation rental cleaning Montgomery, short term rental cleaning Prattville, student dorm cleaning Montgomery AL, post construction cleaning Prattville, spring cleaning rates Montgomery, apartment turnover cleaning Alabama"
+        title="Cleaning Services Montgomery, Prattville, Selma, Homewood & Clanton AL | Self-Maid"
+        description="Professional cleaning services in Montgomery, Prattville, Selma, Homewood, and Clanton, AL. Transparent pricing for residential, commercial, Airbnb, move-in/out cleaning. Free quotes. Call (334) 877-9513."
+        keywords="cleaning services Montgomery AL, Prattville cleaning prices, Selma cleaning company, Homewood house cleaning, Clanton cleaning service, residential cleaning cost Montgomery, commercial cleaning Prattville, Airbnb cleaning rates Alabama, move out cleaning Montgomery pricing, move in cleaning cost Prattville, deep cleaning prices Montgomery, apartment cleaning rates Prattville AL, office cleaning cost Montgomery, house cleaning prices Alabama, maid service rates Montgomery, cleaning service cost Prattville, affordable cleaning Montgomery AL, same day cleaning rates Prattville, recurring cleaning discounts Montgomery, weekly cleaning service Prattville, bi-weekly cleaning Montgomery, monthly cleaning rates Alabama, vacation rental cleaning Montgomery, short term rental cleaning Prattville, student dorm cleaning Montgomery AL, post construction cleaning Prattville, spring cleaning rates Montgomery, apartment turnover cleaning Alabama, Selma maid service, Homewood office cleaning, Clanton residential cleaning"
       />
       
       <div className="min-h-screen bg-background">
@@ -167,6 +224,9 @@ export default function Services() {
           </div>
         </section>
 
+        {/* Social Proof Bar */}
+        <SocialProofBar variant="compact" />
+
         {/* Quick Booking Form */}
         <section className="py-8 lg:py-12 bg-muted/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,17 +244,51 @@ export default function Services() {
                     <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                       <div className="p-6 lg:p-8">
                         <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
-                        <p className="text-muted-foreground text-lg mb-6">{service.description}</p>
-                        <div className="text-2xl font-bold text-primary mb-6">{service.pricing}</div>
+                        <p className="text-muted-foreground text-lg mb-4">{service.description}</p>
+                        <div className="text-2xl font-bold text-primary mb-4">{service.pricing}</div>
                         
-                        <div className="space-y-3">
-                          <h3 className="text-lg font-semibold text-foreground mb-4">What's Included:</h3>
-                          {service.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-start">
-                              <Check className="w-5 h-5 text-secondary mr-3 mt-0.5 flex-shrink-0" />
-                              <span className="text-muted-foreground">{feature}</span>
+                        {/* Ideal For callout */}
+                        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+                          <div className="flex items-start gap-3">
+                            <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            <div>
+                              <span className="font-semibold text-foreground">Ideal for: </span>
+                              <span className="text-muted-foreground">{service.idealFor}</span>
                             </div>
-                          ))}
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* What's Included */}
+                          <div className="space-y-3">
+                            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                              <Check className="w-5 h-5 text-green-500" />
+                              What's Included
+                            </h3>
+                            {service.features.map((feature, featureIndex) => (
+                              <div key={featureIndex} className="flex items-start">
+                                <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                                <span className="text-muted-foreground text-sm">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          {/* What's NOT Included */}
+                          <div className="space-y-3">
+                            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                              <AlertCircle className="w-5 h-5 text-amber-500" />
+                              Not Included
+                            </h3>
+                            {service.notIncluded.map((item, itemIndex) => (
+                              <div key={itemIndex} className="flex items-start">
+                                <X className="w-4 h-4 text-amber-500 mr-2 mt-1 flex-shrink-0" />
+                                <span className="text-muted-foreground text-sm">{item}</span>
+                              </div>
+                            ))}
+                            <p className="text-xs text-muted-foreground italic mt-2">
+                              Need something not listed? Ask us about add-on services!
+                            </p>
+                          </div>
                         </div>
                       </div>
                       
@@ -353,36 +447,81 @@ export default function Services() {
               With 16 years of experience serving Montgomery, Prattville, Selma, Homewood, Clanton, and surrounding areas, we understand the unique cleaning needs of Alabama homes and businesses.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card>
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Montgomery, AL</h3>
-                  <p className="text-muted-foreground mb-4">
-                    From downtown historic districts to suburban neighborhoods, we provide comprehensive cleaning services throughout Montgomery. Whether you're in Garden District, Old Cloverdale, or Hampstead, our local team knows your area and can provide reliable, efficient service.
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Montgomery, AL</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    From downtown historic districts to suburban neighborhoods. Our local team knows Garden District, Old Cloverdale, Hampstead, and beyond.
                   </p>
-                  <p className="text-muted-foreground">
-                    <strong>Popular services in Montgomery:</strong> Residential cleaning, commercial office cleaning, move-in/out cleaning for apartments and homes, and deep cleaning for historic properties.
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Popular:</strong> Residential, commercial, move-in/out cleaning
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Prattville, AL</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Serving the "Fountain City" with pride! We clean homes and businesses throughout Prattville, from established neighborhoods to new developments. Our team is familiar with local property types and can handle everything from single-family homes to multi-unit properties.
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Prattville, AL</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    Serving the "Fountain City" with pride! From established neighborhoods to new developments, we handle homes and multi-unit properties.
                   </p>
-                  <p className="text-muted-foreground">
-                    <strong>Popular services in Prattville:</strong> Weekly home cleaning, Airbnb turnover for rental properties, student housing cleaning, and commercial cleaning for local businesses.
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Popular:</strong> Weekly cleaning, Airbnb turnover, commercial
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Selma, AL</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    Historic Selma deserves professional care. We serve homes and businesses throughout Dallas County with attention to detail.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Popular:</strong> Residential, deep cleaning, move-out cleaning
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Homewood, AL</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    Quality cleaning services for the greater Birmingham metro area. From charming bungalows to modern offices, we've got you covered.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Popular:</strong> Residential, commercial, recurring service
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Clanton, AL</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    Serving Chilton County's peach country! Professional cleaning for homes, vacation rentals, and local businesses.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Popular:</strong> Residential, Airbnb, deep cleaning
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Surrounding Areas</h3>
+                  <p className="text-muted-foreground mb-3 text-sm">
+                    Millbrook, Wetumpka, Pike Road, and all communities in Autauga, Montgomery, Chilton, Dallas, and Jefferson counties.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Call to confirm:</strong> (334) 877-9513
                   </p>
                 </CardContent>
               </Card>
             </div>
 
             <div className="mt-12 text-center">
-              <p className="text-muted-foreground text-lg mb-6">
-                <strong>Also serving:</strong> Millbrook, Wetumpka, Pike Road, and all surrounding communities in Autauga, Montgomery, and St. Clair counties.
-              </p>
               <a 
                 href="/quote" 
                 className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors"
