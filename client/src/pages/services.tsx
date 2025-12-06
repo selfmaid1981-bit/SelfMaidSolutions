@@ -11,7 +11,7 @@ import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_17577302
 import moveoutMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757730261066.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
 import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728436450.webp';
-import heroCleaningImage from '@assets/OIP_1764233528882.webp';
+import heroCleaningImage from '@assets/stock_images/professional_female__5e240e0d.jpg';
 
 const serviceDetails = [
   {
@@ -196,29 +196,40 @@ export default function Services() {
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Team Mascot Hero Section */}
-        <section className="relative">
-          <div 
-            className="min-h-[350px] sm:min-h-[450px] lg:min-h-[600px] relative"
-            style={{
-              backgroundImage: `url(${heroCleaningImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-          </div>
-          <div className="relative -mt-16 sm:-mt-20 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Our Cleaning Services
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
-              Professional cleaning solutions with transparent pricing and guaranteed satisfaction. 
-              Choose from our comprehensive range of services designed for Alabama homes and businesses.
-            </p>
-            <p className="text-2xl lg:text-3xl font-bold text-primary">
-              Join the Clean Team!
-            </p>
+        {/* Hero Section - Split Layout */}
+        <section className="bg-background">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
+              <div className="flex flex-col justify-center px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
+                <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                  SERVICES
+                </p>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+                  Professional<br />
+                  Cleaning<br />
+                  Services
+                </h1>
+                <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-md">
+                  Residential & Commercial Cleaning in Montgomery, Prattville, Selma, Homewood & Clanton, AL
+                </p>
+                <div>
+                  <a 
+                    href="/quote" 
+                    className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors"
+                    data-testid="hero-get-quote-btn"
+                  >
+                    Get a Quote
+                  </a>
+                </div>
+              </div>
+              <div className="relative overflow-hidden">
+                <img 
+                  src={heroCleaningImage}
+                  alt="Professional cleaner with yellow gloves cleaning a counter with spray bottle"
+                  className="w-full h-full object-cover object-center min-h-[300px] lg:min-h-full"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
