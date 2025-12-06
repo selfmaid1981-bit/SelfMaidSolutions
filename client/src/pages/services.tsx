@@ -207,8 +207,6 @@ export default function Services() {
               backgroundRepeat: 'no-repeat'
             }}
           >
-            {/* Fade gradient overlay at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
           </div>
           <div className="relative -mt-16 sm:-mt-20 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
