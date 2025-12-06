@@ -199,7 +199,7 @@ export default function Services() {
         {/* Hero Section - Split Layout */}
         <section className="bg-background">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
+            <div className="grid grid-cols-1 min-h-[400px] lg:min-h-[500px]">
               <div className="flex flex-col justify-center px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
                 <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                   SERVICES
@@ -221,13 +221,6 @@ export default function Services() {
                     Get a Quote
                   </a>
                 </div>
-              </div>
-              <div className="relative overflow-hidden">
-                <img 
-                  src={heroCleaningImage}
-                  alt="Professional cleaner with yellow gloves cleaning a counter with spray bottle"
-                  className="w-full h-full object-cover object-center min-h-[300px] lg:min-h-full"
-                />
               </div>
             </div>
           </div>
