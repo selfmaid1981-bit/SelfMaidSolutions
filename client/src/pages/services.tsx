@@ -4,14 +4,25 @@ import { Footer } from '@/components/footer';
 import { QuickBookingForm } from '@/components/quick-booking-form';
 import { SocialProofBar } from '@/components/social-proof-bar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, X, Home, ArrowRightLeft, Sparkles, Star, Shield, Clock, AlertCircle } from 'lucide-react';
-import residentialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_40_12 PM_1757723474618.png';
-import commercialMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_42_11 PM_1757723517491.png';
-import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_1757730283479.png';
-import moveoutMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757730261066.png';
-import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
-import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728436450.webp';
-import heroCleaningImage from '@assets/image_1765052831748.png';
+import { Check, X, Star, AlertCircle } from 'lucide-react';
+import heroCleaningImage from '@assets/image_1765053192396.png';
+import residentialImage from '@assets/stock_images/professional_house_c_e14d1c08.jpg';
+import deepCleaningImage from '@assets/stock_images/deep_cleaning_kitche_676b17fb.jpg';
+import commercialImage from '@assets/stock_images/commercial_office_cl_ccd81be4.jpg';
+import airbnbImage from '@assets/stock_images/airbnb_vacation_rent_f4a32ec6.jpg';
+import moveoutImage from '@assets/stock_images/move_out_cleaning_em_6d539a21.jpg';
+import apartmentImage from '@assets/stock_images/apartment_cleaning_p_7464443a.jpg';
+import dormImage from '@assets/stock_images/student_dorm_room_cl_f32964a4.jpg';
+
+const serviceImages: Record<string, string> = {
+  residential: residentialImage,
+  deep: deepCleaningImage,
+  commercial: commercialImage,
+  airbnb: airbnbImage,
+  moveout: moveoutImage,
+  apartment: apartmentImage,
+  dorm: dormImage,
+};
 
 const serviceDetails = [
   {
@@ -225,7 +236,7 @@ export default function Services() {
               <div className="relative overflow-hidden">
                 <img 
                   src={heroCleaningImage}
-                  alt="Professional cleaner with yellow gloves cleaning a counter with spray bottle"
+                  alt="Self-Maid Cleaning Solutions superhero sponge mascot in clean living room"
                   className="w-full h-full object-cover object-center min-h-[300px] lg:min-h-full"
                 />
               </div>
@@ -249,55 +260,62 @@ export default function Services() {
             <div className="space-y-8">
               {serviceDetails.map((service, index) => (
                 <Card key={service.id} className="overflow-hidden" data-testid={`service-detail-${service.id}`}>
-                  <CardContent className="p-6 lg:p-8">
-                    <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
-                    <p className="text-muted-foreground text-lg mb-4">{service.description}</p>
-                    <div className="text-2xl font-bold text-primary mb-4">{service.pricing}</div>
-                    
-                    {/* Ideal For callout */}
-                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-                      <div className="flex items-start gap-3">
-                        <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                        <div>
-                          <span className="font-semibold text-foreground">Ideal for: </span>
-                          <span className="text-muted-foreground">{service.idealFor}</span>
+                  <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                    <div className={`p-6 lg:p-8 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                      <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
+                      <p className="text-muted-foreground text-lg mb-4">{service.description}</p>
+                      <div className="text-2xl font-bold text-primary mb-4">{service.pricing}</div>
+                      
+                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+                        <div className="flex items-start gap-3">
+                          <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="font-semibold text-foreground">Ideal for: </span>
+                            <span className="text-muted-foreground">{service.idealFor}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                            <Check className="w-5 h-5 text-green-500" />
+                            What's Included
+                          </h3>
+                          {service.features.map((feature, featureIndex) => (
+                            <div key={featureIndex} className="flex items-start">
+                              <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                              <span className="text-muted-foreground text-sm">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                            <AlertCircle className="w-5 h-5 text-amber-500" />
+                            Not Included
+                          </h3>
+                          {service.notIncluded.map((item, itemIndex) => (
+                            <div key={itemIndex} className="flex items-start">
+                              <X className="w-4 h-4 text-amber-500 mr-2 mt-1 flex-shrink-0" />
+                              <span className="text-muted-foreground text-sm">{item}</span>
+                            </div>
+                          ))}
+                          <p className="text-xs text-muted-foreground italic mt-2">
+                            Need something not listed? Ask us about add-on services!
+                          </p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* What's Included */}
-                      <div className="space-y-3">
-                        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                          <Check className="w-5 h-5 text-green-500" />
-                          What's Included
-                        </h3>
-                        {service.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start">
-                            <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
-                            <span className="text-muted-foreground text-sm">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      {/* What's NOT Included */}
-                      <div className="space-y-3">
-                        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                          <AlertCircle className="w-5 h-5 text-amber-500" />
-                          Not Included
-                        </h3>
-                        {service.notIncluded.map((item, itemIndex) => (
-                          <div key={itemIndex} className="flex items-start">
-                            <X className="w-4 h-4 text-amber-500 mr-2 mt-1 flex-shrink-0" />
-                            <span className="text-muted-foreground text-sm">{item}</span>
-                          </div>
-                        ))}
-                        <p className="text-xs text-muted-foreground italic mt-2">
-                          Need something not listed? Ask us about add-on services!
-                        </p>
-                      </div>
+                    <div className={`relative overflow-hidden min-h-[300px] lg:min-h-[400px] ${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                      <img 
+                        src={serviceImages[service.id]}
+                        alt={`Professional ${service.title.toLowerCase()}`}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
                     </div>
-                  </CardContent>
+                  </div>
                 </Card>
               ))}
             </div>
