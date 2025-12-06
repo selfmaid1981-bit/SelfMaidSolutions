@@ -62,6 +62,37 @@ The application features a premium, professional design using a refined slate/bl
 
 # Recent Changes
 
+## December 6, 2025 - Comprehensive Conversion & SEO Optimization
+- **Enhanced Static HTML Content**: Added comprehensive static content to index.html for improved SEO crawler visibility
+  - Complete "About Self-Maid LLC" section with company history and values
+  - "Why Choose Us" section with trust points and guarantees
+  - Detailed service descriptions with pricing and what's included for each service type
+  - Service areas section listing all Alabama cities served
+  - Satisfaction guarantee section
+  - FAQ section with common questions and answers
+  - Full contact information accessible without JavaScript
+- **Homepage Conversion Improvements**:
+  - Enhanced hero section with explicit service messaging and type badges
+  - Added GoogleReviews component showing 5-star reviews with Google branding
+  - Created ExitIntentPopup for email capture with 10% discount offer
+  - Improved sticky mobile CTA with dual "Call Now" and "Text Us" buttons
+  - Added safe-area padding for modern iOS devices
+- **About Page Enhancement**:
+  - Added founder story section with family-owned messaging since 2009
+  - Created "Our Values" card (Integrity, Excellence, Trust, Community, Reliability)
+  - Added certifications grid with 6 trust badges
+  - Updated SEO with expanded service area keywords
+- **Services Page Improvements**:
+  - Added "What's NOT Included" sections to all service types (reduces scope creep expectations)
+  - Added "Ideal for:" callouts to help customers self-select
+  - Created SocialProofBar component showing key stats (5.0 Rating, 500+ Customers, 16 Years, 100%)
+  - Expanded service area cards to include Selma, Homewood, Clanton, and Surrounding Areas
+  - Updated all service descriptions with expanded service area cities
+- **New Components Created**:
+  - `client/src/components/google-reviews.tsx` - Google Reviews display widget
+  - `client/src/components/exit-intent-popup.tsx` - Email capture popup
+  - `client/src/components/social-proof-bar.tsx` - Reusable social proof stats bar
+
 ## December 1, 2025 - Comprehensive SEO & AI Crawler Optimization
 - **Service Areas Expanded**: Added Clanton, Selma, and Homewood to all service area references across the site
 - **AI Crawler Optimization**: Added support for AI search engines and LLM crawlers
