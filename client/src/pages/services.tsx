@@ -233,11 +233,11 @@ export default function Services() {
                   </a>
                 </div>
               </div>
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden bg-[#f5f3ef] flex items-center justify-center">
                 <img 
                   src={heroCleaningImage}
                   alt="Self-Maid Cleaning Solutions superhero sponge mascot in clean living room"
-                  className="w-full h-full object-cover object-center min-h-[300px] lg:min-h-full"
+                  className="w-full h-full object-contain min-h-[300px] lg:min-h-full"
                 />
               </div>
             </div>
