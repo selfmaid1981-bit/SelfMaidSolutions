@@ -11,7 +11,7 @@ import dormMascot from '@assets/ChatGPT Image Sep 12, 2025, 04_48_21 PM_17577302
 import moveoutMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1757730261066.png';
 import airbnbMascot from '@assets/ChatGPT Image Sep 12, 2025, 05_04_54 PM_1757726485914.png';
 import teamMascot from '@assets/1757706827111_b956ca088944de0fd6e1a8f465109c1b_1757728436450.webp';
-import heroCleaningImage from '@assets/stock_images/professional_female__5e240e0d.jpg';
+import heroCleaningImage from '@assets/image_1765052831748.png';
 
 const serviceDetails = [
   {
