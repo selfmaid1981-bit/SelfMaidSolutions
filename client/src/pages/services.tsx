@@ -199,7 +199,7 @@ export default function Services() {
         {/* Hero Section - Split Layout */}
         <section className="bg-background">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 min-h-[400px] lg:min-h-[500px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
               <div className="flex flex-col justify-center px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
                 <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                   SERVICES
@@ -222,6 +222,13 @@ export default function Services() {
                   </a>
                 </div>
               </div>
+              <div className="relative overflow-hidden">
+                <img 
+                  src={heroCleaningImage}
+                  alt="Professional cleaner with yellow gloves cleaning a counter with spray bottle"
+                  className="w-full h-full object-cover object-center min-h-[300px] lg:min-h-full"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -242,103 +249,52 @@ export default function Services() {
             <div className="space-y-8">
               {serviceDetails.map((service, index) => (
                 <Card key={service.id} className="overflow-hidden" data-testid={`service-detail-${service.id}`}>
-                  <CardContent className="p-0">
-                    <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                      <div className="p-6 lg:p-8">
-                        <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
-                        <p className="text-muted-foreground text-lg mb-4">{service.description}</p>
-                        <div className="text-2xl font-bold text-primary mb-4">{service.pricing}</div>
-                        
-                        {/* Ideal For callout */}
-                        <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-                          <div className="flex items-start gap-3">
-                            <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                            <div>
-                              <span className="font-semibold text-foreground">Ideal for: </span>
-                              <span className="text-muted-foreground">{service.idealFor}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {/* What's Included */}
-                          <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                              <Check className="w-5 h-5 text-green-500" />
-                              What's Included
-                            </h3>
-                            {service.features.map((feature, featureIndex) => (
-                              <div key={featureIndex} className="flex items-start">
-                                <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
-                                <span className="text-muted-foreground text-sm">{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                          
-                          {/* What's NOT Included */}
-                          <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                              <AlertCircle className="w-5 h-5 text-amber-500" />
-                              Not Included
-                            </h3>
-                            {service.notIncluded.map((item, itemIndex) => (
-                              <div key={itemIndex} className="flex items-start">
-                                <X className="w-4 h-4 text-amber-500 mr-2 mt-1 flex-shrink-0" />
-                                <span className="text-muted-foreground text-sm">{item}</span>
-                              </div>
-                            ))}
-                            <p className="text-xs text-muted-foreground italic mt-2">
-                              Need something not listed? Ask us about add-on services!
-                            </p>
-                          </div>
+                  <CardContent className="p-6 lg:p-8">
+                    <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
+                    <p className="text-muted-foreground text-lg mb-4">{service.description}</p>
+                    <div className="text-2xl font-bold text-primary mb-4">{service.pricing}</div>
+                    
+                    {/* Ideal For callout */}
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+                      <div className="flex items-start gap-3">
+                        <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-semibold text-foreground">Ideal for: </span>
+                          <span className="text-muted-foreground">{service.idealFor}</span>
                         </div>
                       </div>
-                      
-                      <div className={`bg-muted/30 p-6 lg:p-8 flex items-center justify-center ${
-                        index % 2 === 1 ? 'lg:col-start-1' : ''
-                      }`}>
-                        <div className="text-center">
-                          <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                            {service.id === 'residential' ? (
-                              <img 
-                                src={residentialMascot} 
-                                alt="Residential cleaning sponge mascot with glasses, mop and bucket" 
-                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
-                              />
-                            ) : service.id === 'deep' ? (
-                              <Sparkles className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 text-primary" />
-                            ) : service.id === 'commercial' ? (
-                              <img 
-                                src={commercialMascot} 
-                                alt="Commercial office cleaning sponge mascot with spray bottle and clipboard" 
-                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
-                              />
-                            ) : service.id === 'moveout' ? (
-                              <img 
-                                src={moveoutMascot} 
-                                alt="Move in/out cleaning sponge mascot team in action with moving and cleaning tools" 
-                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
-                              />
-                            ) : service.id === 'dorm' ? (
-                              <img 
-                                src={dormMascot} 
-                                alt="Student dorm cleaning sponge mascot with moving boxes, clothing, and dorm furniture" 
-                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
-                              />
-                            ) : service.id === 'airbnb' ? (
-                              <img 
-                                src={airbnbMascot} 
-                                alt="Airbnb cleaning sponge mascot with sanitization supplies and medical cross" 
-                                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 object-contain"
-                              />
-                            ) : service.id === 'apartment' ? (
-                              <Home className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 text-primary" />
-                            ) : null}
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* What's Included */}
+                      <div className="space-y-3">
+                        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                          <Check className="w-5 h-5 text-green-500" />
+                          What's Included
+                        </h3>
+                        {service.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start">
+                            <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                            <span className="text-muted-foreground text-sm">{feature}</span>
                           </div>
-                          <p className="text-muted-foreground">
-                            Professional {service.title.toLowerCase()} service with guaranteed satisfaction
-                          </p>
-                        </div>
+                        ))}
+                      </div>
+                      
+                      {/* What's NOT Included */}
+                      <div className="space-y-3">
+                        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                          <AlertCircle className="w-5 h-5 text-amber-500" />
+                          Not Included
+                        </h3>
+                        {service.notIncluded.map((item, itemIndex) => (
+                          <div key={itemIndex} className="flex items-start">
+                            <X className="w-4 h-4 text-amber-500 mr-2 mt-1 flex-shrink-0" />
+                            <span className="text-muted-foreground text-sm">{item}</span>
+                          </div>
+                        ))}
+                        <p className="text-xs text-muted-foreground italic mt-2">
+                          Need something not listed? Ask us about add-on services!
+                        </p>
                       </div>
                     </div>
                   </CardContent>
