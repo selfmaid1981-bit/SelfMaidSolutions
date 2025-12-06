@@ -1,0 +1,197 @@
+1. Keep Your Current Layout — Insert NEW Sections
+
+With Replit, you simply add new <section> blocks.
+
+Here are the drop-in modules you can add without breaking anything:
+
+A. “Why Choose Us” Section
+<section class="why-us">
+  <h2>Why Homeowners Choose Self-Maid LLC</h2>
+  <ul>
+    <li>Licensed, Insured & Background-Checked Cleaners</li>
+    <li>Reliable On-Time Scheduling</li>
+    <li>5-Star Rated Service</li>
+    <li>Eco-Friendly Products Available</li>
+    <li>Transparent Pricing With No Hidden Fees</li>
+  </ul>
+</section>
+
+B. “Service Area” Section
+<section class="service-area">
+  <h2>Service Areas</h2>
+  <p>Savannah • Richmond Hill • Hinesville • Pooler • Rincon • Surrounding Areas</p>
+</section>
+
+C. “Guarantee” Block
+<section class="guarantee">
+  <h2>Our Self-Maid Satisfaction Guarantee</h2>
+  <p>If you're not happy, we come back and make it right — free of charge.</p>
+</section>
+
+
+These do NOT change your design — they slot right into your existing model.
+
+2. Upgrade Your Current Homepage Text — Without Redesign
+
+You keep the same headlines, just improve clarity and trust.
+
+Replace weak text with:
+<h1>Premium Home & Commercial Cleaning Services</h1>
+<p>Trusted, reliable, and detail-focused cleaning services for busy homeowners, renters, property managers, and businesses. Book your cleaning with a licensed and insured professional team.</p>
+<a href="#booking" class="cta">Get a Fast Quote</a>
+
+3. Add Google Reviews Embed
+
+If you have Google reviews, embed them:
+
+<iframe 
+  src="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID"
+  width="100%" 
+  height="300" 
+  style="border:0;">
+</iframe>
+
+
+This alone increases conversions by 30–70%.
+
+4. Add Individual Service Pages (SEO Boost)
+
+Just create new .html files in Replit:
+
+deep-cleaning.html
+
+move-out-cleaning.html
+
+standard-cleaning.html
+
+airbnb-cleaning.html
+
+office-cleaning.html
+
+Each with a structure like:
+
+<h1>Deep Cleaning Service</h1>
+<p>Perfect for homes that need a top-to-bottom reset. Includes baseboards, appliances, bathrooms, kitchens, floors, and all detailed areas.</p>
+<h2>What's Included</h2>
+<ul>
+  <li>Inside appliances</li>
+  <li>Baseboards & vents</li>
+  <li>Detailed scrubbing of bathrooms</li>
+  <li>Full kitchen sanitation</li>
+</ul>
+<a class="cta" href="/book.html">Get a Deep Cleaning Quote</a>
+
+
+This does not affect your homepage and boosts Google/AI ranking instantly.
+
+5. Add a Sticky Mobile Button
+
+Drop this into your HTML footer:
+
+<a href="/book.html" class="sticky-cta">Book Now</a>
+
+
+And add CSS:
+
+.sticky-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1e90ff;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+
+This increases bookings on mobile dramatically.
+
+6. Keep Your Model — Improve Your Trust
+
+You don’t remove anything. You add:
+
+badges (insured, vetted, guaranteed)
+
+professional photos
+
+review stars
+
+business license number
+
+secure checkout badge (if you take payments)
+
+Small additions → big difference.
+
+7. Add a Booking/Quote Form Page
+
+Keep your layout, just add:
+
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="text" name="address" placeholder="Address" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="phone" placeholder="Phone" required>
+  <textarea name="details" placeholder="Tell us about your home"></textarea>
+  <button type="submit">Get My Quote</button>
+</form>
+
+
+Formspree works perfectly inside Replit.
+
+8. Add Schema (AI/ChatGPT Ranking Upgrade)
+
+Create a <script type="application/ld+json"> block:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Self-Maid LLC",
+  "url": "https://selfmaidllc.com",
+  "telephone": "YOUR_PHONE",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Savannah",
+    "addressRegion": "GA"
+  },
+  "image": "https://selfmaidllc.com/yourimage.jpg",
+  "priceRange": "$$",
+  "areaServed": ["Savannah", "Richmond Hill", "Hinesville", "Pooler"]
+}
+</script>
+
+
+This makes AI recognize your business as a real local entity.
+
+9. Add a “Frequently Asked Questions” Block
+<section class="faq">
+  <h2>Frequently Asked Questions</h2>
+  <h3>Are your cleaners insured?</h3>
+  <p>Yes — we are fully licensed and insured.</p>
+  
+  <h3>Do you bring your own supplies?</h3>
+  <p>Yes, we provide all cleaning products and equipment.</p>
+  
+  <h3>Do I need to be home?</h3>
+  <p>No, as long as we have access to your home.</p>
+</section>
+
+
+This improves SEO + trust.
+
+10. Make It Feel More “Premium” Without Changing Design
+
+Easy wins:
+
+increase spacing (padding 40–60px)
+
+make headings slightly larger
+
+switch to a cleaner Google Font
+
+use a consistent button style
+
+Small code edits = big visual improvement.
