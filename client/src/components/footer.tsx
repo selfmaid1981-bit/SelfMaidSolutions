@@ -42,12 +42,16 @@ export function Footer() {
   ];
 
   const directoryLinks = [
-    { name: 'Google Maps', href: 'https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL' },
+    { name: 'Google Business', href: 'https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL' },
     { name: 'Yelp', href: 'https://www.yelp.com/biz/self-maid-cleaning-solutions-montgomery' },
     { name: 'BBB', href: 'https://www.bbb.org/us/al/montgomery' },
     { name: 'Angi', href: 'https://www.angi.com/companylist/us/al/montgomery/house-cleaning.htm' },
     { name: 'Thumbtack', href: 'https://www.thumbtack.com/al/montgomery/house-cleaning/' },
     { name: 'HomeAdvisor', href: 'https://www.homeadvisor.com/c.House-Cleaning.Montgomery.AL.-12050.html' },
+    { name: 'Nextdoor', href: 'https://nextdoor.com/pages/self-maid-cleaning-solutions-montgomery-al/' },
+    { name: 'Houzz', href: 'https://www.houzz.com/professionals/house-cleaners/montgomery-al' },
+    { name: 'Porch', href: 'https://porch.com/montgomery-al/house-cleaning-services' },
+    { name: 'Bark', href: 'https://www.bark.com/en/us/house-cleaning/montgomery-al/' },
   ];
 
   return (
