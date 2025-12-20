@@ -11,6 +11,7 @@ import { RecruitmentSection } from '@/components/recruitment-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
+import { ReferralProgram } from '@/components/referral-program';
 import { Phone, MessageCircle } from 'lucide-react';
 
 // Structured data for local business - optimized for SEO, ChatGPT, and Google
@@ -137,6 +138,7 @@ export default function Home() {
         <GoogleReviews />
         <TestimonialsSection />
         <RecruitmentSection />
+        <ReferralProgram />
         <ContactSection />
         <Footer />
         

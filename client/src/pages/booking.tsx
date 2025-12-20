@@ -12,7 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Calendar, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Calendar, AlertTriangle, CheckCircle, Shield, Clock, Star } from 'lucide-react';
+import { UrgencyBanner, TrustSignals } from '@/components/urgency-banner';
 
 export default function Booking() {
   const [, setLocation] = useLocation();
@@ -159,9 +160,15 @@ export default function Booking() {
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
                 Schedule Your Cleaning
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
                 {quoteData ? 'Complete your booking based on your quote' : 'Book a professional cleaning service'}
               </p>
+              
+              <UrgencyBanner variant="booking" />
+              
+              <div className="mt-4">
+                <TrustSignals />
+              </div>
             </div>
 
             <Card>

@@ -8,7 +8,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Loader2, CreditCard, Shield } from 'lucide-react';
+import { Loader2, CreditCard, Shield, Lock, CheckCircle } from 'lucide-react';
+import { UrgencyBanner } from '@/components/urgency-banner';
 
 let stripePromise: Promise<Stripe | null> | null = null;
 
@@ -62,6 +63,8 @@ const CheckoutForm = ({ bookingId, amount }: { bookingId: string; amount: number
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" data-testid="checkout-form">
+      <UrgencyBanner variant="checkout" />
+      
       <div className="bg-muted/50 p-4 rounded-lg">
         <h3 className="font-semibold text-foreground mb-2">Booking Summary</h3>
         <div className="flex justify-between items-center">
@@ -71,6 +74,15 @@ const CheckoutForm = ({ bookingId, amount }: { bookingId: string; amount: number
         <div className="text-sm text-muted-foreground mt-1">
           Booking ID: {bookingId}
         </div>
+      </div>
+      
+      <div className="flex flex-wrap gap-3 justify-center text-xs text-muted-foreground border-b pb-4">
+        <span className="flex items-center gap-1">
+          <CheckCircle className="w-3 h-3 text-green-500" /> 100% Satisfaction Guarantee
+        </span>
+        <span className="flex items-center gap-1">
+          <Lock className="w-3 h-3 text-blue-500" /> 256-bit SSL Encryption
+        </span>
       </div>
 
       <div className="border border-border rounded-lg p-4">

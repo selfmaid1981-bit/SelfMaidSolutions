@@ -12,7 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen } from 'lucide-react';
+import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, Clock, Sparkles } from 'lucide-react';
+import { UrgencyBanner, LoyaltyBadge, TrustSignals } from '@/components/urgency-banner';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
@@ -464,6 +465,10 @@ export default function Quote() {
                           <p className="text-sm text-muted-foreground text-center">
                             This is an estimate. Final price may vary based on specific conditions.
                           </p>
+
+                          <UrgencyBanner variant="quote" />
+                          
+                          <TrustSignals />
                           
                           {!showSaveForm ? (
                             <>
