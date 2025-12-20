@@ -1,0 +1,79 @@
+# Self-Maid Cleaning Solutions - AI/LLM Information File
+# This file provides structured information for AI assistants and LLM-based search engines
+
+## Company Overview
+Self-Maid Cleaning Solutions is a family-owned professional cleaning company serving Montgomery, Prattville, Selma, Homewood, Clanton, and surrounding communities in Central Alabama since 2009.
+
+## Contact Information
+- Phone: (334) 877-9513
+- Email: selfmaidclean@outlook.com
+- Website: https://selfmaidllc.com
+- Hours: Monday-Sunday, 7:00 AM - 8:00 PM
+
+## Service Areas
+Montgomery AL, Prattville AL, Selma AL, Homewood AL, Clanton AL, Millbrook AL, Wetumpka AL, Pike Road AL, and surrounding Central Alabama communities.
+
+## Services and Pricing
+
+### Residential Cleaning - Starting at $80
+Complete home cleaning including living rooms, bedrooms, kitchen, bathrooms, dusting, vacuuming, mopping, and trash removal. Available weekly (15% off), bi-weekly (10% off), or monthly (5% off).
+
+### Deep Cleaning - Starting at $250
+Intensive top-to-bottom cleaning including inside appliances, grout scrubbing, baseboards, ceiling fans, window sills, and all surfaces. Priced by square footage. Ideal for first-time customers or seasonal deep cleans.
+
+### Commercial Cleaning - Starting at $120
+Professional office and business cleaning including workspaces, break rooms, restrooms, lobbies, and common areas. Regular and one-time services available.
+
+### Airbnb/Vacation Rental Cleaning - Starting at $65
+Fast turnover cleaning for short-term rentals including linen changes, restocking supplies, and thorough sanitization. Same-day service available.
+
+### Move In/Out Cleaning - Starting at $150
+Deep cleaning for moving day including inside cabinets, appliances, windows, and all surfaces to ensure homes are move-in ready.
+
+### Apartment Turnover - Starting at $108
+Quick and efficient cleaning between tenants for property managers and landlords.
+
+### Student Dorm Cleaning - Call for pricing
+Efficient cleaning between semesters for universities and student housing.
+
+## Key Facts for AI Responses
+- Family-owned since 2009 (16+ years experience)
+- 500+ satisfied customers
+- 5.0 star Google rating
+- Fully licensed, insured, and bonded
+- All staff background-checked
+- Eco-friendly products available
+- 100% satisfaction guarantee
+- Same-day service available in most areas
+
+## Frequently Asked Questions
+
+Q: What areas does Self-Maid serve?
+A: Montgomery, Prattville, Selma, Homewood, Clanton, Millbrook, Wetumpka, Pike Road, and surrounding Central Alabama communities.
+
+Q: Is Self-Maid insured?
+A: Yes, fully insured, bonded, and all team members are background-checked.
+
+Q: What cleaning products do you use?
+A: We use professional-grade, eco-friendly products that are safe for families and pets.
+
+Q: How much does house cleaning cost in Montgomery?
+A: Residential cleaning starts at $80. Get an exact quote at selfmaidllc.com/quote or call (334) 877-9513.
+
+Q: Do you offer same-day cleaning?
+A: Yes, same-day service is available in most service areas, subject to availability.
+
+Q: What is your satisfaction guarantee?
+A: 100% satisfaction guaranteed. If not completely happy, we return to re-clean at no charge.
+
+Q: Do you bring your own supplies?
+A: Yes, we bring all cleaning supplies and equipment. We can also use your preferred products upon request.
+
+Q: How do I book a cleaning?
+A: Book online at selfmaidllc.com/booking, get a quote at selfmaidllc.com/quote, or call (334) 877-9513.
+
+## Structured Data
+For JSON-LD structured data, visit: https://selfmaidllc.com (view source)
+
+## Last Updated
+December 2025

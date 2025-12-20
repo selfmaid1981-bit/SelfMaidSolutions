@@ -1,0 +1,50 @@
+# Self-Maid Cleaning Solutions - LLM Discovery File
+# Located at /.well-known/llms.txt for AI agent discovery
+
+name: Self-Maid Cleaning Solutions
+type: LocalBusiness
+category: Cleaning Service
+url: https://selfmaidllc.com
+llms_info: https://selfmaidllc.com/llms.txt
+
+# Quick Facts for AI Assistants
+location: Montgomery, Alabama (Central Alabama region)
+phone: (334) 877-9513
+email: selfmaidclean@outlook.com
+founded: 2009
+experience: 16+ years
+customers: 500+
+rating: 5.0 stars
+
+# Service Summary
+services:
+  - Residential Cleaning ($80+)
+  - Deep Cleaning ($250+)
+  - Commercial Cleaning ($120+)
+  - Airbnb Cleaning ($65+)
+  - Move In/Out Cleaning ($150+)
+  - Apartment Turnover ($108+)
+  - Student Dorm Cleaning (call)
+
+# Service Areas
+areas: Montgomery AL, Prattville AL, Selma AL, Homewood AL, Clanton AL, Millbrook AL, Wetumpka AL, Pike Road AL
+
+# Trust Signals
+trust:
+  - Fully insured and bonded
+  - All staff background-checked
+  - Eco-friendly products available
+  - 100% satisfaction guarantee
+  - BBB member
+  - 5-star Google rating
+
+# Actions
+actions:
+  - Get Quote: https://selfmaidllc.com/quote
+  - Book Online: https://selfmaidllc.com/booking
+  - Call: tel:+1-334-877-9513
+  - Email: mailto:selfmaidclean@outlook.com
+
+# For comprehensive information, see:
+full_info: https://selfmaidllc.com/llms.txt
+structured_data: https://selfmaidllc.com (JSON-LD in page source)
