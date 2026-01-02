@@ -659,6 +659,97 @@ export default function ViralMarketing() {
                 </div>
               </CardContent>
             </Card>
+
+            <Card className="mt-8 border-2 border-blue-500" data-testid="buffer-setup-guide">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="w-6 h-6 text-blue-500" />
+                  Automate Posting with Buffer (Free)
+                </CardTitle>
+                <CardDescription>
+                  Schedule posts to LinkedIn, Facebook, and Instagram automatically
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-bold text-lg mb-3">Setup Steps (5 minutes)</h4>
+                    <ol className="space-y-3 text-sm">
+                      <li className="flex gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                        <span>Go to <a href="https://buffer.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">buffer.com</a> and sign up for free</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                        <span>Click "Connect Channel" and add your accounts:
+                          <ul className="mt-1 ml-4 space-y-1 text-muted-foreground">
+                            <li>• LinkedIn (personal + company page)</li>
+                            <li>• Facebook Page</li>
+                            <li>• Instagram Business account</li>
+                          </ul>
+                        </span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                        <span>Copy content from the tabs above using the copy buttons</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                        <span>Paste into Buffer's composer and schedule your posts</span>
+                      </li>
+                    </ol>
+                  </div>
+                  
+                  <div className="bg-muted/50 rounded-lg p-4">
+                    <h4 className="font-bold mb-3">Buffer Free Plan Includes:</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Connect 3 social channels
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Schedule up to 10 posts per channel
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-green-500">✓</span> AI Assistant for caption ideas
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Landing page builder
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-green-500">✓</span> Basic analytics
+                      </li>
+                    </ul>
+                    
+                    <div className="mt-4 pt-4 border-t">
+                      <h5 className="font-semibold text-sm mb-2">Other Options:</h5>
+                      <ul className="text-xs space-y-1 text-muted-foreground">
+                        <li>• <a href="https://hootsuite.com" target="_blank" rel="noopener noreferrer" className="underline">Hootsuite</a> - More analytics</li>
+                        <li>• <a href="https://later.com" target="_blank" rel="noopener noreferrer" className="underline">Later</a> - Visual calendar</li>
+                        <li>• <a href="https://www.socialpilot.co" target="_blank" rel="noopener noreferrer" className="underline">SocialPilot</a> - Affordable bulk scheduling</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4">
+                  <h4 className="font-bold text-blue-800 dark:text-blue-200 mb-2">Pro Tips for Maximum Reach</h4>
+                  <div className="grid md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold text-blue-700 dark:text-blue-300">Best Times to Post</p>
+                      <p className="text-muted-foreground">Mon-Fri: 11am-1pm, 7-9pm CST</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-blue-700 dark:text-blue-300">Posting Frequency</p>
+                      <p className="text-muted-foreground">4-5 posts/week minimum</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-blue-700 dark:text-blue-300">Content Mix</p>
+                      <p className="text-muted-foreground">70% value, 20% engagement, 10% promo</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
         
