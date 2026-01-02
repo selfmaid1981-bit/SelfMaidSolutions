@@ -291,10 +291,11 @@ export default function ViralMarketing() {
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Viral Marketing Toolkit
+                <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">Viral</span> Marketing{' '}
+                <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">Toolkit</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Proven Instagram & Facebook content strategies to grow your cleaning business
+                Proven <span className="text-pink-500 font-semibold">Instagram</span> & <span className="text-blue-600 font-semibold">Facebook</span> content strategies to grow your cleaning business
               </p>
               <div className="flex justify-center gap-3 mt-6">
                 <Badge variant="secondary" className="flex items-center gap-1">
