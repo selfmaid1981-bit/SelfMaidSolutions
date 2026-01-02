@@ -18,6 +18,7 @@ import MarketingPage from "@/pages/marketing-page";
 import AdminReviews from "@/pages/admin-reviews";
 import AdminCampaigns from "@/pages/admin-campaigns";
 import MarketingMaterials from "@/pages/marketing-materials";
+import ViralMarketing from "@/pages/viral-marketing";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -48,6 +49,7 @@ function Router() {
         <Route path="/admin/reviews" component={AdminReviews} />
         <Route path="/admin/campaigns" component={AdminCampaigns} />
         <Route path="/admin/print" component={MarketingMaterials} />
+        <Route path="/admin/viral" component={ViralMarketing} />
         <Route component={NotFound} />
       </Switch>
     </>
