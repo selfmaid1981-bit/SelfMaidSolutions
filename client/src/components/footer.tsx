@@ -52,6 +52,41 @@ export function Footer() {
     { name: 'Houzz', href: 'https://www.houzz.com/professionals/house-cleaners/montgomery-al' },
     { name: 'Porch', href: 'https://porch.com/montgomery-al/house-cleaning-services' },
     { name: 'Bark', href: 'https://www.bark.com/en/us/house-cleaning/montgomery-al/' },
+    { name: 'Manta', href: 'https://www.manta.com/c/mm5k81p/self-maid-cleaning-solutions' },
+    { name: 'Alignable', href: 'https://www.alignable.com/montgomery-al/self-maid-cleaning-solutions' },
+    { name: 'Expertise', href: 'https://www.expertise.com/al/montgomery/house-cleaning-services' },
+    { name: 'Birdeye', href: 'https://birdeye.com/self-maid-cleaning-solutions-montgomery-al' },
+    { name: 'YellowPages', href: 'https://www.yellowpages.com/montgomery-al/mip/self-maid-cleaning-solutions' },
+    { name: 'CitySearch', href: 'https://www.citysearch.com/profile/self-maid-cleaning-montgomery' },
+    { name: 'MapQuest', href: 'https://www.mapquest.com/us/alabama/self-maid-cleaning-solutions-montgomery' },
+    { name: 'Superpages', href: 'https://www.superpages.com/montgomery-al/cleaning-services' },
+    { name: 'MerchantCircle', href: 'https://www.merchantcircle.com/self-maid-cleaning-solutions-montgomery-al' },
+    { name: 'Hotfrog', href: 'https://www.hotfrog.com/company/us/al/montgomery/self-maid-cleaning-solutions' },
+    { name: 'Brownbook', href: 'https://www.brownbook.net/business/self-maid-cleaning-solutions-montgomery' },
+    { name: 'Foursquare', href: 'https://foursquare.com/v/self-maid-cleaning-solutions/montgomery-al' },
+    { name: 'Judy\'s Book', href: 'https://www.judysbook.com/Self-Maid-Cleaning-Solutions-Montgomery-AL' },
+    { name: 'EZlocal', href: 'https://ezlocal.com/al/montgomery/cleaning-service/self-maid-cleaning-solutions' },
+    { name: 'Local.com', href: 'https://www.local.com/business/details/montgomery-al/self-maid-cleaning-solutions' },
+    { name: 'Tupalo', href: 'https://tupalo.com/en/montgomery-alabama/self-maid-cleaning-solutions' },
+    { name: 'US City', href: 'https://www.uscity.net/self-maid-cleaning-solutions-montgomery-al' },
+    { name: 'Cylex', href: 'https://www.cylex.us.com/company/self-maid-cleaning-solutions-montgomery' },
+    { name: 'n49', href: 'https://www.n49.com/biz/self-maid-cleaning-solutions-montgomery-al' },
+    { name: 'ShowMeLocal', href: 'https://www.showmelocal.com/self-maid-cleaning-solutions-montgomery-al' },
+  ];
+
+  const industryLinks = [
+    { name: 'ISSA (Cleaning Industry)', href: 'https://www.issa.com/' },
+    { name: 'ARCSI', href: 'https://www.arcsi.org/' },
+    { name: 'Cleaning Business Today', href: 'https://www.cleaningbusinesstoday.com/' },
+    { name: 'CleanLink', href: 'https://www.cleanlink.com/' },
+  ];
+
+  const localLinks = [
+    { name: 'Montgomery Chamber', href: 'https://www.montgomerychamber.com/' },
+    { name: 'Prattville Chamber', href: 'https://www.prattvillechamber.com/' },
+    { name: 'Selma Chamber', href: 'https://www.selmaalabama.com/' },
+    { name: 'Alabama Small Business', href: 'https://www.asbdc.org/' },
+    { name: 'Visit Montgomery', href: 'https://www.visitingmontgomery.com/' },
   ];
 
   return (
@@ -180,21 +215,58 @@ export function Footer() {
 
         {/* Directory Backlinks Section */}
         <div className="border-t border-background/20 mt-8 pt-8">
-          <h4 className="text-center text-lg font-semibold mb-4">Find Us On</h4>
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
+          <h4 className="text-center text-lg font-semibold mb-4">Find Us On 30+ Directories</h4>
+          <div className="flex flex-wrap justify-center gap-3 text-xs">
             {directoryLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
                 target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="text-background/60 hover:text-background transition-colors flex items-center"
+                rel="noopener noreferrer"
+                className="text-background/60 hover:text-background transition-colors"
                 data-testid={`directory-link-${index}`}
               >
                 {link.name}
-                <ExternalLink className="w-3 h-3 ml-1" />
               </a>
             ))}
+          </div>
+        </div>
+
+        {/* Industry & Local Links */}
+        <div className="border-t border-background/20 mt-6 pt-6">
+          <div className="grid md:grid-cols-2 gap-6 text-xs">
+            <div className="text-center md:text-left">
+              <h5 className="font-semibold mb-2 text-background/80">Industry Associations</h5>
+              <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                {industryLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/60 hover:text-background transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="text-center md:text-right">
+              <h5 className="font-semibold mb-2 text-background/80">Local Resources</h5>
+              <div className="flex flex-wrap justify-center md:justify-end gap-3">
+                {localLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/60 hover:text-background transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
