@@ -13,13 +13,13 @@ export function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           {/* Clear Value Proposition - Answers: What, Who, Why */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
               Premium Home & Commercial Cleaning Services
             </h1>
-            <p className="text-xl md:text-2xl text-blue-800 font-medium mb-4">
+            <p className="text-xl md:text-2xl text-black font-medium mb-4">
               Serving Montgomery, Prattville, Selma, Homewood & Clanton, Alabama
             </p>
-            <p className="text-lg text-blue-700 max-w-3xl mx-auto">
+            <p className="text-lg text-black max-w-3xl mx-auto">
               Reliable • Fully Insured • 5-Star Rated • 16 Years Experience
             </p>
           </div>
