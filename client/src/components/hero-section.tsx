@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Calendar, Shield, Star, Clock, MessageCircle, Home, Building2, Plane, Truck } from 'lucide-react';
+import { Phone, Calendar, Shield, Star, Clock, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import heroBanner from '@assets/793F560B-3E81-474C-9196-6C977F28E5C3_1759307212932.png';
@@ -11,37 +11,32 @@ export function HeroSection() {
     <>
       <section className="relative overflow-hidden premium-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
-          {/* Clear Value Proposition - Answers: What, Who, Why */}
+          {/* Clear Value Proposition - Emotional Promise */}
           <div className="text-center mb-4 md:mb-8">
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-black mb-2 md:mb-4">
-              Premium Cleaning Services
+              A Clean Home That Feels Like Peace of Mind
             </h1>
-            <p className="text-base md:text-2xl text-black font-medium mb-2 md:mb-4">
-              Montgomery • Prattville • Selma • Homewood • Clanton
+            <p className="text-sm md:text-lg text-black max-w-3xl mx-auto mb-3 md:mb-4">
+              We follow an <span className="font-bold">extensive training guide</span> and a <span className="font-bold">no-nonsense plan for every visit</span>—so your home is cleaned the right way, every time, with one goal: <span className="font-bold">alleviate your stress and restore your comfort.</span>
             </p>
-            <p className="text-sm md:text-lg text-black/80 max-w-3xl mx-auto">
-              Reliable • Insured • 5-Star Rated • 16 Years Experience
+            <p className="text-xs md:text-base text-black/70">
+              Montgomery • Prattville • Selma • Homewood • Clanton, Alabama
             </p>
           </div>
 
-          {/* Service Types - 2x2 Grid on Mobile */}
-          <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-2 md:gap-4 mb-4 md:mb-8 max-w-md md:max-w-none mx-auto">
-            <div className="flex items-center justify-center bg-white/40 backdrop-blur-sm px-3 py-2 rounded-full text-blue-900 font-medium text-xs md:text-base">
-              <Home className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-              Residential
+          {/* Our Promise - Training & Process */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-8 max-w-3xl mx-auto">
+            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Structured Visit Checklist</p>
+              <p className="text-xs text-black/70 hidden md:block">Nothing is ever missed</p>
             </div>
-            <div className="flex items-center justify-center bg-white/40 backdrop-blur-sm px-3 py-2 rounded-full text-blue-900 font-medium text-xs md:text-base">
-              <Building2 className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-              Commercial
+            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Professionally Trained</p>
+              <p className="text-xs text-black/70 hidden md:block">In-house training guide</p>
             </div>
-            <div className="flex items-center justify-center bg-white/40 backdrop-blur-sm px-3 py-2 rounded-full text-blue-900 font-medium text-xs md:text-base">
-              <Plane className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-              <span className="md:hidden">Airbnb</span>
-              <span className="hidden md:inline">Airbnb & Vacation Rentals</span>
-            </div>
-            <div className="flex items-center justify-center bg-white/40 backdrop-blur-sm px-3 py-2 rounded-full text-blue-900 font-medium text-xs md:text-base">
-              <Truck className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-              Move In/Out
+            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Comfort-Focused</p>
+              <p className="text-xs text-black/70 hidden md:block">Zero judgment, full respect</p>
             </div>
           </div>
 

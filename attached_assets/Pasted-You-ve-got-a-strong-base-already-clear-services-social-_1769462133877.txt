@@ -1,0 +1,62 @@
+You’ve got a strong base already—clear services, social proof, and local focus. What’s missing is exactly what you said: the why behind your process—your training guide and no‑nonsense plan—and the emotional promise: stress relief, peace of mind, comfort.
+
+Here’s a focused breakdown and then ready‑to-paste code.
+
+---
+
+Quick analysis of your current homepage
+
+• Hero focus right now:
+The main hero is about “Premium Home & Commercial Cleaning Services”, locations, and credibility badges (insured, 5‑star, 16 years). It’s strong, but very service-provider generic.
+• Emotional promise:
+The page emphasizes reliability and experience, but doesn’t clearly say:
+“We clean to alleviate stress and create peace of mind and comfort.”
+That’s your differentiator and it’s not front and center yet.
+• Process & training:
+You mention being fully insured, bonded, background-checked, but there’s no explicit section about:• An extensive training guide, or
+• A no-nonsense plan/checklist for each visit
+This is a huge trust-builder and should be its own highlight.
+
+• What I’d change at the top:1. Rewrite the hero headline + subheadline to lead with stress relief and peace of mind.
+2. Add a “How We Clean Every Time” or “Our No‑Nonsense Cleaning Plan” section near the top.
+3. Explicitly call out your training guide and visit checklist as part of your promise.
+
+
+
+---
+
+New hero section code (replace your current top hero)
+
+You can swap your existing hero block with this. Adjust classes to match your CSS framework if needed.
+
+<section class="hero hero-main bg-light">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>A Clean Home That Feels Like Peace of Mind</h1>
+      <p class="hero-subtitle">
+        Self-Maid Cleaning Solutions follows an <strong>extensive training guide</strong> and a 
+        <strong>no-nonsense plan for every visit</strong>—so your home is cleaned the right way,
+        every time, with one goal: <strong>alleviate your stress and restore your comfort.</strong>
+      </p>
+
+      <ul class="hero-highlights">
+        <li><strong>Structured visit checklist</strong> so nothing is missed</li>
+        <li><strong>Professionally trained cleaners</strong> using our in-house training guide</li>
+        <li><strong>Comfort-focused cleaning</strong> with zero judgment and full respect</li>
+      </ul>
+
+      <div class="hero-cta">
+        <a href="#quote" class="btn btn-primary">Get Instant Quote</a>
+        <a href="#plan" class="btn btn-outline">See Our Cleaning Plan</a>
+      </div>
+
+      <div class="hero-trust">
+        <span>Fully Insured &amp; Bonded</span>
+        <span>16 Years Experience</span>
+        <span>500+ 5-Star Reviews</span>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <!-- Keep or replace with your existing hero image -->
+      <img src="your-hero-image.jpg" alt="Self-Maid cleaner creating a calm, tidy home">
