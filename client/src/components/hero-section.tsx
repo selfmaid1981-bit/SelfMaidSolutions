@@ -40,7 +40,7 @@ export function HeroSection() {
               Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
             </p>
             <p className="text-sm text-blue-200">
-              Serving Montgomery • Prattville • Selma • Homewood • Clanton
+              Serving Montgomery • Prattville • Millbrook • Wetumpka • Alabaster & More
             </p>
           </div>
 
