@@ -27,7 +27,7 @@ export function HeroSection() {
               A Clean Home That Feels Like<br className="hidden md:block" /> Peace of Mind
             </h1>
             <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-              I'm Michelle — and my team is trained to clean your space the right way, every time. No shortcuts. No stress. Just results you can trust.
+              Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
             </p>
           </div>
 
