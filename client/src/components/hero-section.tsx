@@ -17,11 +17,11 @@ export function HeroSection() {
   return (
     <>
       <section className="hero relative overflow-hidden">
-        <div className="relative w-full h-48 md:h-64 overflow-hidden">
+        <div className="relative w-full h-56 md:h-72 overflow-hidden">
           <img 
             src={mascotBanner} 
             alt="Super Sponge - Self-Maid Mascot flying through the sky" 
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-bottom"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-950"></div>
         </div>
