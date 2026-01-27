@@ -1,8 +1,15 @@
 import { useState } from 'react';
-import { Phone, Calendar, Shield, Star, Clock, MessageCircle } from 'lucide-react';
+import { Phone, Calendar, Shield, Star, Clock, MessageCircle, Home, Building, Key, Truck, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import heroBanner from '@assets/793F560B-3E81-474C-9196-6C977F28E5C3_1759307212932.png';
+
+const quickServices = [
+  { id: 'residential', icon: Home, title: 'Residential', price: '$80+', desc: 'Weekly/Monthly' },
+  { id: 'commercial', icon: Building, title: 'Commercial', price: '$120+', desc: 'Office & Business' },
+  { id: 'airbnb', icon: Key, title: 'Airbnb', price: '$65+', desc: 'Same-Day Ready' },
+  { id: 'moveout', icon: Truck, title: 'Move In/Out', price: '$150+', desc: 'Deposit Back' },
+];
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -24,38 +31,57 @@ export function HeroSection() {
             </p>
           </div>
 
-          {/* Our Promise - Training & Process */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-8 max-w-3xl mx-auto">
-            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
-              <p className="text-xs md:text-sm font-bold text-blue-900">Structured Visit Checklist</p>
-              <p className="text-xs text-black/70 hidden md:block">Nothing is ever missed</p>
-            </div>
-            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
-              <p className="text-xs md:text-sm font-bold text-blue-900">Professionally Trained</p>
-              <p className="text-xs text-black/70 hidden md:block">In-house training guide</p>
-            </div>
-            <div className="bg-white/50 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 rounded-lg text-center">
-              <p className="text-xs md:text-sm font-bold text-blue-900">Comfort-Focused</p>
-              <p className="text-xs text-black/70 hidden md:block">Zero judgment, full respect</p>
-            </div>
+          {/* Quick Service Cards - Immediate Value */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-8 max-w-4xl mx-auto">
+            {quickServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => setIsBookingModalOpen(true)}
+                  className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all text-left group border-2 border-transparent hover:border-blue-500"
+                >
+                  <Icon className="w-6 h-6 md:w-8 md:h-8 text-blue-600 mb-2" />
+                  <h3 className="font-bold text-sm md:text-base text-slate-900">{service.title}</h3>
+                  <p className="text-blue-600 font-bold text-lg md:text-xl">{service.price}</p>
+                  <p className="text-xs text-slate-600">{service.desc}</p>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Hero Banner Image */}
-          <div className="mb-4 md:mb-10 fade-in">
-            <img 
-              src={heroBanner}
-              alt="Self-Maid Cleaning Solutions - We Make Your World Shine" 
-              className="w-full h-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
-              loading="lazy"
-              data-testid="hero-banner-image"
-            />
-          </div>
-          
           {/* Special Offer Banner */}
           <div className="mb-4 md:mb-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl shadow-lg max-w-2xl mx-auto">
             <p className="text-center font-bold text-sm md:text-lg">
               🎉 $20 OFF Your First Cleaning! 🎉
             </p>
+          </div>
+
+          {/* Hero Banner Image - Moved Down */}
+          <div className="mb-4 md:mb-6 fade-in">
+            <img 
+              src={heroBanner}
+              alt="Self-Maid Cleaning Solutions - We Make Your World Shine" 
+              className="w-full h-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl"
+              loading="lazy"
+              data-testid="hero-banner-image"
+            />
+          </div>
+
+          {/* Trust Points - Our Process */}
+          <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6 max-w-2xl mx-auto text-center">
+            <div className="bg-white/50 backdrop-blur-sm px-2 py-2 md:px-4 md:py-3 rounded-lg">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Visit Checklist</p>
+              <p className="text-xs text-black/70 hidden md:block">Nothing missed</p>
+            </div>
+            <div className="bg-white/50 backdrop-blur-sm px-2 py-2 md:px-4 md:py-3 rounded-lg">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Trained Team</p>
+              <p className="text-xs text-black/70 hidden md:block">In-house guide</p>
+            </div>
+            <div className="bg-white/50 backdrop-blur-sm px-2 py-2 md:px-4 md:py-3 rounded-lg">
+              <p className="text-xs md:text-sm font-bold text-blue-900">Comfort-First</p>
+              <p className="text-xs text-black/70 hidden md:block">Zero judgment</p>
+            </div>
           </div>
 
           {/* CTA Buttons & Trust Badges */}
