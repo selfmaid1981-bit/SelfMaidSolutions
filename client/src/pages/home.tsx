@@ -1,18 +1,12 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
-import TrustBadges from '@/components/trust-badges';
 import { ServicesSection } from '@/components/services-section';
-import BeforeAfterGallery from '@/components/before-after-gallery';
-import { AboutSection } from '@/components/about-section';
 import { GoogleReviews } from '@/components/google-reviews';
 import { TestimonialsSection } from '@/components/testimonials-section';
-import { RecruitmentSection } from '@/components/recruitment-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
-import { ExitIntentPopup } from '@/components/exit-intent-popup';
-import { ReferralProgram } from '@/components/referral-program';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 // Structured data for local business - optimized for SEO, ChatGPT, and Google
 const structuredData = {
@@ -131,40 +125,21 @@ export default function Home() {
       <div className="min-h-screen bg-background">
         <Navigation />
         <HeroSection />
-        <TrustBadges />
-        <ServicesSection />
-        <BeforeAfterGallery />
-        <AboutSection />
         <GoogleReviews />
+        <ServicesSection />
         <TestimonialsSection />
-        <RecruitmentSection />
-        <ReferralProgram />
         <ContactSection />
         <Footer />
         
-        {/* Exit Intent Popup */}
-        <ExitIntentPopup />
-        
-        {/* Sticky Mobile CTA Bar */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t shadow-lg px-4 py-3 safe-area-pb">
-          <div className="flex gap-3 justify-center max-w-lg mx-auto">
-            <a 
-              href="tel:334-877-9513" 
-              className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl shadow-lg inline-flex items-center justify-center font-bold text-base hover:shadow-xl transition-all"
-              data-testid="sticky-call-cta"
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Call Now
-            </a>
-            <a 
-              href="sms:3348779513?body=Hi!%20I'm%20interested%20in%20a%20cleaning%20quote."
-              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-xl shadow-lg inline-flex items-center justify-center font-bold text-base hover:shadow-xl transition-all"
-              data-testid="sticky-text-cta"
-            >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Text Us
-            </a>
-          </div>
+        {/* Sticky Mobile CTA */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg px-4 py-3 safe-area-pb">
+          <a 
+            href="tel:334-877-9513" 
+            className="block w-full bg-blue-600 text-white py-3 rounded-full text-center font-semibold"
+          >
+            <Phone className="w-5 h-5 inline mr-2" />
+            Call (334) 877-9513
+          </a>
         </div>
       </div>
     </>
