@@ -21,7 +21,7 @@ export function HeroSection() {
           <img 
             src={mascotBanner} 
             alt="Super Sponge - Self-Maid Mascot flying through the sky" 
-            className="w-full h-full object-cover object-bottom"
+            className="w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-950"></div>
         </div>
