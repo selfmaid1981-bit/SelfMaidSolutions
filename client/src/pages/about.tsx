@@ -75,30 +75,30 @@ export default function About() {
           </div>
         </section>
 
-        {/* Founder Story Section */}
+        {/* Meet Michelle - Owner Bio Section */}
         <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 text-primary font-medium mb-4">
                   <Star className="w-5 h-5 fill-primary" />
-                  Our Story
+                  Meet The Owner
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
-                  From Humble Beginnings to Alabama's Trusted Cleaners
+                  Hi, I'm Michelle
                 </h2>
                 <div className="space-y-4 text-muted-foreground text-lg">
                   <p>
-                    Self-Maid Cleaning Solutions started in 2009 with a simple mission: to provide honest, reliable cleaning services that busy families and business owners could truly count on.
+                    I built Self-Maid Cleaning Solutions from the ground up with one goal in mind: <strong>to deliver a level of cleanliness, consistency, and professionalism that clients can feel the moment they walk into their space.</strong>
                   </p>
                   <p>
-                    What began as a one-person operation has grown into a trusted team serving hundreds of homes and businesses across Montgomery, Prattville, Selma, Homewood, Clanton, and surrounding Alabama communities.
+                    Over the years, I've worked with homes, offices, and commercial properties of all sizes, and I've learned how to tailor a cleaning plan that fits each client's lifestyle, schedule, and standards.
                   </p>
                   <p>
-                    As a <strong>family-owned business</strong>, we understand the trust you place in us when you invite us into your home. That's why every team member is personally vetted, background-checked, and trained to our high standards.
+                    I'm hands-on, detail-driven, and committed to doing things the right way the first time. My team is trained to follow the same high standards I built this business on — <strong>reliability, respect, and results you can trust.</strong>
                   </p>
                   <p>
-                    After 16 years, our commitment remains the same: treat every home like it's our own, and every customer like family.
+                    If you're looking for a cleaning service that's dependable, detail-oriented, and genuinely invested in your peace of mind, you're in the right place. I'd love to take care of your space so you can focus on everything else that matters.
                   </p>
                 </div>
               </div>
@@ -110,32 +110,30 @@ export default function About() {
                         <Award className="w-8 h-8 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-foreground">Our Values</h3>
-                        <p className="text-muted-foreground">What drives us every day</p>
+                        <h3 className="text-xl font-bold text-foreground">Why Work With Me?</h3>
+                        <p className="text-muted-foreground">What sets Self-Maid apart</p>
                       </div>
                     </div>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-foreground"><strong>Integrity</strong> — Honest pricing, no hidden fees</span>
+                    <ul className="space-y-4">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-foreground">You get a <strong>cleaning partner who treats your space like it's her own.</strong></span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-foreground"><strong>Excellence</strong> — Meticulous attention to detail</span>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-foreground">You get <strong>clear communication, consistent quality, and zero shortcuts.</strong></span>
                       </li>
-                      <li className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-foreground"><strong>Trust</strong> — Background-checked, insured team</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-foreground"><strong>Community</strong> — Proudly serving Central Alabama</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-foreground"><strong>Reliability</strong> — On time, every time</span>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-foreground">You get a company that's <strong>innovative, organized, and always improving</strong> to serve you better.</span>
                       </li>
                     </ul>
+                    <div className="mt-6 pt-6 border-t">
+                      <p className="text-sm text-muted-foreground italic">
+                        "I'm hands-on, detail-driven, and committed to doing things the right way the first time."
+                      </p>
+                      <p className="text-sm font-semibold text-foreground mt-2">— Michelle, Owner</p>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
