@@ -6,6 +6,7 @@ import { GoogleReviews } from '@/components/google-reviews';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
+import { ChatWidget } from '@/components/chat-widget';
 import { Phone } from 'lucide-react';
 
 // Structured data for local business - optimized for SEO, ChatGPT, and Google
@@ -142,6 +143,7 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <ChatWidget />
     </>
   );
 }

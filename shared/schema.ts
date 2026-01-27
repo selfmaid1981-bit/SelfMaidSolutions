@@ -226,3 +226,6 @@ export type Referral = typeof referrals.$inferSelect;
 export type InsertReferral = z.infer<typeof insertReferralSchema>;
 export type ReviewRequest = typeof reviewRequests.$inferSelect;
 export type InsertReviewRequest = z.infer<typeof insertReviewRequestSchema>;
+
+// Chat/Conversation models for AI assistant
+export * from "./models/chat";

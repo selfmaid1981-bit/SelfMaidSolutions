@@ -9,6 +9,7 @@ import { sendSMS } from "./twilio";
 import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
+import { registerAIChatRoutes } from "./ai-chat";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -38,6 +39,9 @@ function requireAdmin(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Register AI Chat routes
+  registerAIChatRoutes(app);
+
   // Get Stripe publishable key
   app.get("/api/stripe/public-key", async (req, res) => {
     try {
