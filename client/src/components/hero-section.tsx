@@ -44,7 +44,7 @@ export function HeroSection() {
               Superhero-Level Clean!
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              A Clean Home That Feels Like Peace of Mind
+              A Clean That Feels Like Home
             </h1>
             <p className="text-lg text-blue-100 mb-2">
               Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
