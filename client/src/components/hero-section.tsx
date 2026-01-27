@@ -16,34 +16,42 @@ export function HeroSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-950">
+      <section className="hero relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-950 min-h-[600px] md:min-h-[700px]">
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
         <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-10 md:mb-14">
-            <div className="md:flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4 animate-bounce">
-                <Sparkles className="w-4 h-4" />
-                Superhero-Level Clean!
-              </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-                A Clean Home That Feels Like Peace of Mind
-              </h1>
-              <p className="text-lg text-blue-100 mb-2">
-                Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
-              </p>
-              <p className="text-sm text-blue-200">
-                Serving Montgomery • Prattville • Selma • Homewood • Clanton
-              </p>
-            </div>
-            <div className="hero-mascot w-44 md:w-64 flex-shrink-0">
+          {/* Flying Mascot - Positioned Absolutely */}
+          <div className="hero-mascot hidden md:block">
+            <img 
+              src={mascot} 
+              alt="Super Sponge - Self-Maid Mascot" 
+              className="hero-flyer"
+            />
+          </div>
+
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+            {/* Mobile Mascot */}
+            <div className="md:hidden flex justify-center mb-6">
               <img 
                 src={mascot} 
                 alt="Super Sponge - Self-Maid Mascot" 
-                className="hero-flyer w-full h-auto"
+                className="w-32 h-auto drop-shadow-2xl animate-bounce"
               />
             </div>
+            <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
+              <Sparkles className="w-4 h-4" />
+              Superhero-Level Clean!
+            </div>
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+              A Clean Home That Feels Like Peace of Mind
+            </h1>
+            <p className="text-lg text-blue-100 mb-2">
+              Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
+            </p>
+            <p className="text-sm text-blue-200">
+              Serving Montgomery • Prattville • Selma • Homewood • Clanton
+            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-14">
