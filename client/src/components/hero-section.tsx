@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Home, Building, Key, Truck, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascot from '@assets/10AB3390-5933-4EB1-80AB-AC9BD5429CCB_1769510626226.png';
+import mascotBanner from '@assets/ChatGPT_Image_Jan_27,_2026,_05_57_05_AM_1769511552762.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+' },
@@ -16,33 +16,23 @@ export function HeroSection() {
 
   return (
     <>
-      <section className="hero relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-950 min-h-[600px] md:min-h-[700px]">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-        <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-          {/* Flying Mascot - Positioned Absolutely */}
-          <div className="hero-mascot hidden md:block">
-            <img 
-              src={mascot} 
-              alt="Super Sponge - Self-Maid Mascot" 
-              className="hero-flyer"
-            />
-          </div>
-
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-            {/* Mobile Mascot */}
-            <div className="md:hidden flex justify-center mb-6">
-              <img 
-                src={mascot} 
-                alt="Super Sponge - Self-Maid Mascot" 
-                className="w-32 h-auto drop-shadow-2xl animate-bounce"
-              />
-            </div>
-            <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
-              <Sparkles className="w-4 h-4" />
-              Superhero-Level Clean!
-            </div>
+      <section className="hero relative overflow-hidden">
+        <div className="relative w-full h-48 md:h-64 overflow-hidden">
+          <img 
+            src={mascotBanner} 
+            alt="Super Sponge - Self-Maid Mascot flying through the sky" 
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-950"></div>
+        </div>
+        
+        <div className="bg-gradient-to-b from-indigo-950 via-indigo-900 to-purple-950 pb-12 md:pb-20">
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
+            <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+              <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                <Sparkles className="w-4 h-4" />
+                Superhero-Level Clean!
+              </div>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
               A Clean That Feels Like Home
             </h1>
@@ -100,6 +90,7 @@ export function HeroSection() {
             <span className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
               ✓ Same-Day Available
             </span>
+          </div>
           </div>
         </div>
       </section>
