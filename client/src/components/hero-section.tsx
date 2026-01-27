@@ -36,11 +36,22 @@ export function HeroSection() {
                 Serving Montgomery • Prattville • Selma • Homewood • Clanton
               </p>
             </div>
-            <div className="w-48 md:w-64 flex-shrink-0">
+            <div className="w-48 md:w-64 flex-shrink-0 relative">
+              <style>{`
+                @keyframes float {
+                  0%, 100% { transform: translateY(0) rotate(-2deg); }
+                  50% { transform: translateY(-20px) rotate(2deg); }
+                }
+              `}</style>
               <img 
                 src={mascot} 
                 alt="Super Sponge - Self-Maid Mascot" 
-                className="w-full h-auto drop-shadow-2xl hover:scale-110 transition-transform duration-300"
+                className="w-full h-auto drop-shadow-2xl"
+                style={{ 
+                  animation: 'float 3s ease-in-out infinite',
+                  mixBlendMode: 'multiply',
+                  filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.3))'
+                }}
               />
             </div>
           </div>
