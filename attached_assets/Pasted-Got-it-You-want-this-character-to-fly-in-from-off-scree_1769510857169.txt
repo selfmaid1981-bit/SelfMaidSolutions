@@ -1,0 +1,146 @@
+Got it. You want this character to **fly in from off-screen, orbit the hero section, then settle in**, arms extended like Superman. Below is a **clean, production-ready animation plan** plus **CSS you can drop into a hero section**.
+
+---
+
+## Animation Concept (clear + effective)
+
+**Sequence**
+
+1. **Entry**
+
+   * Starts off-screen left or bottom-left.
+   * Scaled slightly smaller for depth.
+   * Arms already extended forward.
+
+2. **Fly-around**
+
+   * Smooth arc around the hero headline.
+   * Slight rotation to sell flight physics.
+   * Gentle bobbing, not jittery.
+
+3. **Settle / Idle**
+
+   * Comes to rest near logo or CTA.
+   * Subtle hover loop to stay alive.
+
+This keeps attention without stealing focus from conversions.
+
+---
+
+## HTML Structure
+
+```html
+<div class="hero">
+  <img
+    src="/images/cheese-hero.png"
+    alt="Hero Character"
+    class="hero-flyer"
+  />
+</div>
+```
+
+---
+
+## CSS Animation (Superman-style flight)
+
+```css
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.hero-flyer {
+  position: absolute;
+  width: 160px;
+  bottom: -200px;
+  left: -200px;
+  transform-origin: center;
+  animation:
+    flyIn 2.2s ease-out forwards,
+    hover 3s ease-in-out infinite 2.2s;
+}
+
+/* Main flight path */
+@keyframes flyIn {
+  0% {
+    transform: translate(-300px, 300px) scale(0.7) rotate(-20deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(60vw, -10vh) scale(1.05) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(45vw, 10vh) scale(1) rotate(0deg);
+  }
+}
+
+/* Idle hover */
+@keyframes hover {
+  0% {
+    transform: translate(45vw, 10vh);
+  }
+  50% {
+    transform: translate(45vw, 5vh);
+  }
+  100% {
+    transform: translate(45vw, 10vh);
+  }
+}
+```
+
+---
+
+## Optional Upgrade (More “fly-around” feel)
+
+If you want a **true curved orbit**, use `offset-path`:
+
+```css
+.hero-flyer {
+  offset-path: path("M -200 600 Q 400 100 900 300");
+  offset-rotate: auto;
+  animation: orbit 2.5s ease-out forwards;
+}
+
+@keyframes orbit {
+  to {
+    offset-distance: 100%;
+  }
+}
+```
+
+This feels premium and modern but check browser support if you have older audiences.
+
+---
+
+## UX + Business Reality Check
+
+* Keep animation **under 3 seconds**. Longer hurts conversions.
+* Delay hover loop until after entry finishes.
+* Disable animation on `prefers-reduced-motion`.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .hero-flyer {
+    animation: none;
+    transform: translate(45vw, 10vh);
+  }
+}
+```
+
+---
+
+## Next Level (if you want to monetize polish)
+
+* Lottie version for smoother vector motion
+* GSAP timeline for scroll-triggered hero reveals
+* Trigger animation only once per session
+
+If you want, tell me:
+
+* Framework (React, Webflow, plain HTML)
+* Desktop only or mobile-first
+* Static site or app
+
+I’ll tighten this into a drop-in component or animation package.

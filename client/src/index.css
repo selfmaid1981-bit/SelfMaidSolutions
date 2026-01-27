@@ -306,3 +306,10 @@ html {
     width: 140px;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-flyer {
+    animation: none;
+    transform: translate(0, 0);
+  }
+}
