@@ -26,11 +26,12 @@ export function Footer() {
   const serviceAreas = [
     'Montgomery, AL',
     'Prattville, AL', 
+    'Millbrook, AL',
+    'Wetumpka, AL',
+    'Alabaster, AL',
     'Selma, AL',
     'Homewood, AL',
     'Clanton, AL',
-    'Millbrook, AL',
-    'Wetumpka, AL',
     'Pike Road, AL'
   ];
 
