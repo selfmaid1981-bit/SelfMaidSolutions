@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Home, Building, Key, Truck, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascot from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1769508633444.png';
+import mascot from '@assets/10AB3390-5933-4EB1-80AB-AC9BD5429CCB_1769510626226.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+' },
@@ -37,25 +37,20 @@ export function HeroSection() {
                 Serving Montgomery • Prattville • Selma • Homewood • Clanton
               </p>
             </div>
-            <div className="w-40 md:w-56 flex-shrink-0 relative">
+            <div className="w-44 md:w-64 flex-shrink-0 relative">
               <style>{`
-                @keyframes fly {
-                  0% { transform: translate(0, 0) rotate(-5deg); }
-                  25% { transform: translate(10px, -15px) rotate(5deg); }
-                  50% { transform: translate(0, -25px) rotate(-3deg); }
-                  75% { transform: translate(-10px, -15px) rotate(3deg); }
-                  100% { transform: translate(0, 0) rotate(-5deg); }
+                @keyframes superheroFly {
+                  0%, 100% { transform: translate(0, 0) rotate(-3deg); }
+                  25% { transform: translate(15px, -20px) rotate(5deg); }
+                  50% { transform: translate(-5px, -35px) rotate(-2deg); }
+                  75% { transform: translate(-15px, -15px) rotate(3deg); }
                 }
               `}</style>
               <img 
                 src={mascot} 
                 alt="Super Sponge - Self-Maid Mascot" 
-                className="w-full h-auto rounded-3xl shadow-2xl"
-                style={{ 
-                  animation: 'fly 4s ease-in-out infinite',
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
-                  padding: '8px'
-                }}
+                className="w-full h-auto drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)]"
+                style={{ animation: 'superheroFly 5s ease-in-out infinite' }}
               />
             </div>
           </div>
