@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Phone, Calendar, Home, Building, Key, Truck } from 'lucide-react';
+import { Phone, Calendar, Home, Building, Key, Truck, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
+import mascot from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1769508633444.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+' },
@@ -18,17 +19,30 @@ export function HeroSection() {
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800">
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="text-center mb-10 md:mb-14">
-            <p className="text-sm font-medium text-blue-200 tracking-wide uppercase mb-3">
-              Montgomery • Prattville • Selma • Homewood • Clanton
-            </p>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              A Clean Home That Feels Like<br className="hidden md:block" /> Peace of Mind
-            </h1>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-              Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
-            </p>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-10 md:mb-14">
+            <div className="md:flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4 animate-bounce">
+                <Sparkles className="w-4 h-4" />
+                Superhero-Level Clean!
+              </div>
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                A Clean Home That Feels Like Peace of Mind
+              </h1>
+              <p className="text-lg text-blue-100 mb-2">
+                Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
+              </p>
+              <p className="text-sm text-blue-200">
+                Serving Montgomery • Prattville • Selma • Homewood • Clanton
+              </p>
+            </div>
+            <div className="w-48 md:w-64 flex-shrink-0">
+              <img 
+                src={mascot} 
+                alt="Super Sponge - Self-Maid Mascot" 
+                className="w-full h-auto drop-shadow-2xl hover:scale-110 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-14">
