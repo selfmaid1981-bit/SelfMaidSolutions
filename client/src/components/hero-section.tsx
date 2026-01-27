@@ -16,10 +16,10 @@ export function HeroSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-950">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-        <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-950">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-10 md:mb-14">
             <div className="md:flex-1 text-center md:text-left">
@@ -37,11 +37,25 @@ export function HeroSection() {
                 Serving Montgomery • Prattville • Selma • Homewood • Clanton
               </p>
             </div>
-            <div className="w-40 md:w-56 flex-shrink-0">
+            <div className="w-40 md:w-56 flex-shrink-0 relative">
+              <style>{`
+                @keyframes fly {
+                  0% { transform: translate(0, 0) rotate(-5deg); }
+                  25% { transform: translate(10px, -15px) rotate(5deg); }
+                  50% { transform: translate(0, -25px) rotate(-3deg); }
+                  75% { transform: translate(-10px, -15px) rotate(3deg); }
+                  100% { transform: translate(0, 0) rotate(-5deg); }
+                }
+              `}</style>
               <img 
                 src={mascot} 
                 alt="Super Sponge - Self-Maid Mascot" 
-                className="w-full h-auto rounded-full bg-white p-3 shadow-xl"
+                className="w-full h-auto rounded-3xl shadow-2xl"
+                style={{ 
+                  animation: 'fly 4s ease-in-out infinite',
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+                  padding: '8px'
+                }}
               />
             </div>
           </div>
