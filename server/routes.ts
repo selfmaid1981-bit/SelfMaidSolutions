@@ -10,6 +10,16 @@ import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
 import { registerAIChatRoutes } from "./ai-chat";
+import { 
+  getLeadsFromSheet, 
+  getCustomersFromSheet, 
+  addLeadToSheet, 
+  addCustomerToSheet, 
+  updateLeadStatus, 
+  createLeadsFunnelSpreadsheet, 
+  getFunnelStats,
+  syncContactsToSheet 
+} from "./googleSheetsClient";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -552,6 +562,140 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       res.status(500).json({ message: "Failed to send campaign: " + error.message });
+    }
+  });
+
+  // ===== Google Sheets Lead Funnel Routes =====
+  
+  // Create a new leads/customers spreadsheet
+  app.post("/api/sheets/create", requireAdmin, async (req, res) => {
+    try {
+      const result = await createLeadsFunnelSpreadsheet();
+      res.json({
+        success: true,
+        message: "Spreadsheet created successfully",
+        ...result
+      });
+    } catch (error: any) {
+      console.error('Error creating spreadsheet:', error);
+      res.status(500).json({ message: "Failed to create spreadsheet: " + error.message });
+    }
+  });
+
+  // Get leads from spreadsheet
+  app.get("/api/sheets/leads", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      const leads = await getLeadsFromSheet(spreadsheetId);
+      res.json({ leads });
+    } catch (error: any) {
+      console.error('Error getting leads:', error);
+      res.status(500).json({ message: "Failed to get leads: " + error.message });
+    }
+  });
+
+  // Get customers from spreadsheet
+  app.get("/api/sheets/customers", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      const customers = await getCustomersFromSheet(spreadsheetId);
+      res.json({ customers });
+    } catch (error: any) {
+      console.error('Error getting customers:', error);
+      res.status(500).json({ message: "Failed to get customers: " + error.message });
+    }
+  });
+
+  // Add a new lead
+  app.post("/api/sheets/leads", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      const lead = {
+        ...req.body,
+        dateAdded: req.body.dateAdded || new Date().toISOString().split('T')[0],
+        status: req.body.status || 'new',
+      };
+      await addLeadToSheet(spreadsheetId, lead);
+      res.json({ success: true, message: "Lead added successfully" });
+    } catch (error: any) {
+      console.error('Error adding lead:', error);
+      res.status(500).json({ message: "Failed to add lead: " + error.message });
+    }
+  });
+
+  // Add a new customer
+  app.post("/api/sheets/customers", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      await addCustomerToSheet(spreadsheetId, req.body);
+      res.json({ success: true, message: "Customer added successfully" });
+    } catch (error: any) {
+      console.error('Error adding customer:', error);
+      res.status(500).json({ message: "Failed to add customer: " + error.message });
+    }
+  });
+
+  // Update lead status
+  app.patch("/api/sheets/leads/:rowIndex/status", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      const rowIndex = parseInt(req.params.rowIndex);
+      const { status, lastContact } = req.body;
+      await updateLeadStatus(spreadsheetId, rowIndex, status, lastContact);
+      res.json({ success: true, message: "Lead status updated" });
+    } catch (error: any) {
+      console.error('Error updating lead status:', error);
+      res.status(500).json({ message: "Failed to update lead status: " + error.message });
+    }
+  });
+
+  // Get funnel statistics
+  app.get("/api/sheets/funnel-stats", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      const stats = await getFunnelStats(spreadsheetId);
+      res.json({ stats });
+    } catch (error: any) {
+      console.error('Error getting funnel stats:', error);
+      res.status(500).json({ message: "Failed to get funnel stats: " + error.message });
+    }
+  });
+
+  // Sync contacts from database to sheet
+  app.post("/api/sheets/sync-contacts", requireAdmin, async (req, res) => {
+    try {
+      const spreadsheetId = req.query.spreadsheetId as string;
+      if (!spreadsheetId) {
+        return res.status(400).json({ message: "spreadsheetId is required" });
+      }
+      // Use getAllEmailSubscribers which gets contacts from all sources
+      const contacts = await storage.getAllEmailSubscribers();
+      const syncedCount = await syncContactsToSheet(spreadsheetId, contacts);
+      res.json({ 
+        success: true, 
+        message: `Synced ${syncedCount} contacts to spreadsheet` 
+      });
+    } catch (error: any) {
+      console.error('Error syncing contacts:', error);
+      res.status(500).json({ message: "Failed to sync contacts: " + error.message });
     }
   });
 
