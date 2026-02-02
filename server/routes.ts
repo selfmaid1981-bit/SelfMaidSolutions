@@ -699,6 +699,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Send outreach emails to leads
+  app.post("/api/outreach/send", requireAdmin, async (req, res) => {
+    try {
+      const { leads, subject, template } = req.body;
+      
+      if (!leads || !Array.isArray(leads) || leads.length === 0) {
+        return res.status(400).json({ message: "leads array is required" });
+      }
+
+      const { getUncachableSendGridClient } = await import('./sendgrid');
+      const { client, fromEmail } = await getUncachableSendGridClient();
+      
+      const results = [];
+      
+      for (const lead of leads) {
+        if (!lead.email) {
+          results.push({ email: lead.email, status: 'skipped', reason: 'No email' });
+          continue;
+        }
+        
+        const firstName = lead.name ? lead.name.split(' ')[0] : 'there';
+        const city = lead.city || 'your area';
+        
+        const emailBody = template
+          .replace(/\[Name\]/g, lead.name || '')
+          .replace(/\[FirstName\]/g, firstName)
+          .replace(/\[Company\]/g, lead.company || '')
+          .replace(/\[City\]/g, city);
+        
+        const msg = {
+          to: lead.email,
+          from: fromEmail,
+          subject: subject || "Reliable Turnover Cleaning for Your Properties",
+          html: `<div style="font-family: Arial, sans-serif; line-height: 1.6;">${emailBody.replace(/\n/g, '<br>')}</div>`,
+          text: emailBody
+        };
+        
+        try {
+          await client.send(msg);
+          results.push({ email: lead.email, status: 'sent' });
+        } catch (error: any) {
+          results.push({ email: lead.email, status: 'failed', reason: error.message });
+        }
+      }
+      
+      const sent = results.filter(r => r.status === 'sent').length;
+      const failed = results.filter(r => r.status === 'failed').length;
+      
+      res.json({ 
+        success: true, 
+        message: `Sent ${sent} emails, ${failed} failed`,
+        results 
+      });
+    } catch (error: any) {
+      console.error('Error sending outreach:', error);
+      res.status(500).json({ message: "Failed to send outreach: " + error.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
