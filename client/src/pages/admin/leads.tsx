@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { queryClient, apiRequest } from '@/lib/queryClient';
-import { ArrowLeft, Plus, RefreshCw, Download, Users, TrendingUp, UserPlus, FileSpreadsheet, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Plus, RefreshCw, Download, Users, TrendingUp, UserPlus, FileSpreadsheet, ExternalLink, MessageSquare } from 'lucide-react';
 import { Link } from 'wouter';
 
 interface Lead {
@@ -265,9 +265,17 @@ export default function AdminLeads() {
                 Back to Campaigns
               </Button>
             </Link>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Lead Funnel</h1>
-              <p className="text-gray-500">Manage your leads and customers from Google Sheets</p>
+            <div className="flex items-center gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Lead Funnel</h1>
+                <p className="text-gray-500">Manage your leads and customers from Google Sheets</p>
+              </div>
+              <Link href="/admin/outreach">
+                <Button variant="outline" className="ml-auto">
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Outreach Templates
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="flex gap-2">
