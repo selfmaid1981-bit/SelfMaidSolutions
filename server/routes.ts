@@ -10,6 +10,7 @@ import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
 import { registerAIChatRoutes } from "./ai-chat";
+import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
 import { 
   getLeadsFromSheet, 
   getCustomersFromSheet, 
@@ -49,6 +50,10 @@ function requireAdmin(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up Replit Auth BEFORE other routes
+  await setupAuth(app);
+  registerAuthRoutes(app);
+  
   // Register AI Chat routes
   registerAIChatRoutes(app);
 
