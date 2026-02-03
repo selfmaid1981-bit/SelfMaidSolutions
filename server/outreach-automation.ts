@@ -4,6 +4,7 @@ import { getLeadsFromSheet, updateLeadStatus } from "./googleSheetsClient";
 const BUSINESS_PHONE = "(334) 877-9513";
 const BUSINESS_EMAIL = "selfmaidclean@outlook.com";
 const FROM_EMAIL = "selfmaidclean@outlook.com";
+const OWNER_NOTIFICATION_EMAIL = "selfmaid1981@gmail.com";
 
 let SPREADSHEET_ID = process.env.LEADS_SPREADSHEET_ID || "";
 
@@ -288,6 +289,19 @@ export interface OutreachRecord {
 
 const outreachRecords: Map<string, OutreachRecord> = new Map();
 
+async function notifyOwner(leadEmail: string, leadName: string, emailType: string) {
+  try {
+    await sendEmail({
+      to: OWNER_NOTIFICATION_EMAIL,
+      from: FROM_EMAIL,
+      subject: `[Outreach] ${emailType} sent to ${leadName}`,
+      html: `<p>FYI: An automated ${emailType} was sent to <strong>${leadName}</strong> (${leadEmail})</p>`,
+    });
+  } catch (error) {
+    console.log('[Outreach] Failed to notify owner:', error);
+  }
+}
+
 export async function sendInitialOutreach(lead: OutreachLead): Promise<boolean> {
   try {
     const template = lead.type === 'property_manager' 
@@ -300,6 +314,8 @@ export async function sendInitialOutreach(lead: OutreachLead): Promise<boolean> 
       subject: template.subject,
       html: template.html,
     });
+    
+    await notifyOwner(lead.email, lead.name, 'initial outreach');
     
     const record: OutreachRecord = {
       id: `outreach_${Date.now()}`,
@@ -362,6 +378,8 @@ export async function sendFollowUpEmails(): Promise<{ sent: number; errors: numb
           subject: template.subject,
           html: template.html,
         });
+        
+        await notifyOwner(email, record.leadName, newStatus.replace(/_/g, ' '));
         
         record.status = newStatus;
         record.updatedAt = now;
