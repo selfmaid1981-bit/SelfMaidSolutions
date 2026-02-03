@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Copy, Check, Mail, Phone, MessageSquare, Building2, Home, Users } from "lucide-react";
+import { ArrowLeft, Copy, Check, Mail, Phone, MessageSquare, Building2, Home, Users, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function OutreachTemplates() {
@@ -204,13 +204,20 @@ Would it be helpful if I sent you our services sheet to keep on hand for clients
           </Link>
         </div>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-            Outreach Templates
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400">
-            Copy and customize these proven templates for your lead outreach
-          </p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              Outreach Templates
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              Copy and customize these proven templates for your lead outreach
+            </p>
+          </div>
+          <Link href="/admin/automation">
+            <Button className="bg-green-600 hover:bg-green-700">
+              <Zap className="h-4 w-4 mr-2" /> Automate Emails
+            </Button>
+          </Link>
         </div>
 
         <Tabs defaultValue="property-managers" className="space-y-6">

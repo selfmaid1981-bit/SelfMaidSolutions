@@ -21,6 +21,7 @@ import MarketingMaterials from "@/pages/marketing-materials";
 import ViralMarketing from "@/pages/viral-marketing";
 import AdminLeads from "@/pages/admin/leads";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
+import OutreachAutomation from "@/pages/admin/automation";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -54,6 +55,7 @@ function Router() {
         <Route path="/admin/viral" component={ViralMarketing} />
         <Route path="/admin/leads" component={AdminLeads} />
         <Route path="/admin/outreach" component={OutreachTemplates} />
+        <Route path="/admin/automation" component={OutreachAutomation} />
         <Route component={NotFound} />
       </Switch>
     </>

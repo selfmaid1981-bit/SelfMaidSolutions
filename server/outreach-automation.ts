@@ -327,7 +327,8 @@ export async function sendFollowUpEmails(): Promise<{ sent: number; errors: numb
   let sent = 0;
   let errors = 0;
   
-  for (const [email, record] of outreachRecords) {
+  const entries = Array.from(outreachRecords.entries());
+  for (const [email, record] of entries) {
     if (record.status === 'responded' || record.status === 'converted' || record.status === 'unsubscribed') {
       continue;
     }

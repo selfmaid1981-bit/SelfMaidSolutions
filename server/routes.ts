@@ -21,6 +21,15 @@ import {
   getFunnelStats,
   syncContactsToSheet 
 } from "./googleSheetsClient";
+import { 
+  startOutreachAutomation, 
+  stopOutreachAutomation, 
+  getOutreachStats, 
+  getAllOutreachRecords,
+  processLeadsFromSheet,
+  sendFollowUpEmails,
+  setSpreadsheetId
+} from "./outreach-automation";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -106,6 +115,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ message: "Invalid username or password" });
       }
 
+      if (!userWithHash.passwordHash) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
       const isValidPassword = await storage.verifyPassword(password, userWithHash.passwordHash);
       
       if (!isValidPassword) {
@@ -760,6 +773,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error('Error sending outreach:', error);
       res.status(500).json({ message: "Failed to send outreach: " + error.message });
+    }
+  });
+
+  // Outreach Automation Routes
+  app.post("/api/admin/outreach/automation/start", requireAdmin, async (req, res) => {
+    try {
+      const { spreadsheetId, intervalMinutes = 60 } = req.body;
+      
+      if (spreadsheetId) {
+        setSpreadsheetId(spreadsheetId);
+      }
+      
+      startOutreachAutomation(intervalMinutes);
+      
+      res.json({ 
+        success: true, 
+        message: `Outreach automation started. Checking every ${intervalMinutes} minutes.` 
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to start automation: " + error.message });
+    }
+  });
+
+  app.post("/api/admin/outreach/automation/stop", requireAdmin, async (req, res) => {
+    try {
+      stopOutreachAutomation();
+      res.json({ success: true, message: "Outreach automation stopped" });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to stop automation: " + error.message });
+    }
+  });
+
+  app.get("/api/admin/outreach/stats", requireAdmin, async (req, res) => {
+    try {
+      const stats = getOutreachStats();
+      res.json(stats);
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to get stats: " + error.message });
+    }
+  });
+
+  app.get("/api/admin/outreach/records", requireAdmin, async (req, res) => {
+    try {
+      const records = getAllOutreachRecords();
+      res.json(records);
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to get records: " + error.message });
+    }
+  });
+
+  app.post("/api/admin/outreach/process-now", requireAdmin, async (req, res) => {
+    try {
+      const { spreadsheetId } = req.body;
+      
+      const sheetResults = await processLeadsFromSheet(spreadsheetId);
+      const followUpResults = await sendFollowUpEmails();
+      
+      res.json({ 
+        success: true,
+        leads: sheetResults,
+        followUps: followUpResults,
+        message: `Processed ${sheetResults.processed} leads, sent ${sheetResults.sent} initial + ${followUpResults.sent} follow-ups`
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to process: " + error.message });
     }
   });
 
