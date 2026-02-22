@@ -66,6 +66,225 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Register AI Chat routes
   registerAIChatRoutes(app);
 
+  // Dynamic Sitemap.xml - always serves fresh dates
+  app.get("/sitemap.xml", (req, res) => {
+    const today = new Date().toISOString().split('T')[0];
+    const domain = "https://selfmaidllc.com";
+    
+    const pages = [
+      { loc: "/", priority: "1.0", changefreq: "weekly" },
+      { loc: "/services", priority: "0.9", changefreq: "weekly" },
+      { loc: "/quote", priority: "0.9", changefreq: "monthly" },
+      { loc: "/booking", priority: "0.8", changefreq: "monthly" },
+      { loc: "/about", priority: "0.7", changefreq: "monthly" },
+      { loc: "/faq", priority: "0.7", changefreq: "monthly" },
+      { loc: "/blog", priority: "0.6", changefreq: "weekly" },
+      { loc: "/services/montgomery-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/prattville-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/millbrook-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/wetumpka-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/selma-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/homewood-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/clanton-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/pike-road-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/alabaster-al", priority: "0.8", changefreq: "monthly" },
+    ];
+
+    const urls = pages.map(p => `  <url>
+    <loc>${domain}${p.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join("\n");
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>`;
+
+    res.header("Content-Type", "application/xml");
+    res.send(sitemap);
+  });
+
+  // Server-side meta tag injection for SEO on service area pages
+  const serviceAreaMeta: Record<string, { title: string; description: string; canonical: string }> = {
+    "montgomery-al": {
+      title: "Cleaning Services Montgomery AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Top-rated cleaning services in Montgomery, Alabama. Residential, commercial, Airbnb, move-in/out cleaning. Serving Montgomery County since 2009. Insured & bonded. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/montgomery-al"
+    },
+    "prattville-al": {
+      title: "Cleaning Services Prattville AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Prattville, Alabama. Residential, commercial, Airbnb cleaning. Serving Autauga County since 2009. Insured & bonded. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/prattville-al"
+    },
+    "millbrook-al": {
+      title: "Cleaning Services Millbrook AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Millbrook, Alabama. Residential, commercial cleaning. Serving Elmore County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/millbrook-al"
+    },
+    "wetumpka-al": {
+      title: "Cleaning Services Wetumpka AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Wetumpka, Alabama. Residential, commercial cleaning. Serving Elmore County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/wetumpka-al"
+    },
+    "selma-al": {
+      title: "Cleaning Services Selma AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Selma, Alabama. Residential, commercial, move-in/out cleaning. Serving Dallas County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/selma-al"
+    },
+    "homewood-al": {
+      title: "Cleaning Services Homewood AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Homewood, Alabama. Residential, commercial cleaning. Serving Jefferson County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/homewood-al"
+    },
+    "clanton-al": {
+      title: "Cleaning Services Clanton AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Clanton, Alabama. Residential, commercial cleaning. Serving Chilton County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/clanton-al"
+    },
+    "pike-road-al": {
+      title: "Cleaning Services Pike Road AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Pike Road, Alabama. Residential cleaning for premium homes. Serving Montgomery County since 2009. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/pike-road-al"
+    },
+    "alabaster-al": {
+      title: "Cleaning Services Alabaster AL | House Cleaning & Maid Service | Self-Maid",
+      description: "Professional cleaning services in Alabaster, Alabama. Residential, commercial cleaning. Serving Shelby County since 2009. Fully insured. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/services/alabaster-al"
+    }
+  };
+
+  // Also inject meta for main pages crawlers visit
+  const pageMeta: Record<string, { title: string; description: string; canonical: string }> = {
+    "/services": {
+      title: "Professional Cleaning Services | Residential, Commercial, Airbnb | Self-Maid",
+      description: "View all cleaning services from Self-Maid: residential, deep cleaning, commercial, Airbnb, move-in/out, apartment turnover. Serving Montgomery, Prattville & Central Alabama.",
+      canonical: "https://selfmaidllc.com/services"
+    },
+    "/quote": {
+      title: "Get Instant Cleaning Quote | Free Estimate | Self-Maid Cleaning Solutions",
+      description: "Get an instant cleaning quote in under 60 seconds. No obligations. Residential, commercial, Airbnb cleaning. Serving Montgomery, Prattville & Central Alabama.",
+      canonical: "https://selfmaidllc.com/quote"
+    },
+    "/booking": {
+      title: "Book Cleaning Service Online | Self-Maid Cleaning Solutions",
+      description: "Book your professional cleaning service online. Easy scheduling, flexible payment options. Serving Montgomery, Prattville & Central Alabama. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/booking"
+    },
+    "/about": {
+      title: "About Self-Maid | Family-Owned Cleaning Company Since 2009 | Alabama",
+      description: "Learn about Self-Maid Cleaning Solutions - family-owned since 2009, 500+ satisfied customers, fully insured & bonded. Serving Montgomery, Prattville & Central Alabama.",
+      canonical: "https://selfmaidllc.com/about"
+    },
+    "/faq": {
+      title: "FAQ | Cleaning Services Questions | Self-Maid Cleaning Solutions",
+      description: "Common questions about Self-Maid cleaning services: pricing, scheduling, what's included, areas served. Montgomery, Prattville & Central Alabama. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/faq"
+    },
+    "/blog": {
+      title: "Cleaning Tips & Blog | Self-Maid Cleaning Solutions",
+      description: "Expert cleaning tips, home organization advice, and industry news from Self-Maid Cleaning Solutions. Serving Montgomery, Prattville & Central Alabama.",
+      canonical: "https://selfmaidllc.com/blog"
+    }
+  };
+
+  app.use((req, res, next) => {
+    const url = req.path;
+    let meta: { title: string; description: string; canonical: string } | undefined;
+
+    const serviceAreaMatch = url.match(/^\/services\/([a-z-]+)$/);
+    if (serviceAreaMatch) {
+      meta = serviceAreaMeta[serviceAreaMatch[1]];
+    } else {
+      meta = pageMeta[url];
+    }
+
+    if (meta) {
+      const injectMeta = (html: string) => {
+        return html
+          .replace(/<title>[^<]*<\/title>/, `<title>${meta!.title}</title>`)
+          .replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${meta!.description}"`)
+          .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${meta!.canonical}"`)
+          .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${meta!.title}"`)
+          .replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${meta!.description}"`)
+          .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${meta!.canonical}"`)
+          .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${meta!.title}"`)
+          .replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${meta!.description}"`);
+      };
+
+      const originalEnd = res.end.bind(res);
+      res.end = function(chunk?: any, ...args: any[]) {
+        if (typeof chunk === 'string' && chunk.includes('</head>')) {
+          chunk = injectMeta(chunk);
+        } else if (Buffer.isBuffer(chunk) && chunk.toString().includes('</head>')) {
+          chunk = Buffer.from(injectMeta(chunk.toString()));
+        }
+        return originalEnd(chunk, ...args);
+      } as any;
+
+      const originalSend = res.send.bind(res);
+      res.send = function(body: any) {
+        if (typeof body === 'string' && body.includes('</head>')) {
+          body = injectMeta(body);
+        }
+        return originalSend(body);
+      } as any;
+    }
+    next();
+  });
+
+  // Robots.txt served dynamically
+  app.get("/robots.txt", (req, res) => {
+    const robotsTxt = `User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+Sitemap: https://selfmaidllc.com/sitemap.xml
+Host: https://selfmaidllc.com`;
+
+    res.header("Content-Type", "text/plain");
+    res.send(robotsTxt);
+  });
+
   // Get Stripe publishable key
   app.get("/api/stripe/public-key", async (req, res) => {
     try {

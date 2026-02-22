@@ -62,6 +62,18 @@ The application features a premium, professional design using a refined slate/bl
 
 # Recent Changes
 
+## February 22, 2026 - Google Indexing & Service Area Landing Pages
+- **Dynamic Sitemap.xml**: Server-side endpoint (`/sitemap.xml`) generates fresh sitemap with today's date on every request. Includes all main pages plus 9 service area landing pages.
+- **Dynamic Robots.txt**: Server-side endpoint (`/robots.txt`) replaces static file. Includes all major search engine and AI crawler permissions.
+- **Service Area Landing Pages**: 9 SEO-optimized city-specific pages at `/services/:city`:
+  - Montgomery, Prattville, Millbrook, Wetumpka, Selma, Homewood, Clanton, Pike Road, Alabaster
+  - Each page has unique title, description, canonical URL, structured data, neighborhoods, ZIP codes, and nearby areas
+  - Component: `client/src/pages/service-area.tsx`
+- **Server-Side Meta Tag Injection**: Middleware in `server/routes.ts` intercepts HTML responses and replaces `<title>`, `<meta description>`, `<link canonical>`, Open Graph, and Twitter Card tags per-route so crawlers see correct metadata even without JavaScript
+- **Google Search Console Verification**: Meta tag placeholder added to `index.html` — user needs to replace `PENDING_VERIFICATION` with actual Google verification code
+- **Removed Static Files**: Deleted stale `client/public/sitemap.xml` and `client/public/robots.txt` to avoid conflicts with dynamic endpoints
+- **Static SEO Content**: Added service area page links to the static HTML content in `index.html` for crawlers to discover
+
 ## December 6, 2025 - Comprehensive Conversion & SEO Optimization
 - **Enhanced Static HTML Content**: Added comprehensive static content to index.html for improved SEO crawler visibility
   - Complete "About Self-Maid LLC" section with company history and values
