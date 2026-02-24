@@ -9,6 +9,7 @@ import { sendSMS } from "./twilio";
 import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
+import { startWeeklyReportScheduler, sendWeeklyReport, notifyQuotePageView } from "./weekly-report";
 import { registerAIChatRoutes } from "./ai-chat";
 import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
 import { 
@@ -1059,6 +1060,26 @@ Host: https://selfmaidllc.com`;
       res.status(500).json({ message: "Failed to process: " + error.message });
     }
   });
+
+  app.post("/api/track/quote-view", async (req, res) => {
+    try {
+      notifyQuotePageView();
+      res.json({ success: true });
+    } catch (error) {
+      res.json({ success: true });
+    }
+  });
+
+  app.post("/api/admin/weekly-report/send-now", requireAdmin, async (req, res) => {
+    try {
+      const success = await sendWeeklyReport();
+      res.json({ success, message: success ? "Report sent" : "Failed to send report" });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to send report: " + error.message });
+    }
+  });
+
+  startWeeklyReportScheduler();
 
   const httpServer = createServer(app);
   return httpServer;

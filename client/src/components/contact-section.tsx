@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -55,7 +55,6 @@ export function ContactSection() {
 
   const contactMutation = useMutation({
     mutationFn: (data: ContactFormData) => {
-      // Split name into firstName and lastName for backend compatibility
       const nameParts = data.name.trim().split(' ');
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || '';
@@ -94,29 +93,33 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: Phone,
+      label: 'Phone',
       value: '(334) 877-9513',
       href: 'tel:334-877-9513'
     },
     {
       icon: Mail,
+      label: 'Email',
       value: 'selfmaidclean@outlook.com',
       href: 'mailto:selfmaidclean@outlook.com'
     },
     {
       icon: MapPin,
+      label: 'Location',
       value: 'Montgomery & Prattville, AL',
       href: 'https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL'
     }
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-sky-200 via-blue-100 to-blue-200 dark:from-sky-900 dark:to-blue-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 dark:from-slate-900 dark:via-blue-950 dark:to-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Form and Title */}
           <div className="order-2 lg:order-1">
             <div className="mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                 Get in Touch with the Clean Team!
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -124,21 +127,20 @@ export function ContactSection() {
               </p>
             </div>
             
-            {/* Contact Form */}
-            <Card className="bg-white/90 dark:bg-gray-800 shadow-lg border-0 rounded-2xl backdrop-blur-sm">
+            <Card className="bg-white/95 dark:bg-gray-800/95 shadow-2xl border-0 rounded-2xl backdrop-blur-md">
               <CardContent className="p-8">
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="contact-form">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="contact-form">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 dark:text-gray-300">Name</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">Name</FormLabel>
                           <FormControl>
                             <Input 
                               {...field} 
-                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-11 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" 
                               data-testid="input-name" 
                             />
                           </FormControl>
@@ -152,12 +154,12 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">Email</FormLabel>
                           <FormControl>
                             <Input 
                               type="email" 
                               {...field} 
-                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-11 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" 
                               data-testid="input-email" 
                             />
                           </FormControl>
@@ -171,15 +173,15 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 dark:text-gray-300">
-                            Phone <span className="text-gray-500 text-sm">(optional)</span>
+                          <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
+                            Phone <span className="text-gray-400 text-sm font-normal">(optional)</span>
                           </FormLabel>
                           <FormControl>
                             <Input 
                               type="tel" 
                               {...field} 
                               value={field.value || ''} 
-                              className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-11 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" 
                               data-testid="input-phone" 
                             />
                           </FormControl>
@@ -193,13 +195,14 @@ export function ContactSection() {
                       name="serviceType"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">Service Type</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger 
-                                className="border-gray-200 dark:border-gray-600 rounded-lg" 
+                                className="border-gray-200 dark:border-gray-600 rounded-xl h-11" 
                                 data-testid="select-serviceType"
                               >
-                                <SelectValue placeholder="House Cleaning" />
+                                <SelectValue placeholder="Select a service..." />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -221,14 +224,14 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 dark:text-gray-300">Message</FormLabel>
+                          <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">Message</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
                               value={field.value || ''}
                               rows={4} 
                               placeholder="Tell us about your cleaning needs..."
-                              className="border-gray-200 dark:border-gray-600 rounded-lg resize-none"
+                              className="border-gray-200 dark:border-gray-600 rounded-xl resize-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                               data-testid="textarea-message"
                             />
                           </FormControl>
@@ -239,11 +242,18 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 rounded-xl text-lg shadow-lg transition-colors" 
+                      className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-200" 
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >
-                      {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                      {contactMutation.isPending ? (
+                        'Sending...'
+                      ) : (
+                        <span className="flex items-center justify-center gap-2">
+                          <Send className="w-5 h-5" />
+                          Send Message
+                        </span>
+                      )}
                     </Button>
                   </form>
                 </Form>
@@ -251,33 +261,31 @@ export function ContactSection() {
             </Card>
           </div>
           
-          {/* Right Side - Mascot and Contact Info */}
           <div className="order-1 lg:order-2 text-center lg:text-left">
-            {/* Mascot Character */}
             <div className="flex justify-center lg:justify-end mb-8">
               <div className="relative">
                 <img 
                   src={spongeHeroImage} 
                   alt="Shyne superhero sponge mascot holding phone - Contact us today!" 
-                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain"
+                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain drop-shadow-xl"
                   data-testid="contact-mascot-image"
                 />
               </div>
             </div>
             
-            {/* Contact Info */}
-            <div className="bg-slate-800/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/30">
               <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
                   return (
-                    <div key={index} className="flex items-center" data-testid={`contact-info-${index}`}>
-                      <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-4">
+                    <div key={index} className="flex items-center group" data-testid={`contact-info-${index}`}>
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-teal-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:from-blue-500/30 group-hover:to-teal-500/30 transition-all">
                         <Icon className="w-5 h-5 text-blue-300" />
                       </div>
                       <div className="text-left">
+                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">{info.label}</p>
                         {info.href ? (
                           <a 
                             href={info.href} 
@@ -296,10 +304,9 @@ export function ContactSection() {
                 })}
               </div>
               
-              {/* Google Maps Embed */}
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <h4 className="text-sm font-semibold text-white/80 mb-3">Service Areas</h4>
-                <div className="rounded-lg overflow-hidden shadow-lg">
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <h4 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">Service Areas</h4>
+                <div className="rounded-xl overflow-hidden shadow-lg">
                   <iframe
                     title="Self-Maid Cleaning Solutions Service Areas - Montgomery, Prattville, Selma, Alabama"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d426458.8894091447!2d-86.62654674999999!3d32.3617899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888e8194b0d481f9%3A0x8e1b511d354285ff!2sMontgomery%2C%20AL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
@@ -309,11 +316,11 @@ export function ContactSection() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="rounded-lg"
+                    className="rounded-xl"
                     data-testid="google-maps-embed"
                   />
                 </div>
-                <p className="text-xs text-white/60 mt-2 text-center">
+                <p className="text-xs text-slate-400 mt-3 text-center">
                   Serving Montgomery, Prattville, Selma, Homewood, Clanton & surrounding areas
                 </p>
               </div>

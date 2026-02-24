@@ -49,18 +49,18 @@ const reviews = [
 
 export function GoogleReviews() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/30">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-slate-50 dark:from-background dark:to-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-white shadow-md px-6 py-3 rounded-full mb-6">
-            <FaGoogle className="w-6 h-6 text-blue-500" />
-            <span className="font-bold text-lg">Google Reviews</span>
-            <div className="flex">
+          <div className="inline-flex items-center gap-3 bg-white dark:bg-slate-800 shadow-lg px-6 py-3.5 rounded-full mb-6 border border-slate-100 dark:border-slate-700">
+            <FaGoogle className="w-6 h-6" style={{ color: '#4285F4' }} />
+            <span className="font-bold text-lg text-slate-800 dark:text-white">Google Reviews</span>
+            <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                <Star key={star} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <span className="font-bold text-lg">5.0</span>
+            <span className="font-bold text-lg text-slate-800 dark:text-white">5.0</span>
           </div>
           
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -73,21 +73,22 @@ export function GoogleReviews() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {reviews.map((review, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300" data-testid={`google-review-${index}`}>
+            <Card key={index} className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-700/50 bg-white dark:bg-slate-800/80 rounded-2xl overflow-hidden" data-testid={`google-review-${index}`}>
+              <div className="h-1 bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500 opacity-60 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-md">
                     {review.avatar}
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">{review.name}</h4>
                     <div className="flex items-center gap-2">
-                      <div className="flex">
+                      <div className="flex gap-0.5">
                         {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-                      <span className="text-sm text-muted-foreground">{review.date}</span>
+                      <span className="text-xs text-muted-foreground">{review.date}</span>
                     </div>
                   </div>
                 </div>
@@ -102,7 +103,7 @@ export function GoogleReviews() {
             href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white border-2 border-primary text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 border-2 border-blue-500 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-xl font-bold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-md hover:shadow-lg"
             data-testid="view-all-reviews-button"
           >
             <FaGoogle className="w-5 h-5" />

@@ -104,6 +104,65 @@
   }
 }
 
+/* Hero Section Styles */
+.hero-gradient-bg {
+  background: linear-gradient(165deg, hsl(210, 60%, 12%) 0%, hsl(215, 50%, 18%) 30%, hsl(195, 45%, 15%) 70%, hsl(200, 40%, 10%) 100%);
+}
+
+.hero-dot-pattern {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hero-service-card {
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Navigation Styles */
+.nav-top {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, hsl(220, 90%, 56%), hsl(195, 80%, 50%));
+  border-radius: 1px;
+}
+
 .hero-bg {
   background: linear-gradient(135deg, hsl(220, 90%, 56%) 0%, hsl(158, 64%, 52%) 100%);
 }
@@ -203,26 +262,26 @@
 
 /* Mascot sprite positioning */
 .mascot-sprite {
-  background-size: 200% 200%; /* Scale to show 2x2 grid */
+  background-size: 200% 200%;
   background-repeat: no-repeat;
   border-radius: 0.5rem;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .mascot-thumbs-up {
-  background-position: 0% 0%; /* Top left */
+  background-position: 0% 0%;
 }
 
 .mascot-running {
-  background-position: 100% 0%; /* Top right */
+  background-position: 100% 0%;
 }
 
 .mascot-flexing {
-  background-position: 0% 100%; /* Bottom left */
+  background-position: 0% 100%;
 }
 
 .mascot-pointing {
-  background-position: 100% 100%; /* Bottom right */
+  background-position: 100% 100%;
 }
 
 /* Mobile Safe Area for sticky footer CTA */

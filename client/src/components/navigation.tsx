@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,13 @@ import logoImage from '@assets/SMLLC LOGO_1761598219650.png';
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -28,11 +35,11 @@ export function Navigation() {
   };
 
   return (
-    <nav className="glass-effect shadow-lg sticky top-0 z-50 border-b border-white/20">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : 'nav-top'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-18 lg:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3 text-xl font-bold text-primary hover:opacity-90 transition-all transform hover:scale-105" data-testid="logo-link">
+            <Link href="/" className="flex items-center gap-3 text-xl font-bold text-primary hover:opacity-90 transition-all" data-testid="logo-link">
               <img 
                 src={logoImage} 
                 alt="Self-Maid Cleaning Logo" 
@@ -44,13 +51,14 @@ export function Navigation() {
           </div>
           
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                item.href.startsWith('#') ? (
+            <div className="ml-10 flex items-center gap-1">
+              {navItems.map((item) => {
+                const isActive = location === item.href;
+                return item.href.startsWith('#') ? (
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-colors"
+                    className="nav-link relative text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-[15px] font-medium transition-colors"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -59,20 +67,20 @@ export function Navigation() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`px-3 py-2 rounded-md text-lg font-medium transition-colors ${
-                      location === item.href 
-                        ? 'text-primary' 
+                    className={`nav-link relative px-3 py-2 rounded-md text-[15px] font-medium transition-colors ${
+                      isActive 
+                        ? 'text-primary nav-active' 
                         : 'text-muted-foreground hover:text-primary'
                     }`}
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
                   </Link>
-                )
-              ))}
+                );
+              })}
               <a 
                 href="tel:334-877-9513" 
-                className="premium-button text-white px-6 py-3 rounded-xl text-base font-bold inline-flex items-center group"
+                className="premium-button text-white px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center group ml-2"
                 data-testid="nav-phone"
               >
                 <Phone className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
@@ -94,46 +102,48 @@ export function Navigation() {
         </div>
       </div>
       
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-card border-t border-border">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              item.href.startsWith('#') ? (
-                <button
-                  key={item.href}
-                  onClick={() => {
-                    scrollToSection(item.href);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-muted-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                  data-testid={`mobile-nav-${item.label.toLowerCase()}`}
-                >
-                  {item.label}
-                </button>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid={`mobile-nav-${item.label.toLowerCase()}`}
-                >
-                  {item.label}
-                </Link>
-              )
-            ))}
-            <a 
-              href="tel:334-877-9513" 
-              className="bg-primary text-primary-foreground block px-3 py-2 rounded-md text-base font-medium text-center"
-              data-testid="mobile-nav-phone"
-            >
-              <Phone className="w-4 h-4 mr-2 inline" />
-              (334) 877-9513
-            </a>
-          </div>
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="bg-card/95 backdrop-blur-lg border-t border-border/50 px-4 pt-3 pb-4 space-y-1">
+          {navItems.map((item) => {
+            const isActive = location === item.href;
+            return item.href.startsWith('#') ? (
+              <button
+                key={item.href}
+                onClick={() => {
+                  scrollToSection(item.href);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-muted-foreground hover:text-primary hover:bg-primary/5 block px-4 py-3 rounded-lg text-base font-medium w-full text-left transition-colors"
+                data-testid={`mobile-nav-${item.label.toLowerCase()}`}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                  isActive
+                    ? 'text-primary bg-primary/10 font-semibold'
+                    : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid={`mobile-nav-${item.label.toLowerCase()}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <a 
+            href="tel:334-877-9513" 
+            className="premium-button text-white block px-4 py-3 rounded-xl text-base font-bold text-center mt-2"
+            data-testid="mobile-nav-phone"
+          >
+            <Phone className="w-4 h-4 mr-2 inline" />
+            (334) 877-9513
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
 import { SEOHead } from '@/components/ui/seo-head';
@@ -56,6 +56,14 @@ export default function Quote() {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [serviceType, setServiceType] = useState('');
+
+  useEffect(() => {
+    fetch('/api/track/quote-view', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ referrer: document.referrer || null }),
+    }).catch(() => {});
+  }, []);
   const [size, setSize] = useState('');
   const [frequency, setFrequency] = useState('onetime');
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
@@ -215,13 +223,13 @@ export default function Quote() {
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero Section */}
-        <section className="bg-primary/5 py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
-              <Calculator className="w-8 h-8 text-primary" />
+        <section className="bg-gradient-to-br from-blue-50 via-sky-50 to-teal-50 dark:from-slate-900 dark:via-sky-950 dark:to-slate-900 py-14 lg:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl mb-6 shadow-lg">
+              <Calculator className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-5">
               Get Your Free Quote
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -234,11 +242,10 @@ export default function Quote() {
         <section className="py-16 lg:py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Form Section */}
               <div>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Calculate Your Quote</CardTitle>
+                <Card className="rounded-2xl shadow-lg border-slate-200/50 dark:border-slate-700/50">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl font-bold">Calculate Your Quote</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     {/* Service Type */}
@@ -381,18 +388,17 @@ export default function Quote() {
                 </Card>
               </div>
 
-              {/* Quote Display */}
               <div>
-                <Card className="sticky top-24">
-                  <CardHeader>
-                    <CardTitle>Your Estimated Quote</CardTitle>
+                <Card className="sticky top-24 rounded-2xl shadow-lg border-slate-200/50 dark:border-slate-700/50">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl font-bold">Your Estimated Quote</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {showQuote && serviceType && (serviceType === 'studentdorm' ? Number(numberOfRooms) > 0 : (size || Number(customSqFt) > 0)) ? (
                       <div className="space-y-6">
-                        <div className="text-center py-8 border-b">
-                          <p className="text-sm text-muted-foreground mb-2">Estimated Total</p>
-                          <p className="text-5xl font-bold text-primary" data-testid="quote-total">
+                        <div className="text-center py-8 bg-gradient-to-br from-blue-50 to-teal-50 dark:from-slate-800 dark:to-slate-700 rounded-xl -mx-2">
+                          <p className="text-sm text-muted-foreground mb-2 font-medium">Estimated Total</p>
+                          <p className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent" data-testid="quote-total">
                             ${quote}
                           </p>
                           <p className="text-sm text-muted-foreground mt-2">
