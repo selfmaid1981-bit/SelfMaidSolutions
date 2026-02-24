@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Phone, Calendar, Home, Building, Key, Truck, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, Calendar, Home, Building, Key, Truck, Sparkles, Star, Shield, Zap, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import battleBanner from '@assets/5A9D2FCC-A812-4180-B091-0B10400A0E52_1771957028664.png';
+import heroCharacter from '@assets/C35B6F6D-FBA3-4D14-B4FC-B7466FFAC89B_1771957028664.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+', gradient: 'from-blue-500 to-cyan-400' },
@@ -11,103 +11,181 @@ const services = [
   { id: 'moveout', icon: Truck, title: 'Move In/Out', price: '$150+', gradient: 'from-violet-500 to-purple-400' },
 ];
 
+function AnimatedCounter({ target, suffix = '' }: { target: string; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const numericTarget = parseInt(target.replace(/[^0-9]/g, ''));
+
+  useEffect(() => {
+    let frame: number;
+    const duration = 2000;
+    const start = performance.now();
+
+    function animate(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * numericTarget));
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    }
+
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [numericTarget]);
+
+  return <>{count}{suffix}</>;
+}
+
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   return (
     <>
-      <section className="hero relative overflow-hidden">
-        <div className="relative w-full h-56 md:h-72 overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
-          <div className="particles-bg">
-            <div className="particle" /><div className="particle" /><div className="particle" />
-            <div className="particle" /><div className="particle" /><div className="particle" />
-          </div>
-          <img 
-            src={battleBanner} 
-            alt="The Dustice League - Self-Maid superhero team battling grime" 
-            className="w-full h-full object-contain relative z-10 motion-float-slow"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 z-20"></div>
-          <div className="absolute top-4 left-4 w-3 h-3 rounded-full bg-blue-400/40 motion-pulse" />
-          <div className="absolute top-12 right-8 w-2 h-2 rounded-full bg-amber-400/50 motion-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-8 left-16 w-2 h-2 rounded-full bg-teal-400/40 motion-pulse" style={{ animationDelay: '2s' }} />
+      <section className="hero-viral relative overflow-hidden min-h-[90vh] flex items-center">
+        <div className="hero-mesh-bg absolute inset-0" />
+        <div className="hero-noise absolute inset-0" />
+
+        <div className="particles-bg">
+          <div className="particle" /><div className="particle" /><div className="particle" />
+          <div className="particle" /><div className="particle" /><div className="particle" />
+          <div className="particle" /><div className="particle" />
         </div>
-        
-        <div className="hero-gradient-bg relative pb-12 md:pb-20">
-          <div className="hero-dot-pattern absolute inset-0 pointer-events-none"></div>
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
-            <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold mb-5 shadow-lg shadow-amber-400/20 shimmer">
-                <Sparkles className="w-4 h-4 motion-pulse" />
-                Superhero-Level Clean!
+
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl motion-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl motion-pulse" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/8 rounded-full blur-2xl motion-pulse" style={{ animationDelay: '3s' }} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 hero-badge-glow">
+                <Zap className="w-4 h-4 text-amber-400" />
+                <span className="gradient-text-animated font-bold">Alabama's #1 Cleaning Heroes</span>
               </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
-              A Clean That Feels Like Home
-            </h1>
-            <p className="text-lg text-blue-100/90 mb-2">
-              Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
-            </p>
-            <p className="text-sm text-blue-200/70">
-              Serving Montgomery · Prattville · Millbrook · Wetumpka · Alabaster & More
-            </p>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-14">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <button
-                  key={service.id}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] tracking-tight">
+                <span className="block">A Clean That</span>
+                <span className="block hero-headline-gradient">Feels Like</span>
+                <span className="block hero-headline-gradient">Home.</span>
+              </h1>
+
+              <p className="text-lg md:text-xl text-blue-100/80 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                <Button
                   onClick={() => setIsBookingModalOpen(true)}
-                  className="hero-service-card group relative bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl hover:bg-white/20 transition-all duration-300 text-center hover:-translate-y-1"
+                  className="hero-cta-primary group px-8 py-6 rounded-2xl font-bold h-auto text-lg"
                 >
-                  <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300 shadow-md`}>
-                    <Icon className="w-6 h-6 text-white" />
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Get Your Free Quote
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <a
+                  href="tel:334-877-9513"
+                  className="inline-flex items-center justify-center px-8 py-6 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <Phone className="w-5 h-5 mr-2 text-emerald-400" />
+                  (334) 877-9513
+                </a>
+              </div>
+
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
+                <div className="flex items-center gap-2 text-white/70 text-sm">
+                  <Shield className="w-4 h-4 text-emerald-400" />
+                  <span>Fully Insured</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70 text-sm">
+                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  <span>5-Star Rated</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70 text-sm">
+                  <Sparkles className="w-4 h-4 text-blue-400" />
+                  <span>Same-Day Available</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
+                <div className="hero-stat-card text-center">
+                  <div className="text-2xl md:text-3xl font-extrabold text-white"><AnimatedCounter target="500" suffix="+" /></div>
+                  <div className="text-[11px] text-blue-200/60 font-medium uppercase tracking-wider mt-1">Happy Clients</div>
+                </div>
+                <div className="hero-stat-card text-center">
+                  <div className="text-2xl md:text-3xl font-extrabold text-white"><AnimatedCounter target="16" /></div>
+                  <div className="text-[11px] text-blue-200/60 font-medium uppercase tracking-wider mt-1">Years Experience</div>
+                </div>
+                <div className="hero-stat-card text-center">
+                  <div className="text-2xl md:text-3xl font-extrabold text-white">24/7</div>
+                  <div className="text-[11px] text-blue-200/60 font-medium uppercase tracking-wider mt-1">Support</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+              <div className="relative hero-character-container">
+                <div className="absolute inset-0 hero-character-glow" />
+                <div className="absolute -inset-8 rounded-full bg-gradient-to-tr from-blue-500/20 via-transparent to-purple-500/20 blur-2xl motion-pulse" />
+                <img
+                  src={heroCharacter}
+                  alt="Self-Maid Cleaning Superhero - Professional cleaning with superpowers"
+                  className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto hero-character-float drop-shadow-2xl"
+                />
+                <div className="absolute top-8 -left-4 hero-floating-badge">
+                  <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-xl">
+                    <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
+                      <Star className="w-4 h-4 text-white fill-white" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-slate-900">5.0 Rating</div>
+                      <div className="text-[10px] text-slate-500">500+ Reviews</div>
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-white mb-1">{service.title}</h3>
-                  <p className="text-amber-300 font-bold text-xl">{service.price}</p>
-                </button>
-              );
-            })}
+                </div>
+                <div className="absolute bottom-12 -right-4 hero-floating-badge" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-xl">
+                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg flex items-center justify-center">
+                      <Shield className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-slate-900">100% Insured</div>
+                      <div className="text-[10px] text-slate-500">Peace of Mind</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="tel:334-877-9513" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/95 backdrop-blur-sm text-slate-800 rounded-full font-bold text-lg hover:bg-white transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-300"
-            >
-              <Phone className="w-5 h-5 mr-2 text-blue-600" />
-              (334) 877-9513
-            </a>
-            <Button 
-              onClick={() => setIsBookingModalOpen(true)}
-              className="px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-900 rounded-full font-bold h-auto text-lg shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <Calendar className="w-5 h-5 mr-2" />
-              Get Your Free Quote
-            </Button>
+          <div className="mt-12 md:mt-16">
+            <p className="text-center text-blue-200/40 text-xs font-semibold tracking-widest uppercase mb-6">Our Services</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 stagger-in">
+              {services.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <button
+                    key={service.id}
+                    onClick={() => setIsBookingModalOpen(true)}
+                    className="hero-service-card-viral group relative p-4 md:p-5 rounded-2xl text-center hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className={`w-11 h-11 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300 shadow-md`}>
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-white text-sm mb-1">{service.title}</h3>
+                    <p className="text-amber-300 font-bold text-lg">{service.price}</p>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-center mt-8">
-            <span className="hero-trust-badge">
-              <svg className="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Fully Insured
-            </span>
-            <span className="hero-trust-badge">
-              <svg className="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Background-Checked
-            </span>
-            <span className="hero-trust-badge">
-              <svg className="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Same-Day Available
-            </span>
-          </div>
-          </div>
+          <p className="text-center text-blue-200/50 text-sm mt-8">
+            Serving Montgomery · Prattville · Millbrook · Wetumpka · Alabaster · Selma · Homewood · Clanton & More
+          </p>
         </div>
       </section>
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={() => setIsBookingModalOpen(false)} 
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
       />
     </>
   );
