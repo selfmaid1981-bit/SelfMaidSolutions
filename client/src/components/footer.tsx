@@ -1,6 +1,7 @@
 import { Link } from 'wouter';
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaGoogle, FaYelp } from 'react-icons/fa';
+import fullLogoImage from '@assets/Designer_(1)_1771958986136.png';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -64,7 +65,13 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Self-Maid Cleaning Solutions</h3>
+            <div className="mb-5">
+              <img
+                src={fullLogoImage}
+                alt="Self-Maid Cleaning Services LLC Logo"
+                className="h-28 w-auto object-contain"
+              />
+            </div>
             <p className="text-slate-400 mb-6 leading-relaxed max-w-sm">
               Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
             </p>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logoImage from '@assets/SMLLC LOGO_1761598219650.png';
+import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,16 +39,18 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-18 lg:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-3 text-xl font-bold text-primary hover:opacity-90 transition-all" data-testid="logo-link">
-              <img 
-                src={logoImage} 
-                alt="Self-Maid Cleaning Logo" 
-                className="h-12 w-auto rounded-full"
-                data-testid="logo-image"
-              />
-              <div className="hidden sm:flex flex-col">
-                <span className="font-serif text-2xl text-primary leading-tight" data-testid="brand-text">Self-Maid</span>
-                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase text-muted-foreground">Cleaning Solutions</span>
+            <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity" data-testid="logo-link">
+              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 shadow-lg ring-2 ring-yellow-400/40">
+                <img 
+                  src={mascotImage} 
+                  alt="Self-Maid Sponge Hero Mascot" 
+                  className="w-full h-full object-cover object-[center_20%] scale-110"
+                  data-testid="logo-image"
+                />
+              </div>
+              <div className="hidden sm:flex flex-col gap-0.5">
+                <span className="logo-brand-text font-serif text-[22px] font-black leading-none tracking-tight" data-testid="brand-text">Self-Maid</span>
+                <span className="logo-sub-text text-[9px] font-sans font-bold tracking-[0.22em] uppercase">Cleaning Solutions</span>
               </div>
             </Link>
           </div>
