@@ -12,22 +12,6 @@ const testimonials = [
   },
   {
     id: 2,
-    text: "Great service for our Airbnb property. Fast turnaround between guests and always spotless. They helped us maintain 5-star ratings. Highly recommend for property managers!",
-    author: "Mike Thompson",
-    location: "Prattville, AL",
-    initials: "MT",
-    service: "Airbnb Cleaning"
-  },
-  {
-    id: 3,
-    text: "Reliable office cleaning service. Our workplace has never been cleaner, and their team is always professional and trustworthy. Best decision we made for our business!",
-    author: "Lisa Martinez",
-    location: "Montgomery, AL",
-    initials: "LM",
-    service: "Commercial Cleaning"
-  },
-  {
-    id: 4,
     text: "They helped me get my full deposit back when I moved out! The landlord was impressed with how spotless everything was. Worth every penny!",
     author: "David Chen",
     location: "Selma, AL",
@@ -35,15 +19,7 @@ const testimonials = [
     service: "Move-Out Cleaning"
   },
   {
-    id: 5,
-    text: "I was skeptical at first, but after 16 years in business they clearly know what they're doing. My elderly mother's home sparkles and she feels safe with their team.",
-    author: "Jennifer Williams",
-    location: "Montgomery, AL",
-    initials: "JW",
-    service: "Residential Cleaning"
-  },
-  {
-    id: 6,
+    id: 3,
     text: "Same-day service saved me when I had last-minute guests coming! They arrived within hours and made my home look amazing. Will definitely use again!",
     author: "Robert Anderson",
     location: "Prattville, AL",
@@ -54,14 +30,14 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden section-gradient-teal">
+    <section className="py-10 lg:py-16 relative overflow-hidden section-gradient-teal">
       <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.5) 1px, transparent 0)', backgroundSize: '28px 28px' }} />
       <div className="absolute top-10 right-10 w-80 h-80 bg-teal-400/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-72 h-72 bg-blue-400/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-14">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 px-5 py-2.5 rounded-full mb-5 shadow-sm">
             <Star className="w-5 h-5 text-yellow-500 dark:text-yellow-400 fill-yellow-500 dark:fill-yellow-400 mr-2" />
             <span className="text-yellow-800 dark:text-yellow-400 font-bold text-sm tracking-wide">500+ Five-Star Reviews</span>
@@ -74,7 +50,7 @@ export function TestimonialsSection() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {testimonials.map((testimonial) => (
             <Card 
               key={testimonial.id} 

@@ -27,41 +27,17 @@ const reviews = [
     avatar: "JT",
     avatarGradient: "from-violet-500 to-purple-600"
   },
-  {
-    name: "David & Lisa K.",
-    rating: 5,
-    date: "1 week ago",
-    text: "We've tried several cleaning services and Self-Maid is by far the best. They're reliable, trustworthy, and our house has never looked better. The bi-weekly service is a game changer!",
-    avatar: "DK",
-    avatarGradient: "from-rose-500 to-pink-600"
-  },
-  {
-    name: "Amanda P.",
-    rating: 5,
-    date: "2 months ago",
-    text: "Fantastic Airbnb turnaround service! They handle all our rental properties in Prattville. Quick, efficient, and guests always comment on how clean the places are. 5 stars!",
-    avatar: "AP",
-    avatarGradient: "from-amber-500 to-orange-600"
-  },
-  {
-    name: "Robert H.",
-    rating: 5,
-    date: "3 weeks ago",
-    text: "Professional, friendly, and incredibly detailed. They cleaned areas I didn't even think about. The team was respectful of our home and pets. Couldn't be happier!",
-    avatar: "RH",
-    avatarGradient: "from-cyan-500 to-blue-600"
-  }
 ];
 
 export function GoogleReviews() {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden section-gradient-blue">
+    <section className="py-10 lg:py-14 relative overflow-hidden section-gradient-blue">
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.6) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-300/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 bg-white dark:bg-slate-800 shadow-lg px-6 py-3.5 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
             <FaGoogle className="w-6 h-6 flex-shrink-0" style={{ color: '#4285F4' }} />
             <span className="font-bold text-slate-800 dark:text-white">Google Reviews</span>

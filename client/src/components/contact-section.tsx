@@ -112,7 +112,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24 relative overflow-hidden section-gradient-blue">
+    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden section-gradient-blue">
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(29 78 216 / 0.6) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
       <div className="absolute top-20 right-20 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-64 h-64 bg-teal-300/15 rounded-full blur-2xl pointer-events-none" />
