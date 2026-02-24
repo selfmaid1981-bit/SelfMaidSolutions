@@ -104,6 +104,32 @@
   }
 }
 
+/* Page Hero — Bold Gradient (used on all inner pages) */
+.page-hero {
+  background: linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(217, 55%, 13%) 35%, hsl(199, 60%, 12%) 65%, hsl(222, 47%, 9%) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 50%, rgba(59, 130, 246, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 40%, rgba(6, 182, 212, 0.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
 /* Hero Section — Viral Modern */
 .hero-viral {
   background: linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(220, 50%, 12%) 25%, hsl(230, 45%, 10%) 50%, hsl(210, 55%, 8%) 75%, hsl(250, 40%, 10%) 100%);

@@ -12,9 +12,9 @@ interface WeeklyStats {
   totalQuotes: number;
   totalReviewRequests: number;
   totalRevenue: number;
-  recentContacts: { name: string; email: string; serviceType: string; createdAt: Date }[];
-  recentBookings: { name: string; serviceType: string; amount: number; status: string; createdAt: Date }[];
-  recentQuotes: { name: string; serviceType: string; estimatedPrice: number; createdAt: Date }[];
+  recentContacts: { name: string; email: string; serviceType: string; createdAt: Date | null }[];
+  recentBookings: { name: string; serviceType: string; amount: number; status: string; createdAt: Date | null }[];
+  recentQuotes: { name: string; serviceType: string; estimatedPrice: number; createdAt: Date | null }[];
 }
 
 async function getWeeklyStats(): Promise<WeeklyStats> {
@@ -95,7 +95,8 @@ async function getWeeklyStats(): Promise<WeeklyStats> {
   };
 }
 
-function formatDate(date: Date): string {
+function formatDate(date: Date | null): string {
+  if (!date) return 'Unknown';
   return new Date(date).toLocaleDateString('en-US', {
     month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'
   });

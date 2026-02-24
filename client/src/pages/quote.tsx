@@ -223,16 +223,15 @@ export default function Quote() {
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        <section className="bg-gradient-to-br from-blue-50 via-sky-50 to-teal-50 dark:from-slate-900 dark:via-sky-950 dark:to-slate-900 py-14 lg:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+        <section className="page-hero py-14 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl mb-6 shadow-lg">
-              <Calculator className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl mb-6">
+              <Calculator className="w-8 h-8 text-teal-300" />
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-5">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Get Your Free Quote
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
               Transparent pricing with no hidden fees. Calculate your cleaning service cost instantly based on your specific needs.
             </p>
           </div>

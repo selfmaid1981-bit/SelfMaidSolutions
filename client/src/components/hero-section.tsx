@@ -181,6 +181,12 @@ export function HeroSection() {
             Serving Montgomery · Prattville · Millbrook · Wetumpka · Alabaster · Selma · Homewood · Clanton & More
           </p>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" style={{ height: 60 }}>
+            <path d="M0 60L60 50C120 40 240 20 360 15C480 10 600 20 720 25C840 30 960 30 1080 25C1200 20 1320 10 1380 5L1440 0V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z" fill="hsl(var(--background))"/>
+          </svg>
+        </div>
       </section>
       <BookingModal
         isOpen={isBookingModalOpen}

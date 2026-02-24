@@ -96,9 +96,13 @@ export function Footer() {
                 );
               })}
             </div>
-            <div className="inline-flex items-center bg-slate-800 rounded-lg px-3 py-2 text-sm">
-              <span className="bg-green-500 text-white px-2 py-0.5 rounded text-xs font-bold mr-2">5.0 ★</span>
-              <span className="text-slate-300">500+ Reviews</span>
+            <div className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm shadow-sm">
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => <span key={i} className="text-amber-400 text-xs">★</span>)}
+              </div>
+              <span className="text-slate-300 font-medium">5.0</span>
+              <span className="text-slate-500">·</span>
+              <span className="text-slate-400 text-xs">500+ Reviews</span>
             </div>
           </div>
           
@@ -207,14 +211,14 @@ export function Footer() {
           </details>
         </div>
 
-        <div className="border-t border-slate-800 py-6">
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-500 mb-4">
-            <span>✓ Fully Insured</span>
-            <span>✓ Bonded</span>
-            <span>✓ Background Checked</span>
-            <span>✓ Eco-Friendly</span>
-            <span>✓ 16 Years Experience</span>
-            <span>✓ 100% Satisfaction Guarantee</span>
+        <div className="border-t border-slate-800 py-5">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs">
+            {['Fully Insured','Bonded','Background Checked','Eco-Friendly','16 Yrs Experience','100% Guarantee'].map(badge => (
+              <span key={badge} className="flex items-center gap-1 text-slate-400">
+                <span className="text-emerald-500 font-bold">✓</span>
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
         

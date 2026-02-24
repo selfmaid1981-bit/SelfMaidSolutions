@@ -110,19 +110,21 @@ export function ServicesSection() {
               return (
                 <Card 
                   key={service.id} 
-                  className={`group bg-white dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${service.glowColor} rounded-2xl overflow-hidden`}
+                  className={`group relative bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50 hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${service.glowColor} rounded-2xl overflow-hidden`}
                   data-testid={`service-card-${service.id}`}
                 >
+                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} style={{ background: `linear-gradient(white, white) padding-box, linear-gradient(135deg, var(--tw-gradient-stops)) border-box`, border: '1.5px solid transparent' }} />
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.iconGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <CardContent className="p-7">
                     <div className="flex flex-col h-full">
                       <div className="mb-5">
                         <div className={`w-14 h-14 bg-gradient-to-br ${service.iconGradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}>
                           <Icon className="w-7 h-7 text-white" />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-200">
                           {service.title}
                         </h3>
-                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -130,8 +132,8 @@ export function ServicesSection() {
                       <div className="space-y-2.5 mb-6 flex-grow">
                         {service.features.map((feature, index) => (
                           <div key={index} className="flex items-center gap-2.5">
-                            <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                              <svg className="w-3 h-3 text-emerald-500" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" stroke="currentColor">
+                            <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${service.iconGradient} flex items-center justify-center flex-shrink-0 opacity-80`}>
+                              <svg className="w-2.5 h-2.5 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M5 13l4 4L19 7"></path>
                               </svg>
                             </div>
@@ -148,10 +150,10 @@ export function ServicesSection() {
                         </div>
                         <Button 
                           onClick={() => handleServiceClick(service.id)}
-                          className="w-full bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 rounded-xl h-11 font-semibold group-hover:shadow-lg transition-all"
+                          className={`w-full bg-gradient-to-r ${service.iconGradient} hover:opacity-90 text-white rounded-xl h-11 font-bold shadow-md group-hover:shadow-lg transition-all`}
                           data-testid={`service-button-${service.id}`}
                         >
-                          Get a Quote
+                          Book This Service
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
                       </div>

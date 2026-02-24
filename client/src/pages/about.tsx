@@ -60,16 +60,16 @@ export default function About() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-primary/5 py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Heart className="w-4 h-4" />
+        <section className="page-hero py-14 lg:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Heart className="w-4 h-4 text-rose-300" />
               Family-Owned Since 2009
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               About Self-Maid Cleaning
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
               Your trusted cleaning partner in Alabama, dedicated to making your world shine with superhero-level service.
             </p>
           </div>

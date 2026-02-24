@@ -84,18 +84,18 @@ export default function FAQ() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-cyan-400 to-primary/5 py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="page-hero py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <img 
               src={heroImage}
               alt="Self-Maid cleaning superhero mascot team with mops and cleaning supplies" 
-              className="w-full max-w-2xl mx-auto mb-8 h-auto"
+              className="w-full max-w-sm mx-auto mb-6 h-auto hero-image-blend"
               data-testid="faq-hero-image"
             />
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
               Got questions? We've got answers! Find everything you need to know about our cleaning services.
             </p>
           </div>

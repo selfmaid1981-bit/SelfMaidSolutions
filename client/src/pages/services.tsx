@@ -208,32 +208,32 @@ export default function Services() {
         <Navigation />
         
         {/* Hero Section - Split Layout */}
-        <section className="bg-background">
-          <div className="max-w-7xl mx-auto">
+        <section className="page-hero">
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
               <div className="flex flex-col justify-center px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
-                <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                <p className="text-sm font-semibold text-teal-400 uppercase tracking-wider mb-4">
                   SERVICES
                 </p>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                   Professional<br />
                   Cleaning<br />
                   Services
                 </h1>
-                <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-md">
+                <p className="text-lg sm:text-xl text-blue-100/80 mb-8 max-w-md">
                   Residential & Commercial Cleaning in Montgomery, Prattville, Selma, Homewood & Clanton, AL
                 </p>
                 <div>
                   <a 
                     href="/quote" 
-                    className="inline-flex items-center bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200"
                     data-testid="hero-get-quote-btn"
                   >
                     Get a Quote
                   </a>
                 </div>
               </div>
-              <div className="relative overflow-hidden bg-[#f5f3ef] flex items-center justify-center">
+              <div className="relative overflow-hidden bg-slate-800/50 flex items-center justify-center">
                 <img 
                   src={heroCleaningImage}
                   alt="Self-Maid Cleaning Solutions superhero sponge mascot in clean living room"

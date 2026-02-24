@@ -65,7 +65,7 @@ export function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="nav-link relative text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-[15px] font-medium transition-colors"
+                    className="nav-link relative text-muted-foreground hover:text-primary px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 hover:bg-primary/5"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -74,14 +74,17 @@ export function Navigation() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`nav-link relative px-3 py-2 rounded-md text-[15px] font-medium transition-colors ${
+                    className={`nav-link relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 ${
                       isActive 
-                        ? 'text-primary nav-active' 
-                        : 'text-muted-foreground hover:text-primary'
+                        ? 'text-primary bg-primary/8 font-semibold nav-active' 
+                        : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
                     }`}
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
+                    {isActive && (
+                      <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full" />
+                    )}
                   </Link>
                 );
               })}
@@ -117,8 +120,8 @@ export function Navigation() {
         </div>
       </div>
       
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="bg-card/95 backdrop-blur-lg border-t border-border/50 px-4 pt-3 pb-4 space-y-1">
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="bg-white/98 backdrop-blur-xl border-t border-slate-100 shadow-xl px-4 pt-3 pb-5 space-y-0.5">
           {navItems.map((item) => {
             const isActive = location === item.href;
             return item.href.startsWith('#') ? (
@@ -128,7 +131,7 @@ export function Navigation() {
                   scrollToSection(item.href);
                   setIsMobileMenuOpen(false);
                 }}
-                className="text-muted-foreground hover:text-primary hover:bg-primary/5 block px-4 py-3 rounded-lg text-base font-medium w-full text-left transition-colors"
+                className="text-slate-600 hover:text-blue-600 hover:bg-blue-50 flex items-center px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-150"
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
@@ -137,22 +140,23 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-150 ${
                   isActive
-                    ? 'text-primary bg-primary/10 font-semibold'
-                    : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                    ? 'text-blue-700 bg-blue-50 font-semibold'
+                    : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />}
               </Link>
             );
           })}
-          <div className="flex gap-2 mt-2">
+          <div className="flex gap-2 mt-3 pt-3 border-t border-slate-100">
             <button
               onClick={() => { setIsBookingModalOpen(true); setIsMobileMenuOpen(false); }}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 text-white px-4 py-3 rounded-xl text-sm font-bold"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
               data-testid="mobile-nav-book-now"
             >
               <CalendarCheck className="w-4 h-4" />
@@ -160,10 +164,10 @@ export function Navigation() {
             </button>
             <a 
               href="tel:334-877-9513" 
-              className="flex-1 premium-button text-white block px-4 py-3 rounded-xl text-sm font-bold text-center"
+              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
               data-testid="mobile-nav-phone"
             >
-              <Phone className="w-4 h-4 mr-2 inline" />
+              <Phone className="w-4 h-4" />
               Call Us
             </a>
           </div>
