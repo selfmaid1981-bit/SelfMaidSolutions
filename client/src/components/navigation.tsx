@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { BookingModal } from './booking-modal';
 import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -83,9 +85,17 @@ export function Navigation() {
                   </Link>
                 );
               })}
+              <button
+                onClick={() => setIsBookingModalOpen(true)}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 ml-2"
+                data-testid="nav-book-now"
+              >
+                <CalendarCheck className="w-4 h-4" />
+                Book Now
+              </button>
               <a 
                 href="tel:334-877-9513" 
-                className="premium-button text-white px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center group ml-2"
+                className="premium-button text-white px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center group ml-1"
                 data-testid="nav-phone"
               >
                 <Phone className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
@@ -139,16 +149,28 @@ export function Navigation() {
               </Link>
             );
           })}
-          <a 
-            href="tel:334-877-9513" 
-            className="premium-button text-white block px-4 py-3 rounded-xl text-base font-bold text-center mt-2"
-            data-testid="mobile-nav-phone"
-          >
-            <Phone className="w-4 h-4 mr-2 inline" />
-            (334) 877-9513
-          </a>
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={() => { setIsBookingModalOpen(true); setIsMobileMenuOpen(false); }}
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 text-white px-4 py-3 rounded-xl text-sm font-bold"
+              data-testid="mobile-nav-book-now"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              Book Now
+            </button>
+            <a 
+              href="tel:334-877-9513" 
+              className="flex-1 premium-button text-white block px-4 py-3 rounded-xl text-sm font-bold text-center"
+              data-testid="mobile-nav-phone"
+            >
+              <Phone className="w-4 h-4 mr-2 inline" />
+              Call Us
+            </a>
+          </div>
         </div>
       </div>
+
+      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
     </nav>
   );
 }

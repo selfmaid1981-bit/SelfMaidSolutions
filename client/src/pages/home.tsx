@@ -8,8 +8,11 @@ import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
 import { HowItWorks } from '@/components/how-it-works';
 import { PromoSection } from '@/components/promo-section';
+import { TrustBar } from '@/components/trust-bar';
 import { ChatWidget } from '@/components/chat-widget';
-import { Phone } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, CalendarCheck } from 'lucide-react';
+import { BookingModal } from '@/components/booking-modal';
 
 // Structured data for local business - optimized for SEO, ChatGPT, and Google
 const structuredData = {
@@ -114,6 +117,8 @@ const structuredData = {
 };
 
 export default function Home() {
+  const [isMobileBookingOpen, setIsMobileBookingOpen] = useState(false);
+
   return (
     <>
       <SEOHead
@@ -128,6 +133,7 @@ export default function Home() {
       <div className="min-h-screen bg-background">
         <Navigation />
         <HeroSection />
+        <TrustBar />
         <HowItWorks />
         <GoogleReviews />
         <ServicesSection />
@@ -137,15 +143,25 @@ export default function Home() {
         <Footer />
         
         {/* Sticky Mobile CTA */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg px-4 py-3 safe-area-pb">
-          <a 
-            href="tel:334-877-9513" 
-            className="block w-full bg-blue-600 text-white py-3 rounded-full text-center font-semibold"
-          >
-            <Phone className="w-5 h-5 inline mr-2" />
-            Call (334) 877-9513
-          </a>
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 shadow-xl px-3 py-3 safe-area-pb">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setIsMobileBookingOpen(true)}
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold text-sm shadow-md"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              Book Online
+            </button>
+            <a 
+              href="tel:334-877-9513"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-slate-900 dark:bg-slate-700 text-white py-3 rounded-xl font-bold text-sm"
+            >
+              <Phone className="w-4 h-4" />
+              Call Us
+            </a>
+          </div>
         </div>
+        <BookingModal isOpen={isMobileBookingOpen} onClose={() => setIsMobileBookingOpen(false)} />
       </div>
       <ChatWidget />
     </>
