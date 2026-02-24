@@ -6,6 +6,8 @@ import { GoogleReviews } from '@/components/google-reviews';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
+import { HowItWorks } from '@/components/how-it-works';
+import { PromoSection } from '@/components/promo-section';
 import { ChatWidget } from '@/components/chat-widget';
 import { Phone } from 'lucide-react';
 
@@ -126,8 +128,10 @@ export default function Home() {
       <div className="min-h-screen bg-background">
         <Navigation />
         <HeroSection />
+        <HowItWorks />
         <GoogleReviews />
         <ServicesSection />
+        <PromoSection />
         <TestimonialsSection />
         <ContactSection />
         <Footer />

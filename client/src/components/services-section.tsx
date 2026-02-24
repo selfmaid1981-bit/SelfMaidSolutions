@@ -89,8 +89,11 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" className="py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="services" className="py-16 lg:py-24 relative overflow-hidden section-gradient-blue">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-teal-400/8 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-3">What We Offer</p>
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-serif">

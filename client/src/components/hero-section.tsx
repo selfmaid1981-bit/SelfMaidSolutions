@@ -51,9 +51,15 @@ export function HeroSection() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
             <div className="text-center lg:text-left order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <Zap className="w-4 h-4 text-amber-400" />
-                <span className="text-blue-200 font-bold">Alabama's #1 Cleaning Heroes</span>
+              <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-6">
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <Zap className="w-4 h-4 text-amber-400" />
+                  <span className="text-blue-200 font-bold">Alabama's #1 Cleaning Heroes</span>
+                </div>
+                <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-md border border-red-400/40 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                  <span className="text-red-200 font-bold">Only 3 Spots Left This Week!</span>
+                </div>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] tracking-tight">

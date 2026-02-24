@@ -379,31 +379,38 @@ export default function Quote() {
                         !serviceType || 
                         (serviceType === 'studentdorm' ? !(Number(numberOfRooms) > 0) : (!size && !(Number(customSqFt) > 0)))
                       }
-                      className="w-full"
+                      className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-200 h-auto"
                       data-testid="calculate-quote-button"
                     >
-                      Calculate Quote
+                      <Calculator className="w-5 h-5 mr-2" />
+                      Calculate My Quote — It's Free
                     </Button>
                   </CardContent>
                 </Card>
               </div>
 
               <div>
-                <Card className="sticky top-24 rounded-2xl shadow-lg border-slate-200/50 dark:border-slate-700/50">
+                <Card className="sticky top-24 rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                  <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold">Your Estimated Quote</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {showQuote && serviceType && (serviceType === 'studentdorm' ? Number(numberOfRooms) > 0 : (size || Number(customSqFt) > 0)) ? (
                       <div className="space-y-6">
-                        <div className="text-center py-8 bg-gradient-to-br from-blue-50 to-teal-50 dark:from-slate-800 dark:to-slate-700 rounded-xl -mx-2">
-                          <p className="text-sm text-muted-foreground mb-2 font-medium">Estimated Total</p>
-                          <p className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent" data-testid="quote-total">
+                        <div className="text-center py-8 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
+                          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
+                          <p className="text-blue-100 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
+                          <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
                             ${quote}
                           </p>
-                          <p className="text-sm text-muted-foreground mt-2">
-                            {frequency !== 'onetime' && 'per service'}
+                          <p className="text-blue-100/80 text-sm mt-2 relative z-10">
+                            {frequency !== 'onetime' ? 'per service' : 'one-time service'}
                           </p>
+                          <div className="mt-3 inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-semibold relative z-10">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            No hidden fees — ever
+                          </div>
                         </div>
 
                         <div className="space-y-3">

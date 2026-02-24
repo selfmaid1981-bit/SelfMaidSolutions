@@ -54,8 +54,11 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 via-sky-50 to-teal-50 dark:from-slate-900 dark:via-sky-950 dark:to-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+    <section className="py-16 lg:py-24 relative overflow-hidden section-gradient-teal">
+      <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.5) 1px, transparent 0)', backgroundSize: '28px 28px' }} />
+      <div className="absolute top-10 right-10 w-80 h-80 bg-teal-400/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-blue-400/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14">

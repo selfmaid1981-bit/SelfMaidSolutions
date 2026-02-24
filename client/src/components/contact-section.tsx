@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, ShieldCheck, RefreshCw, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -112,10 +112,33 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 dark:from-slate-900 dark:via-blue-950 dark:to-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+    <section id="contact" className="py-16 lg:py-24 relative overflow-hidden section-gradient-blue">
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(29 78 216 / 0.6) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
+      <div className="absolute top-20 right-20 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-64 h-64 bg-teal-300/15 rounded-full blur-2xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div className="mb-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl">
+          <div className="flex items-center gap-4 text-white">
+            <ShieldCheck className="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h3 className="font-bold text-xl">100% Satisfaction Guarantee</h3>
+              <p className="text-emerald-100 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6 text-white/90 text-sm">
+            <div className="flex items-center gap-2">
+              <RefreshCw className="w-4 h-4 text-emerald-200" />
+              <span>Free re-clean</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-emerald-200" />
+              <span>48hr response</span>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="mb-8">

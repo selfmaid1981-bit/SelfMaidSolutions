@@ -325,6 +325,98 @@ html {
   animation: slideUp 0.3s ease-out;
 }
 
+/* ── Global page background gradient ──────────────────────── */
+body {
+  background: linear-gradient(
+    160deg,
+    #f0f7ff 0%,
+    #e8f4fd 15%,
+    #f5f9ff 30%,
+    #eaf4fb 50%,
+    #f0f7ff 65%,
+    #e4f0fb 80%,
+    #f5faff 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.dark body {
+  background: linear-gradient(
+    160deg,
+    #0a0f1e 0%,
+    #0d1528 20%,
+    #0a1220 40%,
+    #0c1628 60%,
+    #0a0f1e 80%,
+    #0d1728 100%
+  );
+}
+
+/* ── Section wave dividers ────────────────────────────────── */
+.wave-divider-down {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: -1px;
+}
+.wave-divider-down svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 48px;
+}
+
+/* ── Section gradient backgrounds ────────────────────────── */
+.section-gradient-blue {
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #dbeafe 30%,
+    #e0f2fe 60%,
+    #f0fdf4 100%
+  );
+}
+
+.dark .section-gradient-blue {
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #0c1e3b 40%,
+    #071e30 70%,
+    #0a1f1a 100%
+  );
+}
+
+.section-gradient-teal {
+  background: linear-gradient(
+    135deg,
+    #f0fdfa 0%,
+    #ccfbf1 20%,
+    #dbeafe 60%,
+    #eff6ff 100%
+  );
+}
+
+.dark .section-gradient-teal {
+  background: linear-gradient(
+    135deg,
+    #0a1628 0%,
+    #052e16 20%,
+    #0c1e3b 60%,
+    #0f172a 100%
+  );
+}
+
+.section-gradient-slate {
+  background: linear-gradient(
+    160deg,
+    #f8fafc 0%,
+    #f1f5f9 40%,
+    #e8f4fd 70%,
+    #f0f7ff 100%
+  );
+}
+
 /* ── Logo 3D / 4D Wordmark ─────────────────────────────────── */
 .logo-brand-text {
   background: linear-gradient(
