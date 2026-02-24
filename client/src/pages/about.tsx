@@ -4,9 +4,9 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone, Heart, Award, CheckCircle } from 'lucide-react';
-import aboutImage from '@assets/Copilot_20250927_160848_1759309660777.png';
-import battleScene1 from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759307198370.png';
-import battleScene2 from '@assets/2178DE78-F139-4676-9870-E02E493A2335_1759308549711.png';
+import dusticeTeamImage from '@assets/4962B151-CDC3-4237-AFA2-FF55BB2F35A9_1771957028664.png';
+import battleScene1 from '@assets/5A9D2FCC-A812-4180-B091-0B10400A0E52_1771957028664.png';
+import battleScene2 from '@assets/IMG_0203_1771957028664.png';
 
 const features = [
   {
@@ -189,11 +189,12 @@ export default function About() {
                 </div>
               </div>
               
-              <div className="relative">
+              <div className="relative sparkle-container">
+                <div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" />
                 <img 
-                  src={aboutImage} 
-                  alt="Meet Shyne - Self-Maid Cleaning mascot superhero sponge - Let's light up this mess!" 
-                  className="rounded-lg shadow-lg w-full h-auto" 
+                  src={dusticeTeamImage} 
+                  alt="The Dustice League - Self-Maid's superhero cleaning team" 
+                  className="rounded-2xl shadow-2xl w-full h-auto motion-float-slow" 
                   data-testid="about-image"
                 />
               </div>
@@ -239,7 +240,7 @@ export default function About() {
                   <div className="relative">
                     <img 
                       src={battleScene1}
-                      alt="Superhero sponge mascot battling dirt with cleaning supplies" 
+                      alt="The Dustice League battling grime - SCRUB! ZAP!" 
                       className="w-full h-auto transform transition-transform group-hover:scale-105"
                       data-testid="about-battle-scene-1"
                     />
@@ -259,7 +260,7 @@ export default function About() {
                   <div className="relative">
                     <img 
                       src={battleScene2}
-                      alt="Cleaning hero conquering mess and grime" 
+                      alt="The Great Clean-Off - Self-Maid superhero team" 
                       className="w-full h-auto transform transition-transform group-hover:scale-105"
                       data-testid="about-battle-scene-2"
                     />

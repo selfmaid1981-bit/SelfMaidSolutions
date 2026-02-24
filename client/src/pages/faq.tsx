@@ -5,8 +5,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Phone, MessageCircle, HelpCircle } from 'lucide-react';
-import battleScene from '@assets/15B2E058-5750-4693-84A2-56BB21CDBAC2_1759308397289.png';
-import heroImage from '@assets/ChatGPT Image Sep 12, 2025, 05_09_00 PM_1759310042131.png';
+import battleScene from '@assets/88479C0C-B329-449E-B231-A318AB805181_1771957028664.png';
+import heroImage from '@assets/39BCB483-D041-4939-87DD-891359ECCDDE_1771957028664.png';
 
 const faqs = [
   {

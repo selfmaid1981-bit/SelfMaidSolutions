@@ -40,13 +40,19 @@ export function Navigation() {
         <div className="flex justify-between items-center h-18 lg:h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3 text-xl font-bold text-primary hover:opacity-90 transition-all" data-testid="logo-link">
-              <img 
-                src={logoImage} 
-                alt="Self-Maid Cleaning Logo" 
-                className="h-12 w-auto"
-                data-testid="logo-image"
-              />
-              <span className="hidden sm:block font-serif text-2xl" data-testid="brand-text">Self-Maid Cleaning</span>
+              <div className="logo-4d-container relative">
+                <div className="logo-glow-ring" />
+                <img 
+                  src={logoImage} 
+                  alt="Self-Maid Cleaning Logo" 
+                  className="h-14 w-auto logo-4d rounded-full"
+                  data-testid="logo-image"
+                />
+              </div>
+              <div className="hidden sm:flex flex-col">
+                <span className="font-serif text-2xl gradient-text-animated leading-tight" data-testid="brand-text">Self-Maid</span>
+                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase text-muted-foreground">Cleaning Solutions</span>
+              </div>
             </Link>
           </div>
           

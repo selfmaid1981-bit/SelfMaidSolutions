@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import spongeHeroImage from '@assets/Shyne superhero char_1759328265491.png';
+import captainClarityImage from '@assets/IMG_0067_1771957028664.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -263,11 +263,15 @@ export function ContactSection() {
           
           <div className="order-1 lg:order-2 text-center lg:text-left">
             <div className="flex justify-center lg:justify-end mb-8">
-              <div className="relative">
+              <div className="relative sparkle-container">
+                <div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-64 h-64 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-blue-500/10 to-teal-500/10 energy-wave" />
+                </div>
                 <img 
-                  src={spongeHeroImage} 
-                  alt="Shyne superhero sponge mascot holding phone - Contact us today!" 
-                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain drop-shadow-xl"
+                  src={captainClarityImage} 
+                  alt="Captain Clarity - Self-Maid superhero ready to help" 
+                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain drop-shadow-xl motion-float relative z-10"
                   data-testid="contact-mascot-image"
                 />
               </div>

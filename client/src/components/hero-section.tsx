@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, Calendar, Home, Building, Key, Truck, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascotBanner from '@assets/ChatGPT_Image_Jan_27,_2026,_05_57_05_AM_1769511552762.png';
+import battleBanner from '@assets/5A9D2FCC-A812-4180-B091-0B10400A0E52_1771957028664.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+', gradient: 'from-blue-500 to-cyan-400' },
@@ -17,21 +17,28 @@ export function HeroSection() {
   return (
     <>
       <section className="hero relative overflow-hidden">
-        <div className="relative w-full h-48 md:h-64 overflow-hidden bg-gradient-to-b from-sky-400 to-sky-300">
+        <div className="relative w-full h-56 md:h-72 overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+          <div className="particles-bg">
+            <div className="particle" /><div className="particle" /><div className="particle" />
+            <div className="particle" /><div className="particle" /><div className="particle" />
+          </div>
           <img 
-            src={mascotBanner} 
-            alt="Super Sponge - Self-Maid Mascot flying through the sky" 
-            className="w-full h-full object-contain"
+            src={battleBanner} 
+            alt="The Dustice League - Self-Maid superhero team battling grime" 
+            className="w-full h-full object-contain relative z-10 motion-float-slow"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 z-20"></div>
+          <div className="absolute top-4 left-4 w-3 h-3 rounded-full bg-blue-400/40 motion-pulse" />
+          <div className="absolute top-12 right-8 w-2 h-2 rounded-full bg-amber-400/50 motion-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-8 left-16 w-2 h-2 rounded-full bg-teal-400/40 motion-pulse" style={{ animationDelay: '2s' }} />
         </div>
         
         <div className="hero-gradient-bg relative pb-12 md:pb-20">
           <div className="hero-dot-pattern absolute inset-0 pointer-events-none"></div>
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
             <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold mb-5 shadow-lg shadow-amber-400/20">
-                <Sparkles className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold mb-5 shadow-lg shadow-amber-400/20 shimmer">
+                <Sparkles className="w-4 h-4 motion-pulse" />
                 Superhero-Level Clean!
               </div>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg">

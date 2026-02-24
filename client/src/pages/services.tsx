@@ -5,7 +5,7 @@ import { QuickBookingForm } from '@/components/quick-booking-form';
 import { SocialProofBar } from '@/components/social-proof-bar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check, X, Star, AlertCircle } from 'lucide-react';
-import heroCleaningImage from '@assets/image_1765053192396.png';
+import heroCleaningImage from '@assets/5CDFA54A-E612-462C-AF20-7F109CE3216B_1771957028664.png';
 import residentialImage from '@assets/stock_images/professional_house_c_e14d1c08.jpg';
 import deepCleaningImage from '@assets/stock_images/deep_cleaning_kitche_676b17fb.jpg';
 import commercialImage from '@assets/stock_images/commercial_office_cl_ccd81be4.jpg';
