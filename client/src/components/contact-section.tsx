@@ -263,15 +263,12 @@ export function ContactSection() {
           
           <div className="order-1 lg:order-2 text-center lg:text-left">
             <div className="flex justify-center lg:justify-end mb-8">
-              <div className="relative sparkle-container">
-                <div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-64 h-64 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-blue-500/10 to-teal-500/10 energy-wave" />
-                </div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-800/80 rounded-2xl z-10 pointer-events-none" />
                 <img 
                   src={captainClarityImage} 
                   alt="Captain Clarity - Self-Maid superhero ready to help" 
-                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain drop-shadow-xl motion-float relative z-10"
+                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain hero-image-blend"
                   data-testid="contact-mascot-image"
                 />
               </div>

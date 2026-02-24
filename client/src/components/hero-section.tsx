@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Phone, Calendar, Home, Building, Key, Truck, Sparkles, Star, Shield, Zap, ArrowRight } from 'lucide-react';
+import { Phone, Calendar, Home, Building, Key, Truck, Star, Shield, Zap, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import heroCharacter from '@assets/C35B6F6D-FBA3-4D14-B4FC-B7466FFAC89B_1771957028664.png';
@@ -44,22 +44,16 @@ export function HeroSection() {
         <div className="hero-mesh-bg absolute inset-0" />
         <div className="hero-noise absolute inset-0" />
 
-        <div className="particles-bg">
-          <div className="particle" /><div className="particle" /><div className="particle" />
-          <div className="particle" /><div className="particle" /><div className="particle" />
-          <div className="particle" /><div className="particle" />
-        </div>
-
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl motion-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl motion-pulse" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/8 rounded-full blur-2xl motion-pulse" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/8 rounded-full blur-2xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
             <div className="text-center lg:text-left order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 hero-badge-glow">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
                 <Zap className="w-4 h-4 text-amber-400" />
-                <span className="gradient-text-animated font-bold">Alabama's #1 Cleaning Heroes</span>
+                <span className="text-blue-200 font-bold">Alabama's #1 Cleaning Heroes</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] tracking-tight">
@@ -83,7 +77,7 @@ export function HeroSection() {
                 </Button>
                 <a
                   href="tel:334-877-9513"
-                  className="inline-flex items-center justify-center px-8 py-6 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center px-8 py-6 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300"
                 >
                   <Phone className="w-5 h-5 mr-2 text-emerald-400" />
                   (334) 877-9513
@@ -122,15 +116,14 @@ export function HeroSection() {
             </div>
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
-              <div className="relative hero-character-container">
+              <div className="relative">
                 <div className="absolute inset-0 hero-character-glow" />
-                <div className="absolute -inset-8 rounded-full bg-gradient-to-tr from-blue-500/20 via-transparent to-purple-500/20 blur-2xl motion-pulse" />
                 <img
                   src={heroCharacter}
                   alt="Self-Maid Cleaning Superhero - Professional cleaning with superpowers"
-                  className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto hero-character-float drop-shadow-2xl"
+                  className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto hero-image-blend"
                 />
-                <div className="absolute top-8 -left-4 hero-floating-badge">
+                <div className="absolute top-8 -left-4 z-20">
                   <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-xl">
                     <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
                       <Star className="w-4 h-4 text-white fill-white" />
@@ -141,7 +134,7 @@ export function HeroSection() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute bottom-12 -right-4 hero-floating-badge" style={{ animationDelay: '1s' }}>
+                <div className="absolute bottom-12 -right-4 z-20">
                   <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-xl">
                     <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg flex items-center justify-center">
                       <Shield className="w-4 h-4 text-white" />
@@ -158,7 +151,7 @@ export function HeroSection() {
 
           <div className="mt-12 md:mt-16">
             <p className="text-center text-blue-200/40 text-xs font-semibold tracking-widest uppercase mb-6">Our Services</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 stagger-in">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (

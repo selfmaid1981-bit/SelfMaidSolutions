@@ -89,13 +89,8 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" className="py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
-        <div className="particles-bg">
-          <div className="particle" /><div className="particle" /><div className="particle" />
-          <div className="particle" /><div className="particle" /><div className="particle" />
-          <div className="particle" /><div className="particle" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="services" className="py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-3">What We Offer</p>
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-serif">
@@ -106,7 +101,7 @@ export function ServicesSection() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => {
               const Icon = service.icon;
               return (

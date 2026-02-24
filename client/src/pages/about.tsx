@@ -189,12 +189,12 @@ export default function About() {
                 </div>
               </div>
               
-              <div className="relative sparkle-container">
-                <div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" /><div className="sparkle" />
+              <div className="relative overflow-hidden rounded-2xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent z-10 pointer-events-none" />
                 <img 
                   src={dusticeTeamImage} 
                   alt="The Dustice League - Self-Maid's superhero cleaning team" 
-                  className="rounded-2xl shadow-2xl w-full h-auto motion-float-slow" 
+                  className="rounded-2xl shadow-2xl w-full h-auto" 
                   data-testid="about-image"
                 />
               </div>
