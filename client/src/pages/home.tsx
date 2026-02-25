@@ -9,6 +9,7 @@ import { Footer } from '@/components/footer';
 import { HowItWorks } from '@/components/how-it-works';
 import { PromoSection } from '@/components/promo-section';
 import { TrustBar } from '@/components/trust-bar';
+import { QuoteAdBanner } from '@/components/quote-ad-banner';
 import { ChatWidget } from '@/components/chat-widget';
 import { useState } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
@@ -135,6 +136,7 @@ export default function Home() {
         <HeroSection />
         <TrustBar />
         <HowItWorks />
+        <QuoteAdBanner />
         <GoogleReviews />
         <ServicesSection />
         <PromoSection />
