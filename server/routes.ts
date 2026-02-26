@@ -10,6 +10,7 @@ import { sendAutomatedReviewRequests } from "./review-automation";
 import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
 import { sendEmail } from "./email";
 import { startWeeklyReportScheduler, sendWeeklyReport, notifyQuotePageView } from "./weekly-report";
+import { sendWelcomeEmail as sendLeadWelcome, scheduleFollowUps, notifyOwnerNewLead } from "./follow-up-scheduler";
 import { registerAIChatRoutes } from "./ai-chat";
 import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
 import { 
@@ -398,14 +399,17 @@ Host: https://selfmaidllc.com`;
         console.warn('Failed to send email notification for contact form');
       }
 
-      // AUTOMATED MARKETING: Send welcome email to new contact
-      try {
-        await sendWelcomeEmail(`${validatedData.firstName} ${validatedData.lastName}`, validatedData.email);
-        console.log(`Welcome email sent to ${validatedData.email}`);
-      } catch (error) {
-        console.error('Failed to send automated welcome email:', error);
-        // Non-blocking: don't fail the contact form submission
-      }
+      // AUTOMATED MARKETING: Welcome + 24h + 72h follow-up sequence
+      const leadInfo = {
+        name: `${validatedData.firstName} ${validatedData.lastName}`.trim(),
+        email: validatedData.email,
+        phone: validatedData.phone || undefined,
+        serviceType: validatedData.serviceType,
+        source: validatedData.message?.match(/\[Lead Source: ([^\]]+)\]/)?.[1] || undefined,
+      };
+      sendLeadWelcome(leadInfo).catch(console.error);
+      scheduleFollowUps(leadInfo);
+      notifyOwnerNewLead(leadInfo).catch(console.error);
 
       res.json({ success: true, message: "Message sent successfully" });
     } catch (error: any) {

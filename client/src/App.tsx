@@ -24,7 +24,9 @@ import AdminLeads from "@/pages/admin/leads";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
 import ServiceArea from "@/pages/service-area";
+import GetStarted from "@/pages/get-started";
 import NotFound from "@/pages/not-found";
+import { FacebookPixel } from "@/components/facebook-pixel";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -59,6 +61,7 @@ function Router() {
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
         <Route path="/services/:city" component={ServiceArea} />
+        <Route path="/get-started" component={GetStarted} />
         <Route component={NotFound} />
       </Switch>
     </>
@@ -70,6 +73,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        <FacebookPixel />
         <JotFormAgent />
         <FloatingCTA />
         <Router />
