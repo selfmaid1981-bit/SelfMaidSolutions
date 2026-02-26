@@ -31,7 +31,7 @@ The application features a professional design using a slate/blue color palette,
 - **Service Offerings**: Five distinct cleaning services with dynamic pricing.
 - **Online Booking**: Multi-step process with "Book Now (Pay Later)" and "Book & Pay Now" options.
 - **Contact Management**: Lead capture via contact forms and "Save My Quote" functionality.
-- **Content Marketing**: Blog, SEO-optimized articles, and a complete marketing toolkit.
+- **Content Marketing**: Blog with 9 SEO-optimized articles targeting high-intent keywords. New posts: house cleaning cost guide, Alabama humidity deep clean guide, Airbnb host complete guide.
 - **Conversion Optimization**: Homepage enhancements including an interactive Before/After gallery, expanded testimonials, trust badges, and optimized CTAs. New components like Google Reviews display widget and Exit-Intent Popups.
 - **How It Works Section**: 3-step visual guide (Quote → Book → Enjoy) with CTA banner to reduce booking friction.
 - **Promo Section**: First-time customer 15% discount section with pricing breakdown and urgency messaging.
@@ -39,6 +39,12 @@ The application features a professional design using a slate/blue color palette,
 - **Hero Urgency Chip**: "Only 3 Spots Left This Week!" pulsing badge for scarcity-driven conversion.
 - **Gradient Consistency**: All homepage sections (Google Reviews, footer, services) use cohesive section-gradient system.
 - **Quote Page Visual Upgrade**: Gradient quote result panel with "No hidden fees" badge; styled CTA button.
+- **Pricing Transparency Section**: Homepage pricing grid showing all 6 service types with realistic price ranges ($65–$450). Includes "most popular" and "highest margin" callouts.
+- **Airbnb/STR Landing Page**: Dedicated page at `/airbnb-cleaning` targeting Airbnb hosts and property managers. Features: same-day turnover selling points, 3-tier pricing, turnover checklist, host testimonials.
+- **Airbnb Teaser on Homepage**: Dark teal/blue section linking to the Airbnb page with stats (4.9 rating, same-day, $65+).
+- **Recurring Plans Section**: Homepage section showcasing weekly/bi-weekly/monthly subscription plans with 10–20% savings. Includes satisfaction guarantee callout.
+- **Expanded Sitemap**: All 9 blog posts, /airbnb-cleaning, /get-started, and all city pages included in sitemap.xml.
+- **Server-Side Meta Injection**: /airbnb-cleaning and /get-started added to SSR meta injection for SEO crawler compatibility.
 
 # External Dependencies
 

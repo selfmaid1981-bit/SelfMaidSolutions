@@ -11,6 +11,9 @@ import { PromoSection } from '@/components/promo-section';
 import { TrustBar } from '@/components/trust-bar';
 import { QuoteAdBanner } from '@/components/quote-ad-banner';
 import { ChatWidget } from '@/components/chat-widget';
+import { PricingSection } from '@/components/pricing-section';
+import { RecurringPlansSection } from '@/components/recurring-plans-section';
+import { AirbnbTeaser } from '@/components/airbnb-teaser';
 import { useState } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
 import { BookingModal } from '@/components/booking-modal';
@@ -137,8 +140,11 @@ export default function Home() {
         <TrustBar />
         <HowItWorks />
         <QuoteAdBanner />
+        <PricingSection />
+        <AirbnbTeaser />
         <GoogleReviews />
         <ServicesSection />
+        <RecurringPlansSection />
         <PromoSection />
         <TestimonialsSection />
         <ContactSection />

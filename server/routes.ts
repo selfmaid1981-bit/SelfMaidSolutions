@@ -94,6 +94,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { loc: "/services/clanton-al", priority: "0.8", changefreq: "monthly" },
       { loc: "/services/pike-road-al", priority: "0.8", changefreq: "monthly" },
       { loc: "/services/alabaster-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning", priority: "0.9", changefreq: "monthly" },
+      { loc: "/get-started", priority: "0.8", changefreq: "monthly" },
+      { loc: "/blog/house-cleaning-cost-montgomery", priority: "0.7", changefreq: "monthly" },
+      { loc: "/blog/deep-clean-alabama-humidity", priority: "0.7", changefreq: "monthly" },
+      { loc: "/blog/airbnb-cleaning-montgomery-hosts", priority: "0.7", changefreq: "monthly" },
+      { loc: "/blog/montgomery-cleaning-guide", priority: "0.6", changefreq: "monthly" },
+      { loc: "/blog/airbnb-cleaning-checklist", priority: "0.6", changefreq: "monthly" },
+      { loc: "/blog/move-out-cleaning-alabama", priority: "0.6", changefreq: "monthly" },
+      { loc: "/blog/spring-cleaning-montgomery", priority: "0.6", changefreq: "monthly" },
+      { loc: "/blog/commercial-cleaning-benefits", priority: "0.6", changefreq: "monthly" },
+      { loc: "/blog/eco-friendly-cleaning", priority: "0.6", changefreq: "monthly" },
     ];
 
     const urls = pages.map(p => `  <url>
@@ -192,6 +203,16 @@ ${urls}
       title: "Cleaning Tips & Blog | Self-Maid Cleaning Solutions",
       description: "Expert cleaning tips, home organization advice, and industry news from Self-Maid Cleaning Solutions. Serving Montgomery, Prattville & Central Alabama.",
       canonical: "https://selfmaidllc.com/blog"
+    },
+    "/airbnb-cleaning": {
+      title: "Airbnb Cleaning Service Montgomery AL | Same-Day Turnover | Self-Maid",
+      description: "Professional Airbnb and vacation rental cleaning in Montgomery, Prattville & Central Alabama. Same-day turnovers, 5-star ready, inspection reports. Starting at $65. Call (334) 877-9513.",
+      canonical: "https://selfmaidllc.com/airbnb-cleaning"
+    },
+    "/get-started": {
+      title: "Get Started with Self-Maid | Book Cleaning in Montgomery, AL",
+      description: "Start your cleaning service with Self-Maid. Get a free quote, schedule your first clean, and join 500+ happy customers in Montgomery, Prattville & Central Alabama.",
+      canonical: "https://selfmaidllc.com/get-started"
     }
   };
 

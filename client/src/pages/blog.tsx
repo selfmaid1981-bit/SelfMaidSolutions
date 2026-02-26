@@ -7,6 +7,33 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 const blogPosts = [
   {
+    id: 'house-cleaning-cost-montgomery',
+    title: 'How Much Does House Cleaning Cost in Montgomery, AL? (2025 Guide)',
+    excerpt: 'A complete breakdown of cleaning service pricing in Montgomery — from standard residential to deep cleaning and Airbnb turnovers. Know what to expect before you book.',
+    date: '2026-02-20',
+    readTime: '7 min read',
+    category: 'Pricing Guide',
+    slug: 'house-cleaning-cost-montgomery'
+  },
+  {
+    id: 'deep-clean-alabama-humidity',
+    title: 'How Often Should You Deep Clean in Alabama\'s Humidity?',
+    excerpt: 'Alabama\'s heat and humidity create unique cleaning challenges. Here\'s how often professionals recommend deep cleaning your home to stay ahead of mold, mildew, and allergens.',
+    date: '2026-02-10',
+    readTime: '6 min read',
+    category: 'Expert Tips',
+    slug: 'deep-clean-alabama-humidity'
+  },
+  {
+    id: 'airbnb-cleaning-montgomery-hosts',
+    title: 'Airbnb Cleaning in Montgomery: The Complete Host Guide',
+    excerpt: 'Everything Montgomery Airbnb and VRBO hosts need to know about keeping a 5-star clean property — checklists, pricing, turnaround timelines, and when to hire a pro.',
+    date: '2026-01-28',
+    readTime: '8 min read',
+    category: 'Airbnb Tips',
+    slug: 'airbnb-cleaning-montgomery-hosts'
+  },
+  {
     id: 'montgomery-cleaning-guide',
     title: 'Ultimate Guide to Home Cleaning in Montgomery, AL',
     excerpt: 'Discover the best practices for keeping your Montgomery home spotless year-round. From dealing with Alabama humidity to seasonal cleaning tips.',

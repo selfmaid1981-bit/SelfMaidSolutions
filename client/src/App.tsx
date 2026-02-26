@@ -25,6 +25,7 @@ import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
 import ServiceArea from "@/pages/service-area";
 import GetStarted from "@/pages/get-started";
+import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
 
@@ -62,6 +63,7 @@ function Router() {
         <Route path="/admin/automation" component={OutreachAutomation} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
+        <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
         <Route component={NotFound} />
       </Switch>
     </>
