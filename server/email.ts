@@ -1,46 +1,36 @@
-import { MailService } from '@sendgrid/mail';
-
-const mailService = new MailService();
-if (process.env.SENDGRID_API_KEY) {
-  mailService.setApiKey(process.env.SENDGRID_API_KEY);
-}
+import { getUncachableSendGridClient } from "./sendgrid";
 
 export interface EmailParams {
-  to: string;
-  from: string;
+  to: string | string[];
+  from?: string;
   subject: string;
   text?: string;
   html?: string;
 }
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
-  if (!process.env.SENDGRID_API_KEY) {
-    console.log('SendGrid not configured, email would be sent:', {
-      to: params.to,
-      subject: params.subject
-    });
-    return true; // Return true to prevent blocking app functionality
-  }
-  
   try {
-    const mailData = {
+    const { client, fromEmail } = await getUncachableSendGridClient();
+
+    const mailData: any = {
       to: params.to,
-      from: params.from,
+      from: params.from || fromEmail,
       subject: params.subject,
-    } as any;
-    
-    if (params.text) mailData.text = params.text;
+    };
+
     if (params.html) mailData.html = params.html;
-    
-    // Ensure at least one content type is present
-    if (!params.text && !params.html) {
-      mailData.text = params.subject; // Fallback to subject as text
-    }
-    
-    await mailService.send(mailData);
+    if (params.text) mailData.text = params.text;
+    if (!params.html && !params.text) mailData.text = params.subject;
+
+    await client.send(mailData);
+    console.log('[Email] Sent to:', Array.isArray(params.to) ? params.to.join(', ') : params.to, '| Subject:', params.subject);
     return true;
-  } catch (error) {
-    console.error('SendGrid email error:', error);
+  } catch (error: any) {
+    if (error?.message === 'SendGrid not connected') {
+      console.warn('[Email] SendGrid integration not connected — email not sent:', params.subject);
+      return false;
+    }
+    console.error('[Email] SendGrid error:', error?.response?.body || error?.message || error);
     return false;
   }
 }

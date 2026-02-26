@@ -32,6 +32,10 @@ import {
   setSpreadsheetId
 } from "./outreach-automation";
 
+// Owner notification emails — all booking/contact/quote alerts go to both
+const OWNER_EMAILS = ["selfmaid1981@gmail.com", "selfmaidclean@outlook.com"];
+const FROM_EMAIL = "selfmaidclean@outlook.com";
+
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
   const adminKey = process.env.ADMIN_API_KEY;
@@ -368,8 +372,8 @@ Host: https://selfmaidllc.com`;
       
       // Send email notification to business owner
       const emailSuccess = await sendEmail({
-        to: "selfmaidclean@outlook.com",
-        from: "selfmaidclean@outlook.com", // Must be verified sender
+        to: OWNER_EMAILS,
+        from: FROM_EMAIL,
         subject: `New Contact Form Submission - ${validatedData.serviceType}`,
         html: `
           <h3>New Contact Form Submission</h3>
@@ -466,8 +470,8 @@ Host: https://selfmaidllc.com`;
         
         // Send notification to business owner via email
         await sendEmail({
-          to: "selfmaidclean@outlook.com",
-          from: "selfmaidclean@outlook.com",
+          to: OWNER_EMAILS,
+          from: FROM_EMAIL,
           subject: `New Booking Request - ${booking.firstName} ${booking.lastName}`,
           html: `
             <h3>New Booking Request (Payment Pending)</h3>
@@ -616,8 +620,8 @@ Host: https://selfmaidllc.com`;
       
       // Send notification email to business owner
       await sendEmail({
-        to: "selfmaidclean@outlook.com",
-        from: "selfmaidclean@outlook.com",
+        to: OWNER_EMAILS,
+        from: FROM_EMAIL,
         subject: `New Quote Request - $${quote.estimatedPrice} - ${quote.serviceType}`,
         html: `
           <h3>New Quote Request</h3>
