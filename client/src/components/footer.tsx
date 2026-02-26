@@ -189,19 +189,21 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 py-6">
+        <div className="border-t border-slate-800/60 py-5">
           <details className="group">
-            <summary className="text-center text-xs text-slate-500 cursor-pointer hover:text-slate-400 transition-colors select-none">
-              Find Us On 15+ Directories ▾
+            <summary className="text-center text-xs text-slate-600 cursor-pointer hover:text-slate-400 transition-colors select-none list-none flex items-center justify-center gap-1.5">
+              <span className="w-8 h-px bg-slate-700" />
+              <span>Find us on 15+ directories</span>
+              <span className="w-8 h-px bg-slate-700" />
             </summary>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3 text-xs">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5 mt-4 text-xs">
               {directoryLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-600 hover:text-slate-400 transition-colors"
+                  className="text-slate-600 hover:text-slate-300 transition-colors px-2 py-0.5 rounded hover:bg-slate-800/60"
                   data-testid={`directory-link-${index}`}
                 >
                   {link.name}
@@ -212,10 +214,10 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-800 py-5">
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs">
             {['Fully Insured','Bonded','Background Checked','Eco-Friendly','16 Yrs Experience','100% Guarantee'].map(badge => (
-              <span key={badge} className="flex items-center gap-1 text-slate-400">
-                <span className="text-emerald-500 font-bold">✓</span>
+              <span key={badge} className="flex items-center gap-1.5 text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700/50">
+                <span className="text-emerald-500 font-bold text-xs">✓</span>
                 {badge}
               </span>
             ))}

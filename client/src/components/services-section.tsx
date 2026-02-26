@@ -110,11 +110,12 @@ export function ServicesSection() {
               return (
                 <Card 
                   key={service.id} 
-                  className={`group relative bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50 hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${service.glowColor} rounded-2xl overflow-hidden`}
+                  className={`group relative bg-white dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/40 hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${service.glowColor} rounded-2xl overflow-hidden`}
                   data-testid={`service-card-${service.id}`}
                 >
-                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${service.iconGradient} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <CardContent className="p-7">
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.iconGradient} opacity-50 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.iconGradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 pointer-events-none`} />
+                  <CardContent className="p-7 relative">
                     <div className="flex flex-col h-full">
                       <div className="mb-5">
                         <div className={`w-14 h-14 bg-gradient-to-br ${service.iconGradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}>
@@ -128,10 +129,10 @@ export function ServicesSection() {
                         </p>
                       </div>
                       
-                      <div className="space-y-2.5 mb-6 flex-grow">
+                      <div className="space-y-2 mb-6 flex-grow">
                         {service.features.map((feature, index) => (
                           <div key={index} className="flex items-center gap-2.5">
-                            <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${service.iconGradient} flex items-center justify-center flex-shrink-0 opacity-80`}>
+                            <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${service.iconGradient} flex items-center justify-center flex-shrink-0 shadow-sm`}>
                               <svg className="w-2.5 h-2.5 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M5 13l4 4L19 7"></path>
                               </svg>
@@ -143,14 +144,17 @@ export function ServicesSection() {
                       
                       <div className="border-t border-slate-100 dark:border-slate-700/50 pt-5">
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${service.iconGradient} text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm`}>
+                          <div className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${service.iconGradient} text-white text-sm font-bold px-3.5 py-1.5 rounded-lg shadow-sm`}>
                             {service.price}
                           </div>
-                          <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">No hidden fees</span>
+                          <span className="text-xs text-slate-400 dark:text-slate-500 font-medium flex items-center gap-1">
+                            <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                            No hidden fees
+                          </span>
                         </div>
                         <Button 
                           onClick={() => handleServiceClick(service.id)}
-                          className={`w-full bg-gradient-to-r ${service.iconGradient} hover:opacity-90 text-white rounded-xl h-11 font-bold shadow-md group-hover:shadow-lg transition-all`}
+                          className={`w-full bg-gradient-to-r ${service.iconGradient} hover:opacity-90 text-white rounded-xl h-11 font-bold shadow-md group-hover:shadow-lg transition-all btn-shine`}
                           data-testid={`service-button-${service.id}`}
                         >
                           Book This Service

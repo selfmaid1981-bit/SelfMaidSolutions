@@ -63,13 +63,13 @@ export function GoogleReviews() {
           {reviews.map((review, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-200/80 dark:border-slate-700/50 bg-white dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden"
+              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-200/70 dark:border-slate-700/40 bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden"
               data-testid={`google-review-${index}`}
             >
-              <div className="h-1.5 bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] group-hover:opacity-100 opacity-80 transition-opacity" />
+              <div className="h-1 bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] opacity-70 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6">
                 <div className="flex items-start gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${review.avatarGradient} flex items-center justify-center font-bold text-white text-sm shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300`}>
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${review.avatarGradient} flex items-center justify-center font-bold text-white text-sm shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300`}>
                     {review.avatar}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -83,12 +83,12 @@ export function GoogleReviews() {
                       <span className="text-xs text-slate-400 dark:text-slate-500">{review.date}</span>
                     </div>
                   </div>
-                  <div className="w-8 h-8 bg-slate-50 dark:bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-slate-50 dark:bg-slate-700 rounded-xl flex items-center justify-center flex-shrink-0 border border-slate-100 dark:border-slate-600">
                     <FaGoogle className="w-4 h-4" style={{ color: '#4285F4' }} />
                   </div>
                 </div>
                 <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed italic">"{review.text}"</p>
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex items-center gap-1.5 text-xs">
                   <ThumbsUp className="w-3.5 h-3.5 text-emerald-500" />
                   <span className="text-emerald-600 dark:text-emerald-400 font-medium">Verified Google Review</span>
                 </div>

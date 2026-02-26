@@ -44,9 +44,11 @@ export function HeroSection() {
         <div className="hero-mesh-bg absolute inset-0" />
         <div className="hero-noise absolute inset-0" />
 
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/8 rounded-full blur-2xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/12 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/12 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl" />
+        <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-cyan-400/8 rounded-full blur-xl" />
+        <div className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-indigo-400/8 rounded-full blur-xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
@@ -90,17 +92,17 @@ export function HeroSection() {
                 </a>
               </div>
 
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
-                <div className="flex items-center gap-2 text-white/70 text-sm">
-                  <Shield className="w-4 h-4 text-emerald-400" />
+              <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
+                <div className="flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/12 px-3 py-1.5 rounded-full text-white/80 text-sm">
+                  <Shield className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Fully Insured</span>
                 </div>
-                <div className="flex items-center gap-2 text-white/70 text-sm">
-                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                <div className="flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/12 px-3 py-1.5 rounded-full text-white/80 text-sm">
+                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                   <span>5-Star Rated</span>
                 </div>
-                <div className="flex items-center gap-2 text-white/70 text-sm">
-                  <Sparkles className="w-4 h-4 text-blue-400" />
+                <div className="flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/12 px-3 py-1.5 rounded-full text-white/80 text-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
                   <span>Same-Day Available</span>
                 </div>
               </div>

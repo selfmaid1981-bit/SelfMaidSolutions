@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, CheckCircle2 } from 'lucide-react';
 
 const testimonials = [
   {
@@ -8,7 +8,8 @@ const testimonials = [
     author: "Sarah Johnson",
     location: "Montgomery, AL",
     initials: "SJ",
-    service: "Deep Cleaning"
+    service: "Deep Cleaning",
+    avatarGradient: "from-blue-500 to-indigo-600"
   },
   {
     id: 2,
@@ -16,7 +17,8 @@ const testimonials = [
     author: "David Chen",
     location: "Selma, AL",
     initials: "DC",
-    service: "Move-Out Cleaning"
+    service: "Move-Out Cleaning",
+    avatarGradient: "from-teal-500 to-emerald-600"
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const testimonials = [
     author: "Robert Anderson",
     location: "Prattville, AL",
     initials: "RA",
-    service: "Emergency Cleaning"
+    service: "Emergency Cleaning",
+    avatarGradient: "from-violet-500 to-purple-600"
   }
 ];
 
@@ -54,33 +57,27 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <Card 
               key={testimonial.id} 
-              className="group border border-white/60 dark:border-slate-700/50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden rounded-2xl" 
+              className="group border border-white/70 dark:border-slate-700/40 bg-white/85 dark:bg-slate-800/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden rounded-2xl" 
               data-testid={`testimonial-${testimonial.id}`}
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute top-0 left-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-teal-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
               <CardContent className="p-7">
-                <Quote className="w-10 h-10 text-blue-100 dark:text-blue-900/60 absolute top-5 right-5" />
-                
-                <div className="flex gap-0.5 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400 drop-shadow-sm" />
-                  ))}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                    ))}
+                  </div>
+                  <Quote className="w-8 h-8 text-blue-100 dark:text-blue-900/60 flex-shrink-0" />
                 </div>
                 
-                <p className="text-slate-700 dark:text-slate-300 mb-5 leading-relaxed text-[15px]">
+                <p className="text-slate-700 dark:text-slate-300 mb-5 leading-relaxed text-[15px] italic">
                   "{testimonial.text}"
                 </p>
-
-                <div className="mb-4">
-                  <span className="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">
-                    {testimonial.service}
-                  </span>
-                </div>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/50">
-                  <div className="flex items-center">
-                    <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center mr-3 shadow-md ring-2 ring-blue-100 dark:ring-blue-900/50">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-11 h-11 bg-gradient-to-br ${testimonial.avatarGradient} rounded-full flex items-center justify-center shadow-md ring-2 ring-white dark:ring-slate-700`}>
                       <span className="text-white font-bold text-sm">
                         {testimonial.initials}
                       </span>
@@ -89,14 +86,15 @@ export function TestimonialsSection() {
                       <h4 className="font-semibold text-slate-900 dark:text-white text-sm">
                         {testimonial.author}
                       </h4>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                         {testimonial.location}
                       </p>
                     </div>
                   </div>
-                  <div className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-full">
+                  <span className="text-xs font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2.5 py-1 rounded-full border border-teal-100 dark:border-teal-800">
                     {testimonial.service}
-                  </div>
+                  </span>
                 </div>
               </CardContent>
             </Card>

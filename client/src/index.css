@@ -505,3 +505,58 @@ body {
   100% { background-position: -80% center; }
 }
 
+/* ── Card hover glow enhancement ─────────────────────────── */
+.card-glow-blue:hover {
+  box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.08);
+}
+
+.card-glow-teal:hover {
+  box-shadow: 0 20px 40px -12px rgba(20, 184, 166, 0.2), 0 0 0 1px rgba(20, 184, 166, 0.08);
+}
+
+/* ── Subtle dot grid background for sections ─────────────── */
+.dot-grid-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ── Trust badge pill in footer ──────────────────────────── */
+.trust-badge {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* ── Shine animation for CTA buttons ─────────────────────── */
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+}
+
+.btn-shine:hover::after {
+  animation: shine 0.6s ease-in-out;
+}
+
