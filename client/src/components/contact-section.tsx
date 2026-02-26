@@ -142,7 +142,11 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+              <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                We respond within 24 hours
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 font-serif">
                 Get in Touch with the Clean Team!
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -150,7 +154,8 @@ export function ContactSection() {
               </p>
             </div>
             
-            <Card className="bg-white/95 dark:bg-gray-800/95 shadow-2xl border-0 rounded-2xl backdrop-blur-md">
+            <Card className="bg-white/95 dark:bg-gray-800/95 shadow-2xl border-0 rounded-2xl backdrop-blur-md overflow-hidden">
+              <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500" />
               <CardContent className="p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="contact-form">

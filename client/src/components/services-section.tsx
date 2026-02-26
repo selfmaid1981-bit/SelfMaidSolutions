@@ -113,8 +113,7 @@ export function ServicesSection() {
                   className={`group relative bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50 hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${service.glowColor} rounded-2xl overflow-hidden`}
                   data-testid={`service-card-${service.id}`}
                 >
-                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} style={{ background: `linear-gradient(white, white) padding-box, linear-gradient(135deg, var(--tw-gradient-stops)) border-box`, border: '1.5px solid transparent' }} />
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.iconGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${service.iconGradient} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
                   <CardContent className="p-7">
                     <div className="flex flex-col h-full">
                       <div className="mb-5">
@@ -144,9 +143,10 @@ export function ServicesSection() {
                       
                       <div className="border-t border-slate-100 dark:border-slate-700/50 pt-5">
                         <div className="flex items-center justify-between mb-4">
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                          <div className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${service.iconGradient} text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm`}>
                             {service.price}
                           </div>
+                          <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">No hidden fees</span>
                         </div>
                         <Button 
                           onClick={() => handleServiceClick(service.id)}

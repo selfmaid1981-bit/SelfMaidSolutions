@@ -51,10 +51,10 @@ export function GoogleReviews() {
             <span className="text-slate-500 dark:text-slate-400 text-sm">(500+ reviews)</span>
           </div>
 
-          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-serif">
+          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-3 font-serif">
             Real Reviews from Real Customers
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Don't take our word for it — see why 500+ customers across Alabama trust Self-Maid with their homes and businesses.
           </p>
         </div>

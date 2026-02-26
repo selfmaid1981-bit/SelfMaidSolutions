@@ -68,17 +68,17 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
-            <div className="mb-5">
+            <div className="mb-4">
               <img
                 src={fullLogoImage}
                 alt="Self-Maid Cleaning Services LLC Logo"
-                className="h-28 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
             </div>
-            <p className="text-slate-400 mb-6 leading-relaxed max-w-sm">
+            <p className="text-slate-400 mb-5 leading-relaxed max-w-sm text-sm">
               Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
             </p>
-            <div className="flex space-x-3 mb-5">
+            <div className="flex space-x-2.5 mb-5">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
                 return (
@@ -87,22 +87,22 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-slate-800 hover:bg-blue-600 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200"
+                    className="w-9 h-9 bg-slate-800 hover:bg-gradient-to-br hover:from-blue-600 hover:to-teal-500 rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 border border-slate-700/50 hover:border-transparent hover:shadow-lg"
                     aria-label={`Visit us on ${social.label}`}
                     data-testid={`social-${social.label.toLowerCase()}`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-3.5 h-3.5" />
                   </a>
                 );
               })}
             </div>
-            <div className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700/50 rounded-xl px-3.5 py-2 text-sm">
               <div className="flex gap-0.5">
                 {[1,2,3,4,5].map(i => <span key={i} className="text-amber-400 text-xs">★</span>)}
               </div>
-              <span className="text-slate-300 font-medium">5.0</span>
-              <span className="text-slate-500">·</span>
-              <span className="text-slate-400 text-xs">500+ Reviews</span>
+              <span className="text-slate-300 font-semibold text-xs">5.0</span>
+              <span className="text-slate-600">·</span>
+              <span className="text-slate-500 text-xs">500+ Reviews</span>
             </div>
           </div>
           
