@@ -39,7 +39,7 @@ The application features a professional design using a slate/blue color palette,
 - **Hero Urgency Chip**: "Only 3 Spots Left This Week!" pulsing badge for scarcity-driven conversion.
 - **Gradient Consistency**: All homepage sections (Google Reviews, footer, services) use cohesive section-gradient system.
 - **Quote Page Visual Upgrade**: Gradient quote result panel with "No hidden fees" badge; styled CTA button.
-- **Pricing Transparency Section**: Homepage pricing grid showing all 6 service types with realistic price ranges ($65–$450). Includes "most popular" and "highest margin" callouts.
+- **Pricing Transparency Section**: Homepage pricing grid showing all 6 service types with realistic price ranges ($65–$450). Includes "most popular" and "fastest growing" callouts.
 - **Airbnb/STR Landing Page**: Dedicated page at `/airbnb-cleaning` targeting Airbnb hosts and property managers. Features: same-day turnover selling points, 3-tier pricing, turnover checklist, host testimonials.
 - **Airbnb Teaser on Homepage**: Dark teal/blue section linking to the Airbnb page with stats (4.9 rating, same-day, $65+).
 - **Recurring Plans Section**: Homepage section showcasing weekly/bi-weekly/monthly subscription plans with 10–20% savings. Includes satisfaction guarantee callout.
