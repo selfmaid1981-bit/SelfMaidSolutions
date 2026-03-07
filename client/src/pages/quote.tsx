@@ -242,11 +242,18 @@ export default function Quote() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <Card className="rounded-2xl shadow-lg border-slate-200/50 dark:border-slate-700/50">
+                <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
+                  <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500" />
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/5 to-teal-400/5 rounded-full pointer-events-none" />
                   <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-bold">Calculate Your Quote</CardTitle>
+                    <CardTitle className="text-xl font-bold flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
+                        <Calculator className="w-4 h-4 text-white" />
+                      </div>
+                      Calculate Your Quote
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-6 relative">
                     {/* Service Type */}
                     <div className="space-y-2">
                       <Label htmlFor="service-type">Service Type</Label>
@@ -389,10 +396,14 @@ export default function Quote() {
               </div>
 
               <div>
-                <Card className="sticky top-24 rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                <Card className="sticky top-24 rounded-2xl shadow-2xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500" />
+                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-teal-400/5 to-blue-400/5 rounded-full pointer-events-none" />
                   <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-bold">Your Estimated Quote</CardTitle>
+                    <CardTitle className="text-xl font-bold flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-teal-500" />
+                      Your Estimated Quote
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     {showQuote && serviceType && (serviceType === 'studentdorm' ? Number(numberOfRooms) > 0 : (size || Number(customSqFt) > 0)) ? (
@@ -519,9 +530,11 @@ export default function Quote() {
                               </a>
                             </>
                           ) : (
-                            <div className="space-y-4 bg-muted/30 p-4 rounded-lg">
-                              <h4 className="font-semibold text-foreground flex items-center">
-                                <Mail className="w-4 h-4 mr-2" />
+                            <div className="space-y-4 bg-gradient-to-br from-muted/30 to-muted/10 p-5 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+                              <h4 className="font-semibold text-foreground flex items-center gap-2">
+                                <div className="w-7 h-7 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                                  <Mail className="w-3.5 h-3.5 text-white" />
+                                </div>
                                 Your Information
                               </h4>
                               <div className="space-y-3">
@@ -580,9 +593,11 @@ export default function Quote() {
                         </div>
                       </div>
                     ) : (
-                      <div className="text-center py-12">
-                        <Calculator className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-                        <p className="text-muted-foreground">
+                      <div className="text-center py-14">
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl mb-5 shadow-inner">
+                          <Calculator className="w-10 h-10 text-slate-300 dark:text-slate-500" />
+                        </div>
+                        <p className="text-muted-foreground max-w-xs mx-auto leading-relaxed">
                           Select a service and size or enter square footage to calculate your quote
                         </p>
                       </div>
