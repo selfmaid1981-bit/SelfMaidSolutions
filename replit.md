@@ -22,8 +22,15 @@ The application features a professional design using a slate/blue color palette,
 - **Content & SEO**: Includes a blog, comprehensive SEO strategies targeting local keywords, and various marketing content templates. Dynamic sitemap.xml and robots.txt are generated.
 - **Marketing Automation**: Strategy for email and social media automation workflows using SendGrid, Buffer, Meta Business Suite, Hootsuite, and Zapier.
 - **Admin Dashboard**: Features for managing email marketing campaigns, subscribers (with CSV export), and tracking automated review requests.
-- **Automated Review System**: Triggers Google review requests via email and SMS after successful Stripe payments.
+- **Automated Review System**: Triggers Google review requests via email and SMS after successful Stripe payments. Extended with `server/hooks/review-on-complete.ts` module that auto-triggers when a job status changes to "completed" (Job Completed → SMS → Google Review flow).
 - **SMS Notifications**: Twilio integration for business owner notifications and customer review requests.
+- **Integration Hooks** (`server/hooks/`): Centralized integration modules:
+  - `stripe-subscriptions.ts` — SaaS subscription lifecycle (create, cancel, webhook sync)
+  - `twilio-sms.ts` — SMS helpers (single, batch, job completion, appointment reminders)
+  - `hunter-email.ts` — Hunter.io email discovery (domain search, email finder, verification, business enrichment)
+  - `openai-helpers.ts` — AI utilities (text generation, structured extraction, call transcript analysis, outreach email generation, lead intent classification)
+  - `review-on-complete.ts` — Automated review request flow triggered on job completion
+  - `index.ts` — Barrel export for all hooks
 - **Server-Side SEO**: Middleware intercepts HTML responses to inject dynamic meta tags for improved crawler visibility.
 - **Service Area Landing Pages**: Dynamically generated, SEO-optimized city-specific pages.
 
@@ -82,3 +89,11 @@ The application features a professional design using a slate/blue color palette,
 - **Email**: SendGrid Mail API.
 - **SMS**: Twilio Node.js SDK.
 - **Payment**: Stripe Node.js SDK.
+- **AI**: OpenAI SDK (via Replit AI Integrations).
+
+## Documentation
+
+- **ER Diagram**: `.local/er-diagram.md` — Full database entity relationship diagram (Mermaid syntax) with all 22 tables, 280 columns, 78 indexes.
+- **API Documentation**: `.local/api-documentation.md` — Complete REST API reference for all current endpoints.
+- **Architecture Plan**: `.local/architecture-plan.md` — System architecture, folder structure, and integration map.
+- **API Specification**: `.local/api-specification.md` — Detailed request/response schemas for planned endpoints.
