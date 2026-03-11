@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
 import { SEOHead } from '@/components/ui/seo-head';
@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, Clock, Sparkles } from 'lucide-react';
+import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, BedDouble, Bath, Ruler, Sparkles } from 'lucide-react';
 import { UrgencyBanner, LoyaltyBadge, TrustSignals } from '@/components/urgency-banner';
 
 const serviceTypes = [
@@ -23,115 +23,80 @@ const serviceTypes = [
   { value: 'shorttermrental', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
   { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
   { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
-  { value: 'studentdorm', label: 'Student Dorm/Apartment Turnover (Call for Pricing)', perRoom: 45, minCharge: 45 }
-];
-
-const sizeOptions = [
-  { value: 'small', label: 'Small (Under 1000 sq ft)', multiplier: 1 },
-  { value: 'medium', label: 'Medium (1000-2000 sq ft)', multiplier: 1.5 },
-  { value: 'large', label: 'Large (2000-3000 sq ft)', multiplier: 2 },
-  { value: 'xlarge', label: 'Extra Large (3000+ sq ft)', multiplier: 2.5 }
 ];
 
 const frequencyOptions = [
   { value: 'onetime', label: 'One-Time Service', discount: 0 },
   { value: 'weekly', label: 'Weekly (15% discount)', discount: 0.15 },
   { value: 'biweekly', label: 'Bi-Weekly (10% discount)', discount: 0.10 },
-  { value: 'monthly', label: 'Monthly (5% discount)', discount: 0.05 }
+  { value: 'monthly', label: 'Monthly (5% discount)', discount: 0.05 },
 ];
 
 const addOns = [
-  { id: 'deep', label: 'Deep Cleaning', price: 50 },
   { id: 'carpet', label: 'Carpet Cleaning', price: 75 },
-  { id: 'windows', label: 'Window Cleaning (Custom Quote - depends on quantity & height)', price: 0 },
   { id: 'appliances', label: 'Appliance Cleaning', price: 35 },
   { id: 'refrigerator', label: 'Refrigerator Cleaning', price: 30 },
   { id: 'stove', label: 'Stove Cleaning', price: 25 },
   { id: 'garage', label: 'Garage Cleaning', price: 60 },
   { id: 'blinds', label: 'Blind Cleaning', price: 35 },
-  { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 }
+  { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 },
 ];
+
+function estimateSqFt(bedrooms: number, bathrooms: number): number {
+  if (bedrooms <= 0 && bathrooms <= 0) return 0;
+  const baseSqFt = 400;
+  const perBedroom = 250;
+  const perBathroom = 75;
+  return Math.round(baseSqFt + (bedrooms * perBedroom) + (bathrooms * perBathroom));
+}
 
 export default function Quote() {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [serviceType, setServiceType] = useState('');
-
-  useEffect(() => {
-    fetch('/api/track/quote-view', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ referrer: document.referrer || null }),
-    }).catch(() => {});
-  }, []);
-  const [size, setSize] = useState('');
+  const [bedrooms, setBedrooms] = useState('');
+  const [bathrooms, setBathrooms] = useState('');
+  const [customSqFt, setCustomSqFt] = useState('');
   const [frequency, setFrequency] = useState('onetime');
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
-  const [customSqFt, setCustomSqFt] = useState('');
-  const [numberOfRooms, setNumberOfRooms] = useState('');
-  const [showQuote, setShowQuote] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [showSaveForm, setShowSaveForm] = useState(false);
 
-  const calculateQuote = () => {
-    if (!serviceType) return 0;
+  const selectedService = serviceTypes.find(s => s.value === serviceType);
+  const freq = frequencyOptions.find(f => f.value === frequency);
 
-    const service = serviceTypes.find(s => s.value === serviceType);
-    const freq = frequencyOptions.find(f => f.value === frequency);
+  const estimatedSqFt = useMemo(() => {
+    const sqFtInput = parseInt(customSqFt) || 0;
+    if (sqFtInput > 0) return sqFtInput;
+    return estimateSqFt(parseInt(bedrooms) || 0, parseFloat(bathrooms) || 0);
+  }, [bedrooms, bathrooms, customSqFt]);
 
-    if (!service || !freq) return 0;
-
-    let basePrice = 0;
-
-    // Handle student dorm/apartment turnover with room-based pricing
-    if (serviceType === 'studentdorm') {
-      const rooms = Math.max(0, parseInt(numberOfRooms) || 0);
-      if (rooms > 0) {
-        const perRoomRate = (service as any).perRoom || 45;
-        basePrice = rooms * perRoomRate;
-      } else {
-        return 0;
-      }
-    }
-    // If custom square footage is provided, use that
-    else if (customSqFt) {
-      const sqFt = Math.max(0, parseInt(customSqFt) || 0);
-      if (sqFt > 0) {
-        const rate = (service as any).baseRate || 0;
-        basePrice = Math.max(service.minCharge, sqFt * rate);
-      } else {
-        return 0;
-      }
-    } else if (size) {
-      // Otherwise use size selection
-      const sizeOption = sizeOptions.find(s => s.value === size);
-      if (!sizeOption) return 0;
-      basePrice = service.minCharge * sizeOption.multiplier;
-    } else {
-      return 0;
-    }
-
-    // Apply frequency discount
+  const quote = useMemo(() => {
+    if (!selectedService || !freq || estimatedSqFt <= 0) return 0;
+    let basePrice = Math.max(selectedService.minCharge, estimatedSqFt * selectedService.baseRate);
     basePrice = basePrice * (1 - freq.discount);
-
-    // Add selected add-ons
     const addOnTotal = selectedAddOns.reduce((total, addOnId) => {
       const addOn = addOns.find(a => a.id === addOnId);
       return total + (addOn?.price || 0);
     }, 0);
-
     return Math.round(basePrice + addOnTotal);
-  };
+  }, [selectedService, freq, estimatedSqFt, selectedAddOns]);
 
   const toggleAddOn = (addOnId: string) => {
-    setSelectedAddOns(prev => 
-      prev.includes(addOnId) 
+    setSelectedAddOns(prev =>
+      prev.includes(addOnId)
         ? prev.filter(id => id !== addOnId)
         : [...prev, addOnId]
     );
   };
+
+  const sizeLabel = customSqFt
+    ? `${customSqFt} sq ft`
+    : estimatedSqFt > 0
+      ? `~${estimatedSqFt} sq ft (${bedrooms || 0} bed / ${bathrooms || 0} bath)`
+      : null;
 
   const saveQuoteMutation = useMutation({
     mutationFn: async () => {
@@ -140,9 +105,9 @@ export default function Quote() {
         email: customerEmail,
         phone: customerPhone || null,
         serviceType: selectedService?.label || serviceType,
-        propertySize: serviceType === 'studentdorm' ? `${numberOfRooms} rooms` : (size ? sizeOptions.find(s => s.value === size)?.label : null),
-        customSqFt: customSqFt ? parseInt(customSqFt) : null,
-        frequency: frequencyOptions.find(f => f.value === frequency)?.label || frequency,
+        propertySize: sizeLabel,
+        customSqFt: estimatedSqFt || null,
+        frequency: freq?.label || frequency,
         addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
         estimatedPrice: quote,
       });
@@ -165,64 +130,46 @@ export default function Quote() {
 
   const handleSaveQuote = () => {
     if (!customerName || !customerEmail) {
-      toast({
-        title: "Missing Information",
-        description: "Please provide your name and email to save your quote.",
-        variant: "destructive",
-      });
+      toast({ title: "Missing Information", description: "Please provide your name and email to save your quote.", variant: "destructive" });
       return;
     }
-    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(customerEmail)) {
-      toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
+      toast({ title: "Invalid Email", description: "Please enter a valid email address.", variant: "destructive" });
       return;
     }
-    
     saveQuoteMutation.mutate();
   };
 
   const handleBookThisQuote = () => {
     if (!customerName || !customerEmail) {
-      toast({
-        title: "Missing Information",
-        description: "Please provide your name and email to book this quote.",
-        variant: "destructive",
-      });
+      toast({ title: "Missing Information", description: "Please provide your name and email to book this quote.", variant: "destructive" });
       return;
     }
-
-    // Build booking URL with quote data
     const params = new URLSearchParams({
-      quoteId: Math.random().toString(36).substr(2, 9), // Temporary quote ID
+      quoteId: 'q-' + Date.now().toString(36),
       serviceType: selectedService?.label || '',
       estimatedPrice: quote.toString(),
       quoteName: customerName,
       quoteEmail: customerEmail,
       quotePhone: customerPhone,
     });
-
     setLocation(`/booking?${params.toString()}`);
   };
 
-  const quote = calculateQuote();
-  const selectedService = serviceTypes.find(s => s.value === serviceType);
+  const hasInput = serviceType && estimatedSqFt > 0;
 
   return (
     <>
       <SEOHead
         title="Free Cleaning Quote Calculator | Montgomery & Prattville AL | Self-Maid"
         description="Instant cleaning quote calculator for Montgomery and Prattville, AL. Get accurate pricing for residential, commercial, Airbnb cleaning services. Free estimates!"
-        keywords="cleaning quote Montgomery AL, cleaning cost calculator Prattville, free cleaning estimate Alabama, cleaning service pricing Montgomery, instant quote Prattville cleaning, how much does cleaning cost Montgomery, house cleaning estimate Prattville AL, cleaning price calculator Alabama, get cleaning quote Montgomery, free estimate house cleaning Prattville, cleaning service cost estimator Montgomery AL, calculate cleaning cost Alabama, residential cleaning quote Montgomery, commercial cleaning estimate Prattville, Airbnb cleaning pricing Montgomery, move out cleaning quote Alabama, deep cleaning cost calculator Prattville, apartment cleaning estimate Montgomery, Selma cleaning quote, Homewood cleaning estimate, Clanton cleaning prices, online quote cleaning Alabama, instant pricing house cleaning Montgomery, cleaning cost by room Prattville, cleaning price per bedroom Montgomery, bathroom cleaning cost Alabama, square footage cleaning rates Montgomery, cleaning quote no obligation Prattville, free in home estimate Montgomery, virtual cleaning estimate Alabama, text quote cleaning Montgomery, phone estimate cleaning Prattville, same day quote cleaning Alabama"
+        keywords="cleaning quote Montgomery AL, cleaning cost calculator Prattville, free cleaning estimate Alabama, cleaning service pricing Montgomery"
       />
-      
+
       <div className="min-h-screen bg-background">
         <Navigation />
-        
+
         <section className="page-hero py-14 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl mb-6">
@@ -232,29 +179,26 @@ export default function Quote() {
               Get Your Free Quote
             </h1>
             <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
-              Transparent pricing with no hidden fees. Calculate your cleaning service cost instantly based on your specific needs.
+              Transparent pricing with no hidden fees. Enter your home details and see your price instantly.
             </p>
           </div>
         </section>
 
-        {/* Quote Calculator */}
         <section className="py-16 lg:py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500" />
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/5 to-teal-400/5 rounded-full pointer-events-none" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
                       <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
                         <Calculator className="w-4 h-4 text-white" />
                       </div>
-                      Calculate Your Quote
+                      Your Home Details
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6 relative">
-                    {/* Service Type */}
+                  <CardContent className="space-y-5">
                     <div className="space-y-2">
                       <Label htmlFor="service-type">Service Type</Label>
                       <Select value={serviceType} onValueChange={setServiceType}>
@@ -263,11 +207,7 @@ export default function Quote() {
                         </SelectTrigger>
                         <SelectContent>
                           {serviceTypes.map(service => (
-                            <SelectItem 
-                              key={service.value} 
-                              value={service.value}
-                              data-testid={`option-service-${service.value}`}
-                            >
+                            <SelectItem key={service.value} value={service.value}>
                               {service.label}
                             </SelectItem>
                           ))}
@@ -275,68 +215,64 @@ export default function Quote() {
                       </Select>
                     </div>
 
-                    {/* Room Count for Student Dorm */}
-                    {serviceType === 'studentdorm' ? (
+                    <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <Label htmlFor="rooms">Number of Rooms</Label>
-                        <Input 
-                          id="rooms"
+                        <Label htmlFor="bedrooms" className="flex items-center gap-1.5">
+                          <BedDouble className="w-4 h-4 text-blue-500" />
+                          Bedrooms
+                        </Label>
+                        <Input
+                          id="bedrooms"
                           type="number"
-                          min="1"
-                          step="1"
-                          placeholder="e.g., 3 (kitchen, living room, bathroom)"
-                          value={numberOfRooms}
-                          onChange={(e) => setNumberOfRooms(e.target.value)}
-                          data-testid="quote-rooms-input"
+                          min="0"
+                          max="10"
+                          placeholder="e.g. 3"
+                          value={bedrooms}
+                          onChange={(e) => setBedrooms(e.target.value)}
+                          data-testid="quote-bedrooms-input"
                         />
-                        <p className="text-sm text-muted-foreground">
-                          $45 per room. Count all rooms including kitchen, living room, bedrooms, bathrooms, etc.
-                        </p>
                       </div>
-                    ) : (
-                      <>
-                        {/* Size */}
-                        <div className="space-y-2">
-                          <Label htmlFor="size">Property Size</Label>
-                          <Select value={size} onValueChange={setSize}>
-                            <SelectTrigger id="size" data-testid="quote-size-select">
-                              <SelectValue placeholder="Select property size" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {sizeOptions.map(option => (
-                                <SelectItem 
-                                  key={option.value} 
-                                  value={option.value}
-                                  data-testid={`option-size-${option.value}`}
-                                >
-                                  {option.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bathrooms" className="flex items-center gap-1.5">
+                          <Bath className="w-4 h-4 text-teal-500" />
+                          Bathrooms
+                        </Label>
+                        <Input
+                          id="bathrooms"
+                          type="number"
+                          min="0"
+                          max="10"
+                          step="0.5"
+                          placeholder="e.g. 2"
+                          value={bathrooms}
+                          onChange={(e) => setBathrooms(e.target.value)}
+                          data-testid="quote-bathrooms-input"
+                        />
+                      </div>
+                    </div>
 
-                        {/* Custom Square Footage */}
-                        <div className="space-y-2">
-                          <Label htmlFor="sqft">Custom Square Footage (Optional)</Label>
-                          <Input 
-                            id="sqft"
-                            type="number"
-                            min="0"
-                            step="1"
-                            placeholder="e.g., 1500"
-                            value={customSqFt}
-                            onChange={(e) => setCustomSqFt(e.target.value)}
-                            data-testid="quote-sqft-input"
-                          />
-                          <p className="text-sm text-muted-foreground">
-                            Enter exact square footage to override size selection
-                          </p>
-                        </div>
-                      </>
-                    )}
+                    <div className="space-y-2">
+                      <Label htmlFor="sqft" className="flex items-center gap-1.5">
+                        <Ruler className="w-4 h-4 text-orange-500" />
+                        Square Footage
+                        <span className="text-xs text-muted-foreground font-normal">(optional — overrides bed/bath estimate)</span>
+                      </Label>
+                      <Input
+                        id="sqft"
+                        type="number"
+                        min="0"
+                        placeholder={estimatedSqFt > 0 && !customSqFt ? `Estimated: ~${estimatedSqFt} sq ft` : "e.g. 1500"}
+                        value={customSqFt}
+                        onChange={(e) => setCustomSqFt(e.target.value)}
+                        data-testid="quote-sqft-input"
+                      />
+                      {estimatedSqFt > 0 && !customSqFt && (bedrooms || bathrooms) && (
+                        <p className="text-xs text-muted-foreground">
+                          Estimated ~{estimatedSqFt} sq ft based on {bedrooms || 0} bedroom(s) and {bathrooms || 0} bathroom(s)
+                        </p>
+                      )}
+                    </div>
 
-                    {/* Frequency */}
                     <div className="space-y-2">
                       <Label htmlFor="frequency">Service Frequency</Label>
                       <Select value={frequency} onValueChange={setFrequency}>
@@ -345,11 +281,7 @@ export default function Quote() {
                         </SelectTrigger>
                         <SelectContent>
                           {frequencyOptions.map(option => (
-                            <SelectItem 
-                              key={option.value} 
-                              value={option.value}
-                              data-testid={`option-frequency-${option.value}`}
-                            >
+                            <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
                           ))}
@@ -357,7 +289,6 @@ export default function Quote() {
                       </Select>
                     </div>
 
-                    {/* Add-Ons */}
                     <div className="space-y-2">
                       <Label>Additional Services (Optional)</Label>
                       <div className="space-y-2">
@@ -378,19 +309,6 @@ export default function Quote() {
                         ))}
                       </div>
                     </div>
-
-                    <Button 
-                      onClick={() => setShowQuote(true)} 
-                      disabled={
-                        !serviceType || 
-                        (serviceType === 'studentdorm' ? !(Number(numberOfRooms) > 0) : (!size && !(Number(customSqFt) > 0)))
-                      }
-                      className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-200 h-auto"
-                      data-testid="calculate-quote-button"
-                    >
-                      <Calculator className="w-5 h-5 mr-2" />
-                      Calculate My Quote — It's Free
-                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -398,7 +316,6 @@ export default function Quote() {
               <div>
                 <Card className="sticky top-24 rounded-2xl shadow-2xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500" />
-                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-teal-400/5 to-blue-400/5 rounded-full pointer-events-none" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-teal-500" />
@@ -406,7 +323,7 @@ export default function Quote() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    {showQuote && serviceType && (serviceType === 'studentdorm' ? Number(numberOfRooms) > 0 : (size || Number(customSqFt) > 0)) ? (
+                    {hasInput ? (
                       <div className="space-y-6">
                         <div className="text-center py-8 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
                           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
@@ -430,32 +347,21 @@ export default function Quote() {
                               <span className="text-muted-foreground">Service:</span>
                               <span className="font-medium">{selectedService?.label}</span>
                             </div>
-                            {serviceType === 'studentdorm' ? (
+                            {(bedrooms || bathrooms) && (
                               <div className="flex justify-between">
-                                <span className="text-muted-foreground">Number of Rooms:</span>
-                                <span className="font-medium">{numberOfRooms} rooms</span>
+                                <span className="text-muted-foreground">Rooms:</span>
+                                <span className="font-medium">{bedrooms || 0} bed / {bathrooms || 0} bath</span>
                               </div>
-                            ) : (
-                              <>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Size:</span>
-                                  <span className="font-medium">
-                                    {size ? sizeOptions.find(s => s.value === size)?.label : 'Custom'}
-                                  </span>
-                                </div>
-                                {customSqFt && (
-                                  <div className="flex justify-between">
-                                    <span className="text-muted-foreground">Square Footage:</span>
-                                    <span className="font-medium">{customSqFt} sq ft</span>
-                                  </div>
-                                )}
-                              </>
                             )}
                             <div className="flex justify-between">
-                              <span className="text-muted-foreground">Frequency:</span>
+                              <span className="text-muted-foreground">Size:</span>
                               <span className="font-medium">
-                                {frequencyOptions.find(f => f.value === frequency)?.label}
+                                {customSqFt ? `${customSqFt} sq ft` : `~${estimatedSqFt} sq ft (est.)`}
                               </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Frequency:</span>
+                              <span className="font-medium">{freq?.label}</span>
                             </div>
                             {selectedAddOns.length > 0 && (
                               <div className="pt-2 border-t">
@@ -480,8 +386,8 @@ export default function Quote() {
                         <div className="pt-6 border-t space-y-3">
                           <Alert className="bg-amber-50 border-amber-200">
                             <AlertTriangle className="h-4 w-4 text-amber-600" />
-                            <AlertDescription className="text-amber-800 text-xs space-y-1">
-                              <p><strong>Important:</strong> Each quote must be approved by Self-Maid. You will be contacted as soon as your booking request is received. Booking is not guaranteed by this website.</p>
+                            <AlertDescription className="text-amber-800 text-xs">
+                              <strong>Important:</strong> Each quote must be approved by Self-Maid. You will be contacted as soon as your booking request is received. Booking is not guaranteed by this website.
                             </AlertDescription>
                           </Alert>
 
@@ -490,43 +396,25 @@ export default function Quote() {
                           </p>
 
                           <UrgencyBanner variant="quote" />
-                          
                           <TrustSignals />
-                          
+
                           {!showSaveForm ? (
                             <>
-                              <div className="space-y-3">
-                                <Button
-                                  onClick={() => setShowSaveForm(true)}
-                                  className="w-full bg-green-600 hover:bg-green-700 text-white"
-                                  data-testid="show-save-form-button"
-                                >
-                                  <Save className="w-4 h-4 mr-2" />
-                                  Save My Quote
-                                </Button>
-                              </div>
-                              <a 
+                              <Button
+                                onClick={() => setShowSaveForm(true)}
+                                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                data-testid="show-save-form-button"
+                              >
+                                <Save className="w-4 h-4 mr-2" />
+                                Save My Quote
+                              </Button>
+                              <a
                                 href="tel:334-877-9513"
                                 className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center"
                                 data-testid="quote-call-button"
                               >
                                 <Phone className="w-4 h-4 mr-2" />
                                 Call to Book: (334) 877-9513
-                              </a>
-                              <Button
-                                onClick={handleBookThisQuote}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                                data-testid="button-book-this-quote"
-                              >
-                                <BookOpen className="w-4 h-4 mr-2" />
-                                Book This Quote
-                              </Button>
-                              <a 
-                                href={`/#contact?service=${encodeURIComponent(selectedService?.label || '')}&quote=${quote}`}
-                                className="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors flex items-center justify-center"
-                                data-testid="quote-contact-button"
-                              >
-                                Request This Quote
                               </a>
                             </>
                           ) : (
@@ -581,13 +469,22 @@ export default function Quote() {
                                   {saveQuoteMutation.isPending ? 'Saving...' : 'Save & Email Quote'}
                                 </Button>
                                 <Button
-                                  onClick={() => setShowSaveForm(false)}
-                                  variant="outline"
-                                  data-testid="button-cancel-save"
+                                  onClick={handleBookThisQuote}
+                                  disabled={!customerName || !customerEmail}
+                                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                                  data-testid="button-book-this-quote"
                                 >
-                                  Cancel
+                                  <BookOpen className="w-4 h-4 mr-2" />
+                                  Book Now
                                 </Button>
                               </div>
+                              <Button
+                                onClick={() => setShowSaveForm(false)}
+                                variant="ghost"
+                                className="w-full text-sm"
+                              >
+                                Cancel
+                              </Button>
                             </div>
                           )}
                         </div>
@@ -598,7 +495,7 @@ export default function Quote() {
                           <Calculator className="w-10 h-10 text-slate-300 dark:text-slate-500" />
                         </div>
                         <p className="text-muted-foreground max-w-xs mx-auto leading-relaxed">
-                          Select a service and size or enter square footage to calculate your quote
+                          Select a service and enter your bedrooms, bathrooms, or square footage to see your price instantly
                         </p>
                       </div>
                     )}
