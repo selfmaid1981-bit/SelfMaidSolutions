@@ -1,9 +1,8 @@
 import { sendEmail } from "./email";
 import { storage } from "./storage";
+import { BUSINESS_PHONE, BUSINESS_EMAIL, GOOGLE_REVIEW_URL } from "./config";
 
-const GOOGLE_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=ChIJ-erVoU0XiYgR8ZsW5vCBzL4";
-const BUSINESS_PHONE = "(334) 877-9513";
-const BUSINESS_EMAIL = "selfmaidclean@outlook.com";
+const GOOGLE_REVIEW_LINK = GOOGLE_REVIEW_URL;
 
 export interface EmailTemplate {
   subject: string;

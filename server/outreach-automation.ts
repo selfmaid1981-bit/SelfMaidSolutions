@@ -1,10 +1,8 @@
 import { sendEmail } from "./email";
 import { getLeadsFromSheet, updateLeadStatus } from "./googleSheetsClient";
+import { BUSINESS_PHONE, BUSINESS_EMAIL, FROM_EMAIL, OWNER_EMAILS } from "./config";
 
-const BUSINESS_PHONE = "(334) 877-9513";
-const BUSINESS_EMAIL = "selfmaidclean@outlook.com";
-const FROM_EMAIL = "selfmaidclean@outlook.com";
-const OWNER_NOTIFICATION_EMAIL = "selfmaid1981@gmail.com";
+const OWNER_NOTIFICATION_EMAIL = OWNER_EMAILS[0];
 
 let SPREADSHEET_ID = process.env.LEADS_SPREADSHEET_ID || "";
 

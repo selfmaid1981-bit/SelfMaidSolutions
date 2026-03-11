@@ -1,13 +1,6 @@
 import { MailService } from '@sendgrid/mail';
 import { sendSMS } from './twilio';
-
-const BUSINESS_GOOGLE_PLACE_ID = 'ChIJYTN_j1CYcYgR8KT7e-8y0Vw';
-const GOOGLE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${BUSINESS_GOOGLE_PLACE_ID}`;
-const SHORT_REVIEW_URL = 'https://g.page/r/YOUR_SHORT_URL/review';
-
-const BUSINESS_NAME = 'Self-Maid Cleaning Solutions';
-const BUSINESS_PHONE = '(334) 877-9513';
-const BUSINESS_EMAIL = 'selfmaidclean@outlook.com';
+import { BUSINESS_NAME, BUSINESS_PHONE, BUSINESS_EMAIL, GOOGLE_REVIEW_URL, BUSINESS_GOOGLE_PLACE_ID } from './config';
 
 interface ReviewRequestParams {
   customerName: string;

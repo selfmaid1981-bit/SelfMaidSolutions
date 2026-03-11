@@ -3,11 +3,7 @@ import { jobs, appointments, clients, reviewRequests, bookings } from "@shared/s
 import { eq, and } from "drizzle-orm";
 import { sendSMS } from "../twilio";
 import { sendEmail } from "../email";
-
-const BUSINESS_NAME = "Self-Maid Cleaning Solutions";
-const BUSINESS_PHONE = "(334) 877-9513";
-const BUSINESS_EMAIL = "selfmaidclean@outlook.com";
-const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJYTN_j1CYcYgR8KT7e-8y0Vw";
+import { BUSINESS_NAME, BUSINESS_PHONE, BUSINESS_EMAIL, GOOGLE_REVIEW_URL } from "../config";
 
 interface ReviewTriggerResult {
   smsSent: boolean;

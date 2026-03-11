@@ -6,8 +6,7 @@ import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, inse
 import { getUncachableStripeClient } from "./stripeClient";
 import { getUncachableSendGridClient } from "./sendgrid";
 import { sendSMS } from "./twilio";
-import { sendAutomatedReviewRequests } from "./review-automation";
-import { sendWelcomeEmail, sendFollowUpEmail, sendThankYouEmail, sendBulkCampaign } from "./marketing-automation";
+import { sendFollowUpEmail } from "./marketing-automation";
 import { sendEmail } from "./email";
 import { startWeeklyReportScheduler, sendWeeklyReport, notifyQuotePageView } from "./weekly-report";
 import { sendWelcomeEmail as sendLeadWelcome, scheduleFollowUps, notifyOwnerNewLead } from "./follow-up-scheduler";
@@ -33,9 +32,7 @@ import {
   setSpreadsheetId
 } from "./outreach-automation";
 
-// Owner notification emails — all booking/contact/quote alerts go to both
-const OWNER_EMAILS = ["selfmaid1981@gmail.com", "selfmaidclean@outlook.com"];
-const FROM_EMAIL = "selfmaidclean@outlook.com";
+import { OWNER_EMAILS, FROM_EMAIL } from "./config";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {

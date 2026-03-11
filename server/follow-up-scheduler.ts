@@ -1,9 +1,7 @@
 import { sendEmail } from './email';
+import { OWNER_EMAILS, FROM_EMAIL, BUSINESS_PHONE, BUSINESS_NAME } from './config';
 
-const OWNER_EMAIL = 'selfmaid1981@gmail.com';
-const FROM_EMAIL = 'selfmaidclean@outlook.com';
-const BUSINESS_PHONE = '(334) 877-9513';
-const BUSINESS_NAME = 'Self-Maid Cleaning Solutions';
+const OWNER_EMAIL = OWNER_EMAILS[0];
 
 interface LeadInfo {
   name: string;

@@ -91,9 +91,12 @@ The application features a professional design using a slate/blue color palette,
 - **Payment**: Stripe Node.js SDK.
 - **AI**: OpenAI SDK (via Replit AI Integrations).
 
+- **Centralized Config**: `server/config.ts` — All business constants (name, phone, email, owner emails, Google Place ID, review URL) centralized in one file. All server modules import from this file.
+
 ## Documentation
 
 - **ER Diagram**: `.local/er-diagram.md` — Full database entity relationship diagram (Mermaid syntax) with all 22 tables, 280 columns, 78 indexes.
 - **API Documentation**: `.local/api-documentation.md` — Complete REST API reference for all current endpoints.
 - **Architecture Plan**: `.local/architecture-plan.md` — System architecture, folder structure, and integration map.
 - **API Specification**: `.local/api-specification.md` — Detailed request/response schemas for planned endpoints.
+- **Codebase Audit**: `.local/codebase-audit.md` — Full audit report covering duplicates, DB migrations, routes, folder structure, and architecture diagram.

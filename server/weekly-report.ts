@@ -2,9 +2,9 @@ import { db } from "./db";
 import { contactMessages, bookings, quotes, reviewRequests } from "@shared/schema";
 import { sql, gte } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { OWNER_EMAILS, FROM_EMAIL } from "./config";
 
-const OWNER_EMAIL = "selfmaid1981@gmail.com";
-const FROM_EMAIL = "selfmaidclean@outlook.com";
+const OWNER_EMAIL = OWNER_EMAILS[0];
 
 interface WeeklyStats {
   totalContacts: number;
