@@ -105,6 +105,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { loc: "/blog/spring-cleaning-montgomery", priority: "0.6", changefreq: "monthly" },
       { loc: "/blog/commercial-cleaning-benefits", priority: "0.6", changefreq: "monthly" },
       { loc: "/blog/eco-friendly-cleaning", priority: "0.6", changefreq: "monthly" },
+      { loc: "/house-cleaning-montgomery-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/house-cleaning-prattville-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/house-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/house-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/house-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/deep-cleaning-montgomery-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/deep-cleaning-prattville-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/deep-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/deep-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/deep-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-montgomery-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-prattville-al", priority: "0.8", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-montgomery-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-prattville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-montgomery-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-prattville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
     ];
 
     const urls = pages.map(p => `  <url>
@@ -216,13 +241,39 @@ ${urls}
     }
   };
 
+  const cityServiceMeta: Record<string, { title: string; description: string }> = {
+    "house-cleaning": { title: "House Cleaning", description: "Professional house cleaning" },
+    "deep-cleaning": { title: "Deep Cleaning", description: "Thorough deep cleaning" },
+    "airbnb-cleaning": { title: "Airbnb Cleaning", description: "Same-day Airbnb turnover cleaning" },
+    "move-in-move-out-cleaning": { title: "Move In/Move Out Cleaning", description: "Move-in and move-out cleaning" },
+    "commercial-cleaning": { title: "Commercial Cleaning", description: "Professional commercial and office cleaning" },
+  };
+  const cityNames: Record<string, string> = {
+    "montgomery-al": "Montgomery, AL",
+    "prattville-al": "Prattville, AL",
+    "millbrook-al": "Millbrook, AL",
+    "wetumpka-al": "Wetumpka, AL",
+    "selma-al": "Selma, AL",
+  };
+
   app.use((req, res, next) => {
     const url = req.path;
     let meta: { title: string; description: string; canonical: string } | undefined;
 
     const serviceAreaMatch = url.match(/^\/services\/([a-z-]+)$/);
+    const cityServiceMatch = url.match(/^\/(house-cleaning|deep-cleaning|airbnb-cleaning|move-in-move-out-cleaning|commercial-cleaning)-([a-z-]+)$/);
     if (serviceAreaMatch) {
       meta = serviceAreaMeta[serviceAreaMatch[1]];
+    } else if (cityServiceMatch) {
+      const svc = cityServiceMeta[cityServiceMatch[1]];
+      const cityName = cityNames[cityServiceMatch[2]];
+      if (svc && cityName) {
+        meta = {
+          title: `${svc.title} ${cityName} | Maid Service | Self-Maid`,
+          description: `${svc.description} in ${cityName}. Licensed, insured, 16 years experience. Starting prices from $65. Call (334) 877-9513 for a free quote.`,
+          canonical: `https://selfmaidllc.com${url}`
+        };
+      }
     } else {
       meta = pageMeta[url];
     }

@@ -84,15 +84,21 @@ export function SEOHead({
       canonicalLink.setAttribute('href', `${window.location.origin}${window.location.pathname}`);
     }
 
-    // Add structured data
+    // Add page-specific structured data (separate from global schema in index.html)
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]');
+      let script = document.querySelector('script[type="application/ld+json"][data-page-schema]') as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
         script.setAttribute('type', 'application/ld+json');
+        script.setAttribute('data-page-schema', 'true');
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(structuredData);
+    } else {
+      const existingPageSchema = document.querySelector('script[type="application/ld+json"][data-page-schema]');
+      if (existingPageSchema) {
+        existingPageSchema.remove();
+      }
     }
   }, [title, description, keywords, ogTitle, ogDescription, ogImage, structuredData, canonical, noindex]);
 

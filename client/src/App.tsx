@@ -24,6 +24,7 @@ import AdminLeads from "@/pages/admin/leads";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
 import ServiceArea from "@/pages/service-area";
+import CityServicePage, { allCityServiceCombinations } from "@/pages/city-service";
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NotFound from "@/pages/not-found";
@@ -64,6 +65,11 @@ function Router() {
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
+        <Route path="/:cityServiceSlug">{(params) => {
+          const slug = params.cityServiceSlug || "";
+          const validSlugs = new Set(allCityServiceCombinations.map(c => c.slug));
+          return validSlugs.has(slug) ? <CityServicePage /> : <NotFound />;
+        }}</Route>
         <Route component={NotFound} />
       </Switch>
     </>

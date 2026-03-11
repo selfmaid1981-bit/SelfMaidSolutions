@@ -466,12 +466,46 @@ export default function BlogPost() {
     );
   }
 
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.metaDescription,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "author": {
+      "@type": "Person",
+      "name": "Michelle",
+      "url": "https://selfmaidllc.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Self-Maid Cleaning Solutions",
+      "url": "https://selfmaidllc.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://selfmaidllc.com/favicon.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://selfmaidllc.com/blog/${slug}`
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["article h1", "article .prose"]
+    },
+    "articleSection": post.category,
+    "inLanguage": "en-US"
+  };
+
   return (
     <>
       <SEOHead
         title={`${post.title} | Self-Maid Cleaning Blog`}
         description={post.metaDescription}
         keywords={`${post.category}, cleaning tips Montgomery, cleaning tips Prattville, Alabama cleaning guide`}
+        structuredData={articleStructuredData}
       />
       
       <div className="min-h-screen bg-background">
@@ -493,7 +527,7 @@ export default function BlogPost() {
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
                 {post.title}
               </h1>
-              <div className="flex items-center gap-6 text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
@@ -503,6 +537,9 @@ export default function BlogPost() {
                   {post.readTime}
                 </span>
               </div>
+              <p className="mt-3 text-sm text-muted-foreground italic">
+                Written by Michelle | Self-Maid Cleaning Solutions
+              </p>
             </div>
 
             <Card>

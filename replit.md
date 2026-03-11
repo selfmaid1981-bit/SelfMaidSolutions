@@ -43,8 +43,14 @@ The application features a professional design using a slate/blue color palette,
 - **Airbnb/STR Landing Page**: Dedicated page at `/airbnb-cleaning` targeting Airbnb hosts and property managers. Features: same-day turnover selling points, 3-tier pricing, turnover checklist, host testimonials.
 - **Airbnb Teaser on Homepage**: Dark teal/blue section linking to the Airbnb page with stats (4.9 rating, same-day, $65+).
 - **Recurring Plans Section**: Homepage section showcasing weekly/bi-weekly/monthly subscription plans with 10–20% savings. Includes satisfaction guarantee callout.
-- **Expanded Sitemap**: All 9 blog posts, /airbnb-cleaning, /get-started, and all city pages included in sitemap.xml.
-- **Server-Side Meta Injection**: /airbnb-cleaning and /get-started added to SSR meta injection for SEO crawler compatibility.
+- **Expanded Sitemap**: All 9 blog posts, /airbnb-cleaning, /get-started, all city pages, and 25 city+service keyword pages included in sitemap.xml.
+- **Server-Side Meta Injection**: /airbnb-cleaning, /get-started, all service areas, and city+service pages added to SSR meta injection for SEO crawler compatibility.
+- **City+Service Landing Pages**: 25 SEO-optimized pages at URLs like `/house-cleaning-montgomery-al`, `/deep-cleaning-prattville-al` etc. targeting high-traffic local keywords (5 services × 5 cities). Each has unique content, JSON-LD structured data, and internal cross-links.
+- **Navigation Dropdowns**: Desktop nav has hover-triggered dropdowns for "Services" (6 service types) and "Service Areas" (9 cities). Mobile nav has expandable sections.
+- **Brand Positioning**: Hero headline changed to "Self-Maid Cleaning Solutions" with tagline "Montgomery's Most Trusted Cleaning Service Since 2009". Includes city-targeted subheadline.
+- **Blog Article Schema**: BlogPosting JSON-LD with author (Michelle), publisher, datePublished, speakable schema for AI discoverability. Author byline on all blog posts.
+- **Image SEO**: All below-fold images have lazy loading, explicit width/height dimensions, and keyword-rich alt tags.
+- **Google Analytics 4**: GA4 tag (G-BHKLJVML78) installed directly in index.html alongside GTM container.
 
 # External Dependencies
 

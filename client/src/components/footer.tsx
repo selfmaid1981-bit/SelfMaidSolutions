@@ -198,9 +198,22 @@ export function Footer() {
 
             <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mt-6 mb-3">Service Areas</h4>
             <div className="flex flex-wrap gap-1">
-              {serviceAreas.map((area, index) => (
-                <span key={index} className="text-xs text-slate-500">
-                  {area}{index < serviceAreas.length - 1 ? ' · ' : ''}
+              {[
+                { name: 'Montgomery', href: '/house-cleaning-montgomery-al' },
+                { name: 'Prattville', href: '/house-cleaning-prattville-al' },
+                { name: 'Millbrook', href: '/house-cleaning-millbrook-al' },
+                { name: 'Wetumpka', href: '/house-cleaning-wetumpka-al' },
+                { name: 'Selma', href: '/house-cleaning-selma-al' },
+                { name: 'Pike Road', href: '/services/pike-road-al' },
+                { name: 'Homewood', href: '/services/homewood-al' },
+                { name: 'Clanton', href: '/services/clanton-al' },
+                { name: 'Alabaster', href: '/services/alabaster-al' },
+              ].map((area, index, arr) => (
+                <span key={area.name}>
+                  <Link href={area.href} className="text-xs text-slate-500 hover:text-teal-300 transition-colors">
+                    {area.name}
+                  </Link>
+                  {index < arr.length - 1 && <span className="text-xs text-slate-600"> · </span>}
                 </span>
               ))}
             </div>

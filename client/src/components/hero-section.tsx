@@ -65,14 +65,18 @@ export function HeroSection() {
                 </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] tracking-tight">
-                <span className="block drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">A Clean That</span>
-                <span className="block hero-headline-gradient">Feels Like</span>
-                <span className="block hero-headline-gradient">Home.</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[1.05] tracking-tight">
+                <span className="block hero-headline-gradient">Self-Maid</span>
+                <span className="block drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">Cleaning</span>
+                <span className="block hero-headline-gradient">Solutions</span>
               </h1>
 
+              <p className="text-base md:text-lg text-amber-300/90 font-semibold mb-3 tracking-wide">
+                Montgomery's Most Trusted Cleaning Service Since 2009
+              </p>
+
               <p className="text-lg md:text-xl text-blue-100/80 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Professional cleaning done the right way, every time. No shortcuts. No stress. Just results you can trust.
+                Professional house cleaning for Montgomery, Prattville, Selma & Central Alabama. No shortcuts. No stress. Just results you can trust.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
