@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, UserPlus, Calendar, Briefcase, TrendingUp, DollarSign } from "lucide-react";
+import { Users, UserPlus, Calendar, Briefcase, TrendingUp, DollarSign, Calculator, ArrowUpRight } from "lucide-react";
 
 interface MetricsCardsProps {
   stats: {
@@ -7,6 +7,8 @@ interface MetricsCardsProps {
     totalClients: number;
     totalAppointments: number;
     totalJobs: number;
+    totalQuotes?: number;
+    quoteConversionRate?: number;
     leadsByStage: Record<string, number>;
     jobsByStatus: Record<string, number>;
   };
@@ -16,10 +18,10 @@ export function MetricsCards({ stats }: MetricsCardsProps) {
   const cards = [
     { label: "Total Leads", value: stats.totalLeads, icon: UserPlus, color: "text-blue-600", bg: "bg-blue-50" },
     { label: "Active Clients", value: stats.totalClients, icon: Users, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Quote Requests", value: stats.totalQuotes ?? (stats.leadsByStage?.quote_requested || 0), icon: Calculator, color: "text-cyan-600", bg: "bg-cyan-50" },
     { label: "Appointments", value: stats.totalAppointments, icon: Calendar, color: "text-purple-600", bg: "bg-purple-50" },
-    { label: "Jobs", value: stats.totalJobs, icon: Briefcase, color: "text-orange-600", bg: "bg-orange-50" },
-    { label: "Conversion Rate", value: stats.totalLeads > 0 ? `${Math.round((stats.totalClients / stats.totalLeads) * 100)}%` : "0%", icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50" },
-    { label: "Completed Jobs", value: stats.jobsByStatus?.completed || 0, icon: DollarSign, color: "text-cyan-600", bg: "bg-cyan-50" },
+    { label: "Active Jobs", value: stats.totalJobs, icon: Briefcase, color: "text-orange-600", bg: "bg-orange-50" },
+    { label: "Quote → Booking", value: `${stats.quoteConversionRate ?? 0}%`, icon: ArrowUpRight, color: "text-emerald-600", bg: "bg-emerald-50" },
   ];
 
   return (

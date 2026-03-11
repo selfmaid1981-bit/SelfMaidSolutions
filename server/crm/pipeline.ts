@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 
 const PIPELINE_STAGES = [
   "new_lead",
+  "quote_requested",
   "contacted",
   "qualified",
   "proposal_sent",

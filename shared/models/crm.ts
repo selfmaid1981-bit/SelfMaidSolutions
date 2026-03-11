@@ -1,5 +1,6 @@
 export const PIPELINE_STAGES = [
   { key: "new_lead", label: "New Lead", color: "#3B82F6" },
+  { key: "quote_requested", label: "Quote Requested", color: "#06B6D4" },
   { key: "contacted", label: "Contacted", color: "#EAB308" },
   { key: "qualified", label: "Qualified", color: "#8B5CF6" },
   { key: "proposal_sent", label: "Proposal Sent", color: "#F97316" },

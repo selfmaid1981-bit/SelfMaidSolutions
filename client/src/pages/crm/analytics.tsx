@@ -6,6 +6,7 @@ import { crmApi } from "@/lib/crm-api";
 
 const STAGE_COLORS: Record<string, string> = {
   new_lead: "#3B82F6",
+  quote_requested: "#06B6D4",
   contacted: "#EAB308",
   qualified: "#8B5CF6",
   proposal_sent: "#F97316",
@@ -125,7 +126,7 @@ export default function CrmAnalytics() {
                   </div>
                   <div className="bg-purple-50 rounded-lg p-4 text-center">
                     <p className="text-3xl font-bold text-purple-700">{conversionRate}%</p>
-                    <p className="text-sm text-purple-600">Conversion Rate</p>
+                    <p className="text-sm text-purple-600">Lead → Client Rate</p>
                   </div>
                   <div className="bg-orange-50 rounded-lg p-4 text-center">
                     <p className="text-3xl font-bold text-orange-700">{stats.totalJobs}</p>
@@ -137,10 +138,22 @@ export default function CrmAnalytics() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Overview</CardTitle>
+                <CardTitle className="text-base">Quote Funnel</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                    <span className="text-sm text-cyan-700 font-medium">Total Quotes</span>
+                    <span className="text-lg font-bold text-cyan-800">{stats.totalQuotes ?? 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                    <span className="text-sm text-cyan-700 font-medium">Quote Leads (Pipeline)</span>
+                    <span className="text-lg font-bold text-cyan-800">{stats.leadsByStage?.quote_requested || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                    <span className="text-sm text-emerald-700 font-medium">Quote → Booking Rate</span>
+                    <span className="text-lg font-bold text-emerald-800">{stats.quoteConversionRate ?? 0}%</span>
+                  </div>
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-600">Appointments Scheduled</span>
                     <span className="text-lg font-bold">{stats.totalAppointments}</span>
@@ -148,14 +161,6 @@ export default function CrmAnalytics() {
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-600">Completed Jobs</span>
                     <span className="text-lg font-bold">{stats.jobsByStatus?.completed || 0}</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-sm text-gray-600">In Progress Jobs</span>
-                    <span className="text-lg font-bold">{stats.jobsByStatus?.in_progress || 0}</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-sm text-gray-600">New Leads</span>
-                    <span className="text-lg font-bold">{stats.leadsByStage?.new_lead || 0}</span>
                   </div>
                 </div>
               </CardContent>

@@ -760,10 +760,31 @@ Host: https://selfmaidllc.com`;
         // Non-blocking: don't fail the quote submission
       }
       
+      let leadId: string | null = null;
+      try {
+        const nameParts = quote.name.trim().split(/\s+/);
+        const firstName = nameParts[0] || quote.name;
+        const lastName = nameParts.slice(1).join(" ") || "";
+        const lead = await storage.createLead({
+          firstName,
+          lastName,
+          email: quote.email,
+          phone: quote.phone || undefined,
+          source: "website",
+          serviceType: quote.serviceType,
+          pipelineStage: "quote_requested",
+          notes: `Quote #${quote.id}: $${quote.estimatedPrice} — ${quote.serviceType}, ${quote.frequency}`,
+        });
+        leadId = lead.id;
+      } catch (leadErr: any) {
+        console.error("[Quote→Lead] Failed to create lead:", leadErr.message);
+      }
+
       res.json({ 
         success: true, 
         message: "Quote saved and sent to your email",
-        quoteId: quote.id 
+        quoteId: quote.id,
+        leadId,
       });
     } catch (error: any) {
       console.error('Quote submission error:', error);

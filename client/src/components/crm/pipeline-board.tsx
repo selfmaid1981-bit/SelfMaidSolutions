@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 
 const STAGES = [
   { key: "new_lead", label: "New Leads", color: "bg-blue-500" },
+  { key: "quote_requested", label: "Quote Requested", color: "bg-cyan-500" },
   { key: "contacted", label: "Contacted", color: "bg-yellow-500" },
   { key: "qualified", label: "Qualified", color: "bg-purple-500" },
   { key: "proposal_sent", label: "Proposal Sent", color: "bg-orange-500" },

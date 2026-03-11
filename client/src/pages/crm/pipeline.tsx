@@ -151,6 +151,7 @@ export default function CrmPipeline() {
                     <SelectTrigger className="flex-1"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="new_lead">New Lead</SelectItem>
+                      <SelectItem value="quote_requested">Quote Requested</SelectItem>
                       <SelectItem value="contacted">Contacted</SelectItem>
                       <SelectItem value="qualified">Qualified</SelectItem>
                       <SelectItem value="proposal_sent">Proposal Sent</SelectItem>
