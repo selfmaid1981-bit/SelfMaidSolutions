@@ -6,3 +6,9 @@ id = "7_v2xZJTlLhSIz3Y3U91a"
 uri = "file://.local/architecture-plan.md"
 type = "text"
 title = "Leading Edge Growth OS — Architecture Plan"
+
+[[outputs]]
+id = "6_0xC6LKx3KljMUDYb4Hk"
+uri = "file://.local/api-specification.md"
+type = "text"
+title = "Leading Edge Growth OS — REST API Specification"
