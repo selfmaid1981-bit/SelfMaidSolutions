@@ -29,6 +29,18 @@ import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
+import CrmDashboard from "@/pages/crm/dashboard";
+import CrmPipeline from "@/pages/crm/pipeline";
+import CrmContacts from "@/pages/crm/contacts";
+import CrmAppointments from "@/pages/crm/appointments";
+import CrmJobs from "@/pages/crm/jobs";
+import CrmAnalytics from "@/pages/crm/analytics";
+import SaasLanding from "@/pages/saas/landing";
+import SaasSignup from "@/pages/saas/signup";
+import SaasDashboard from "@/pages/saas/dashboard";
+import SaasLeadDiscovery from "@/pages/saas/lead-discovery";
+import SaasBilling from "@/pages/saas/billing";
+import SaasSettings from "@/pages/saas/settings";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -65,6 +77,18 @@ function Router() {
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
+        <Route path="/crm" component={CrmDashboard} />
+        <Route path="/crm/pipeline" component={CrmPipeline} />
+        <Route path="/crm/contacts" component={CrmContacts} />
+        <Route path="/crm/appointments" component={CrmAppointments} />
+        <Route path="/crm/jobs" component={CrmJobs} />
+        <Route path="/crm/analytics" component={CrmAnalytics} />
+        <Route path="/saas/landing" component={SaasLanding} />
+        <Route path="/saas/signup" component={SaasSignup} />
+        <Route path="/saas" component={SaasDashboard} />
+        <Route path="/saas/lead-discovery" component={SaasLeadDiscovery} />
+        <Route path="/saas/billing" component={SaasBilling} />
+        <Route path="/saas/settings" component={SaasSettings} />
         <Route path="/:cityServiceSlug">{(params) => {
           const slug = params.cityServiceSlug || "";
           const validSlugs = new Set(allCityServiceCombinations.map(c => c.slug));

@@ -49,3 +49,9 @@ waitForPort = 5000
 
 [rules.formatter.fileExtensions.".html"]
 id = "module:nodejs-20/formatter:prettier"
+
+[userenv]
+
+[userenv.shared]
+VITE_ADMIN_API_KEY = "Weedseed1!"
+ADMIN_API_KEY = "Weedseed1!"

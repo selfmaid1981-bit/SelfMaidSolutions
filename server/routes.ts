@@ -69,6 +69,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Register AI Chat routes
   registerAIChatRoutes(app);
 
+  // Register CRM routes
+  const crmRoutes = (await import("./crm/routes")).default;
+  app.use("/api/crm", crmRoutes);
+
+  // Register SaaS routes
+  const saasRoutes = (await import("./saas/routes")).default;
+  app.use("/api/saas", saasRoutes);
+
+  // Register Voice/AI Receptionist routes
+  const voiceRoutes = (await import("./voice/routes")).default;
+  app.use("/api/voice", voiceRoutes);
+
   // Dynamic Sitemap.xml - always serves fresh dates
   app.get("/sitemap.xml", (req, res) => {
     const today = new Date().toISOString().split('T')[0];

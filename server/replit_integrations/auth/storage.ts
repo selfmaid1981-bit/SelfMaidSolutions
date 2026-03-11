@@ -11,7 +11,10 @@ export interface IAuthStorage {
 
 class AuthStorage implements IAuthStorage {
   async getUser(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
+    const [user] = await db
+      .select({ id: users.id, username: users.username })
+      .from(users)
+      .where(eq(users.id, id));
     return user;
   }
 
@@ -26,7 +29,7 @@ class AuthStorage implements IAuthStorage {
           updatedAt: new Date(),
         },
       })
-      .returning();
+      .returning({ id: users.id, username: users.username });
     return user;
   }
 }

@@ -71,7 +71,7 @@ export const users = pgTable(
 );
 
 export type UpsertUser = typeof users.$inferInsert;
-export type User = typeof users.$inferSelect;
+export type User = Pick<typeof users.$inferSelect, "id" | "username">;
 
 // ==================== EXISTING TABLES (PRESERVED) ====================
 

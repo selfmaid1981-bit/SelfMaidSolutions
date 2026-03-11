@@ -15,7 +15,7 @@ The application features a professional design using a slate/blue color palette,
 - **Frontend**: React 18 with TypeScript, Wouter, Tailwind CSS, Radix UI/shadcn/ui, TanStack Query, React Hook Form with Zod, and Vite.
 - **Backend**: Node.js with Express.js and TypeScript, Drizzle ORM for PostgreSQL (Neon serverless), and a RESTful API.
 - **Data Storage**: PostgreSQL on Neon, managing 22 tables across core business, CRM, SaaS, lead discovery, and AI voice modules. Core tables: `users`, `companies`, `sessions`, `contact_messages`, `bookings`, `quotes`, `cleaners`, `recurring_bookings`, `referrals`, `email_campaigns`, `review_requests`. CRM tables: `leads`, `clients`, `appointments`, `jobs`. SaaS tables: `subscriptions`. Lead discovery tables: `local_businesses`, `business_emails`. AI voice tables: `call_logs`, `call_transcripts`. Chat tables: `conversations`, `messages`. All tenant-scoped tables include `company_id` for multi-tenant isolation.
-- **Authentication & Security**: Express sessions with secure cookies, server-side Zod validation, CORS, and input sanitization.
+- **Authentication & Security**: Express sessions with secure cookies, server-side Zod validation, CORS, and input sanitization. PATCH route field whitelisting on all CRM and SaaS endpoints prevents mass-assignment attacks. User type narrowed to `{id, username}` — all DB queries and API responses enforce minimal user data exposure. Admin routes use `x-admin-api-key` header auth (note: VITE_ADMIN_API_KEY client exposure is a known limitation for production — should be replaced with session/JWT auth).
 - **Payment Processing**: Stripe integration for secure transactions, utilizing Stripe Elements and webhooks.
 - **Email Communication**: SendGrid handles all transactional and marketing emails.
 - **Quote Calculator**: Dynamic calculator based on service type, property size, frequency discounts, and add-on services.
@@ -92,6 +92,10 @@ The application features a professional design using a slate/blue color palette,
 - **AI**: OpenAI SDK (via Replit AI Integrations).
 
 - **Centralized Config**: `server/config.ts` — All business constants (name, phone, email, owner emails, Google Place ID, review URL) centralized in one file. All server modules import from this file.
+- **CRM Module** (`server/crm/`): Full CRM backend with routes (`/api/crm/*`), pipeline management, scheduling, lead-to-client conversion. Frontend at `/crm/*` with dashboard, pipeline board, contacts, appointments, jobs, and analytics pages.
+- **SaaS Module** (`server/saas/`): Multi-tenant SaaS backend with routes (`/api/saas/*`), company management, subscription tiers (Starter $49/Professional $99/Enterprise $199), and lead discovery engine. Frontend at `/saas/*` with landing page, signup wizard, dashboard, lead discovery, billing, and settings.
+- **Voice Module** (`server/voice/`): AI receptionist backend with routes (`/api/voice/*`), Twilio TwiML integration, call logging, transcript storage, and intent extraction. Handles incoming calls, speech processing, and status callbacks.
+- **Shared Models**: `shared/models/crm.ts` (pipeline stages, job statuses, service types, lead sources) and `shared/models/saas.ts` (subscription tiers with features/limits).
 
 ## Documentation
 
