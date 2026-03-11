@@ -19,8 +19,11 @@ export default function BeforeAfterGallery() {
             <div className="relative">
               <img
                 src={kitchenTransformation}
-                alt="Kitchen cleaning before and after - Montgomery Alabama"
+                alt="Kitchen cleaning before and after transformation - Self-Maid Montgomery Alabama"
                 className="w-full h-auto object-cover"
+                loading="lazy"
+                width={1200}
+                height={600}
                 data-testid="gallery-image-kitchen"
               />
               

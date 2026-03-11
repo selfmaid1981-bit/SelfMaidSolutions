@@ -302,8 +302,11 @@ export function ContactSection() {
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-800/80 rounded-2xl z-10 pointer-events-none" />
                 <img 
                   src={captainClarityImage} 
-                  alt="Captain Clarity - Self-Maid superhero ready to help" 
+                  alt="Captain Clarity - Self-Maid cleaning superhero mascot Montgomery Alabama" 
                   className="w-64 h-64 lg:w-80 lg:h-80 object-contain hero-image-blend"
+                  loading="lazy"
+                  width={320}
+                  height={320}
                   data-testid="contact-mascot-image"
                 />
               </div>

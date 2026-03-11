@@ -72,8 +72,11 @@ export function AboutSection() {
           <div className="relative rounded-2xl overflow-hidden shadow-2xl">
             <img 
               src={bathroomImage} 
-              alt="Professionally cleaned modern bathroom - spotless results" 
+              alt="Professionally cleaned modern bathroom - spotless results by Self-Maid Montgomery AL" 
               className="w-full h-auto object-cover" 
+              loading="lazy"
+              width={600}
+              height={400}
               data-testid="about-image-1"
             />
           </div>
@@ -81,8 +84,11 @@ export function AboutSection() {
           <div className="relative rounded-2xl overflow-hidden shadow-2xl">
             <img 
               src={officeImage} 
-              alt="Professional commercial office cleaning services" 
+              alt="Professional commercial office cleaning services in Montgomery Alabama" 
               className="w-full h-auto object-cover" 
+              loading="lazy"
+              width={600}
+              height={400}
               data-testid="about-image-2"
             />
           </div>

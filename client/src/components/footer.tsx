@@ -71,8 +71,11 @@ export function Footer() {
             <div className="mb-5">
               <img
                 src={fullLogoImage}
-                alt="Self-Maid Cleaning Services LLC Logo"
+                alt="Self-Maid Cleaning Services LLC Logo - Professional Cleaning Montgomery AL"
                 className="h-24 w-auto object-contain drop-shadow-lg"
+                loading="lazy"
+                width={200}
+                height={96}
               />
             </div>
             <p className="text-slate-400 mb-5 leading-relaxed max-w-sm text-sm">
