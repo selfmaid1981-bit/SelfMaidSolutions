@@ -14,7 +14,7 @@ The application features a professional design using a slate/blue color palette,
 ## Technical Implementations
 - **Frontend**: React 18 with TypeScript, Wouter, Tailwind CSS, Radix UI/shadcn/ui, TanStack Query, React Hook Form with Zod, and Vite.
 - **Backend**: Node.js with Express.js and TypeScript, Drizzle ORM for PostgreSQL (Neon serverless), and a RESTful API.
-- **Data Storage**: PostgreSQL on Neon, managing schemas for `users`, `contact_messages`, `bookings`, `quotes`, `review_requests`, and marketing campaigns.
+- **Data Storage**: PostgreSQL on Neon, managing 22 tables across core business, CRM, SaaS, lead discovery, and AI voice modules. Core tables: `users`, `companies`, `sessions`, `contact_messages`, `bookings`, `quotes`, `cleaners`, `recurring_bookings`, `referrals`, `email_campaigns`, `review_requests`. CRM tables: `leads`, `clients`, `appointments`, `jobs`. SaaS tables: `subscriptions`. Lead discovery tables: `local_businesses`, `business_emails`. AI voice tables: `call_logs`, `call_transcripts`. Chat tables: `conversations`, `messages`. All tenant-scoped tables include `company_id` for multi-tenant isolation.
 - **Authentication & Security**: Express sessions with secure cookies, server-side Zod validation, CORS, and input sanitization.
 - **Payment Processing**: Stripe integration for secure transactions, utilizing Stripe Elements and webhooks.
 - **Email Communication**: SendGrid handles all transactional and marketing emails.
