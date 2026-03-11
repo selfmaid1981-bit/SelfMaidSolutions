@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight, Calculator, Check, AlertTriangle } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,9 +11,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { serviceOptions, timeSlots, getTomorrowDate } from '@/lib/services';
+import {
+  serviceOptions,
+  timeSlots,
+  getTomorrowDate,
+  quoteServiceTypes,
+  propertySizeOptions,
+  frequencyOptions,
+  addOnServices,
+  calculateQuotePrice,
+} from '@/lib/services';
 import { insertBookingSchema } from '@shared/schema';
 import { z } from 'zod';
 import { useLocation } from 'wouter';
@@ -55,6 +65,12 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
   const [step, setStep] = useState(1);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
+  const [propertySize, setPropertySize] = useState('');
+  const [customSqFt, setCustomSqFt] = useState('');
+  const [frequency, setFrequency] = useState('onetime');
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [numberOfRooms, setNumberOfRooms] = useState('');
   
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingFormSchema),
@@ -71,22 +87,29 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
       preferredDate: userData?.preferredDate || '',
       preferredTime: '',
       specialInstructions: '',
-      amount: 80,
+      amount: 0,
     },
   });
 
   const selectedService = form.watch('serviceType');
-  const selectedServiceData = serviceOptions.find(s => s.value === selectedService);
+
+  const calculatedPrice = calculateQuotePrice({
+    serviceType: selectedService,
+    propertySize,
+    customSqFt,
+    frequency,
+    selectedAddOns,
+    numberOfRooms,
+  });
 
   useEffect(() => {
-    if (selectedServiceData) {
-      form.setValue('amount', selectedServiceData.price);
+    if (calculatedPrice > 0) {
+      form.setValue('amount', calculatedPrice);
     }
-  }, [selectedService, selectedServiceData, form]);
+  }, [calculatedPrice, form]);
 
   useEffect(() => {
     if (isOpen && userData) {
-      // Prefill form with user data from quick booking form
       if (userData.firstName) form.setValue('firstName', userData.firstName);
       if (userData.lastName) form.setValue('lastName', userData.lastName);
       if (userData.phone) form.setValue('phone', userData.phone);
@@ -97,6 +120,14 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
     }
   }, [defaultService, userData, isOpen, form]);
 
+  const toggleAddOn = (addOnId: string) => {
+    setSelectedAddOns(prev =>
+      prev.includes(addOnId)
+        ? prev.filter(id => id !== addOnId)
+        : [...prev, addOnId]
+    );
+  };
+
   const bookingMutation = useMutation({
     mutationFn: async (data: BookingFormData & { skipPayment?: boolean }) => {
       const response = await apiRequest('POST', '/api/bookings', data);
@@ -105,15 +136,13 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
     onSuccess: (result, variables) => {
       onClose();
       if (variables.skipPayment) {
-        // Booking without payment - show success message
         toast({
           title: "Booking Submitted!",
           description: "We've received your booking request. We'll contact you within 24 hours to confirm.",
         });
         setLocation('/');
       } else {
-        // Redirect to checkout with booking ID
-        setLocation(`/checkout?bookingId=${result.bookingId}&amount=${selectedServiceData?.price || 80}`);
+        setLocation(`/checkout?bookingId=${result.bookingId}&amount=${calculatedPrice}`);
       }
     },
     onError: (error: any) => {
@@ -127,34 +156,36 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
 
   const handleBookWithoutPayment = () => {
     form.handleSubmit((data) => {
-      bookingMutation.mutate({ ...data, skipPayment: true });
+      bookingMutation.mutate({ ...data, amount: calculatedPrice, skipPayment: true });
     })();
   };
 
   const handleBookWithPayment = () => {
     form.handleSubmit((data) => {
-      bookingMutation.mutate({ ...data, skipPayment: false });
+      bookingMutation.mutate({ ...data, amount: calculatedPrice, skipPayment: false });
     })();
   };
 
+  const isDormService = selectedService === 'dorm';
+  const hasSizeInfo = isDormService
+    ? parseInt(numberOfRooms) > 0
+    : (propertySize !== '' || (customSqFt !== '' && parseInt(customSqFt) > 0));
+
   const nextStep = () => {
     if (step === 1 && !selectedService) {
-      toast({
-        title: "Service Required",
-        description: "Please select a service to continue.",
-        variant: "destructive",
-      });
+      toast({ title: "Service Required", description: "Please select a service to continue.", variant: "destructive" });
+      return;
+    }
+
+    if (step === 2 && !hasSizeInfo) {
+      toast({ title: "Property Details Required", description: isDormService ? "Please enter the number of rooms." : "Please select a property size or enter square footage.", variant: "destructive" });
       return;
     }
     
-    if (step === 2) {
+    if (step === 3) {
       const { preferredDate, preferredTime } = form.getValues();
       if (!preferredDate || !preferredTime) {
-        toast({
-          title: "Date and Time Required",
-          description: "Please select both date and time to continue.",
-          variant: "destructive",
-        });
+        toast({ title: "Date and Time Required", description: "Please select both date and time to continue.", variant: "destructive" });
         return;
       }
     }
@@ -166,12 +197,19 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
 
   const handleClose = () => {
     setStep(1);
+    setPropertySize('');
+    setCustomSqFt('');
+    setFrequency('onetime');
+    setSelectedAddOns([]);
+    setNumberOfRooms('');
     form.reset();
     onClose();
   };
 
-  // Set minimum date to tomorrow for consistency with quick booking form
   const minDate = getTomorrowDate();
+  const totalSteps = 4;
+
+  const selectedQuoteService = quoteServiceTypes.find(s => s.value === selectedService);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -191,11 +229,10 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
         </DialogHeader>
         
         <div className="py-6">
-          {/* Progress indicator - only show for booking, not recruitment */}
           {!isRecruitment && (
             <div className="flex items-center justify-center mb-8">
               <div className="flex items-center space-x-4">
-                {[1, 2, 3].map((stepNumber) => (
+                {Array.from({ length: totalSteps }, (_, i) => i + 1).map((stepNumber) => (
                   <div key={stepNumber} className="flex items-center">
                     <div 
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
@@ -206,8 +243,8 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                     >
                       {stepNumber}
                     </div>
-                    {stepNumber < 3 && (
-                      <div className={`w-12 h-0.5 mx-2 ${
+                    {stepNumber < totalSteps && (
+                      <div className={`w-8 h-0.5 mx-1 ${
                         step > stepNumber ? 'bg-primary' : 'bg-muted'
                       }`} />
                     )}
@@ -219,7 +256,6 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
 
           <Form {...form}>
             <form className="space-y-6">
-              {/* Recruitment Form */}
               {isRecruitment && (
                 <div data-testid="recruitment-form">
                   <h3 className="text-lg font-semibold mb-4">Tell Us About Yourself</h3>
@@ -316,8 +352,6 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                   <Button 
                     type="button"
                     onClick={() => {
-                      // Handle recruitment submission
-                      const formData = form.getValues();
                       toast({
                         title: "Application Submitted!",
                         description: "Thank you for your interest! We'll contact you within 2 business days.",
@@ -332,7 +366,6 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                 </div>
               )}
 
-              {/* Step 1: Service Selection */}
               {!isRecruitment && step === 1 && (
                 <div data-testid="booking-step-1">
                   <h3 className="text-lg font-semibold mb-4">1. Select Your Service</h3>
@@ -344,14 +377,14 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                         <FormControl>
                           <RadioGroup onValueChange={field.onChange} value={field.value}>
                             <div className="space-y-3">
-                              {serviceOptions.map((service) => (
+                              {quoteServiceTypes.map((service) => (
                                 <div key={service.value} className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted/50">
-                                  <RadioGroupItem value={service.value} id={service.value} />
-                                  <Label htmlFor={service.value} className="flex-1 cursor-pointer">
+                                  <RadioGroupItem value={service.value} id={`booking-${service.value}`} />
+                                  <Label htmlFor={`booking-${service.value}`} className="flex-1 cursor-pointer">
                                     <div className="flex justify-between items-center">
                                       <div>
                                         <div className="font-medium">{service.label}</div>
-                                        <div className="text-sm text-muted-foreground">Starting at ${service.price}</div>
+                                        <div className="text-sm text-muted-foreground">Starting at ${service.minCharge}</div>
                                       </div>
                                     </div>
                                   </Label>
@@ -370,15 +403,145 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                     className="w-full mt-6"
                     data-testid="step-1-next"
                   >
-                    Continue to Schedule <ArrowRight className="w-4 h-4 ml-2" />
+                    Continue to Property Details <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
               )}
 
-              {/* Step 2: Scheduling */}
               {!isRecruitment && step === 2 && (
                 <div data-testid="booking-step-2">
-                  <h3 className="text-lg font-semibold mb-4">2. Choose Date & Time</h3>
+                  <h3 className="text-lg font-semibold mb-2">2. Property Details</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Tell us about your space so we can give you an accurate price.
+                  </p>
+
+                  {isDormService ? (
+                    <div className="space-y-2">
+                      <Label>Number of Rooms</Label>
+                      <Input
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="e.g., 3 (kitchen, living room, bathroom)"
+                        value={numberOfRooms}
+                        onChange={(e) => setNumberOfRooms(e.target.value)}
+                        data-testid="input-rooms"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        $45 per room. Count all rooms including kitchen, living room, bedrooms, bathrooms, etc.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label>Property Size</Label>
+                        <Select value={propertySize} onValueChange={(val) => { setPropertySize(val); setCustomSqFt(''); }}>
+                          <SelectTrigger data-testid="select-property-size">
+                            <SelectValue placeholder="Select property size" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {propertySizeOptions.map(option => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label>Or Enter Exact Square Footage</Label>
+                        <Input
+                          type="number"
+                          min="0"
+                          step="1"
+                          placeholder="e.g., 2500"
+                          value={customSqFt}
+                          onChange={(e) => { setCustomSqFt(e.target.value); if (e.target.value) setPropertySize(''); }}
+                          data-testid="input-sqft"
+                        />
+                        <p className="text-xs text-muted-foreground">
+                          Exact square footage gives the most accurate price
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-6 space-y-2">
+                    <Label>Service Frequency</Label>
+                    <Select value={frequency} onValueChange={setFrequency}>
+                      <SelectTrigger data-testid="select-frequency">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {frequencyOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="mt-6 space-y-2">
+                    <Label>Additional Services (Optional)</Label>
+                    <div className="space-y-2">
+                      {addOnServices.map(addOn => (
+                        <div key={addOn.id} className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            id={`booking-addon-${addOn.id}`}
+                            checked={selectedAddOns.includes(addOn.id)}
+                            onChange={() => toggleAddOn(addOn.id)}
+                            className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                            data-testid={`addon-${addOn.id}`}
+                          />
+                          <label htmlFor={`booking-addon-${addOn.id}`} className="flex-1 text-sm cursor-pointer">
+                            {addOn.label} (+${addOn.price})
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {calculatedPrice > 0 && (
+                    <div className="mt-6 bg-gradient-to-r from-blue-600 to-teal-500 rounded-xl p-4 text-white text-center" data-testid="live-price">
+                      <div className="flex items-center justify-center gap-2 mb-1">
+                        <Calculator className="w-4 h-4" />
+                        <span className="text-sm font-medium text-blue-100">Estimated Price</span>
+                      </div>
+                      <div className="text-3xl font-bold">${calculatedPrice}</div>
+                      <p className="text-xs text-blue-100 mt-1">
+                        {frequency !== 'onetime' ? 'per service' : 'one-time service'} · final price confirmed by Self-Maid
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="flex gap-4 mt-6">
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      onClick={prevStep} 
+                      className="flex-1"
+                      data-testid="step-2-back"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                    </Button>
+                    <Button 
+                      type="button" 
+                      onClick={nextStep} 
+                      className="flex-1"
+                      data-testid="step-2-next"
+                    >
+                      Continue to Schedule <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {!isRecruitment && step === 3 && (
+                <div data-testid="booking-step-3">
+                  <h3 className="text-lg font-semibold mb-4">3. Choose Date & Time</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
@@ -427,7 +590,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                       variant="outline" 
                       onClick={prevStep} 
                       className="flex-1"
-                      data-testid="step-2-back"
+                      data-testid="step-3-back"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" /> Back
                     </Button>
@@ -435,7 +598,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                       type="button" 
                       onClick={nextStep} 
                       className="flex-1"
-                      data-testid="step-2-next"
+                      data-testid="step-3-next"
                     >
                       Continue to Details <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
@@ -443,10 +606,9 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                 </div>
               )}
 
-              {/* Step 3: Contact & Address Details */}
-              {!isRecruitment && step === 3 && (
-                <div data-testid="booking-step-3">
-                  <h3 className="text-lg font-semibold mb-4">3. Contact & Address Information</h3>
+              {!isRecruitment && step === 4 && (
+                <div data-testid="booking-step-4">
+                  <h3 className="text-lg font-semibold mb-4">4. Contact & Address Information</h3>
                   
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -587,11 +749,59 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                       )}
                     />
 
-                    <div className="bg-muted/50 p-4 rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">Service Total:</span>
-                        <span className="text-lg font-bold text-primary" data-testid="service-total">
-                          ${selectedServiceData?.price || 80}.00
+                    <Alert className="bg-amber-50 border-amber-200 dark:bg-amber-950/30 dark:border-amber-800">
+                      <AlertTriangle className="h-4 w-4 text-amber-600" />
+                      <AlertDescription className="text-amber-800 dark:text-amber-200 text-xs">
+                        <strong>Important:</strong> Each booking must be approved by Self-Maid. You will be contacted as soon as your request is received. Final pricing is confirmed by Self-Maid.
+                      </AlertDescription>
+                    </Alert>
+
+                    <div className="bg-muted/50 p-4 rounded-lg space-y-2" data-testid="booking-summary">
+                      <h4 className="font-semibold text-sm">Booking Summary</h4>
+                      <div className="space-y-1 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Service:</span>
+                          <span className="font-medium">{selectedQuoteService?.label}</span>
+                        </div>
+                        {isDormService ? (
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Rooms:</span>
+                            <span className="font-medium">{numberOfRooms}</span>
+                          </div>
+                        ) : (
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Size:</span>
+                            <span className="font-medium">
+                              {customSqFt ? `${customSqFt} sq ft` : propertySizeOptions.find(s => s.value === propertySize)?.label}
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Frequency:</span>
+                          <span className="font-medium">{frequencyOptions.find(f => f.value === frequency)?.label}</span>
+                        </div>
+                        {selectedAddOns.length > 0 && (
+                          <div className="pt-1 border-t">
+                            <span className="text-muted-foreground text-xs">Add-ons:</span>
+                            {selectedAddOns.map(id => {
+                              const addOn = addOnServices.find(a => a.id === id);
+                              return (
+                                <div key={id} className="flex items-center justify-between ml-2">
+                                  <span className="flex items-center text-xs">
+                                    <Check className="w-3 h-3 mr-1 text-green-600" />
+                                    {addOn?.label}
+                                  </span>
+                                  <span className="text-xs font-medium">+${addOn?.price}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center pt-2 border-t">
+                        <span className="font-semibold">Estimated Total:</span>
+                        <span className="text-xl font-bold text-primary" data-testid="service-total">
+                          ${calculatedPrice}
                         </span>
                       </div>
                     </div>
@@ -603,7 +813,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                         type="button"
                         onClick={handleBookWithoutPayment}
                         className="flex-1 bg-primary hover:bg-primary/90 text-white font-semibold"
-                        disabled={bookingMutation.isPending}
+                        disabled={bookingMutation.isPending || calculatedPrice <= 0}
                         data-testid="book-without-payment"
                       >
                         {bookingMutation.isPending ? 'Processing...' : 'Book Now (Pay Later)'}
@@ -612,7 +822,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                         type="button"
                         onClick={handleBookWithPayment}
                         className="flex-1 bg-secondary hover:bg-secondary/90 text-white font-semibold"
-                        disabled={bookingMutation.isPending}
+                        disabled={bookingMutation.isPending || calculatedPrice <= 0}
                         data-testid="book-with-payment"
                       >
                         {bookingMutation.isPending ? 'Processing...' : 'Book & Pay Now'}
@@ -623,7 +833,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                       variant="outline" 
                       onClick={prevStep} 
                       className="w-full"
-                      data-testid="step-3-back"
+                      data-testid="step-4-back"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" /> Back
                     </Button>

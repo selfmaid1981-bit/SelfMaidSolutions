@@ -589,10 +589,10 @@ Host: https://selfmaidllc.com`;
   // Create payment intent for booking
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
-      const { amount, bookingId } = req.body;
+      const { bookingId } = req.body;
       
-      if (!amount || !bookingId) {
-        return res.status(400).json({ message: "Amount and booking ID are required" });
+      if (!bookingId) {
+        return res.status(400).json({ message: "Booking ID is required" });
       }
 
       const booking = await storage.getBooking(bookingId);
@@ -600,9 +600,13 @@ Host: https://selfmaidllc.com`;
         return res.status(404).json({ message: "Booking not found" });
       }
 
+      if (!booking.amount || booking.amount <= 0) {
+        return res.status(400).json({ message: "Booking has no valid amount. Please contact us." });
+      }
+
       const stripe = await getUncachableStripeClient();
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: Math.round(amount * 100), // Convert to cents
+        amount: Math.round(booking.amount * 100),
         currency: "usd",
         metadata: {
           bookingId: bookingId,
@@ -612,7 +616,7 @@ Host: https://selfmaidllc.com`;
       // Update booking with payment intent ID
       await storage.updateBookingPaymentIntent(bookingId, paymentIntent.id);
       
-      res.json({ clientSecret: paymentIntent.client_secret });
+      res.json({ clientSecret: paymentIntent.client_secret, amount: booking.amount });
     } catch (error: any) {
       console.error('Payment intent creation error:', error);
       res.status(500).json({ message: "Error creating payment intent: " + error.message });

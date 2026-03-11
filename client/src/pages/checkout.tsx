@@ -142,9 +142,8 @@ export default function Checkout() {
     // Get booking details from URL params
     const urlParams = new URLSearchParams(window.location.search);
     const bookingIdParam = urlParams.get('bookingId');
-    const amountParam = urlParams.get('amount');
 
-    if (!bookingIdParam || !amountParam) {
+    if (!bookingIdParam) {
       toast({
         title: "Invalid Checkout",
         description: "Missing booking information. Please start a new booking.",
@@ -155,16 +154,14 @@ export default function Checkout() {
     }
 
     setBookingId(bookingIdParam);
-    setAmount(parseInt(amountParam));
 
-    // Create PaymentIntent
     apiRequest("POST", "/api/create-payment-intent", { 
-      bookingId: bookingIdParam, 
-      amount: parseInt(amountParam) 
+      bookingId: bookingIdParam
     })
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
+        if (data.amount) setAmount(data.amount);
       })
       .catch((error) => {
         toast({

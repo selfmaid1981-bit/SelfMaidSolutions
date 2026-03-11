@@ -51,6 +51,9 @@ The application features a professional design using a slate/blue color palette,
 - **Blog Article Schema**: BlogPosting JSON-LD with author (Michelle), publisher, datePublished, speakable schema for AI discoverability. Author byline on all blog posts.
 - **Image SEO**: All below-fold images have lazy loading, explicit width/height dimensions, and keyword-rich alt tags.
 - **Google Analytics 4**: GA4 tag (G-BHKLJVML78) installed directly in index.html alongside GTM container.
+- **Integrated Quote Calculator in Booking**: The booking modal now has a 4-step flow: Service Selection → Property Details (size/sq ft/frequency/add-ons with live price) → Schedule → Contact/Address with full summary. Pricing logic shared via `client/src/lib/services.ts` (calculateQuotePrice, quoteServiceTypes, propertySizeOptions, frequencyOptions, addOnServices). No more flat $80 default.
+- **Server-Side Payment Integrity**: Payment intent creation uses the booking's stored amount (from DB), not client-provided amount. Prevents URL parameter tampering on checkout.
+- **City-Service Page Routing Fix**: Wouter's `regexparam` doesn't support named params after non-slash characters. Routes like `/house-cleaning-:slug` replaced with `/:cityServiceSlug` catch-all validated against `allCityServiceCombinations` set.
 
 # External Dependencies
 
