@@ -1,0 +1,203 @@
+Build a full-stack SaaS platform called "Leading Edge Growth OS" designed for service businesses like cleaning companies, lawn care, pressure washing, and HVAC.
+
+The platform will power the business Self-Maid Cleaning and later be sold as SaaS.
+
+Tech Stack:
+Frontend: React + Tailwind CSS
+Backend: Node.js + Express
+Database: PostgreSQL
+Authentication: JWT + role-based access
+Payments: Stripe
+Messaging: Twilio (SMS + calls)
+AI: OpenAI API
+
+Architecture must support three domains:
+
+1. selfmaidllc.com
+Purpose: customer-facing lead generation website.
+
+Features:
+- homepage optimized for conversion
+- instant quote calculator
+- service pages (residential, deep cleaning, move-out cleaning, Airbnb cleaning, commercial cleaning)
+- online booking form
+- FAQ section
+- testimonials
+- contact form
+- lead capture connected to CRM
+
+Forms must send data to backend API.
+
+2. getleadingedge.net
+Purpose: internal CRM and operations dashboard.
+
+Modules:
+
+CRM
+- lead pipeline
+- contact database
+- quote generator
+- appointment scheduling
+- job tracking
+
+Pipeline stages:
+New Lead
+Contacted
+Quote Sent
+Booked
+Recurring Client
+
+Dashboard metrics:
+- leads today
+- quotes sent
+- bookings
+- revenue
+
+3. deluxe.biz
+Purpose: multi-tenant SaaS platform for service businesses.
+
+Features:
+
+User Accounts
+- signup/login
+- company profiles
+- role permissions
+
+CRM
+- lead tracking
+- pipeline stages
+- contact management
+
+Booking System
+- customer scheduling
+- calendar management
+- service selection
+
+Quote Calculator
+- dynamic pricing
+- service configuration
+
+Outreach Automation
+- email campaigns
+- SMS follow-ups
+- call tracking
+
+Review Automation
+- SMS review requests
+- Google review link generator
+
+Analytics
+- lead sources
+- conversion rates
+- revenue tracking
+
+Stripe Integration
+- SaaS subscription plans
+
+Starter $49
+Growth $99
+Pro $199
+
+Lead Discovery Engine
+
+Build a module that automatically finds local businesses.
+
+Inputs:
+city
+business category
+radius
+
+Sources:
+Google Maps scraping
+
+Outputs:
+business_name
+address
+phone
+website
+rating
+review_count
+
+Store in table:
+local_businesses
+
+Extract domains and run Hunter API to discover emails.
+
+Store emails in:
+business_emails
+
+Score each lead 1–100 based on likelihood to need services.
+
+AI Receptionist
+
+Use Twilio and OpenAI API.
+
+When someone calls:
+
+AI answers phone
+asks questions
+collects:
+
+name
+phone
+address
+service type
+bedrooms
+bathrooms
+date requested
+
+Generate quote using pricing formula.
+
+If user wants booking:
+check calendar
+confirm appointment
+
+Store in:
+appointments table
+
+Send SMS confirmation.
+
+Database Schema
+
+Tables should include:
+
+users
+companies
+leads
+clients
+appointments
+quotes
+jobs
+subscriptions
+local_businesses
+business_emails
+call_logs
+call_transcripts
+
+Admin Dashboard
+
+Provide system metrics:
+
+total leads
+conversion rate
+appointments booked
+monthly revenue
+outreach performance
+
+Frontend Pages
+
+Landing pages
+CRM dashboard
+lead management
+booking calendar
+analytics dashboard
+campaign builder
+
+Deployment
+
+Prepare for deployment with:
+
+Docker configuration
+environment variables
+API documentation
+database migrations
