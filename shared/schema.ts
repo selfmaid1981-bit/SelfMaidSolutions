@@ -107,6 +107,8 @@ export const bookings = pgTable(
     status: text("status").notNull().default("pending"),
     paymentIntentId: text("payment_intent_id"),
     quoteId: varchar("quote_id"),
+    discountApplied: integer("discount_applied").default(0),
+    discountSource: text("discount_source"),
     assignedCleanerId: varchar("assigned_cleaner_id"),
     customerId: varchar("customer_id"),
     recurringBookingId: varchar("recurring_booking_id"),

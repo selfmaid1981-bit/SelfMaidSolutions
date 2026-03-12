@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useLocation } from 'wouter';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, BedDouble, Bath, Ruler, Sparkles } from 'lucide-react';
+import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, BedDouble, Bath, Ruler, Sparkles, Timer, Zap, Calendar, Clock } from 'lucide-react';
 import { UrgencyBanner, LoyaltyBadge, TrustSignals } from '@/components/urgency-banner';
 
 const serviceTypes = [
@@ -42,12 +42,93 @@ const addOns = [
   { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 },
 ];
 
+const DISCOUNT_PERCENT = 10;
+const COUNTDOWN_SECONDS = 15 * 60;
+
 function estimateSqFt(bedrooms: number, bathrooms: number): number {
   if (bedrooms <= 0 && bathrooms <= 0) return 0;
-  const baseSqFt = 400;
-  const perBedroom = 250;
-  const perBathroom = 75;
-  return Math.round(baseSqFt + (bedrooms * perBedroom) + (bathrooms * perBathroom));
+  return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
+}
+
+function generateAvailableSlots(): { date: string; label: string; slots: string[] }[] {
+  const result: { date: string; label: string; slots: string[] }[] = [];
+  const now = new Date();
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  for (let i = 1; i <= 7; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    const dow = d.getDay();
+    if (dow === 0) continue;
+
+    const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const label = `${dayNames[dow]}, ${monthNames[d.getMonth()]} ${d.getDate()}`;
+
+    const slots: string[] = [];
+    const startHour = 8;
+    const endHour = dow === 6 ? 14 : 17;
+    for (let h = startHour; h < endHour; h += 2) {
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h > 12 ? h - 12 : h;
+      const endH = h + 2;
+      const endAmpm = endH >= 12 ? 'PM' : 'AM';
+      const endH12 = endH > 12 ? endH - 12 : endH;
+      slots.push(`${h12}:00 ${ampm} – ${endH12}:00 ${endAmpm}`);
+    }
+
+    result.push({ date: dateStr, label, slots });
+  }
+  return result;
+}
+
+function CountdownTimer({ seconds, onExpire }: { seconds: number; onExpire: () => void }) {
+  const [remaining, setRemaining] = useState(seconds);
+  const expireCalled = useRef(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRemaining(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          if (!expireCalled.current) {
+            expireCalled.current = true;
+            onExpire();
+          }
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [onExpire]);
+
+  const mins = Math.floor(remaining / 60);
+  const secs = remaining % 60;
+  const pct = (remaining / seconds) * 100;
+  const isUrgent = remaining < 120;
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Timer className={`w-4 h-4 ${isUrgent ? 'text-red-500 animate-pulse' : 'text-orange-500'}`} />
+          <span className={`text-sm font-semibold ${isUrgent ? 'text-red-600' : 'text-orange-600'}`}>
+            Offer expires in
+          </span>
+        </div>
+        <span className={`text-lg font-bold font-mono ${isUrgent ? 'text-red-600' : 'text-orange-700'}`}>
+          {mins}:{secs.toString().padStart(2, '0')}
+        </span>
+      </div>
+      <div className="w-full bg-gray-200 rounded-full h-1.5">
+        <div
+          className={`h-1.5 rounded-full transition-all duration-1000 ${isUrgent ? 'bg-red-500' : 'bg-orange-500'}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default function Quote() {
@@ -63,6 +144,10 @@ export default function Quote() {
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [showSaveForm, setShowSaveForm] = useState(false);
+  const [savedQuoteId, setSavedQuoteId] = useState<string | null>(null);
+  const [showIncentive, setShowIncentive] = useState(false);
+  const [discountExpired, setDiscountExpired] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState<{ date: string; time: string } | null>(null);
 
   const selectedService = serviceTypes.find(s => s.value === serviceType);
   const freq = frequencyOptions.find(f => f.value === frequency);
@@ -84,6 +169,15 @@ export default function Quote() {
     return Math.round(basePrice + addOnTotal);
   }, [selectedService, freq, estimatedSqFt, selectedAddOns]);
 
+  const discountedPrice = useMemo(() => {
+    if (!quote) return 0;
+    return Math.round(quote * (1 - DISCOUNT_PERCENT / 100));
+  }, [quote]);
+
+  const savings = quote - discountedPrice;
+
+  const availableSlots = useMemo(() => generateAvailableSlots(), []);
+
   const toggleAddOn = (addOnId: string) => {
     setSelectedAddOns(prev =>
       prev.includes(addOnId)
@@ -100,7 +194,7 @@ export default function Quote() {
 
   const saveQuoteMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest('POST', '/api/quotes', {
+      const res = await apiRequest('POST', '/api/quotes', {
         name: customerName,
         email: customerEmail,
         phone: customerPhone || null,
@@ -111,13 +205,17 @@ export default function Quote() {
         addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
         estimatedPrice: quote,
       });
+      return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
         title: "Quote Saved!",
-        description: "Your quote has been saved and sent to your email. We'll be in touch soon!",
+        description: "Your quote has been saved and sent to your email. Check out your limited-time offer below!",
       });
+      setSavedQuoteId(data.quoteId || 'q-' + Date.now().toString(36));
       setShowSaveForm(false);
+      setShowIncentive(true);
+      setDiscountExpired(false);
     },
     onError: (error: any) => {
       toast({
@@ -141,21 +239,40 @@ export default function Quote() {
     saveQuoteMutation.mutate();
   };
 
+  const handleBookWithDiscount = () => {
+    const useDiscount = showIncentive && !discountExpired;
+    const finalPrice = useDiscount ? discountedPrice : quote;
+    const params = new URLSearchParams({
+      quoteId: savedQuoteId || 'q-' + Date.now().toString(36),
+      serviceType: selectedService?.label || '',
+      estimatedPrice: finalPrice.toString(),
+      quoteName: customerName,
+      quoteEmail: customerEmail,
+      quotePhone: customerPhone,
+    });
+    if (useDiscount) {
+      params.set('discountApplied', savings.toString());
+      params.set('discountSource', 'booking_incentive');
+      params.set('originalPrice', quote.toString());
+    }
+    if (selectedSlot) {
+      params.set('preferredDate', selectedSlot.date);
+      params.set('preferredTime', selectedSlot.time);
+    }
+    setLocation(`/booking?${params.toString()}`);
+  };
+
   const handleBookThisQuote = () => {
     if (!customerName || !customerEmail) {
       toast({ title: "Missing Information", description: "Please provide your name and email to book this quote.", variant: "destructive" });
       return;
     }
-    const params = new URLSearchParams({
-      quoteId: 'q-' + Date.now().toString(36),
-      serviceType: selectedService?.label || '',
-      estimatedPrice: quote.toString(),
-      quoteName: customerName,
-      quoteEmail: customerEmail,
-      quotePhone: customerPhone,
-    });
-    setLocation(`/booking?${params.toString()}`);
+    handleBookWithDiscount();
   };
+
+  const handleDiscountExpired = useCallback(() => {
+    setDiscountExpired(true);
+  }, []);
 
   const hasInput = serviceType && estimatedSqFt > 0;
 
@@ -313,7 +430,7 @@ export default function Quote() {
                 </Card>
               </div>
 
-              <div>
+              <div className="space-y-6">
                 <Card className="sticky top-24 rounded-2xl shadow-2xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500" />
                   <CardHeader className="pb-4">
@@ -328,9 +445,24 @@ export default function Quote() {
                         <div className="text-center py-8 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
                           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
                           <p className="text-blue-100 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
-                          <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
-                            ${quote}
-                          </p>
+                          {showIncentive && !discountExpired ? (
+                            <>
+                              <p className="text-2xl text-blue-200/60 line-through relative z-10">${quote}</p>
+                              <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
+                                ${discountedPrice}
+                              </p>
+                              <div className="mt-2 inline-flex items-center gap-1.5 bg-red-500/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-bold relative z-10 animate-pulse">
+                                <Zap className="w-3.5 h-3.5" />
+                                You save ${savings}!
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
+                                ${quote}
+                              </p>
+                            </>
+                          )}
                           <p className="text-blue-100/80 text-sm mt-2 relative z-10">
                             {frequency !== 'onetime' ? 'per service' : 'one-time service'}
                           </p>
@@ -383,6 +515,28 @@ export default function Quote() {
                           </div>
                         </div>
 
+                        {showIncentive && !discountExpired && (
+                          <div className="rounded-xl border-2 border-orange-400 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 p-4 space-y-3" data-testid="incentive-panel">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                                <Zap className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="font-bold text-orange-800 dark:text-orange-200">{DISCOUNT_PERCENT}% Off — Book Now!</p>
+                                <p className="text-xs text-orange-600 dark:text-orange-400">Limited time offer for new customers</p>
+                              </div>
+                            </div>
+                            <CountdownTimer seconds={COUNTDOWN_SECONDS} onExpire={handleDiscountExpired} />
+                          </div>
+                        )}
+
+                        {showIncentive && discountExpired && (
+                          <div className="rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 p-4 text-center" data-testid="incentive-expired">
+                            <p className="text-sm text-gray-500">Discount offer has expired</p>
+                            <p className="text-xs text-gray-400 mt-1">You can still book at the regular price</p>
+                          </div>
+                        )}
+
                         <div className="pt-6 border-t space-y-3">
                           <Alert className="bg-amber-50 border-amber-200">
                             <AlertTriangle className="h-4 w-4 text-amber-600" />
@@ -398,7 +552,7 @@ export default function Quote() {
                           <UrgencyBanner variant="quote" />
                           <TrustSignals />
 
-                          {!showSaveForm ? (
+                          {!showSaveForm && !showIncentive ? (
                             <>
                               <Button
                                 onClick={() => setShowSaveForm(true)}
@@ -417,6 +571,32 @@ export default function Quote() {
                                 Call to Book: (334) 877-9513
                               </a>
                             </>
+                          ) : showIncentive ? (
+                            <div className="space-y-3">
+                              <Button
+                                onClick={handleBookWithDiscount}
+                                size="lg"
+                                className={`w-full text-white font-bold text-lg py-6 shadow-lg transition-all ${
+                                  !discountExpired
+                                    ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 animate-pulse hover:animate-none'
+                                    : 'bg-blue-600 hover:bg-blue-700'
+                                }`}
+                                data-testid="button-book-with-discount"
+                              >
+                                <BookOpen className="w-5 h-5 mr-2" />
+                                {!discountExpired
+                                  ? `Book Now — $${discountedPrice} (Save $${savings}!)`
+                                  : `Book Now — $${quote}`
+                                }
+                              </Button>
+                              <a
+                                href="tel:334-877-9513"
+                                className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center text-sm"
+                              >
+                                <Phone className="w-4 h-4 mr-2" />
+                                Or call: (334) 877-9513
+                              </a>
+                            </div>
                           ) : (
                             <div className="space-y-4 bg-gradient-to-br from-muted/30 to-muted/10 p-5 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
                               <h4 className="font-semibold text-foreground flex items-center gap-2">
@@ -501,6 +681,54 @@ export default function Quote() {
                     )}
                   </CardContent>
                 </Card>
+
+                {showIncentive && (
+                  <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden" data-testid="available-slots-card">
+                    <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg font-bold flex items-center gap-2">
+                        <Calendar className="w-5 h-5 text-emerald-500" />
+                        Available Booking Slots
+                      </CardTitle>
+                      <p className="text-xs text-muted-foreground">Select a time and we'll pre-fill your booking</p>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {availableSlots.slice(0, 4).map(day => (
+                        <div key={day.date}>
+                          <p className="text-sm font-semibold text-foreground mb-2">{day.label}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {day.slots.map(slot => {
+                              const isSelected = selectedSlot?.date === day.date && selectedSlot?.time === slot;
+                              return (
+                                <button
+                                  key={`${day.date}-${slot}`}
+                                  onClick={() => setSelectedSlot(isSelected ? null : { date: day.date, time: slot })}
+                                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                                    isSelected
+                                      ? 'bg-emerald-500 text-white border-emerald-500 shadow-md'
+                                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-emerald-400 hover:bg-emerald-50'
+                                  }`}
+                                  data-testid={`slot-${day.date}-${slot}`}
+                                >
+                                  <Clock className="w-3 h-3 inline mr-1" />
+                                  {slot}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ))}
+                      {selectedSlot && (
+                        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-lg p-3 flex items-center gap-2">
+                          <Check className="w-4 h-4 text-emerald-600" />
+                          <p className="text-sm text-emerald-700 dark:text-emerald-300">
+                            Selected: <strong>{selectedSlot.time}</strong> on <strong>{selectedSlot.date}</strong>
+                          </p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           </div>

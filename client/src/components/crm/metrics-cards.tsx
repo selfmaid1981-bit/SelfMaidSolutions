@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, UserPlus, Calendar, Briefcase, TrendingUp, DollarSign, Calculator, ArrowUpRight } from "lucide-react";
+import { Users, UserPlus, Calendar, Briefcase, TrendingUp, DollarSign, Calculator, ArrowUpRight, BookOpen, Tag } from "lucide-react";
 
 interface MetricsCardsProps {
   stats: {
@@ -8,7 +8,10 @@ interface MetricsCardsProps {
     totalAppointments: number;
     totalJobs: number;
     totalQuotes?: number;
+    totalBookings?: number;
     quoteConversionRate?: number;
+    discountBookings?: number;
+    discountConversionRate?: number;
     leadsByStage: Record<string, number>;
     jobsByStatus: Record<string, number>;
   };
@@ -16,12 +19,12 @@ interface MetricsCardsProps {
 
 export function MetricsCards({ stats }: MetricsCardsProps) {
   const cards = [
-    { label: "Total Leads", value: stats.totalLeads, icon: UserPlus, color: "text-blue-600", bg: "bg-blue-50" },
-    { label: "Active Clients", value: stats.totalClients, icon: Users, color: "text-green-600", bg: "bg-green-50" },
-    { label: "Quote Requests", value: stats.totalQuotes ?? (stats.leadsByStage?.quote_requested || 0), icon: Calculator, color: "text-cyan-600", bg: "bg-cyan-50" },
-    { label: "Appointments", value: stats.totalAppointments, icon: Calendar, color: "text-purple-600", bg: "bg-purple-50" },
-    { label: "Active Jobs", value: stats.totalJobs, icon: Briefcase, color: "text-orange-600", bg: "bg-orange-50" },
+    { label: "Quotes Generated", value: stats.totalQuotes ?? (stats.leadsByStage?.quote_requested || 0), icon: Calculator, color: "text-cyan-600", bg: "bg-cyan-50" },
+    { label: "Bookings", value: stats.totalBookings ?? 0, icon: BookOpen, color: "text-blue-600", bg: "bg-blue-50" },
     { label: "Quote → Booking", value: `${stats.quoteConversionRate ?? 0}%`, icon: ArrowUpRight, color: "text-emerald-600", bg: "bg-emerald-50" },
+    { label: "Discount Bookings", value: stats.discountBookings ?? 0, icon: Tag, color: "text-orange-600", bg: "bg-orange-50" },
+    { label: "Discount Conv. Rate", value: `${stats.discountConversionRate ?? 0}%`, icon: TrendingUp, color: "text-red-600", bg: "bg-red-50" },
+    { label: "Active Clients", value: stats.totalClients, icon: Users, color: "text-green-600", bg: "bg-green-50" },
   ];
 
   return (

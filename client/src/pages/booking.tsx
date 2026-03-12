@@ -45,6 +45,11 @@ export default function Booking() {
     const quoteName = params.get('quoteName');
     const quoteEmail = params.get('quoteEmail');
     const quotePhone = params.get('quotePhone');
+    const discountApplied = params.get('discountApplied');
+    const discountSource = params.get('discountSource');
+    const originalPrice = params.get('originalPrice');
+    const prefDate = params.get('preferredDate');
+    const prefTime = params.get('preferredTime');
 
     if (quoteId) {
       setQuoteData({
@@ -54,9 +59,11 @@ export default function Booking() {
         quoteName: quoteName || '',
         quoteEmail: quoteEmail || '',
         quotePhone: quotePhone || '',
+        discountApplied: discountApplied ? parseInt(discountApplied) : 0,
+        discountSource: discountSource || null,
+        originalPrice: originalPrice ? parseInt(originalPrice) : null,
       });
 
-      // Pre-fill form with quote data
       if (quoteName) {
         const [first, last] = quoteName.split(' ');
         setFirstName(first || '');
@@ -64,6 +71,8 @@ export default function Booking() {
       }
       if (quoteEmail) setEmail(quoteEmail);
       if (quotePhone) setPhone(quotePhone);
+      if (prefDate) setPreferredDate(prefDate);
+      if (prefTime) setPreferredTime(prefTime);
     }
   }, []);
 
@@ -84,6 +93,8 @@ export default function Booking() {
         specialInstructions: specialInstructions || null,
         amount: quoteData?.estimatedPrice || 0,
         quoteId: quoteData?.quoteId || null,
+        discountApplied: quoteData?.discountApplied || 0,
+        discountSource: quoteData?.discountSource || null,
       };
 
       if (paymentOption === 'later') {
@@ -177,12 +188,19 @@ export default function Booking() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Quote Info Display */}
                   {quoteData && (
-                    <Alert className="bg-blue-50 border-blue-200">
-                      <CheckCircle className="h-4 w-4 text-blue-600" />
-                      <AlertDescription className="text-blue-800">
-                        <strong>Quote Details:</strong> {quoteData.serviceType} - ${quoteData.estimatedPrice}
+                    <Alert className={quoteData.discountApplied > 0 ? "bg-green-50 border-green-300" : "bg-blue-50 border-blue-200"}>
+                      <CheckCircle className={`h-4 w-4 ${quoteData.discountApplied > 0 ? 'text-green-600' : 'text-blue-600'}`} />
+                      <AlertDescription className={quoteData.discountApplied > 0 ? "text-green-800" : "text-blue-800"}>
+                        <strong>Quote Details:</strong> {quoteData.serviceType} — ${quoteData.estimatedPrice}
+                        {quoteData.discountApplied > 0 && quoteData.originalPrice && (
+                          <span className="ml-2">
+                            <span className="line-through text-gray-400">${quoteData.originalPrice}</span>
+                            <span className="ml-1 inline-flex items-center bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                              You save ${quoteData.discountApplied}!
+                            </span>
+                          </span>
+                        )}
                       </AlertDescription>
                     </Alert>
                   )}

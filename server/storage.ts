@@ -49,7 +49,10 @@ export interface CrmStats {
   totalAppointments: number;
   totalJobs: number;
   totalQuotes: number;
+  totalBookings: number;
   quoteConversionRate: number;
+  discountBookings: number;
+  discountConversionRate: number;
   leadsByStage: Record<string, number>;
   jobsByStatus: Record<string, number>;
   recentLeads: Lead[];
@@ -381,12 +384,22 @@ export class DatabaseStorage implements IStorage {
       : await db.select().from(quotes);
     const totalQuoteCount = allQuotes.length;
 
-    const quoteOriginLeads = allLeads.filter(l => l.notes?.includes("Quote #"));
-    const convertedFromQuote = quoteOriginLeads.filter(
-      l => ["won", "converted"].includes(l.pipelineStage)
+    const allBookings = companyId
+      ? await db.select().from(bookings).where(eq(bookings.companyId, companyId))
+      : await db.select().from(bookings);
+    const totalBookingCount = allBookings.length;
+
+    const discountBookingCount = allBookings.filter(
+      b => b.discountApplied && b.discountApplied > 0
     ).length;
+
+    const bookingsFromQuotes = allBookings.filter(b => b.quoteId).length;
     const quoteConversionRate = totalQuoteCount > 0
-      ? Math.round((convertedFromQuote / totalQuoteCount) * 100)
+      ? Math.round((bookingsFromQuotes / totalQuoteCount) * 100)
+      : 0;
+
+    const discountConversionRate = totalQuoteCount > 0
+      ? Math.round((discountBookingCount / totalQuoteCount) * 100)
       : 0;
 
     return {
@@ -395,7 +408,10 @@ export class DatabaseStorage implements IStorage {
       totalAppointments: allAppointments.length,
       totalJobs: allJobs.length,
       totalQuotes: totalQuoteCount,
+      totalBookings: totalBookingCount,
       quoteConversionRate,
+      discountBookings: discountBookingCount,
+      discountConversionRate,
       leadsByStage,
       jobsByStatus,
       recentLeads: allLeads.slice(0, 5),

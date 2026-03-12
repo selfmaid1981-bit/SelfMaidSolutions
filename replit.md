@@ -46,7 +46,8 @@ The application features a professional design using a slate/blue color palette,
 - **Satisfaction Guarantee Banner**: Prominent 100% satisfaction guarantee above the contact form.
 - **Hero Urgency Chip**: "Only 3 Spots Left This Week!" pulsing badge for scarcity-driven conversion.
 - **Gradient Consistency**: All homepage sections (Google Reviews, footer, services) use cohesive section-gradient system.
-- **Quote Page Visual Upgrade**: Gradient quote result panel with "No hidden fees" badge; styled CTA button.
+- **Quote Page Visual Upgrade**: Gradient quote result panel with "No hidden fees" badge; styled CTA button. Booking Incentive Engine: after quote save, shows 10% limited-time discount with 15-minute countdown timer, available booking slots, and highlighted "Book Now" CTA. Discount + selected slot data passes through to booking page. Discount tracked in bookings table (`discountApplied`, `discountSource`).
+- **Booking Conversion Metrics**: CRM dashboard metrics cards show: Quotes Generated, Bookings, Quote→Booking rate (computed from actual bookings with quoteId), Discount Bookings, Discount Conversion Rate, Active Clients.
 - **Pricing Transparency Section**: Homepage pricing grid showing all 6 service types with realistic price ranges ($65–$450). Includes "most popular" and "fastest growing" callouts.
 - **Airbnb/STR Landing Page**: Dedicated page at `/airbnb-cleaning` targeting Airbnb hosts and property managers. Features: same-day turnover selling points, 3-tier pricing, turnover checklist, host testimonials.
 - **Airbnb Teaser on Homepage**: Dark teal/blue section linking to the Airbnb page with stats (4.9 rating, same-day, $65+).
