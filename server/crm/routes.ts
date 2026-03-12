@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { storage } from "../storage";
 import { insertLeadSchema, insertClientSchema, insertAppointmentSchema, insertJobSchema } from "@shared/schema";
 import { onJobCompleted } from "../hooks/review-on-complete";
+import { getFollowUpStats, processFollowUps } from "../hooks/quote-followup";
 
 const router = Router();
 
@@ -22,7 +23,7 @@ function pick<T extends Record<string, any>>(obj: T, keys: string[]): Partial<T>
   return result;
 }
 
-const LEAD_MUTABLE = ["firstName", "lastName", "email", "phone", "address", "city", "state", "zipCode", "source", "serviceType", "pipelineStage", "score", "notes", "assignedTo", "lastContactedAt"];
+const LEAD_MUTABLE = ["firstName", "lastName", "email", "phone", "address", "city", "state", "zipCode", "source", "serviceType", "pipelineStage", "score", "notes", "assignedTo", "lastContactedAt", "followUpStatus", "followUpSmsAt", "followUpEmailAt", "followUpDiscountAt"];
 const CLIENT_MUTABLE = ["firstName", "lastName", "email", "phone", "address", "city", "state", "zipCode", "lifetimeValue", "totalBookings", "notes"];
 const APPOINTMENT_MUTABLE = ["serviceType", "address", "city", "state", "zipCode", "scheduledDate", "scheduledTime", "durationMinutes", "amount", "status", "notes", "assignedTo", "clientId", "leadId"];
 const JOB_MUTABLE = ["status", "assignedTo", "startedAt", "completedAt", "notes", "checklist", "photos"];
@@ -31,6 +32,24 @@ router.get("/stats", requireAdmin, async (_req: Request, res: Response) => {
   try {
     const stats = await storage.getCrmStats();
     res.json(stats);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/followup-stats", requireAdmin, async (_req: Request, res: Response) => {
+  try {
+    const stats = await getFollowUpStats();
+    res.json(stats);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post("/followups/process", requireAdmin, async (_req: Request, res: Response) => {
+  try {
+    const result = await processFollowUps();
+    res.json({ success: true, ...result });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

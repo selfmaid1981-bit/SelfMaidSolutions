@@ -19,6 +19,8 @@ async function crmFetch<T>(url: string, options?: RequestInit): Promise<T> {
 
 export const crmApi = {
   getStats: () => crmFetch<any>("/api/crm/stats"),
+  getFollowUpStats: () => crmFetch<any>("/api/crm/followup-stats"),
+  triggerFollowUps: () => crmFetch<any>("/api/crm/followups/process", { method: "POST" }),
   getLeads: () => crmFetch<any[]>("/api/crm/leads"),
   getLead: (id: string) => crmFetch<any>(`/api/crm/leads/${id}`),
   createLead: (data: any) => crmFetch<any>("/api/crm/leads", { method: "POST", body: JSON.stringify(data) }),

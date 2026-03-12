@@ -7,12 +7,18 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { crmApi } from "@/lib/crm-api";
 import { format } from "date-fns";
 import { Link } from "wouter";
-import { ArrowRight, Clock, UserPlus } from "lucide-react";
+import { ArrowRight, Clock, UserPlus, MessageSquare, Mail, Tag, TrendingUp, Calculator } from "lucide-react";
 
 export default function CrmDashboard() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["/api/crm/stats"],
     queryFn: crmApi.getStats,
+  });
+
+  const { data: followUpStats } = useQuery({
+    queryKey: ["/api/crm/followup-stats"],
+    queryFn: crmApi.getFollowUpStats,
+    refetchInterval: 30_000,
   });
 
   return (
@@ -112,6 +118,55 @@ export default function CrmDashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {followUpStats && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold">Follow-Up Automation</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div className="bg-cyan-50 rounded-lg p-4 text-center">
+                  <Calculator className="h-5 w-5 text-cyan-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-cyan-700">{followUpStats.totalQuoteLeads}</p>
+                  <p className="text-xs text-gray-500">Quotes Sent</p>
+                </div>
+                <div className="bg-yellow-50 rounded-lg p-4 text-center">
+                  <Clock className="h-5 w-5 text-yellow-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-yellow-700">{followUpStats.pendingFollowUps}</p>
+                  <p className="text-xs text-gray-500">Pending Follow-Ups</p>
+                </div>
+                <div className="bg-blue-50 rounded-lg p-4 text-center">
+                  <MessageSquare className="h-5 w-5 text-blue-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-blue-700">{followUpStats.smsReminders}</p>
+                  <p className="text-xs text-gray-500">SMS Reminders</p>
+                </div>
+                <div className="bg-purple-50 rounded-lg p-4 text-center">
+                  <Mail className="h-5 w-5 text-purple-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-purple-700">{followUpStats.emailReminders}</p>
+                  <p className="text-xs text-gray-500">Email Reminders</p>
+                </div>
+                <div className="bg-red-50 rounded-lg p-4 text-center">
+                  <Tag className="h-5 w-5 text-red-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-red-700">{followUpStats.discountOffers}</p>
+                  <p className="text-xs text-gray-500">Discount Offers</p>
+                </div>
+                <div className="bg-green-50 rounded-lg p-4 text-center">
+                  <TrendingUp className="h-5 w-5 text-green-600 mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-green-700">{followUpStats.convertedFromFollowUp}</p>
+                  <p className="text-xs text-gray-500">Bookings from Follow-Ups</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">
+                <div className="flex items-center gap-1">
+                  <span className="inline-block w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  Auto-running
+                </div>
+                <span>10min SMS → 24hr Email → 3-day Discount</span>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {stats && Object.keys(stats.leadsByStage || {}).length > 0 && (
           <Card>

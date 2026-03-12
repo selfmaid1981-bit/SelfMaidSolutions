@@ -3,6 +3,7 @@ import { DashboardLayout } from "@/components/shared/dashboard-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { crmApi } from "@/lib/crm-api";
+import { MessageSquare, Mail, Tag, TrendingUp } from "lucide-react";
 
 const STAGE_COLORS: Record<string, string> = {
   new_lead: "#3B82F6",
@@ -28,6 +29,11 @@ export default function CrmAnalytics() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["/api/crm/stats"],
     queryFn: crmApi.getStats,
+  });
+
+  const { data: followUpStats } = useQuery({
+    queryKey: ["/api/crm/followup-stats"],
+    queryFn: crmApi.getFollowUpStats,
   });
 
   const conversionRate = stats && stats.totalLeads > 0
@@ -165,6 +171,60 @@ export default function CrmAnalytics() {
                 </div>
               </CardContent>
             </Card>
+
+            {followUpStats && (
+              <Card className="lg:col-span-2">
+                <CardHeader>
+                  <CardTitle className="text-base">Follow-Up Automation Performance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
+                      <MessageSquare className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-blue-700">{followUpStats.smsReminders}</p>
+                        <p className="text-xs text-blue-600">SMS Reminders Sent</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-lg">
+                      <Mail className="h-8 w-8 text-purple-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-purple-700">{followUpStats.emailReminders}</p>
+                        <p className="text-xs text-purple-600">Email Reminders Sent</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-red-50 rounded-lg">
+                      <Tag className="h-8 w-8 text-red-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-red-700">{followUpStats.discountOffers}</p>
+                        <p className="text-xs text-red-600">Discount Offers Sent</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg">
+                      <TrendingUp className="h-8 w-8 text-green-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-green-700">{followUpStats.convertedFromFollowUp}</p>
+                        <p className="text-xs text-green-600">Bookings from Follow-Ups</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <p className="text-lg font-bold">{followUpStats.totalQuoteLeads}</p>
+                      <p className="text-xs text-gray-500">Total Quote Leads</p>
+                    </div>
+                    <div className="p-3 bg-yellow-50 rounded-lg">
+                      <p className="text-lg font-bold text-yellow-700">{followUpStats.pendingFollowUps}</p>
+                      <p className="text-xs text-gray-500">Pending Sequences</p>
+                    </div>
+                    <div className="p-3 bg-green-50 rounded-lg">
+                      <p className="text-lg font-bold text-green-700">{followUpStats.completedFollowUps}</p>
+                      <p className="text-xs text-gray-500">Completed Sequences</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         ) : null}
       </div>

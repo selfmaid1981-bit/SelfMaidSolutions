@@ -33,3 +33,10 @@ export {
   classifyLeadIntent,
   getOpenAIClient,
 } from "./openai-helpers";
+
+export {
+  startFollowUpScheduler,
+  stopFollowUpScheduler,
+  processFollowUps,
+  getFollowUpStats,
+} from "./quote-followup";

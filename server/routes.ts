@@ -73,6 +73,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const crmRoutes = (await import("./crm/routes")).default;
   app.use("/api/crm", crmRoutes);
 
+  // Start follow-up scheduler (checks every 60s for pending follow-ups)
+  const { startFollowUpScheduler } = await import("./hooks/quote-followup");
+  startFollowUpScheduler(60_000);
+
   // Register SaaS routes
   const saasRoutes = (await import("./saas/routes")).default;
   app.use("/api/saas", saasRoutes);
@@ -773,6 +777,8 @@ Host: https://selfmaidllc.com`;
           source: "website",
           serviceType: quote.serviceType,
           pipelineStage: "quote_requested",
+          quoteId: quote.id,
+          followUpStatus: "pending",
           notes: `Quote #${quote.id}: $${quote.estimatedPrice} — ${quote.serviceType}, ${quote.frequency}`,
         });
         leadId = lead.id;

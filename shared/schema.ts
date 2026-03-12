@@ -285,6 +285,11 @@ export const leads = pgTable(
     notes: text("notes"),
     assignedTo: varchar("assigned_to"),
     lastContactedAt: timestamp("last_contacted_at"),
+    quoteId: varchar("quote_id"),
+    followUpStatus: text("follow_up_status").default("none"),
+    followUpSmsAt: timestamp("follow_up_sms_at"),
+    followUpEmailAt: timestamp("follow_up_email_at"),
+    followUpDiscountAt: timestamp("follow_up_discount_at"),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
   },
@@ -295,6 +300,7 @@ export const leads = pgTable(
     index("IDX_leads_assigned").on(table.assignedTo),
     index("IDX_leads_source").on(table.source),
     index("IDX_leads_score").on(table.score),
+    index("IDX_leads_followup").on(table.followUpStatus),
   ]
 );
 

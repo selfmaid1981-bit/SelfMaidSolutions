@@ -30,6 +30,7 @@ The application features a professional design using a slate/blue color palette,
   - `hunter-email.ts` — Hunter.io email discovery (domain search, email finder, verification, business enrichment)
   - `openai-helpers.ts` — AI utilities (text generation, structured extraction, call transcript analysis, outreach email generation, lead intent classification)
   - `review-on-complete.ts` — Automated review request flow triggered on job completion
+  - `quote-followup.ts` — Automated 3-step follow-up sequence for unbooked quotes (10min SMS → 24hr email → 3-day discount offer). Includes concurrency guard, state machine completion logic, and conversion tracking. Scheduler runs every 60s.
   - `index.ts` — Barrel export for all hooks
 - **Server-Side SEO**: Middleware intercepts HTML responses to inject dynamic meta tags for improved crawler visibility.
 - **Service Area Landing Pages**: Dynamically generated, SEO-optimized city-specific pages.
