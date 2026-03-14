@@ -9,7 +9,7 @@ import { Footer } from '@/components/footer';
 import { HowItWorks } from '@/components/how-it-works';
 import { PromoSection } from '@/components/promo-section';
 import { TrustBar } from '@/components/trust-bar';
-import { QuoteAdBanner } from '@/components/quote-ad-banner';
+import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { ChatWidget } from '@/components/chat-widget';
 import { PricingSection } from '@/components/pricing-section';
 import { RecurringPlansSection } from '@/components/recurring-plans-section';
@@ -139,7 +139,7 @@ export default function Home() {
         <HeroSection />
         <TrustBar />
         <HowItWorks />
-        <QuoteAdBanner />
+        <HomepageQuoteCalculator />
         <PricingSection />
         <AirbnbTeaser />
         <GoogleReviews />
