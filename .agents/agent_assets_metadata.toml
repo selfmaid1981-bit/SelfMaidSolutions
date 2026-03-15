@@ -36,3 +36,15 @@ id = "zod9JxH0F6_g1O0dJfvRU"
 uri = "file://attached_assets/47CFE7D3-17B3-427A-ABA3-B978A17D2C68_1773578331892.png"
 type = "image"
 title = "Self-Maid Logo with Name (Comic Burst)"
+
+[[outputs]]
+id = "qQyB_6KSe2w_DtN4PN4UI"
+uri = "file://self-maid-animated-logo.mp4"
+type = "video"
+title = "Self-Maid Animated Logo (Dark Background)"
+
+[[outputs]]
+id = "6ep2S5IXqsp2WRFOToLqy"
+uri = "file://self-maid-animated-logo-white.mp4"
+type = "video"
+title = "Self-Maid Animated Logo (White Background)"
