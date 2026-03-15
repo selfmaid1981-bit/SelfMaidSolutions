@@ -40,7 +40,7 @@ const cities: Record<string, CityInfo> = {
     name: "Prattville",
     slug: "prattville",
     county: "Autauga County",
-    neighborhoods: ["Downtown Prattville", "Legends", "Bridle Creek", "Autumn Ridge", "Glennbrooke", "Pine Level", "Kingston", "Cobblestone"],
+    neighborhoods: ["Downtown Prattville", "Legends", "Bridle Creek", "Autumn Ridge", "Glennbrooke", "Silver Hills", "Highland Ridge", "Hunting Ridge", "Riverchase", "Pine Level", "Kingston", "Cobblestone"],
     zipCodes: ["36066", "36067", "36068"],
     localFlavor: "Known as the 'Fountain City,' Prattville's beautiful homes and growing neighborhoods deserve professional care. From the charming downtown along Daniel Pratt Drive to the newer Legends community, we keep Prattville homes spotless."
   },

@@ -1,0 +1,279 @@
+Act as a senior full‑stack engineer, UX designer, and growth engineer working on the Self‑Maid Cleaning platform.
+
+The system is hosted on Replit.
+
+STACK
+
+Runtime: Node.js 20
+Frontend: React
+Database: PostgreSQL
+
+Existing integrations:
+
+SendGrid
+Twilio
+Stripe
+Google Sheets
+OpenAI
+
+BUSINESS GOAL
+
+Turn the Self‑Maid website into a high‑converting lead generation and booking system for residential cleaning services.
+
+Primary service area:
+
+Prattville Alabama
+
+Secondary areas:
+
+Montgomery
+Millbrook
+Deatsville
+
+IMPORTANT CONSTRAINTS
+
+• Do NOT break the existing quote → booking workflow
+• Reuse existing components
+• Avoid unnecessary dependencies
+• Marketing budget is near zero
+• Optimize for organic search and conversion rate
+
+--------------------------------------------------
+
+PHASE 1 — SYSTEM AUDIT
+
+Analyze the entire project and report:
+
+• folder structure
+• database schema
+• API endpoints
+• frontend routes
+• integrations
+
+Verify these endpoints:
+
+POST /api/quotes
+POST /api/bookings
+POST /api/contact
+
+Verify integrations:
+
+SendGrid
+Twilio
+Stripe
+Google Sheets
+
+Fix any TypeScript or runtime errors.
+
+--------------------------------------------------
+
+PHASE 2 — BACKEND STABILIZATION
+
+Resolve issues including:
+
+• mismatched User types
+• outdated p‑retry imports
+• undefined API response guards
+• missing CRUD methods
+
+Ensure CRUD exists for:
+
+cleaners
+recurring_bookings
+referrals
+quote_requests
+
+Ensure admin dashboard route exists.
+
+--------------------------------------------------
+
+PHASE 3 — HOMEPAGE CONVERSION LAYOUT
+
+Update homepage layout in this order:
+
+1 Hero section  
+2 Quote calculator  
+3 Trust badges  
+4 Before/after gallery  
+5 Services section  
+6 Reviews  
+7 Final booking CTA  
+
+Hero headline:
+
+Professional House Cleaning in Prattville AL
+
+Subheadline:
+
+Get an instant cleaning quote in under 30 seconds.
+
+--------------------------------------------------
+
+PHASE 4 — QUOTE CALCULATOR
+
+Create component:
+
+client/src/components/QuoteCalculator.tsx
+
+Inputs:
+
+bedrooms  
+bathrooms  
+square_feet  
+pets  
+
+Pricing formula:
+
+base_price = 120  
++20 per bedroom  
++15 per bathroom  
++0.05 per sq ft above 1500  
+
+Display pricing options:
+
+One‑Time Cleaning
+
+Biweekly Cleaning  
+10% discount  
+★ Most Popular
+
+Monthly Cleaning  
+5% discount
+
+Include CTA button:
+
+Book This Cleaning
+
+--------------------------------------------------
+
+PHASE 5 — LEAD CAPTURE
+
+Create table:
+
+quote_requests
+
+Fields:
+
+id  
+name  
+email  
+phone  
+bedrooms  
+bathrooms  
+square_feet  
+estimated_price  
+created_at  
+
+Create endpoint:
+
+POST /api/quotes
+
+Store quote requests in PostgreSQL.
+
+--------------------------------------------------
+
+PHASE 6 — AUTOMATED FOLLOW UPS
+
+After quote submission:
+
+Send SMS via Twilio:
+
+Hi [Name], thanks for requesting a quote from Self‑Maid Cleaning. Book your cleaning here: [link]
+
+Send email via SendGrid including:
+
+• quote summary  
+• booking link  
+• services list  
+
+--------------------------------------------------
+
+PHASE 7 — PRATTVILLE SEO PAGE
+
+Create page:
+
+client/src/pages/house-cleaning-prattville-al.tsx
+
+Include:
+
+hero  
+before/after images  
+service descriptions  
+reviews  
+quote calculator  
+booking CTA  
+
+Mention neighborhoods:
+
+Glennbrooke  
+Silver Hills  
+Highland Ridge  
+Hunting Ridge  
+Riverchase  
+
+--------------------------------------------------
+
+PHASE 8 — NEIGHBORHOOD SEO PAGES
+
+Create reusable template.
+
+Generate pages:
+
+/services/prattville/glennbrooke  
+/services/prattville/silver-hills  
+/services/prattville/highland-ridge  
+/services/prattville/hunting-ridge  
+/services/prattville/riverchase  
+
+Each page includes:
+
+• localized headline  
+• service list  
+• reviews  
+• quote calculator  
+• booking CTA  
+
+--------------------------------------------------
+
+PHASE 9 — REVIEW AUTOMATION
+
+After cleaning completion:
+
+Send automated SMS requesting a Google review.
+
+--------------------------------------------------
+
+PHASE 10 — ANALYTICS
+
+Track:
+
+quote requests  
+bookings  
+conversion rate  
+top neighborhoods  
+revenue per client  
+
+Display metrics in admin dashboard.
+
+--------------------------------------------------
+
+PERFORMANCE
+
+Ensure:
+
+• fast page load  
+• mobile responsiveness  
+• SEO metadata  
+• stable API responses  
+
+--------------------------------------------------
+
+FINAL OUTPUT
+
+Provide summary of:
+
+• files created  
+• files modified  
+• database migrations  
+• API endpoints added  
+• recommended improvements

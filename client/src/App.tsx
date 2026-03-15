@@ -27,6 +27,7 @@ import ServiceArea from "@/pages/service-area";
 import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/pages/city-service";
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
+import NeighborhoodPage from "@/pages/neighborhood";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
 import CrmDashboard from "@/pages/crm/dashboard";
@@ -89,6 +90,7 @@ function Router() {
         <Route path="/saas/lead-discovery" component={SaasLeadDiscovery} />
         <Route path="/saas/billing" component={SaasBilling} />
         <Route path="/saas/settings" component={SaasSettings} />
+        <Route path="/services/:city/:neighborhood" component={NeighborhoodPage} />
         <Route path="/:cityServiceSlug">{(params) => {
           const slug = params.cityServiceSlug || "";
           const validSlugs = new Set(allCityServiceCombinations.map(c => c.slug));

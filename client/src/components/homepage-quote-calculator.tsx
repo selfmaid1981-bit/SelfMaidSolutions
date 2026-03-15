@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle } from 'lucide-react';
+import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 
@@ -15,24 +15,41 @@ const serviceTypes = [
   { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
 ];
 
+const frequencyOptions = [
+  { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
+  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: '★ Most Popular' },
+  { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
+];
+
+const PET_SURCHARGE = 25;
+
 function estimateSqFt(bedrooms: number, bathrooms: number): number {
   if (bedrooms <= 0 && bathrooms <= 0) return 0;
   return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
 }
 
+function calcBasePrice(beds: number, baths: number, sqft: number): number {
+  let base = 120 + (beds * 20) + (baths * 15);
+  if (sqft > 1500) base += (sqft - 1500) * 0.05;
+  return Math.round(base);
+}
+
 export function HomepageQuoteCalculator() {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
-  const [serviceType, setServiceType] = useState('');
+  const [serviceType, setServiceType] = useState('residential');
   const [bedrooms, setBedrooms] = useState('');
   const [bathrooms, setBathrooms] = useState('');
   const [sqft, setSqft] = useState('');
+  const [pets, setPets] = useState('no');
+  const [frequency, setFrequency] = useState('onetime');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [step, setStep] = useState<'calc' | 'info'>('calc');
 
   const selectedService = serviceTypes.find(s => s.value === serviceType);
+  const selectedFrequency = frequencyOptions.find(f => f.value === frequency) || frequencyOptions[0];
 
   const estimatedSqFt = useMemo(() => {
     const sqFtInput = parseInt(sqft) || 0;
@@ -40,10 +57,23 @@ export function HomepageQuoteCalculator() {
     return estimateSqFt(parseInt(bedrooms) || 0, parseFloat(bathrooms) || 0);
   }, [bedrooms, bathrooms, sqft]);
 
+  const basePrice = useMemo(() => {
+    const beds = parseInt(bedrooms) || 0;
+    const baths = parseFloat(bathrooms) || 0;
+    if (beds <= 0 && baths <= 0 && estimatedSqFt <= 0) return 0;
+    const formulaPrice = calcBasePrice(beds, baths, estimatedSqFt);
+    if (!selectedService) return formulaPrice;
+    const ratePrice = Math.max(selectedService.minCharge, estimatedSqFt * selectedService.baseRate);
+    return Math.round(Math.max(formulaPrice, ratePrice));
+  }, [selectedService, estimatedSqFt, bedrooms, bathrooms]);
+
   const price = useMemo(() => {
-    if (!selectedService || estimatedSqFt <= 0) return 0;
-    return Math.round(Math.max(selectedService.minCharge, estimatedSqFt * selectedService.baseRate));
-  }, [selectedService, estimatedSqFt]);
+    if (basePrice <= 0) return 0;
+    let total = basePrice;
+    if (pets === 'yes') total += PET_SURCHARGE;
+    total = Math.round(total * (1 - selectedFrequency.discount));
+    return total;
+  }, [basePrice, pets, selectedFrequency]);
 
   const sizeLabel = sqft
     ? `${sqft} sq ft`
@@ -60,8 +90,8 @@ export function HomepageQuoteCalculator() {
         serviceType: selectedService?.label || serviceType,
         propertySize: sizeLabel,
         customSqFt: estimatedSqFt || null,
-        frequency: 'One-Time Service',
-        addOns: [],
+        frequency: selectedFrequency.label,
+        addOns: pets === 'yes' ? ['Pet Surcharge'] : [],
         estimatedPrice: price,
       });
       return res.json();
@@ -223,28 +253,83 @@ export function HomepageQuoteCalculator() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                        <Ruler className="w-3 h-3" /> Square Footage
-                        <span className="text-white/40 text-[10px]">(optional)</span>
-                      </label>
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder={estimatedSqFt > 0 && !sqft ? `Est. ~${estimatedSqFt} sq ft` : 'e.g. 1500'}
-                        value={sqft}
-                        onChange={e => setSqft(e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                        data-testid="home-quote-sqft"
-                      />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
+                          <Ruler className="w-3 h-3" /> Sq Ft
+                          <span className="text-white/40 text-[10px]">(opt.)</span>
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          placeholder={estimatedSqFt > 0 && !sqft ? `~${estimatedSqFt}` : 'e.g. 1500'}
+                          value={sqft}
+                          onChange={e => setSqft(e.target.value)}
+                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                          data-testid="home-quote-sqft"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
+                          <PawPrint className="w-3 h-3" /> Pets?
+                        </label>
+                        <select
+                          value={pets}
+                          onChange={e => setPets(e.target.value)}
+                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 appearance-none"
+                          data-testid="home-quote-pets"
+                        >
+                          <option value="no" className="text-slate-900">No pets</option>
+                          <option value="yes" className="text-slate-900">Yes (+$25)</option>
+                        </select>
+                      </div>
                     </div>
+
+                    {basePrice > 0 && (
+                      <div className="space-y-1.5">
+                        {frequencyOptions.map(opt => {
+                          const optPrice = Math.round((basePrice + (pets === 'yes' ? PET_SURCHARGE : 0)) * (1 - opt.discount));
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() => setFrequency(opt.value)}
+                              className={`w-full flex items-center justify-between rounded-xl px-3 py-2 text-sm transition-all ${
+                                frequency === opt.value
+                                  ? 'bg-white/20 border border-amber-400/50 shadow-lg'
+                                  : 'bg-white/5 border border-white/10 hover:bg-white/10'
+                              }`}
+                              data-testid={`home-quote-freq-${opt.value}`}
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className={`w-3 h-3 rounded-full border-2 flex items-center justify-center ${
+                                  frequency === opt.value ? 'border-amber-400' : 'border-white/30'
+                                }`}>
+                                  {frequency === opt.value && <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />}
+                                </span>
+                                <span className="text-white font-medium">{opt.label}</span>
+                                {opt.badge && (
+                                  <span className="text-[9px] font-bold text-amber-300 bg-amber-400/20 border border-amber-400/30 px-1.5 py-0.5 rounded-full">{opt.badge}</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-1.5">
+                                {opt.discount > 0 && (
+                                  <span className="text-emerald-400 text-[10px] font-semibold">-{Math.round(opt.discount * 100)}%</span>
+                                )}
+                                <span className={`font-bold ${frequency === opt.value ? 'text-amber-300' : 'text-white/70'}`}>${optPrice}</span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
 
                     {price > 0 && (
                       <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-4 text-center" data-testid="home-quote-result">
                         <p className="text-white/60 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
                         <p className="text-4xl font-black text-white" data-testid="home-quote-price">${price}</p>
-                        <p className="text-white/50 text-xs mt-1">{selectedService?.label}</p>
-                        {sizeLabel && <p className="text-white/40 text-[10px] mt-0.5">{sizeLabel}</p>}
+                        <p className="text-white/50 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
+                        {sizeLabel && <p className="text-white/40 text-[10px] mt-0.5">{sizeLabel}{pets === 'yes' ? ' · Pet surcharge' : ''}</p>}
                       </div>
                     )}
 
@@ -256,7 +341,7 @@ export function HomepageQuoteCalculator() {
                     >
                       {price > 0 ? (
                         <>
-                          Continue to Booking
+                          Book This Cleaning
                           <ArrowRight className="w-4 h-4" />
                         </>
                       ) : (

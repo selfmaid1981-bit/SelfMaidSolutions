@@ -34,7 +34,7 @@ const cityData: Record<string, CityData> = {
     slug: "prattville-al",
     county: "Autauga County",
     description: "Known as the 'Fountain City,' Prattville's beautiful homes and growing business community deserve top-quality cleaning services. Self-Maid serves all of Prattville and surrounding Autauga County.",
-    neighborhoods: ["Downtown Prattville", "Legends", "Bridle Creek", "Autumn Ridge", "Glennbrooke", "Pine Level", "Kingston", "Cobblestone"],
+    neighborhoods: ["Downtown Prattville", "Legends", "Bridle Creek", "Autumn Ridge", "Glennbrooke", "Silver Hills", "Highland Ridge", "Hunting Ridge", "Riverchase", "Pine Level", "Kingston", "Cobblestone"],
     zipCodes: ["36066", "36067", "36068"],
     nearbyAreas: ["Montgomery", "Millbrook", "Wetumpka"],
     localDetails: "From the charming downtown district along Daniel Pratt Drive to the newer developments in the Legends area, we provide professional cleaning throughout all of Prattville. Our team is familiar with every neighborhood and delivers the same high-quality service to every home."

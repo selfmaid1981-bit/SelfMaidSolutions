@@ -149,6 +149,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { loc: "/move-in-move-out-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
       { loc: "/commercial-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
       { loc: "/apartment-turnover-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/services/prattville/glennbrooke", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/prattville/silver-hills", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/prattville/highland-ridge", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/prattville/hunting-ridge", priority: "0.8", changefreq: "monthly" },
+      { loc: "/services/prattville/riverchase", priority: "0.8", changefreq: "monthly" },
     ];
 
     const urls = pages.map(p => `  <url>
