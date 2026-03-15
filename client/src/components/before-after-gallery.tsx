@@ -135,7 +135,7 @@ export default function BeforeAfterGallery() {
               </a>
               <Link href="/quote">
                 <Button
-                  className="bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl h-auto"
+                  className="bg-gradient-to-r from-[#19A974] to-[#0d7a52] hover:from-[#19A974] hover:to-[#19A974] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl h-auto btn-shine"
                   data-testid="gallery-cta-quote"
                 >
                   Get Your Free Quote

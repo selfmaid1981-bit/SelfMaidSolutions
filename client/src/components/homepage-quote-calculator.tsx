@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
+import mascotImg from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
@@ -177,7 +177,7 @@ export function HomepageQuoteCalculator() {
               <div className="flex items-end gap-4">
                 <img
                   src={mascotImg}
-                  alt="Self-Maid mascot"
+                  alt="Self-Maid Cleaning Solutions"
                   className="w-24 h-24 lg:w-32 lg:h-32 object-contain flex-shrink-0 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
                   loading="lazy"
                   width={128}

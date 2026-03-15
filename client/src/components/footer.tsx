@@ -1,7 +1,7 @@
 import { Link } from 'wouter';
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaGoogle, FaYelp } from 'react-icons/fa';
-import fullLogoImage from '@assets/Designer_(1)_1771958986136.png';
+import fullLogoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

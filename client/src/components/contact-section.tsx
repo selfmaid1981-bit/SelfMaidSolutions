@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import captainClarityImage from '@assets/IMG_0067_1771957028664.png';
+import brandImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -274,7 +274,7 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group" 
+                      className="w-full bg-gradient-to-r from-[#19A974] to-[#0d7a52] hover:from-[#19A974] hover:to-[#19A974] text-white font-bold py-6 rounded-xl text-lg shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group btn-shine" 
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >
@@ -301,12 +301,12 @@ export function ContactSection() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-800/80 rounded-2xl z-10 pointer-events-none" />
                 <img 
-                  src={captainClarityImage} 
-                  alt="Captain Clarity - Self-Maid cleaning superhero mascot Montgomery Alabama" 
-                  className="w-64 h-64 lg:w-80 lg:h-80 object-contain hero-image-blend"
+                  src={brandImage} 
+                  alt="Self-Maid Cleaning Solutions - Professional cleaning Montgomery Alabama" 
+                  className="w-64 h-auto lg:w-80 lg:h-auto object-contain"
                   loading="lazy"
                   width={320}
-                  height={320}
+                  height={400}
                   data-testid="contact-mascot-image"
                 />
               </div>

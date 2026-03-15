@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone, CalendarCheck, ChevronRight, ChevronDown, MapPin, Sparkles, Building2, Home, Key, Package, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png';
+import logoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 const serviceAreas = [
   { name: "Montgomery", slug: "montgomery-al" },
@@ -94,18 +94,12 @@ export function Navigation() {
         <div className="flex justify-between items-center h-[4.5rem] lg:h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity group" data-testid="logo-link">
-              <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 shadow-lg ring-2 ring-yellow-400/40 group-hover:ring-yellow-400/60 group-hover:shadow-xl transition-all duration-300">
-                <img 
-                  src={mascotImage} 
-                  alt="Self-Maid Sponge Hero Mascot" 
-                  className="w-full h-full object-cover object-[center_20%] scale-110"
-                  data-testid="logo-image"
-                />
-              </div>
-              <div className="hidden sm:flex flex-col gap-0.5">
-                <span className="logo-brand-text font-serif text-[22px] font-black leading-none tracking-tight" data-testid="brand-text">Self-Maid</span>
-                <span className="logo-sub-text text-[9px] font-sans font-bold tracking-[0.22em] uppercase">Cleaning Solutions</span>
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Self-Maid Cleaning Solutions" 
+                className="h-12 sm:h-14 w-auto object-contain"
+                data-testid="logo-image"
+              />
             </Link>
           </div>
           
