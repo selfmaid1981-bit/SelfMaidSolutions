@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Maid Animated Logo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: transparent;
+    overflow: hidden;
+  }
+  .logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    perspective: 800px;
+  }
+  .logo-3d {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    animation: float 4s ease-in-out infinite;
+  }
+  .logo-3d img {
+    width: 260px;
+    height: 260px;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 8px 24px rgba(59,130,246,0.35)) drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+  }
+  .glow {
+    position: absolute;
+    inset: -15%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, rgba(20,184,166,0.15) 40%, transparent 70%);
+    z-index: 0;
+    animation: glowPulse 3s ease-in-out infinite alternate;
+    filter: blur(20px);
+  }
+  .sparkle {
+    position: absolute;
+    width: var(--size, 5px);
+    height: var(--size, 5px);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, rgba(59,130,246,0.8) 50%, transparent 100%);
+    top: 50%; left: 50%;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    animation: sparkle 2.4s ease-in-out var(--delay, 0s) infinite;
+  }
+  .orbit-dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(59,130,246,0.7);
+    top: 50%; left: 50%;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    animation: orbit 6s linear var(--delay, 0s) infinite;
+  }
+  .brand-text {
+    font-family: 'Georgia', serif;
+    font-size: 52px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1d4ed8 0%, #0e7490 50%, #0f766e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    animation: textPulse 3s ease-in-out infinite alternate;
+    text-align: center;
+  }
+  .brand-sub {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-top: -10px;
+    animation: textPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotateY(0deg); }
+    25% { transform: translateY(-12px) rotateY(5deg); }
+    50% { transform: translateY(-6px) rotateY(0deg); }
+    75% { transform: translateY(-14px) rotateY(-5deg); }
+  }
+  @keyframes pulseGlow {
+    0% { filter: drop-shadow(0 8px 24px rgba(59,130,246,0.3)) drop-shadow(0 2px 8px rgba(0,0,0,0.15)); }
+    100% { filter: drop-shadow(0 12px 32px rgba(20,184,166,0.45)) drop-shadow(0 4px 12px rgba(59,130,246,0.25)); }
+  }
+  @keyframes glowPulse {
+    0% { opacity: 0.5; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1.1); }
+  }
+  @keyframes sparkle {
+    0% { opacity: 0; transform: translate(-50%,-50%) translate(0,0) scale(0); }
+    20% { opacity: 1; transform: translate(-50%,-50%) translate(calc(var(--x) * 0.5), calc(var(--y) * 0.5)) scale(1); }
+    60% { opacity: 0.6; transform: translate(-50%,-50%) translate(var(--x), var(--y)) scale(0.8); }
+    100% { opacity: 0; transform: translate(-50%,-50%) translate(calc(var(--x) * 1.2), calc(var(--y) * 1.2)) scale(0); }
+  }
+  @keyframes orbit {
+    0% { opacity: 0; transform: translate(-50%,-50%) rotate(var(--angle, 0deg)) translateX(150px) scale(0); }
+    10% { opacity: 0.8; transform: translate(-50%,-50%) rotate(calc(var(--angle, 0deg) + 36deg)) translateX(150px) scale(1); }
+    90% { opacity: 0.3; transform: translate(-50%,-50%) rotate(calc(var(--angle, 0deg) + 324deg)) translateX(150px) scale(0.5); }
+    100% { opacity: 0; transform: translate(-50%,-50%) rotate(calc(var(--angle, 0deg) + 360deg)) translateX(150px) scale(0); }
+  }
+  @keyframes textPulse {
+    0% { opacity: 0.85; }
+    100% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="logo-wrap">
+  <div class="logo-3d">
+    <div class="glow"></div>
+    <img src="/assets/47CFE7D3-17B3-427A-ABA3-B978A17D2C68_1773578331892.png" alt="Self-Maid Logo">
+    <span class="sparkle" style="--delay:0s;--x:120px;--y:-80px;--size:6px"></span>
+    <span class="sparkle" style="--delay:0.3s;--x:-110px;--y:-90px;--size:5px"></span>
+    <span class="sparkle" style="--delay:0.6s;--x:100px;--y:100px;--size:7px"></span>
+    <span class="sparkle" style="--delay:0.9s;--x:-120px;--y:70px;--size:4px"></span>
+    <span class="sparkle" style="--delay:1.2s;--x:0px;--y:-130px;--size:6px"></span>
+    <span class="sparkle" style="--delay:1.5s;--x:130px;--y:0px;--size:5px"></span>
+    <span class="sparkle" style="--delay:1.8s;--x:-60px;--y:120px;--size:7px"></span>
+    <span class="sparkle" style="--delay:2.1s;--x:80px;--y:-110px;--size:4px"></span>
+    <span class="orbit-dot" style="--delay:0s;--angle:0deg"></span>
+    <span class="orbit-dot" style="--delay:1s;--angle:60deg"></span>
+    <span class="orbit-dot" style="--delay:2s;--angle:120deg"></span>
+    <span class="orbit-dot" style="--delay:3s;--angle:180deg"></span>
+    <span class="orbit-dot" style="--delay:4s;--angle:240deg"></span>
+    <span class="orbit-dot" style="--delay:5s;--angle:300deg"></span>
+  </div>
+  <div class="brand-text">Self-Maid</div>
+  <div class="brand-sub">Cleaning Solutions</div>
+</div>
+</body>
+</html>
