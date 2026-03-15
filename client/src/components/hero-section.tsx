@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Phone, Calendar, Home, Building, Key, Truck, Star, Shield, Zap, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import heroCharacter from '@assets/IMG_1097_1773578331891.png';
+import { Animated3DLogo } from './animated-3d-logo';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+', gradient: 'from-blue-500 to-cyan-400', shadow: 'shadow-blue-500/25' },
@@ -130,13 +130,8 @@ export function HeroSection() {
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
               <div className="relative">
-                <div className="absolute inset-0 hero-character-glow" />
-                <img
-                  src={heroCharacter}
-                  alt="Self-Maid Cleaning Superhero - Professional cleaning with superpowers"
-                  className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto hero-image-blend"
-                />
-                <div className="absolute top-8 -left-4 z-20 hero-float-card">
+                <Animated3DLogo size={280} variant="dark" />
+                <div className="absolute top-4 -left-4 z-20 hero-float-card">
                   <div className="hero-floating-badge flex items-center gap-2.5 rounded-2xl px-4 py-3">
                     <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30">
                       <Star className="w-[18px] h-[18px] text-white fill-white" />
@@ -149,7 +144,7 @@ export function HeroSection() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute bottom-12 -right-4 z-20 hero-float-card-delayed">
+                <div className="absolute bottom-4 -right-4 z-20 hero-float-card-delayed">
                   <div className="hero-floating-badge flex items-center gap-2.5 rounded-2xl px-4 py-3">
                     <div className="w-9 h-9 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30">
                       <CheckCircle2 className="w-[18px] h-[18px] text-white" />

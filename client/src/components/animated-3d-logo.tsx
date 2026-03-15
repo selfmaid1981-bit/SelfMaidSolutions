@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
-export function Animated3DLogo({ size = 220 }: { size?: number }) {
+interface Animated3DLogoProps {
+  size?: number;
+  variant?: 'light' | 'dark';
+}
+
+export function Animated3DLogo({ size = 220, variant = 'light' }: Animated3DLogoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<'enter' | 'wipe' | 'sparkle' | 'idle'>('enter');
 
@@ -19,7 +24,7 @@ export function Animated3DLogo({ size = 220 }: { size?: number }) {
   return (
     <div
       ref={containerRef}
-      className={`cr-stage cr-${phase}`}
+      className={`cr-stage cr-${phase} ${variant === 'dark' ? 'cr-dark' : ''}`}
       style={{ '--cr-size': `${size}px`, '--cr-mascot': `${mascotH}px` } as React.CSSProperties}
     >
       <div className="cr-surface">

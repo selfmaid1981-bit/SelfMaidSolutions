@@ -776,14 +776,16 @@ body {
   justify-content: center;
   width: 100%;
   max-width: 520px;
+  min-height: 200px;
   aspect-ratio: 2.2 / 1;
-  overflow: hidden;
+  overflow: visible;
   margin: 0 auto;
 }
 
 .cr-surface {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -995,6 +997,27 @@ body {
 .cr-idle .cr-star-tr { animation: crStarTwinkle 3s 0.8s ease-in-out infinite; }
 .cr-idle .cr-star-bl { animation: crStarTwinkle 3s 1.6s ease-in-out infinite; }
 .cr-idle .cr-star-br { animation: crStarTwinkle 3s 2.4s ease-in-out infinite; }
+
+/* ── Dark variant (for dark hero backgrounds) ── */
+.cr-dark .cr-reveal-mask {
+  background: linear-gradient(180deg, #020617 0%, #0c1539 100%);
+}
+
+.cr-dark .cr-dirty {
+  background: repeating-conic-gradient(
+    rgba(100, 110, 130, 0.08) 0% 25%,
+    transparent 0% 50%
+  ) 0 0 / 12px 12px;
+}
+
+.cr-dark .cr-sub {
+  color: #94a3b8;
+}
+
+.cr-dark .cr-star::before,
+.cr-dark .cr-star::after {
+  background: rgba(255, 255, 255, 0.9);
+}
 
 /* ── Keyframes ── */
 
