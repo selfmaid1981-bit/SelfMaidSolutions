@@ -768,3 +768,154 @@ body {
   background-size: 40px 40px;
 }
 
+.logo-3d-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.logo-3d-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  animation: logo3dFloat 4s ease-in-out infinite;
+}
+
+.logo-3d-image {
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.35))
+          drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  animation: logo3dPulseGlow 3s ease-in-out infinite alternate;
+}
+
+.logo-3d-glow {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(20, 184, 166, 0.15) 40%, transparent 70%);
+  z-index: 0;
+  animation: logo3dGlowPulse 3s ease-in-out infinite alternate;
+  filter: blur(20px);
+}
+
+.logo-3d-reflection {
+  position: absolute;
+  bottom: -30%;
+  left: 10%;
+  right: 10%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.12), transparent);
+  transform: scaleY(-1) rotateX(60deg);
+  filter: blur(8px);
+  z-index: 1;
+  opacity: 0.5;
+  mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+}
+
+.logo-3d-sparkle {
+  position: absolute;
+  width: var(--sparkle-size, 5px);
+  height: var(--sparkle-size, 5px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, rgba(59, 130, 246, 0.8) 50%, transparent 100%);
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  animation: logo3dSparkle 2.4s ease-in-out var(--sparkle-delay, 0s) infinite;
+}
+
+.logo-3d-ring-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.6);
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  animation: logo3dOrbit 6s linear var(--ring-delay, 0s) infinite;
+}
+
+@keyframes logo3dFloat {
+  0%, 100% { transform: translateY(0px) rotateY(0deg); }
+  25% { transform: translateY(-10px) rotateY(3deg); }
+  50% { transform: translateY(-6px) rotateY(0deg); }
+  75% { transform: translateY(-12px) rotateY(-3deg); }
+}
+
+@keyframes logo3dPulseGlow {
+  0% {
+    filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.3))
+            drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  }
+  100% {
+    filter: drop-shadow(0 12px 32px rgba(20, 184, 166, 0.45))
+            drop-shadow(0 4px 12px rgba(59, 130, 246, 0.25));
+  }
+}
+
+@keyframes logo3dGlowPulse {
+  0% { opacity: 0.5; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes logo3dSparkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(0, 0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(
+      calc(var(--sparkle-x, 0px) * 0.5),
+      calc(var(--sparkle-y, 0px) * 0.5)
+    ) scale(1);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) translate(
+      var(--sparkle-x, 0px),
+      var(--sparkle-y, 0px)
+    ) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(
+      calc(var(--sparkle-x, 0px) * 1.2),
+      calc(var(--sparkle-y, 0px) * 1.2)
+    ) scale(0);
+  }
+}
+
+@keyframes logo3dOrbit {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--ring-angle, 0deg)) translateX(var(--ring-radius, 80px)) scale(0);
+  }
+  10% { opacity: 0.7; transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 36deg)) translateX(var(--ring-radius, 80px)) scale(1); }
+  90% { opacity: 0.3; transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 324deg)) translateX(var(--ring-radius, 80px)) scale(0.6); }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 360deg)) translateX(var(--ring-radius, 80px)) scale(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-3d-inner { animation: none; }
+  .logo-3d-image { animation: none; }
+  .logo-3d-glow { animation: none; }
+  .logo-3d-sparkle { animation: none; }
+  .logo-3d-ring-dot { animation: none; }
+}
+

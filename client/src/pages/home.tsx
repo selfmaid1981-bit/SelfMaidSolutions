@@ -9,6 +9,7 @@ import { TrustBar } from '@/components/trust-bar';
 import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { ChatWidget } from '@/components/chat-widget';
 import BeforeAfterGallery from '@/components/before-after-gallery';
+import { Animated3DLogo } from '@/components/animated-3d-logo';
 import { FinalCtaSection } from '@/components/final-cta-section';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useState } from 'react';
@@ -136,6 +137,17 @@ export default function Home() {
         <HomepageQuoteCalculator />
         <TrustBar />
         <BeforeAfterGallery />
+        <section className="py-12 lg:py-16 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
+          <div className="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
+            <Animated3DLogo size={220} />
+            <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-6 font-serif">
+              Montgomery's Most Trusted Cleaning Team
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg max-w-xl">
+              16 years of spotless results across Central Alabama
+            </p>
+          </div>
+        </section>
         <ServicesSection />
         <GoogleReviews />
         <FinalCtaSection />
