@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773576264615.png';
 
 export function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -83,14 +82,10 @@ export function ExitIntentPopup() {
           <X className="w-6 h-6" />
         </button>
 
-        <div className="bg-gradient-to-br from-blue-700 to-teal-600 text-white p-8 text-center">
-          <img
-            src={mascotImg}
-            alt="Self-Maid mascot"
-            className="w-20 h-20 object-contain mx-auto mb-3 drop-shadow-lg"
-            width={80}
-            height={80}
-          />
+        <div className="bg-gradient-to-br from-primary to-primary/80 text-white p-8 text-center">
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Gift className="w-8 h-8" />
+          </div>
           <h3 className="text-2xl font-bold mb-2">Wait! Don't Leave Yet!</h3>
           <p className="text-white/90">Get 10% OFF your first cleaning service</p>
         </div>

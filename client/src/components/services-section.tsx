@@ -3,7 +3,6 @@ import { Home, Building, Key, Truck, GraduationCap, Building2, ArrowRight, Phone
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import servicesBanner from '@assets/3A26DA8A-614F-4AE6-A3E7-A0E54B93CCDB_1773576140460.png';
 
 interface Service {
   id: string;
@@ -184,16 +183,7 @@ export function ServicesSection() {
             })}
           </div>
           
-          <div className="mt-12 mb-10 max-w-5xl mx-auto">
-            <img
-              src={servicesBanner}
-              alt="Self-Maid cleaning services — hosting hangover, life gets messy, bathroom disaster, pet mess, moving out, deep clean, busy schedule, your home deserves better"
-              className="w-full rounded-2xl shadow-xl"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="text-center mt-8">
+          <div className="text-center mt-14">
             <p className="text-slate-500 dark:text-slate-400 mb-5 text-lg">
               Need a custom cleaning package? We'll work with you to create the perfect solution.
             </p>
