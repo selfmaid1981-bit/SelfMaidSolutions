@@ -24,3 +24,9 @@ id = "n_dfJIfDVusxkfscQLDvE"
 uri = "file://attached_assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png"
 type = "image"
 title = "Self-Maid Logo / Mascot"
+
+[[outputs]]
+id = "lSvGo84nLMoXo8HgupLI-"
+uri = "file://attached_assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png"
+type = "image"
+title = "Self-Maid SM Sponge Hero (used in 3D logo)"
