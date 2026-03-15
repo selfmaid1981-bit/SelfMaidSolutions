@@ -1,0 +1,153 @@
+Act as a senior software architect reviewing the Self‑Maid Cleaning platform.
+
+Do NOT immediately generate new features.
+
+First analyze the existing project and provide a detailed report.
+
+--------------------------------------------------
+
+SYSTEM CONTEXT
+
+The project is a cleaning service platform built on Replit.
+
+STACK
+
+Runtime: Node.js 20
+Frontend: React
+Database: PostgreSQL
+
+Integrations:
+
+SendGrid (email automation)
+Twilio (SMS messaging)
+Stripe (payments)
+Google Sheets (CRM logging)
+OpenAI (AI capabilities)
+
+Primary service area:
+
+Prattville Alabama
+
+--------------------------------------------------
+
+TASK 1 — PROJECT STRUCTURE
+
+Analyze the full codebase and describe:
+
+• folder structure
+• major components
+• API routes
+• database schema
+• integrations
+
+Explain how the frontend, backend, and database interact.
+
+--------------------------------------------------
+
+TASK 2 — SYSTEM HEALTH
+
+Identify any problems including:
+
+• TypeScript errors
+• missing API routes
+• inconsistent types
+• unused components
+• duplicate functionality
+• performance risks
+
+List the issues in order of severity.
+
+--------------------------------------------------
+
+TASK 3 — DATABASE REVIEW
+
+Analyze the PostgreSQL schema and determine whether it properly supports:
+
+• quote requests
+• bookings
+• recurring cleaning
+• customers
+• reviews
+• referrals
+
+Recommend improvements if necessary.
+
+--------------------------------------------------
+
+TASK 4 — CONVERSION FUNNEL
+
+Analyze the current website flow:
+
+visitor → quote → booking → follow‑up
+
+Determine if the funnel is optimized for:
+
+• high quote requests
+• fast booking
+• recurring clients
+
+Recommend improvements.
+
+--------------------------------------------------
+
+TASK 5 — SEO STRUCTURE
+
+Evaluate the website's SEO structure.
+
+Check for:
+
+• service pages
+• city landing pages
+• neighborhood pages
+• metadata
+• internal linking
+
+Identify missing SEO opportunities for Prattville.
+
+--------------------------------------------------
+
+TASK 6 — AUTOMATION REVIEW
+
+Analyze how the system currently uses:
+
+SendGrid
+Twilio
+Stripe
+Google Sheets
+
+Determine if automation workflows exist for:
+
+• quote confirmations
+• booking confirmations
+• follow‑ups
+• review requests
+• referrals
+
+Suggest improvements.
+
+--------------------------------------------------
+
+TASK 7 — PERFORMANCE
+
+Evaluate:
+
+• page load speed
+• image optimization
+• API efficiency
+• database queries
+
+Suggest improvements.
+
+--------------------------------------------------
+
+FINAL OUTPUT
+
+Provide a report containing:
+
+1. System overview
+2. Critical issues
+3. Medium priority improvements
+4. Conversion improvements
+5. SEO opportunities
+6. Automation improvements
+7. Recommended development roadmap

@@ -12,3 +12,9 @@ id = "6_0xC6LKx3KljMUDYb4Hk"
 uri = "file://.local/api-specification.md"
 type = "text"
 title = "Leading Edge Growth OS — REST API Specification"
+
+[[outputs]]
+id = "Fu3LrHIyd3qYsGId7hbzM"
+uri = "file://.local/system-audit-report.md"
+type = "text"
+title = "Self-Maid System Audit Report"
