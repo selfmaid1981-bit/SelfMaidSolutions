@@ -768,154 +768,261 @@ body {
   background-size: 40px 40px;
 }
 
-.logo-3d-container {
+.wipe-logo-container {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  cursor: pointer;
+  gap: 16px;
+  min-height: calc(var(--logo-size, 220px) + 80px);
+  overflow: visible;
 }
 
-.logo-3d-inner {
+.wipe-mascot-track {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 2;
+  transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wipe-mascot-track.enter {
+  transform: translateX(-180px) scale(0.6);
+  opacity: 0;
+  animation: mascotEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.wipe-mascot-track.wipe {
+  animation: mascotWipe 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.wipe-mascot-track.reveal,
+.wipe-mascot-track.idle {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.wipe-mascot {
+  position: relative;
   transform-style: preserve-3d;
-  animation: logo3dFloat 4s ease-in-out infinite;
 }
 
-.logo-3d-image {
+.wipe-mascot-track.idle .wipe-mascot {
+  animation: mascotFloat 4s ease-in-out infinite;
+}
+
+.wipe-mascot-img {
   position: relative;
   z-index: 2;
   object-fit: contain;
-  filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.35))
-          drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
-  animation: logo3dPulseGlow 3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 8px 20px rgba(59, 130, 246, 0.3))
+          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
 }
 
-.logo-3d-glow {
+.wipe-mascot-track.idle .wipe-mascot-img {
+  animation: mascotGlow 3s ease-in-out infinite alternate;
+}
+
+.wipe-mascot-glow {
   position: absolute;
-  inset: -15%;
+  inset: -20%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(20, 184, 166, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(20, 184, 166, 0.1) 45%, transparent 70%);
   z-index: 0;
-  animation: logo3dGlowPulse 3s ease-in-out infinite alternate;
-  filter: blur(20px);
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.6s;
 }
 
-.logo-3d-reflection {
-  position: absolute;
-  bottom: -30%;
-  left: 10%;
-  right: 10%;
-  height: 40%;
-  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.12), transparent);
-  transform: scaleY(-1) rotateX(60deg);
-  filter: blur(8px);
-  z-index: 1;
-  opacity: 0.5;
-  mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+.wipe-mascot-track.idle .wipe-mascot-glow {
+  opacity: 1;
+  animation: glowBreath 3s ease-in-out infinite alternate;
 }
 
-.logo-3d-sparkle {
+.wipe-clean-streak {
   position: absolute;
-  width: var(--sparkle-size, 5px);
-  height: var(--sparkle-size, 5px);
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, rgba(59, 130, 246, 0.8) 50%, transparent 100%);
-  top: 50%;
-  left: 50%;
+  top: 20%;
+  right: -30px;
+  width: 50px;
+  height: 60%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), rgba(59, 130, 246, 0.15), transparent);
+  border-radius: 4px;
   z-index: 3;
   opacity: 0;
-  pointer-events: none;
-  animation: logo3dSparkle 2.4s ease-in-out var(--sparkle-delay, 0s) infinite;
+  transform: skewX(-8deg);
+  filter: blur(2px);
 }
 
-.logo-3d-ring-dot {
+.wipe-mascot-track.wipe .wipe-clean-streak {
+  animation: streakFlash 1s ease-out forwards;
+}
+
+.wipe-text-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.wipe-text-block.enter,
+.wipe-text-block.wipe {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+.wipe-text-block.reveal {
+  animation: textReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.wipe-text-block.idle {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+.wipe-brand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 46px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0891b2 50%, #0f766e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  position: relative;
+}
+
+.wipe-text-block.idle .wipe-brand {
+  animation: textShimmer 4s ease-in-out infinite;
+}
+
+.wipe-sub {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.wipe-shine {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.wipe-text-block.reveal .wipe-shine,
+.wipe-text-block.idle .wipe-shine {
+  animation: shineSwipe 3s ease-in-out 0.5s infinite;
+}
+
+.wipe-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.wipe-sparkle-dot {
+  position: absolute;
+  width: var(--sp-size, 4px);
+  height: var(--sp-size, 4px);
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.6);
+  background: radial-gradient(circle, #fff 0%, rgba(59, 130, 246, 0.7) 60%, transparent 100%);
   top: 50%;
   left: 50%;
-  z-index: 1;
   opacity: 0;
-  pointer-events: none;
-  animation: logo3dOrbit 6s linear var(--ring-delay, 0s) infinite;
+  animation: sparkleFloat 3s ease-in-out var(--sp-delay, 0s) infinite;
 }
 
-@keyframes logo3dFloat {
+@keyframes mascotEnter {
+  0% { transform: translateX(-180px) scale(0.6); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+@keyframes mascotWipe {
+  0% { transform: translateX(0) scale(1) rotate(0deg); }
+  30% { transform: translateX(30px) scale(1.05) rotate(5deg); }
+  60% { transform: translateX(-20px) scale(1.02) rotate(-3deg); }
+  100% { transform: translateX(0) scale(1) rotate(0deg); }
+}
+
+@keyframes mascotFloat {
   0%, 100% { transform: translateY(0px) rotateY(0deg); }
-  25% { transform: translateY(-10px) rotateY(3deg); }
-  50% { transform: translateY(-6px) rotateY(0deg); }
-  75% { transform: translateY(-12px) rotateY(-3deg); }
+  25% { transform: translateY(-10px) rotateY(4deg); }
+  50% { transform: translateY(-5px) rotateY(0deg); }
+  75% { transform: translateY(-12px) rotateY(-4deg); }
 }
 
-@keyframes logo3dPulseGlow {
+@keyframes mascotGlow {
   0% {
-    filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.3))
-            drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 8px 20px rgba(59, 130, 246, 0.3))
+            drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
   }
   100% {
-    filter: drop-shadow(0 12px 32px rgba(20, 184, 166, 0.45))
-            drop-shadow(0 4px 12px rgba(59, 130, 246, 0.25));
+    filter: drop-shadow(0 10px 28px rgba(20, 184, 166, 0.4))
+            drop-shadow(0 3px 10px rgba(59, 130, 246, 0.2));
   }
 }
 
-@keyframes logo3dGlowPulse {
-  0% { opacity: 0.5; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1.05); }
+@keyframes glowBreath {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1.06); }
 }
 
-@keyframes logo3dSparkle {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate(0, 0) scale(0);
+@keyframes streakFlash {
+  0% { opacity: 0; transform: skewX(-8deg) translateX(-40px); }
+  30% { opacity: 0.9; }
+  100% { opacity: 0; transform: skewX(-8deg) translateX(80px); }
+}
+
+@keyframes textReveal {
+  0% { opacity: 0; clip-path: inset(0 100% 0 0); }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes textShimmer {
+  0%, 100% {
+    background: linear-gradient(135deg, #1d4ed8 0%, #0891b2 50%, #0f766e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(
-      calc(var(--sparkle-x, 0px) * 0.5),
-      calc(var(--sparkle-y, 0px) * 0.5)
-    ) scale(1);
-  }
-  60% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) translate(
-      var(--sparkle-x, 0px),
-      var(--sparkle-y, 0px)
-    ) scale(0.8);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate(
-      calc(var(--sparkle-x, 0px) * 1.2),
-      calc(var(--sparkle-y, 0px) * 1.2)
-    ) scale(0);
+  50% {
+    background: linear-gradient(135deg, #0f766e 0%, #1d4ed8 50%, #0891b2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 }
 
-@keyframes logo3dOrbit {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--ring-angle, 0deg)) translateX(var(--ring-radius, 80px)) scale(0);
-  }
-  10% { opacity: 0.7; transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 36deg)) translateX(var(--ring-radius, 80px)) scale(1); }
-  90% { opacity: 0.3; transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 324deg)) translateX(var(--ring-radius, 80px)) scale(0.6); }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(calc(var(--ring-angle, 0deg) + 360deg)) translateX(var(--ring-radius, 80px)) scale(0);
-  }
+@keyframes shineSwipe {
+  0%, 70%, 100% { left: -100%; opacity: 0; }
+  75% { opacity: 0.7; }
+  85% { left: 120%; opacity: 0; }
+}
+
+@keyframes sparkleFloat {
+  0% { opacity: 0; transform: translate(-50%, -50%) translate(0, 0) scale(0); }
+  15% { opacity: 1; transform: translate(-50%, -50%) translate(calc(var(--sp-x) * 0.4), calc(var(--sp-y) * 0.4)) scale(1); }
+  50% { opacity: 0.5; transform: translate(-50%, -50%) translate(var(--sp-x), var(--sp-y)) scale(0.7); }
+  100% { opacity: 0; transform: translate(-50%, -50%) translate(calc(var(--sp-x) * 1.1), calc(var(--sp-y) * 1.1)) scale(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-3d-inner { animation: none; }
-  .logo-3d-image { animation: none; }
-  .logo-3d-glow { animation: none; }
-  .logo-3d-sparkle { animation: none; }
-  .logo-3d-ring-dot { animation: none; }
+  .wipe-mascot-track.enter { animation: none; transform: translateX(0) scale(1); opacity: 1; }
+  .wipe-mascot-track.wipe { animation: none; }
+  .wipe-mascot-track.idle .wipe-mascot { animation: none; }
+  .wipe-mascot-track.idle .wipe-mascot-img { animation: none; }
+  .wipe-text-block.reveal { animation: none; opacity: 1; clip-path: none; }
+  .wipe-text-block.idle .wipe-brand { animation: none; }
+  .wipe-shine { animation: none !important; }
+  .wipe-sparkle-dot { animation: none; }
 }
 

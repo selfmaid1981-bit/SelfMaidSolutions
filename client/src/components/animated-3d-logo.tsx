@@ -1,11 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
-export function Animated3DLogo({ size = 200 }: { size?: number }) {
+export function Animated3DLogo({ size = 220 }: { size?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number>(0);
+  const [phase, setPhase] = useState<'enter' | 'wipe' | 'reveal' | 'idle'>('enter');
 
   useEffect(() => {
+    const timers = [
+      setTimeout(() => setPhase('wipe'), 800),
+      setTimeout(() => setPhase('reveal'), 1800),
+      setTimeout(() => setPhase('idle'), 3000),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== 'idle') return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -18,19 +29,17 @@ export function Animated3DLogo({ size = 200 }: { size?: number }) {
       const rect = container.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      mouseX = ((e.clientX - centerX) / (rect.width / 2)) * 25;
-      mouseY = ((e.clientY - centerY) / (rect.height / 2)) * -25;
+      mouseX = ((e.clientX - centerX) / (rect.width / 2)) * 15;
+      mouseY = ((e.clientY - centerY) / (rect.height / 2)) * -15;
     };
 
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.08;
-      currentY += (mouseY - currentY) * 0.08;
-
-      const inner = container.querySelector('.logo-3d-inner') as HTMLElement;
-      if (inner) {
-        inner.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
+      currentX += (mouseX - currentX) * 0.06;
+      currentY += (mouseY - currentY) * 0.06;
+      const mascot = container.querySelector('.wipe-mascot') as HTMLElement;
+      if (mascot) {
+        mascot.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
       }
-
       frameRef.current = requestAnimationFrame(animate);
     };
 
@@ -41,53 +50,51 @@ export function Animated3DLogo({ size = 200 }: { size?: number }) {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(frameRef.current);
     };
-  }, []);
+  }, [phase]);
+
+  const mascotSize = size * 0.85;
 
   return (
     <div
       ref={containerRef}
-      className="logo-3d-container"
-      style={{
-        width: size,
-        height: size,
-        perspective: '800px',
-      }}
+      className="wipe-logo-container"
+      style={{ '--logo-size': `${size}px` } as React.CSSProperties}
     >
-      <div className="logo-3d-inner" style={{ transformStyle: 'preserve-3d', transition: 'transform 0.1s ease-out' }}>
-        <div className="logo-3d-glow" />
-        <img
-          src={mascotImg}
-          alt="Self-Maid 3D animated mascot"
-          className="logo-3d-image"
-          style={{ width: size, height: size }}
-        />
-        <div className="logo-3d-reflection" />
-
-        {Array.from({ length: 12 }).map((_, i) => (
-          <span
-            key={i}
-            className="logo-3d-sparkle"
-            style={{
-              '--sparkle-delay': `${i * 0.4}s`,
-              '--sparkle-x': `${Math.cos((i / 12) * Math.PI * 2) * (size * 0.55)}px`,
-              '--sparkle-y': `${Math.sin((i / 12) * Math.PI * 2) * (size * 0.55)}px`,
-              '--sparkle-size': `${4 + Math.random() * 6}px`,
-            } as React.CSSProperties}
+      <div className={`wipe-mascot-track ${phase}`}>
+        <div className="wipe-mascot" style={{ perspective: '600px', transformStyle: 'preserve-3d' }}>
+          <div className="wipe-mascot-glow" />
+          <img
+            src={mascotImg}
+            alt="Self-Maid mascot"
+            className="wipe-mascot-img"
+            style={{ width: mascotSize, height: mascotSize }}
           />
-        ))}
-
-        {Array.from({ length: 6 }).map((_, i) => (
-          <span
-            key={`ring-${i}`}
-            className="logo-3d-ring-dot"
-            style={{
-              '--ring-delay': `${i * 0.6}s`,
-              '--ring-angle': `${(i / 6) * 360}deg`,
-              '--ring-radius': `${size * 0.48}px`,
-            } as React.CSSProperties}
-          />
-        ))}
+          <div className="wipe-clean-streak" />
+        </div>
       </div>
+
+      <div className={`wipe-text-block ${phase}`}>
+        <span className="wipe-brand" data-text="Self-Maid">Self-Maid</span>
+        <span className="wipe-sub">Cleaning Solutions</span>
+        <div className="wipe-shine" />
+      </div>
+
+      {phase === 'idle' && (
+        <div className="wipe-sparkles">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <span
+              key={i}
+              className="wipe-sparkle-dot"
+              style={{
+                '--sp-delay': `${i * 0.5}s`,
+                '--sp-x': `${(Math.random() - 0.5) * size * 2.2}px`,
+                '--sp-y': `${(Math.random() - 0.5) * size * 1.4}px`,
+                '--sp-size': `${3 + Math.random() * 5}px`,
+              } as React.CSSProperties}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
