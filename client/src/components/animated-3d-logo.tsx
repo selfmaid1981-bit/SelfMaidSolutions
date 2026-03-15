@@ -12,9 +12,9 @@ export function Animated3DLogo({ size = 220, variant = 'light' }: Animated3DLogo
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase('wipe'), 600),
-      setTimeout(() => setPhase('sparkle'), 2200),
-      setTimeout(() => setPhase('idle'), 3500),
+      setTimeout(() => setPhase('wipe'), 1200),
+      setTimeout(() => setPhase('sparkle'), 4000),
+      setTimeout(() => setPhase('idle'), 6000),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
