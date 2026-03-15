@@ -2,18 +2,32 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import kitchenTransformation from '@assets/IMG_1852_1763084552552.png';
+import kitchenTransformation from '@assets/B9A64146-698F-4F2A-BBFE-AEAB05F156F0_1773576140460.png';
+import livingRoomTransformation from '@assets/2938E6F8-CE88-4B25-B262-960A50D4D205_1773576140460.png';
+import fourSceneTransformation from '@assets/CDC87EB7-1D3E-4319-A902-6BB13B68E8ED_1773576140460.png';
 import dirtyBathroom from '@assets/stock_images/dirty_messy_bathroom_91e52294.jpg';
 import cleanBathroom from '@assets/stock_images/sparkling_clean_bath_3ad4062e.jpg';
-import messyKitchen from '@assets/stock_images/messy_dirty_kitchen__dad199f4.jpg';
-import cleanKitchen from '@assets/stock_images/sparkling_clean_kitc_0796fbed.jpg';
 
 const galleryItems = [
   {
-    id: 'kitchen-real',
+    id: 'kitchen-transformation',
     title: 'Kitchen Deep Clean',
-    subtitle: 'Montgomery, AL — Real client transformation',
+    subtitle: 'Self-Maid Transformation — before & after magic',
     image: kitchenTransformation,
+    isSplitImage: true,
+  },
+  {
+    id: 'living-room-transformation',
+    title: 'Living Room Revival',
+    subtitle: 'From chaos to calm — the Self-Maid difference',
+    image: livingRoomTransformation,
+    isSplitImage: true,
+  },
+  {
+    id: 'multi-room',
+    title: 'Whole Home Transformations',
+    subtitle: 'Kitchen, living room, bathroom & pet-friendly cleaning',
+    image: fourSceneTransformation,
     isSplitImage: true,
   },
   {
@@ -22,14 +36,6 @@ const galleryItems = [
     subtitle: 'From grime to shine — professional deep clean',
     beforeImage: dirtyBathroom,
     afterImage: cleanBathroom,
-    isSplitImage: false,
-  },
-  {
-    id: 'kitchen-stock',
-    title: 'Kitchen Makeover',
-    subtitle: 'Complete countertop and appliance detail',
-    beforeImage: messyKitchen,
-    afterImage: cleanKitchen,
     isSplitImage: false,
   },
 ];

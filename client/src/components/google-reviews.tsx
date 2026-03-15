@@ -1,7 +1,7 @@
 import { Star, ExternalLink, ThumbsUp, Shield } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FaGoogle } from 'react-icons/fa';
-import mascotImg from '@assets/mascot-nobg.png';
+import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773576264615.png';
 
 const reviews = [
   {

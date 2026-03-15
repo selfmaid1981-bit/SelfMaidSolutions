@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Phone, Calendar, Home, Building, Key, Truck, Star, Shield, Zap, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import heroCharacter from '@assets/C35B6F6D-FBA3-4D14-B4FC-B7466FFAC89B_1771957028664.png';
+import heroCharacter from '@assets/6B4D3408-2859-4D0E-B184-CE1B293F69CA_1773576140460.png';
 
 const services = [
   { id: 'residential', icon: Home, title: 'Residential', price: '$80+', gradient: 'from-blue-500 to-cyan-400', shadow: 'shadow-blue-500/25' },
