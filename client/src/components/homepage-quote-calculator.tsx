@@ -106,7 +106,12 @@ export function HomepageQuoteCalculator() {
         quoteName: name,
         quoteEmail: email,
         quotePhone: phone,
+        frequency: selectedFrequency.label,
+        propertySize: sizeLabel || '',
+        bedrooms: bedrooms || '',
+        bathrooms: bathrooms || '',
       });
+      if (pets === 'yes') params.set('pets', 'yes');
       setLocation(`/booking?${params.toString()}`);
     },
     onError: (error: any) => {
@@ -372,6 +377,14 @@ export function HomepageQuoteCalculator() {
                       )}
                     </button>
 
+                    <div className="flex items-center justify-center gap-3 text-[10px] text-white/50 mt-1">
+                      <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />5.0 Google Rating</span>
+                      <span>·</span>
+                      <span>500+ Homes Cleaned</span>
+                      <span>·</span>
+                      <span>Fully Insured</span>
+                    </div>
+
                     <button
                       onClick={handleSeeFullQuote}
                       className="w-full text-white/50 hover:text-white/80 text-xs py-1 transition-colors"
@@ -410,7 +423,9 @@ export function HomepageQuoteCalculator() {
                       />
                     </div>
                     <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 block">Phone (optional)</label>
+                      <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
+                        <Phone className="w-3 h-3" /> Phone
+                      </label>
                       <input
                         type="tel"
                         placeholder="(334) 555-0100"
@@ -419,6 +434,7 @@ export function HomepageQuoteCalculator() {
                         className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
                         data-testid="home-quote-phone"
                       />
+                      <p className="text-emerald-300/70 text-[10px] mt-1">We'll text your quote summary instantly</p>
                     </div>
 
                     <button
@@ -434,6 +450,14 @@ export function HomepageQuoteCalculator() {
                         </>
                       )}
                     </button>
+
+                    <div className="flex items-center justify-center gap-3 text-[10px] text-white/50 mt-1">
+                      <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />5.0 Google Rating</span>
+                      <span>·</span>
+                      <span>500+ Homes Cleaned</span>
+                      <span>·</span>
+                      <span>Fully Insured</span>
+                    </div>
 
                     <button
                       onClick={() => setStep('calc')}

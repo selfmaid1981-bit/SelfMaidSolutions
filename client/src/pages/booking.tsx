@@ -51,6 +51,9 @@ export default function Booking() {
     const prefDate = params.get('preferredDate');
     const prefTime = params.get('preferredTime');
 
+    const frequency = params.get('frequency');
+    const propertySize = params.get('propertySize');
+
     if (quoteId) {
       setQuoteData({
         quoteId,
@@ -62,6 +65,8 @@ export default function Booking() {
         discountApplied: discountApplied ? parseInt(discountApplied) : 0,
         discountSource: discountSource || null,
         originalPrice: originalPrice ? parseInt(originalPrice) : null,
+        frequency: frequency || null,
+        propertySize: propertySize || null,
       });
 
       if (quoteName) {
@@ -193,6 +198,8 @@ export default function Booking() {
                       <CheckCircle className={`h-4 w-4 ${quoteData.discountApplied > 0 ? 'text-green-600' : 'text-blue-600'}`} />
                       <AlertDescription className={quoteData.discountApplied > 0 ? "text-green-800" : "text-blue-800"}>
                         <strong>Quote Details:</strong> {quoteData.serviceType} — ${quoteData.estimatedPrice}
+                        {quoteData.frequency && <span className="ml-1">({quoteData.frequency})</span>}
+                        {quoteData.propertySize && <span className="ml-1 text-sm text-gray-500">· {quoteData.propertySize}</span>}
                         {quoteData.discountApplied > 0 && quoteData.originalPrice && (
                           <span className="ml-2">
                             <span className="line-through text-gray-400">${quoteData.originalPrice}</span>
@@ -403,7 +410,6 @@ export default function Booking() {
                     </label>
                   </div>
 
-                  {/* Submit Button */}
                   <Button
                     type="submit"
                     disabled={createBookingMutation.isPending}
@@ -413,6 +419,19 @@ export default function Booking() {
                   >
                     {createBookingMutation.isPending ? 'Processing...' : 'Submit Booking Request'}
                   </Button>
+                  <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                      5.0 Google Rating
+                    </span>
+                    <span>·</span>
+                    <span className="flex items-center gap-1">
+                      <Shield className="w-3 h-3 text-emerald-500" />
+                      Fully Insured
+                    </span>
+                    <span>·</span>
+                    <span>500+ Homes Cleaned</span>
+                  </div>
                 </form>
               </CardContent>
             </Card>
