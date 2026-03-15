@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
+import mascotImg from '@assets/mascot-nobg.png';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
@@ -17,7 +18,7 @@ const serviceTypes = [
 
 const frequencyOptions = [
   { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
-  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: '★ Most Popular' },
+  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: 'Most Popular' },
   { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
 ];
 
@@ -166,6 +167,25 @@ export function HomepageQuoteCalculator() {
             <p className="text-blue-100/85 text-lg mb-7 leading-relaxed max-w-lg">
               Enter your home details and see transparent, no-hidden-fee pricing instantly — no phone call needed.
             </p>
+
+            <div className="relative mb-8">
+              <div className="flex items-end gap-4">
+                <img
+                  src={mascotImg}
+                  alt="Self-Maid mascot"
+                  className="w-24 h-24 lg:w-32 lg:h-32 object-contain flex-shrink-0 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+                  loading="lazy"
+                  width={128}
+                  height={128}
+                />
+                <div className="relative bg-white/15 backdrop-blur-sm border border-white/25 rounded-2xl rounded-bl-sm px-5 py-3 max-w-xs">
+                  <p className="text-white font-semibold text-sm leading-snug">
+                    Let's get your home sparkling! Enter your details and I'll show you your price instantly.
+                  </p>
+                  <div className="absolute -bottom-1 left-0 w-3 h-3 bg-white/15 border-l border-b border-white/25" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
+                </div>
+              </div>
+            </div>
 
             <ul className="space-y-3 mb-8">
               {['Instant pricing — no waiting', 'No credit card required', 'Saves as a lead in our system', 'Continue straight to booking'].map(f => (

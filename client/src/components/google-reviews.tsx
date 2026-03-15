@@ -1,6 +1,7 @@
 import { Star, ExternalLink, ThumbsUp, Shield } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FaGoogle } from 'react-icons/fa';
+import mascotImg from '@assets/mascot-nobg.png';
 
 const reviews = [
   {
@@ -104,25 +105,43 @@ export function GoogleReviews() {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 border-2 border-[#4285F4] text-[#4285F4] dark:text-blue-400 px-8 py-4 rounded-xl font-bold hover:bg-[#4285F4] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white hover:border-[#4285F4] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
-            data-testid="view-all-reviews-button"
-          >
-            <FaGoogle className="w-5 h-5" />
-            View All Reviews on Google
-            <ExternalLink className="w-4 h-4" />
-          </a>
-          <a
-            href="/quote"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
-          >
-            Get Your Free Quote
-            <Star className="w-4 h-4 fill-white" />
-          </a>
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-end gap-3">
+            <img
+              src={mascotImg}
+              alt="Self-Maid mascot"
+              className="w-16 h-16 object-contain drop-shadow-lg"
+              loading="lazy"
+              width={64}
+              height={64}
+            />
+            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-bl-sm px-4 py-2.5 shadow-md max-w-xs">
+              <p className="text-slate-700 dark:text-slate-200 text-sm font-medium">
+                Join 500+ happy customers! Your spotless home is just one quote away.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 border-2 border-[#4285F4] text-[#4285F4] dark:text-blue-400 px-8 py-4 rounded-xl font-bold hover:bg-[#4285F4] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white hover:border-[#4285F4] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+              data-testid="view-all-reviews-button"
+            >
+              <FaGoogle className="w-5 h-5" />
+              View All Reviews on Google
+              <ExternalLink className="w-4 h-4" />
+            </a>
+            <a
+              href="/quote"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+            >
+              Get Your Free Quote
+              <Star className="w-4 h-4 fill-white" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
