@@ -7,6 +7,7 @@ import { Shield, Users, Leaf, Clock, Star, Phone, Heart, Award, CheckCircle } fr
 import dusticeTeamImage from '@assets/4962B151-CDC3-4237-AFA2-FF55BB2F35A9_1771957028664.png';
 import battleScene1 from '@assets/5A9D2FCC-A812-4180-B091-0B10400A0E52_1771957028664.png';
 import battleScene2 from '@assets/IMG_0203_1771957028664.png';
+import ownerImage from '@assets/IMG_1097_1773578331891.png';
 
 const features = [
   {
@@ -79,7 +80,7 @@ export default function About() {
         <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <div className="order-2 lg:order-1">
                 <div className="inline-flex items-center gap-2 text-primary font-medium mb-4">
                   <Star className="w-5 h-5 fill-primary" />
                   Meet The Owner
@@ -102,37 +103,49 @@ export default function About() {
                   </p>
                 </div>
               </div>
-              <div className="relative">
-                <Card className="bg-white shadow-xl overflow-hidden">
-                  <CardContent className="p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Award className="w-8 h-8 text-primary" />
+              <div className="relative order-1 lg:order-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md mx-auto lg:mx-0 lg:ml-auto">
+                  <img
+                    src={ownerImage}
+                    alt="Michelle — Owner of Self-Maid Cleaning Solutions"
+                    className="w-full h-auto object-cover"
+                    data-testid="owner-photo"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                    <p className="text-white font-bold text-lg">Michelle</p>
+                    <p className="text-white/80 text-sm">Owner & Founder, Self-Maid Cleaning Solutions</p>
+                  </div>
+                </div>
+                <Card className="bg-white dark:bg-slate-800 shadow-xl mt-6">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                        <Award className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-foreground">Why Work With Me?</h3>
-                        <p className="text-muted-foreground">What sets Self-Maid apart</p>
+                        <h3 className="text-lg font-bold text-foreground">Why Work With Me?</h3>
+                        <p className="text-muted-foreground text-sm">What sets Self-Maid apart</p>
                       </div>
                     </div>
-                    <ul className="space-y-4">
+                    <ul className="space-y-3">
                       <li className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">You get a <strong>cleaning partner who treats your space like it's her own.</strong></span>
+                        <span className="text-foreground text-sm">A <strong>cleaning partner who treats your space like it's her own.</strong></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">You get <strong>clear communication, consistent quality, and zero shortcuts.</strong></span>
+                        <span className="text-foreground text-sm"><strong>Clear communication, consistent quality, and zero shortcuts.</strong></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">You get a company that's <strong>innovative, organized, and always improving</strong> to serve you better.</span>
+                        <span className="text-foreground text-sm">A company that's <strong>innovative, organized, and always improving.</strong></span>
                       </li>
                     </ul>
-                    <div className="mt-6 pt-6 border-t">
+                    <div className="mt-4 pt-4 border-t">
                       <p className="text-sm text-muted-foreground italic">
                         "I'm hands-on, detail-driven, and committed to doing things the right way the first time."
                       </p>
-                      <p className="text-sm font-semibold text-foreground mt-2">— Michelle, Owner</p>
+                      <p className="text-sm font-semibold text-foreground mt-1">— Michelle, Owner</p>
                     </div>
                   </CardContent>
                 </Card>

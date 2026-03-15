@@ -1,6 +1,6 @@
 import { ArrowRight, Phone, Shield, Clock, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import mascotImg from '@assets/mascot-nobg.png';
+import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
 export function FinalCtaSection() {
   return (

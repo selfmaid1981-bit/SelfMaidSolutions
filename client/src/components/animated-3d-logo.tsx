@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import mascotImg from '@assets/mascot-nobg.png';
+import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
 export function Animated3DLogo({ size = 200 }: { size?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
