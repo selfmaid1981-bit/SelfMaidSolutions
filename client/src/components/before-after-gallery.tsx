@@ -2,35 +2,28 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import kitchenTransformation from '@assets/IMG_1852_1763084552552.png';
-import dirtyBathroom from '@assets/stock_images/dirty_messy_bathroom_91e52294.jpg';
-import cleanBathroom from '@assets/stock_images/sparkling_clean_bath_3ad4062e.jpg';
-import messyKitchen from '@assets/stock_images/messy_dirty_kitchen__dad199f4.jpg';
-import cleanKitchen from '@assets/stock_images/sparkling_clean_kitc_0796fbed.jpg';
 
 const galleryItems = [
   {
-    id: 'kitchen-real',
+    id: 'kitchen',
     title: 'Kitchen Deep Clean',
-    subtitle: 'Montgomery, AL — Real client transformation',
-    image: kitchenTransformation,
-    isSplitImage: true,
+    subtitle: 'From grease and grime to spotless and shining',
+    beforeImage: '/assets/before-after/before-kitchen-dirty.svg',
+    afterImage: '/assets/before-after/after-kitchen-clean.svg',
   },
   {
     id: 'bathroom',
     title: 'Bathroom Restoration',
-    subtitle: 'From grime to shine — professional deep clean',
-    beforeImage: dirtyBathroom,
-    afterImage: cleanBathroom,
-    isSplitImage: false,
+    subtitle: 'Professional deep clean — tile, grout, and fixtures',
+    beforeImage: '/assets/before-after/before-bathroom-dirty.svg',
+    afterImage: '/assets/before-after/after-bathroom-clean.svg',
   },
   {
-    id: 'kitchen-stock',
-    title: 'Kitchen Makeover',
-    subtitle: 'Complete countertop and appliance detail',
-    beforeImage: messyKitchen,
-    afterImage: cleanKitchen,
-    isSplitImage: false,
+    id: 'livingroom',
+    title: 'Living Room Revival',
+    subtitle: 'Cluttered to clean — organized and refreshed',
+    beforeImage: '/assets/before-after/before-livingroom-messy.svg',
+    afterImage: '/assets/before-after/after-livingroom-clean.svg',
   },
 ];
 
@@ -53,68 +46,44 @@ export default function BeforeAfterGallery() {
             See the Self-Maid Difference
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Real before and after photos from homes we've cleaned across Central Alabama.
+            Real before and after transformations from homes we've cleaned across Central Alabama.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto">
           <div className="relative bg-slate-100 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl group">
-            {item.isSplitImage ? (
+            <div className="grid grid-cols-2">
               <div className="relative">
                 <img
-                  src={item.image}
-                  alt={`${item.title} before and after cleaning transformation`}
-                  className="w-full h-auto object-cover"
+                  src={item.beforeImage}
+                  alt={`${item.title} - before cleaning`}
+                  className="w-full h-64 sm:h-80 lg:h-96 object-cover"
                   loading="lazy"
-                  width={1200}
-                  height={600}
-                  data-testid="gallery-image-kitchen"
+                  width={600}
+                  height={400}
                 />
                 <div className="absolute top-4 left-4 z-10">
                   <span className="bg-red-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
                     Before
                   </span>
                 </div>
-                <div className="absolute bottom-4 left-4 z-10">
+              </div>
+              <div className="relative">
+                <img
+                  src={item.afterImage}
+                  alt={`${item.title} - after cleaning by Self-Maid`}
+                  className="w-full h-64 sm:h-80 lg:h-96 object-cover"
+                  loading="lazy"
+                  width={600}
+                  height={400}
+                />
+                <div className="absolute top-4 right-4 z-10">
                   <span className="bg-emerald-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
                     After
                   </span>
                 </div>
               </div>
-            ) : (
-              <div className="grid grid-cols-2">
-                <div className="relative">
-                  <img
-                    src={item.beforeImage}
-                    alt={`${item.title} - before cleaning`}
-                    className="w-full h-64 sm:h-80 lg:h-96 object-cover"
-                    loading="lazy"
-                    width={600}
-                    height={400}
-                  />
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="bg-red-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
-                      Before
-                    </span>
-                  </div>
-                </div>
-                <div className="relative">
-                  <img
-                    src={item.afterImage}
-                    alt={`${item.title} - after cleaning by Self-Maid`}
-                    className="w-full h-64 sm:h-80 lg:h-96 object-cover"
-                    loading="lazy"
-                    width={600}
-                    height={400}
-                  />
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-emerald-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
-                      After
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
 
             <button
               onClick={prev}

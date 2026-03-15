@@ -9,7 +9,6 @@ import { TrustBar } from '@/components/trust-bar';
 import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { ChatWidget } from '@/components/chat-widget';
 import BeforeAfterGallery from '@/components/before-after-gallery';
-import { Animated3DLogo } from '@/components/animated-3d-logo';
 import { FinalCtaSection } from '@/components/final-cta-section';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useState } from 'react';
@@ -138,14 +137,37 @@ export default function Home() {
         <TrustBar />
         <BeforeAfterGallery />
         <section className="py-12 lg:py-16 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
-          <div className="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
-            <Animated3DLogo size={220} />
-            <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-6 font-serif">
-              Montgomery's Most Trusted Cleaning Team
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg max-w-xl">
-              16 years of spotless results across Central Alabama
-            </p>
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white font-serif">
+                Montgomery's Most Trusted Cleaning Team
+              </h2>
+              <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg max-w-xl mx-auto">
+                16 years of spotless results across Central Alabama
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="/assets/team/cleaner-wiping-counter.svg"
+                  alt="Professional cleaner wiping kitchen counter"
+                  className="w-full h-56 object-cover"
+                  loading="lazy"
+                  width={480}
+                  height={224}
+                />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="/assets/team/cleaner-vacuuming.svg"
+                  alt="Professional cleaner vacuuming carpet"
+                  className="w-full h-56 object-cover"
+                  loading="lazy"
+                  width={480}
+                  height={224}
+                />
+              </div>
+            </div>
           </div>
         </section>
         <ServicesSection />

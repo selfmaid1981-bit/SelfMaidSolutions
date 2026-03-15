@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+    <rect width="960" height="600" fill="#e2e8f0"/>
+    <rect x="2" y="2" width="956" height="596" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="8,4" rx="8"/>
+    <text x="480" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#64748b">Hero Image</text>
+    <text x="480" y="314" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b" opacity="0.7">Clean modern home interior</text>
+    <text x="480" y="334" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b" opacity="0.5">Replace with final image</text>
+  </svg>

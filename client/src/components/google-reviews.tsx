@@ -1,7 +1,6 @@
 import { Star, ExternalLink, ThumbsUp, Shield } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FaGoogle } from 'react-icons/fa';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
 const reviews = [
   {
@@ -106,16 +105,16 @@ export function GoogleReviews() {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <div className="flex items-end gap-3">
+          <div className="flex items-center gap-5">
             <img
-              src={mascotImg}
-              alt="Self-Maid mascot"
-              className="w-16 h-16 object-contain drop-shadow-lg"
+              src="/assets/reviews/happy-homeowner.svg"
+              alt="Happy homeowner relaxing in a clean home"
+              className="w-20 h-20 object-cover rounded-2xl shadow-lg"
               loading="lazy"
-              width={64}
-              height={64}
+              width={80}
+              height={80}
             />
-            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-bl-sm px-4 py-2.5 shadow-md max-w-xs">
+            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-bl-sm px-5 py-3 shadow-md max-w-xs">
               <p className="text-slate-700 dark:text-slate-200 text-sm font-medium">
                 Join 500+ happy customers! Your spotless home is just one quote away.
               </p>

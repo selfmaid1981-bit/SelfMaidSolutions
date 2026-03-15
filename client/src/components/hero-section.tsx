@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Phone, ArrowRight, Sparkles, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773578331892.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -70,15 +69,15 @@ export function HeroSection() {
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
               <div className="relative premium-hero-visual">
-                <div className="premium-hero-card">
+                <div className="premium-hero-image-frame">
                   <img
-                    src={mascotImg}
-                    alt="Self-Maid cleaning mascot"
-                    className="w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 object-contain relative z-10 drop-shadow-2xl"
+                    src="/assets/hero/hero-clean-home.svg"
+                    alt="Beautiful clean modern home interior — Self-Maid Cleaning Solutions"
+                    className="w-full h-full object-cover"
+                    width={640}
+                    height={400}
                   />
-                  <div className="premium-hero-sparkle premium-hero-sparkle-1" />
-                  <div className="premium-hero-sparkle premium-hero-sparkle-2" />
-                  <div className="premium-hero-sparkle premium-hero-sparkle-3" />
+                  <div className="premium-hero-image-overlay" />
                 </div>
 
                 <div className="absolute -bottom-4 -left-4 md:-left-8 z-20 premium-hero-float">
