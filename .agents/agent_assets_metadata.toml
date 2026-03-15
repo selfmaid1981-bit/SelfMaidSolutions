@@ -18,3 +18,9 @@ id = "Fu3LrHIyd3qYsGId7hbzM"
 uri = "file://.local/system-audit-report.md"
 type = "text"
 title = "Self-Maid System Audit Report"
+
+[[outputs]]
+id = "n_dfJIfDVusxkfscQLDvE"
+uri = "file://attached_assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png"
+type = "image"
+title = "Self-Maid Logo / Mascot"
