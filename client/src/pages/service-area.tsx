@@ -108,6 +108,16 @@ const cityData: Record<string, CityData> = {
     zipCodes: ["35007", "35114"],
     nearbyAreas: ["Homewood", "Clanton", "Birmingham"],
     localDetails: "From the neighborhoods around Colonial Promenade to residential areas throughout the city, our cleaning team provides reliable, professional service that Alabaster families trust. We handle everything from weekly cleanings to deep cleans and move-in/move-out services."
+  },
+  "deatsville-al": {
+    name: "Deatsville",
+    slug: "deatsville-al",
+    county: "Elmore County",
+    description: "Deatsville's growing community between Prattville and Wetumpka makes it one of Elmore County's most desirable areas. Self-Maid Cleaning Solutions is proud to serve Deatsville families with professional cleaning.",
+    neighborhoods: ["Downtown Deatsville", "Marler", "Central", "Rifle Range Road"],
+    zipCodes: ["36022"],
+    nearbyAreas: ["Prattville", "Millbrook", "Wetumpka", "Montgomery"],
+    localDetails: "Nestled between Prattville and Wetumpka along Highway 143, Deatsville's mix of established homes and newer construction deserves dependable, professional cleaning. Our team serves every corner of the Deatsville community with the same care and attention to detail."
   }
 };
 

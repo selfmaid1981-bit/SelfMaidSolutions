@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { storage } from "../storage";
-import { insertLeadSchema, insertClientSchema, insertAppointmentSchema, insertJobSchema } from "@shared/schema";
+import { insertLeadSchema, insertClientSchema, insertAppointmentSchema, insertJobSchema, insertCleanerSchema, insertRecurringBookingSchema, insertReferralSchema } from "@shared/schema";
 import { onJobCompleted } from "../hooks/review-on-complete";
 import { getFollowUpStats, processFollowUps } from "../hooks/quote-followup";
 
@@ -247,6 +247,118 @@ router.patch("/jobs/:id", requireAdmin, async (req: Request, res: Response) => {
       onJobCompleted(job.id).catch(err => console.error("[CRM] Review trigger failed:", err));
     }
     res.json(job);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+const CLEANER_MUTABLE = ["firstName", "lastName", "email", "phone", "hourlyRate", "servicesOffered", "availability", "rating", "totalJobsCompleted", "isActive", "companyId", "userId"];
+
+router.get("/cleaners", requireAdmin, async (_req: Request, res: Response) => {
+  const list = await storage.getCleaners();
+  res.json(list);
+});
+
+router.get("/cleaners/:id", requireAdmin, async (req: Request, res: Response) => {
+  const item = await storage.getCleaner(req.params.id);
+  if (!item) return res.status(404).json({ error: "Cleaner not found" });
+  res.json(item);
+});
+
+router.post("/cleaners", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const parsed = insertCleanerSchema.parse(req.body);
+    const item = await storage.createCleaner(parsed);
+    res.status(201).json(item);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.patch("/cleaners/:id", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const safe = pick(req.body, CLEANER_MUTABLE);
+    const item = await storage.updateCleaner(req.params.id, safe);
+    if (!item) return res.status(404).json({ error: "Cleaner not found" });
+    res.json(item);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.delete("/cleaners/:id", requireAdmin, async (req: Request, res: Response) => {
+  const ok = await storage.deleteCleaner(req.params.id);
+  if (!ok) return res.status(404).json({ error: "Cleaner not found" });
+  res.json({ success: true });
+});
+
+const RB_MUTABLE = ["customerId", "customerEmail", "firstName", "lastName", "phone", "serviceType", "address", "city", "state", "zipCode", "frequency", "preferredDayOfWeek", "preferredTime", "amount", "specialInstructions", "status", "nextScheduledDate", "stripeSubscriptionId", "companyId"];
+
+router.get("/recurring-bookings", requireAdmin, async (_req: Request, res: Response) => {
+  const list = await storage.getRecurringBookings();
+  res.json(list);
+});
+
+router.get("/recurring-bookings/:id", requireAdmin, async (req: Request, res: Response) => {
+  const item = await storage.getRecurringBooking(req.params.id);
+  if (!item) return res.status(404).json({ error: "Recurring booking not found" });
+  res.json(item);
+});
+
+router.post("/recurring-bookings", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const parsed = insertRecurringBookingSchema.parse(req.body);
+    const item = await storage.createRecurringBooking(parsed);
+    res.status(201).json(item);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.patch("/recurring-bookings/:id", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const safe = pick(req.body, RB_MUTABLE);
+    const item = await storage.updateRecurringBooking(req.params.id, safe);
+    if (!item) return res.status(404).json({ error: "Recurring booking not found" });
+    res.json(item);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.delete("/recurring-bookings/:id", requireAdmin, async (req: Request, res: Response) => {
+  const ok = await storage.deleteRecurringBooking(req.params.id);
+  if (!ok) return res.status(404).json({ error: "Recurring booking not found" });
+  res.json({ success: true });
+});
+
+router.get("/referrals", requireAdmin, async (_req: Request, res: Response) => {
+  const list = await storage.getReferrals();
+  res.json(list);
+});
+
+router.get("/referrals/:id", requireAdmin, async (req: Request, res: Response) => {
+  const item = await storage.getReferral(req.params.id);
+  if (!item) return res.status(404).json({ error: "Referral not found" });
+  res.json(item);
+});
+
+router.post("/referrals", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const parsed = insertReferralSchema.parse(req.body);
+    const item = await storage.createReferral(parsed);
+    res.status(201).json(item);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.patch("/referrals/:id", requireAdmin, async (req: Request, res: Response) => {
+  try {
+    const safe = pick(req.body, ["referrerEmail", "referrerName", "referredEmail", "referredName", "referredPhone", "status", "rewardAmount", "rewardPaid", "notes", "companyId"]);
+    const item = await storage.updateReferral(req.params.id, safe);
+    if (!item) return res.status(404).json({ error: "Referral not found" });
+    res.json(item);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }

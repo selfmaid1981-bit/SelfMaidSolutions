@@ -67,6 +67,14 @@ const cities: Record<string, CityInfo> = {
     neighborhoods: ["Historic District", "Downtown Selma", "Valley Grande", "Orrville"],
     zipCodes: ["36701", "36702", "36703"],
     localFlavor: "Selma's historic homes and proud community deserve exceptional care. From the beautiful historic district to neighborhoods throughout Dallas County, Self-Maid delivers quality cleaning you can count on."
+  },
+  "deatsville": {
+    name: "Deatsville",
+    slug: "deatsville",
+    county: "Elmore County",
+    neighborhoods: ["Downtown Deatsville", "Marler", "Central", "Rifle Range Road"],
+    zipCodes: ["36022"],
+    localFlavor: "Deatsville's growing community between Prattville and Wetumpka deserves dependable, professional cleaning. From established homes to new-construction neighborhoods, Self-Maid keeps Deatsville residences looking their best."
   }
 };
 
@@ -242,7 +250,20 @@ const allCityServiceCombinations = Object.keys(cities).flatMap(citySlug =>
   }))
 );
 
-export { allCityServiceCombinations };
+const slugAliases: Record<string, string> = {};
+Object.keys(cities).forEach(citySlug => {
+  slugAliases[`move-out-cleaning-${citySlug}`] = `move-in-move-out-cleaning-${citySlug}-al`;
+  slugAliases[`move-in-cleaning-${citySlug}`] = `move-in-move-out-cleaning-${citySlug}-al`;
+  slugAliases[`maid-service-${citySlug}`] = `house-cleaning-${citySlug}-al`;
+  slugAliases[`cleaning-service-${citySlug}`] = `house-cleaning-${citySlug}-al`;
+  slugAliases[`office-cleaning-${citySlug}`] = `commercial-cleaning-${citySlug}-al`;
+  slugAliases[`vacation-rental-cleaning-${citySlug}`] = `airbnb-cleaning-${citySlug}-al`;
+  Object.keys(services).forEach(serviceSlug => {
+    slugAliases[`${serviceSlug}-${citySlug}`] = `${serviceSlug}-${citySlug}-al`;
+  });
+});
+
+export { allCityServiceCombinations, slugAliases };
 
 export default function CityServicePage() {
   const [location] = useLocation();

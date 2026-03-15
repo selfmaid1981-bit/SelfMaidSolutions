@@ -143,6 +143,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { loc: "/commercial-cleaning-millbrook-al", priority: "0.7", changefreq: "monthly" },
       { loc: "/commercial-cleaning-wetumpka-al", priority: "0.7", changefreq: "monthly" },
       { loc: "/commercial-cleaning-selma-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/house-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/deep-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/airbnb-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/move-in-move-out-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/commercial-cleaning-deatsville-al", priority: "0.7", changefreq: "monthly" },
+      { loc: "/apartment-turnover-deatsville-al", priority: "0.7", changefreq: "monthly" },
     ];
 
     const urls = pages.map(p => `  <url>

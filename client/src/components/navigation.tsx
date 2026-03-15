@@ -11,6 +11,7 @@ const serviceAreas = [
   { name: "Millbrook", slug: "millbrook-al" },
   { name: "Wetumpka", slug: "wetumpka-al" },
   { name: "Selma", slug: "selma-al" },
+  { name: "Deatsville", slug: "deatsville-al" },
   { name: "Pike Road", slug: "pike-road-al" },
   { name: "Homewood", slug: "homewood-al" },
   { name: "Clanton", slug: "clanton-al" },

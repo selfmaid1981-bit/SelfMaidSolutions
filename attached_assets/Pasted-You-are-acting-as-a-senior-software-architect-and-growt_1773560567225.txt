@@ -1,0 +1,301 @@
+You are acting as a senior software architect and growth engineer working on the Self‑Maid Cleaning platform.
+
+The system is built on Replit.
+
+STACK
+
+Runtime: Node.js 20
+Frontend: React
+Database: PostgreSQL
+
+Existing integrations:
+
+SendGrid (email)
+Twilio (SMS)
+Stripe (payments)
+Google Sheets (CRM logging)
+OpenAI (AI capabilities)
+
+PRIMARY BUSINESS GOAL
+
+Turn the Self‑Maid website into a high‑converting lead generation and booking system for residential cleaning services in:
+
+Prattville Alabama
+Montgomery Alabama
+Millbrook Alabama
+Deatsville Alabama
+
+Primary target market:
+
+Prattville Alabama.
+
+IMPORTANT CONSTRAINTS
+
+1. The existing quote → booking workflow must not break.
+2. Keep the system simple and reliable.
+3. Avoid unnecessary dependencies.
+4. Reuse existing components whenever possible.
+5. Optimize for organic traffic and conversion rate.
+6. Marketing budget is near zero.
+
+Focus on systems that produce recurring residential cleaning clients.
+
+----------------------------------------------------
+
+PHASE 1 — SYSTEM AUDIT
+
+Audit the entire project.
+
+Generate a report showing:
+
+• project folder structure
+• database schema
+• API endpoints
+• frontend routes
+• integrations
+
+Verify the following integrations function:
+
+SendGrid
+Twilio
+Stripe
+Google Sheets
+
+Check that these core endpoints work:
+
+POST /api/quotes
+POST /api/bookings
+POST /api/contact
+
+Verify these frontend pages load:
+
+/
+services
+quote
+booking
+
+Fix any TypeScript or runtime errors discovered.
+
+----------------------------------------------------
+
+PHASE 2 — SYSTEM STABILIZATION
+
+Resolve known issues:
+
+• mismatched User type returns
+• outdated p-retry imports
+• undefined API response guards
+• missing CRUD functions for
+
+cleaners
+recurring_bookings
+referrals
+quote_requests
+
+Ensure the admin dashboard route is properly registered.
+
+Confirm the application runs without errors.
+
+----------------------------------------------------
+
+PHASE 3 — QUOTE CALCULATOR (CORE CONVERSION FEATURE)
+
+Create component:
+
+client/src/components/QuoteCalculator.tsx
+
+Inputs:
+
+bedrooms
+bathrooms
+square_feet
+pets
+
+Pricing logic:
+
+base_price = 120
++20 per bedroom
++15 per bathroom
++0.05 per sq ft above 1500
+
+Display pricing options:
+
+One‑Time Cleaning
+Biweekly Cleaning (10% discount) ★ Most Popular
+Monthly Cleaning (5% discount)
+
+Include button:
+
+“Book This Cleaning”
+
+When submitted:
+
+POST to /api/quotes
+
+----------------------------------------------------
+
+PHASE 4 — QUOTE LEAD CAPTURE
+
+Create table:
+
+quote_requests
+
+Fields:
+
+id
+name
+email
+phone
+bedrooms
+bathrooms
+square_feet
+estimated_price
+created_at
+
+Add endpoint:
+
+POST /api/quotes
+
+Store quote request in PostgreSQL.
+
+----------------------------------------------------
+
+PHASE 5 — AUTOMATED FOLLOW‑UPS
+
+Use Twilio and SendGrid.
+
+After quote submission:
+
+Send SMS:
+
+“Hi [Name], thanks for requesting a quote from Self‑Maid Cleaning. Your estimate is ready. Book your cleaning here: [link]”
+
+Send email including:
+
+• quote summary
+• booking link
+• services offered
+
+----------------------------------------------------
+
+PHASE 6 — HOMEPAGE CONVERSION OPTIMIZATION
+
+Update homepage layout.
+
+Sections:
+
+Hero headline targeting
+“House Cleaning Prattville AL”
+
+Instant quote calculator (above the fold)
+
+Trust indicators:
+
+Licensed
+Insured
+Background Checked
+
+Before / after cleaning visuals
+
+Customer reviews
+
+Clear booking CTA.
+
+Ensure mobile responsiveness.
+
+----------------------------------------------------
+
+PHASE 7 — PRATTVILLE SEO PAGE
+
+Create page:
+
+client/src/pages/house-cleaning-prattville-al.tsx
+
+Include sections:
+
+Hero headline
+Before/after images
+Service list
+Customer testimonials
+Neighborhood references
+
+Glennbrooke
+Silver Hills
+Highland Ridge
+Hunting Ridge
+Riverchase
+
+Embed QuoteCalculator component.
+
+Add SEO metadata.
+
+----------------------------------------------------
+
+PHASE 8 — NEIGHBORHOOD SEO PAGES
+
+Create reusable template.
+
+Generate pages for:
+
+/services/prattville/glennbrooke
+/services/prattville/silver-hills
+/services/prattville/highland-ridge
+/services/prattville/hunting-ridge
+/services/prattville/riverchase
+
+Each page must include:
+
+localized headline
+service list
+reviews
+quote calculator
+booking CTA
+
+----------------------------------------------------
+
+PHASE 9 — REVIEW AUTOMATION
+
+After appointment completion:
+
+Send automated SMS asking for a Google review.
+
+Use Twilio integration.
+
+----------------------------------------------------
+
+PHASE 10 — ANALYTICS
+
+Track:
+
+quote requests
+bookings
+conversion rate
+top neighborhoods
+revenue per customer
+
+Expose metrics in admin dashboard.
+
+----------------------------------------------------
+
+PERFORMANCE REQUIREMENTS
+
+Ensure:
+
+fast page load
+mobile responsiveness
+SEO metadata
+stable API responses
+
+Do NOT remove or break existing booking logic.
+
+----------------------------------------------------
+
+FINAL OUTPUT
+
+Provide summary of:
+
+• files created
+• files modified
+• database migrations
+• new API endpoints
+• recommended next improvements

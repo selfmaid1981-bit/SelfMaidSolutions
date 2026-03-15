@@ -1,4 +1,4 @@
-import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, type EmailCampaign, type InsertEmailCampaign, type ReviewRequest, type InsertReviewRequest, type Lead, type InsertLead, type Client, type InsertClient, type Appointment, type InsertAppointment, type Job, type InsertJob, users, contactMessages, bookings, quotes, emailCampaigns, reviewRequests, leads, clients, appointments, jobs } from "@shared/schema";
+import { type User, type UserWithPasswordHash, type InsertUser, type ContactMessage, type InsertContactMessage, type Booking, type InsertBooking, type Quote, type InsertQuote, type EmailCampaign, type InsertEmailCampaign, type ReviewRequest, type InsertReviewRequest, type Lead, type InsertLead, type Client, type InsertClient, type Appointment, type InsertAppointment, type Job, type InsertJob, type Cleaner, type InsertCleaner, type RecurringBooking, type InsertRecurringBooking, type Referral, type InsertReferral, users, contactMessages, bookings, quotes, emailCampaigns, reviewRequests, leads, clients, appointments, jobs, cleaners, recurringBookings, referrals } from "@shared/schema";
 import { db } from "./db";
 import { eq, sql, desc, and, count } from "drizzle-orm";
 import * as bcrypt from "bcrypt";
@@ -41,6 +41,20 @@ export interface IStorage {
   createJob(job: InsertJob): Promise<Job>;
   updateJob(id: string, data: Partial<Job>): Promise<Job | undefined>;
   getCrmStats(companyId?: string): Promise<CrmStats>;
+  getCleaners(companyId?: string): Promise<Cleaner[]>;
+  getCleaner(id: string): Promise<Cleaner | undefined>;
+  createCleaner(cleaner: InsertCleaner): Promise<Cleaner>;
+  updateCleaner(id: string, data: Partial<Cleaner>): Promise<Cleaner | undefined>;
+  deleteCleaner(id: string): Promise<boolean>;
+  getRecurringBookings(companyId?: string): Promise<RecurringBooking[]>;
+  getRecurringBooking(id: string): Promise<RecurringBooking | undefined>;
+  createRecurringBooking(rb: InsertRecurringBooking): Promise<RecurringBooking>;
+  updateRecurringBooking(id: string, data: Partial<RecurringBooking>): Promise<RecurringBooking | undefined>;
+  deleteRecurringBooking(id: string): Promise<boolean>;
+  getReferrals(companyId?: string): Promise<Referral[]>;
+  getReferral(id: string): Promise<Referral | undefined>;
+  createReferral(referral: InsertReferral): Promise<Referral>;
+  updateReferral(id: string, data: Partial<Referral>): Promise<Referral | undefined>;
 }
 
 export interface CrmStats {
@@ -417,6 +431,82 @@ export class DatabaseStorage implements IStorage {
       recentLeads: allLeads.slice(0, 5),
       recentJobs: allJobs.slice(0, 5),
     };
+  }
+
+  async getCleaners(companyId?: string): Promise<Cleaner[]> {
+    if (companyId) {
+      return db.select().from(cleaners).where(eq(cleaners.companyId, companyId)).orderBy(desc(cleaners.createdAt));
+    }
+    return db.select().from(cleaners).orderBy(desc(cleaners.createdAt));
+  }
+
+  async getCleaner(id: string): Promise<Cleaner | undefined> {
+    const [cleaner] = await db.select().from(cleaners).where(eq(cleaners.id, id));
+    return cleaner || undefined;
+  }
+
+  async createCleaner(cleaner: InsertCleaner): Promise<Cleaner> {
+    const [created] = await db.insert(cleaners).values(cleaner).returning();
+    return created;
+  }
+
+  async updateCleaner(id: string, data: Partial<Cleaner>): Promise<Cleaner | undefined> {
+    const [updated] = await db.update(cleaners).set(data).where(eq(cleaners.id, id)).returning();
+    return updated || undefined;
+  }
+
+  async deleteCleaner(id: string): Promise<boolean> {
+    const result = await db.delete(cleaners).where(eq(cleaners.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async getRecurringBookings(companyId?: string): Promise<RecurringBooking[]> {
+    if (companyId) {
+      return db.select().from(recurringBookings).where(eq(recurringBookings.companyId, companyId)).orderBy(desc(recurringBookings.createdAt));
+    }
+    return db.select().from(recurringBookings).orderBy(desc(recurringBookings.createdAt));
+  }
+
+  async getRecurringBooking(id: string): Promise<RecurringBooking | undefined> {
+    const [rb] = await db.select().from(recurringBookings).where(eq(recurringBookings.id, id));
+    return rb || undefined;
+  }
+
+  async createRecurringBooking(rb: InsertRecurringBooking): Promise<RecurringBooking> {
+    const [created] = await db.insert(recurringBookings).values(rb).returning();
+    return created;
+  }
+
+  async updateRecurringBooking(id: string, data: Partial<RecurringBooking>): Promise<RecurringBooking | undefined> {
+    const [updated] = await db.update(recurringBookings).set(data).where(eq(recurringBookings.id, id)).returning();
+    return updated || undefined;
+  }
+
+  async deleteRecurringBooking(id: string): Promise<boolean> {
+    const result = await db.delete(recurringBookings).where(eq(recurringBookings.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async getReferrals(companyId?: string): Promise<Referral[]> {
+    if (companyId) {
+      return db.select().from(referrals).where(eq(referrals.companyId, companyId)).orderBy(desc(referrals.createdAt));
+    }
+    return db.select().from(referrals).orderBy(desc(referrals.createdAt));
+  }
+
+  async getReferral(id: string): Promise<Referral | undefined> {
+    const [referral] = await db.select().from(referrals).where(eq(referrals.id, id));
+    return referral || undefined;
+  }
+
+  async createReferral(referral: InsertReferral): Promise<Referral> {
+    const [created] = await db.insert(referrals).values(referral).returning();
+    return created;
+  }
+
+  async updateReferral(id: string, data: Partial<Referral>): Promise<Referral | undefined> {
+    const [updated] = await db.update(referrals).set(data).where(eq(referrals.id, id)).returning();
+    return updated || undefined;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, useLocation, Redirect } from "wouter";
 import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -24,7 +24,7 @@ import AdminLeads from "@/pages/admin/leads";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
 import ServiceArea from "@/pages/service-area";
-import CityServicePage, { allCityServiceCombinations } from "@/pages/city-service";
+import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/pages/city-service";
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NotFound from "@/pages/not-found";
@@ -92,7 +92,10 @@ function Router() {
         <Route path="/:cityServiceSlug">{(params) => {
           const slug = params.cityServiceSlug || "";
           const validSlugs = new Set(allCityServiceCombinations.map(c => c.slug));
-          return validSlugs.has(slug) ? <CityServicePage /> : <NotFound />;
+          if (validSlugs.has(slug)) return <CityServicePage />;
+          const canonical = slugAliases[slug];
+          if (canonical && validSlugs.has(canonical)) return <Redirect to={`/${canonical}`} />;
+          return <NotFound />;
         }}</Route>
         <Route component={NotFound} />
       </Switch>

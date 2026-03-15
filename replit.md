@@ -55,8 +55,11 @@ The application features a professional design using a slate/blue color palette,
 - **Recurring Plans Section**: Homepage section showcasing weekly/bi-weekly/monthly subscription plans with 10–20% savings. Includes satisfaction guarantee callout.
 - **Expanded Sitemap**: All 9 blog posts, /airbnb-cleaning, /get-started, all city pages, and 25 city+service keyword pages included in sitemap.xml.
 - **Server-Side Meta Injection**: /airbnb-cleaning, /get-started, all service areas, and city+service pages added to SSR meta injection for SEO crawler compatibility.
-- **City+Service Landing Pages**: 25 SEO-optimized pages at URLs like `/house-cleaning-montgomery-al`, `/deep-cleaning-prattville-al` etc. targeting high-traffic local keywords (5 services × 5 cities). Each has unique content, JSON-LD structured data, and internal cross-links.
-- **Navigation Dropdowns**: Desktop nav has hover-triggered dropdowns for "Services" (6 service types) and "Service Areas" (9 cities). Mobile nav has expandable sections.
+- **City+Service Landing Pages**: 31+ SEO-optimized pages at URLs like `/house-cleaning-montgomery-al`, `/deep-cleaning-prattville-al` etc. targeting high-traffic local keywords (6 services × 6 cities including Deatsville). Each has unique content, JSON-LD structured data, and internal cross-links.
+- **SEO Slug Aliases**: Shorthand URLs redirect to canonical pages (e.g. `/move-out-cleaning-prattville` → `/move-in-move-out-cleaning-prattville-al`, `/maid-service-montgomery` → `/house-cleaning-montgomery-al`). Auto-generated for all city+service combos.
+- **Deatsville Service Area**: Full coverage — city+service pages, service area page (`/services/deatsville-al`), nav dropdown, sitemap entries.
+- **CRUD for Cleaners, Recurring Bookings, Referrals**: Full REST API at `/api/crm/cleaners`, `/api/crm/recurring-bookings`, `/api/crm/referrals` with GET/POST/PATCH/DELETE (admin-only).
+- **Navigation Dropdowns**: Desktop nav has hover-triggered dropdowns for "Services" (6 service types) and "Service Areas" (10 cities including Deatsville). Mobile nav has expandable sections.
 - **Brand Positioning**: Hero headline changed to "Self-Maid Cleaning Solutions" with tagline "Montgomery's Most Trusted Cleaning Service Since 2009". Includes city-targeted subheadline.
 - **Blog Article Schema**: BlogPosting JSON-LD with author (Michelle), publisher, datePublished, speakable schema for AI discoverability. Author byline on all blog posts.
 - **Image SEO**: All below-fold images have lazy loading, explicit width/height dimensions, and keyword-rich alt tags.
