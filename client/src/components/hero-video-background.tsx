@@ -11,7 +11,7 @@ interface HeroVideoBackgroundProps {
 export function HeroVideoBackground({
   videoSrc = '/assets/video/clean-home-hero.mp4',
   posterSrc,
-  fallbackImageSrc = '/assets/hero/hero-clean-home.svg',
+  fallbackImageSrc = '/assets/hero/hero-clean-home.png',
   overlayOpacity = 0.6,
   children,
 }: HeroVideoBackgroundProps) {
@@ -50,7 +50,7 @@ export function HeroVideoBackground({
       )}
 
       <div
-        className="absolute inset-0 bg-[#1C2D3A]"
+        className="absolute inset-0 bg-[#1F2A37]"
         style={{ opacity: overlayOpacity }}
         aria-hidden="true"
       />

@@ -8,22 +8,22 @@ const galleryItems = [
     id: 'kitchen',
     title: 'Kitchen Deep Clean',
     subtitle: 'From grease and grime to spotless and shining',
-    beforeImage: '/assets/before-after/before-kitchen-dirty.svg',
-    afterImage: '/assets/before-after/after-kitchen-clean.svg',
+    beforeImage: '/assets/before-after/before-kitchen-dirty.png',
+    afterImage: '/assets/before-after/after-kitchen-clean.png',
   },
   {
     id: 'bathroom',
     title: 'Bathroom Restoration',
     subtitle: 'Professional deep clean — tile, grout, and fixtures',
-    beforeImage: '/assets/before-after/before-bathroom-dirty.svg',
-    afterImage: '/assets/before-after/after-bathroom-clean.svg',
+    beforeImage: '/assets/before-after/before-bathroom-dirty.png',
+    afterImage: '/assets/before-after/after-bathroom-clean.png',
   },
   {
     id: 'livingroom',
     title: 'Living Room Revival',
     subtitle: 'Cluttered to clean — organized and refreshed',
-    beforeImage: '/assets/before-after/before-livingroom-messy.svg',
-    afterImage: '/assets/before-after/after-livingroom-clean.svg',
+    beforeImage: '/assets/before-after/before-livingroom-messy.png',
+    afterImage: '/assets/before-after/after-livingroom-clean.png',
   },
 ];
 
@@ -135,7 +135,7 @@ export default function BeforeAfterGallery() {
               </a>
               <Link href="/quote">
                 <Button
-                  className="bg-gradient-to-r from-[#19A974] to-[#0d7a52] hover:from-[#19A974] hover:to-[#19A974] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl h-auto btn-shine"
+                  className="bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl h-auto btn-shine"
                   data-testid="gallery-cta-quote"
                 >
                   Get Your Free Quote

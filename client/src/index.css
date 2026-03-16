@@ -134,10 +134,10 @@
 /* ── Premium Hero ── */
 .premium-hero {
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(25, 169, 116, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(25, 169, 116, 0.05) 0%, transparent 40%),
-    linear-gradient(160deg, #1C2D3A 0%, #152230 25%, #1a3040 50%, #162838 75%, #1C2D3A 100%);
+    radial-gradient(ellipse at 20% 50%, rgba(30, 142, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(198, 169, 105, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(30, 142, 106, 0.05) 0%, transparent 40%),
+    linear-gradient(160deg, #1F2A37 0%, #152230 25%, #1a3040 50%, #162838 75%, #1F2A37 100%);
   min-height: 90vh;
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@
   height: 600px;
   top: -15%;
   left: -8%;
-  background: radial-gradient(circle, rgba(25, 169, 116, 0.15) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(30, 142, 106, 0.15) 0%, transparent 65%);
   animation: heroGlowPulse 8s ease-in-out infinite;
 }
 
@@ -164,7 +164,7 @@
   height: 450px;
   bottom: -8%;
   right: -5%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(198, 169, 105, 0.12) 0%, transparent 65%);
   animation: heroGlowPulse 8s ease-in-out infinite 3s;
 }
 
@@ -174,7 +174,7 @@
   top: 40%;
   left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(25, 169, 116, 0.06) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(30, 142, 106, 0.06) 0%, transparent 60%);
   animation: heroGlowPulse 10s ease-in-out infinite 5s;
 }
 
@@ -187,11 +187,11 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.3) 1px, transparent 1px),
-    radial-gradient(circle at 85% 15%, rgba(25, 169, 116, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 15% 25%, rgba(198, 169, 105, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 85% 15%, rgba(30, 142, 106, 0.25) 1px, transparent 1px),
     radial-gradient(circle at 45% 80%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.2) 1px, transparent 1px),
-    radial-gradient(circle at 25% 70%, rgba(25, 169, 116, 0.15) 1px, transparent 1px);
+    radial-gradient(circle at 70% 60%, rgba(198, 169, 105, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 25% 70%, rgba(30, 142, 106, 0.15) 1px, transparent 1px);
   background-size: 100% 100%;
   pointer-events: none;
   animation: heroParticleFloat 12s ease-in-out infinite;
@@ -204,11 +204,11 @@
 
 .premium-hero-pill {
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(198, 169, 105, 0.3);
 }
 
 .hero-badge-glow {
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 20px rgba(198, 169, 105, 0.1);
 }
 
 .hero-text-shadow {
@@ -216,11 +216,11 @@
 }
 
 .hero-tagline-glow {
-  text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+  text-shadow: 0 0 30px rgba(198, 169, 105, 0.3);
 }
 
 .premium-hero-headline-accent {
-  background: linear-gradient(135deg, #19A974 0%, #2dd4a0 35%, #D4AF37 70%, #f0d060 100%);
+  background: linear-gradient(135deg, #1E8E6A 0%, #2dd4a0 35%, #C6A969 70%, #f0d060 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -234,14 +234,14 @@
 }
 
 .premium-hero-cta {
-  background: linear-gradient(135deg, #19A974 0%, #0d7a52 100%);
+  background: linear-gradient(135deg, #1E8E6A 0%, #166d50 100%);
   color: white;
-  box-shadow: 0 8px 30px rgba(25, 169, 116, 0.35), 0 2px 8px rgba(25, 169, 116, 0.2);
+  box-shadow: 0 8px 30px rgba(30, 142, 106, 0.35), 0 2px 8px rgba(30, 142, 106, 0.2);
   transition: all 0.3s ease;
 }
 
 .premium-hero-cta:hover {
-  box-shadow: 0 14px 45px rgba(25, 169, 116, 0.45), 0 4px 16px rgba(25, 169, 116, 0.3);
+  box-shadow: 0 14px 45px rgba(30, 142, 106, 0.45), 0 4px 16px rgba(30, 142, 106, 0.3);
   transform: translateY(-3px);
 }
 
@@ -254,7 +254,7 @@
   position: absolute;
   inset: -3px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #19A974, #D4AF37);
+  background: linear-gradient(135deg, #1E8E6A, #C6A969);
   opacity: 0;
   z-index: -1;
   animation: ctaPulseRing 3s ease-in-out infinite;
@@ -273,8 +273,8 @@
 
 .premium-hero-cta-ghost:hover {
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+  border-color: rgba(198, 169, 105, 0.4);
+  box-shadow: 0 4px 20px rgba(198, 169, 105, 0.1);
 }
 
 .premium-hero-image-frame {
@@ -290,8 +290,8 @@
 .hero-image-glow {
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(25, 169, 116, 0.15),
-    0 0 80px rgba(25, 169, 116, 0.08);
+    0 0 0 1px rgba(30, 142, 106, 0.15),
+    0 0 80px rgba(30, 142, 106, 0.08);
 }
 
 .premium-hero-image-overlay {
@@ -314,7 +314,7 @@
 }
 
 .hero-badge-glass {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(25, 169, 116, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(30, 142, 106, 0.08);
 }
 
 @keyframes premiumFloat {
@@ -346,13 +346,13 @@
 
 /* ── Trust Bar Gradient ── */
 .trust-bar-gradient {
-  background: linear-gradient(135deg, #1C2D3A 0%, #0d7a52 50%, #1C2D3A 100%);
-  border-top: 1px solid rgba(25, 169, 116, 0.2);
-  border-bottom: 1px solid rgba(25, 169, 116, 0.2);
+  background: linear-gradient(135deg, #1F2A37 0%, #166d50 50%, #1F2A37 100%);
+  border-top: 1px solid rgba(30, 142, 106, 0.2);
+  border-bottom: 1px solid rgba(30, 142, 106, 0.2);
 }
 
 .trust-bar-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.06) 25%, rgba(25, 169, 116, 0.08) 50%, rgba(212, 175, 55, 0.06) 75%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(198, 169, 105, 0.06) 25%, rgba(30, 142, 106, 0.08) 50%, rgba(198, 169, 105, 0.06) 75%, transparent 100%);
   background-size: 200% 100%;
   animation: trustShimmer 8s linear infinite;
 }
@@ -413,13 +413,13 @@
 }
 
 .premium-button {
-  background: linear-gradient(135deg, #1C2D3A 0%, #2a4256 100%);
+  background: linear-gradient(135deg, #1F2A37 0%, #2a4256 100%);
   box-shadow: 0 4px 6px -1px rgba(28, 45, 58, 0.3), 0 2px 4px -2px rgba(28, 45, 58, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .premium-button:hover {
-  background: linear-gradient(135deg, #2a4256 0%, #1C2D3A 100%);
+  background: linear-gradient(135deg, #2a4256 0%, #1F2A37 100%);
   box-shadow: 0 10px 15px -3px rgba(28, 45, 58, 0.4), 0 4px 6px -4px rgba(28, 45, 58, 0.3);
   transform: translateY(-2px);
 }
@@ -560,20 +560,20 @@ body {
 .section-gradient-blue {
   background: linear-gradient(
     135deg,
-    #f0f7f4 0%,
-    #e6f0ec 30%,
-    #eaf4f8 60%,
-    #f0fdf4 100%
+    #F5F7F9 0%,
+    #edf3f0 30%,
+    #e8f0ed 60%,
+    #F5F7F9 100%
   );
 }
 
 .dark .section-gradient-blue {
   background: linear-gradient(
     135deg,
-    #0f172a 0%,
-    #0c1e3b 40%,
-    #071e30 70%,
-    #0a1f1a 100%
+    #1F2A37 0%,
+    #1a2a30 40%,
+    #162a28 70%,
+    #1F2A37 100%
   );
 }
 
@@ -752,7 +752,7 @@ body {
 }
 
 .nav-book-btn {
-  background: linear-gradient(135deg, #19A974 0%, #0d7a52 100%);
+  background: linear-gradient(135deg, #1E8E6A 0%, #166d50 100%);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -774,7 +774,7 @@ body {
 }
 
 .nav-book-btn:hover {
-  box-shadow: 0 6px 20px rgba(25, 169, 116, 0.35);
+  box-shadow: 0 6px 20px rgba(30, 142, 106, 0.35);
   transform: translateY(-1px);
 }
 
@@ -906,7 +906,7 @@ body {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(36px, 8vw, 52px);
   font-weight: 900;
-  background: linear-gradient(135deg, #1d4ed8 0%, #0891b2 50%, #0f766e 100%);
+  background: linear-gradient(135deg, #1F2A37 0%, #1E8E6A 50%, #166d50 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -921,7 +921,7 @@ body {
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #64748b;
+  color: #1E8E6A;
   white-space: nowrap;
 }
 

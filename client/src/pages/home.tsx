@@ -137,19 +137,19 @@ export default function Home() {
         <TrustBar />
         <BeforeAfterGallery />
         <section className="py-14 lg:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1C2D3A] via-[#1a3848] to-[#1C2D3A]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1F2A37] via-[#1a3848] to-[#1F2A37]" />
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }} />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 relative z-10">
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.1] text-white/80 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                <Star className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
+                <Star className="w-4 h-4 text-[#C6A969] fill-[#C6A969]" />
                 16 Years of Excellence
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif mb-3">
                 Montgomery's Most Trusted{' '}
-                <span className="bg-gradient-to-r from-[#19A974] to-[#D4AF37] bg-clip-text text-transparent">Cleaning Team</span>
+                <span className="bg-gradient-to-r from-[#1E8E6A] to-[#C6A969] bg-clip-text text-transparent">Cleaning Team</span>
               </h2>
               <p className="text-white/60 text-lg max-w-xl mx-auto">
                 Spotless results across Prattville, Montgomery, Millbrook & beyond
@@ -157,9 +157,9 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
               {[
-                { num: '500+', label: 'Happy Families', accent: '#19A974' },
-                { num: '16', label: 'Years in Business', accent: '#D4AF37' },
-                { num: '5.0', label: 'Google Rating', accent: '#19A974' },
+                { num: '500+', label: 'Happy Families', accent: '#1E8E6A' },
+                { num: '16', label: 'Years in Business', accent: '#C6A969' },
+                { num: '5.0', label: 'Google Rating', accent: '#1E8E6A' },
               ].map(stat => (
                 <div key={stat.label} className="text-center bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 hover:bg-white/[0.08] transition-all duration-300">
                   <div className="text-4xl lg:text-5xl font-extrabold mb-1" style={{ color: stat.accent }}>{stat.num}</div>
@@ -170,7 +170,7 @@ export default function Home() {
             <div className="text-center">
               <button
                 onClick={() => setIsMobileBookingOpen(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#19A974] to-[#0d7a52] hover:from-[#19A974] hover:to-[#19A974] text-white px-10 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-10 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
               >
                 <CalendarCheck className="w-5 h-5" />
                 Get Your Free Quote
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="flex gap-2">
             <button
               onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#19A974] to-[#0d7a52] text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-emerald-500/20"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-emerald-500/20"
             >
               <CalendarCheck className="w-4 h-4" />
               Book Online

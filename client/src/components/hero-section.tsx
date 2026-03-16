@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone, ArrowRight, Sparkles, Shield, Star, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import logoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
+import { Animated3DLogo } from './animated-3d-logo';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -20,7 +20,7 @@ export function HeroSection() {
 
             <div className="text-center lg:text-left order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full premium-hero-pill mb-6 hero-badge-glow">
-                <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                <Sparkles className="w-4 h-4 text-[#C6A969]" />
                 <span className="text-sm font-semibold tracking-wide text-white/90">Bringing the Shine Since 2009</span>
               </div>
 
@@ -33,8 +33,8 @@ export function HeroSection() {
                 Professional residential cleaning in Prattville, Montgomery, Millbrook & surrounding areas.
               </p>
 
-              <p className="text-base text-[#D4AF37] font-semibold tracking-wider mb-8 hero-tagline-glow">
-                Your Mess is Our Magic
+              <p className="text-base text-[#C6A969] font-semibold tracking-wider mb-8 hero-tagline-glow">
+                Your Cleaning Superhero.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
@@ -58,9 +58,9 @@ export function HeroSection() {
 
               <div className="flex flex-wrap gap-5 justify-center lg:justify-start">
                 {[
-                  { icon: Shield, label: 'Fully Insured', color: 'text-[#19A974]' },
-                  { icon: Star, label: '5-Star Rated', color: 'text-[#D4AF37] fill-[#D4AF37]' },
-                  { icon: Clock, label: 'Same-Day Available', color: 'text-[#19A974]' },
+                  { icon: Shield, label: 'Fully Insured', color: 'text-[#1E8E6A]' },
+                  { icon: Star, label: '5-Star Rated', color: 'text-[#C6A969] fill-[#C6A969]' },
+                  { icon: Clock, label: 'Same-Day Available', color: 'text-[#1E8E6A]' },
                 ].map(item => (
                   <div key={item.label} className="flex items-center gap-2 bg-white/[0.06] px-3.5 py-2 rounded-full border border-white/[0.08]">
                     <item.icon className={`w-4 h-4 ${item.color}`} />
@@ -71,51 +71,33 @@ export function HeroSection() {
             </div>
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <div className="relative premium-hero-visual">
-                <div className="premium-hero-image-frame hero-image-glow">
-                  <img
-                    src="/assets/hero/hero-clean-home.svg"
-                    alt="Beautiful clean modern home interior — Self-Maid Cleaning Solutions"
-                    className="w-full h-full object-cover"
-                    width={640}
-                    height={400}
-                  />
-                  <div className="premium-hero-image-overlay" />
-                </div>
+              <div className="relative">
+                <Animated3DLogo size={280} variant="dark" />
 
-                <div className="absolute -bottom-4 -left-4 md:-left-8 z-20 premium-hero-float">
+                <div className="absolute -bottom-6 -left-6 md:-left-10 z-20 premium-hero-float">
                   <div className="premium-hero-badge hero-badge-glass">
-                    <div className="w-9 h-9 bg-gradient-to-br from-[#19A974] to-[#0d7a52] rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <div className="w-9 h-9 bg-gradient-to-br from-[#1E8E6A] to-[#166d50] rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
                       <Star className="w-4 h-4 text-white fill-white" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-[#1C2D3A]">5.0 Rating</div>
+                      <div className="text-xs font-bold text-[#1F2A37]">5.0 Rating</div>
                       <div className="flex gap-0.5 mt-0.5">
-                        {[1,2,3,4,5].map(i => <Star key={i} className="w-2.5 h-2.5 text-[#D4AF37] fill-[#D4AF37]" />)}
+                        {[1,2,3,4,5].map(i => <Star key={i} className="w-2.5 h-2.5 text-[#C6A969] fill-[#C6A969]" />)}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="absolute -top-4 -right-4 md:-right-8 z-20 premium-hero-float-delayed">
+                <div className="absolute -top-6 -right-6 md:-right-10 z-20 premium-hero-float-delayed">
                   <div className="premium-hero-badge hero-badge-glass">
-                    <div className="w-9 h-9 bg-gradient-to-br from-[#19A974] to-[#0d7a52] rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <div className="w-9 h-9 bg-gradient-to-br from-[#1E8E6A] to-[#166d50] rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
                       <Shield className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-[#1C2D3A]">100% Insured</div>
-                      <div className="text-[10px] text-[#1C2D3A]/50">Peace of Mind</div>
+                      <div className="text-xs font-bold text-[#1F2A37]">100% Insured</div>
+                      <div className="text-[10px] text-[#1F2A37]/50">Peace of Mind</div>
                     </div>
                   </div>
-                </div>
-
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
-                  <img
-                    src={logoImage}
-                    alt=""
-                    className="w-20 h-20 object-contain opacity-15 drop-shadow-lg"
-                    aria-hidden="true"
-                  />
                 </div>
               </div>
             </div>

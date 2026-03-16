@@ -1,0 +1,223 @@
+Redesign the Self‑Maid Cleaning Solutions website to create a memorable, premium brand experience using the sponge superhero mascot.
+
+The brand should feel:
+
+confident
+fresh
+top‑notch
+luxury home service
+memorable
+
+Avoid making the site look childish or overly cartoonish.
+
+The sponge mascot should be used as a brand character, not the entire design.
+
+------------------------------------------------
+
+BUSINESS
+
+Self‑Maid Cleaning Solutions
+
+Tagline:
+Bringing the Shine Since 2009
+
+Primary Headline:
+Relax, We Do the Dirty Work.
+
+Optional Supporting Line:
+Your Cleaning Superhero.
+
+Website:
+selfmaidllc.com
+
+------------------------------------------------
+
+BRAND COLORS
+
+Primary:
+Deep Navy #1F2A37
+
+Secondary:
+Emerald Green #1E8E6A
+
+Accent:
+Champagne Gold #C6A969
+
+Background:
+Soft Clean White #F5F7F9
+
+Avoid bright comic colors for backgrounds.
+
+Use the sponge mascot colors only for the character.
+
+------------------------------------------------
+
+LOGO SYSTEM
+
+Create a clean logo layout:
+
+[Mascot]  Self‑Maid
+          Cleaning Solutions
+
+Do NOT use comic explosions or starburst graphics in the logo.
+
+Use modern professional typography.
+
+------------------------------------------------
+
+HOMEPAGE HERO SECTION
+
+Create a strong hero section with:
+
+Large luxury home background image
+
+Example imagery:
+
+bright modern kitchen
+sunlight through windows
+spotless countertops
+beautiful clean interior
+
+Overlay text:
+
+SELF‑MAID CLEANING SOLUTIONS
+Bringing the Shine Since 2009
+
+Relax, We Do the Dirty Work.
+
+Buttons:
+
+Get Instant Quote
+Book Cleaning
+
+Place the sponge mascot beside the call‑to‑action area.
+
+------------------------------------------------
+
+TRUST SECTION
+
+Add a trust bar under the hero.
+
+Licensed & Insured
+Background Checked Cleaners
+5‑Star Customer Reviews
+Serving Prattville Since 2009
+
+Use simple icons.
+
+------------------------------------------------
+
+BEFORE / AFTER SECTION
+
+Add a visual transformation gallery.
+
+Show real cleaning transformations.
+
+Examples:
+
+Dirty kitchen → spotless kitchen
+Messy bathroom → sparkling bathroom
+Cluttered living room → organized clean space
+
+Use slider or side‑by‑side comparison.
+
+------------------------------------------------
+
+SERVICES SECTION
+
+Create large visual cards for:
+
+Recurring Cleaning
+Deep Cleaning
+Move‑Out Cleaning
+Airbnb Cleaning
+
+Each card must include:
+
+image
+short description
+book button
+
+------------------------------------------------
+
+QUOTE CALCULATOR
+
+Place the instant quote calculator prominently.
+
+Headline:
+
+Your Exact Cleaning Price in Seconds
+
+Inputs:
+
+Bedrooms
+Bathrooms
+Square footage
+Pets
+
+Button:
+
+Get My Instant Quote
+
+------------------------------------------------
+
+MASCOT USAGE
+
+Use the sponge superhero mascot in these places:
+
+hero section
+quote calculator area
+call‑to‑action sections
+footer
+
+Do NOT repeat the mascot everywhere.
+
+Use it as a friendly guide for the user.
+
+Example speech bubble:
+
+"Let's make your home sparkle."
+
+------------------------------------------------
+
+CUSTOMER REVIEWS
+
+Add testimonial cards with star ratings and quotes.
+
+------------------------------------------------
+
+SERVICE AREA
+
+Add a section listing service areas:
+
+Prattville
+Montgomery
+Millbrook
+Deatsville
+
+Include small map.
+
+------------------------------------------------
+
+DESIGN STYLE
+
+The final website should feel:
+
+modern
+professional
+memorable
+visually rich
+
+Every section should contain imagery so the site never feels empty.
+
+------------------------------------------------
+
+OUTPUT
+
+Provide:
+
+updated homepage layout
+components updated
+image placeholders
+styling improvements
+mascot integration

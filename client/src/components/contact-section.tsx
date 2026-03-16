@@ -274,7 +274,7 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-[#19A974] to-[#0d7a52] hover:from-[#19A974] hover:to-[#19A974] text-white font-bold py-6 rounded-xl text-lg shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group btn-shine" 
+                      className="w-full bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white font-bold py-6 rounded-xl text-lg shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group btn-shine" 
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >

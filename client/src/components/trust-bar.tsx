@@ -1,11 +1,10 @@
 import { Shield, Star, Clock, Award, CheckCircle } from 'lucide-react';
 
 const signals = [
-  { icon: Star, label: '500+ Five-Star Reviews', color: 'text-amber-300' },
-  { icon: Award, label: '16 Years Experience', color: 'text-emerald-300' },
-  { icon: Shield, label: 'Fully Insured & Bonded', color: 'text-sky-300' },
-  { icon: Clock, label: 'Same-Day Available', color: 'text-amber-300' },
-  { icon: CheckCircle, label: '100% Satisfaction Guarantee', color: 'text-emerald-300' },
+  { icon: Shield, label: 'Licensed & Insured', color: 'text-emerald-300' },
+  { icon: CheckCircle, label: 'Background Checked Cleaners', color: 'text-amber-200' },
+  { icon: Star, label: '5-Star Customer Reviews', color: 'text-amber-300' },
+  { icon: Award, label: 'Serving Prattville Since 2009', color: 'text-emerald-300' },
 ];
 
 export function TrustBar() {
