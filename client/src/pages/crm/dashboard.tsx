@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { crmApi } from "@/lib/crm-api";
 import { format } from "date-fns";
 import { Link } from "wouter";
-import { ArrowRight, Clock, UserPlus, MessageSquare, Mail, Tag, TrendingUp, Calculator } from "lucide-react";
+import { ArrowRight, ArrowDown, Clock, UserPlus, MessageSquare, Mail, Tag, TrendingUp, Calculator, CheckCircle2, Percent } from "lucide-react";
 
 export default function CrmDashboard() {
   const { data: stats, isLoading } = useQuery({
@@ -121,48 +121,125 @@ export default function CrmDashboard() {
 
         {followUpStats && (
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base font-semibold">Follow-Up Automation</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div className="bg-cyan-50 rounded-lg p-4 text-center">
-                  <Calculator className="h-5 w-5 text-cyan-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-cyan-700">{followUpStats.totalQuoteLeads}</p>
-                  <p className="text-xs text-gray-500">Quotes Sent</p>
-                </div>
-                <div className="bg-yellow-50 rounded-lg p-4 text-center">
-                  <Clock className="h-5 w-5 text-yellow-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-yellow-700">{followUpStats.pendingFollowUps}</p>
-                  <p className="text-xs text-gray-500">Pending Follow-Ups</p>
-                </div>
-                <div className="bg-blue-50 rounded-lg p-4 text-center">
-                  <MessageSquare className="h-5 w-5 text-blue-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-blue-700">{followUpStats.smsReminders}</p>
-                  <p className="text-xs text-gray-500">SMS Reminders</p>
-                </div>
-                <div className="bg-purple-50 rounded-lg p-4 text-center">
-                  <Mail className="h-5 w-5 text-purple-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-purple-700">{followUpStats.emailReminders}</p>
-                  <p className="text-xs text-gray-500">Email Reminders</p>
-                </div>
-                <div className="bg-red-50 rounded-lg p-4 text-center">
-                  <Tag className="h-5 w-5 text-red-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-red-700">{followUpStats.discountOffers}</p>
-                  <p className="text-xs text-gray-500">Discount Offers</p>
-                </div>
-                <div className="bg-green-50 rounded-lg p-4 text-center">
-                  <TrendingUp className="h-5 w-5 text-green-600 mx-auto mb-1" />
-                  <p className="text-2xl font-bold text-green-700">{followUpStats.convertedFromFollowUp}</p>
-                  <p className="text-xs text-gray-500">Bookings from Follow-Ups</p>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base font-semibold">Follow-Up Automation Pipeline</CardTitle>
+                <div className="flex items-center gap-1.5 text-xs text-green-600 bg-green-50 px-2.5 py-1 rounded-full">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  Live
                 </div>
               </div>
-              <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">
-                <div className="flex items-center gap-1">
-                  <span className="inline-block w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  Auto-running
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="flex flex-col lg:flex-row items-stretch gap-0">
+                <div className="flex-1 relative">
+                  <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 border-2 border-cyan-200 rounded-xl p-5 text-center h-full flex flex-col justify-center">
+                    <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2 shadow-sm border border-cyan-200">
+                      <Calculator className="h-5 w-5 text-cyan-600" />
+                    </div>
+                    <p className="text-3xl font-bold text-cyan-700">{followUpStats.totalQuoteLeads}</p>
+                    <p className="text-xs font-medium text-cyan-600 mt-1">Quotes Created</p>
+                    <p className="text-[10px] text-cyan-500 mt-0.5">Immediately</p>
+                  </div>
                 </div>
-                <span>10min SMS → 24hr Email → 3-day Discount</span>
+
+                <div className="flex items-center justify-center lg:px-1 py-2 lg:py-0">
+                  <ArrowDown className="h-5 w-5 text-gray-300 lg:hidden" />
+                  <ArrowRight className="h-5 w-5 text-gray-300 hidden lg:block" />
+                </div>
+
+                <div className="flex-1 relative">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-5 text-center h-full flex flex-col justify-center">
+                    <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2 shadow-sm border border-blue-200">
+                      <MessageSquare className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <p className="text-3xl font-bold text-blue-700">{followUpStats.smsReminders}</p>
+                    <p className="text-xs font-medium text-blue-600 mt-1">SMS Sent</p>
+                    <p className="text-[10px] text-blue-500 mt-0.5">After 10 min</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center lg:px-1 py-2 lg:py-0">
+                  <ArrowDown className="h-5 w-5 text-gray-300 lg:hidden" />
+                  <ArrowRight className="h-5 w-5 text-gray-300 hidden lg:block" />
+                </div>
+
+                <div className="flex-1 relative">
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-xl p-5 text-center h-full flex flex-col justify-center">
+                    <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2 shadow-sm border border-purple-200">
+                      <Mail className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <p className="text-3xl font-bold text-purple-700">{followUpStats.emailReminders}</p>
+                    <p className="text-xs font-medium text-purple-600 mt-1">Email Reminders</p>
+                    <p className="text-[10px] text-purple-500 mt-0.5">After 24 hours</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center lg:px-1 py-2 lg:py-0">
+                  <ArrowDown className="h-5 w-5 text-gray-300 lg:hidden" />
+                  <ArrowRight className="h-5 w-5 text-gray-300 hidden lg:block" />
+                </div>
+
+                <div className="flex-1 relative">
+                  <div className="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200 rounded-xl p-5 text-center h-full flex flex-col justify-center">
+                    <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2 shadow-sm border border-red-200">
+                      <Tag className="h-5 w-5 text-red-600" />
+                    </div>
+                    <p className="text-3xl font-bold text-red-700">{followUpStats.discountOffers}</p>
+                    <p className="text-xs font-medium text-red-600 mt-1">15% Discount Offers</p>
+                    <p className="text-[10px] text-red-500 mt-0.5">After 3 days</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center lg:px-1 py-2 lg:py-0">
+                  <ArrowDown className="h-5 w-5 text-gray-300 lg:hidden" />
+                  <ArrowRight className="h-5 w-5 text-gray-300 hidden lg:block" />
+                </div>
+
+                <div className="flex-1 relative">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-300 rounded-xl p-5 text-center h-full flex flex-col justify-center">
+                    <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2 shadow-sm border border-green-300">
+                      <CheckCircle2 className="h-5 w-5 text-green-600" />
+                    </div>
+                    <p className="text-3xl font-bold text-green-700">{followUpStats.convertedFromFollowUp}</p>
+                    <p className="text-xs font-medium text-green-600 mt-1">Booked</p>
+                    <p className="text-[10px] text-green-500 mt-0.5">Converted</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 pt-2 border-t">
+                <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                  <div className="bg-yellow-100 rounded-full p-2">
+                    <Clock className="h-4 w-4 text-yellow-600" />
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-gray-900">{followUpStats.pendingFollowUps}</p>
+                    <p className="text-xs text-gray-500">In Progress</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                  <div className="bg-green-100 rounded-full p-2">
+                    <TrendingUp className="h-4 w-4 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-gray-900">{followUpStats.completedFollowUps}</p>
+                    <p className="text-xs text-gray-500">Sequences Done</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                  <div className="bg-emerald-100 rounded-full p-2">
+                    <Percent className="h-4 w-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-gray-900">
+                      {followUpStats.totalQuoteLeads > 0
+                        ? Math.round((followUpStats.convertedFromFollowUp / followUpStats.totalQuoteLeads) * 100)
+                        : 0}%
+                    </p>
+                    <p className="text-xs text-gray-500">Conversion Rate</p>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
