@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import mascotImg from '@assets/sponge-hero-full-body.png';
+import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773603022797.png';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
