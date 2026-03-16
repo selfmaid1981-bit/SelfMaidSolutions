@@ -237,11 +237,11 @@ Would it be helpful if I sent you our services sheet to keep on hand for clients
           </TabsList>
 
           <TabsContent value="property-managers" className="space-y-4">
-            <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg mb-6">
-              <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+            <div className="bg-emerald-50 dark:bg-blue-950 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-2">
                 Property Manager Outreach Strategy
               </h3>
-              <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+              <ul className="text-sm text-emerald-800 dark:text-emerald-200 space-y-1">
                 <li>• Day 1: Send initial LinkedIn message or email</li>
                 <li>• Day 3: Follow-up #1 with social proof</li>
                 <li>• Day 7: Follow-up #2 with value add</li>

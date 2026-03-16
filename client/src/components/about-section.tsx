@@ -58,8 +58,8 @@ export function AboutSection() {
                 className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700" 
                 data-testid={`feature-${index}`}
               >
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-lg flex items-center justify-center mb-4">
+                  <Icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                 </div>
                 <h4 className="font-bold text-lg text-slate-900 dark:text-white mb-2">{feature.title}</h4>
                 <p className="text-slate-600 dark:text-slate-400">{feature.description}</p>
@@ -97,7 +97,7 @@ export function AboutSection() {
         <div className="text-center mt-12">
           <a 
             href="tel:334-877-9513" 
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             data-testid="about-call-button"
           >
             Call (334) 877-9513 for a Free Quote

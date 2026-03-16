@@ -220,13 +220,13 @@ export default function Services() {
                   Cleaning<br />
                   Services
                 </h1>
-                <p className="text-lg sm:text-xl text-blue-100/80 mb-8 max-w-md">
+                <p className="text-lg sm:text-xl text-emerald-100/80 mb-8 max-w-md">
                   Residential & Commercial Cleaning in Montgomery, Prattville, Selma, Homewood & Clanton, AL
                 </p>
                 <div>
                   <a 
                     href="/quote" 
-                    className="inline-flex items-center bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200"
+                    className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200"
                     data-testid="hero-get-quote-btn"
                   >
                     Get a Quote

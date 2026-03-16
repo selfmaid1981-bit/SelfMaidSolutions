@@ -7,7 +7,7 @@ const steps = [
     icon: ClipboardList,
     title: 'Get Your Free Quote',
     description: 'Use our instant calculator or call us. Takes 60 seconds, no obligation.',
-    color: 'from-blue-500 to-blue-600',
+    color: 'from-emerald-500 to-emerald-600',
     detail: '60 seconds',
   },
   {
@@ -32,7 +32,7 @@ export function HowItWorks() {
   return (
     <>
       <section className="py-10 lg:py-14 bg-white dark:bg-slate-950 relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-200 dark:via-blue-900/50 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200 dark:via-emerald-900/50 to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10">
@@ -72,12 +72,12 @@ export function HowItWorks() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={() => setIsBookingModalOpen(true)}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
             >
               <CalendarCheck className="w-5 h-5" />
               Book Now — It's Free to Start
             </button>
-            <a href="/quote" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">
+            <a href="/quote" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline text-sm">
               Or get an instant quote →
             </a>
           </div>

@@ -10,16 +10,16 @@ function BusinessCard() {
     <div className="print-container" id="business-card">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div 
-          className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white p-6 rounded-lg shadow-xl w-[350px] h-[200px] flex flex-col justify-between"
+          className="bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 text-white p-6 rounded-lg shadow-xl w-[350px] h-[200px] flex flex-col justify-between"
           data-testid="business-card-front"
         >
           <div>
             <h3 className="text-2xl font-bold tracking-tight">Self-Maid</h3>
-            <p className="text-blue-200 text-sm">Cleaning Solutions LLC</p>
+            <p className="text-emerald-200 text-sm">Cleaning Solutions LLC</p>
           </div>
           <div className="space-y-1">
             <p className="text-lg font-semibold">Professional Cleaning Services</p>
-            <p className="text-blue-200 text-sm">Residential • Commercial • Airbnb • Move-In/Out</p>
+            <p className="text-emerald-200 text-sm">Residential • Commercial • Airbnb • Move-In/Out</p>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1">
@@ -34,29 +34,29 @@ function BusinessCard() {
         </div>
         
         <div 
-          className="bg-white border-2 border-blue-600 p-6 rounded-lg shadow-xl w-[350px] h-[200px] flex flex-col justify-between"
+          className="bg-white border-2 border-emerald-600 p-6 rounded-lg shadow-xl w-[350px] h-[200px] flex flex-col justify-between"
           data-testid="business-card-back"
         >
           <div className="space-y-2 text-gray-700">
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-blue-600" />
+              <Phone className="w-4 h-4 text-emerald-600" />
               <span className="font-semibold">(334) 877-9513</span>
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-blue-600" />
+              <Mail className="w-4 h-4 text-emerald-600" />
               <span>selfmaidclean@outlook.com</span>
             </div>
             <div className="flex items-center gap-2">
-              <Globe className="w-4 h-4 text-blue-600" />
+              <Globe className="w-4 h-4 text-emerald-600" />
               <span className="font-semibold">selfmaidllc.com</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-blue-600" />
+              <MapPin className="w-4 h-4 text-emerald-600" />
               <span className="text-sm">Montgomery, Prattville, Selma & Central AL</span>
             </div>
           </div>
           <div className="text-center">
-            <p className="text-blue-600 font-bold text-lg">$20 OFF First Cleaning!</p>
+            <p className="text-emerald-600 font-bold text-lg">$20 OFF First Cleaning!</p>
             <p className="text-xs text-gray-500">New customers only. Mention this card.</p>
           </div>
         </div>
@@ -68,14 +68,14 @@ function BusinessCard() {
 function Flyer() {
   return (
     <div 
-      className="bg-white border-4 border-blue-600 rounded-lg shadow-2xl p-8 max-w-[600px] mx-auto"
+      className="bg-white border-4 border-emerald-600 rounded-lg shadow-2xl p-8 max-w-[600px] mx-auto"
       id="flyer"
       data-testid="flyer-design"
     >
       <div className="text-center mb-6">
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 px-6 rounded-lg mb-4">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-800 text-white py-4 px-6 rounded-lg mb-4">
           <h2 className="text-3xl font-bold">Self-Maid Cleaning Solutions</h2>
-          <p className="text-blue-200">Professional Cleaning You Can Trust</p>
+          <p className="text-emerald-200">Professional Cleaning You Can Trust</p>
         </div>
         
         <div className="bg-green-500 text-white py-3 px-4 rounded-lg inline-block mb-4">
@@ -85,8 +85,8 @@ function Flyer() {
       </div>
       
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-bold text-blue-800 mb-2">Our Services</h4>
+        <div className="bg-emerald-50 p-4 rounded-lg">
+          <h4 className="font-bold text-emerald-800 mb-2">Our Services</h4>
           <ul className="text-sm space-y-1 text-gray-700">
             <li className="flex items-center gap-1"><Check className="w-3 h-3 text-green-600" /> House Cleaning</li>
             <li className="flex items-center gap-1"><Check className="w-3 h-3 text-green-600" /> Deep Cleaning</li>
@@ -96,12 +96,12 @@ function Flyer() {
             <li className="flex items-center gap-1"><Check className="w-3 h-3 text-green-600" /> Construction Cleanup</li>
           </ul>
         </div>
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-bold text-blue-800 mb-2">Why Choose Us?</h4>
+        <div className="bg-emerald-50 p-4 rounded-lg">
+          <h4 className="font-bold text-emerald-800 mb-2">Why Choose Us?</h4>
           <ul className="text-sm space-y-1 text-gray-700">
             <li className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-500" /> 5-Star Google Rating</li>
-            <li className="flex items-center gap-1"><Shield className="w-3 h-3 text-blue-600" /> Fully Insured & Bonded</li>
-            <li className="flex items-center gap-1"><Clock className="w-3 h-3 text-blue-600" /> 16 Years Experience</li>
+            <li className="flex items-center gap-1"><Shield className="w-3 h-3 text-emerald-600" /> Fully Insured & Bonded</li>
+            <li className="flex items-center gap-1"><Clock className="w-3 h-3 text-emerald-600" /> 16 Years Experience</li>
             <li className="flex items-center gap-1"><Sparkles className="w-3 h-3 text-purple-600" /> Eco-Friendly Products</li>
             <li className="flex items-center gap-1"><Check className="w-3 h-3 text-green-600" /> Background Checked</li>
             <li className="flex items-center gap-1"><Check className="w-3 h-3 text-green-600" /> 100% Satisfaction</li>
@@ -113,15 +113,15 @@ function Flyer() {
         <h4 className="font-bold text-center text-gray-800 mb-3">Recurring Customer Discounts</h4>
         <div className="flex justify-center gap-4 text-sm">
           <div className="bg-white px-3 py-2 rounded shadow text-center">
-            <p className="font-bold text-blue-600">Weekly</p>
+            <p className="font-bold text-emerald-600">Weekly</p>
             <p className="text-lg font-bold text-green-600">15% OFF</p>
           </div>
           <div className="bg-white px-3 py-2 rounded shadow text-center">
-            <p className="font-bold text-blue-600">Bi-Weekly</p>
+            <p className="font-bold text-emerald-600">Bi-Weekly</p>
             <p className="text-lg font-bold text-green-600">10% OFF</p>
           </div>
           <div className="bg-white px-3 py-2 rounded shadow text-center">
-            <p className="font-bold text-blue-600">Monthly</p>
+            <p className="font-bold text-emerald-600">Monthly</p>
             <p className="text-lg font-bold text-green-600">5% OFF</p>
           </div>
         </div>
@@ -130,11 +130,11 @@ function Flyer() {
       <div className="text-center space-y-2">
         <div className="flex justify-center items-center gap-6">
           <div className="flex items-center gap-2">
-            <Phone className="w-5 h-5 text-blue-600" />
+            <Phone className="w-5 h-5 text-emerald-600" />
             <span className="font-bold text-xl">(334) 877-9513</span>
           </div>
         </div>
-        <p className="text-blue-600 font-semibold">selfmaidllc.com</p>
+        <p className="text-emerald-600 font-semibold">selfmaidllc.com</p>
         <p className="text-sm text-gray-600">Serving Montgomery, Prattville, Selma, Homewood, Clanton & Surrounding Areas</p>
       </div>
     </div>
@@ -144,26 +144,26 @@ function Flyer() {
 function DoorHanger() {
   return (
     <div 
-      className="bg-gradient-to-b from-blue-600 to-blue-800 text-white rounded-lg shadow-2xl p-6 max-w-[280px] mx-auto min-h-[500px] flex flex-col"
+      className="bg-gradient-to-b from-emerald-600 to-emerald-800 text-white rounded-lg shadow-2xl p-6 max-w-[280px] mx-auto min-h-[500px] flex flex-col"
       id="door-hanger"
       data-testid="door-hanger-design"
     >
-      <div className="text-center border-b-2 border-blue-400 pb-4 mb-4">
+      <div className="text-center border-b-2 border-emerald-400 pb-4 mb-4">
         <div className="w-16 h-16 bg-white rounded-full mx-auto mb-2 flex items-center justify-center">
-          <Sparkles className="w-8 h-8 text-blue-600" />
+          <Sparkles className="w-8 h-8 text-emerald-600" />
         </div>
         <h3 className="text-xl font-bold">Self-Maid</h3>
-        <p className="text-blue-200 text-sm">Cleaning Solutions</p>
+        <p className="text-emerald-200 text-sm">Cleaning Solutions</p>
       </div>
       
-      <div className="bg-yellow-400 text-blue-900 py-3 px-4 rounded-lg text-center mb-4">
+      <div className="bg-yellow-400 text-emerald-900 py-3 px-4 rounded-lg text-center mb-4">
         <p className="text-sm font-semibold">NEW NEIGHBOR SPECIAL</p>
         <p className="text-2xl font-bold">$20 OFF</p>
         <p className="text-xs">Your First Cleaning</p>
       </div>
       
       <div className="flex-1 space-y-3 mb-4">
-        <p className="text-center text-sm text-blue-200">Professional cleaning services for:</p>
+        <p className="text-center text-sm text-emerald-200">Professional cleaning services for:</p>
         <ul className="text-sm space-y-2">
           <li className="flex items-center gap-2"><Check className="w-4 h-4 text-green-400" /> Homes & Apartments</li>
           <li className="flex items-center gap-2"><Check className="w-4 h-4 text-green-400" /> Offices & Businesses</li>
@@ -181,13 +181,13 @@ function DoorHanger() {
             <p className="text-xs">Insured</p>
           </div>
           <div className="text-center">
-            <Clock className="w-5 h-5 text-blue-300 mx-auto" />
+            <Clock className="w-5 h-5 text-emerald-300 mx-auto" />
             <p className="text-xs">16 Years</p>
           </div>
         </div>
       </div>
       
-      <div className="bg-white text-blue-800 rounded-lg p-3 text-center">
+      <div className="bg-white text-emerald-800 rounded-lg p-3 text-center">
         <p className="font-bold text-lg">(334) 877-9513</p>
         <p className="text-sm">selfmaidllc.com</p>
       </div>
@@ -198,14 +198,14 @@ function DoorHanger() {
 function RackCard() {
   return (
     <div 
-      className="bg-white border-2 border-blue-600 rounded-lg shadow-2xl p-6 max-w-[300px] mx-auto min-h-[550px] flex flex-col"
+      className="bg-white border-2 border-emerald-600 rounded-lg shadow-2xl p-6 max-w-[300px] mx-auto min-h-[550px] flex flex-col"
       id="rack-card"
       data-testid="rack-card-design"
     >
       <div className="text-center mb-4">
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-4 rounded-lg">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-800 text-white py-3 px-4 rounded-lg">
           <h3 className="text-xl font-bold">Self-Maid</h3>
-          <p className="text-blue-200 text-xs">Cleaning Solutions LLC</p>
+          <p className="text-emerald-200 text-xs">Cleaning Solutions LLC</p>
         </div>
       </div>
       
@@ -214,8 +214,8 @@ function RackCard() {
       </div>
       
       <div className="space-y-3 flex-1">
-        <div className="bg-blue-50 p-3 rounded">
-          <h4 className="font-bold text-blue-800 text-sm mb-2">Services & Starting Prices</h4>
+        <div className="bg-emerald-50 p-3 rounded">
+          <h4 className="font-bold text-emerald-800 text-sm mb-2">Services & Starting Prices</h4>
           <ul className="text-xs space-y-1 text-gray-700">
             <li className="flex justify-between"><span>House Cleaning</span><span className="font-bold">$120+</span></li>
             <li className="flex justify-between"><span>Deep Cleaning</span><span className="font-bold">$250+</span></li>
@@ -237,11 +237,11 @@ function RackCard() {
             <p className="text-xs text-gray-600">5-Star</p>
           </div>
           <div className="text-center">
-            <Shield className="w-5 h-5 text-blue-600 mx-auto" />
+            <Shield className="w-5 h-5 text-emerald-600 mx-auto" />
             <p className="text-xs text-gray-600">Insured</p>
           </div>
           <div className="text-center">
-            <Clock className="w-5 h-5 text-blue-600 mx-auto" />
+            <Clock className="w-5 h-5 text-emerald-600 mx-auto" />
             <p className="text-xs text-gray-600">16 Yrs</p>
           </div>
         </div>
@@ -249,7 +249,7 @@ function RackCard() {
       
       <div className="border-t pt-3 mt-3">
         <div className="text-center">
-          <p className="font-bold text-blue-600 text-lg">(334) 877-9513</p>
+          <p className="font-bold text-emerald-600 text-lg">(334) 877-9513</p>
           <p className="text-sm text-gray-600">selfmaidllc.com</p>
           <p className="text-xs text-gray-500 mt-1">Montgomery • Prattville • Selma</p>
         </div>

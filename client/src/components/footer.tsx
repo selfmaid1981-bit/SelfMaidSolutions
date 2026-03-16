@@ -2,6 +2,7 @@ import { Link } from 'wouter';
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaGoogle, FaYelp } from 'react-icons/fa';
 import fullLogoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
+import mascotImg from '@assets/CB9B78E1-3011-4CA6-8EFF-BCEC4E145765_1773674858018.png';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -61,8 +62,8 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative text-white overflow-hidden" style={{ background: 'linear-gradient(160deg, #1F2A37 0%, #1a2530 30%, #162028 60%, #1F2A37 100%)' }}>
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1E8E6A] via-[#C6A969] to-[#166d50]" />
+    <footer className="relative text-white overflow-hidden" style={{ background: 'linear-gradient(160deg, #1F2A37 0%, #253545 30%, #1A2E3D 60%, #1F2A37 100%)' }}>
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1E8E6A] via-[#C6A969] to-[#166B50]" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -78,9 +79,17 @@ export function Footer() {
                 height={96}
               />
             </div>
-            <p className="text-slate-400 mb-5 leading-relaxed max-w-sm text-sm">
-              Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
-            </p>
+            <div className="flex items-start gap-3 mb-5">
+              <img
+                src={mascotImg}
+                alt="Self-Maid mascot"
+                className="w-14 h-14 object-contain flex-shrink-0 drop-shadow-md"
+                loading="lazy"
+              />
+              <p className="text-slate-400 leading-relaxed text-sm">
+                Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
+              </p>
+            </div>
             <div className="flex space-x-2.5 mb-5">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
@@ -90,7 +99,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-slate-800/80 hover:bg-gradient-to-br hover:from-[#1E8E6A] hover:to-[#166d50] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 border border-slate-700/50 hover:border-transparent hover:shadow-lg hover:shadow-emerald-500/10 hover:scale-110"
+                    className="w-10 h-10 bg-slate-800/80 hover:bg-gradient-to-br hover:from-[#1E8E6A] hover:to-[#2D3F52] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 border border-slate-700/50 hover:border-transparent hover:shadow-lg hover:shadow-emerald-500/10 hover:scale-110"
                     aria-label={`Visit us on ${social.label}`}
                     data-testid={`social-${social.label.toLowerCase()}`}
                   >

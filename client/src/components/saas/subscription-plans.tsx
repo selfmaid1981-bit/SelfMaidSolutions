@@ -9,7 +9,7 @@ const PLANS = [
     name: "Starter",
     price: 49,
     features: ["CRM Dashboard", "Up to 50 leads/month", "Basic analytics", "Email notifications"],
-    color: "border-blue-200",
+    color: "border-emerald-200",
     popular: false,
   },
   {

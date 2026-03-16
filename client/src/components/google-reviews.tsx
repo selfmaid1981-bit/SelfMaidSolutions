@@ -9,7 +9,7 @@ const reviews = [
     date: "2 weeks ago",
     text: "Self-Maid transformed our home! The team was professional, thorough, and left everything sparkling clean. They even got stains out of our carpet that we thought were permanent. Highly recommend!",
     avatar: "SM",
-    avatarGradient: "from-blue-500 to-indigo-600"
+    avatarGradient: "from-emerald-500 to-indigo-600"
   },
   {
     name: "Michael R.",
@@ -25,7 +25,7 @@ const reviews = [
     date: "3 weeks ago",
     text: "Used Self-Maid for our move-out cleaning and got my full deposit back! They were flexible with scheduling and the price was very fair. Will definitely use again.",
     avatar: "JT",
-    avatarGradient: "from-violet-500 to-purple-600"
+    avatarGradient: "from-violet-500 to-emerald-600"
   },
 ];
 
@@ -33,7 +33,7 @@ export function GoogleReviews() {
   return (
     <section className="py-10 lg:py-14 relative overflow-hidden section-gradient-blue">
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.6) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-300/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-300/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -63,12 +63,12 @@ export function GoogleReviews() {
           {reviews.map((review, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-200/70 dark:border-slate-700/40 bg-white/95 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-200/60 dark:hover:border-blue-700/40"
+              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-200/70 dark:border-slate-700/40 bg-white/95 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:border-emerald-200/60 dark:hover:border-emerald-700/40"
               data-testid={`google-review-${index}`}
             >
               <div className="h-1.5 bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
-                <div className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-blue-400/5 to-teal-400/5 rounded-full group-hover:from-blue-400/10 group-hover:to-teal-400/10 transition-all duration-500 pointer-events-none" />
+                <div className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-emerald-400/5 to-teal-400/5 rounded-full group-hover:from-emerald-400/10 group-hover:to-teal-400/10 transition-all duration-500 pointer-events-none" />
                 <div className="flex items-start gap-3 mb-4 relative">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${review.avatarGradient} flex items-center justify-center font-bold text-white text-sm shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 ring-2 ring-white/50 dark:ring-slate-700/50`}>
                     {review.avatar}
@@ -126,7 +126,7 @@ export function GoogleReviews() {
               href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 border-2 border-[#4285F4] text-[#4285F4] dark:text-blue-400 px-8 py-4 rounded-xl font-bold hover:bg-[#4285F4] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white hover:border-[#4285F4] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 border-2 border-[#4285F4] text-[#4285F4] dark:text-emerald-400 px-8 py-4 rounded-xl font-bold hover:bg-[#4285F4] hover:text-white dark:hover:bg-emerald-600 dark:hover:text-white hover:border-[#4285F4] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
               data-testid="view-all-reviews-button"
             >
               <FaGoogle className="w-5 h-5" />
@@ -135,7 +135,7 @@ export function GoogleReviews() {
             </a>
             <a
               href="/quote"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] text-white px-8 py-4 rounded-xl font-bold hover:from-[#1E8E6A] hover:to-[#1E8E6A] transition-all duration-300 shadow-md shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 btn-shine"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] text-white px-8 py-4 rounded-xl font-bold hover:from-[#1E8E6A] hover:to-[#1E8E6A] transition-all duration-300 shadow-md shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 btn-shine"
             >
               Get Your Free Quote
               <Star className="w-4 h-4 fill-white" />

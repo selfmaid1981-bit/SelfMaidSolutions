@@ -25,7 +25,7 @@ const services: Service[] = [
     price: 'Starting at $80',
     image: '/assets/services/service-residential.png',
     imageAlt: 'Clean modern living room after residential cleaning service',
-    gradient: 'from-emerald-600 to-emerald-500',
+    gradient: 'from-emerald-700 to-emerald-500',
     glowColor: 'hover:shadow-emerald-500/20',
   },
   {
@@ -36,7 +36,7 @@ const services: Service[] = [
     price: 'Starting at $120',
     image: '/assets/services/service-commercial.png',
     imageAlt: 'Clean professional office workspace after commercial cleaning',
-    gradient: 'from-[#1F2A37] to-slate-600',
+    gradient: 'from-[#1F2A37] to-slate-700',
     glowColor: 'hover:shadow-slate-500/20',
   },
   {
@@ -58,8 +58,8 @@ const services: Service[] = [
     price: 'Starting at $150',
     image: '/assets/services/service-moveout.png',
     imageAlt: 'Empty clean apartment ready for move-in after professional cleaning',
-    gradient: 'from-[#C6A969] to-amber-500',
-    glowColor: 'hover:shadow-amber-500/20',
+    gradient: 'from-[#C6A969] to-yellow-400',
+    glowColor: 'hover:shadow-yellow-400/20',
   },
   {
     id: 'deep',
@@ -69,8 +69,8 @@ const services: Service[] = [
     price: 'Starting at $250',
     image: '/assets/services/service-deep-clean.png',
     imageAlt: 'Sparkling clean bathroom after professional deep cleaning service',
-    gradient: 'from-[#1F2A37] to-emerald-700',
-    glowColor: 'hover:shadow-emerald-700/20',
+    gradient: 'from-[#166B50] to-red-900',
+    glowColor: 'hover:shadow-emerald-900/20',
   },
   {
     id: 'dorm',
@@ -178,7 +178,7 @@ export function ServicesSection() {
             </p>
             <a 
               href="tel:334-877-9513" 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#166d50] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] hover:from-[#2D3F52] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
             >
               <Phone className="w-5 h-5" />
               Call (334) 877-9513 for Custom Quote

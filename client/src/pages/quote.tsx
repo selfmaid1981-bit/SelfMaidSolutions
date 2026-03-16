@@ -112,18 +112,18 @@ function CountdownTimer({ seconds, onExpire }: { seconds: number; onExpire: () =
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Timer className={`w-4 h-4 ${isUrgent ? 'text-red-500 animate-pulse' : 'text-orange-500'}`} />
-          <span className={`text-sm font-semibold ${isUrgent ? 'text-red-600' : 'text-orange-600'}`}>
+          <Timer className={`w-4 h-4 ${isUrgent ? 'text-emerald-500 animate-pulse' : 'text-orange-500'}`} />
+          <span className={`text-sm font-semibold ${isUrgent ? 'text-emerald-600' : 'text-orange-600'}`}>
             Offer expires in
           </span>
         </div>
-        <span className={`text-lg font-bold font-mono ${isUrgent ? 'text-red-600' : 'text-orange-700'}`}>
+        <span className={`text-lg font-bold font-mono ${isUrgent ? 'text-emerald-600' : 'text-orange-700'}`}>
           {mins}:{secs.toString().padStart(2, '0')}
         </span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-1.5">
         <div
-          className={`h-1.5 rounded-full transition-all duration-1000 ${isUrgent ? 'bg-red-500' : 'bg-orange-500'}`}
+          className={`h-1.5 rounded-full transition-all duration-1000 ${isUrgent ? 'bg-emerald-500' : 'bg-orange-500'}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -295,7 +295,7 @@ export default function Quote() {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Get Your Free Quote
             </h1>
-            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
               Transparent pricing with no hidden fees. Enter your home details and see your price instantly.
             </p>
           </div>
@@ -306,10 +306,10 @@ export default function Quote() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
-                  <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500" />
+                  <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
                         <Calculator className="w-4 h-4 text-white" />
                       </div>
                       Your Home Details
@@ -335,7 +335,7 @@ export default function Quote() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <Label htmlFor="bedrooms" className="flex items-center gap-1.5">
-                          <BedDouble className="w-4 h-4 text-blue-500" />
+                          <BedDouble className="w-4 h-4 text-emerald-500" />
                           Bedrooms
                         </Label>
                         <Input
@@ -432,7 +432,7 @@ export default function Quote() {
 
               <div className="space-y-6">
                 <Card className="sticky top-24 rounded-2xl shadow-2xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
-                  <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500" />
+                  <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-teal-500" />
@@ -442,16 +442,16 @@ export default function Quote() {
                   <CardContent>
                     {hasInput ? (
                       <div className="space-y-6">
-                        <div className="text-center py-8 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
+                        <div className="text-center py-8 bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
                           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-                          <p className="text-blue-100 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
+                          <p className="text-emerald-100 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
                           {showIncentive && !discountExpired ? (
                             <>
-                              <p className="text-2xl text-blue-200/60 line-through relative z-10">${quote}</p>
+                              <p className="text-2xl text-emerald-200/60 line-through relative z-10">${quote}</p>
                               <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
                                 ${discountedPrice}
                               </p>
-                              <div className="mt-2 inline-flex items-center gap-1.5 bg-red-500/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-bold relative z-10 animate-pulse">
+                              <div className="mt-2 inline-flex items-center gap-1.5 bg-emerald-500/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-bold relative z-10 animate-pulse">
                                 <Zap className="w-3.5 h-3.5" />
                                 You save ${savings}!
                               </div>
@@ -463,7 +463,7 @@ export default function Quote() {
                               </p>
                             </>
                           )}
-                          <p className="text-blue-100/80 text-sm mt-2 relative z-10">
+                          <p className="text-emerald-100/80 text-sm mt-2 relative z-10">
                             {frequency !== 'onetime' ? 'per service' : 'one-time service'}
                           </p>
                           <div className="mt-3 inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-semibold relative z-10">
@@ -518,7 +518,7 @@ export default function Quote() {
                         {showIncentive && !discountExpired && (
                           <div className="rounded-xl border-2 border-orange-400 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 p-4 space-y-3" data-testid="incentive-panel">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-emerald-500 rounded-lg flex items-center justify-center">
                                 <Zap className="w-4 h-4 text-white" />
                               </div>
                               <div>
@@ -578,8 +578,8 @@ export default function Quote() {
                                 size="lg"
                                 className={`w-full text-white font-bold text-lg py-6 shadow-lg transition-all ${
                                   !discountExpired
-                                    ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 animate-pulse hover:animate-none'
-                                    : 'bg-blue-600 hover:bg-blue-700'
+                                    ? 'bg-gradient-to-r from-orange-500 to-emerald-500 hover:from-orange-600 hover:to-emerald-600 animate-pulse hover:animate-none'
+                                    : 'bg-emerald-600 hover:bg-emerald-700'
                                 }`}
                                 data-testid="button-book-with-discount"
                               >
@@ -651,7 +651,7 @@ export default function Quote() {
                                 <Button
                                   onClick={handleBookThisQuote}
                                   disabled={!customerName || !customerEmail}
-                                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                                  className="flex-1 bg-emerald-600 hover:bg-emerald-700"
                                   data-testid="button-book-this-quote"
                                 >
                                   <BookOpen className="w-4 h-4 mr-2" />

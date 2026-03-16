@@ -5,7 +5,7 @@ const trustBadges = [
     icon: Award,
     title: '16 Years',
     subtitle: 'In Business',
-    color: 'text-blue-600 dark:text-blue-400'
+    color: 'text-emerald-600 dark:text-emerald-400'
   },
   {
     icon: Shield,
@@ -35,7 +35,7 @@ const trustBadges = [
     icon: Phone,
     title: '2-Hour',
     subtitle: 'Response Time',
-    color: 'text-red-600 dark:text-red-400'
+    color: 'text-emerald-600 dark:text-emerald-400'
   }
 ];
 
@@ -49,7 +49,7 @@ export default function TrustBadges() {
             return (
               <div 
                 key={index}
-                className="flex flex-col items-center text-center p-4 rounded-lg bg-slate-800/50 dark:bg-slate-900/50 border border-slate-700 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105"
+                className="flex flex-col items-center text-center p-4 rounded-lg bg-slate-800/50 dark:bg-slate-900/50 border border-slate-700 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all duration-300 hover:transform hover:scale-105"
                 data-testid={`trust-badge-${index}`}
               >
                 <div className="mb-2">

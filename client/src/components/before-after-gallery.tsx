@@ -38,7 +38,7 @@ export default function BeforeAfterGallery() {
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <Sparkles className="w-4 h-4" />
             Real Results
           </div>
@@ -63,7 +63,7 @@ export default function BeforeAfterGallery() {
                   height={400}
                 />
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="bg-red-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
+                  <span className="bg-emerald-500/90 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide shadow-lg">
                     Before
                   </span>
                 </div>
@@ -115,7 +115,7 @@ export default function BeforeAfterGallery() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`w-3 h-3 rounded-full transition-all ${i === activeIndex ? 'bg-blue-600 w-8' : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400'}`}
+                className={`w-3 h-3 rounded-full transition-all ${i === activeIndex ? 'bg-emerald-600 w-8' : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400'}`}
                 aria-label={`View image ${i + 1}`}
               />
             ))}
@@ -135,7 +135,7 @@ export default function BeforeAfterGallery() {
               </a>
               <Link href="/quote">
                 <Button
-                  className="bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl h-auto btn-shine"
+                  className="bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl h-auto btn-shine"
                   data-testid="gallery-cta-quote"
                 >
                   Get Your Free Quote

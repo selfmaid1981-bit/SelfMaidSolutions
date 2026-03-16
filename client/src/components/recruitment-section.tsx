@@ -41,7 +41,7 @@ export function RecruitmentSection() {
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-slate-900 dark:to-sky-950">
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-slate-900 dark:to-emerald-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <div>
@@ -57,7 +57,7 @@ export function RecruitmentSection() {
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button 
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl h-auto"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl h-auto"
                   data-testid="recruitment-signup-button"
                 >
                   Apply Now
@@ -65,7 +65,7 @@ export function RecruitmentSection() {
                 
                 <a 
                   href="mailto:selfmaidclean@outlook.com?subject=Career Inquiry - Self-Maid Cleaning"
-                  className="inline-flex items-center justify-center bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center justify-center bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 border-2 border-emerald-600 dark:border-emerald-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 dark:hover:bg-slate-700 transition-colors shadow-lg hover:shadow-xl"
                   data-testid="recruitment-email-button"
                 >
                   Email Us
@@ -74,15 +74,15 @@ export function RecruitmentSection() {
               
               <div className="flex items-center space-x-8 text-slate-600 dark:text-slate-400">
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
                   <span className="font-semibold">Service</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
                   <span className="font-semibold">Reliability</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
                   <span className="font-semibold">Trust</span>
                 </div>
               </div>
@@ -102,8 +102,8 @@ export function RecruitmentSection() {
                     key={index}
                     className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
                   >
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-lg flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <h4 className="font-bold text-lg text-slate-900 dark:text-white mb-2">
                       {benefit.title}

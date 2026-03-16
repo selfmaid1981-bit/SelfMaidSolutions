@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773603022797.png';
+import mascotImg from '@assets/CB9B78E1-3011-4CA6-8EFF-BCEC4E145765_1773674858018.png';
 
 const serviceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
@@ -169,7 +169,7 @@ export function HomepageQuoteCalculator() {
               <span className="text-amber-300">in Seconds</span>
             </h2>
 
-            <p className="text-blue-100/85 text-lg mb-7 leading-relaxed max-w-lg">
+            <p className="text-emerald-100/85 text-lg mb-7 leading-relaxed max-w-lg">
               Enter your home details and see transparent, no-hidden-fee pricing instantly — no phone call needed.
             </p>
 
@@ -219,7 +219,7 @@ export function HomepageQuoteCalculator() {
                   </div>
                   <div>
                     <p className="text-white font-bold text-sm">Quote Calculator</p>
-                    <p className="text-blue-200/70 text-xs">Get your price now</p>
+                    <p className="text-emerald-200/70 text-xs">Get your price now</p>
                   </div>
                   <div className="ml-auto flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 rounded-full px-2.5 py-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -468,7 +468,7 @@ export function HomepageQuoteCalculator() {
                   </div>
                 )}
 
-                <p className="text-center text-blue-200/50 text-xs mt-3">
+                <p className="text-center text-emerald-200/50 text-xs mt-3">
                   Free · Instant · No commitment
                 </p>
               </div>

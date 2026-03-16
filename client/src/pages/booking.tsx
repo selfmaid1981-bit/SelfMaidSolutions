@@ -176,7 +176,7 @@ export default function Booking() {
               <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
                 Schedule Your Cleaning
               </h1>
-              <p className="text-xl text-blue-100/80 max-w-3xl mx-auto mb-6">
+              <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto mb-6">
                 {quoteData ? 'Complete your booking based on your quote' : 'Book a professional cleaning service'}
               </p>
               
@@ -194,9 +194,9 @@ export default function Booking() {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {quoteData && (
-                    <Alert className={quoteData.discountApplied > 0 ? "bg-green-50 border-green-300" : "bg-blue-50 border-blue-200"}>
-                      <CheckCircle className={`h-4 w-4 ${quoteData.discountApplied > 0 ? 'text-green-600' : 'text-blue-600'}`} />
-                      <AlertDescription className={quoteData.discountApplied > 0 ? "text-green-800" : "text-blue-800"}>
+                    <Alert className={quoteData.discountApplied > 0 ? "bg-green-50 border-green-300" : "bg-emerald-50 border-emerald-200"}>
+                      <CheckCircle className={`h-4 w-4 ${quoteData.discountApplied > 0 ? 'text-green-600' : 'text-emerald-600'}`} />
+                      <AlertDescription className={quoteData.discountApplied > 0 ? "text-green-800" : "text-emerald-800"}>
                         <strong>Quote Details:</strong> {quoteData.serviceType} — ${quoteData.estimatedPrice}
                         {quoteData.frequency && <span className="ml-1">({quoteData.frequency})</span>}
                         {quoteData.propertySize && <span className="ml-1 text-sm text-gray-500">· {quoteData.propertySize}</span>}

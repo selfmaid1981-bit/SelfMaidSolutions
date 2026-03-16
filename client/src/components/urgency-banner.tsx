@@ -21,13 +21,13 @@ export function UrgencyBanner({ variant = 'booking' }: UrgencyBannerProps) {
       icon: Calendar,
       text: `Only ${spotsLeft} spots left this week!`,
       subtext: 'Book now to secure your preferred time',
-      color: 'from-orange-500 to-red-500',
+      color: 'from-orange-500 to-emerald-500',
     },
     quote: {
       icon: Clock,
       text: 'Quote valid for 7 days',
       subtext: 'Lock in your price before rates increase',
-      color: 'from-blue-500 to-purple-500',
+      color: 'from-emerald-500 to-emerald-500',
     },
     checkout: {
       icon: Users,

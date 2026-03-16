@@ -36,9 +36,9 @@ export function FloatingCTA() {
             </a>
             <button
               onClick={() => { setIsBookingModalOpen(true); setExpanded(false); }}
-              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-blue-50 hover:border-blue-300 transition-all whitespace-nowrap"
+              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-emerald-50 hover:border-emerald-300 transition-all whitespace-nowrap"
             >
-              <Calendar className="w-4 h-4 text-blue-500" />
+              <Calendar className="w-4 h-4 text-emerald-500" />
               Get a Quote
             </button>
           </div>
@@ -63,7 +63,7 @@ export function FloatingCTA() {
               }
             }}
             onContextMenu={(e) => { e.preventDefault(); setExpanded(!expanded); }}
-            className="relative group flex items-center gap-2.5 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600 text-white px-6 py-4 rounded-2xl shadow-2xl shadow-blue-600/40 font-bold text-sm transition-all duration-300 hover:shadow-blue-600/60 hover:-translate-y-0.5 active:translate-y-0"
+            className="relative group flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 hover:from-emerald-700 hover:via-emerald-600 hover:to-teal-600 text-white px-6 py-4 rounded-2xl shadow-2xl shadow-emerald-600/40 font-bold text-sm transition-all duration-300 hover:shadow-emerald-600/60 hover:-translate-y-0.5 active:translate-y-0"
             aria-label="Book cleaning now"
             data-testid="floating-book-btn"
           >

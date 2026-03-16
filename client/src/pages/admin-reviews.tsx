@@ -72,7 +72,7 @@ export default function AdminReviews() {
                 <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
                   Review Link Clicks
                 </CardTitle>
-                <ExternalLink className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <ExternalLink className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-slate-900 dark:text-white">
@@ -203,7 +203,7 @@ export default function AdminReviews() {
                   </h4>
                   <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                     <div className="flex items-start gap-2">
-                      <Mail className="h-4 w-4 mt-0.5 text-blue-600" />
+                      <Mail className="h-4 w-4 mt-0.5 text-emerald-600" />
                       <span><strong>Email Signature:</strong> Add to every email you send</span>
                     </div>
                     <div className="flex items-start gap-2">
@@ -234,7 +234,7 @@ export default function AdminReviews() {
             </Card>
           </div>
 
-          <Card className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950 dark:to-green-950 border-blue-200 dark:border-blue-800">
+          <Card className="bg-gradient-to-r from-emerald-50 to-green-50 dark:from-blue-950 dark:to-green-950 border-emerald-200 dark:border-emerald-800">
             <CardHeader>
               <CardTitle className="text-slate-900 dark:text-white">
                 📧 Automated Review Requests - Active!
@@ -247,7 +247,7 @@ export default function AdminReviews() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
                   <div className="flex items-center gap-3 mb-2">
-                    <Mail className="h-5 w-5 text-blue-600" />
+                    <Mail className="h-5 w-5 text-emerald-600" />
                     <h4 className="font-semibold text-slate-900 dark:text-white">Email Request</h4>
                   </div>
                   <p className="text-sm text-slate-600 dark:text-slate-400">

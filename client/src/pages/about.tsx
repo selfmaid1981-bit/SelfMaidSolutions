@@ -70,7 +70,7 @@ export default function About() {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               About Self-Maid Cleaning
             </h1>
-            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
               Your trusted cleaning partner in Alabama, dedicated to making your world shine with superhero-level service.
             </p>
           </div>

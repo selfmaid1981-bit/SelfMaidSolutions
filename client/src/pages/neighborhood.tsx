@@ -137,7 +137,7 @@ export default function NeighborhoodPage() {
         <section className="relative overflow-hidden py-16 lg:py-24" style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #0e7490 40%, #0f766e 70%, #1d4ed8 100%)' }}>
           <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 text-blue-200/70 text-sm mb-4">
+            <div className="flex items-center gap-2 text-emerald-200/70 text-sm mb-4">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
               <Link href={`/services/${data.citySlug}-al`} className="hover:text-white transition-colors">{data.city}</Link>
@@ -147,9 +147,9 @@ export default function NeighborhoodPage() {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
               House Cleaning in{' '}
               <span className="text-amber-300">{data.name}</span>
-              <span className="block text-2xl sm:text-3xl mt-1 text-blue-100/80">{data.city}, Alabama</span>
+              <span className="block text-2xl sm:text-3xl mt-1 text-emerald-100/80">{data.city}, Alabama</span>
             </h1>
-            <p className="text-lg text-blue-100/80 max-w-2xl mb-8 leading-relaxed">
+            <p className="text-lg text-emerald-100/80 max-w-2xl mb-8 leading-relaxed">
               {data.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -177,7 +177,7 @@ export default function NeighborhoodPage() {
                 { icon: Clock, label: "16+ Years Experience" },
               ].map(item => (
                 <div key={item.label} className="flex items-center gap-3 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm">
-                  <item.icon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <item.icon className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{item.label}</span>
                 </div>
               ))}
@@ -211,10 +211,10 @@ export default function NeighborhoodPage() {
               {services.map(s => (
                 <Card key={s.name} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
-                    <s.icon className="w-8 h-8 text-blue-600 mb-3" />
+                    <s.icon className="w-8 h-8 text-emerald-600 mb-3" />
                     <h3 className="font-bold text-lg mb-1">{s.name}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{s.desc}</p>
-                    <p className="text-blue-600 font-bold">{s.price}</p>
+                    <p className="text-emerald-600 font-bold">{s.price}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -257,13 +257,13 @@ export default function NeighborhoodPage() {
                 const isLinkable = !!neighborhoods[nSlug];
                 return isLinkable ? (
                   <Link key={n} href={`/services/${data.citySlug}/${nSlug}`}>
-                    <span className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full px-4 py-2 text-sm font-medium hover:border-blue-400 transition-colors cursor-pointer">
-                      <MapPin className="w-3 h-3 text-blue-600" />{n}
+                    <span className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full px-4 py-2 text-sm font-medium hover:border-emerald-400 transition-colors cursor-pointer">
+                      <MapPin className="w-3 h-3 text-emerald-600" />{n}
                     </span>
                   </Link>
                 ) : (
                   <span key={n} className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full px-4 py-2 text-sm font-medium">
-                    <MapPin className="w-3 h-3 text-blue-600" />{n}
+                    <MapPin className="w-3 h-3 text-emerald-600" />{n}
                   </span>
                 );
               })}
@@ -276,7 +276,7 @@ export default function NeighborhoodPage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Ready for a Cleaner Home in {data.name}?
             </h2>
-            <p className="text-blue-100/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-emerald-100/80 text-lg mb-8 max-w-2xl mx-auto">
               Get an instant quote in under 30 seconds. No commitments, no hidden fees — just transparent pricing for professional cleaning.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

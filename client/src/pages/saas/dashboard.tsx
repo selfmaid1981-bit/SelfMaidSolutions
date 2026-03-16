@@ -17,7 +17,7 @@ export default function SaasDashboard() {
   });
 
   const cards = [
-    { label: "Leads", value: stats?.totalLeads || 0, icon: UserPlus, color: "text-blue-600", bg: "bg-blue-50" },
+    { label: "Leads", value: stats?.totalLeads || 0, icon: UserPlus, color: "text-emerald-600", bg: "bg-emerald-50" },
     { label: "Clients", value: stats?.totalClients || 0, icon: Users, color: "text-green-600", bg: "bg-green-50" },
     { label: "Appointments", value: stats?.totalAppointments || 0, icon: Calendar, color: "text-purple-600", bg: "bg-purple-50" },
     { label: "Jobs", value: stats?.totalJobs || 0, icon: Briefcase, color: "text-orange-600", bg: "bg-orange-50" },

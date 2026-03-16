@@ -143,10 +143,10 @@ export function Navigation() {
                         <Link
                           key={service.name}
                           href={service.href}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
                           onClick={() => setServicesDropdownOpen(false)}
                         >
-                          <Icon className="w-4 h-4 text-blue-500" />
+                          <Icon className="w-4 h-4 text-emerald-500" />
                           {service.name}
                         </Link>
                       );
@@ -154,7 +154,7 @@ export function Navigation() {
                     <div className="border-t border-gray-100 dark:border-gray-700 mt-1 pt-1">
                       <Link
                         href="/services"
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-gray-700 transition-colors"
                         onClick={() => setServicesDropdownOpen(false)}
                       >
                         View All Services
@@ -188,10 +188,10 @@ export function Navigation() {
                       <Link
                         key={area.slug}
                         href={`/services/${area.slug}`}
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
                         onClick={() => setAreasDropdownOpen(false)}
                       >
-                        <MapPin className="w-4 h-4 text-blue-500" />
+                        <MapPin className="w-4 h-4 text-emerald-500" />
                         {area.name}, AL
                       </Link>
                     ))}
@@ -264,15 +264,15 @@ export function Navigation() {
             href="/"
             className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200 ${
               location === '/'
-                ? 'text-blue-700 bg-gradient-to-r from-blue-50 to-cyan-50 font-semibold shadow-sm'
-                : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50/80'
+                ? 'text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 font-semibold shadow-sm'
+                : 'text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80'
             }`}
             style={{ animationDelay: '0ms' }}
             onClick={() => setIsMobileMenuOpen(false)}
             data-testid="mobile-nav-home"
           >
             Home
-            {location === '/' && <span className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex-shrink-0 shadow-sm shadow-blue-400/50" />}
+            {location === '/' && <span className="w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex-shrink-0 shadow-sm shadow-emerald-400/50" />}
           </Link>
 
           <div style={{ animationDelay: '50ms' }}>
@@ -280,8 +280,8 @@ export function Navigation() {
               onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
               className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200 ${
                 location === '/services' || location === '/airbnb-cleaning'
-                  ? 'text-blue-700 bg-gradient-to-r from-blue-50 to-cyan-50 font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50/80'
+                  ? 'text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 font-semibold shadow-sm'
+                  : 'text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80'
               }`}
               data-testid="mobile-nav-services"
             >
@@ -296,17 +296,17 @@ export function Navigation() {
                     <Link
                       key={service.name}
                       href={service.href}
-                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50/80 transition-colors"
+                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <Icon className="w-4 h-4 text-blue-500" />
+                      <Icon className="w-4 h-4 text-emerald-500" />
                       {service.name}
                     </Link>
                   );
                 })}
                 <Link
                   href="/services"
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold text-blue-600 hover:bg-blue-50/80 transition-colors"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold text-emerald-600 hover:bg-emerald-50/80 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   View All Services
@@ -321,8 +321,8 @@ export function Navigation() {
               onClick={() => setMobileAreasOpen(!mobileAreasOpen)}
               className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200 ${
                 location.startsWith('/services/')
-                  ? 'text-blue-700 bg-gradient-to-r from-blue-50 to-cyan-50 font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50/80'
+                  ? 'text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 font-semibold shadow-sm'
+                  : 'text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80'
               }`}
               data-testid="mobile-nav-service-areas"
             >
@@ -335,10 +335,10 @@ export function Navigation() {
                   <Link
                     key={area.slug}
                     href={`/services/${area.slug}`}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50/80 transition-colors"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <MapPin className="w-4 h-4 text-blue-500" />
+                    <MapPin className="w-4 h-4 text-emerald-500" />
                     {area.name}, AL
                   </Link>
                 ))}
@@ -355,7 +355,7 @@ export function Navigation() {
                   scrollToSection(item.href.replace('/', ''));
                   setIsMobileMenuOpen(false);
                 }}
-                className="mobile-nav-item text-slate-600 hover:text-blue-600 hover:bg-blue-50/80 flex items-center px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200"
+                className="mobile-nav-item text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80 flex items-center px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200"
                 style={{ animationDelay: `${(index + 3) * 50}ms` }}
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
@@ -368,15 +368,15 @@ export function Navigation() {
                 href={item.href}
                 className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200 ${
                   isActive
-                    ? 'text-blue-700 bg-gradient-to-r from-blue-50 to-cyan-50 font-semibold shadow-sm'
-                    : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50/80'
+                    ? 'text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 font-semibold shadow-sm'
+                    : 'text-slate-600 hover:text-emerald-600 hover:bg-emerald-50/80'
                 }`}
                 style={{ animationDelay: `${(index + 3) * 50}ms` }}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
-                {isActive && <span className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex-shrink-0 shadow-sm shadow-blue-400/50" />}
+                {isActive && <span className="w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex-shrink-0 shadow-sm shadow-emerald-400/50" />}
               </Link>
             );
           })}

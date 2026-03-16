@@ -95,7 +95,7 @@ export default function FAQ() {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
               Got questions? We've got answers! Find everything you need to know about our cleaning services.
             </p>
           </div>

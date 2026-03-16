@@ -373,11 +373,11 @@ export default function CityServicePage() {
       />
       <Navigation />
 
-      <section className="relative bg-gradient-to-br from-blue-900 via-slate-800 to-blue-900 text-white py-20 md:py-28">
+      <section className="relative bg-gradient-to-br from-emerald-900 via-slate-800 to-emerald-900 text-white py-20 md:py-28">
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative container mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-            <MapPin className="w-4 h-4 text-blue-300" />
+            <MapPin className="w-4 h-4 text-emerald-300" />
             <span className="text-sm font-medium">Serving {city.name}, {city.county}, Alabama</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -408,8 +408,8 @@ export default function CityServicePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                <ServiceIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
+                <ServiceIcon className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold">
                 {service.shortName} in {city.name}, AL
@@ -434,13 +434,13 @@ export default function CityServicePage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-blue-200 dark:border-blue-800">
+              <Card className="border-emerald-200 dark:border-emerald-800">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-400">What's Included</h3>
+                  <h3 className="text-xl font-bold mb-4 text-emerald-700 dark:text-emerald-400">What's Included</h3>
                   <ul className="space-y-3">
                     {service.includes.map(item => (
                       <li key={item} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                        <Sparkles className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <Sparkles className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -459,7 +459,7 @@ export default function CityServicePage() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-blue-600" />
+                  <MapPin className="w-5 h-5 text-emerald-600" />
                   Neighborhoods
                 </h3>
                 <ul className="space-y-2">
@@ -473,12 +473,12 @@ export default function CityServicePage() {
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-blue-600" />
+                  <MapPin className="w-5 h-5 text-emerald-600" />
                   ZIP Codes Served
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {city.zipCodes.map(z => (
-                    <span key={z} className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium">{z}</span>
+                    <span key={z} className="bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-full text-sm font-medium">{z}</span>
                   ))}
                 </div>
               </div>
@@ -487,12 +487,12 @@ export default function CityServicePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-emerald-900 text-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Why {city.name} Trusts Self-Maid</h2>
           <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <Shield className="w-10 h-10 mx-auto mb-3 text-blue-300" />
+              <Shield className="w-10 h-10 mx-auto mb-3 text-emerald-300" />
               <h3 className="font-bold text-lg mb-1">Fully Insured</h3>
               <p className="text-sm text-gray-300">Licensed, bonded & background-checked</p>
             </div>
@@ -502,12 +502,12 @@ export default function CityServicePage() {
               <p className="text-sm text-gray-300">500+ satisfied customers</p>
             </div>
             <div>
-              <Clock className="w-10 h-10 mx-auto mb-3 text-blue-300" />
+              <Clock className="w-10 h-10 mx-auto mb-3 text-emerald-300" />
               <h3 className="font-bold text-lg mb-1">Since 2009</h3>
               <p className="text-sm text-gray-300">16+ years serving Alabama</p>
             </div>
             <div>
-              <Sparkles className="w-10 h-10 mx-auto mb-3 text-blue-300" />
+              <Sparkles className="w-10 h-10 mx-auto mb-3 text-emerald-300" />
               <h3 className="font-bold text-lg mb-1">100% Guarantee</h3>
               <p className="text-sm text-gray-300">Not happy? We come back free</p>
             </div>
@@ -544,7 +544,7 @@ export default function CityServicePage() {
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {otherServicesInCity.map(s => (
               <Link key={s.url} href={s.url}>
-                <span className="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border">
+                <span className="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer bg-white dark:bg-gray-700 hover:bg-emerald-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border">
                   {s.shortName}
                 </span>
               </Link>
@@ -555,7 +555,7 @@ export default function CityServicePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {samServiceOtherCities.map(c => (
               <Link key={c.url} href={c.url}>
-                <span className="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border">
+                <span className="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer bg-white dark:bg-gray-700 hover:bg-emerald-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border">
                   <MapPin className="w-3 h-3" />
                   {c.name}, AL
                 </span>

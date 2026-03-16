@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { trackLead } from '@/components/facebook-pixel';
-import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1771958986136.png';
+import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1773674858018.png';
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -104,13 +104,13 @@ export default function GetStarted() {
             <Check className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-3">You're on the list!</h2>
-          <p className="text-blue-200 text-lg mb-6">
+          <p className="text-emerald-200 text-lg mb-6">
             We'll call you within <strong className="text-white">2 business hours</strong> to confirm your cleaning and answer any questions.
           </p>
           <p className="text-slate-400 mb-8">Check your email for a confirmation — and feel free to call us anytime:</p>
           <a
             href="tel:334-877-9513"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
           >
             <Phone className="w-5 h-5" />
             (334) 877-9513
@@ -129,7 +129,7 @@ export default function GetStarted() {
           </div>
           <div>
             <div className="text-white font-black text-lg leading-none">Self-Maid</div>
-            <div className="text-blue-300 text-[9px] font-bold tracking-widest uppercase">Cleaning Solutions</div>
+            <div className="text-emerald-300 text-[9px] font-bold tracking-widest uppercase">Cleaning Solutions</div>
           </div>
         </a>
         <a
@@ -148,9 +148,9 @@ export default function GetStarted() {
             Limited spots — only 3 openings left this week
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-[1.1]">
-            Get a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">Spotless Home</span><br />Without the Stress
+            Get a <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">Spotless Home</span><br />Without the Stress
           </h1>
-          <p className="text-blue-100/80 text-lg leading-relaxed">
+          <p className="text-emerald-100/80 text-lg leading-relaxed">
             Alabama's trusted cleaning crew. Professional, insured, and background-checked. We show up, clean up, and leave your space sparkling — every time.
           </p>
         </div>
@@ -165,7 +165,7 @@ export default function GetStarted() {
         </div>
 
         <div className="bg-white/[0.06] border border-white/10 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl mb-6">
-          <div className="h-1 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500 rounded-full mb-6 -mx-6 sm:-mx-8 mt-[-24px] sm:mt-[-32px] rounded-t-3xl" />
+          <div className="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500 rounded-full mb-6 -mx-6 sm:-mx-8 mt-[-24px] sm:mt-[-32px] rounded-t-3xl" />
 
           <h2 className="text-xl font-bold text-white mb-1">Claim Your Free Quote</h2>
           <p className="text-slate-400 text-sm mb-6">No commitment. We'll call you within 2 hours to confirm.</p>
@@ -177,7 +177,7 @@ export default function GetStarted() {
                   <FormItem>
                     <FormLabel className="text-slate-300 text-sm">Full Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Jane Smith" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-blue-400 focus:bg-white/15" />
+                      <Input {...field} placeholder="Jane Smith" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-emerald-400 focus:bg-white/15" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -186,7 +186,7 @@ export default function GetStarted() {
                   <FormItem>
                     <FormLabel className="text-slate-300 text-sm">Phone Number</FormLabel>
                     <FormControl>
-                      <Input {...field} type="tel" placeholder="(334) 555-0000" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-blue-400 focus:bg-white/15" />
+                      <Input {...field} type="tel" placeholder="(334) 555-0000" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-emerald-400 focus:bg-white/15" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -197,7 +197,7 @@ export default function GetStarted() {
                 <FormItem>
                   <FormLabel className="text-slate-300 text-sm">Email Address</FormLabel>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="you@email.com" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-blue-400 focus:bg-white/15" />
+                    <Input {...field} type="email" placeholder="you@email.com" className="bg-white/10 border-white/20 text-white placeholder:text-slate-500 rounded-xl h-11 focus:border-emerald-400 focus:bg-white/15" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -208,7 +208,7 @@ export default function GetStarted() {
                   <FormLabel className="text-slate-300 text-sm">What do you need cleaned?</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white rounded-xl h-11 focus:border-blue-400 focus:bg-white/15">
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white rounded-xl h-11 focus:border-emerald-400 focus:bg-white/15">
                         <SelectValue placeholder="Choose a service..." />
                       </SelectTrigger>
                     </FormControl>
@@ -225,7 +225,7 @@ export default function GetStarted() {
                   <FormLabel className="text-slate-300 text-sm">How did you hear about us? <span className="text-slate-500">(optional)</span></FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white rounded-xl h-11 focus:border-blue-400 focus:bg-white/15">
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white rounded-xl h-11 focus:border-emerald-400 focus:bg-white/15">
                         <SelectValue placeholder="Select..." />
                       </SelectTrigger>
                     </FormControl>
@@ -240,7 +240,7 @@ export default function GetStarted() {
               <Button
                 type="submit"
                 disabled={mutation.isPending}
-                className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold py-6 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-all h-auto mt-2"
+                className="w-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white font-bold py-6 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-all h-auto mt-2"
               >
                 {mutation.isPending ? 'Sending...' : (
                   <>
@@ -275,7 +275,7 @@ export default function GetStarted() {
             { name: 'LACONTE J.', text: 'My house has never been this clean. Called Monday, cleaned Tuesday. Fast and professional.', service: 'Residential' },
           ].map((r, i) => (
             <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center flex-shrink-0 font-bold text-white text-sm">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 font-bold text-white text-sm">
                 {r.name[0]}
               </div>
               <div>
@@ -286,7 +286,7 @@ export default function GetStarted() {
                   <span className="text-slate-400 text-xs">{r.name}</span>
                 </div>
                 <p className="text-slate-300 text-sm leading-relaxed">"{r.text}"</p>
-                <span className="text-blue-400 text-xs mt-1 block">{r.service}</span>
+                <span className="text-emerald-400 text-xs mt-1 block">{r.service}</span>
               </div>
             </div>
           ))}

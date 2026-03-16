@@ -10,7 +10,7 @@ const plans = [
     price: '$64+',
     originalPrice: '$80',
     perMonth: 'from $256/mo',
-    color: 'from-blue-600 to-teal-500',
+    color: 'from-emerald-600 to-teal-500',
     badge: 'bg-amber-400 text-amber-900',
     features: ['Every week, same day', 'Always fresh & spotless', 'Priority scheduling', 'Free re-clean guarantee']
   },
@@ -32,7 +32,7 @@ const plans = [
     price: '$72+',
     originalPrice: '$80',
     perMonth: 'from $72/mo',
-    color: 'from-slate-500 to-blue-500',
+    color: 'from-slate-500 to-emerald-500',
     badge: 'bg-slate-500 text-white',
     features: ['Once a month', 'Ideal for smaller homes', 'Flexible scheduling', 'Free re-clean guarantee']
   }
@@ -93,7 +93,7 @@ export function RecurringPlansSection() {
                 </ul>
 
                 <Link href="/booking">
-                  <Button className="w-full font-semibold bg-gradient-to-r from-blue-600 to-teal-500 text-white hover:opacity-90">
+                  <Button className="w-full font-semibold bg-gradient-to-r from-emerald-600 to-teal-500 text-white hover:opacity-90">
                     Start {plan.freq} Plan
                   </Button>
                 </Link>
@@ -102,14 +102,14 @@ export function RecurringPlansSection() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-teal-50 dark:from-blue-900/20 dark:to-teal-900/20 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800">
+        <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 text-center border border-emerald-100 dark:border-emerald-800">
           <Heart className="w-8 h-8 text-rose-500 mx-auto mb-3" />
           <h3 className="text-xl font-bold mb-2">100% Satisfaction Guarantee</h3>
           <p className="text-muted-foreground text-sm max-w-xl mx-auto mb-4">
             Not happy with your clean? We'll come back and fix it for free — no questions, no hassle. That's our promise to every recurring customer.
           </p>
           <Link href="/quote">
-            <Button variant="outline" className="font-semibold border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/30">
+            <Button variant="outline" className="font-semibold border-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30">
               Get My Recurring Quote <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

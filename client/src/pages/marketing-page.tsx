@@ -380,7 +380,7 @@ export default function MarketingPage() {
       case "draft":
         return <Badge variant="outline" data-testid={`status-draft`}><Clock className="w-3 h-3 mr-1" />Draft</Badge>;
       case "sending":
-        return <Badge variant="outline" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" data-testid={`status-sending`}><Send className="w-3 h-3 mr-1" />Sending</Badge>;
+        return <Badge variant="outline" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200" data-testid={`status-sending`}><Send className="w-3 h-3 mr-1" />Sending</Badge>;
       case "sent":
         return <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" data-testid={`status-sent`}><CheckCircle className="w-3 h-3 mr-1" />Sent</Badge>;
       case "failed":
@@ -392,7 +392,7 @@ export default function MarketingPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-slate-950 dark:via-slate-900 dark:to-sky-950 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950 flex items-center justify-center px-4">
         <Card className="w-full max-w-md">
           <CardHeader>
             <div className="flex items-center gap-2 mb-2">
@@ -427,7 +427,7 @@ export default function MarketingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-slate-950 dark:via-slate-900 dark:to-sky-950 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950 py-12 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2 font-serif">

@@ -58,7 +58,7 @@ export function PricingSection() {
     <section className="py-20 lg:py-28 bg-slate-50 dark:bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
             <Sparkles className="w-4 h-4" /> Transparent Pricing
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -75,7 +75,7 @@ export function PricingSection() {
               key={service.name}
               className={`relative rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
                 service.highlight
-                  ? 'bg-gradient-to-br from-teal-600 to-blue-700 border-teal-500 text-white shadow-xl shadow-teal-500/15'
+                  ? 'bg-gradient-to-br from-teal-600 to-emerald-700 border-teal-500 text-white shadow-xl shadow-teal-500/15'
                   : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-md'
               }`}
             >
@@ -111,7 +111,7 @@ export function PricingSection() {
                   className={`w-full font-semibold ${
                     service.highlight
                       ? 'bg-white text-teal-700 hover:bg-teal-50'
-                      : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-emerald-600 hover:bg-emerald-700 text-white'
                   }`}
                 >
                   Get Exact Quote
@@ -126,7 +126,7 @@ export function PricingSection() {
             Prices vary based on property size and condition. Our quote calculator gives you a precise number instantly — no phone call required.
           </p>
           <Link href="/quote">
-            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-teal-500 text-white text-lg px-10 py-6 font-bold rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+            <Button size="lg" className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-lg px-10 py-6 font-bold rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
               Calculate My Exact Price <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

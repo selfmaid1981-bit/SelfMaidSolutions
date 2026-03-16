@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import brandImage from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773603022797.png';
+import brandImage from '@assets/5ABA9A4B-8196-460F-B91D-ACB1EE0ED467_1773674858017.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -114,7 +114,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-10 lg:py-16 relative overflow-hidden section-gradient-blue">
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(29 78 216 / 0.6) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
-      <div className="absolute top-20 right-20 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-20 right-20 w-72 h-72 bg-emerald-300/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-64 h-64 bg-teal-300/15 rounded-full blur-2xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -145,8 +145,8 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="mb-8">
-              <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-blue-100 dark:border-blue-800/50">
-                <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-emerald-100 dark:border-emerald-800/50">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 We respond within 24 hours
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 font-serif">
@@ -158,8 +158,8 @@ export function ContactSection() {
             </div>
             
             <Card className="bg-white/95 dark:bg-gray-800/95 shadow-2xl border-0 rounded-2xl backdrop-blur-md overflow-hidden relative">
-              <div className="h-1.5 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500" />
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/5 to-teal-400/5 rounded-full pointer-events-none" />
+              <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500" />
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-emerald-400/5 to-teal-400/5 rounded-full pointer-events-none" />
               <CardContent className="p-8 relative">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="contact-form">
@@ -172,7 +172,7 @@ export function ContactSection() {
                           <FormControl>
                             <Input 
                               {...field} 
-                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
                               data-testid="input-name" 
                             />
                           </FormControl>
@@ -191,7 +191,7 @@ export function ContactSection() {
                             <Input 
                               type="email" 
                               {...field} 
-                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
                               data-testid="input-email" 
                             />
                           </FormControl>
@@ -213,7 +213,7 @@ export function ContactSection() {
                               type="tel" 
                               {...field} 
                               value={field.value || ''} 
-                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
+                              className="border-gray-200 dark:border-gray-600 rounded-xl h-12 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700" 
                               data-testid="input-phone" 
                             />
                           </FormControl>
@@ -263,7 +263,7 @@ export function ContactSection() {
                               value={field.value || ''}
                               rows={4} 
                               placeholder="Tell us about your cleaning needs..."
-                              className="border-gray-200 dark:border-gray-600 rounded-xl resize-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700"
+                              className="border-gray-200 dark:border-gray-600 rounded-xl resize-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all bg-gray-50/50 dark:bg-gray-700/50 hover:bg-white dark:hover:bg-gray-700"
                               data-testid="textarea-message"
                             />
                           </FormControl>
@@ -274,7 +274,7 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white font-bold py-6 rounded-xl text-lg shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group btn-shine" 
+                      className="w-full bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white font-bold py-6 rounded-xl text-lg shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group btn-shine" 
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >
@@ -313,8 +313,8 @@ export function ContactSection() {
             </div>
             
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/30 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-500 opacity-60" />
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/5 rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500 opacity-60" />
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/5 rounded-full pointer-events-none" />
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
                 <Sparkles className="w-5 h-5 text-teal-400" />
                 Contact Info
@@ -325,8 +325,8 @@ export function ContactSection() {
                   const Icon = info.icon;
                   return (
                     <div key={index} className="flex items-center group" data-testid={`contact-info-${index}`}>
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-teal-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:from-blue-500/30 group-hover:to-teal-500/30 group-hover:scale-105 transition-all duration-300 border border-white/5">
-                        <Icon className="w-5 h-5 text-blue-300" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:from-emerald-500/30 group-hover:to-teal-500/30 group-hover:scale-105 transition-all duration-300 border border-white/5">
+                        <Icon className="w-5 h-5 text-emerald-300" />
                       </div>
                       <div className="text-left">
                         <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">{info.label}</p>

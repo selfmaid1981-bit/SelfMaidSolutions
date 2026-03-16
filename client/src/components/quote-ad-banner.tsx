@@ -58,7 +58,7 @@ export function QuoteAdBanner() {
               <span className="text-amber-300">in Seconds</span>
             </h2>
 
-            <p className="text-blue-100/85 text-lg mb-7 leading-relaxed max-w-lg">
+            <p className="text-emerald-100/85 text-lg mb-7 leading-relaxed max-w-lg">
               Stop guessing. Use our instant quote calculator to get transparent,
               no-hidden-fee pricing tailored to your home — no phone call needed.
             </p>
@@ -100,7 +100,7 @@ export function QuoteAdBanner() {
                   </div>
                   <div>
                     <p className="text-white font-bold text-sm">Quote Calculator</p>
-                    <p className="text-blue-200/70 text-xs">selfmaidllc.com/quote</p>
+                    <p className="text-emerald-200/70 text-xs">selfmaidllc.com/quote</p>
                   </div>
                   <div className="ml-auto flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 rounded-full px-2.5 py-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -140,12 +140,12 @@ export function QuoteAdBanner() {
                   <div className="bg-white/8 border border-white/15 rounded-xl p-3 text-center">
                     <DollarSign className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
                     <p className="text-white font-bold text-sm">No Hidden Fees</p>
-                    <p className="text-blue-200/60 text-xs">What you see = what you pay</p>
+                    <p className="text-emerald-200/60 text-xs">What you see = what you pay</p>
                   </div>
                   <div className="bg-white/8 border border-white/15 rounded-xl p-3 text-center">
-                    <Clock className="w-4 h-4 text-blue-300 mx-auto mb-1" />
+                    <Clock className="w-4 h-4 text-emerald-300 mx-auto mb-1" />
                     <p className="text-white font-bold text-sm">Takes 60 Seconds</p>
-                    <p className="text-blue-200/60 text-xs">Answer 4 quick questions</p>
+                    <p className="text-emerald-200/60 text-xs">Answer 4 quick questions</p>
                   </div>
                 </div>
 
@@ -156,7 +156,7 @@ export function QuoteAdBanner() {
                   Calculate My Price →
                 </a>
 
-                <p className="text-center text-blue-200/50 text-xs mt-3">
+                <p className="text-center text-emerald-200/50 text-xs mt-3">
                   Free · Instant · No commitment
                 </p>
               </div>

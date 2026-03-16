@@ -212,8 +212,8 @@ export default function OutreachAutomation() {
                   <div className="text-2xl font-bold text-slate-900">{stats?.total || 0}</div>
                   <div className="text-xs text-slate-600">Total Leads</div>
                 </div>
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{stats?.sentInitial || 0}</div>
+                <div className="text-center p-3 bg-emerald-50 rounded-lg">
+                  <div className="text-2xl font-bold text-emerald-600">{stats?.sentInitial || 0}</div>
                   <div className="text-xs text-slate-600">Initial Sent</div>
                 </div>
                 <div className="text-center p-3 bg-amber-50 rounded-lg">
@@ -231,7 +231,7 @@ export default function OutreachAutomation() {
                   <div className="text-xs text-slate-600">Converted</div>
                 </div>
                 <div className="text-center p-3 bg-red-50 rounded-lg">
-                  <div className="text-2xl font-bold text-red-600">{stats?.unsubscribed || 0}</div>
+                  <div className="text-2xl font-bold text-emerald-600">{stats?.unsubscribed || 0}</div>
                   <div className="text-xs text-slate-600">Unsubscribed</div>
                 </div>
               </div>
@@ -292,10 +292,10 @@ export default function OutreachAutomation() {
           </CardContent>
         </Card>
 
-        <Card className="bg-blue-50 border-blue-200">
+        <Card className="bg-emerald-50 border-emerald-200">
           <CardContent className="pt-6">
-            <h3 className="font-semibold text-blue-900 mb-2">How Automation Works</h3>
-            <ul className="text-sm text-blue-800 space-y-1">
+            <h3 className="font-semibold text-emerald-900 mb-2">How Automation Works</h3>
+            <ul className="text-sm text-emerald-800 space-y-1">
               <li>• <strong>Day 0:</strong> Initial outreach email sent to new leads</li>
               <li>• <strong>Day 3:</strong> First follow-up if no response</li>
               <li>• <strong>Day 7:</strong> Second follow-up with special offer</li>

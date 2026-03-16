@@ -111,7 +111,7 @@ export default function Blog() {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Cleaning Tips & Resources
             </h1>
-            <p className="text-xl text-blue-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
               Expert advice from 16 years of professional cleaning experience in Montgomery and Prattville, Alabama
             </p>
           </div>

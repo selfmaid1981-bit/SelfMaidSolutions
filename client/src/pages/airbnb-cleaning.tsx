@@ -135,10 +135,10 @@ export default function AirbnbCleaning() {
         <Navigation />
 
         {/* Hero */}
-        <section className="relative bg-gradient-to-br from-teal-900 via-slate-800 to-blue-900 text-white py-20 md:py-28 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 via-slate-800 to-emerald-900 text-white py-20 md:py-28 overflow-hidden">
           <div className="absolute inset-0 bg-black/20" />
           <div className="absolute top-10 right-10 w-72 h-72 bg-teal-500/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl" />
 
           <div className="relative container mx-auto px-4 text-center max-w-4xl">
             <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-sm border border-teal-400/30 text-teal-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -201,7 +201,7 @@ export default function AirbnbCleaning() {
                 return (
                   <Card key={f.title} className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-slate-800">
                     <CardContent className="p-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-blue-500 rounded-xl flex items-center justify-center mb-4 shadow-md">
+                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4 shadow-md">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold mb-2">{f.title}</h3>
@@ -265,7 +265,7 @@ export default function AirbnbCleaning() {
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                   <Award className="w-4 h-4" /> Our Turnover Checklist
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Every Item. Every Time.</h2>
@@ -274,7 +274,7 @@ export default function AirbnbCleaning() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link href="/booking">
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                       Book Your First Turnover
                     </Button>
                   </Link>
@@ -308,7 +308,7 @@ export default function AirbnbCleaning() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-gradient-to-br from-teal-900 to-blue-900 text-white">
+        <section className="py-20 bg-gradient-to-br from-teal-900 to-emerald-900 text-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Hosts Love Self-Maid</h2>

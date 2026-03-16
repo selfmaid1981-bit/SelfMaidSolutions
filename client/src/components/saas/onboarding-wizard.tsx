@@ -39,7 +39,7 @@ export function OnboardingWizard({ onComplete, loading }: OnboardingWizardProps)
         <CardTitle>Get Started with Leading Edge</CardTitle>
         <div className="flex gap-2 mt-3">
           {STEPS.map((s, i) => (
-            <div key={s.key} className={`flex items-center gap-1 text-xs px-3 py-1.5 rounded-full ${i <= step ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400"}`}>
+            <div key={s.key} className={`flex items-center gap-1 text-xs px-3 py-1.5 rounded-full ${i <= step ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-400"}`}>
               {i < step ? <Check className="h-3 w-3" /> : <s.icon className="h-3 w-3" />}
               {s.label}
             </div>
@@ -77,7 +77,7 @@ export function OnboardingWizard({ onComplete, loading }: OnboardingWizardProps)
             {["starter", "professional", "enterprise"].map(t => (
               <div
                 key={t}
-                className={`border rounded-lg p-4 cursor-pointer transition-colors ${form.tier === t ? "border-blue-500 bg-blue-50" : "hover:border-gray-300"}`}
+                className={`border rounded-lg p-4 cursor-pointer transition-colors ${form.tier === t ? "border-emerald-500 bg-emerald-50" : "hover:border-gray-300"}`}
                 onClick={() => setForm(f => ({ ...f, tier: t }))}
               >
                 <div className="flex items-center justify-between">

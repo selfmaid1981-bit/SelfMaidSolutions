@@ -505,13 +505,13 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                   </div>
 
                   {calculatedPrice > 0 && (
-                    <div className="mt-6 bg-gradient-to-r from-blue-600 to-teal-500 rounded-xl p-4 text-white text-center" data-testid="live-price">
+                    <div className="mt-6 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-xl p-4 text-white text-center" data-testid="live-price">
                       <div className="flex items-center justify-center gap-2 mb-1">
                         <Calculator className="w-4 h-4" />
-                        <span className="text-sm font-medium text-blue-100">Estimated Price</span>
+                        <span className="text-sm font-medium text-emerald-100">Estimated Price</span>
                       </div>
                       <div className="text-3xl font-bold">${calculatedPrice}</div>
-                      <p className="text-xs text-blue-100 mt-1">
+                      <p className="text-xs text-emerald-100 mt-1">
                         {frequency !== 'onetime' ? 'per service' : 'one-time service'} · final price confirmed by Self-Maid
                       </p>
                     </div>

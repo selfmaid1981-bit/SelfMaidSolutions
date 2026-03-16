@@ -137,7 +137,7 @@ export default function Home() {
         <TrustBar />
         <BeforeAfterGallery />
         <section className="py-14 lg:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1F2A37] via-[#1a3848] to-[#1F2A37]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1F2A37] via-[#253545] to-[#1F2A37]" />
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }} />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -170,7 +170,7 @@ export default function Home() {
             <div className="text-center">
               <button
                 onClick={() => setIsMobileBookingOpen(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-10 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] hover:from-[#1E8E6A] hover:to-[#1E8E6A] text-white px-10 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
               >
                 <CalendarCheck className="w-5 h-5" />
                 Get Your Free Quote
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="flex gap-2">
             <button
               onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-emerald-500/20"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-emerald-500/20"
             >
               <CalendarCheck className="w-4 h-4" />
               Book Online

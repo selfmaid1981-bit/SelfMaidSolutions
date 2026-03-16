@@ -76,7 +76,7 @@ export default function AdminDashboard() {
               <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 Total Bookings
               </CardTitle>
-              <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <Calendar className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-slate-900 dark:text-white">

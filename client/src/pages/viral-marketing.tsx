@@ -295,7 +295,7 @@ export default function ViralMarketing() {
                 <span className="bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">Toolkit</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Proven <span className="text-pink-600 font-semibold">Instagram</span> & <span className="text-blue-700 font-semibold">Facebook</span> content strategies to grow your cleaning business
+                Proven <span className="text-pink-600 font-semibold">Instagram</span> & <span className="text-emerald-700 font-semibold">Facebook</span> content strategies to grow your cleaning business
               </p>
               <div className="flex justify-center gap-3 mt-6">
                 <Badge variant="secondary" className="flex items-center gap-1">
@@ -424,7 +424,7 @@ export default function ViralMarketing() {
                       <CardHeader>
                         <div className="flex items-center justify-between">
                           <CardTitle className="flex items-center gap-2">
-                            <Facebook className="w-5 h-5 text-blue-600" />
+                            <Facebook className="w-5 h-5 text-emerald-600" />
                             {post.title}
                           </CardTitle>
                           <Badge variant="secondary">{post.type}</Badge>
@@ -490,7 +490,7 @@ export default function ViralMarketing() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <Facebook className="w-5 h-5 text-blue-600" />
+                        <Facebook className="w-5 h-5 text-emerald-600" />
                         Facebook Hashtags
                       </CardTitle>
                       <CardDescription>Use 3-5 hashtags per post (less is more)</CardDescription>
@@ -571,7 +571,7 @@ export default function ViralMarketing() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-lg">
-                        <Clock className="w-5 h-5 text-blue-500" />
+                        <Clock className="w-5 h-5 text-emerald-500" />
                         Best Posting Times
                       </CardTitle>
                     </CardHeader>
@@ -593,7 +593,7 @@ export default function ViralMarketing() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-lg">
-                        <Target className="w-5 h-5 text-red-500" />
+                        <Target className="w-5 h-5 text-emerald-500" />
                         Engagement Goals
                       </CardTitle>
                     </CardHeader>
@@ -660,10 +660,10 @@ export default function ViralMarketing() {
               </CardContent>
             </Card>
 
-            <Card className="mt-8 border-2 border-blue-500" data-testid="buffer-setup-guide">
+            <Card className="mt-8 border-2 border-emerald-500" data-testid="buffer-setup-guide">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-6 h-6 text-blue-500" />
+                  <Calendar className="w-6 h-6 text-emerald-500" />
                   Automate Posting with Buffer (Free)
                 </CardTitle>
                 <CardDescription>
@@ -676,11 +676,11 @@ export default function ViralMarketing() {
                     <h4 className="font-bold text-lg mb-3">Setup Steps (5 minutes)</h4>
                     <ol className="space-y-3 text-sm">
                       <li className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
-                        <span>Go to <a href="https://buffer.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">buffer.com</a> and sign up for free</span>
+                        <span className="flex-shrink-0 w-6 h-6 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                        <span>Go to <a href="https://buffer.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">buffer.com</a> and sign up for free</span>
                       </li>
                       <li className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                        <span className="flex-shrink-0 w-6 h-6 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
                         <span>Click "Connect Channel" and add your accounts:
                           <ul className="mt-1 ml-4 space-y-1 text-muted-foreground">
                             <li>• LinkedIn (personal + company page)</li>
@@ -690,11 +690,11 @@ export default function ViralMarketing() {
                         </span>
                       </li>
                       <li className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                        <span className="flex-shrink-0 w-6 h-6 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
                         <span>Copy content from the tabs above using the copy buttons</span>
                       </li>
                       <li className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                        <span className="flex-shrink-0 w-6 h-6 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
                         <span>Paste into Buffer's composer and schedule your posts</span>
                       </li>
                     </ol>
@@ -731,19 +731,19 @@ export default function ViralMarketing() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4">
-                  <h4 className="font-bold text-blue-800 dark:text-blue-200 mb-2">Pro Tips for Maximum Reach</h4>
+                <div className="bg-emerald-50 dark:bg-blue-950 rounded-lg p-4">
+                  <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-2">Pro Tips for Maximum Reach</h4>
                   <div className="grid md:grid-cols-3 gap-4 text-sm">
                     <div>
-                      <p className="font-semibold text-blue-700 dark:text-blue-300">Best Times to Post</p>
+                      <p className="font-semibold text-emerald-700 dark:text-emerald-300">Best Times to Post</p>
                       <p className="text-muted-foreground">Mon-Fri: 11am-1pm, 7-9pm CST</p>
                     </div>
                     <div>
-                      <p className="font-semibold text-blue-700 dark:text-blue-300">Posting Frequency</p>
+                      <p className="font-semibold text-emerald-700 dark:text-emerald-300">Posting Frequency</p>
                       <p className="text-muted-foreground">4-5 posts/week minimum</p>
                     </div>
                     <div>
-                      <p className="font-semibold text-blue-700 dark:text-blue-300">Content Mix</p>
+                      <p className="font-semibold text-emerald-700 dark:text-emerald-300">Content Mix</p>
                       <p className="text-muted-foreground">70% value, 20% engagement, 10% promo</p>
                     </div>
                   </div>

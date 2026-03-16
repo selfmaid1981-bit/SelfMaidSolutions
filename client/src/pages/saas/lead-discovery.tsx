@@ -18,7 +18,7 @@ export default function SaasLeadDiscovery() {
   });
 
   const statusColors: Record<string, string> = {
-    discovered: "bg-blue-100 text-blue-800",
+    discovered: "bg-emerald-100 text-emerald-800",
     contacted: "bg-yellow-100 text-yellow-800",
     interested: "bg-green-100 text-green-800",
     not_interested: "bg-red-100 text-red-800",

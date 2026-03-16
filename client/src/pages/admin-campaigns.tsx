@@ -146,9 +146,9 @@ export default function AdminCampaigns() {
       case 'sent':
         return <CheckCircle2 className="h-5 w-5 text-green-600" />;
       case 'sending':
-        return <Loader2 className="h-5 w-5 text-blue-600 animate-spin" />;
+        return <Loader2 className="h-5 w-5 text-emerald-600 animate-spin" />;
       case 'failed':
-        return <XCircle className="h-5 w-5 text-red-600" />;
+        return <XCircle className="h-5 w-5 text-emerald-600" />;
       default:
         return <Clock className="h-5 w-5 text-yellow-600" />;
     }
@@ -162,7 +162,7 @@ export default function AdminCampaigns() {
           {getStatusIcon(status)} Sent
         </span>;
       case 'sending':
-        return <span className={`${baseClasses} bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200`}>
+        return <span className={`${baseClasses} bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200`}>
           {getStatusIcon(status)} Sending
         </span>;
       case 'failed':
@@ -200,7 +200,7 @@ export default function AdminCampaigns() {
             </div>
             <Dialog open={isCreating} onOpenChange={setIsCreating}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <Button size="lg" className="bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-700 hover:to-purple-700">
                   <Plus className="mr-2 h-5 w-5" />
                   Create Campaign
                 </Button>
@@ -247,7 +247,7 @@ export default function AdminCampaigns() {
                         </SelectItem>
                         <SelectItem value="custom">
                           <div className="flex items-center gap-2">
-                            <Mail className="h-4 w-4 text-blue-600" />
+                            <Mail className="h-4 w-4 text-emerald-600" />
                             Custom Campaign
                           </div>
                         </SelectItem>
@@ -330,7 +330,7 @@ export default function AdminCampaigns() {
                 <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
                   Total Subscribers
                 </CardTitle>
-                <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <Users className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-slate-900 dark:text-white">
@@ -381,7 +381,7 @@ export default function AdminCampaigns() {
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                  <UserCheck className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <UserCheck className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
                   Email Subscribers
                 </CardTitle>
                 <CardDescription>
@@ -447,7 +447,7 @@ export default function AdminCampaigns() {
                 </div>
               ) : subscribersError ? (
                 <div className="text-center py-12">
-                  <XCircle className="h-16 w-16 mx-auto text-red-500 dark:text-red-400 mb-4" />
+                  <XCircle className="h-16 w-16 mx-auto text-emerald-500 dark:text-emerald-400 mb-4" />
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                     Error Loading Subscribers
                   </h3>
@@ -486,7 +486,7 @@ export default function AdminCampaigns() {
                               subscriber.source === 'booking' 
                                 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                                 : subscriber.source === 'quote'
-                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
                                 : 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
                             }`}>
                               {subscriber.source === 'booking' && '💼 Booking'}
@@ -534,7 +534,7 @@ export default function AdminCampaigns() {
                   {campaigns.map((campaign) => (
                     <div
                       key={campaign.id}
-                      className="border border-slate-200 dark:border-slate-700 rounded-lg p-6 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
+                      className="border border-slate-200 dark:border-slate-700 rounded-lg p-6 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors"
                     >
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div className="flex-1">
@@ -553,7 +553,7 @@ export default function AdminCampaigns() {
                               <span>Sent: {new Date(campaign.sentAt).toLocaleDateString()}</span>
                             )}
                             {campaign.recipientCount && campaign.recipientCount > 0 && (
-                              <span className="font-medium text-blue-600 dark:text-blue-400">
+                              <span className="font-medium text-emerald-600 dark:text-emerald-400">
                                 {campaign.recipientCount} recipients
                               </span>
                             )}
@@ -602,7 +602,7 @@ export default function AdminCampaigns() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 mt-8">
+          <Card className="bg-gradient-to-r from-emerald-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border-emerald-200 dark:border-emerald-800 mt-8">
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-purple-600" />
@@ -628,8 +628,8 @@ export default function AdminCampaigns() {
 
                 <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                      <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
+                      <Calendar className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <h4 className="font-semibold text-slate-900 dark:text-white">Quote Follow-Ups</h4>
                   </div>

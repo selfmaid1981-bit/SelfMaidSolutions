@@ -81,7 +81,7 @@ const CheckoutForm = ({ bookingId, amount }: { bookingId: string; amount: number
           <CheckCircle className="w-3 h-3 text-green-500" /> 100% Satisfaction Guarantee
         </span>
         <span className="flex items-center gap-1">
-          <Lock className="w-3 h-3 text-blue-500" /> 256-bit SSL Encryption
+          <Lock className="w-3 h-3 text-emerald-500" /> 256-bit SSL Encryption
         </span>
       </div>
 

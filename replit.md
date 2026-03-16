@@ -9,7 +9,7 @@ Preferred communication style: Simple, everyday language.
 # System Architecture
 
 ## UI/UX Decisions
-The application uses a professional design with a slate/blue color palette, serif fonts, and subtle animations. It incorporates realistic stock photography. UI components are built with Radix UI and shadcn/ui for accessibility, responsiveness, and dark mode support.
+The application uses a bold, premium design with a deep navy/purple/red-black palette and neon yellow accents (#0A0E1A Deep Navy, #6B21A8 Royal Purple, #4C1D95 Deeper Purple, #3B0A0A Rich Red-Black, #E5FF00 Neon Yellow), serif fonts, and subtle animations. It incorporates realistic stock photography. UI components are built with Radix UI and shadcn/ui for accessibility, responsiveness, and dark mode support.
 
 ## Technical Implementations
 - **Frontend**: React 18 with TypeScript, Wouter, Tailwind CSS, Radix UI/shadcn/ui, TanStack Query, React Hook Form with Zod, and Vite.

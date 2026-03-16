@@ -44,7 +44,7 @@ function LogoPrimary({ width, className, showTagline }: { width: number; classNa
       <defs>
         <linearGradient id="mascotGrad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#1E8E6A" />
-          <stop offset="100%" stopColor="#166d50" />
+          <stop offset="100%" stopColor="#2D3F52" />
         </linearGradient>
         <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#1F2A37" />
@@ -94,7 +94,7 @@ function LogoIcon({ width, className }: { width: number; className: string }) {
         </linearGradient>
         <linearGradient id="mascotGrad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#1E8E6A" />
-          <stop offset="100%" stopColor="#166d50" />
+          <stop offset="100%" stopColor="#2D3F52" />
         </linearGradient>
       </defs>
 
@@ -120,7 +120,7 @@ function LogoHorizontal({ width, className, showTagline }: { width: number; clas
       <defs>
         <linearGradient id="mascotGrad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#1E8E6A" />
-          <stop offset="100%" stopColor="#166d50" />
+          <stop offset="100%" stopColor="#2D3F52" />
         </linearGradient>
       </defs>
 

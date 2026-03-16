@@ -52,7 +52,7 @@ interface FunnelStats {
 }
 
 const statusColors: Record<string, string> = {
-  new: 'bg-blue-100 text-blue-800',
+  new: 'bg-emerald-100 text-emerald-800',
   contacted: 'bg-yellow-100 text-yellow-800',
   responded: 'bg-purple-100 text-purple-800',
   meeting: 'bg-orange-100 text-orange-800',
@@ -352,7 +352,7 @@ export default function AdminLeads() {
                 </Card>
                 <Card>
                   <CardContent className="pt-4">
-                    <div className="text-2xl font-bold text-blue-600">{stats.new}</div>
+                    <div className="text-2xl font-bold text-emerald-600">{stats.new}</div>
                     <div className="text-sm text-gray-500">New</div>
                   </CardContent>
                 </Card>
