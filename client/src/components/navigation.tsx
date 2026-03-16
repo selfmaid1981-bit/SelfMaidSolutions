@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Menu, X, Phone, CalendarCheck, ChevronRight, ChevronDown, MapPin, Sparkles, Building2, Home, Key, Package, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import logoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
+import logoImage from '@assets/sponge-hero-icon.png';
 
 const serviceAreas = [
   { name: "Montgomery", slug: "montgomery-al" },

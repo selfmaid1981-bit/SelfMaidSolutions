@@ -69,8 +69,8 @@ const services: Service[] = [
     price: 'Starting at $250',
     image: '/assets/services/service-deep-clean.png',
     imageAlt: 'Sparkling clean bathroom after professional deep cleaning service',
-    gradient: 'from-pink-500 to-rose-400',
-    glowColor: 'hover:shadow-pink-500/20',
+    gradient: 'from-[#1F2A37] to-emerald-700',
+    glowColor: 'hover:shadow-emerald-700/20',
   },
   {
     id: 'dorm',
@@ -80,8 +80,8 @@ const services: Service[] = [
     price: 'Call for pricing',
     image: '/assets/services/service-dorm.png',
     imageAlt: 'Clean organized college dorm room after professional cleaning',
-    gradient: 'from-orange-500 to-amber-400',
-    glowColor: 'hover:shadow-orange-500/20',
+    gradient: 'from-[#C6A969] to-[#1E8E6A]',
+    glowColor: 'hover:shadow-emerald-500/20',
   }
 ];
 
@@ -97,19 +97,19 @@ export function ServicesSection() {
   return (
     <>
       <section id="services" className="py-10 lg:py-16 relative overflow-hidden section-gradient-blue">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-300/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
         <div className="services-dot-pattern absolute inset-0 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               What We Offer
             </div>
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-serif">
               Our Cleaning Services
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full mx-auto mb-4" />
+            <div className="w-20 h-1 bg-gradient-to-r from-[#1E8E6A] to-[#C6A969] rounded-full mx-auto mb-4" />
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
               Professional cleaning solutions tailored to your needs across Montgomery, Prattville, Selma, Homewood, and Clanton
             </p>
@@ -138,7 +138,7 @@ export function ServicesSection() {
                 </div>
                 <CardContent className="p-6 relative">
                   <div className="flex flex-col h-full">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-200">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors duration-200">
                       {service.title}
                     </h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4">
@@ -178,7 +178,7 @@ export function ServicesSection() {
             </p>
             <a 
               href="tel:334-877-9513" 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg shadow-blue-600/25 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#166d50] hover:from-[#166d50] hover:to-[#1E8E6A] text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 btn-shine"
             >
               <Phone className="w-5 h-5" />
               Call (334) 877-9513 for Custom Quote

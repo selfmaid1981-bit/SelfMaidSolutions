@@ -1,6 +1,6 @@
 import { ArrowRight, Phone, Shield, Clock, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import mascotImg from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
+import mascotImg from '@assets/sponge-hero-full-body.png';
 
 export function FinalCtaSection() {
   return (
