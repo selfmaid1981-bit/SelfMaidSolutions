@@ -69,7 +69,7 @@ const services: Service[] = [
     price: 'Starting at $250',
     image: '/assets/services/service-deep-clean.png',
     imageAlt: 'Sparkling clean bathroom after professional deep cleaning service',
-    gradient: 'from-[#166B50] to-red-900',
+    gradient: 'from-[#166B50] to-emerald-900',
     glowColor: 'hover:shadow-emerald-900/20',
   },
   {
