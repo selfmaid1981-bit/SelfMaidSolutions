@@ -1,0 +1,261 @@
+Act as a senior full-stack developer, UI/UX designer, and conversion-focused marketing expert.
+
+Your goal is to transform the Self‑Maid Cleaning Solutions website into a high-converting, premium cleaning service platform that generates leads quickly and efficiently.
+
+Optimize for speed, simplicity, and revenue generation. Avoid unnecessary complexity or rebuilding existing working components.
+
+------------------------------------------------
+
+BUSINESS
+
+Self‑Maid Cleaning Solutions
+
+Tagline:
+Bringing the Shine Since 2009
+
+Primary Headline:
+Relax, We Do the Dirty Work.
+
+Mascot:
+Shine the Super Sponge
+
+Service Areas:
+Prattville AL
+Montgomery AL
+Millbrook AL
+Deatsville AL
+
+------------------------------------------------
+
+CORE OBJECTIVE
+
+Create a website that:
+
+• looks premium and trustworthy
+• is visually full (no empty sections)
+• converts visitors into quote requests quickly
+• loads fast and works perfectly on mobile
+• minimizes API calls and unnecessary processing
+
+------------------------------------------------
+
+DESIGN SYSTEM
+
+PRIMARY STYLE (Luxury)
+
+Emerald #1E8E6A
+Gold #C6A969
+Deep Navy #1F2A37
+White / light marble background
+
+SECONDARY STYLE (Mascot)
+
+Use navy/red/yellow ONLY for mascot.
+Do not use mascot colors in layout backgrounds.
+
+------------------------------------------------
+
+HOMEPAGE STRUCTURE
+
+1. HERO SECTION
+
+Use a high-quality luxury home background image:
+
+bright kitchen
+sunlight
+spotless surfaces
+
+Overlay:
+
+SELF‑MAID CLEANING SOLUTIONS
+Bringing the Shine Since 2009
+
+Relax, We Do the Dirty Work.
+
+Buttons:
+
+Get Instant Quote (primary)
+Book Cleaning (secondary)
+
+Place mascot on right side.
+
+------------------------------------------------
+
+2. TRUST BAR
+
+Display:
+
+Licensed & Insured
+5-Star Reviews
+Background Checked
+Since 2009
+
+------------------------------------------------
+
+3. BEFORE / AFTER SECTION (CRITICAL)
+
+This must use TRUE transformations.
+
+Each pair must show the SAME ROOM:
+
+Before:
+dirty, cluttered, dull
+
+After:
+clean, bright, polished
+
+Use either:
+
+side-by-side
+or slider comparison
+
+Add title:
+
+See the Self‑Maid Difference
+
+------------------------------------------------
+
+4. SERVICES SECTION
+
+Create visual cards:
+
+Recurring Cleaning
+Deep Cleaning
+Move-Out Cleaning
+Airbnb Cleaning
+
+Each includes:
+
+image
+short description
+CTA button
+
+------------------------------------------------
+
+5. QUOTE CALCULATOR (TOP PRIORITY)
+
+Place near top of page.
+
+Fields:
+
+Bedrooms
+Bathrooms
+Square footage
+Pets
+
+Button:
+
+Get My Instant Quote
+
+Keep logic simple and fast.
+
+------------------------------------------------
+
+6. REVIEWS
+
+Add testimonial cards with star ratings.
+
+------------------------------------------------
+
+7. SERVICE AREAS
+
+List cities served.
+
+------------------------------------------------
+
+MASCOT USAGE
+
+Use Shine the Super Sponge in:
+
+hero
+quote section
+call-to-action areas
+
+Do NOT overuse.
+
+------------------------------------------------
+
+IMAGE SYSTEM
+
+Use unique images per section.
+
+Optimize:
+
+WebP format
+lazy loading
+responsive sizes
+
+------------------------------------------------
+
+PERFORMANCE RULES
+
+• reuse existing components where possible
+• avoid unnecessary API calls
+• avoid duplicate code
+• keep bundle size small
+• optimize for mobile first
+
+------------------------------------------------
+
+SEO (BASIC, NOT OVERBUILT)
+
+Add pages for:
+
+/house-cleaning-prattville-al
+/house-cleaning-montgomery-al
+/house-cleaning-millbrook-al
+/house-cleaning-deatsville-al
+
+Keep content simple and local-focused.
+
+------------------------------------------------
+
+LEAD FLOW (REVENUE FOCUS)
+
+Create simple lead capture:
+
+POST /api/quote
+
+Store:
+
+name
+phone
+email
+home details
+
+Trigger:
+
+email confirmation
+optional SMS
+
+------------------------------------------------
+
+EXTERNAL INTEGRATION
+
+Structure site so it can integrate with:
+
+getleadingedge.net
+deluxbiz.pro
+
+Do NOT deeply embed or overcomplicate.
+
+Prepare clean API hooks or placeholders for future integration.
+
+------------------------------------------------
+
+OUTPUT
+
+Provide:
+
+• updated homepage layout
+• optimized components
+• image structure
+• quote flow
+• performance improvements
+• summary of changes
+
+------------------------------------------------
+
+GOAL
+
+A clean, premium, fast website that converts visitors into paying customers quickly without wasting resources.
