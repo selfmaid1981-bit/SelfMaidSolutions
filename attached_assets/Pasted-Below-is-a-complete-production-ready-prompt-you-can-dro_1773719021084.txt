@@ -1,0 +1,210 @@
+Below is a complete, production-ready prompt you can drop into @Replit (or give directly to a developer/AI agent) to diagnose and fix your issue.
+
+⸻
+
+🔧 REPLIT PROMPT — Fix Pricing Flicker + Booking Loop + Email Failure
+
+Context
+
+We have a cleaning service pricing calculator + booking flow.
+
+Current Issues:
+	1.	Price flickers / changes briefly
+	•	Example: $545 → $543 when clicking “Book This Cleaning”
+	2.	Booking flow resets or repeats
+	•	Instead of continuing smoothly, it reinitializes
+	3.	Quote email is not being sent
+	•	No email received after quote or booking attempt
+
+⸻
+
+Objective
+
+Stabilize the system so that:
+	•	Price is calculated once and never changes unless inputs change
+	•	Booking flow persists state cleanly (no reset or duplication)
+	•	Email is reliably sent with quote + booking data
+
+⸻
+
+Requirements
+
+1. Single Source of Truth for Pricing
+	•	Price must be calculated only once
+	•	Store in a centralized state (React state, context, or global store)
+
+Implementation Rule:
+	•	DO NOT recalculate price inside booking modal
+	•	Only pass precomputed price forward
+
+const [quoteData, setQuoteData] = useState({
+  price: null,
+  sqft: null,
+  bedrooms: null,
+  bathrooms: null,
+  pets: false,
+  frequency: "one-time"
+});
+
+
+⸻
+
+2. Freeze Data on “Book” Click
+
+When user clicks Book This Cleaning:
+	•	Capture ALL inputs
+	•	Lock them into a payload
+	•	Pass payload into booking flow
+
+const handleBookNow = () => {
+  const payload = {
+    ...quoteData,
+    timestamp: Date.now()
+  };
+  
+  openBookingModal(payload);
+};
+
+
+⸻
+
+3. Prevent Re-Render / Double Execution
+
+Check and fix:
+
+If using React:
+	•	Remove duplicate useEffect triggers
+	•	Ensure no recalculation on mount
+
+useEffect(() => {
+  if (!quoteData.price) return;
+  // DO NOT recalculate price here
+}, []);
+
+Also verify:
+	•	No duplicate modal mounting
+	•	No double onClick bindings
+	•	React Strict Mode not causing duplicate execution in dev
+
+⸻
+
+4. Fix Price Flicker (Critical)
+
+Ensure:
+	•	No rounding differences between components
+	•	No recalculation with slightly different inputs
+
+Example fix:
+
+const finalPrice = useMemo(() => {
+  return calculatePrice(quoteData);
+}, [quoteData]); // ONLY changes when inputs change
+
+
+⸻
+
+5. Booking Flow State Persistence
+
+Booking modal should:
+	•	Accept payload as props
+	•	NOT initialize its own defaults if payload exists
+
+const BookingModal = ({ initialData }) => {
+  const [formData, setFormData] = useState(initialData);
+};
+
+
+⸻
+
+6. Email System (Must Fix)
+
+Implement TWO triggers:
+
+⸻
+
+A. Quote Email (Immediate)
+
+Trigger when:
+	•	User clicks “Book This Cleaning”
+
+await fetch("/api/send-quote", {
+  method: "POST",
+  body: JSON.stringify(payload)
+});
+
+
+⸻
+
+B. Booking Confirmation Email
+
+Trigger when:
+	•	Final booking is submitted
+
+⸻
+
+Backend Example (Node / Express)
+
+app.post("/api/send-quote", async (req, res) => {
+  const data = req.body;
+
+  try {
+    await sendEmail({
+      to: data.email,
+      subject: "Your Cleaning Quote",
+      html: `
+        <h1>Your Quote: $${data.price}</h1>
+        <p>Sq Ft: ${data.sqft}</p>
+        <p>Pets: ${data.pets ? "Yes" : "No"}</p>
+      `
+    });
+
+    res.status(200).send("Email sent");
+  } catch (err) {
+    console.error("EMAIL ERROR:", err);
+    res.status(500).send("Failed");
+  }
+});
+
+
+⸻
+
+7. Add Debug Logging (Temporary)
+
+console.log("QUOTE DATA:", quoteData);
+console.log("FINAL PRICE:", quoteData.price);
+console.log("BOOKING PAYLOAD:", payload);
+
+
+⸻
+
+Expected Outcome
+
+After fixes:
+	•	✅ Price does NOT change when entering booking
+	•	✅ Booking flow continues smoothly (no reset)
+	•	✅ Quote email is received immediately
+	•	✅ Final booking confirmation email works
+	•	✅ No duplicate calculations or UI flicker
+
+⸻
+
+Deliverables
+	1.	Refactored pricing logic (single source of truth)
+	2.	Fixed booking modal state handling
+	3.	Working email API endpoint
+	4.	Removal of duplicate renders/events
+	5.	Clean, testable flow from quote → booking → confirmation
+
+⸻
+
+Priority Order
+	1.	Fix price flicker (state issue)
+	2.	Fix booking loop (component lifecycle issue)
+	3.	Fix email (revenue capture issue)
+
+⸻
+
+If you want next-level optimization, I can also:
+	•	Redesign your pricing engine for margin control
+	•	Add upsell logic (deep clean, add-ons, etc.)
+	•	Implement abandoned quote recovery (high ROI)
