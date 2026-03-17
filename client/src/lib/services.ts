@@ -86,10 +86,14 @@ export const quoteServiceTypes = [
   { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
   { value: 'deep', label: 'Deep Cleaning', baseRate: 0.195, minCharge: 250 },
   { value: 'moveout', label: 'Move-Out Cleaning', baseRate: 0.228, minCharge: 325 },
-  { value: 'airbnb', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
+  { value: 'apartment', label: 'Apartment Turnover', baseRate: 0.171, minCharge: 108 },
+  { value: 'shorttermrental', label: 'Short Term Rental', baseRate: 0.114, minCharge: 95 },
   { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
-  { value: 'dorm', label: 'Student Dorm/Apartment Turnover', perRoom: 45, minCharge: 45 },
+  { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
+  { value: 'dorm', label: 'Student Dorm/Apartment Turnover', baseRate: 0.12, minCharge: 45, perRoom: 45 },
 ];
+
+export const sqFtServiceTypes = quoteServiceTypes.filter(s => s.value !== 'dorm');
 
 export const propertySizeOptions = [
   { value: 'small', label: 'Under 1,000 sq ft', multiplier: 1 },
@@ -100,9 +104,21 @@ export const propertySizeOptions = [
 
 export const frequencyOptions = [
   { value: 'onetime', label: 'One-Time Service', discount: 0 },
-  { value: 'weekly', label: 'Weekly (15% off)', discount: 0.15 },
   { value: 'biweekly', label: 'Bi-Weekly (10% off)', discount: 0.10 },
   { value: 'monthly', label: 'Monthly (5% off)', discount: 0.05 },
+];
+
+export const homepageFrequencyOptions = [
+  { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
+  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: 'Most Popular' as const },
+  { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
+];
+
+export const fullQuoteFrequencyOptions = [
+  { value: 'onetime', label: 'One-Time Service', discount: 0 },
+  { value: 'weekly', label: 'Weekly (15% discount)', discount: 0.15 },
+  { value: 'biweekly', label: 'Bi-Weekly (10% discount)', discount: 0.10 },
+  { value: 'monthly', label: 'Monthly (5% discount)', discount: 0.05 },
 ];
 
 export const addOnServices = [
@@ -115,42 +131,84 @@ export const addOnServices = [
   { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 },
 ];
 
+export const PET_SURCHARGE = 25;
+
+export function estimateSqFt(bedrooms: number, bathrooms: number): number {
+  if (bedrooms <= 0 && bathrooms <= 0) return 0;
+  return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
+}
+
+export function calcBasePrice(beds: number, baths: number, sqft: number): number {
+  let base = 120 + (beds * 20) + (baths * 15);
+  if (sqft > 1500) base += (sqft - 1500) * 0.05;
+  return Math.round(base);
+}
+
 export function calculateQuotePrice(config: {
   serviceType: string;
-  propertySize: string;
-  customSqFt: string;
+  propertySize?: string;
+  customSqFt?: string;
   frequency: string;
-  selectedAddOns: string[];
+  selectedAddOns?: string[];
   numberOfRooms?: string;
+  bedrooms?: string;
+  bathrooms?: string;
+  pets?: string;
 }): number {
-  const { serviceType, propertySize, customSqFt, frequency, selectedAddOns, numberOfRooms } = config;
+  const {
+    serviceType,
+    propertySize = '',
+    customSqFt = '',
+    frequency,
+    selectedAddOns = [],
+    numberOfRooms,
+    bedrooms = '',
+    bathrooms = '',
+    pets = 'no',
+  } = config;
   if (!serviceType) return 0;
 
   const service = quoteServiceTypes.find(s => s.value === serviceType);
-  const freq = frequencyOptions.find(f => f.value === frequency);
+  const freqList = [...frequencyOptions, ...fullQuoteFrequencyOptions];
+  const freq = freqList.find(f => f.value === frequency);
   if (!service || !freq) return 0;
+
+  let sqFt = parseInt(customSqFt) || 0;
+  const beds = parseInt(bedrooms) || 0;
+  const baths = parseFloat(bathrooms) || 0;
+
+  if (sqFt <= 0 && (beds > 0 || baths > 0)) {
+    sqFt = estimateSqFt(beds, baths);
+  }
 
   let basePrice = 0;
 
-  if (serviceType === 'dorm') {
-    const rooms = Math.max(0, parseInt(numberOfRooms || '') || 0);
+  if (serviceType === 'dorm' && numberOfRooms) {
+    const rooms = Math.max(0, parseInt(numberOfRooms) || 0);
     if (rooms > 0) {
       basePrice = rooms * ((service as any).perRoom || 45);
     } else {
       return 0;
     }
-  } else if (customSqFt && parseInt(customSqFt) > 0) {
-    const sqFt = parseInt(customSqFt);
-    basePrice = Math.max(service.minCharge, sqFt * (service.baseRate || 0));
+  } else if (sqFt > 0) {
+    const ratePrice = Math.max(service.minCharge, sqFt * (service.baseRate || 0));
+    if (beds > 0 || baths > 0) {
+      const formulaPrice = calcBasePrice(beds, baths, sqFt);
+      basePrice = Math.round(Math.max(formulaPrice, ratePrice));
+    } else {
+      basePrice = Math.round(ratePrice);
+    }
   } else if (propertySize) {
     const sizeOption = propertySizeOptions.find(s => s.value === propertySize);
     if (!sizeOption) return 0;
-    basePrice = service.minCharge * sizeOption.multiplier;
+    basePrice = Math.round(service.minCharge * sizeOption.multiplier);
   } else {
     return 0;
   }
 
-  basePrice = basePrice * (1 - freq.discount);
+  if (pets === 'yes') basePrice += PET_SURCHARGE;
+
+  basePrice = Math.round(basePrice * (1 - freq.discount));
 
   const addOnTotal = selectedAddOns.reduce((total, addOnId) => {
     const addOn = addOnServices.find(a => a.id === addOnId);

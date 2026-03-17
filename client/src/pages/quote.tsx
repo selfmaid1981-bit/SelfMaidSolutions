@@ -14,41 +14,16 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { Calculator, Phone, Check, Mail, Save, AlertTriangle, BookOpen, BedDouble, Bath, Ruler, Sparkles, Timer, Zap, Calendar, Clock } from 'lucide-react';
 import { UrgencyBanner, LoyaltyBadge, TrustSignals } from '@/components/urgency-banner';
-
-const serviceTypes = [
-  { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
-  { value: 'deep', label: 'Deep Cleaning', baseRate: 0.195, minCharge: 250 },
-  { value: 'moveout', label: 'Move-Out Cleaning', baseRate: 0.228, minCharge: 325 },
-  { value: 'apartment', label: 'Apartment Turnover', baseRate: 0.171, minCharge: 108 },
-  { value: 'shorttermrental', label: 'Short Term Rental Cleaning', baseRate: 0.114, minCharge: 95 },
-  { value: 'commercial', label: 'Commercial/Office Cleaning', baseRate: 0.163, minCharge: 180 },
-  { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
-];
-
-const frequencyOptions = [
-  { value: 'onetime', label: 'One-Time Service', discount: 0 },
-  { value: 'weekly', label: 'Weekly (15% discount)', discount: 0.15 },
-  { value: 'biweekly', label: 'Bi-Weekly (10% discount)', discount: 0.10 },
-  { value: 'monthly', label: 'Monthly (5% discount)', discount: 0.05 },
-];
-
-const addOns = [
-  { id: 'carpet', label: 'Carpet Cleaning', price: 75 },
-  { id: 'appliances', label: 'Appliance Cleaning', price: 35 },
-  { id: 'refrigerator', label: 'Refrigerator Cleaning', price: 30 },
-  { id: 'stove', label: 'Stove Cleaning', price: 25 },
-  { id: 'garage', label: 'Garage Cleaning', price: 60 },
-  { id: 'blinds', label: 'Blind Cleaning', price: 35 },
-  { id: 'baseboards', label: 'Baseboard Cleaning', price: 30 },
-];
+import {
+  sqFtServiceTypes as serviceTypes,
+  fullQuoteFrequencyOptions as frequencyOptions,
+  addOnServices as addOns,
+  estimateSqFt,
+  calculateQuotePrice,
+} from '@/lib/services';
 
 const DISCOUNT_PERCENT = 10;
 const COUNTDOWN_SECONDS = 15 * 60;
-
-function estimateSqFt(bedrooms: number, bathrooms: number): number {
-  if (bedrooms <= 0 && bathrooms <= 0) return 0;
-  return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
-}
 
 function generateAvailableSlots(): { date: string; label: string; slots: string[] }[] {
   const result: { date: string; label: string; slots: string[] }[] = [];
@@ -159,15 +134,15 @@ export default function Quote() {
   }, [bedrooms, bathrooms, customSqFt]);
 
   const quote = useMemo(() => {
-    if (!selectedService || !freq || estimatedSqFt <= 0) return 0;
-    let basePrice = Math.max(selectedService.minCharge, estimatedSqFt * selectedService.baseRate);
-    basePrice = basePrice * (1 - freq.discount);
-    const addOnTotal = selectedAddOns.reduce((total, addOnId) => {
-      const addOn = addOns.find(a => a.id === addOnId);
-      return total + (addOn?.price || 0);
-    }, 0);
-    return Math.round(basePrice + addOnTotal);
-  }, [selectedService, freq, estimatedSqFt, selectedAddOns]);
+    return calculateQuotePrice({
+      serviceType,
+      customSqFt: customSqFt || (estimatedSqFt > 0 ? String(estimatedSqFt) : ''),
+      frequency,
+      selectedAddOns,
+      bedrooms,
+      bathrooms,
+    });
+  }, [serviceType, customSqFt, estimatedSqFt, frequency, selectedAddOns, bedrooms, bathrooms]);
 
   const discountedPrice = useMemo(() => {
     if (!quote) return 0;

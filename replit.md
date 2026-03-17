@@ -19,7 +19,7 @@ The application uses a bold, premium design with a deep navy/purple/red-black pa
 - **Payment Processing**: Stripe integration for secure transactions, utilizing Stripe Elements and webhooks. Payment intent creation uses the booking's stored amount for integrity.
 - **Email Communication**: SendGrid for transactional and marketing emails.
 - **SMS Notifications**: Twilio integration for business owner notifications and customer review requests.
-- **Quote Calculator**: Dynamic calculator based on service type, property size, frequency, and add-on services.
+- **Quote Calculator**: Unified pricing engine in `client/src/lib/services.ts` (`calculateQuotePrice()`) used by all calculators (homepage, booking modal, full quote page). Service types, rates, and frequency discounts are defined once. Homepage and full quote page use `sqFtServiceTypes` (excludes dorm); booking modal uses full `quoteServiceTypes` with room-count input for dorm.
 - **Content & SEO**: Blog, local SEO strategies, dynamic sitemap.xml and robots.txt, server-side meta injection, and dynamically generated, SEO-optimized city-specific landing pages and city+service pages. Includes SEO slug aliases for redirects.
 - **Marketing Automation**: Strategies for email and social media automation workflows.
 - **Admin Dashboard**: Features for managing email marketing campaigns, subscribers, and automated review requests.

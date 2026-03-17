@@ -5,35 +5,13 @@ import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, P
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import mascotImg from '@assets/CB9B78E1-3011-4CA6-8EFF-BCEC4E145765_1773674858018.png';
-
-const serviceTypes = [
-  { value: 'residential', label: 'Standard House Cleaning', baseRate: 0.13, minCharge: 120 },
-  { value: 'deep', label: 'Deep Cleaning', baseRate: 0.195, minCharge: 250 },
-  { value: 'moveout', label: 'Move-Out Cleaning', baseRate: 0.228, minCharge: 325 },
-  { value: 'apartment', label: 'Apartment Turnover', baseRate: 0.171, minCharge: 108 },
-  { value: 'shorttermrental', label: 'Short Term Rental', baseRate: 0.114, minCharge: 95 },
-  { value: 'commercial', label: 'Commercial/Office', baseRate: 0.163, minCharge: 180 },
-  { value: 'construction', label: 'Construction Cleanup', baseRate: 0.293, minCharge: 400 },
-];
-
-const frequencyOptions = [
-  { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
-  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: 'Most Popular' },
-  { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
-];
-
-const PET_SURCHARGE = 25;
-
-function estimateSqFt(bedrooms: number, bathrooms: number): number {
-  if (bedrooms <= 0 && bathrooms <= 0) return 0;
-  return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
-}
-
-function calcBasePrice(beds: number, baths: number, sqft: number): number {
-  let base = 120 + (beds * 20) + (baths * 15);
-  if (sqft > 1500) base += (sqft - 1500) * 0.05;
-  return Math.round(base);
-}
+import {
+  sqFtServiceTypes as serviceTypes,
+  homepageFrequencyOptions as frequencyOptions,
+  PET_SURCHARGE,
+  estimateSqFt,
+  calculateQuotePrice,
+} from '@/lib/services';
 
 export function HomepageQuoteCalculator() {
   const { toast } = useToast();
@@ -58,23 +36,29 @@ export function HomepageQuoteCalculator() {
     return estimateSqFt(parseInt(bedrooms) || 0, parseFloat(bathrooms) || 0);
   }, [bedrooms, bathrooms, sqft]);
 
-  const basePrice = useMemo(() => {
-    const beds = parseInt(bedrooms) || 0;
-    const baths = parseFloat(bathrooms) || 0;
-    if (beds <= 0 && baths <= 0 && estimatedSqFt <= 0) return 0;
-    const formulaPrice = calcBasePrice(beds, baths, estimatedSqFt);
-    if (!selectedService) return formulaPrice;
-    const ratePrice = Math.max(selectedService.minCharge, estimatedSqFt * selectedService.baseRate);
-    return Math.round(Math.max(formulaPrice, ratePrice));
-  }, [selectedService, estimatedSqFt, bedrooms, bathrooms]);
-
   const price = useMemo(() => {
-    if (basePrice <= 0) return 0;
-    let total = basePrice;
-    if (pets === 'yes') total += PET_SURCHARGE;
-    total = Math.round(total * (1 - selectedFrequency.discount));
-    return total;
-  }, [basePrice, pets, selectedFrequency]);
+    return calculateQuotePrice({
+      serviceType,
+      customSqFt: sqft || (estimatedSqFt > 0 ? String(estimatedSqFt) : ''),
+      frequency,
+      selectedAddOns: [],
+      bedrooms,
+      bathrooms,
+      pets,
+    });
+  }, [serviceType, sqft, estimatedSqFt, frequency, bedrooms, bathrooms, pets]);
+
+  const basePrice = useMemo(() => {
+    return calculateQuotePrice({
+      serviceType,
+      customSqFt: sqft || (estimatedSqFt > 0 ? String(estimatedSqFt) : ''),
+      frequency: 'onetime',
+      selectedAddOns: [],
+      bedrooms,
+      bathrooms,
+      pets: 'no',
+    });
+  }, [serviceType, sqft, estimatedSqFt, bedrooms, bathrooms]);
 
   const sizeLabel = sqft
     ? `${sqft} sq ft`
