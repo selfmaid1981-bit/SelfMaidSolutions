@@ -48,3 +48,9 @@ id = "6ep2S5IXqsp2WRFOToLqy"
 uri = "file://self-maid-animated-logo-white.mp4"
 type = "video"
 title = "Self-Maid Animated Logo (White Background)"
+
+[[outputs]]
+id = "GKVLLVFoqd-_IO6PKw1eg"
+uri = "file://self-maid-project.tar.gz"
+type = "unspecified"
+title = "Self-Maid Project - Full Source Code"
