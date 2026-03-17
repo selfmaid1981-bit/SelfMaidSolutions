@@ -17,7 +17,7 @@ const galleryPairs = [
 
 export default function BeforeAfterGallery() {
   return (
-    <section className="py-14 lg:py-20 bg-white">
+    <section className="py-14 lg:py-20 marble-bg">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
@@ -28,18 +28,18 @@ export default function BeforeAfterGallery() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {galleryPairs.map((pair) => (
-            <div key={pair.id} className="grid grid-cols-2 gap-1 rounded-xl overflow-hidden shadow-lg">
+            <div key={pair.id} className="grid grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg border border-gray-200">
               <div className="relative">
                 <img
                   src={pair.beforeImage}
                   alt={pair.beforeAlt}
-                  className="w-full h-48 sm:h-56 object-cover"
+                  className="w-full h-44 sm:h-52 object-cover"
                   loading="lazy"
                   width={400}
                   height={300}
                 />
-                <div className="absolute bottom-0 left-0 right-0">
-                  <span className="inline-block bg-[#1F2A37]/85 text-white text-xs font-bold px-4 py-1.5 uppercase tracking-wider">
+                <div className="absolute bottom-3 left-3">
+                  <span className="inline-block bg-[#1F2A37] text-white text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
                     Before
                   </span>
                 </div>
@@ -48,13 +48,13 @@ export default function BeforeAfterGallery() {
                 <img
                   src={pair.afterImage}
                   alt={pair.afterAlt}
-                  className="w-full h-48 sm:h-56 object-cover"
+                  className="w-full h-44 sm:h-52 object-cover"
                   loading="lazy"
                   width={400}
                   height={300}
                 />
-                <div className="absolute bottom-0 right-0">
-                  <span className="inline-block bg-[#1E8E6A]/85 text-white text-xs font-bold px-4 py-1.5 uppercase tracking-wider">
+                <div className="absolute bottom-3 right-3">
+                  <span className="inline-block bg-[#1E8E6A] text-white text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
                     After
                   </span>
                 </div>

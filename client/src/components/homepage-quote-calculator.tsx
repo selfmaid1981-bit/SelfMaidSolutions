@@ -136,7 +136,7 @@ export function HomepageQuoteCalculator() {
   const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-3 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
 
   return (
-    <section className="py-14 lg:py-20 bg-gray-50" id="instant-quote">
+    <section className="py-14 lg:py-20 marble-bg" id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
           <div className="bg-[#1F2A37] px-6 py-4 flex items-center gap-3">

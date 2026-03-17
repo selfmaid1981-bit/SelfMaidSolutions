@@ -73,7 +73,7 @@ export function HeroSection() {
 
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-[5]">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" style={{ height: 40 }}>
-            <path d="M0 60L720 0L1440 60V60H0Z" fill="hsl(var(--background))"/>
+            <path d="M0 60L720 0L1440 60V60H0Z" fill="#f5f0eb"/>
           </svg>
         </div>
       </section>

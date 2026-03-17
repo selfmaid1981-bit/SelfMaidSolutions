@@ -109,8 +109,8 @@ export function Navigation() {
                 href="/"
                 className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 ${
                   location === '/' 
-                    ? 'text-primary bg-primary/8 font-semibold nav-active-enhanced' 
-                    : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                    ? 'text-[#C6A969] font-semibold' 
+                    : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
                 }`}
                 data-testid="nav-home"
               >
@@ -127,8 +127,8 @@ export function Navigation() {
                   href="/services"
                   className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location === '/services' || location === '/airbnb-cleaning'
-                      ? 'text-primary bg-primary/8 font-semibold nav-active-enhanced' 
-                      : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                      ? 'text-[#C6A969] font-semibold' 
+                      : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
                   }`}
                   data-testid="nav-services"
                 >
@@ -174,8 +174,8 @@ export function Navigation() {
                 <button
                   className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location.startsWith('/services/') 
-                      ? 'text-primary bg-primary/8 font-semibold nav-active-enhanced' 
-                      : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                      ? 'text-[#C6A969] font-semibold' 
+                      : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
                   }`}
                   data-testid="nav-service-areas"
                 >
@@ -205,7 +205,7 @@ export function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href.replace('/', ''))}
-                    className="nav-link-enhanced relative text-muted-foreground hover:text-primary px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 hover:bg-primary/5"
+                    className="nav-link-enhanced relative text-white/80 hover:text-[#C6A969] px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 hover:bg-white/5"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -216,8 +216,8 @@ export function Navigation() {
                     href={item.href}
                     className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 ${
                       isActive 
-                        ? 'text-primary bg-primary/8 font-semibold nav-active-enhanced' 
-                        : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                        ? 'text-[#C6A969] font-semibold' 
+                        : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
                     }`}
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
@@ -252,7 +252,7 @@ export function Navigation() {
               className="relative w-10 h-10 p-0"
               data-testid="mobile-menu-toggle"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
             </Button>
           </div>
         </div>

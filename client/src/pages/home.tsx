@@ -130,7 +130,7 @@ export default function Home() {
         structuredData={structuredData}
       />
       
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen marble-bg">
         <Navigation />
         <HeroSection />
         <TrustBar />

@@ -1,6 +1,8 @@
 import type { Express } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import { timingSafeEqual } from "crypto";
+import path from "path";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
 import { getUncachableStripeClient } from "./stripeClient";
@@ -62,6 +64,12 @@ function requireAdmin(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  const publicPath = path.resolve(import.meta.dirname, "..", "public");
+  app.use("/assets", express.static(path.join(publicPath, "assets"), {
+    maxAge: '1d',
+    immutable: true,
+  }));
+
   // Set up Replit Auth BEFORE other routes
   await setupAuth(app);
   registerAuthRoutes(app);
