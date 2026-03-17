@@ -3,7 +3,7 @@ import { ArrowRight, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
-import heroImg from '@assets/stock_images/clean_modern_bathroo_821537ee.jpg';
+import heroImg from '@assets/hero-kitchen-luxury.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -18,8 +18,8 @@ export function HeroSection() {
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center 40%' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A37]/90 via-[#1F2A37]/60 to-[#1F2A37]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A37]/80 via-transparent to-[#1F2A37]/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A37]/85 via-[#1F2A37]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A37]/60 via-transparent to-[#1F2A37]/15" />
         </div>
 
         <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#1F2A37] to-transparent z-[5]" />
