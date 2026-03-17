@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { trackLead } from '@/components/facebook-pixel';
-import mascotImage from '@assets/2290BC3D-42AC-47C8-8279-D1D3C7452892_1773674858018.png';
+import mascotImage from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),

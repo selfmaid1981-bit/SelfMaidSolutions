@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import brandImage from '@assets/5ABA9A4B-8196-460F-B91D-ACB1EE0ED467_1773674858017.png';
+import brandImage from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),

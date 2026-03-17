@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import mascotImg from '@assets/CB9B78E1-3011-4CA6-8EFF-BCEC4E145765_1773674858018.png';
+import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
 
 interface Animated3DLogoProps {
   size?: number;

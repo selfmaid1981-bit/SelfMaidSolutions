@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { Calculator, BedDouble, Bath, Ruler, Sparkles, ArrowRight, Check, Zap, Phone, CheckCircle, PawPrint, Star } from 'lucide-react';
+import { Calculator, BedDouble, Bath, Ruler, ArrowRight, Phone, PawPrint, Sparkles, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import mascotImg from '@assets/CB9B78E1-3011-4CA6-8EFF-BCEC4E145765_1773674858018.png';
 import {
   sqFtServiceTypes as serviceTypes,
   homepageFrequencyOptions as frequencyOptions,
@@ -133,330 +132,212 @@ export function HomepageQuoteCalculator() {
     setLocation(`/quote?${params.toString()}`);
   };
 
+  const selectClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969] appearance-none";
+  const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-3 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
+
   return (
-    <section className="relative overflow-hidden py-14 lg:py-20" id="instant-quote">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #0e7490 40%, #0f766e 70%, #1d4ed8 100%)' }} />
-      <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-      <div className="absolute top-0 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 text-white px-4 py-2 rounded-full text-sm font-semibold mb-5">
-              <Zap className="w-4 h-4 text-amber-300" />
-              Instant Online Pricing
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-              Your Exact Price{' '}
-              <span className="text-amber-300">in Seconds</span>
-            </h2>
-
-            <p className="text-emerald-100/85 text-lg mb-7 leading-relaxed max-w-lg">
-              Enter your home details and see transparent, no-hidden-fee pricing instantly — no phone call needed.
-            </p>
-
-            <div className="relative mb-8">
-              <div className="flex items-end gap-4">
-                <img
-                  src={mascotImg}
-                  alt="Self-Maid Cleaning Solutions"
-                  className="w-24 h-24 lg:w-32 lg:h-32 object-contain flex-shrink-0 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
-                  loading="lazy"
-                  width={128}
-                  height={128}
-                />
-                <div className="relative bg-white/15 backdrop-blur-sm border border-white/25 rounded-2xl rounded-bl-sm px-5 py-3 max-w-xs">
-                  <p className="text-white font-semibold text-sm leading-snug">
-                    Let's get your home sparkling! Enter your details and I'll show you your price instantly.
-                  </p>
-                  <div className="absolute -bottom-1 left-0 w-3 h-3 bg-white/15 border-l border-b border-white/25" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
-                </div>
-              </div>
-            </div>
-
-            <ul className="space-y-3 mb-8">
-              {['Instant pricing — no waiting', 'No credit card required', 'Saves as a lead in our system', 'Continue straight to booking'].map(f => (
-                <li key={f} className="flex items-center gap-3 text-white/90">
-                  <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                  <span className="text-[15px]">{f}</span>
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="tel:334-877-9513"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/25 text-white font-semibold px-6 py-3 rounded-2xl transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              Or Call (334) 877-9513
-            </a>
+    <section className="py-14 lg:py-20 bg-gray-50" id="instant-quote">
+      <div className="max-w-xl mx-auto px-4 sm:px-6">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+          <div className="bg-[#1F2A37] px-6 py-4 flex items-center gap-3">
+            <Calculator className="w-5 h-5 text-[#C6A969]" />
+            <h2 className="text-lg font-bold text-white font-serif italic">Get an Instant Quote</h2>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
-            <div className="w-full max-w-md">
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 shadow-2xl">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 bg-amber-400 rounded-xl flex items-center justify-center shadow-lg">
-                    <Calculator className="w-5 h-5 text-slate-900" />
+          <div className="px-6 py-6">
+            {step === 'calc' ? (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
+                      <BedDouble className="w-3.5 h-3.5 text-gray-400" /> Bedrooms
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="10"
+                      placeholder="e.g. 3"
+                      value={bedrooms}
+                      onChange={e => setBedrooms(e.target.value)}
+                      className={inputClass}
+                      data-testid="home-quote-bedrooms"
+                    />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">Quote Calculator</p>
-                    <p className="text-emerald-200/70 text-xs">Get your price now</p>
-                  </div>
-                  <div className="ml-auto flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 rounded-full px-2.5 py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-emerald-300 text-xs font-semibold">Live</span>
+                    <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
+                      <Bath className="w-3.5 h-3.5 text-gray-400" /> Bathrooms
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="10"
+                      step="0.5"
+                      placeholder="e.g. 2"
+                      value={bathrooms}
+                      onChange={e => setBathrooms(e.target.value)}
+                      className={inputClass}
+                      data-testid="home-quote-bathrooms"
+                    />
                   </div>
                 </div>
 
-                {step === 'calc' ? (
-                  <div className="space-y-3">
-                    <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 block">Service Type</label>
-                      <select
-                        value={serviceType}
-                        onChange={e => setServiceType(e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 appearance-none"
-                        data-testid="home-quote-service"
-                      >
-                        <option value="" className="text-slate-900">Select a service...</option>
-                        {serviceTypes.map(s => (
-                          <option key={s.value} value={s.value} className="text-slate-900">{s.label}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                          <BedDouble className="w-3 h-3" /> Bedrooms
-                        </label>
-                        <input
-                          type="number"
-                          min="0"
-                          max="10"
-                          placeholder="e.g. 3"
-                          value={bedrooms}
-                          onChange={e => setBedrooms(e.target.value)}
-                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                          data-testid="home-quote-bedrooms"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                          <Bath className="w-3 h-3" /> Bathrooms
-                        </label>
-                        <input
-                          type="number"
-                          min="0"
-                          max="10"
-                          step="0.5"
-                          placeholder="e.g. 2"
-                          value={bathrooms}
-                          onChange={e => setBathrooms(e.target.value)}
-                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                          data-testid="home-quote-bathrooms"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                          <Ruler className="w-3 h-3" /> Sq Ft
-                          <span className="text-white/40 text-[10px]">(opt.)</span>
-                        </label>
-                        <input
-                          type="number"
-                          min="0"
-                          placeholder={estimatedSqFt > 0 && !sqft ? `~${estimatedSqFt}` : 'e.g. 1500'}
-                          value={sqft}
-                          onChange={e => setSqft(e.target.value)}
-                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                          data-testid="home-quote-sqft"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                          <PawPrint className="w-3 h-3" /> Pets?
-                        </label>
-                        <select
-                          value={pets}
-                          onChange={e => setPets(e.target.value)}
-                          className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 appearance-none"
-                          data-testid="home-quote-pets"
-                        >
-                          <option value="no" className="text-slate-900">No pets</option>
-                          <option value="yes" className="text-slate-900">Yes (+$25)</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    {basePrice > 0 && (
-                      <div className="space-y-1.5">
-                        {frequencyOptions.map(opt => {
-                          const optPrice = Math.round((basePrice + (pets === 'yes' ? PET_SURCHARGE : 0)) * (1 - opt.discount));
-                          return (
-                            <button
-                              key={opt.value}
-                              type="button"
-                              onClick={() => setFrequency(opt.value)}
-                              className={`w-full flex items-center justify-between rounded-xl px-3 py-2 text-sm transition-all ${
-                                frequency === opt.value
-                                  ? 'bg-white/20 border border-amber-400/50 shadow-lg'
-                                  : 'bg-white/5 border border-white/10 hover:bg-white/10'
-                              }`}
-                              data-testid={`home-quote-freq-${opt.value}`}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span className={`w-3 h-3 rounded-full border-2 flex items-center justify-center ${
-                                  frequency === opt.value ? 'border-amber-400' : 'border-white/30'
-                                }`}>
-                                  {frequency === opt.value && <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />}
-                                </span>
-                                <span className="text-white font-medium">{opt.label}</span>
-                                {opt.badge && (
-                                  <span className="text-[9px] font-bold text-amber-300 bg-amber-400/20 border border-amber-400/30 px-1.5 py-0.5 rounded-full">{opt.badge}</span>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-1.5">
-                                {opt.discount > 0 && (
-                                  <span className="text-emerald-400 text-[10px] font-semibold">-{Math.round(opt.discount * 100)}%</span>
-                                )}
-                                <span className={`font-bold ${frequency === opt.value ? 'text-amber-300' : 'text-white/70'}`}>${optPrice}</span>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-
-                    {price > 0 && (
-                      <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-4 text-center" data-testid="home-quote-result">
-                        <p className="text-white/60 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
-                        <p className="text-4xl font-black text-white" data-testid="home-quote-price">${price}</p>
-                        <p className="text-white/50 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
-                        {sizeLabel && <p className="text-white/40 text-[10px] mt-0.5">{sizeLabel}{pets === 'yes' ? ' · Pet surcharge' : ''}</p>}
-                      </div>
-                    )}
-
-                    <button
-                      onClick={handleContinue}
-                      disabled={!serviceType || estimatedSqFt <= 0}
-                      className="w-full bg-amber-400 hover:bg-amber-300 disabled:bg-white/10 disabled:text-white/30 text-slate-900 font-bold py-3 rounded-xl text-sm shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-                      data-testid="home-quote-continue"
+                <div>
+                  <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 block">Type of Service</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <select
+                      value={serviceType}
+                      onChange={e => setServiceType(e.target.value)}
+                      className={selectClass}
+                      data-testid="home-quote-service"
                     >
-                      {price > 0 ? (
-                        <>
-                          Book This Cleaning
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      ) : (
-                        <>
-                          <Calculator className="w-4 h-4" />
-                          Enter Details to See Price
-                        </>
-                      )}
-                    </button>
-
-                    <div className="flex items-center justify-center gap-3 text-[10px] text-white/50 mt-1">
-                      <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />5.0 Google Rating</span>
-                      <span>·</span>
-                      <span>500+ Homes Cleaned</span>
-                      <span>·</span>
-                      <span>Fully Insured</span>
-                    </div>
-
-                    <button
-                      onClick={handleSeeFullQuote}
-                      className="w-full text-white/50 hover:text-white/80 text-xs py-1 transition-colors"
+                      {serviceTypes.map(s => (
+                        <option key={s.value} value={s.value}>{s.label}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={frequency}
+                      onChange={e => setFrequency(e.target.value)}
+                      className={selectClass}
+                      data-testid="home-quote-frequency"
                     >
-                      Want add-ons or frequency discounts? See full calculator →
-                    </button>
+                      {frequencyOptions.map(f => (
+                        <option key={f.value} value={f.value}>
+                          {f.label}{f.discount > 0 ? ` (-${Math.round(f.discount * 100)}%)` : ''}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-3 text-center">
-                      <p className="text-white/60 text-xs">Your Quote</p>
-                      <p className="text-3xl font-black text-white">${price}</p>
-                      <p className="text-white/50 text-xs">{selectedService?.label} · {sizeLabel}</p>
-                    </div>
+                </div>
 
-                    <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 block">Name *</label>
-                      <input
-                        type="text"
-                        placeholder="Your name"
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                        data-testid="home-quote-name"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 block">Email *</label>
-                      <input
-                        type="email"
-                        placeholder="your@email.com"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                        data-testid="home-quote-email"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-white/70 text-xs font-medium mb-1 flex items-center gap-1">
-                        <Phone className="w-3 h-3" /> Phone
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="(334) 555-0100"
-                        value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-2.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-                        data-testid="home-quote-phone"
-                      />
-                      <p className="text-emerald-300/70 text-[10px] mt-1">We'll text your quote summary instantly</p>
-                    </div>
-
-                    <button
-                      onClick={handleSubmit}
-                      disabled={saveQuoteMutation.isPending}
-                      className="w-full bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-slate-900 font-bold py-3 rounded-xl text-sm shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-                      data-testid="home-quote-submit"
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
+                      <Ruler className="w-3.5 h-3.5 text-gray-400" /> Sq Ft
+                      <span className="text-gray-400 text-[10px]">(optional)</span>
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder={estimatedSqFt > 0 && !sqft ? `~${estimatedSqFt}` : 'e.g. 1500'}
+                      value={sqft}
+                      onChange={e => setSqft(e.target.value)}
+                      className={inputClass}
+                      data-testid="home-quote-sqft"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
+                      <PawPrint className="w-3.5 h-3.5 text-gray-400" /> Pets?
+                    </label>
+                    <select
+                      value={pets}
+                      onChange={e => setPets(e.target.value)}
+                      className={selectClass}
+                      data-testid="home-quote-pets"
                     >
-                      {saveQuoteMutation.isPending ? 'Saving...' : (
-                        <>
-                          <Sparkles className="w-4 h-4" />
-                          Save Quote & Continue to Booking
-                        </>
-                      )}
-                    </button>
+                      <option value="no">No pets</option>
+                      <option value="yes">Yes (+$25)</option>
+                    </select>
+                  </div>
+                </div>
 
-                    <div className="flex items-center justify-center gap-3 text-[10px] text-white/50 mt-1">
-                      <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />5.0 Google Rating</span>
-                      <span>·</span>
-                      <span>500+ Homes Cleaned</span>
-                      <span>·</span>
-                      <span>Fully Insured</span>
-                    </div>
-
-                    <button
-                      onClick={() => setStep('calc')}
-                      className="w-full text-white/50 hover:text-white/80 text-xs py-1 transition-colors"
-                    >
-                      ← Back to calculator
-                    </button>
+                {price > 0 && (
+                  <div className="bg-[#1E8E6A]/5 border border-[#1E8E6A]/20 rounded-xl p-4 text-center" data-testid="home-quote-result">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
+                    <p className="text-4xl font-black text-[#1F2A37]" data-testid="home-quote-price">${price}</p>
+                    <p className="text-gray-500 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
                   </div>
                 )}
 
-                <p className="text-center text-emerald-200/50 text-xs mt-3">
-                  Free · Instant · No commitment
-                </p>
+                <button
+                  onClick={handleContinue}
+                  disabled={!serviceType || estimatedSqFt <= 0}
+                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:bg-gray-200 disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-400 text-[#1F2A37] font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                  data-testid="home-quote-continue"
+                >
+                  {price > 0 ? (
+                    <>Calculate Price</>
+                  ) : (
+                    <>
+                      <Calculator className="w-4 h-4" />
+                      Calculate Price
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleSeeFullQuote}
+                  className="w-full text-gray-400 hover:text-[#1E8E6A] text-xs py-1 transition-colors"
+                >
+                  Need add-ons or more options? See full calculator →
+                </button>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="bg-[#1E8E6A]/5 border border-[#1E8E6A]/20 rounded-xl p-3 text-center">
+                  <p className="text-gray-500 text-xs">Your Quote</p>
+                  <p className="text-3xl font-black text-[#1F2A37]">${price}</p>
+                  <p className="text-gray-500 text-xs">{selectedService?.label} · {sizeLabel}</p>
+                </div>
+
+                <div>
+                  <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 block">Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    className={inputClass}
+                    data-testid="home-quote-name"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 block">Email *</label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className={inputClass}
+                    data-testid="home-quote-email"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
+                    <Phone className="w-3.5 h-3.5 text-gray-400" /> Phone
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="(334) 555-0100"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    className={inputClass}
+                    data-testid="home-quote-phone"
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={saveQuoteMutation.isPending}
+                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:opacity-50 text-[#1F2A37] font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                  data-testid="home-quote-submit"
+                >
+                  {saveQuoteMutation.isPending ? 'Saving...' : (
+                    <>
+                      <Sparkles className="w-4 h-4" />
+                      Save Quote & Continue to Booking
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => setStep('calc')}
+                  className="w-full text-gray-400 hover:text-[#1E8E6A] text-xs py-1 transition-colors"
+                >
+                  ← Back to calculator
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
