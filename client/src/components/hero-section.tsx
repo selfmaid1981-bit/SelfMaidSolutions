@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
+
 import heroImg from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 
 export function HeroSection() {
@@ -24,49 +24,38 @@ export function HeroSection() {
         <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#1F2A37] to-transparent z-[5]" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center">
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              <p className="text-sm sm:text-base font-semibold text-[#C6A969] italic mb-3 tracking-wide font-serif">
-                Your Home's New Cleaning Standard
-              </p>
+          <div className="max-w-2xl">
+            <p className="text-sm sm:text-base font-semibold text-[#C6A969] italic mb-3 tracking-wide font-serif">
+              Your Home's New Cleaning Standard
+            </p>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight mb-3 font-serif">
-                <span className="block text-white italic">A calm, polished,</span>
-                <span className="block text-white italic">professional clean —</span>
-                <span className="block text-[#C6A969] italic">every single visit.</span>
-              </h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight mb-3 font-serif">
+              <span className="block text-white italic">A calm, polished,</span>
+              <span className="block text-white italic">professional clean —</span>
+              <span className="block text-[#C6A969] italic">every single visit.</span>
+            </h1>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mt-8">
-                <Button
-                  onClick={() => {
-                    const el = document.getElementById('instant-quote');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
-                  data-testid="hero-get-quote"
-                >
-                  Get Your Instant Quote
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-                <Button
-                  onClick={() => setIsBookingModalOpen(true)}
-                  variant="outline"
-                  className="bg-white/90 hover:bg-white text-[#1F2A37] border-white/80 px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
-                  data-testid="hero-book-cleaning"
-                >
-                  <CalendarCheck className="w-5 h-5 mr-2" />
-                  Book Cleaning
-                </Button>
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <img
-                src={mascotImg}
-                alt="Shine the Super Sponge - Self-Maid mascot"
-                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] object-contain drop-shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-                loading="eager"
-              />
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+              <Button
+                onClick={() => {
+                  const el = document.getElementById('instant-quote');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
+                data-testid="hero-get-quote"
+              >
+                Get Your Instant Quote
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button
+                onClick={() => setIsBookingModalOpen(true)}
+                variant="outline"
+                className="bg-white/90 hover:bg-white text-[#1F2A37] border-white/80 px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
+                data-testid="hero-book-cleaning"
+              >
+                <CalendarCheck className="w-5 h-5 mr-2" />
+                Book Cleaning
+              </Button>
             </div>
           </div>
         </div>
