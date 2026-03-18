@@ -1,4 +1,5 @@
 import { Shield, Leaf, CheckCircle, Award } from 'lucide-react';
+import ownerPhoto from '@assets/808AA65C-8994-4D31-BAF3-4FDC2EC96722_1773873939311.png';
 
 const trustItems = [
   {
@@ -32,6 +33,26 @@ export function AboutSection() {
             Why Choose Self-Maid
           </h2>
           <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14 mb-12">
+          <div className="flex-shrink-0">
+            <div className="w-40 h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-[#C6A969]/30 shadow-lg">
+              <img
+                src={ownerPhoto}
+                alt="Michelle, Owner of Self-Maid Cleaning Solutions"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div className="text-center lg:text-left">
+            <h3 className="text-xl font-bold text-[#1F2A37] mb-2 font-serif italic">
+              Hi, I'm Michelle
+            </h3>
+            <p className="text-gray-600 leading-relaxed max-w-lg">
+              With over 16 years of experience, I built Self-Maid on one simple promise: every home deserves a calm, thorough, and trustworthy clean. Our team treats your space like our own — because your peace of mind matters most.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">

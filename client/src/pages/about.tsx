@@ -4,7 +4,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone, Heart, Award, CheckCircle } from 'lucide-react';
-import ownerImage from '@assets/A4D3F113-FF2F-4171-A3BA-02E30CED2600_1773862384828.png';
+import ownerImage from '@assets/808AA65C-8994-4D31-BAF3-4FDC2EC96722_1773873939311.png';
 
 const features = [
   {
