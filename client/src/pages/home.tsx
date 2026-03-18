@@ -1,15 +1,15 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
+import { AboutSection } from '@/components/about-section';
 import { ServicesSection } from '@/components/services-section';
-import { GoogleReviews } from '@/components/google-reviews';
+import { HowItWorks } from '@/components/how-it-works';
+import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
+import { TestimonialsSection } from '@/components/testimonials-section';
+import { FinalCtaSection } from '@/components/final-cta-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
-import { TrustBar } from '@/components/trust-bar';
-import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { ChatWidget } from '@/components/chat-widget';
-import BeforeAfterGallery from '@/components/before-after-gallery';
-import { FinalCtaSection } from '@/components/final-cta-section';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useState } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
@@ -133,27 +133,27 @@ export default function Home() {
       <div className="min-h-screen marble-bg">
         <Navigation />
         <HeroSection />
-        <TrustBar />
-        <BeforeAfterGallery />
+        <AboutSection />
         <ServicesSection />
+        <HowItWorks />
         <HomepageQuoteCalculator />
-        <GoogleReviews />
+        <TestimonialsSection />
         <FinalCtaSection />
         <ContactSection />
         <Footer />
         
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 shadow-xl px-3 py-3 safe-area-pb">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-xl px-3 py-3 safe-area-pb">
           <div className="flex gap-2">
             <button
               onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-emerald-500/20"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#1F2A37] text-white py-3 rounded-xl font-bold text-sm shadow-md"
             >
               <CalendarCheck className="w-4 h-4" />
               Book Online
             </button>
             <a 
               href="tel:334-877-9513"
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-slate-900 dark:bg-slate-700 text-white py-3 rounded-xl font-bold text-sm"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#C6A969] text-[#1F2A37] py-3 rounded-xl font-bold text-sm"
             >
               <Phone className="w-4 h-4" />
               Call Us

@@ -3,7 +3,7 @@ import { ArrowRight, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from './booking-modal';
 import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
-import heroImg from '@assets/hero-kitchen-luxury.png';
+import heroImg from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 
 export function HeroSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -14,12 +14,11 @@ export function HeroSection() {
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
-            alt="Luxury clean kitchen interior"
+            alt="Beautiful white marble kitchen interior"
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center 40%' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A37]/85 via-[#1F2A37]/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A37]/60 via-transparent to-[#1F2A37]/15" />
+          <div className="absolute inset-0 bg-[#1F2A37]/70" />
         </div>
 
         <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#1F2A37] to-transparent z-[5]" />
@@ -27,25 +26,26 @@ export function HeroSection() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center">
             <div className="text-center lg:text-left order-2 lg:order-1">
-              <p className="text-sm sm:text-base font-semibold text-[#C6A969] italic mb-2 tracking-wide">
-                Bringing the Shine Since 2009
+              <p className="text-sm sm:text-base font-semibold text-[#C6A969] italic mb-3 tracking-wide font-serif">
+                Your Home's New Cleaning Standard
               </p>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-extrabold leading-[1.1] tracking-tight mb-6">
-                <span className="block text-white">Relax, We Do</span>
-                <span className="block text-white">the Dirty Work.</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight mb-3 font-serif">
+                <span className="block text-white italic">A calm, polished,</span>
+                <span className="block text-white italic">professional clean —</span>
+                <span className="block text-[#C6A969] italic">every single visit.</span>
               </h1>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mt-8">
                 <Button
                   onClick={() => {
                     const el = document.getElementById('instant-quote');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="bg-[#1E8E6A] hover:bg-[#166B50] text-white px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
+                  className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-8 py-6 rounded-lg font-bold text-base h-auto shadow-lg"
                   data-testid="hero-get-quote"
                 >
-                  Get Instant Quote
+                  Get Your Instant Quote
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
                 <Button

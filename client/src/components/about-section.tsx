@@ -1,107 +1,56 @@
-import { Shield, UserCheck, Leaf, Clock, Award, Users } from 'lucide-react';
-import bathroomImage from '@assets/stock_images/clean_modern_bathroo_821537ee.jpg';
-import officeImage from '@assets/photo-1507089947368-19c1da9775ae_1764233361201.avif';
+import { Shield, Leaf, CheckCircle, Award } from 'lucide-react';
+
+const trustItems = [
+  {
+    icon: CheckCircle,
+    title: 'Trusted Professionals',
+    description: 'Background-checked, trained, and reliable cleaning experts.',
+  },
+  {
+    icon: Leaf,
+    title: 'Eco-Friendly Products',
+    description: 'Safe, non-toxic solutions for your family and pets.',
+  },
+  {
+    icon: Award,
+    title: 'Satisfaction Guaranteed',
+    description: "Not happy? We'll re-clean at no extra charge.",
+  },
+  {
+    icon: Shield,
+    title: 'Insured & Bonded',
+    description: 'Full coverage and peace of mind on every visit.',
+  },
+];
 
 export function AboutSection() {
-  const features = [
-    {
-      icon: Shield,
-      title: 'Fully Insured & Bonded',
-      description: 'Complete peace of mind with comprehensive insurance coverage'
-    },
-    {
-      icon: UserCheck,
-      title: 'Background Checked',
-      description: 'All team members thoroughly vetted and professionally trained'
-    },
-    {
-      icon: Leaf,
-      title: 'Eco-Friendly Products',
-      description: 'Safe, green cleaning solutions for your family and pets'
-    },
-    {
-      icon: Clock,
-      title: 'Flexible Scheduling',
-      description: 'Same-day service available. We work around your busy schedule'
-    },
-    {
-      icon: Award,
-      title: '16 Years Experience',
-      description: 'Serving Montgomery, Prattville, Selma, Homewood, and Clanton with proven expertise'
-    },
-    {
-      icon: Users,
-      title: '500+ Happy Customers',
-      description: 'Trusted by families and businesses across Alabama'
-    }
-  ];
-
   return (
-    <section id="about" className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-serif">
-            Why Choose Self-Maid Cleaning?
+    <section id="about" className="py-14 lg:py-20 marble-bg">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+            Why Choose Self-Maid
           </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Family-owned and operated with 16 years of experience serving Alabama communities. 
-            We deliver professional results you can trust.
-          </p>
+          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {trustItems.map((item, index) => {
+            const Icon = item.icon;
             return (
-              <div 
-                key={index} 
-                className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700" 
-                data-testid={`feature-${index}`}
+              <div
+                key={index}
+                className="flex flex-col items-center"
+                data-testid={`trust-${index}`}
               >
-                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                <div className="w-14 h-14 rounded-full bg-[#1F2A37]/5 flex items-center justify-center mb-3">
+                  <Icon className="w-7 h-7 text-[#1F2A37]" />
                 </div>
-                <h4 className="font-bold text-lg text-slate-900 dark:text-white mb-2">{feature.title}</h4>
-                <p className="text-slate-600 dark:text-slate-400">{feature.description}</p>
+                <h3 className="text-sm font-bold text-[#1F2A37] mb-1">{item.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed max-w-[160px]">{item.description}</p>
               </div>
             );
           })}
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-            <img 
-              src={bathroomImage} 
-              alt="Professionally cleaned modern bathroom - spotless results by Self-Maid Montgomery AL" 
-              className="w-full h-auto object-cover" 
-              loading="lazy"
-              width={600}
-              height={400}
-              data-testid="about-image-1"
-            />
-          </div>
-          
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-            <img 
-              src={officeImage} 
-              alt="Professional commercial office cleaning services in Montgomery Alabama" 
-              className="w-full h-auto object-cover" 
-              loading="lazy"
-              width={600}
-              height={400}
-              data-testid="about-image-2"
-            />
-          </div>
-        </div>
-        
-        <div className="text-center mt-12">
-          <a 
-            href="tel:334-877-9513" 
-            className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            data-testid="about-call-button"
-          >
-            Call (334) 877-9513 for a Free Quote
-          </a>
         </div>
       </div>
     </section>

@@ -132,21 +132,27 @@ export function HomepageQuoteCalculator() {
     setLocation(`/quote?${params.toString()}`);
   };
 
-  const selectClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969] appearance-none";
-  const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-3 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
+  const selectClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969] appearance-none";
+  const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
 
   return (
     <section className="py-14 lg:py-20 marble-bg" id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-          <div className="bg-[#1F2A37] px-6 py-4 flex items-center gap-3">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+            Get Your Instant Quote
+          </h2>
+          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+        </div>
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-[#C6A969]/20">
+          <div className="bg-[#1F2A37] px-6 py-5 flex items-center justify-center gap-3">
             <Calculator className="w-5 h-5 text-[#C6A969]" />
-            <h2 className="text-lg font-bold text-white font-serif italic">Get an Instant Quote</h2>
+            <h3 className="text-lg font-bold text-white font-serif italic">Instant Cleaning Estimate</h3>
           </div>
 
-          <div className="px-6 py-6">
+          <div className="px-6 py-8">
             {step === 'calc' ? (
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
@@ -252,7 +258,7 @@ export function HomepageQuoteCalculator() {
                 <button
                   onClick={handleContinue}
                   disabled={!serviceType || estimatedSqFt <= 0}
-                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:bg-gray-200 disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-400 text-[#1F2A37] font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:bg-gray-200 disabled:from-gray-200 disabled:to-gray-200 disabled:text-gray-400 text-[#1F2A37] font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   data-testid="home-quote-continue"
                 >
                   {price > 0 ? (
@@ -319,7 +325,7 @@ export function HomepageQuoteCalculator() {
                 <button
                   onClick={handleSubmit}
                   disabled={saveQuoteMutation.isPending}
-                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:opacity-50 text-[#1F2A37] font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-[#C6A969] to-[#B8985A] hover:from-[#B8985A] hover:to-[#A88A4D] disabled:opacity-50 text-[#1F2A37] font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   data-testid="home-quote-submit"
                 >
                   {saveQuoteMutation.isPending ? 'Saving...' : (
