@@ -142,22 +142,22 @@ export default function Home() {
         <ContactSection />
         <Footer />
         
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-xl px-3 py-3 safe-area-pb">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-xl px-3 py-3 safe-area-pb">
           <div className="flex gap-2">
+            <a 
+              href="tel:334-877-9513"
+              className="flex-[1.2] inline-flex items-center justify-center gap-2 bg-[#C6A969] text-[#1F2A37] py-3.5 rounded-xl font-bold text-sm shadow-md"
+            >
+              <Phone className="w-4 h-4" />
+              Call Now
+            </a>
             <button
               onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#1F2A37] text-white py-3 rounded-xl font-bold text-sm shadow-md"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#1F2A37] text-white py-3.5 rounded-xl font-bold text-sm"
             >
               <CalendarCheck className="w-4 h-4" />
               Book Online
             </button>
-            <a 
-              href="tel:334-877-9513"
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#C6A969] text-[#1F2A37] py-3 rounded-xl font-bold text-sm"
-            >
-              <Phone className="w-4 h-4" />
-              Call Us
-            </a>
           </div>
         </div>
         <BookingModal isOpen={isMobileBookingOpen} onClose={() => setIsMobileBookingOpen(false)} />

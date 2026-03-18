@@ -110,24 +110,24 @@ export function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"
+          className="fixed bottom-6 right-6 z-50 bg-[#1F2A37] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></span>
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#C6A969] rounded-full border-2 border-white animate-pulse"></span>
         </button>
       )}
 
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-100px)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4 flex items-center justify-between">
+          <div className="bg-[#1F2A37] text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <MessageCircle className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="font-semibold">Self-Maid Assistant</h3>
-                <p className="text-xs text-emerald-200">24/7 Chat Support</p>
+                <p className="text-xs text-[#C6A969]">24/7 Chat Support</p>
               </div>
             </div>
             <button
@@ -148,7 +148,7 @@ export function ChatWidget() {
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl ${
                     message.role === 'user'
-                      ? 'bg-emerald-600 text-white rounded-br-md'
+                      ? 'bg-[#1F2A37] text-white rounded-br-md'
                       : 'bg-white text-gray-800 shadow-sm border border-gray-100 rounded-bl-md'
                   }`}
                 >
@@ -159,7 +159,7 @@ export function ChatWidget() {
             {isLoading && messages[messages.length - 1]?.role === 'user' && (
               <div className="flex justify-start">
                 <div className="bg-white p-3 rounded-2xl rounded-bl-md shadow-sm border border-gray-100">
-                  <Loader2 className="w-5 h-5 animate-spin text-emerald-600" />
+                  <Loader2 className="w-5 h-5 animate-spin text-[#C6A969]" />
                 </div>
               </div>
             )}
@@ -174,13 +174,13 @@ export function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#C6A969] focus:border-transparent text-sm"
                 disabled={isLoading}
               />
               <Button
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
-                className="bg-emerald-600 hover:bg-emerald-700 rounded-full p-2 h-auto"
+                className="bg-[#1F2A37] hover:bg-[#2a3a4d] rounded-full p-2 h-auto"
               >
                 <Send className="w-5 h-5" />
               </Button>

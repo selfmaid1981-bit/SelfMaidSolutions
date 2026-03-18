@@ -1,0 +1,194 @@
+Refactor and optimize the EXISTING homepage only.
+
+DO NOT rebuild the project.
+DO NOT create new pages.
+DO NOT duplicate components.
+DO NOT modify backend logic, API routes, or database.
+
+--------------------------------------------------
+
+GOAL
+
+Improve visual quality, brand consistency, and conversion rate
+while keeping all current functionality intact.
+
+The site should feel:
+premium
+clean
+trustworthy
+conversion-focused
+
+--------------------------------------------------
+
+GLOBAL STYLE RULES
+
+• Primary colors: navy (#1F2A37), gold (#C6A969), white
+• Remove ALL green and random colors
+• Use gold ONLY for primary CTAs and accents
+• Maintain consistent spacing between sections
+• Increase whitespace for a cleaner look
+• Keep typography modern and readable
+
+--------------------------------------------------
+
+CRITICAL FIXES
+
+1. REMOVE FLOATING BUTTON
+
+• Remove the floating green "Book Now" button completely
+• Keep only:
+  - bottom sticky CTA bar
+  - buttons inside sections
+
+--------------------------------------------------
+
+2. CTA HIERARCHY
+
+• Make ONE primary action across the entire site:
+
+Primary CTA:
+"Get Your Instant Quote"
+
+• Style:
+  background: gold (#C6A969)
+  text: black
+  large, rounded, bold
+
+• Secondary CTA:
+dark navy button
+
+• Add under primary CTA:
+"Takes 30 seconds — no obligation"
+
+--------------------------------------------------
+
+3. HERO SECTION (MODIFY ONLY)
+
+• Keep existing structure
+• Use high-quality kitchen image
+• Add dark overlay:
+  background: rgba(31, 42, 55, 0.75)
+
+• Headline:
+"Your Home’s New Cleaning Standard"
+
+• Subtext:
+"A calm, polished, professional clean — every single visit."
+
+• Add CTA button above the fold
+
+• Remove duplicate or competing buttons
+
+--------------------------------------------------
+
+4. IMAGE CONSISTENCY
+
+• Remove any unrelated or random images (e.g. books, camera, etc.)
+• Only use:
+  - clean kitchens
+  - bathrooms
+  - living rooms
+  - cleaning action shots
+
+• Ensure all images are:
+  - bright
+  - high quality
+  - consistent lighting
+
+--------------------------------------------------
+
+5. SERVICES SECTION (REFINE ONLY)
+
+• Keep existing component
+• Improve cards:
+
+  - equal height
+  - consistent spacing
+  - subtle shadow:
+    shadow-sm hover:shadow-md transition
+
+  - gold border:
+    border-2 border-[#C6A969]
+
+• Update service names:
+
+  Standard Cleaning → Ongoing Home Cleaning  
+  Deep Cleaning → Detailed Deep Cleaning  
+  Airbnb Cleaning → Short-Term Rental Turnovers  
+  Move-Out Cleaning → Move-Out & Turnover Cleaning  
+
+--------------------------------------------------
+
+6. TEXT DENSITY
+
+• Reduce long bullet lists (especially “What’s Included”)
+• Show top 4–5 key items only
+• Add:
+  “View full checklist” option if needed
+
+--------------------------------------------------
+
+7. COLOR CLEANUP
+
+• Remove green and orange UI elements
+• Replace with:
+  - gold for highlights
+  - navy for structure
+  - gray for secondary text
+
+--------------------------------------------------
+
+8. FAQ SECTION
+
+• Keep layout
+• Improve readability:
+
+  - max-width: 2xl
+  - increase spacing between cards
+  - slightly larger text
+
+--------------------------------------------------
+
+9. BOTTOM CTA BAR
+
+• Keep bar
+• Make one button dominant:
+
+  Primary (gold): Call Now or Get Quote  
+  Secondary (navy): Book Online  
+
+--------------------------------------------------
+
+10. BEFORE / AFTER (IF EXISTS)
+
+• Ensure images are:
+  - same room
+  - same angle
+  - clean vs dirty
+
+• Fix mismatched pairs
+
+DO NOT create a new section — only refine existing
+
+--------------------------------------------------
+
+PERFORMANCE
+
+• Do not add heavy libraries
+• Optimize images (use WebP if possible)
+• Keep bundle size small
+
+--------------------------------------------------
+
+FINAL RESULT
+
+The site should feel:
+
+premium  
+minimal  
+clear  
+easy to act on  
+
+No clutter. No competing actions. One clear conversion path.
+
+--------------------------------------------------

@@ -708,7 +708,7 @@ body {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #1E8E6A, #1E8E6A);
+  background: linear-gradient(90deg, #C6A969, #C6A969);
   border-radius: 1px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(-50%);
@@ -724,7 +724,7 @@ body {
 }
 
 .nav-book-btn {
-  background: linear-gradient(135deg, #1E8E6A 0%, #166B50 100%);
+  background: linear-gradient(135deg, #1F2A37 0%, #2a3a4d 100%);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -746,7 +746,7 @@ body {
 }
 
 .nav-book-btn:hover {
-  box-shadow: 0 6px 20px rgba(30, 142, 106, 0.35);
+  box-shadow: 0 6px 20px rgba(31, 42, 55, 0.35);
   transform: translateY(-1px);
 }
 

@@ -4,25 +4,25 @@ import { BookingModal } from './booking-modal';
 const services = [
   {
     id: 'residential',
-    title: 'Standard Cleaning',
+    title: 'Ongoing Home Cleaning',
     description: 'Routine upkeep for a spotless home.',
     image: '/assets/services/icon-standard.png',
   },
   {
     id: 'deep',
-    title: 'Deep Cleaning',
+    title: 'Detailed Deep Cleaning',
     description: 'Thorough top-to-bottom cleaning.',
     image: '/assets/services/icon-deep.png',
   },
   {
     id: 'moveout',
-    title: 'Move-Out Cleaning',
+    title: 'Move-Out & Turnover Cleaning',
     description: 'Complete clean for a fresh start.',
     image: '/assets/services/icon-moveout.png',
   },
   {
     id: 'airbnb',
-    title: 'Airbnb Cleaning',
+    title: 'Short-Term Rental Turnovers',
     description: 'Guest-ready cleaning for rentals.',
     image: '/assets/services/icon-airbnb.png',
   },
@@ -68,7 +68,7 @@ export function ServicesSection() {
                 className="group text-center focus:outline-none"
                 data-testid={`service-card-${service.id}`}
               >
-                <div className="border border-[#C6A969]/40 hover:border-[#C6A969] rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:shadow-lg bg-white group-hover:-translate-y-1">
+                <div className="border-2 border-[#C6A969]/30 hover:border-[#C6A969] rounded-2xl p-4 sm:p-5 transition-all duration-300 shadow-sm hover:shadow-md bg-white group-hover:-translate-y-1 h-full flex flex-col items-center">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3">
                     <img
                       src={service.image}
