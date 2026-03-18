@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sparkles, Search, Truck, Home, Briefcase } from 'lucide-react';
+import { Sparkles, Search, Truck, Home, Briefcase, GraduationCap, Building2 } from 'lucide-react';
 import { BookingModal } from './booking-modal';
 
 const services = [
@@ -33,6 +33,18 @@ const services = [
     description: 'Professional office cleaning.',
     icon: Briefcase,
   },
+  {
+    id: 'dorm',
+    title: 'Student Dorm',
+    description: 'Fast dorm turnovers for students.',
+    icon: GraduationCap,
+  },
+  {
+    id: 'multifamily',
+    title: 'Multi-Family Turnovers',
+    description: 'Unit-ready cleaning for property managers.',
+    icon: Building2,
+  },
 ];
 
 export function ServicesSection() {
@@ -52,7 +64,7 @@ export function ServicesSection() {
             <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
             {services.map((service) => {
               const Icon = service.icon;
               return (
