@@ -1,0 +1,247 @@
+Perfect — this is the last major piece that turns your site into a real money-making machine 💰
+
+You want:
+👉 Instant Quote Calculator (fast, simple, converts)
+👉 connected to your lead system
+👉 lightweight (Replit-friendly)
+
+⸻
+
+🔥 WHAT THIS WILL DO
+
+User flow becomes:
+
+Landing → Click Quote → Gets Price → Submits → You get lead
+
+👉 This dramatically increases conversions.
+
+⸻
+
+💻 ✅ DROP-IN CALCULATOR (React)
+
+Add this component:
+
+📄 QuoteCalculator.jsx
+
+import { useState } from "react";
+
+export default function QuoteCalculator() {
+  const [form, setForm] = useState({
+    bedrooms: 1,
+    bathrooms: 1,
+    sqft: 1000,
+  });
+
+  const [price, setPrice] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  // SIMPLE PRICING LOGIC
+  const calculatePrice = () => {
+    let base = 80;
+    let bedroomCost = form.bedrooms * 15;
+    let bathroomCost = form.bathrooms * 20;
+    let sizeCost = form.sqft * 0.05;
+
+    const total = Math.round(base + bedroomCost + bathroomCost + sizeCost);
+    setPrice(total);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await fetch("http://localhost:3001/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...form, price }),
+    });
+
+    setSubmitted(true);
+  };
+
+  return (
+    <section className="py-16 bg-[#F5F7F9]">
+      <div className="max-w-xl mx-auto px-6 text-center">
+
+        <h2 className="text-2xl font-semibold mb-4">
+          Get Your Instant Cleaning Estimate
+        </h2>
+
+        {!submitted ? (
+          <>
+            <div className="space-y-4 mb-6">
+
+              <input
+                type="number"
+                min="1"
+                value={form.bedrooms}
+                onChange={(e) => setForm({ ...form, bedrooms: e.target.value })}
+                className="w-full p-3 border rounded"
+                placeholder="Bedrooms"
+              />
+
+              <input
+                type="number"
+                min="1"
+                value={form.bathrooms}
+                onChange={(e) => setForm({ ...form, bathrooms: e.target.value })}
+                className="w-full p-3 border rounded"
+                placeholder="Bathrooms"
+              />
+
+              <input
+                type="number"
+                value={form.sqft}
+                onChange={(e) => setForm({ ...form, sqft: e.target.value })}
+                className="w-full p-3 border rounded"
+                placeholder="Square Footage"
+              />
+            </div>
+
+            <button
+              onClick={calculatePrice}
+              className="bg-[#C6A969] px-6 py-3 rounded font-semibold mb-4"
+            >
+              Calculate Price
+            </button>
+
+            {price && (
+              <div className="bg-white p-4 rounded shadow mb-4">
+                <p className="text-lg font-semibold">
+                  Estimated Price: ${price}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Final price may vary based on condition.
+                </p>
+              </div>
+            )}
+
+            {price && (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="w-full p-3 border rounded"
+                  onChange={(e) =>
+                    setForm({ ...form, name: e.target.value })
+                  }
+                />
+
+                <input
+                  type="text"
+                  placeholder="Phone"
+                  className="w-full p-3 border rounded"
+                  onChange={(e) =>
+                    setForm({ ...form, phone: e.target.value })
+                  }
+                />
+
+                <button className="bg-[#1F2A37] text-white px-6 py-3 rounded font-semibold">
+                  Book This Cleaning
+                </button>
+              </form>
+            )}
+          </>
+        ) : (
+          <div className="bg-green-50 p-4 rounded">
+            <p className="font-semibold text-green-700">
+              You're all set!
+            </p>
+            <p className="text-sm">
+              We’ll contact you shortly to confirm your cleaning.
+            </p>
+          </div>
+        )}
+
+      </div>
+    </section>
+  );
+}
+
+
+⸻
+
+📍 WHERE TO ADD IT
+
+Inside your homepage:
+
+{/* HERO */}
+
+{/* SERVICES */}
+
+{/* BEFORE / AFTER */}
+
+{/* ADD HERE 👇 */}
+<QuoteCalculator />
+
+{/* TESTIMONIALS */}
+
+
+⸻
+
+💰 WHY THIS WORKS (IMPORTANT)
+
+This is what happens psychologically:
+
+Before:
+
+👉 “Contact for quote” (friction)
+
+After:
+
+👉 “Oh I already know the price” (low friction)
+
+⸻
+
+🔥 CONVERSION BOOST BUILT IN
+
+This calculator:
+
+✅ gives instant value
+✅ builds trust
+✅ qualifies leads
+✅ increases bookings
+✅ sends data to your backend
+
+⸻
+
+🧠 NEXT LEVEL (OPTIONAL UPGRADE)
+
+Later you can:
+	•	adjust pricing logic per service
+	•	add deep cleaning multiplier
+	•	show “recommended plan”
+	•	connect to SMS auto booking
+
+⸻
+
+💥 FINAL RESULT
+
+Now your site has:
+
+✅ premium design
+✅ emotional hook (hero)
+✅ proof (before/after)
+✅ instant pricing (calculator)
+✅ lead capture (API)
+✅ automation-ready system
+
+⸻
+
+🚀 Real Talk
+
+This is now:
+
+👉 not just a website
+👉 a lead + conversion engine
+
+⸻
+
+If you want next, I can:
+
+✅ make pricing smarter (based on real jobs)
+✅ add “weekly / biweekly pricing toggle”
+✅ or build auto follow-up texts that close jobs
+
+You’re building something seriously powerful 👍
