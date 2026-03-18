@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { trackLead } from '@/components/facebook-pixel';
-import mascotImage from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
+import fullLogoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -124,13 +124,7 @@ export default function GetStarted() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
       <header className="px-4 py-4 flex items-center justify-between max-w-2xl mx-auto">
         <a href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-yellow-400/40">
-            <img src={mascotImage} alt="Self-Maid" className="w-full h-full object-cover object-[center_20%]" />
-          </div>
-          <div>
-            <div className="text-white font-black text-lg leading-none">Self-Maid</div>
-            <div className="text-emerald-300 text-[9px] font-bold tracking-widest uppercase">Cleaning Solutions</div>
-          </div>
+          <img src={fullLogoImage} alt="Self-Maid Cleaning Solutions" className="h-10 w-auto object-contain" />
         </a>
         <a
           href="tel:334-877-9513"

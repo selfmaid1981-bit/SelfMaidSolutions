@@ -4,10 +4,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Leaf, Clock, Star, Phone, Heart, Award, CheckCircle } from 'lucide-react';
-import dusticeTeamImage from '@assets/4962B151-CDC3-4237-AFA2-FF55BB2F35A9_1771957028664.png';
-import battleScene1 from '@assets/5A9D2FCC-A812-4180-B091-0B10400A0E52_1771957028664.png';
-import battleScene2 from '@assets/IMG_0203_1771957028664.png';
-import ownerImage from '@assets/IMG_1097_1773578331891.png';
+import ownerImage from '@assets/A4D3F113-FF2F-4171-A3BA-02E30CED2600_1773862384828.png';
 
 const features = [
   {
@@ -61,31 +58,31 @@ export default function About() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="page-hero py-14 lg:py-20">
+        <section className="bg-[#1F2A37] py-14 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <Heart className="w-4 h-4 text-rose-300" />
+            <div className="inline-flex items-center gap-2 bg-[#C6A969]/15 border border-[#C6A969]/30 text-[#C6A969] px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Heart className="w-4 h-4" />
               Family-Owned Since 2009
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5 font-serif italic">
               About Self-Maid Cleaning
             </h1>
-            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
-              Your trusted cleaning partner in Alabama, dedicated to making your world shine with superhero-level service.
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Your trusted cleaning partner in Alabama, dedicated to providing professional, reliable service every time.
             </p>
           </div>
         </section>
 
         {/* Meet Michelle - Owner Bio Section */}
-        <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <section className="py-16 bg-[#f5f0eb]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 text-primary font-medium mb-4">
-                  <Star className="w-5 h-5 fill-primary" />
+                <div className="inline-flex items-center gap-2 text-[#C6A969] font-medium mb-4">
+                  <Star className="w-5 h-5 fill-[#C6A969]" />
                   Meet The Owner
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
+                <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] mb-6 font-serif italic">
                   Hi, I'm Michelle
                 </h2>
                 <div className="space-y-4 text-muted-foreground text-lg">
@@ -202,94 +199,20 @@ export default function About() {
                 </div>
               </div>
               
-              <div className="relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent z-10 pointer-events-none" />
-                <img 
-                  src={dusticeTeamImage} 
-                  alt="The Dustice League - Self-Maid's superhero cleaning team" 
-                  className="rounded-2xl shadow-2xl w-full h-auto" 
-                  data-testid="about-image"
-                />
+              <div className="bg-[#1F2A37] rounded-2xl p-8 text-center shadow-2xl">
+                <div className="grid grid-cols-2 gap-6">
+                  {stats.map((stat, index) => (
+                    <div key={index} data-testid={`about-stat-${index}`}>
+                      <div className="text-3xl lg:text-4xl font-bold text-[#C6A969] mb-1 font-serif">{stat.number}</div>
+                      <div className="text-white/70 text-sm">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-16 bg-muted/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Our Track Record</h2>
-              <p className="text-muted-foreground text-lg">Numbers that speak to our commitment to excellence</p>
-            </div>
-            
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center" data-testid={`stat-${index}`}>
-                  <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Battle Scene Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                We Fight Dirt So You Don't Have To!
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Our cleaning superheroes are equipped and ready to tackle even the toughest messes. 
-                No job is too big or too dirty for our expert team.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={battleScene1}
-                      alt="The Dustice League battling grime - SCRUB! ZAP!" 
-                      className="w-full h-auto transform transition-transform group-hover:scale-105"
-                      data-testid="about-battle-scene-1"
-                    />
-                  </div>
-                  <div className="p-6 bg-primary/5">
-                    <h3 className="text-xl font-bold text-foreground mb-2">Armed & Ready</h3>
-                    <p className="text-muted-foreground">
-                      Our team comes fully equipped with professional-grade cleaning tools and eco-friendly 
-                      solutions to defeat dirt, grime, and germs in every corner.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={battleScene2}
-                      alt="The Great Clean-Off - Self-Maid superhero team" 
-                      className="w-full h-auto transform transition-transform group-hover:scale-105"
-                      data-testid="about-battle-scene-2"
-                    />
-                  </div>
-                  <div className="p-6 bg-secondary/5">
-                    <h3 className="text-xl font-bold text-foreground mb-2">No Mess Too Tough</h3>
-                    <p className="text-muted-foreground">
-                      Whether it's stubborn stains, accumulated dust, or deep-seated grime, 
-                      our superheroes tackle every challenge with skill and determination.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
 
         {/* Mission Section */}
         <section className="py-16 lg:py-24">
@@ -309,18 +232,18 @@ export default function About() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-primary py-16">
+        <section className="bg-[#1F2A37] py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl font-bold text-white mb-4 font-serif italic">
               Ready to Experience the Self-Maid Difference?
             </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Join hundreds of satisfied customers across Alabama and discover what superhero-level cleaning looks like.
+            <p className="text-xl text-white/70 mb-8">
+              Join hundreds of satisfied customers across Alabama and discover professional cleaning you can count on.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="tel:334-877-9513" 
-                className="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center"
+                className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-8 py-4 rounded-lg text-lg font-bold transition-colors inline-flex items-center justify-center shadow-lg"
                 data-testid="about-cta-phone"
               >
                 <Phone className="w-5 h-5 mr-2" />
@@ -328,7 +251,7 @@ export default function About() {
               </a>
               <a 
                 href="/#contact" 
-                className="bg-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-secondary/90 transition-colors"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-lg text-lg font-bold transition-colors"
                 data-testid="about-cta-contact"
               >
                 Get Free Quote

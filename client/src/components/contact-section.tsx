@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
-import brandImage from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
 
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -297,21 +296,6 @@ export function ContactSection() {
           </div>
           
           <div className="order-1 lg:order-2 text-center lg:text-left">
-            <div className="flex justify-center lg:justify-end mb-8">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-800/80 rounded-2xl z-10 pointer-events-none" />
-                <img 
-                  src={brandImage} 
-                  alt="Self-Maid Cleaning Solutions - Professional cleaning Montgomery Alabama" 
-                  className="w-64 h-auto lg:w-80 lg:h-auto object-contain"
-                  loading="lazy"
-                  width={320}
-                  height={400}
-                  data-testid="contact-mascot-image"
-                />
-              </div>
-            </div>
-            
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/30 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500 opacity-60" />
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/5 rounded-full pointer-events-none" />

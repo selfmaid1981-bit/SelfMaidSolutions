@@ -5,7 +5,7 @@ import { QuickBookingForm } from '@/components/quick-booking-form';
 import { SocialProofBar } from '@/components/social-proof-bar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check, X, Star, AlertCircle } from 'lucide-react';
-import heroCleaningImage from '@assets/5CDFA54A-E612-462C-AF20-7F109CE3216B_1771957028664.png';
+import heroKitchenImage from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 import residentialImage from '@assets/stock_images/professional_house_c_e14d1c08.jpg';
 import deepCleaningImage from '@assets/stock_images/deep_cleaning_kitche_676b17fb.jpg';
 import commercialImage from '@assets/stock_images/commercial_office_cl_ccd81be4.jpg';
@@ -207,39 +207,32 @@ export default function Services() {
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero Section - Split Layout */}
-        <section className="page-hero">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
-              <div className="flex flex-col justify-center px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
-                <p className="text-sm font-semibold text-teal-400 uppercase tracking-wider mb-4">
-                  SERVICES
-                </p>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                  Professional<br />
-                  Cleaning<br />
-                  Services
-                </h1>
-                <p className="text-lg sm:text-xl text-emerald-100/80 mb-8 max-w-md">
-                  Residential & Commercial Cleaning in Montgomery, Prattville, Selma, Homewood & Clanton, AL
-                </p>
-                <div>
-                  <a 
-                    href="/quote" 
-                    className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200"
-                    data-testid="hero-get-quote-btn"
-                  >
-                    Get a Quote
-                  </a>
-                </div>
-              </div>
-              <div className="relative overflow-hidden bg-slate-800/50 flex items-center justify-center">
-                <img 
-                  src={heroCleaningImage}
-                  alt="Self-Maid Cleaning Solutions superhero sponge mascot in clean living room"
-                  className="w-full h-full object-contain min-h-[300px] lg:min-h-full"
-                />
-              </div>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden min-h-[400px] lg:min-h-[500px]">
+          <div className="absolute inset-0 z-0">
+            <img src={heroKitchenImage} alt="Beautiful clean interior" className="w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
+            <div className="absolute inset-0 bg-[#1F2A37]/75" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-24">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold text-[#C6A969] italic tracking-wide mb-4 font-serif">
+                SERVICES
+              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-serif italic">
+                Professional<br />
+                Cleaning<br />
+                Services
+              </h1>
+              <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-md">
+                Residential & Commercial Cleaning in Montgomery, Prattville, Selma, Homewood & Clanton, AL
+              </p>
+              <a 
+                href="/quote" 
+                className="inline-flex items-center bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all"
+                data-testid="hero-get-quote-btn"
+              >
+                Get a Quote
+              </a>
             </div>
           </div>
         </section>

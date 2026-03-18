@@ -2,7 +2,6 @@ import { Link } from 'wouter';
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaGoogle, FaYelp } from 'react-icons/fa';
 import fullLogoImage from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -79,17 +78,9 @@ export function Footer() {
                 height={96}
               />
             </div>
-            <div className="flex items-start gap-3 mb-5">
-              <img
-                src={mascotImg}
-                alt="Self-Maid mascot"
-                className="w-14 h-14 object-contain flex-shrink-0 drop-shadow-md"
-                loading="lazy"
-              />
-              <p className="text-slate-400 leading-relaxed text-sm">
-                Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
-              </p>
-            </div>
+            <p className="text-slate-400 leading-relaxed text-sm mb-5">
+              Professional cleaning services you can trust. Serving Central Alabama with 16 years of experience.
+            </p>
             <div className="flex space-x-2.5 mb-5">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;

@@ -5,8 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Phone, MessageCircle, HelpCircle } from 'lucide-react';
-import battleScene from '@assets/88479C0C-B329-449E-B231-A318AB805181_1771957028664.png';
-import heroImage from '@assets/39BCB483-D041-4939-87DD-891359ECCDDE_1771957028664.png';
 
 const faqs = [
   {
@@ -84,18 +82,15 @@ export default function FAQ() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="page-hero py-12 lg:py-16">
+        <section className="bg-[#1F2A37] py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <img 
-              src={heroImage}
-              alt="Self-Maid cleaning superhero mascot team with mops and cleaning supplies" 
-              className="w-full max-w-sm mx-auto mb-6 h-auto hero-image-blend"
-              data-testid="faq-hero-image"
-            />
-            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-[#C6A969]/15 flex items-center justify-center">
+              <HelpCircle className="w-8 h-8 text-[#C6A969]" />
+            </div>
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5 font-serif italic">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
               Got questions? We've got answers! Find everything you need to know about our cleaning services.
             </p>
           </div>
@@ -139,61 +134,33 @@ export default function FAQ() {
           </div>
         </section>
 
-        {/* Battle Scene Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-muted/20">
-          <div 
-            className="min-h-[400px] lg:min-h-[500px]"
-            style={{
-              backgroundImage: `url(${battleScene})`,
-              backgroundSize: 'contain',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-          </div>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              We Fight Dirt So You Don't Have To!
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Armed with professional tools and expertise, we tackle every cleaning challenge with superhero-level determination.
-            </p>
-          </div>
-        </section>
-
         {/* Still Have Questions Section */}
-        <section className="py-16 bg-muted/20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Card className="border-primary/20 bg-primary/5">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-2xl font-bold text-foreground mb-2">
-                  Still Have Questions?
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Our friendly team is here to help! Get in touch and we'll provide personalized answers.
-                </p>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a 
-                    href="tel:334-877-9513" 
-                    className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center justify-center"
-                    data-testid="faq-cta-phone"
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call (334) 877-9513
-                  </a>
-                  <a 
-                    href="/#contact" 
-                    className="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors inline-flex items-center justify-center"
-                    data-testid="faq-cta-contact"
-                  >
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Send Us a Message
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
+        <section className="py-16 bg-[#1F2A37]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-3 font-serif italic">
+              Still Have Questions?
+            </h3>
+            <p className="text-white/60 mb-8">
+              Our friendly team is here to help! Get in touch and we'll provide personalized answers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:334-877-9513" 
+                className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-6 py-3 rounded-lg font-bold transition-colors inline-flex items-center justify-center shadow-lg"
+                data-testid="faq-cta-phone"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call (334) 877-9513
+              </a>
+              <a 
+                href="/#contact" 
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3 rounded-lg font-bold transition-colors inline-flex items-center justify-center"
+                data-testid="faq-cta-contact"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Send Us a Message
+              </a>
+            </div>
           </div>
         </section>
 

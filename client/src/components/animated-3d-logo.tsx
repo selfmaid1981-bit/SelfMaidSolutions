@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import mascotImg from '@assets/899188B8-841E-438D-B74D-E0D12D6EBD97_1773754774408.png';
+import fullLogoImg from '@assets/C1779863-20FF-4284-87E7-F8622C11FE8C_1773603022797.png';
 
 interface Animated3DLogoProps {
   size?: number;
@@ -40,7 +40,7 @@ export function Animated3DLogo({ size = 220, variant = 'light' }: Animated3DLogo
 
       <div className="cr-mascot-slot">
         <img
-          src={mascotImg}
+          src={fullLogoImg}
           alt="Self-Maid Cleaning Solutions professional logo"
           className="cr-mascot-img"
           width={mascotH}
