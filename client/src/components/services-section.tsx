@@ -37,10 +37,7 @@ const services = [
 
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<string>('');
-
   const handleServiceClick = (serviceId: string) => {
-    setSelectedService(serviceId);
     setIsBookingModalOpen(true);
   };
 

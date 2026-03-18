@@ -1,13 +1,12 @@
 import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { Calculator, BedDouble, Bath, Ruler, ArrowRight, Phone, PawPrint, Sparkles, Star } from 'lucide-react';
+import { Calculator, BedDouble, Bath, Ruler, Phone, PawPrint, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import {
   sqFtServiceTypes as serviceTypes,
   homepageFrequencyOptions as frequencyOptions,
-  PET_SURCHARGE,
   estimateSqFt,
   calculateQuotePrice,
 } from '@/lib/services';
