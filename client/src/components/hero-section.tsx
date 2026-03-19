@@ -12,7 +12,7 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.75) 0%, rgba(20,50,45,0.7) 50%, rgba(15,28,46,0.75) 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.78) 0%, rgba(18,32,38,0.75) 50%, rgba(15,28,46,0.78) 100%)' }} />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-10 md:py-16 lg:py-20 text-center">
