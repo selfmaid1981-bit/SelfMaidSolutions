@@ -1,7 +1,6 @@
 import beforeAfterKitchen from '@assets/IMG_1852_1773888845939.png';
 import afterKitchen from '@assets/IMG_0599_1773888652538.jpeg';
 import afterKitchen2 from '@assets/att.8e7fYRKunZ706dZ8V_Z2PmSu1QzcZZ7BCW6xoPjGJ7s_1773888845939.jpeg';
-import afterLivingRoom from '@assets/att.0SCYMHFE4RjR-tOzfxYAhJ4ucBLqN6ZO7s6oqTpOuNI_1773888845939.jpeg';
 
 export default function BeforeAfterGallery() {
   return (
@@ -25,7 +24,7 @@ export default function BeforeAfterGallery() {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
               <img
                 src={afterKitchen}
@@ -43,19 +42,6 @@ export default function BeforeAfterGallery() {
               <img
                 src={afterKitchen2}
                 alt="Clean kitchen with navy cabinets after Self-Maid cleaning"
-                className="w-full h-56 sm:h-64 object-cover"
-                loading="lazy"
-              />
-              <div className="absolute bottom-3 right-3">
-                <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
-                  After
-                </span>
-              </div>
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
-              <img
-                src={afterLivingRoom}
-                alt="Clean living room after Self-Maid cleaning"
                 className="w-full h-56 sm:h-64 object-cover"
                 loading="lazy"
               />
