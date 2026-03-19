@@ -7,8 +7,8 @@ export function FinalCtaSection() {
         <h2 className="text-3xl lg:text-4xl font-bold mb-3 font-serif italic">
           Ready for a Spotless Home?
         </h2>
-        <p className="text-white/60 text-base mb-8">
-          Get your free, no-obligation quote today!
+        <p className="text-gray-300 text-base mb-8">
+          Limited availability this week
         </p>
         <div>
           <a

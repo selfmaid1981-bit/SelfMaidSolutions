@@ -135,13 +135,13 @@ export function HomepageQuoteCalculator() {
   const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
 
   return (
-    <section className="py-14 lg:py-20 marble-bg" id="instant-quote">
+    <section className="py-14 lg:py-20 bg-[#1F2A37]" id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
-            Get Your Instant Quote
+          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
+            Get Your Instant Price
           </h2>
-          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+          <p className="text-gray-300 mt-3">Takes less than 30 seconds</p>
         </div>
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-[#C6A969]/20">
           <div className="bg-[#1F2A37] px-6 py-5 flex items-center justify-center gap-3">
@@ -247,7 +247,7 @@ export function HomepageQuoteCalculator() {
                 </div>
 
                 {price > 0 && (
-                  <div className="bg-[#1E8E6A]/5 border border-[#1E8E6A]/20 rounded-xl p-4 text-center" data-testid="home-quote-result">
+                  <div className="bg-[#C6A969]/10 border border-[#C6A969]/20 rounded-xl p-4 text-center" data-testid="home-quote-result">
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
                     <p className="text-4xl font-black text-[#1F2A37]" data-testid="home-quote-price">${price}</p>
                     <p className="text-gray-500 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
@@ -272,14 +272,14 @@ export function HomepageQuoteCalculator() {
 
                 <button
                   onClick={handleSeeFullQuote}
-                  className="w-full text-gray-400 hover:text-[#1E8E6A] text-xs py-1 transition-colors"
+                  className="w-full text-gray-400 hover:text-[#C6A969] text-xs py-1 transition-colors"
                 >
                   Need add-ons or more options? See full calculator →
                 </button>
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="bg-[#1E8E6A]/5 border border-[#1E8E6A]/20 rounded-xl p-3 text-center">
+                <div className="bg-[#C6A969]/10 border border-[#C6A969]/20 rounded-xl p-3 text-center">
                   <p className="text-gray-500 text-xs">Your Quote</p>
                   <p className="text-3xl font-black text-[#1F2A37]">${price}</p>
                   <p className="text-gray-500 text-xs">{selectedService?.label} · {sizeLabel}</p>
@@ -337,7 +337,7 @@ export function HomepageQuoteCalculator() {
 
                 <button
                   onClick={() => setStep('calc')}
-                  className="w-full text-gray-400 hover:text-[#1E8E6A] text-xs py-1 transition-colors"
+                  className="w-full text-gray-400 hover:text-[#C6A969] text-xs py-1 transition-colors"
                 >
                   ← Back to calculator
                 </button>
