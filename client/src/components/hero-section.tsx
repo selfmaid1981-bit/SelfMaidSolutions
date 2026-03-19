@@ -25,11 +25,15 @@ export function HeroSection() {
           Done Right.
         </h1>
 
-        <p className="text-white/90 text-base sm:text-lg mb-8 max-w-md mx-auto leading-relaxed">
+        <p className="text-white/90 text-base sm:text-lg mb-3 max-w-md mx-auto leading-relaxed">
           Reliable, polished results — every visit.
         </p>
 
-        <div className="flex flex-col items-center">
+        <p className="text-sm text-gray-300 mb-8">
+          Trusted by homeowners who want it done right the first time
+        </p>
+
+        <div className="flex flex-col items-center mt-2">
           <a
             href="#instant-quote"
             onClick={(e) => {

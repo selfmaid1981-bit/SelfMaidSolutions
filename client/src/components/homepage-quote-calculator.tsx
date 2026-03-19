@@ -139,7 +139,7 @@ export function HomepageQuoteCalculator() {
       <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
-            Get Your Instant Price
+            Get Your Exact Cleaning Price
           </h2>
           <p className="text-gray-300 mt-3">Takes less than 30 seconds</p>
         </div>
@@ -251,6 +251,12 @@ export function HomepageQuoteCalculator() {
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
                     <p className="text-4xl font-black text-[#1F2A37]" data-testid="home-quote-price">${price}</p>
                     <p className="text-gray-500 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
+                    <a
+                      href="tel:334-877-9513"
+                      className="mt-3 inline-flex items-center gap-2 bg-[#1F2A37] text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-[#2D3F52] transition-colors"
+                    >
+                      📞 Call to Book — (334) 877-9513
+                    </a>
                   </div>
                 )}
 

@@ -8,7 +8,7 @@ export default function BeforeAfterGallery() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
-            See the Difference
+            See the Real Difference
           </h2>
           <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
           <p className="text-gray-600 mt-3 text-sm">Real results from real Self-Maid clients</p>
