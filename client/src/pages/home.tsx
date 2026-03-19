@@ -134,8 +134,8 @@ export default function Home() {
       
       <div className="min-h-screen marble-bg">
         <Navigation />
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C6A969] to-transparent" />
         <HeroSection />
-        <TrustBar />
         <ServicesSection />
         <BeforeAfterGallery />
         <HowItWorks />

@@ -1,11 +1,10 @@
 import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 import heroImg from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden min-h-[520px] lg:min-h-[600px]">
+    <section className="relative overflow-hidden min-h-[480px] lg:min-h-[560px]">
       <div className="absolute inset-0 z-0">
         <img
           src={heroImg}
@@ -13,49 +12,40 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0 bg-[#1F2A37]/75" />
+        <div className="absolute inset-0 bg-[#0f1c2e]/85" />
       </div>
 
-      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#1F2A37] to-transparent z-[5]" />
+      <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-10 md:py-16 lg:py-20 text-center">
+        <p className="text-sm font-semibold text-[#C6A969] mb-5 tracking-wide">
+          ⭐⭐⭐⭐⭐ Rated &bull; Insured &amp; Bonded &bull; Montgomery, AL
+        </p>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
-        <div className="max-w-2xl">
-          <p className="text-sm sm:text-base font-semibold text-[#C6A969] italic mb-3 tracking-wide font-serif">
-            Montgomery's Trusted Cleaning Professionals
+        <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-semibold leading-[1.2] tracking-tight mb-4 text-white">
+          Luxury Cleaning.<br />
+          Done Right.
+        </h1>
+
+        <p className="text-white/90 text-base sm:text-lg mb-8 max-w-md mx-auto leading-relaxed">
+          Reliable, polished results — every visit.
+        </p>
+
+        <div className="flex flex-col items-center">
+          <a
+            href="#instant-quote"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('instant-quote');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="inline-block bg-[#C6A969] hover:scale-[1.03] text-[#0f1c2e] px-10 py-4 rounded-xl font-semibold text-base sm:text-lg shadow-lg transition-transform duration-200 max-w-[320px] w-full"
+            data-testid="hero-get-quote"
+          >
+            Get Your Instant Quote →
+          </a>
+          <p className="text-white/70 text-[13px] mt-3">
+            Takes 30 seconds &bull; No obligation
           </p>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight mb-3 font-serif">
-            <span className="block text-white italic">Your Home's New</span>
-            <span className="block text-[#C6A969] italic">Cleaning Standard.</span>
-          </h1>
-
-          <p className="text-white/80 text-lg sm:text-xl mb-8 max-w-lg leading-relaxed">
-            A calm, polished, professional clean — every single visit.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-start gap-3">
-            <div>
-              <Button
-                onClick={() => {
-                  const el = document.getElementById('instant-quote');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-10 py-7 rounded-xl font-bold text-lg h-auto shadow-lg"
-                data-testid="hero-get-quote"
-              >
-                Get Your Instant Quote
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <p className="text-white/60 text-sm mt-2 ml-1">Takes 30 seconds — no obligation</p>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-[5]">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" style={{ height: 40 }}>
-          <path d="M0 60L720 0L1440 60V60H0Z" fill="#f5f0eb"/>
-        </svg>
       </div>
     </section>
   );
