@@ -12,7 +12,7 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0 bg-[#0f1c2e]/85" />
+        <div className="absolute inset-0 bg-[#0f1c2e]/65" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-10 md:py-16 lg:py-20 text-center">
