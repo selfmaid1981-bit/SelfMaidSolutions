@@ -2,7 +2,7 @@ const galleryPairs = [
   {
     id: 'kitchen',
     beforeImage: '/assets/before-after/before-kitchen-dirty.png',
-    afterImage: '/assets/before-after/after-kitchen-clean.png',
+    afterImage: '/assets/before-after/after-kitchen-clean.jpg',
     beforeAlt: 'Kitchen before cleaning',
     afterAlt: 'Kitchen after Self-Maid cleaning',
   },
