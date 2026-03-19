@@ -138,6 +138,27 @@ export default function Home() {
         <HeroSection />
         <ServicesSection />
         <BeforeAfterGallery />
+        
+        <section className="py-14 lg:py-20 bg-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+                Our Team in Action
+              </h2>
+              <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+              <p className="text-gray-600 mt-3 text-sm">Professional, uniformed, and ready to make your space shine</p>
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+              <img
+                src="/assets/team-working-branded.png"
+                alt="Self-Maid cleaning team in navy branded uniforms working together in a living room"
+                className="w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </section>
+
         <HowItWorks />
         <HomepageQuoteCalculator />
         <TestimonialsSection />
