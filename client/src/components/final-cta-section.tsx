@@ -18,7 +18,7 @@ export function FinalCtaSection() {
               const el = document.getElementById('instant-quote');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="inline-flex items-center gap-2 bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-10 py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C6A969] via-[#50C878] to-[#C6A969] bg-[length:200%_100%] animate-[emeraldShine_3s_ease-in-out_infinite] hover:scale-[1.03] text-[#1F2A37] px-10 py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
           >
             Get Your Instant Quote
             <ArrowRight className="w-5 h-5" />
