@@ -1,19 +1,7 @@
-const galleryPairs = [
-  {
-    id: 'kitchen',
-    beforeImage: '/assets/before-after/before-kitchen-dirty.png',
-    afterImage: '/assets/before-after/after-kitchen-clean.jpg',
-    beforeAlt: 'Kitchen before cleaning',
-    afterAlt: 'Kitchen after Self-Maid cleaning',
-  },
-  {
-    id: 'bathroom',
-    beforeImage: '/assets/before-after/before-bathroom-dirty.png',
-    afterImage: '/assets/before-after/after-bathroom-clean.png',
-    beforeAlt: 'Bathroom before cleaning',
-    afterAlt: 'Bathroom after Self-Maid cleaning',
-  },
-];
+import beforeAfterKitchen from '@assets/IMG_1852_1773888845939.png';
+import afterKitchen from '@assets/IMG_0599_1773888652538.jpeg';
+import afterKitchen2 from '@assets/att.8e7fYRKunZ706dZ8V_Z2PmSu1QzcZZ7BCW6xoPjGJ7s_1773888845939.jpeg';
+import afterLivingRoom from '@assets/att.0SCYMHFE4RjR-tOzfxYAhJ4ucBLqN6ZO7s6oqTpOuNI_1773888845939.jpeg';
 
 export default function BeforeAfterGallery() {
   return (
@@ -24,43 +12,60 @@ export default function BeforeAfterGallery() {
             See the Difference
           </h2>
           <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+          <p className="text-gray-600 mt-3 text-sm">Real results from real Self-Maid clients</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {galleryPairs.map((pair) => (
-            <div key={pair.id} className="grid grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg border border-gray-200">
-              <div className="relative">
-                <img
-                  src={pair.beforeImage}
-                  alt={pair.beforeAlt}
-                  className="w-full h-44 sm:h-52 object-cover"
-                  loading="lazy"
-                  width={400}
-                  height={300}
-                />
-                <div className="absolute bottom-3 left-3">
-                  <span className="inline-block bg-[#1F2A37] text-white text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
-                    Before
-                  </span>
-                </div>
-              </div>
-              <div className="relative">
-                <img
-                  src={pair.afterImage}
-                  alt={pair.afterAlt}
-                  className="w-full h-44 sm:h-52 object-cover"
-                  loading="lazy"
-                  width={400}
-                  height={300}
-                />
-                <div className="absolute bottom-3 right-3">
-                  <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
-                    After
-                  </span>
-                </div>
+        <div className="space-y-8">
+          <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+            <img
+              src={beforeAfterKitchen}
+              alt="Kitchen before and after Self-Maid cleaning — messy countertops transformed to spotless"
+              className="w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
+              <img
+                src={afterKitchen}
+                alt="Spotless kitchen after Self-Maid cleaning"
+                className="w-full h-56 sm:h-64 object-cover"
+                loading="lazy"
+              />
+              <div className="absolute bottom-3 right-3">
+                <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
+                  After
+                </span>
               </div>
             </div>
-          ))}
+            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
+              <img
+                src={afterKitchen2}
+                alt="Clean kitchen with navy cabinets after Self-Maid cleaning"
+                className="w-full h-56 sm:h-64 object-cover"
+                loading="lazy"
+              />
+              <div className="absolute bottom-3 right-3">
+                <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
+                  After
+                </span>
+              </div>
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative">
+              <img
+                src={afterLivingRoom}
+                alt="Clean living room after Self-Maid cleaning"
+                className="w-full h-56 sm:h-64 object-cover"
+                loading="lazy"
+              />
+              <div className="absolute bottom-3 right-3">
+                <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
+                  After
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
