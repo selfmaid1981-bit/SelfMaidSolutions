@@ -37,7 +37,7 @@ export function HeroSection() {
               const el = document.getElementById('instant-quote');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="inline-block bg-gradient-to-r from-[#C6A969] via-[#50C878] to-[#C6A969] bg-[length:200%_100%] animate-[emeraldShine_3s_ease-in-out_infinite] hover:scale-[1.03] text-[#0f1c2e] px-10 py-4 rounded-xl font-semibold text-base sm:text-lg shadow-lg transition-transform duration-200 max-w-[320px] w-full"
+            className="inline-block bg-gradient-to-r from-[#C6A969] to-[#7ec89e] hover:scale-[1.03] text-[#0f1c2e] px-10 py-4 rounded-xl font-semibold text-base sm:text-lg shadow-lg transition-transform duration-200 max-w-[320px] w-full"
             data-testid="hero-get-quote"
           >
             Get Your Instant Quote →
