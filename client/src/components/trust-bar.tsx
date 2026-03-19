@@ -24,7 +24,7 @@ export function TrustBar() {
                     ))}
                   </div>
                 ) : (
-                  <div className="w-6 h-6 rounded-full bg-[#1E8E6A] flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-full bg-[#1F2A37] flex items-center justify-center">
                     <Icon className="w-3.5 h-3.5 text-white" />
                   </div>
                 )}

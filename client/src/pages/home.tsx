@@ -1,11 +1,13 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
-import { AboutSection } from '@/components/about-section';
+import { TrustBar } from '@/components/trust-bar';
 import { ServicesSection } from '@/components/services-section';
+import BeforeAfterGallery from '@/components/before-after-gallery';
 import { HowItWorks } from '@/components/how-it-works';
 import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { TestimonialsSection } from '@/components/testimonials-section';
+import { AboutSection } from '@/components/about-section';
 import { FinalCtaSection } from '@/components/final-cta-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
@@ -133,11 +135,13 @@ export default function Home() {
       <div className="min-h-screen marble-bg">
         <Navigation />
         <HeroSection />
-        <AboutSection />
+        <TrustBar />
         <ServicesSection />
+        <BeforeAfterGallery />
         <HowItWorks />
         <HomepageQuoteCalculator />
         <TestimonialsSection />
+        <AboutSection />
         <FinalCtaSection />
         <ContactSection />
         <Footer />

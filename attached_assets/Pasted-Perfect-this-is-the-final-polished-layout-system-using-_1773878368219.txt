@@ -1,0 +1,346 @@
+Perfect — this is the final polished layout system using everything you’ve built + all the upgrades we discussed (premium, conversion-focused, NOT rebuilt).
+
+I’m giving you a clean, Replit-ready structure + styling with:
+	•	✅ white + navy + gold
+	•	✅ marble accents (tasteful, not overdone)
+	•	✅ strong conversion flow
+	•	✅ keeps ALL your existing components
+
+⸻
+
+🧠 FINAL PAGE STRUCTURE
+
+<Header />
+
+<HeroSection />
+
+<TrustBar /> 
+
+<ServicesSection />
+
+<BeforeAfterSection />
+
+<HowItWorks />
+
+<QuoteCalculator />
+
+<TestimonialsSection />
+
+<AboutSection />
+
+<FinalCTA />
+
+<ContactSection />
+
+<Footer />
+
+
+⸻
+
+🎨 GLOBAL STYLE (ADD THIS FIRST)
+
+In your main CSS / globals:
+
+:root {
+  --navy: #1F2A37;
+  --gold: #C6A969;
+  --light: #F5F7F9;
+}
+
+.marble-bg {
+  background-image: url('/images/marble-light.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.section {
+  padding: 80px 20px;
+}
+
+.section-light {
+  background: white;
+}
+
+.section-dark {
+  background: var(--navy);
+  color: white;
+}
+
+.section-marble {
+  background: var(--light);
+}
+
+
+⸻
+
+🥇 HEADER (CLEAN + PREMIUM)
+
+<header className="bg-white border-b border-gray-200 py-4 px-6 flex justify-between items-center">
+
+  <img
+    src="/images/logo-gold.png"
+    className="h-10"
+  />
+
+  <button className="text-[#1F2A37] text-2xl">☰</button>
+
+</header>
+
+👉 White only — NO navy here
+
+⸻
+
+🥈 HERO (DARK + CONTRAST)
+
+<section className="relative h-[90vh] flex items-center justify-center text-center text-white">
+
+  <img
+    src="/images/hero-kitchen.webp"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+
+  <div className="absolute inset-0 bg-[#1F2A37]/75" />
+
+  <div className="relative z-10 max-w-2xl px-6">
+
+    <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
+      Your Home’s New Cleaning Standard
+    </h1>
+
+    <p className="mt-4 text-lg text-gray-200">
+      A calm, polished, professional clean — every single visit.
+    </p>
+
+    <button className="mt-6 bg-[#C6A969] text-black px-6 py-3 rounded-lg font-semibold">
+      Get Your Instant Quote
+    </button>
+
+    <p className="text-sm mt-2 text-gray-300">
+      Takes 30 seconds — no obligation
+    </p>
+
+  </div>
+</section>
+
+
+⸻
+
+🧠 TRUST BAR (SMALL BUT POWERFUL)
+
+<section className="bg-white py-6 text-center border-b">
+  <div className="flex justify-center gap-10 text-sm font-semibold text-gray-700">
+    <span>⭐ 5.0 Rated</span>
+    <span>500+ Cleanings</span>
+    <span>16+ Years Experience</span>
+  </div>
+</section>
+
+
+⸻
+
+🧽 SERVICES (WHITE)
+
+<section className="section section-light">
+
+  <h2 className="text-2xl text-center mb-10">
+    Our Services
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+    {services.map((service) => (
+      <div className="border-2 border-[#C6A969] p-6 rounded-xl shadow-sm hover:shadow-md transition">
+
+        <h3 className="font-semibold text-lg mb-2">
+          {service.title}
+        </h3>
+
+        <p className="text-gray-600 text-sm">
+          {service.description}
+        </p>
+
+      </div>
+    ))}
+
+  </div>
+
+</section>
+
+
+⸻
+
+🔥 BEFORE / AFTER (MARBLE SECTION)
+
+<section className="section marble-bg text-center">
+
+  <h2 className="text-2xl mb-10">
+    See the Difference
+  </h2>
+
+  <div className="max-w-4xl mx-auto">
+    {/* your existing carousel here */}
+  </div>
+
+</section>
+
+👉 Marble here = perfect placement (subtle luxury)
+
+⸻
+
+🔄 HOW IT WORKS (WHITE)
+
+<section className="section section-light text-center">
+
+  <h2 className="text-2xl mb-10">How It Works</h2>
+
+  <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+
+    <div>
+      <h3 className="font-semibold">1. Get Your Instant Quote</h3>
+    </div>
+
+    <div>
+      <h3 className="font-semibold">2. Schedule Your Cleaning</h3>
+    </div>
+
+    <div>
+      <h3 className="font-semibold">3. Relax & Enjoy</h3>
+    </div>
+
+  </div>
+
+</section>
+
+
+⸻
+
+💰 QUOTE CALCULATOR (NAVY = FOCUS ZONE)
+
+<section className="section section-dark text-center">
+
+  <h2 className="text-2xl mb-4">
+    Get Your Instant Price
+  </h2>
+
+  <p className="mb-8 text-gray-300">
+    Takes less than 30 seconds
+  </p>
+
+  <div className="max-w-xl mx-auto">
+    <QuoteCalculator />
+  </div>
+
+</section>
+
+👉 This is your money section → keep dark
+
+⸻
+
+⭐ TESTIMONIALS (WHITE)
+
+<section className="section section-light">
+
+  <h2 className="text-2xl text-center mb-10">
+    What Clients Say
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+    {testimonials.map((t) => (
+      <div className="bg-white p-6 rounded-lg shadow-sm">
+        ⭐⭐⭐⭐⭐
+        <p className="mt-2 text-sm">{t.text}</p>
+        <p className="mt-2 font-semibold text-sm">{t.name}</p>
+      </div>
+    ))}
+
+  </div>
+
+</section>
+
+
+⸻
+
+👩 ABOUT (MARBLE + YOUR IMAGE)
+
+<section className="section marble-bg">
+
+  <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+
+    <img
+      src="/images/owner.jpg"
+      className="rounded-lg shadow-md"
+    />
+
+    <div>
+      <h2 className="text-2xl mb-4">Meet the Owner</h2>
+
+      <p className="text-gray-700">
+        Hi, I’m Michelle. I built Self-Maid to deliver a level of clean
+        that feels calm, consistent, and truly professional every time.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+👉 Marble here = premium storytelling moment
+
+⸻
+
+🔥 FINAL CTA (NAVY CLOSE)
+
+<section className="section section-dark text-center">
+
+  <h2 className="text-2xl mb-4">
+    Ready for a Spotless Home?
+  </h2>
+
+  <p className="mb-6 text-gray-300">
+    Limited availability this week
+  </p>
+
+  <button className="bg-[#C6A969] text-black px-6 py-3 rounded-lg font-semibold">
+    Get Your Instant Quote
+  </button>
+
+</section>
+
+
+⸻
+
+🧠 DESIGN BALANCE (THIS IS WHY THIS WORKS)
+
+You now have:
+	•	White → clean sections
+	•	Navy → focus + conversion
+	•	Marble → premium accent
+
+👉 Not overused = still classy
+
+⸻
+
+💥 FINAL RESULT
+
+This layout gives you:
+
+✅ premium feel
+✅ clear hierarchy
+✅ strong CTA flow
+✅ no clutter
+✅ brand consistency
+✅ conversion-first design
+
+⸻
+
+🚀 If you want next
+
+I can:
+	•	🔥 build your before/after slider code (perfect version)
+	•	💰 add auto text follow-up after form submit
+	•	🎯 fine-tune pricing for max profit
+
+⸻
+
+You now have a legit high-end service site layout 👍

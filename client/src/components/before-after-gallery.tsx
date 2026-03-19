@@ -54,7 +54,7 @@ export default function BeforeAfterGallery() {
                   height={300}
                 />
                 <div className="absolute bottom-3 right-3">
-                  <span className="inline-block bg-[#1E8E6A] text-white text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
+                  <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
                     After
                   </span>
                 </div>
