@@ -91,23 +91,11 @@ export function Navigation() {
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : 'nav-top'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-[4.5rem] lg:h-20">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity group" data-testid="logo-link">
-              <img 
-                src={logoImage} 
-                alt="Self-Maid Cleaning Solutions" 
-                className="h-12 sm:h-14 w-auto object-contain"
-                data-testid="logo-image"
-              />
-            </Link>
-          </div>
-          
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center gap-0.5">
+        <div className="flex items-center h-[5rem] lg:h-24 relative">
+          <div className="hidden lg:flex items-center gap-0.5 flex-1">
               <Link
                 href="/"
-                className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 ${
+                className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 ${
                   location === '/' 
                     ? 'text-[#C6A969] font-semibold' 
                     : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
@@ -125,7 +113,7 @@ export function Navigation() {
               >
                 <Link
                   href="/services"
-                  className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
+                  className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location === '/services' || location === '/airbnb-cleaning'
                       ? 'text-[#C6A969] font-semibold' 
                       : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
@@ -172,14 +160,14 @@ export function Navigation() {
                 onMouseLeave={handleAreasLeave}
               >
                 <button
-                  className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
+                  className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location.startsWith('/services/') 
                       ? 'text-[#C6A969] font-semibold' 
                       : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
                   }`}
                   data-testid="nav-service-areas"
                 >
-                  Service Areas
+                  Areas
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${areasDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {areasDropdownOpen && (
@@ -205,7 +193,7 @@ export function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href.replace('/', ''))}
-                    className="nav-link-enhanced relative text-white/80 hover:text-[#C6A969] px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 hover:bg-white/5"
+                    className="nav-link-enhanced relative text-white/80 hover:text-[#C6A969] px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 hover:bg-white/5"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -214,7 +202,7 @@ export function Navigation() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[15px] font-medium transition-all duration-200 ${
+                    className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 ${
                       isActive 
                         ? 'text-[#C6A969] font-semibold' 
                         : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
@@ -225,9 +213,21 @@ export function Navigation() {
                   </Link>
                 );
               })}
+          </div>
+
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center hover:opacity-90 transition-opacity z-10" data-testid="logo-link">
+            <img
+              src={logoImage}
+              alt="Self-Maid Cleaning Solutions"
+              className="h-14 lg:h-[4.5rem] w-auto object-contain drop-shadow-lg"
+              data-testid="logo-image"
+            />
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-1.5 flex-1 justify-end">
               <button
                 onClick={() => setIsBookingModalOpen(true)}
-                className="nav-book-btn inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 ml-2"
+                className="nav-book-btn inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300"
                 data-testid="nav-book-now"
               >
                 <CalendarCheck className="w-4 h-4" />
@@ -235,16 +235,15 @@ export function Navigation() {
               </button>
               <a 
                 href="tel:334-877-9513" 
-                className="premium-button text-white px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center group ml-1.5"
+                className="premium-button text-white px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center group"
                 data-testid="nav-phone"
               >
                 <Phone className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
                 (334) 877-9513
               </a>
-            </div>
           </div>
           
-          <div className="md:hidden">
+          <div className="lg:hidden ml-auto">
             <Button
               variant="ghost"
               size="sm"
@@ -258,7 +257,7 @@ export function Navigation() {
         </div>
       </div>
       
-      <div className={`md:hidden mobile-menu-container ${isMobileMenuOpen ? 'mobile-menu-open' : 'mobile-menu-closed'}`}>
+      <div className={`lg:hidden mobile-menu-container ${isMobileMenuOpen ? 'mobile-menu-open' : 'mobile-menu-closed'}`}>
         <div className="mobile-menu-glass px-4 pt-3 pb-5 space-y-0.5">
           <Link
             href="/"
