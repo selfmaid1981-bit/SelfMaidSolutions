@@ -12,7 +12,7 @@ export function HeroSection() {
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0 bg-[#0f1c2e]/65" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.75) 0%, rgba(20,50,45,0.7) 50%, rgba(15,28,46,0.75) 100%)' }} />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-10 md:py-16 lg:py-20 text-center">
@@ -37,7 +37,7 @@ export function HeroSection() {
               const el = document.getElementById('instant-quote');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="inline-block bg-gradient-to-r from-[#C6A969] to-[#7ec89e] hover:scale-[1.03] text-[#0f1c2e] px-10 py-4 rounded-xl font-semibold text-base sm:text-lg shadow-lg transition-transform duration-200 max-w-[320px] w-full"
+            className="inline-block bg-[#C6A969] hover:bg-[#B8985A] hover:scale-[1.03] text-[#0f1c2e] px-10 py-4 rounded-xl font-semibold text-base sm:text-lg shadow-lg transition-all duration-200 max-w-[320px] w-full"
             data-testid="hero-get-quote"
           >
             Get Your Instant Quote →

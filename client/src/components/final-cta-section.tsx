@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function FinalCtaSection() {
   return (
-    <section className="bg-[#1F2A37] text-white py-16 lg:py-20 relative overflow-hidden">
+    <section className="text-white py-16 lg:py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1F2A37 0%, #1a3330 50%, #1F2A37 100%)' }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold mb-3 font-serif italic">
           Ready for a Spotless Home?
@@ -18,7 +18,7 @@ export function FinalCtaSection() {
               const el = document.getElementById('instant-quote');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C6A969] to-[#7ec89e] hover:scale-[1.03] text-[#1F2A37] px-10 py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 bg-[#C6A969] hover:bg-[#B8985A] text-[#1F2A37] px-10 py-5 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all"
           >
             Get Your Instant Quote
             <ArrowRight className="w-5 h-5" />
