@@ -140,7 +140,6 @@ export function estimateSqFt(bedrooms: number, bathrooms: number): number {
 
 export function calcBasePrice(beds: number, baths: number, sqft: number): number {
   let total = 120 + (beds * 25) + (baths * 20);
-  if (sqft > 0) total += sqft * 0.1;
   return Math.round(total);
 }
 
