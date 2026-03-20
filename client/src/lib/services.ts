@@ -139,9 +139,9 @@ export function estimateSqFt(bedrooms: number, bathrooms: number): number {
 }
 
 export function calcBasePrice(beds: number, baths: number, sqft: number): number {
-  let base = 120 + (beds * 20) + (baths * 15);
-  if (sqft > 1500) base += (sqft - 1500) * 0.05;
-  return Math.round(base);
+  let total = 120 + (beds * 25) + (baths * 20);
+  if (sqft > 0) total += sqft * 0.1;
+  return Math.round(total);
 }
 
 export function calculateQuotePrice(config: {
@@ -177,10 +177,6 @@ export function calculateQuotePrice(config: {
   const beds = parseInt(bedrooms) || 0;
   const baths = parseFloat(bathrooms) || 0;
 
-  if (sqFt <= 0 && (beds > 0 || baths > 0)) {
-    sqFt = estimateSqFt(beds, baths);
-  }
-
   let basePrice = 0;
 
   if (serviceType === 'dorm' && numberOfRooms) {
@@ -190,14 +186,11 @@ export function calculateQuotePrice(config: {
     } else {
       return 0;
     }
-  } else if (sqFt > 0) {
-    const ratePrice = Math.max(service.minCharge, sqFt * (service.baseRate || 0));
-    if (beds > 0 || baths > 0) {
-      const formulaPrice = calcBasePrice(beds, baths, sqFt);
-      basePrice = Math.round(Math.max(formulaPrice, ratePrice));
-    } else {
-      basePrice = Math.round(ratePrice);
+  } else if (beds > 0 || baths > 0 || sqFt > 0) {
+    if (sqFt <= 0 && (beds > 0 || baths > 0)) {
+      sqFt = estimateSqFt(beds, baths);
     }
+    basePrice = Math.max(service.minCharge, calcBasePrice(beds, baths, sqFt));
   } else if (propertySize) {
     const sizeOption = propertySizeOptions.find(s => s.value === propertySize);
     if (!sizeOption) return 0;
