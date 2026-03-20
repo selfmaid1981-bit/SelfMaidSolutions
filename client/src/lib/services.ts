@@ -138,9 +138,26 @@ export function estimateSqFt(bedrooms: number, bathrooms: number): number {
   return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
 }
 
-export function calcBasePrice(beds: number, baths: number, sqft: number): number {
+export const cleanTypeTiers = [
+  { value: 'standard', label: 'Standard', description: 'Maintenance clean', multiplier: 1.0, badge: null },
+  { value: 'premium', label: 'Premium', description: 'More detailed, better results', multiplier: 1.25, badge: 'MOST POPULAR' as const },
+  { value: 'deep', label: 'Deep Clean', description: 'Full reset cleaning', multiplier: 1.5, badge: null },
+] as const;
+
+export type CleanType = typeof cleanTypeTiers[number]['value'];
+
+export function calcBasePrice(beds: number, baths: number, sqft: number, cleanType: CleanType = 'premium'): number {
   let total = 120 + (beds * 25) + (baths * 20);
-  return Math.round(total);
+
+  if (sqft > 3000) total += 40;
+  else if (sqft > 2000) total += 25;
+
+  const tier = cleanTypeTiers.find(t => t.value === cleanType);
+  total *= tier?.multiplier || 1;
+
+  if (total < 150) total = 150;
+
+  return Math.round(total / 10) * 10;
 }
 
 export function calculateQuotePrice(config: {
@@ -153,6 +170,7 @@ export function calculateQuotePrice(config: {
   bedrooms?: string;
   bathrooms?: string;
   pets?: string;
+  cleanType?: CleanType;
 }): number {
   const {
     serviceType,
@@ -164,6 +182,7 @@ export function calculateQuotePrice(config: {
     bedrooms = '',
     bathrooms = '',
     pets = 'no',
+    cleanType = 'premium',
   } = config;
   if (!serviceType) return 0;
 
@@ -189,7 +208,7 @@ export function calculateQuotePrice(config: {
     if (sqFt <= 0 && (beds > 0 || baths > 0)) {
       sqFt = estimateSqFt(beds, baths);
     }
-    basePrice = Math.max(service.minCharge, calcBasePrice(beds, baths, sqFt));
+    basePrice = Math.max(service.minCharge, calcBasePrice(beds, baths, sqFt, cleanType));
   } else if (propertySize) {
     const sizeOption = propertySizeOptions.find(s => s.value === propertySize);
     if (!sizeOption) return 0;
@@ -207,5 +226,7 @@ export function calculateQuotePrice(config: {
     return total + (addOn?.price || 0);
   }, 0);
 
-  return Math.round(basePrice + addOnTotal);
+  let total = basePrice + addOnTotal;
+  if (total < 150) total = 150;
+  return Math.round(total / 10) * 10;
 }

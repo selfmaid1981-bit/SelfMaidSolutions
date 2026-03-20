@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
 import { Calculator, BedDouble, Bath, Ruler, Phone, PawPrint, Sparkles } from 'lucide-react';
@@ -9,6 +9,8 @@ import {
   homepageFrequencyOptions as frequencyOptions,
   estimateSqFt,
   calculateQuotePrice,
+  cleanTypeTiers,
+  type CleanType,
 } from '@/lib/services';
 
 export function HomepageQuoteCalculator() {
@@ -20,6 +22,7 @@ export function HomepageQuoteCalculator() {
   const [sqft, setSqft] = useState('');
   const [pets, setPets] = useState('no');
   const [frequency, setFrequency] = useState('onetime');
+  const [cleanType, setCleanType] = useState<CleanType>('premium');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -27,12 +30,20 @@ export function HomepageQuoteCalculator() {
 
   const selectedService = serviceTypes.find(s => s.value === serviceType);
   const selectedFrequency = frequencyOptions.find(f => f.value === frequency) || frequencyOptions[0];
+  const selectedTier = cleanTypeTiers.find(t => t.value === cleanType);
 
   const estimatedSqFt = useMemo(() => {
     const sqFtInput = parseInt(sqft) || 0;
     if (sqFtInput > 0) return sqFtInput;
     return estimateSqFt(parseInt(bedrooms) || 0, parseFloat(bathrooms) || 0);
   }, [bedrooms, bathrooms, sqft]);
+
+  useEffect(() => {
+    const sqFtVal = parseInt(sqft) || estimatedSqFt;
+    if (sqFtVal > 3000) {
+      setCleanType('deep');
+    }
+  }, [sqft, estimatedSqFt]);
 
   const price = useMemo(() => {
     return calculateQuotePrice({
@@ -43,8 +54,9 @@ export function HomepageQuoteCalculator() {
       bedrooms,
       bathrooms,
       pets,
+      cleanType,
     });
-  }, [serviceType, sqft, estimatedSqFt, frequency, bedrooms, bathrooms, pets]);
+  }, [serviceType, sqft, estimatedSqFt, frequency, bedrooms, bathrooms, pets, cleanType]);
 
   const basePrice = useMemo(() => {
     return calculateQuotePrice({
@@ -55,8 +67,9 @@ export function HomepageQuoteCalculator() {
       bedrooms,
       bathrooms,
       pets: 'no',
+      cleanType,
     });
-  }, [serviceType, sqft, estimatedSqFt, bedrooms, bathrooms]);
+  }, [serviceType, sqft, estimatedSqFt, bedrooms, bathrooms, cleanType]);
 
   const sizeLabel = sqft
     ? `${sqft} sq ft`
@@ -70,7 +83,7 @@ export function HomepageQuoteCalculator() {
         name,
         email,
         phone: phone || null,
-        serviceType: selectedService?.label || serviceType,
+        serviceType: `${selectedTier?.label || 'Premium'} ${selectedService?.label || serviceType}`,
         propertySize: sizeLabel,
         customSqFt: estimatedSqFt || null,
         frequency: selectedFrequency.label,
@@ -152,6 +165,31 @@ export function HomepageQuoteCalculator() {
           <div className="px-6 py-8">
             {step === 'calc' ? (
               <div className="space-y-5">
+                <div className="grid grid-cols-3 gap-3">
+                  {cleanTypeTiers.map(tier => (
+                    <button
+                      key={tier.value}
+                      type="button"
+                      onClick={() => setCleanType(tier.value as CleanType)}
+                      className={`p-3 rounded-xl border cursor-pointer transition-all text-center ${
+                        cleanType === tier.value
+                          ? 'border-[#C6A969] shadow-md scale-[1.03] bg-white ring-1 ring-[#C6A969]/30'
+                          : 'border-gray-200 bg-gray-50 hover:border-[#C6A969]/50'
+                      }`}
+                    >
+                      {tier.badge && (
+                        <span className="text-[10px] text-[#C6A969] font-bold tracking-wide block mb-1">
+                          ⭐ {tier.badge}
+                        </span>
+                      )}
+                      <span className={`font-semibold block ${cleanType === tier.value ? 'text-[#1F2A37]' : 'text-gray-700'} ${tier.value === 'premium' ? 'text-base' : 'text-sm'}`}>
+                        {tier.label}
+                      </span>
+                      <span className="text-[11px] text-gray-500 block mt-0.5">{tier.description}</span>
+                    </button>
+                  ))}
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-[#1F2A37] text-xs font-semibold mb-1.5 flex items-center gap-1">
@@ -250,7 +288,8 @@ export function HomepageQuoteCalculator() {
                   <div className="bg-[#C6A969]/10 border border-[#C6A969]/20 rounded-xl p-4 text-center" data-testid="home-quote-result">
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
                     <p className="text-4xl font-black text-[#1F2A37]" data-testid="home-quote-price">${price}</p>
-                    <p className="text-gray-500 text-xs mt-1">{selectedService?.label} · {selectedFrequency.label}</p>
+                    <p className="text-gray-500 text-xs mt-1">{selectedTier?.label} · {selectedService?.label} · {selectedFrequency.label}</p>
+                    <p className="text-gray-400 text-[11px] mt-1">Most homes range between $180 – $350</p>
                     <a
                       href="tel:334-877-9513"
                       className="mt-3 inline-flex items-center gap-2 bg-[#1F2A37] text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-[#2D3F52] transition-colors"
@@ -276,6 +315,11 @@ export function HomepageQuoteCalculator() {
                   )}
                 </button>
 
+                <div className="text-center">
+                  <p className="text-gray-400 text-[11px]">Final price confirmed after walkthrough</p>
+                  <p className="text-[#C6A969] text-xs mt-1 font-medium">Limited availability this week — book now</p>
+                </div>
+
                 <button
                   onClick={handleSeeFullQuote}
                   className="w-full text-gray-400 hover:text-[#C6A969] text-xs py-1 transition-colors"
@@ -288,7 +332,7 @@ export function HomepageQuoteCalculator() {
                 <div className="bg-[#C6A969]/10 border border-[#C6A969]/20 rounded-xl p-3 text-center">
                   <p className="text-gray-500 text-xs">Your Quote</p>
                   <p className="text-3xl font-black text-[#1F2A37]">${price}</p>
-                  <p className="text-gray-500 text-xs">{selectedService?.label} · {sizeLabel}</p>
+                  <p className="text-gray-500 text-xs">{selectedTier?.label} · {selectedService?.label} · {sizeLabel}</p>
                 </div>
 
                 <div>

@@ -1,0 +1,218 @@
+import React, { useState, useEffect } from "react";
+
+export default function QuoteCalculator() {
+  const [form, setForm] = useState({
+    bedrooms: 3,
+    bathrooms: 2,
+    squareFootage: 1800,
+    cleanType: "premium", // default (MOST IMPORTANT)
+    frequency: "one-time",
+    addOns: {
+      carpetCleaning: false,
+      applianceCleaning: false,
+      refrigeratorCleaning: false,
+      stoveCleaning: false,
+      garageCleaning: false,
+      blindCleaning: false,
+      baseboardCleaning: false,
+    },
+  });
+
+  const [price, setPrice] = useState(0);
+
+  // 🏆 PRICING FUNCTION (FIXED + OPTIMIZED)
+  const calculatePrice = () => {
+    let base = 120;
+
+    let bedroomCost = form.bedrooms * 25;
+    let bathroomCost = form.bathrooms * 20;
+
+    let total = base + bedroomCost + bathroomCost;
+
+    // Light sqft adjustment (NOT dominant)
+    if (form.squareFootage > 3000) total += 40;
+    else if (form.squareFootage > 2000) total += 25;
+
+    // Tier multipliers
+    const multipliers = {
+      standard: 1.0,
+      premium: 1.25,
+      deep: 1.5,
+    };
+
+    total *= multipliers[form.cleanType] || 1;
+
+    // Add-ons
+    const addOns = {
+      carpetCleaning: 75,
+      applianceCleaning: 35,
+      refrigeratorCleaning: 30,
+      stoveCleaning: 25,
+      garageCleaning: 60,
+      blindCleaning: 35,
+      baseboardCleaning: 30,
+    };
+
+    Object.keys(addOns).forEach((key) => {
+      if (form.addOns[key]) total += addOns[key];
+    });
+
+    // Frequency discount
+    if (form.frequency === "weekly") total *= 0.85;
+    if (form.frequency === "biweekly") total *= 0.9;
+
+    // Minimum price
+    if (total < 150) total = 150;
+
+    // Clean rounding
+    return Math.round(total / 10) * 10;
+  };
+
+  // 🔄 Recalculate price
+  useEffect(() => {
+    setPrice(calculatePrice());
+  }, [form]);
+
+  // 🧠 SMART AUTO-UPGRADE LOGIC
+  useEffect(() => {
+    const addOnCount = Object.values(form.addOns).filter(Boolean).length;
+
+    if (form.squareFootage > 3000 || addOnCount >= 3) {
+      setForm((prev) => ({ ...prev, cleanType: "deep" }));
+    }
+  }, [form.squareFootage, form.addOns]);
+
+  // 🎨 CARD STYLE
+  const getCardStyle = (type) => {
+    const isActive = form.cleanType === type;
+
+    return `
+      p-4 rounded-xl border cursor-pointer transition text-center
+      ${
+        isActive
+          ? "border-[#C6A969] shadow-md scale-105 bg-white"
+          : "border-gray-200 bg-gray-50 hover:border-[#C6A969]"
+      }
+    `;
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-6">
+
+      {/* 🏆 PACKAGE SELECTOR */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+        <div
+          className={getCardStyle("standard")}
+          onClick={() => setForm({ ...form, cleanType: "standard" })}
+        >
+          <h3 className="font-semibold">Standard</h3>
+          <p className="text-sm text-gray-500">Maintenance clean</p>
+        </div>
+
+        <div
+          className={getCardStyle("premium")}
+          onClick={() => setForm({ ...form, cleanType: "premium" })}
+        >
+          <div className="text-xs text-[#C6A969] font-semibold mb-1">
+            ⭐ MOST POPULAR
+          </div>
+          <h3 className="font-semibold text-lg">Premium</h3>
+          <p className="text-sm text-gray-600">
+            More detailed, better results
+          </p>
+        </div>
+
+        <div
+          className={getCardStyle("deep")}
+          onClick={() => setForm({ ...form, cleanType: "deep" })}
+        >
+          <h3 className="font-semibold">Deep Clean</h3>
+          <p className="text-sm text-gray-500">
+            Full reset cleaning
+          </p>
+        </div>
+      </div>
+
+      {/* 🏠 INPUTS */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+
+        <input
+          type="number"
+          value={form.bedrooms}
+          onChange={(e) =>
+            setForm({ ...form, bedrooms: Number(e.target.value) })
+          }
+          className="border p-2 rounded"
+          placeholder="Bedrooms"
+        />
+
+        <input
+          type="number"
+          value={form.bathrooms}
+          onChange={(e) =>
+            setForm({ ...form, bathrooms: Number(e.target.value) })
+          }
+          className="border p-2 rounded"
+          placeholder="Bathrooms"
+        />
+
+        <input
+          type="number"
+          value={form.squareFootage}
+          onChange={(e) =>
+            setForm({ ...form, squareFootage: Number(e.target.value) })
+          }
+          className="border p-2 rounded"
+          placeholder="Sq Ft"
+        />
+      </div>
+
+      {/* 🧼 ADD-ONS */}
+      <div className="mb-6">
+        <h4 className="font-semibold mb-2">Add-Ons</h4>
+
+        {Object.keys(form.addOns).map((key) => (
+          <label key={key} className="block text-sm">
+            <input
+              type="checkbox"
+              checked={form.addOns[key]}
+              onChange={() =>
+                setForm({
+                  ...form,
+                  addOns: {
+                    ...form.addOns,
+                    [key]: !form.addOns[key],
+                  },
+                })
+              }
+              className="mr-2"
+            />
+            {key}
+          </label>
+        ))}
+      </div>
+
+      {/* 💰 PRICE DISPLAY */}
+      <div className="text-center">
+
+        <p className="text-sm text-gray-500 mb-2">
+          Most homes range between $180 – $350
+        </p>
+
+        <h2 className="text-3xl font-bold text-[#1F2A37]">
+          ${price}
+        </h2>
+
+        <p className="text-sm text-gray-500 mt-2">
+          Final price confirmed after walkthrough
+        </p>
+
+        <p className="text-sm text-[#C6A969] mt-2">
+          Limited availability this week — book now
+        </p>
+
+      </div>
+    </div>
+  );
+}
