@@ -76,6 +76,7 @@
     <!-- End Google Analytics 4 -->
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site information" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     
     <!-- Preconnect for performance -->
@@ -105,6 +106,24 @@
           "currenciesAccepted": "USD",
           "paymentAccepted": "Cash, Credit Card, Debit Card, Check",
           "openingHours": "Mo-Su 07:00-20:00",
+          "numberOfEmployees": {"@type": "QuantitativeValue", "minValue": 5, "maxValue": 15},
+          "slogan": "Luxury Cleaning. Done Right.",
+          "knowsAbout": [
+            "residential cleaning",
+            "deep cleaning",
+            "Airbnb turnover cleaning",
+            "move-in move-out cleaning",
+            "commercial office cleaning",
+            "eco-friendly cleaning products",
+            "short-term rental cleaning",
+            "apartment turnover cleaning",
+            "property management cleaning",
+            "student dorm cleaning"
+          ],
+          "hasCredential": [
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "license", "name": "Alabama Business License"},
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Fully Insured and Bonded"}
+          ],
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Montgomery",
@@ -132,11 +151,12 @@
             "@type": "OfferCatalog",
             "name": "Cleaning Services",
             "itemListElement": [
-              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Residential Cleaning", "description": "Complete home cleaning services", "provider": {"@id": "https://selfmaidllc.com/#business"}}},
-              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial Cleaning", "description": "Professional office and business cleaning", "provider": {"@id": "https://selfmaidllc.com/#business"}}},
-              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Airbnb Cleaning", "description": "Vacation rental turnover cleaning", "provider": {"@id": "https://selfmaidllc.com/#business"}}},
-              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Move In/Out Cleaning", "description": "Deep cleaning for moving day", "provider": {"@id": "https://selfmaidllc.com/#business"}}},
-              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Deep Cleaning", "description": "Intensive top-to-bottom cleaning", "provider": {"@id": "https://selfmaidllc.com/#business"}}}
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ongoing Home Cleaning", "description": "Routine residential cleaning with weekly, bi-weekly, or monthly scheduling. Includes dusting, vacuuming, mopping, kitchen and bathroom sanitization."}, "priceSpecification": {"@type": "PriceSpecification", "price": "120", "priceCurrency": "USD", "unitText": "starting price"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Detailed Deep Cleaning", "description": "Intensive top-to-bottom cleaning including inside appliances, baseboards, ceiling fans, grout scrubbing, and cabinet interiors. Takes 4-8 hours."}, "priceSpecification": {"@type": "PriceSpecification", "price": "250", "priceCurrency": "USD", "unitText": "starting price"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Short-Term Rental Turnovers", "description": "Same-day Airbnb and VRBO turnover cleaning with linen changes, restocking, and quality check photos for hosts."}, "priceSpecification": {"@type": "PriceSpecification", "price": "65", "priceCurrency": "USD", "unitText": "starting price"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Move-In/Move-Out Cleaning", "description": "Comprehensive deep cleaning for moving day with deposit-back guarantee."}, "priceSpecification": {"@type": "PriceSpecification", "price": "150", "priceCurrency": "USD", "unitText": "starting price"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Office Cleaning", "description": "Professional commercial cleaning for offices, retail, and medical facilities."}, "priceSpecification": {"@type": "PriceSpecification", "price": "120", "priceCurrency": "USD", "unitText": "starting price"}},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Student Dorm Cleaning", "description": "Fast, affordable dorm and student apartment turnovers."}, "priceSpecification": {"@type": "PriceSpecification", "price": "45", "priceCurrency": "USD", "unitText": "starting price"}}
             ]
           },
           "aggregateRating": {
@@ -175,7 +195,11 @@
           "about": {"@id": "https://selfmaidllc.com/#business"},
           "primaryImageOfPage": {"@type": "ImageObject", "url": "https://selfmaidllc.com/og-image.jpg"},
           "datePublished": "2020-01-01",
-          "dateModified": "2026-02-22"
+          "dateModified": "2026-03-20",
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": ["#static-seo-content h1", "#static-seo-content h2", "#static-seo-content h3", ".hero-headline", ".hero-subtext"]
+          }
         },
         {
           "@type": "FAQPage",
@@ -246,8 +270,8 @@
           <h2>Our Professional Cleaning Services</h2>
           
           <article id="residential-cleaning">
-            <h3>Residential Cleaning - Starting at $80</h3>
-            <p>Complete home cleaning services tailored to your schedule and preferences. Serving Montgomery, Prattville, Selma, Homewood, and Clanton homes with professional care. Available weekly, bi-weekly, or monthly.</p>
+            <h3>Ongoing Home Cleaning - Starting at $120</h3>
+            <p>Complete home cleaning services tailored to your schedule and preferences. Serving Montgomery, Prattville, Selma, Homewood, and Clanton homes with professional care. Available weekly (15% off), bi-weekly (10% off), or monthly (5% off). Pricing based on $120 base plus $25 per bedroom and $20 per bathroom.</p>
             <h4>What's Included:</h4>
             <ul>
               <li>Living rooms and bedrooms - dusting, vacuuming, organizing</li>
@@ -261,8 +285,8 @@
           </article>
           
           <article id="deep-cleaning">
-            <h3>Deep Cleaning Service - Starting at $250</h3>
-            <p>Our most intensive cleaning service - a comprehensive top-to-bottom transformation of your entire home. Perfect for spring cleaning, post-renovation, or when your home needs extra attention. Priced based on square footage.</p>
+            <h3>Detailed Deep Cleaning - Starting at $250</h3>
+            <p>Our most intensive cleaning service - a comprehensive top-to-bottom transformation of your entire home. Perfect for spring cleaning, post-renovation, or when your home needs extra attention.</p>
             <h4>What's Included:</h4>
             <ul>
               <li>KITCHEN: Clean inside/outside all appliances (oven, microwave, refrigerator), degrease cabinets, scrub countertops and backsplash</li>
@@ -292,7 +316,7 @@
           </article>
           
           <article id="airbnb-cleaning">
-            <h3>Airbnb & Vacation Rental Cleaning - Starting at $65</h3>
+            <h3>Short-Term Rental Turnovers - Starting at $65</h3>
             <p>Fast and thorough turnover cleaning to keep your rental property booking-ready with same-day service. Serving vacation rental hosts throughout Central Alabama.</p>
             <h4>What's Included:</h4>
             <ul>

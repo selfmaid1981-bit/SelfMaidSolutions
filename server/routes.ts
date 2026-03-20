@@ -351,12 +351,16 @@ Allow: /
 Disallow: /checkout
 Disallow: /api/
 Disallow: /admin/
+Disallow: /marketing-materials
+Disallow: /viral-marketing
 
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
 User-agent: GPTBot
 Allow: /
@@ -373,10 +377,25 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: facebookexternalhit
@@ -393,6 +412,12 @@ Host: https://selfmaidllc.com`;
 
     res.header("Content-Type", "text/plain");
     res.send(robotsTxt);
+  });
+
+  // LLMs.txt — AI-optimized plain text for LLM crawlers
+  app.get(["/llms.txt", "/.well-known/llms.txt"], (req, res) => {
+    res.header("Content-Type", "text/plain");
+    res.sendFile(path.resolve("public/llms.txt"));
   });
 
   // Get Stripe publishable key
