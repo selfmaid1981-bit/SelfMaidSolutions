@@ -59,3 +59,7 @@ id = "module:nodejs-20/formatter:prettier"
 [userenv]
 
 [userenv.shared]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
