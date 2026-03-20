@@ -139,9 +139,9 @@ export function estimateSqFt(bedrooms: number, bathrooms: number): number {
 }
 
 export const cleanTypeTiers = [
-  { value: 'standard', label: 'Standard', description: 'Maintenance clean', multiplier: 1.0, badge: null },
-  { value: 'premium', label: 'Premium', description: 'More detailed, better results', multiplier: 1.25, badge: 'MOST POPULAR' as const },
-  { value: 'deep', label: 'Deep Clean', description: 'Full reset cleaning', multiplier: 1.5, badge: null },
+  { value: 'standard', label: 'Ongoing', description: 'Maintenance clean', multiplier: 1.0, badge: null, includes: [] as string[] },
+  { value: 'premium', label: 'Premium', description: 'More detailed, polished clean', multiplier: 1.25, badge: 'MOST POPULAR' as const, includes: ['Cabinet fronts', 'Baseboards (spot)', 'Mirrors & glass', 'Bed making'] },
+  { value: 'deep', label: 'Deep Clean', description: 'Full home reset', multiplier: 1.5, badge: null, includes: ['Oven & fridge', 'Grout scrubbing', 'Fixtures & fans', 'Window tracks'] },
 ] as const;
 
 export type CleanType = typeof cleanTypeTiers[number]['value'];

@@ -171,21 +171,28 @@ export function HomepageQuoteCalculator() {
                       key={tier.value}
                       type="button"
                       onClick={() => setCleanType(tier.value as CleanType)}
-                      className={`p-3 rounded-xl border cursor-pointer transition-all text-center ${
+                      className={`p-3 rounded-xl border cursor-pointer transition-all duration-300 text-center ${
                         cleanType === tier.value
-                          ? 'border-[#C6A969] shadow-md scale-[1.03] bg-white ring-1 ring-[#C6A969]/30'
-                          : 'border-gray-200 bg-gray-50 hover:border-[#C6A969]/50'
+                          ? 'border-[#C6A969] shadow-xl scale-105 bg-white ring-1 ring-[#C6A969]/30'
+                          : 'border-gray-200 bg-gray-50 hover:shadow-md hover:-translate-y-0.5'
                       }`}
                     >
                       {tier.badge && (
-                        <span className="text-[10px] text-[#C6A969] font-bold tracking-wide block mb-1">
-                          ⭐ {tier.badge}
+                        <span className="bg-[#C6A969] text-[#1F2A37] text-[10px] font-bold px-2 py-0.5 rounded inline-block mb-1">
+                          {tier.badge}
                         </span>
                       )}
                       <span className={`font-semibold block ${cleanType === tier.value ? 'text-[#1F2A37]' : 'text-gray-700'} ${tier.value === 'premium' ? 'text-base' : 'text-sm'}`}>
                         {tier.label}
                       </span>
                       <span className="text-[11px] text-gray-500 block mt-0.5">{tier.description}</span>
+                      {cleanType === tier.value && tier.includes.length > 0 && (
+                        <ul className="text-[11px] text-gray-600 mt-2 text-left space-y-0.5">
+                          {tier.includes.map(item => (
+                            <li key={item}>✔ {item}</li>
+                          ))}
+                        </ul>
+                      )}
                     </button>
                   ))}
                 </div>
