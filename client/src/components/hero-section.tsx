@@ -11,6 +11,7 @@ export function HeroSection() {
           alt="Beautiful white marble kitchen interior"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 40%' }}
+          fetchPriority="high"
         />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.78) 0%, rgba(18,32,38,0.75) 50%, rgba(15,28,46,0.78) 100%)' }} />
       </div>

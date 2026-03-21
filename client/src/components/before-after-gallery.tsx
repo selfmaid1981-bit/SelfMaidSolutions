@@ -56,6 +56,7 @@ function BeforeAfterSlider({ before, after, label }: { before: string; after: st
           alt={`${label} after cleaning`}
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
+          loading="lazy"
         />
 
         <div
@@ -67,6 +68,7 @@ function BeforeAfterSlider({ before, after, label }: { before: string; after: st
             alt={`${label} before cleaning`}
             className="absolute inset-0 w-full h-full object-cover"
             draggable={false}
+            loading="lazy"
           />
         </div>
 
