@@ -110,8 +110,9 @@ export const frequencyOptions = [
 
 export const homepageFrequencyOptions = [
   { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
-  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: 'Most Popular' as const },
-  { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
+  { value: 'weekly', label: 'Weekly Cleaning (15% off)', discount: 0.15, badge: null },
+  { value: 'biweekly', label: 'Biweekly Cleaning (10% off)', discount: 0.10, badge: 'Most Popular' as const },
+  { value: 'monthly', label: 'Monthly Cleaning (5% off)', discount: 0.05, badge: null },
 ];
 
 export const fullQuoteFrequencyOptions = [
