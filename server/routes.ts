@@ -85,6 +85,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const { startFollowUpScheduler } = await import("./hooks/quote-followup");
   startFollowUpScheduler(60_000);
 
+  // Start B2B outreach automation (checks every 60 minutes for new leads)
+  if (process.env.LEADS_SPREADSHEET_ID) {
+    startOutreachAutomation(60);
+    console.log('[Server] B2B outreach automation started (60 min interval)');
+  } else {
+    console.log('[Server] B2B outreach automation skipped — no LEADS_SPREADSHEET_ID set');
+  }
+
   // Register SaaS routes
   const saasRoutes = (await import("./saas/routes")).default;
   app.use("/api/saas", saasRoutes);
