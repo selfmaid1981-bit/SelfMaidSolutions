@@ -243,10 +243,10 @@ export async function createLeadsFunnelSpreadsheet() {
   // Add headers to Leads sheet
   await sheets.spreadsheets.values.update({
     spreadsheetId,
-    range: 'Leads!A1:K1',
+    range: 'Leads!A1:L1',
     valueInputOption: 'RAW',
     requestBody: {
-      values: [['Name', 'Email', 'Phone', 'Company', 'Title', 'City', 'Source', 'Status', 'Notes', 'Date Added', 'Last Contact']],
+      values: [['Name', 'Email', 'Phone', 'Company', 'Title', 'City', 'Source', 'Status', 'Notes', 'Date Added', 'Last Contact', 'Website']],
     },
   });
 

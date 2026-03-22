@@ -1,0 +1,82 @@
+Build a fully automated lead generation and outreach pipeline that pulls business leads from Google Maps and enriches them with contact data, then sends them into a Google Sheet for an existing email automation system.
+
+SYSTEM REQUIREMENTS:
+
+1. GOOGLE MAPS LEAD SCRAPER
+- Use Google Places API (NOT raw scraping)
+- Accept dynamic search queries (e.g. “property management companies in Miami”, “realtors in Dallas”)
+- Extract:
+  - Business Name
+  - Address
+  - Phone Number
+  - Website
+  - Google Rating
+  - Total Reviews
+  - Category
+- Handle pagination (multiple results pages)
+- Deduplicate businesses by name + address
+
+2. DATA ENRICHMENT LAYER
+- Visit business website (if available)
+- Attempt to extract:
+  - Email (from website or contact page)
+- If no email found, integrate optional API:
+  - Apollo.io or similar enrichment API
+- Add fields:
+  - Email
+  - Email Verified (true/false)
+  - Lead Source (“Google Maps”)
+
+3. GOOGLE SHEETS INTEGRATION
+- Connect to Google Sheets API
+- Append leads to a sheet named “Leads”
+- Map fields to columns:
+  Name, Email, Phone, Company, Title (leave blank), City, Source, Status (default “new”), Notes, Date Added, Last Contact, Website
+
+4. AUTOMATION LOGIC
+- Run automatically every 60 minutes
+- Only add NEW leads (no duplicates)
+- Maintain a local cache/database (SQLite or JSON) to track previously added leads
+
+5. CONFIGURATION
+- Create a config file where user can define:
+  - Target cities
+  - Search keywords
+  - Max leads per run
+  - Google API key
+  - Google Sheets ID
+
+6. STRUCTURE
+- Use Python
+- Modular architecture:
+  - scraper.py
+  - enrichment.py
+  - sheets.py
+  - scheduler.py
+  - main.py
+- Include requirements.txt
+
+7. ERROR HANDLING
+- Retry failed API calls
+- Log all activity (success + failures)
+- Skip incomplete records safely
+
+8. OUTPUT
+- Clean, production-ready code
+- Clear setup instructions:
+  - How to add API keys
+  - How to connect Google Sheets
+  - How to run scheduler
+
+9. OPTIONAL (IF POSSIBLE)
+- Add Make/Zapier webhook support
+- Add simple lead scoring:
+  - +1 if website exists
+  - +1 if rating > 4.0
+  - +1 if reviews > 20
+
+GOAL:
+This system should continuously feed new, clean leads into Google Sheets so an external email automation system can immediately begin outreach without manual input.
+
+IMPORTANT:
+Do NOT use brittle scraping methods. Use official APIs wherever possible. Code must be stable and scalable.

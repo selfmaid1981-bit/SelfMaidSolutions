@@ -35,6 +35,16 @@ import {
 } from "./outreach-automation";
 
 import { OWNER_EMAILS, FROM_EMAIL } from "./config";
+import {
+  runPipeline,
+  startLeadGenPipeline,
+  stopLeadGenPipeline,
+  isPipelineRunning,
+  getLeadGenConfig,
+  updateLeadGenConfig,
+  addSearch,
+  removeSearch,
+} from "./lead-gen/pipeline";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -1252,6 +1262,86 @@ Host: https://selfmaidllc.com`;
   });
 
   startWeeklyReportScheduler();
+
+  // Lead Generation Pipeline Routes
+  app.post("/api/admin/lead-gen/start", requireAdmin, async (req, res) => {
+    try {
+      const { intervalMinutes } = req.body;
+      startLeadGenPipeline(intervalMinutes);
+      res.json({ success: true, message: `Lead gen pipeline started (every ${intervalMinutes || 60} min)` });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to start pipeline: " + error.message });
+    }
+  });
+
+  app.post("/api/admin/lead-gen/stop", requireAdmin, async (req, res) => {
+    try {
+      stopLeadGenPipeline();
+      res.json({ success: true, message: "Lead gen pipeline stopped" });
+    } catch (error: any) {
+      res.status(500).json({ message: "Failed to stop pipeline: " + error.message });
+    }
+  });
+
+  app.post("/api/admin/lead-gen/run-now", requireAdmin, async (req, res) => {
+    try {
+      const result = await runPipeline();
+      res.json({ success: true, ...result });
+    } catch (error: any) {
+      res.status(500).json({ message: "Pipeline run failed: " + error.message });
+    }
+  });
+
+  app.get("/api/admin/lead-gen/config", requireAdmin, async (req, res) => {
+    try {
+      const config = getLeadGenConfig();
+      res.json({ ...config, active: isPipelineRunning() });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.put("/api/admin/lead-gen/config", requireAdmin, async (req, res) => {
+    try {
+      updateLeadGenConfig(req.body);
+      res.json({ success: true, config: getLeadGenConfig() });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/lead-gen/searches", requireAdmin, async (req, res) => {
+    try {
+      const { query, maxResults } = req.body;
+      if (!query) return res.status(400).json({ message: "query is required" });
+      addSearch(query, maxResults);
+      res.json({ success: true, config: getLeadGenConfig() });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.delete("/api/admin/lead-gen/searches", requireAdmin, async (req, res) => {
+    try {
+      const { query } = req.body;
+      if (!query) return res.status(400).json({ message: "query is required" });
+      removeSearch(query);
+      res.json({ success: true, config: getLeadGenConfig() });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Auto-start lead gen pipeline if Google Places API key is set
+  if (process.env.GOOGLE_PLACES_API_KEY && process.env.LEADS_SPREADSHEET_ID) {
+    startLeadGenPipeline(60);
+    console.log('[Server] Lead generation pipeline started (60 min interval)');
+  } else {
+    const missing = [];
+    if (!process.env.GOOGLE_PLACES_API_KEY) missing.push('GOOGLE_PLACES_API_KEY');
+    if (!process.env.LEADS_SPREADSHEET_ID) missing.push('LEADS_SPREADSHEET_ID');
+    console.log(`[Server] Lead gen pipeline skipped — missing: ${missing.join(', ')}`);
+  }
 
   const httpServer = createServer(app);
   return httpServer;
