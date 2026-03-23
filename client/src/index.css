@@ -276,14 +276,13 @@
 }
 
 .marble-bg {
-  background:
-    radial-gradient(ellipse at 15% 10%, rgba(255,255,255,0.04) 0%, transparent 40%),
-    radial-gradient(ellipse at 85% 25%, rgba(200,200,210,0.03) 0%, transparent 35%),
-    radial-gradient(ellipse at 40% 60%, rgba(245,197,66,0.02) 0%, transparent 30%),
-    radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.03) 0%, transparent 35%),
-    radial-gradient(ellipse at 25% 90%, rgba(192,192,200,0.025) 0%, transparent 30%),
-    radial-gradient(circle at top, #1a1a22, #000);
+  background: #0a0a0d;
   position: relative;
+}
+
+.marble-bg > * {
+  position: relative;
+  z-index: 2;
 }
 
 .marble-bg::before {
@@ -291,29 +290,46 @@
   position: fixed;
   inset: 0;
   background:
+    /* Silver veins — thick diagonal streaks */
     repeating-linear-gradient(
-      135deg,
+      130deg,
       transparent 0px,
-      transparent 80px,
-      rgba(255,255,255,0.012) 80px,
-      rgba(255,255,255,0.012) 81px
+      transparent 40px,
+      rgba(180,180,190,0.07) 40px,
+      rgba(200,200,210,0.12) 42px,
+      rgba(180,180,190,0.05) 45px,
+      transparent 48px
     ),
     repeating-linear-gradient(
-      45deg,
+      50deg,
       transparent 0px,
-      transparent 120px,
-      rgba(192,192,200,0.01) 120px,
-      rgba(192,192,200,0.01) 121px
+      transparent 70px,
+      rgba(160,160,175,0.06) 70px,
+      rgba(190,190,200,0.1) 72px,
+      rgba(160,160,175,0.04) 75px,
+      transparent 78px
+    ),
+    /* Gold veins — thinner accent threads */
+    repeating-linear-gradient(
+      155deg,
+      transparent 0px,
+      transparent 100px,
+      rgba(245,197,66,0.05) 100px,
+      rgba(245,197,66,0.1) 101.5px,
+      rgba(200,155,45,0.06) 103px,
+      transparent 106px
     ),
     repeating-linear-gradient(
-      90deg,
+      25deg,
       transparent 0px,
-      transparent 200px,
-      rgba(245,197,66,0.008) 200px,
-      rgba(245,197,66,0.008) 201px
+      transparent 160px,
+      rgba(200,155,45,0.04) 160px,
+      rgba(245,197,66,0.08) 161.5px,
+      rgba(200,155,45,0.03) 163px,
+      transparent 166px
     );
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .marble-bg::after {
@@ -321,18 +337,24 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.015) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 50%, rgba(192,192,200,0.01) 0%, transparent 40%),
-    radial-gradient(ellipse at 80% 70%, rgba(245,197,66,0.01) 0%, transparent 35%);
+    /* Silver shimmer pools */
+    radial-gradient(ellipse at 20% 20%, rgba(200,200,210,0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 15%, rgba(180,180,195,0.08) 0%, transparent 35%),
+    radial-gradient(ellipse at 60% 60%, rgba(190,190,200,0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 15% 75%, rgba(200,200,210,0.07) 0%, transparent 35%),
+    /* Gold shimmer highlights */
+    radial-gradient(ellipse at 45% 35%, rgba(245,197,66,0.06) 0%, transparent 30%),
+    radial-gradient(ellipse at 75% 70%, rgba(245,197,66,0.05) 0%, transparent 30%),
+    radial-gradient(ellipse at 30% 90%, rgba(200,155,45,0.04) 0%, transparent 25%);
   animation: marbleShift 20s ease-in-out infinite alternate;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 @keyframes marbleShift {
-  0% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 0.7; transform: scale(0.98); }
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 0.8; transform: scale(0.98); }
 }
 
 .nav-link {
