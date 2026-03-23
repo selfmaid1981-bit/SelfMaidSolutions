@@ -23,36 +23,41 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-14 lg:py-20" style={{ background: '#0a0a0d' }}>
+    <section className="py-24 lg:py-32" style={{ background: '#0a0a0d' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
-            What Our Clients Are Saying
+        <div className="text-center mb-16">
+          <p className="section-label text-white/50 tracking-[4px]">TESTIMONIALS</p>
+          <div className="editorial-divider-center" />
+          <h2 className="font-bold text-white font-serif">
+            What Our Clients <span className="italic" style={{ color: '#f5c542' }}>Are Saying</span>
           </h2>
-          <div className="w-24 h-[2px] mx-auto mt-3" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-6 rounded-2xl transition-shadow hover:shadow-lg"
-              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.08)' }}
+              className="relative p-8 rounded-2xl transition-all duration-500 hover:translate-y-[-2px]"
+              style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}
               data-testid={`testimonial-${testimonial.id}`}
             >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-amber-400" style={{ color: '#f5c542' }} />
-                ))}
-              </div>
+              <span className="editorial-quote-mark">&ldquo;</span>
 
-              <p className="text-white/70 text-sm leading-relaxed mb-5 italic">
-                "{testimonial.text}"
-              </p>
+              <div className="relative z-10">
+                <div className="flex gap-0.5 mb-5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: '#f5c542' }} />
+                  ))}
+                </div>
 
-              <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                <p className="font-semibold text-white text-sm">{testimonial.author}</p>
-                <p className="text-xs text-white/40">{testimonial.location}</p>
+                <p className="text-white/60 text-sm leading-[1.8] mb-6 italic">
+                  {testimonial.text}
+                </p>
+
+                <div className="pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                  <p className="font-semibold text-white text-sm tracking-wide">{testimonial.author}</p>
+                  <p className="text-[11px] text-white/30 tracking-wider uppercase mt-0.5">{testimonial.location}</p>
+                </div>
               </div>
             </div>
           ))}

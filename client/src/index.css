@@ -87,26 +87,28 @@
     @apply font-serif;
     font-weight: 700;
     letter-spacing: -1px;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 
   h1 {
-    font-size: 48px;
+    font-size: clamp(40px, 5vw, 56px);
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
   }
 
   h2 {
-    @apply text-3xl lg:text-5xl;
+    font-size: clamp(28px, 3.5vw, 44px);
+    letter-spacing: -0.5px;
   }
 
   h3 {
-    @apply text-2xl lg:text-4xl;
+    font-size: clamp(20px, 2.5vw, 32px);
   }
 
   p {
     opacity: 0.75;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 }
 
@@ -828,10 +830,39 @@ body {
 }
 
 .section-label {
-  font-size: 12px;
-  letter-spacing: 3px;
-  opacity: 0.5;
-  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 12px;
+}
+
+.editorial-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, #f5c542, rgba(245,197,66,0.2));
+  margin: 16px 0;
+}
+
+.editorial-divider-center {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #f5c542, transparent);
+  margin: 16px auto;
+}
+
+.editorial-quote-mark {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(245,197,66,0.15);
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  pointer-events: none;
+  user-select: none;
 }
 
 .gold-outline-btn {

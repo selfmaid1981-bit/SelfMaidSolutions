@@ -49,10 +49,10 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative text-white overflow-hidden" style={{ background: '#0a0a0d', borderTop: '1px solid rgba(245,197,66,0.15)' }}>
-      <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #f5c542, #c89b2d, #f5c542, transparent)' }} />
+    <footer className="relative text-white overflow-hidden" style={{ background: '#0a0a0d', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,197,66,0.3), transparent)' }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
             <div className="mb-5">
               <img
@@ -97,16 +97,15 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-6 h-px" style={{ background: 'linear-gradient(90deg, #f5c542, transparent)' }} />
+            <h4 className="text-[11px] font-semibold uppercase tracking-[3px] text-white/50 mb-6">
               Services
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {services.map((service, index) => (
                 <li key={index}>
                   <Link 
                     href={service.href} 
-                    className="text-white/40 hover:text-[#f5c542] transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
+                    className="text-white/35 hover:text-white/70 transition-colors duration-300 text-sm"
                     data-testid={`footer-service-${index}`}
                   >
                     {service.name}
@@ -117,16 +116,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-6 h-px" style={{ background: 'linear-gradient(90deg, #f5c542, transparent)' }} />
+            <h4 className="text-[11px] font-semibold uppercase tracking-[3px] text-white/50 mb-6">
               Quick Links
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link 
                     href={link.href} 
-                    className="text-white/40 hover:text-[#f5c542] transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
+                    className="text-white/35 hover:text-white/70 transition-colors duration-300 text-sm"
                     data-testid={`footer-quick-link-${index}`}
                   >
                     {link.name}
@@ -137,8 +135,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-6 h-px" style={{ background: 'linear-gradient(90deg, #f5c542, transparent)' }} />
+            <h4 className="text-[11px] font-semibold uppercase tracking-[3px] text-white/50 mb-6">
               Contact
             </h4>
             <ul className="space-y-3.5">

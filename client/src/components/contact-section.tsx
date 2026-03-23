@@ -111,45 +111,40 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
-      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(245, 197, 66, 0.3) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        <div className="mb-10 rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl relative overflow-hidden" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
-          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(245,197,66,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-          <div className="flex items-center gap-4 text-white relative z-10">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(245,197,66,0.1)' }}>
-              <ShieldCheck className="w-7 h-7 flex-shrink-0" style={{ color: '#f5c542' }} />
+        <div className="mb-16 rounded-xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="flex items-center gap-4 text-white">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(245,197,66,0.06)' }}>
+              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#f5c542' }} />
             </div>
             <div>
-              <h3 className="font-bold text-xl">100% Satisfaction Guarantee</h3>
-              <p className="text-white/50 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
+              <h3 className="font-bold text-lg">100% Satisfaction Guarantee</h3>
+              <p className="text-white/35 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
             </div>
           </div>
-          <div className="flex items-center gap-6 text-white/80 text-sm relative z-10">
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.1)' }}>
-              <RefreshCw className="w-4 h-4" style={{ color: '#f5c542' }} />
+          <div className="flex items-center gap-4 text-white/60 text-sm">
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <RefreshCw className="w-3.5 h-3.5" style={{ color: '#f5c542' }} />
               <span>Free re-clean</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.1)' }}>
-              <Clock className="w-4 h-4" style={{ color: '#f5c542' }} />
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <Clock className="w-3.5 h-3.5" style={{ color: '#f5c542' }} />
               <span>48hr response</span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
           <div className="order-2 lg:order-1">
             <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4" style={{ background: 'rgba(245,197,66,0.08)', color: '#f5c542', border: '1px solid rgba(245,197,66,0.15)' }}>
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f5c542' }} />
-                We respond within 24 hours
-              </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 font-serif italic">
-                Get in Touch
+              <p className="section-label text-white/50 tracking-[4px]">CONTACT</p>
+              <div className="editorial-divider" />
+              <h2 className="font-bold text-white mb-3 font-serif">
+                Get in <span className="italic" style={{ color: '#f5c542' }}>Touch</span>
               </h2>
-              <p className="text-lg text-white/60">
+              <p className="text-base text-white/40 leading-relaxed">
                 Questions? Ready to book? We're here to help.
               </p>
             </div>
@@ -294,10 +289,9 @@ export function ContactSection() {
           </div>
           
           <div className="order-1 lg:order-2 text-center lg:text-left">
-            <div className="rounded-2xl p-8 shadow-2xl relative overflow-hidden" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
-              <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, #f5c542, rgba(245,197,66,0.3), #f5c542)' }} />
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2 relative z-10 font-serif italic">
-                <Sparkles className="w-5 h-5" style={{ color: '#f5c542' }} />
+            <div className="rounded-xl p-8 relative" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10 font-serif italic">
+                <Sparkles className="w-4 h-4" style={{ color: '#f5c542' }} />
                 Contact Info
               </h3>
               

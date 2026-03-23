@@ -148,16 +148,18 @@ export function HomepageQuoteCalculator() {
   const inputClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2" + " " + "bg-[#111111] border border-white/10 text-white placeholder:text-white/30 focus:ring-[#f5c542]/40 focus:border-[#f5c542]";
 
   return (
-    <section className="py-14 lg:py-20" style={{ background: 'linear-gradient(135deg, #0a0a0d 0%, #111111 50%, #0a0a0d 100%)' }} id="instant-quote">
+    <section className="py-24 lg:py-32" style={{ background: '#0a0a0d' }} id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
-            Get Your Exact Cleaning Price
+        <div className="text-center mb-12">
+          <p className="section-label text-white/50 tracking-[4px]">PRICING</p>
+          <div className="editorial-divider-center" />
+          <h2 className="font-bold text-white font-serif">
+            Get Your <span className="italic" style={{ color: '#f5c542' }}>Exact</span> Price
           </h2>
-          <p className="text-white/50 mt-3">Takes less than 30 seconds</p>
+          <p className="text-white/35 mt-3 text-sm tracking-wide">Takes less than 30 seconds</p>
         </div>
-        <div className="rounded-2xl shadow-xl overflow-hidden" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
-          <div className="px-6 py-5 flex items-center justify-center gap-3" style={{ background: 'linear-gradient(135deg, #0a0a0d, #111111)', borderBottom: '1px solid rgba(245,197,66,0.15)' }}>
+        <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="px-6 py-5 flex items-center justify-center gap-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
             <Calculator className="w-5 h-5" style={{ color: '#f5c542' }} />
             <h3 className="text-lg font-bold text-white font-serif italic">Instant Cleaning Estimate</h3>
           </div>
