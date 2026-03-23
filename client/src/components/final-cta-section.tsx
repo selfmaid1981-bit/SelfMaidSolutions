@@ -50,6 +50,8 @@ export function FinalCtaSection() {
   const inputClass = "w-full block text-white bg-transparent border border-white/20 rounded placeholder:text-white/40 focus:outline-none focus:border-[#f5c542]/50 text-sm";
 
   return (
+    <>
+    <div className="section-divider-gold" />
     <section className="text-white section-warm" style={{ padding: '60px 10%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '40px', alignItems: 'center' }}>
       <div>
         <h2 className="text-3xl lg:text-4xl font-bold font-serif leading-tight mb-6">
@@ -68,11 +70,12 @@ export function FinalCtaSection() {
       </div>
 
       <div
+        className="cta-form-glow"
         style={{
           background: '#111',
           padding: '30px',
           borderRadius: '10px',
-          border: '1px solid #333',
+          border: '1px solid rgba(245,197,66,0.2)',
           width: '340px',
           flexShrink: 0
         }}
@@ -116,5 +119,6 @@ export function FinalCtaSection() {
         </form>
       </div>
     </section>
+    </>
   );
 }

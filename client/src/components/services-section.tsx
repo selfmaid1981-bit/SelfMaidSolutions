@@ -79,7 +79,7 @@ export function ServicesSection() {
               alt="Self-Maid professional cleaner at work"
               className="object-cover"
               loading="lazy"
-              style={{ width: '320px', maxHeight: '400px' }}
+              style={{ width: '380px', maxHeight: '480px' }}
             />
           </div>
         </div>
