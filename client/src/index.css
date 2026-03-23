@@ -86,13 +86,19 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -1px;
     line-height: 1.2;
   }
 
   h1 {
-    @apply text-4xl lg:text-6xl;
-    font-weight: 800;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  p {
+    opacity: 0.75;
+    line-height: 1.6;
   }
 
   h2 {
@@ -677,6 +683,9 @@ body {
 
 .nav-link-enhanced {
   position: relative;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .nav-link-enhanced::after {
