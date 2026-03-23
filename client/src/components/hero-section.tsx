@@ -1,4 +1,4 @@
-import heroLogo from '@assets/logo-gold-nobg.png';
+import heroLogo from '@assets/hero-logo-transparent.png';
 
 export function HeroSection() {
   return (
@@ -45,15 +45,12 @@ export function HeroSection() {
           </div>
 
           <div className="hidden lg:flex justify-center">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-2xl" style={{ background: 'radial-gradient(ellipse, rgba(245,197,66,0.06) 0%, transparent 70%)' }} />
-              <img
-                src={heroLogo}
-                alt="Self-Maid Cleaning Solutions"
-                className="relative w-full max-w-[440px] object-contain"
-                fetchPriority="high"
-              />
-            </div>
+            <img
+              src={heroLogo}
+              alt="Self-Maid Cleaning Solutions"
+              className="w-full max-w-[460px] object-contain drop-shadow-md"
+              fetchPriority="high"
+            />
           </div>
         </div>
       </div>
