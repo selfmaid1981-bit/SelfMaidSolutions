@@ -1,4 +1,4 @@
-import heroLogo from '@assets/B7C3758D-4E80-457B-8925-422DC3AD5C33_1774242177721.jpeg';
+import heroLogo from '@assets/logo-gold-nobg.png';
 
 export function HeroSection() {
   return (
