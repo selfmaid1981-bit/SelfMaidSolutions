@@ -1,7 +1,6 @@
 import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
-import { TrustBar } from '@/components/trust-bar';
 import { ServicesSection } from '@/components/services-section';
 import BeforeAfterGallery from '@/components/before-after-gallery';
 import { HowItWorks } from '@/components/how-it-works';
@@ -134,31 +133,9 @@ export default function Home() {
       
       <div className="min-h-screen marble-bg">
         <Navigation />
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#f5c542] to-transparent" />
         <HeroSection />
         <ServicesSection />
         <BeforeAfterGallery />
-        
-        <section className="py-14 lg:py-20" style={{ background: '#0a0a0d' }}>
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
-                Our Team in Action
-              </h2>
-              <div className="w-24 h-[2px] mx-auto mt-3" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
-              <p className="text-white/50 mt-3 text-sm">Professional, uniformed, and ready to make your space shine</p>
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-lg" style={{ border: '1px solid rgba(245,197,66,0.15)' }}>
-              <img
-                src="/assets/team-working-branded.png"
-                alt="Self-Maid cleaning team in navy branded uniforms working together in a living room"
-                className="w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
         <HowItWorks />
         <HomepageQuoteCalculator />
         <TestimonialsSection />

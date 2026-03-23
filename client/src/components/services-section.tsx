@@ -3,46 +3,22 @@ import { BookingModal } from './booking-modal';
 
 const services = [
   {
-    id: 'residential',
-    title: 'Ongoing Home Cleaning',
-    description: 'Routine upkeep for a spotless home.',
-    image: '/assets/services/icon-standard.png',
-  },
-  {
     id: 'deep',
-    title: 'Detailed Deep Cleaning',
-    description: 'Thorough top-to-bottom cleaning.',
+    title: 'Deep Cleaning',
     image: '/assets/services/icon-deep.png',
+    bullets: ['Thorough, detailed, no shortcuts'],
   },
   {
     id: 'moveout',
-    title: 'Move-Out & Turnover Cleaning',
-    description: 'Complete clean for a fresh start.',
+    title: 'Move-In/Move-Out',
     image: '/assets/services/icon-moveout.png',
+    bullets: ['Perfect for property turnovers'],
   },
   {
     id: 'airbnb',
-    title: 'Short-Term Rental Turnovers',
-    description: 'Guest-ready cleaning for rentals.',
+    title: 'Airbnb Turnover',
     image: '/assets/services/icon-airbnb.png',
-  },
-  {
-    id: 'commercial',
-    title: 'Office Cleaning',
-    description: 'Professional office cleaning.',
-    image: '/assets/services/icon-office.png',
-  },
-  {
-    id: 'dorm',
-    title: 'Student Dorm',
-    description: 'Fast dorm turnovers for students.',
-    image: '/assets/services/icon-dorm.png',
-  },
-  {
-    id: 'multifamily',
-    title: 'Multi-Family Turnovers',
-    description: 'Unit-ready cleaning for property managers.',
-    image: '/assets/services/icon-multifamily.png',
+    bullets: ['Fast & reliable service for hosts'],
   },
 ];
 
@@ -51,45 +27,76 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" className="py-14 lg:py-20" style={{ background: '#0a0a0d' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-4">
-            <p className="text-xs uppercase tracking-[0.2em] mb-2" style={{ color: '#f5c542' }}>Our Services</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
-              Experience the Self-Maid Difference
-            </h2>
-            <div className="w-24 h-[2px] mx-auto mt-3" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
-            <p className="text-white/50 mt-3 text-sm">Premium Cleaning</p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {services.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => setIsBookingModalOpen(true)}
-                className="group text-center focus:outline-none"
-                data-testid={`service-card-${service.id}`}
-              >
-                <div className="rounded-2xl p-4 sm:p-5 transition-all duration-300 shadow-sm hover:shadow-lg group-hover:-translate-y-1 h-full flex flex-col items-center" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      width={96}
-                      height={96}
-                    />
-                  </div>
-                  <h3 className="text-sm font-bold text-white mb-1">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs text-white/50 leading-relaxed">
-                    {service.description}
-                  </p>
+      <section id="services" className="py-14 lg:py-20 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'radial-gradient(ellipse at 20% 80%, rgba(245,197,66,0.03) 0%, transparent 50%)'
+        }} />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div>
+              <div className="mb-6">
+                <p className="section-label uppercase text-white mb-2">OUR SERVICES</p>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="h-[1px] w-12" style={{ background: 'linear-gradient(90deg, rgba(245,197,66,0.5), transparent)' }} />
+                  <span className="text-white/40 text-xs tracking-wider uppercase" />
                 </div>
-              </button>
-            ))}
+                <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic mb-2">
+                  Experience the Self-Maid Difference
+                </h2>
+                <div className="flex items-center gap-3 mt-3">
+                  <div className="h-[1px] flex-1" style={{ background: 'linear-gradient(90deg, rgba(245,197,66,0.4), transparent)' }} />
+                  <span className="text-white/50 text-sm tracking-wider">Premium Cleaning</span>
+                  <div className="h-[1px] flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,197,66,0.4))' }} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                {services.map((service) => (
+                  <button
+                    key={service.id}
+                    onClick={() => setIsBookingModalOpen(true)}
+                    className="group text-center focus:outline-none"
+                    data-testid={`service-card-${service.id}`}
+                  >
+                    <div
+                      className="rounded-xl p-4 transition-all duration-300 hover:shadow-lg group-hover:-translate-y-1 h-full flex flex-col items-center"
+                      style={{ background: 'rgba(17,17,17,0.8)', border: '1px solid rgba(245,197,66,0.2)' }}
+                    >
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3">
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                          width={80}
+                          height={80}
+                        />
+                      </div>
+                      <h3 className="text-xs sm:text-sm font-bold text-white mb-2">
+                        {service.title}
+                      </h3>
+                      <div className="text-left w-full space-y-0.5">
+                        {service.bullets.map((bullet) => (
+                          <p key={bullet} className="text-[11px] text-white/50 leading-snug">
+                            <span style={{ color: '#f5c542' }}>✓</span> {bullet}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden lg:block rounded-xl overflow-hidden" style={{ border: '1px solid rgba(245,197,66,0.1)' }}>
+              <img
+                src="/assets/team-working-branded.png"
+                alt="Self-Maid professional cleaner at work"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                style={{ minHeight: '380px' }}
+              />
+            </div>
           </div>
         </div>
       </section>
