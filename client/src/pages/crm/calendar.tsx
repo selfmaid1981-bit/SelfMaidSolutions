@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { QueryErrorState } from "@/components/error-boundary";
 import { crmApi } from "@/lib/crm-api";
 import {
   ChevronLeft,
@@ -99,7 +100,7 @@ export default function CrmCalendar() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
-  const { data: events = [], isLoading } = useQuery<CalendarEvent[]>({
+  const { data: events = [], isLoading, isError, refetch } = useQuery<CalendarEvent[]>({
     queryKey: ["/api/crm/calendar"],
     queryFn: crmApi.getCalendarEvents,
   });
@@ -205,6 +206,8 @@ export default function CrmCalendar() {
 
         {isLoading ? (
           <Skeleton className="h-[600px] w-full rounded-xl" />
+        ) : isError ? (
+          <QueryErrorState message="Failed to load calendar events" onRetry={() => refetch()} />
         ) : (
           <div className="flex gap-6 flex-col lg:flex-row">
             <Card className="flex-1 min-w-0">

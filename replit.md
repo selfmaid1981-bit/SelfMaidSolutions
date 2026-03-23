@@ -42,7 +42,8 @@ The application uses a bold, premium design with a deep navy/purple/red-black pa
 - **Admin Features**: CRUD operations for Cleaners, Recurring Bookings, and Referrals.
 - **Navigation**: Desktop and mobile navigation with dropdowns for services and service areas.
 - **Brand Positioning**: Clear brand messaging with a city-targeted tagline.
-- **SEO Enhancements**: Blog Article Schema (JSON-LD), Image SEO (lazy loading, dimensions, alt tags).
+- **SEO Enhancements**: Blog Article Schema (JSON-LD), Image SEO (lazy loading, dimensions, alt tags). Sitemap at `public/sitemap.xml` with 64 URLs covering all public pages, city-service combos, service areas, neighborhoods, and blog posts.
+- **Error Handling**: Global `ErrorBoundary` wraps entire app in App.tsx — prevents white-screen crashes. `QueryErrorState` reusable component shows "Failed to load..." with retry button. All CRM pages (dashboard, pipeline, contacts, calendar, analytics, jobs, appointments) have error state UI when API calls fail.
 - **Analytics**: Google Analytics 4 integration. Page view tracking via `page_views` table (path, referrer, session, screen size, IP). Frontend tracker at `client/src/lib/page-tracker.ts` fires on every route change via `sendBeacon`. Daily visitor report emailed at 7 AM CT to owner emails with traffic stats, new quotes/contacts/bookings/leads with full contact details. Scheduler: `server/daily-visitor-report.ts`. Manual trigger: `POST /api/admin/daily-report` (admin-only). Daily Google Sheets sync pushes page views, quotes, contacts, bookings, and leads into a "Self-Maid Daily Reports" spreadsheet with dedicated tabs. Module: `server/daily-sheets-sync.ts`. Manual trigger: `POST /api/admin/sync-sheets` (admin-only). Sheets auto-created on first sync if `DAILY_REPORT_SPREADSHEET_ID` env var not set.
 
 # External Dependencies

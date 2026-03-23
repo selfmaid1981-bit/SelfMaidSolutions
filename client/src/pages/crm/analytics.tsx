@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { DashboardLayout } from "@/components/shared/dashboard-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { QueryErrorState } from "@/components/error-boundary";
 import { crmApi } from "@/lib/crm-api";
 import { MessageSquare, Mail, Tag, TrendingUp } from "lucide-react";
 
@@ -26,7 +27,7 @@ const JOB_COLORS: Record<string, string> = {
 };
 
 export default function CrmAnalytics() {
-  const { data: stats, isLoading } = useQuery({
+  const { data: stats, isLoading, isError, refetch } = useQuery({
     queryKey: ["/api/crm/stats"],
     queryFn: crmApi.getStats,
   });
@@ -52,6 +53,8 @@ export default function CrmAnalytics() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-[300px]" />)}
           </div>
+        ) : isError ? (
+          <QueryErrorState message="Failed to load analytics" onRetry={() => refetch()} />
         ) : stats ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>

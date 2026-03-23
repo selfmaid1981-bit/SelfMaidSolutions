@@ -32,6 +32,7 @@ import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NeighborhoodPage from "@/pages/neighborhood";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
+import { ErrorBoundary } from "@/components/error-boundary";
 import CrmDashboard from "@/pages/crm/dashboard";
 import CrmPipeline from "@/pages/crm/pipeline";
 import CrmContacts from "@/pages/crm/contacts";
@@ -114,14 +115,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <FacebookPixel />
-        <JotFormAgent />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <FacebookPixel />
+          <JotFormAgent />
+          <Router />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

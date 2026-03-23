@@ -13,6 +13,7 @@ import { crmApi } from "@/lib/crm-api";
 import { queryClient } from "@/lib/queryClient";
 import { useState } from "react";
 import { Plus, ArrowRightLeft } from "lucide-react";
+import { QueryErrorState } from "@/components/error-boundary";
 
 export default function CrmPipeline() {
   const { toast } = useToast();
@@ -20,7 +21,7 @@ export default function CrmPipeline() {
   const [detailLead, setDetailLead] = useState<any>(null);
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", serviceType: "", source: "website", notes: "" });
 
-  const { data: leads = [], isLoading } = useQuery({
+  const { data: leads = [], isLoading, isError, refetch } = useQuery({
     queryKey: ["/api/crm/leads"],
     queryFn: crmApi.getLeads,
   });
@@ -120,6 +121,8 @@ export default function CrmPipeline() {
           <div className="flex gap-4">
             {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="w-[280px] h-[300px]" />)}
           </div>
+        ) : isError ? (
+          <QueryErrorState message="Failed to load pipeline" onRetry={() => refetch()} />
         ) : (
           <PipelineBoard leads={leads} onLeadClick={setDetailLead} />
         )}

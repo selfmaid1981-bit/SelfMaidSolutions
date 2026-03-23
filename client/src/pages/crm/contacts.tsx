@@ -12,6 +12,7 @@ import { crmApi } from "@/lib/crm-api";
 import { queryClient } from "@/lib/queryClient";
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { QueryErrorState } from "@/components/error-boundary";
 
 export default function CrmContacts() {
   const { toast } = useToast();
@@ -19,7 +20,7 @@ export default function CrmContacts() {
   const [detail, setDetail] = useState<any>(null);
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", address: "", city: "", state: "", zipCode: "", notes: "" });
 
-  const { data: clients = [], isLoading } = useQuery({
+  const { data: clients = [], isLoading, isError, refetch } = useQuery({
     queryKey: ["/api/crm/clients"],
     queryFn: crmApi.getClients,
   });
@@ -76,6 +77,8 @@ export default function CrmContacts() {
 
         {isLoading ? (
           <Skeleton className="h-[400px]" />
+        ) : isError ? (
+          <QueryErrorState message="Failed to load contacts" onRetry={() => refetch()} />
         ) : (
           <ContactList clients={clients} onClientClick={setDetail} />
         )}

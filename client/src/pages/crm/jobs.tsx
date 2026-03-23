@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { QueryErrorState } from "@/components/error-boundary";
 import { useToast } from "@/hooks/use-toast";
 import { crmApi } from "@/lib/crm-api";
 import { queryClient } from "@/lib/queryClient";
@@ -17,7 +18,7 @@ export default function CrmJobs() {
   const { toast } = useToast();
   const [detail, setDetail] = useState<any>(null);
 
-  const { data: jobs = [], isLoading } = useQuery({
+  const { data: jobs = [], isLoading, isError, refetch } = useQuery({
     queryKey: ["/api/crm/jobs"],
     queryFn: crmApi.getJobs,
   });
@@ -64,6 +65,8 @@ export default function CrmJobs() {
 
         {isLoading ? (
           <Skeleton className="h-[400px]" />
+        ) : isError ? (
+          <QueryErrorState message="Failed to load jobs" onRetry={() => refetch()} />
         ) : (
           <JobTracker jobs={jobs} onJobClick={setDetail} />
         )}
