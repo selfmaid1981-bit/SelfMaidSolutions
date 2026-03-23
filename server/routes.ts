@@ -35,6 +35,9 @@ import {
 } from "./outreach-automation";
 
 import { OWNER_EMAILS, FROM_EMAIL } from "./config";
+import { startDailyReportScheduler, sendDailyVisitorReport } from "./daily-visitor-report";
+import { db } from "./db";
+import { pageViews, insertPageViewSchema } from "@shared/schema";
 import {
   runPipeline,
   startLeadGenPipeline,
@@ -509,6 +512,39 @@ Host: https://selfmaidllc.com`;
     } catch (error: any) {
       console.error('Login error:', error);
       res.status(500).json({ message: "Login failed: " + error.message });
+    }
+  });
+
+  app.post("/api/track", async (req, res) => {
+    try {
+      const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || '';
+      const path = typeof req.body.path === 'string' ? req.body.path.slice(0, 500) : '/';
+      const referrer = typeof req.body.referrer === 'string' ? req.body.referrer.slice(0, 1000) : null;
+      const sessionId = typeof req.body.sessionId === 'string' ? req.body.sessionId.slice(0, 100) : null;
+      const screenWidth = typeof req.body.screenWidth === 'number' && req.body.screenWidth > 0 && req.body.screenWidth < 10000 ? req.body.screenWidth : null;
+      const screenHeight = typeof req.body.screenHeight === 'number' && req.body.screenHeight > 0 && req.body.screenHeight < 10000 ? req.body.screenHeight : null;
+
+      await db.insert(pageViews).values({
+        path,
+        referrer,
+        userAgent: (req.headers['user-agent'] || '').slice(0, 500) || null,
+        ip: ip.slice(0, 45),
+        sessionId,
+        screenWidth,
+        screenHeight,
+      });
+      res.json({ ok: true });
+    } catch (error) {
+      res.json({ ok: true });
+    }
+  });
+
+  app.post("/api/admin/daily-report", requireAdmin, async (req, res) => {
+    try {
+      const sent = await sendDailyVisitorReport();
+      res.json({ success: sent });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   });
 
@@ -1264,6 +1300,7 @@ Host: https://selfmaidllc.com`;
   });
 
   startWeeklyReportScheduler();
+  startDailyReportScheduler();
 
   // Lead Generation Pipeline Routes
   app.post("/api/admin/lead-gen/start", requireAdmin, async (req, res) => {

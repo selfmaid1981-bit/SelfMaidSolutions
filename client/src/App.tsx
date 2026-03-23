@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { JotFormAgent } from "@/components/jotform-agent";
+import { trackPageView } from "@/lib/page-tracker";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
 import About from "@/pages/about";
@@ -48,6 +49,7 @@ function ScrollToTop() {
   
   useEffect(() => {
     window.scrollTo(0, 0);
+    trackPageView(location);
   }, [location]);
   
   return null;
