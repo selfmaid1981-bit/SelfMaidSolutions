@@ -29,7 +29,7 @@ export function ServicesSection() {
     <>
       <div className="section-divider-gold" />
       <section id="services" className="section-warm" style={{ padding: '80px 10%' }}>
-        <div className="text-center mb-10">
+        <div className="text-center mb-10 scroll-reveal">
           <p className="text-xs tracking-[3px] uppercase text-white/50 mb-3">
             ——— OUR SERVICES ———
           </p>
@@ -44,7 +44,7 @@ export function ServicesSection() {
         </div>
 
         <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
-          <div className="flex gap-5 flex-wrap lg:flex-nowrap">
+          <div className="flex gap-5 flex-wrap lg:flex-nowrap scroll-reveal-left">
             {services.map((service) => (
               <button
                 key={service.id}
@@ -73,7 +73,7 @@ export function ServicesSection() {
             ))}
           </div>
 
-          <div className="cleaner-photo-wrapper flex-shrink-0">
+          <div className="cleaner-photo-wrapper flex-shrink-0 scroll-reveal-right">
             <img
               src="/assets/services-cleaner-hero.png"
               alt="Self-Maid professional cleaner at work"

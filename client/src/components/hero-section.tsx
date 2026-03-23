@@ -1,8 +1,10 @@
 import heroLogo from '@assets/hero-logo-transparent.png';
+import { GoldParticles } from './gold-particles';
 
 export function HeroSection() {
   return (
     <section className="hero-section">
+      <GoldParticles />
       <div className="hero-container">
         <div className="hero-content">
           <h1>Spotless Homes.<br />Zero Stress.</h1>

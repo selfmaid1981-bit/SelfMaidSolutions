@@ -25,11 +25,11 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-24 lg:py-32" style={{ background: '#0a0a0d' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-reveal">
           <p className="section-label text-white/50 tracking-[4px]">TESTIMONIALS</p>
           <div className="editorial-divider-center" />
           <h2 className="font-bold text-white font-serif">
-            What Our Clients <span className="italic" style={{ color: '#f5c542' }}>Are Saying</span>
+            What Our Clients <span className="italic gold-shine-text">Are Saying</span>
           </h2>
         </div>
 
@@ -37,7 +37,7 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="relative p-8 rounded-2xl transition-all duration-500 hover:translate-y-[-2px]"
+              className="relative p-8 rounded-2xl transition-all duration-500 hover:translate-y-[-2px] scroll-reveal"
               style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}
               data-testid={`testimonial-${testimonial.id}`}
             >

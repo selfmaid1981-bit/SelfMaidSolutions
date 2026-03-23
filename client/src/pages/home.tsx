@@ -12,6 +12,10 @@ import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
 import { ChatWidget } from '@/components/chat-widget';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
+import { StickyQuoteBar } from '@/components/sticky-quote-bar';
+import { StatsCounter } from '@/components/stats-counter';
+import { ReferralSection } from '@/components/referral-section';
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { useState } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
 import { BookingModal } from '@/components/booking-modal';
@@ -119,6 +123,7 @@ const structuredData = {
 
 export default function Home() {
   const [isMobileBookingOpen, setIsMobileBookingOpen] = useState(false);
+  useScrollReveal();
 
   return (
     <>
@@ -130,16 +135,19 @@ export default function Home() {
         ogDescription="Professional cleaning services serving Montgomery, Prattville, Selma, Homewood, and Clanton, AL. From homes to offices, we make everything spotless with 16 years of experience."
         structuredData={structuredData}
       />
+      <StickyQuoteBar />
       
       <div className="min-h-screen marble-bg">
         <Navigation />
         <HeroSection />
+        <StatsCounter />
         <ServicesSection />
         <BeforeAfterGallery />
         <HowItWorks />
         <HomepageQuoteCalculator />
         <TestimonialsSection />
         <AboutSection />
+        <ReferralSection />
         <FinalCtaSection />
         <ContactSection />
         <Footer />
