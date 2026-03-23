@@ -12,6 +12,7 @@ const bookingFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Please enter a valid email'),
   phone: z.string().optional(),
+  date: z.string().optional(),
 });
 
 type BookingFormData = z.infer<typeof bookingFormSchema>;
@@ -25,6 +26,7 @@ export function FinalCtaSection() {
       name: '',
       email: '',
       phone: '',
+      date: '',
     },
   });
 
@@ -39,7 +41,7 @@ export function FinalCtaSection() {
         email: data.email,
         phone: data.phone || null,
         serviceType: 'residential',
-        message: 'Booking inquiry from homepage form',
+        message: `Booking inquiry from homepage form${data.date ? ` — Preferred date: ${data.date}` : ''}`,
       });
     },
     onSuccess: () => {
@@ -63,21 +65,13 @@ export function FinalCtaSection() {
   };
 
   return (
-    <section className="text-white py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at 30% 50%, rgba(245,197,66,0.04) 0%, transparent 60%)'
-      }} />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <div>
-            <p className="section-label text-white/50 tracking-[4px]">BOOK NOW</p>
-            <div className="editorial-divider" />
-            <h2 className="font-bold mb-6 font-serif leading-tight">
-              Ready for a <span className="italic" style={{ color: '#f5c542' }}>spotless</span> home?
+    <section className="text-white py-16 lg:py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0d 0%, #0d0d0d 50%, #0a0a0d 100%)' }}>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="pt-4">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 font-serif italic leading-tight">
+              Ready for a spotless home?
             </h2>
-            <p className="text-white/40 text-base leading-relaxed mb-8 max-w-md">
-              Get a transparent quote in seconds, or book directly. No hidden fees, no surprises — just a cleaner home.
-            </p>
             <a
               href="#instant-quote"
               onClick={(e) => {
@@ -85,17 +79,20 @@ export function FinalCtaSection() {
                 const el = document.getElementById('instant-quote');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="nav-book-btn inline-flex items-center gap-2 px-10 py-4 font-bold text-sm tracking-[1.5px] uppercase"
+              className="nav-book-btn inline-flex items-center gap-2 px-10 py-4 font-bold text-sm tracking-[1px] uppercase"
               data-testid="cta-get-quote"
             >
               GET A QUOTE
             </a>
           </div>
 
-          <div className="rounded-xl overflow-hidden" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="p-8 sm:p-10">
-              <h3 className="text-xl font-bold text-white mb-2 font-serif italic text-center">Book Your Cleaning</h3>
-              <p className="text-white/30 text-xs text-center mb-6 tracking-wide">We respond within 24 hours</p>
+          <div className="rounded-lg overflow-hidden" style={{
+            background: '#111111',
+            border: '1px solid rgba(245,197,66,0.12)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.4)'
+          }}>
+            <div className="p-6 sm:p-8">
+              <h3 className="text-xl font-bold text-white mb-5 font-serif italic text-center">Book Your Cleaning</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="booking-form-cta">
                   <FormField
@@ -107,7 +104,7 @@ export function FinalCtaSection() {
                           <Input
                             {...field}
                             placeholder="Name"
-                            className="border-white/8 rounded-lg h-12 bg-[#0a0a0d] text-white placeholder:text-white/25 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
+                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
                           />
                         </FormControl>
                         <FormMessage />
@@ -124,7 +121,7 @@ export function FinalCtaSection() {
                             type="email"
                             {...field}
                             placeholder="Email"
-                            className="border-white/8 rounded-lg h-12 bg-[#0a0a0d] text-white placeholder:text-white/25 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
+                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
                           />
                         </FormControl>
                         <FormMessage />
@@ -141,8 +138,25 @@ export function FinalCtaSection() {
                             type="tel"
                             {...field}
                             value={field.value || ''}
-                            placeholder="Phone (optional)"
-                            className="border-white/8 rounded-lg h-12 bg-[#0a0a0d] text-white placeholder:text-white/25 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
+                            placeholder="Phone"
+                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="date"
+                            {...field}
+                            value={field.value || ''}
+                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
                           />
                         </FormControl>
                         <FormMessage />
@@ -151,7 +165,7 @@ export function FinalCtaSection() {
                   />
                   <Button
                     type="submit"
-                    className="w-full font-bold py-6 rounded-lg text-sm tracking-[1px] uppercase text-[#0a0a0d] hover:opacity-90 transition-opacity"
+                    className="w-full font-bold py-5 rounded-md text-sm tracking-[1px] uppercase text-[#0a0a0d]"
                     style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)' }}
                     disabled={bookingMutation.isPending}
                     data-testid="cta-submit"

@@ -25,13 +25,16 @@ export function Navigation() {
     { href: '/', label: 'Home' },
     { href: '/services', label: 'Services' },
     { href: '/about', label: 'About Us' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/faq', label: 'FAQ' },
+    { href: '/#testimonials', label: 'Reviews' },
     { href: '/#contact', label: 'Contact' },
   ];
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
+      if (location !== '/') {
+        window.location.href = '/' + href;
+        return;
+      }
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });

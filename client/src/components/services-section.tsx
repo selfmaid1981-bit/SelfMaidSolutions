@@ -6,19 +6,19 @@ const services = [
     id: 'deep',
     title: 'Deep Cleaning',
     image: '/assets/services/icon-deep.png',
-    description: 'Thorough, detailed, no shortcuts. Every surface, every corner.',
+    bullets: ['Thorough, detailed,', 'no shortcuts'],
   },
   {
     id: 'moveout',
-    title: 'Move-In / Move-Out',
+    title: 'Move-In/Move-Out',
     image: '/assets/services/icon-moveout.png',
-    description: 'Perfect for property turnovers and getting your full deposit back.',
+    bullets: ['Perfect for', 'property turnovers'],
   },
   {
     id: 'airbnb',
     title: 'Airbnb Turnover',
     image: '/assets/services/icon-airbnb.png',
-    description: 'Fast, reliable service that keeps your 5-star reviews coming.',
+    bullets: ['Fast & reliable', 'service for hosts'],
   },
 ];
 
@@ -27,49 +27,65 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+      <section id="services" className="py-16 lg:py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0d0d0d 0%, #0a0a0d 100%)' }}>
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'radial-gradient(ellipse at 20% 80%, rgba(245,197,66,0.03) 0%, transparent 50%)'
+          background: 'radial-gradient(ellipse at 80% 50%, rgba(245,197,66,0.04) 0%, transparent 50%)'
         }} />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
-            <div>
-              <p className="section-label text-white/50 tracking-[4px]">OUR SERVICES</p>
-              <div className="editorial-divider" />
-              <h2 className="font-bold text-white font-serif mb-3">
-                Experience the <span className="italic" style={{ color: '#f5c542' }}>Self-Maid</span> Difference
-              </h2>
-              <p className="text-white/40 text-sm mb-10 max-w-sm">Premium cleaning tailored to your space and schedule.</p>
 
-              <div className="space-y-4">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div>
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-px w-10" style={{ background: 'rgba(245,197,66,0.4)' }} />
+                  <p className="text-[11px] font-semibold tracking-[3px] uppercase text-white/45">OUR SERVICES</p>
+                  <div className="h-px w-10" style={{ background: 'rgba(245,197,66,0.4)' }} />
+                </div>
+                <h2 className="text-2xl lg:text-3xl font-bold text-white font-serif italic mb-2">
+                  Experience the Self-Maid Difference
+                </h2>
+                <div className="flex items-center gap-3">
+                  <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(245,197,66,0.3), transparent)' }} />
+                  <span className="text-white/40 text-xs tracking-wider">Premium Cleaning</span>
+                  <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,197,66,0.3))' }} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 sm:gap-4">
                 {services.map((service) => (
                   <button
                     key={service.id}
                     onClick={() => setIsBookingModalOpen(true)}
-                    className="group w-full text-left focus:outline-none"
+                    className="group text-center focus:outline-none"
                     data-testid={`service-card-${service.id}`}
                   >
                     <div
-                      className="rounded-xl p-5 transition-all duration-500 hover:translate-x-1 flex items-start gap-5"
-                      style={{ background: 'rgba(17,17,17,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}
+                      className="rounded-xl p-4 sm:p-5 transition-all duration-300 hover:shadow-lg group-hover:-translate-y-1 h-full flex flex-col items-center"
+                      style={{
+                        background: 'rgba(17,17,17,0.8)',
+                        border: '1px solid rgba(245,197,66,0.15)',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.3)'
+                      }}
                     >
-                      <div className="w-14 h-14 flex-shrink-0 rounded-lg overflow-hidden" style={{ background: 'rgba(245,197,66,0.06)' }}>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3">
                         <img
                           src={service.image}
                           alt={service.title}
-                          className="w-full h-full object-contain p-2"
+                          className="w-full h-full object-contain"
                           loading="lazy"
-                          width={56}
-                          height={56}
+                          width={80}
+                          height={80}
                         />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-base font-bold text-white mb-1 group-hover:text-[#f5c542] transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-white/40 leading-relaxed">
-                          {service.description}
-                        </p>
+                      <h3 className="text-xs sm:text-sm font-bold text-white mb-2">
+                        {service.title}
+                      </h3>
+                      <div className="text-left w-full space-y-0.5">
+                        {service.bullets.map((bullet) => (
+                          <p key={bullet} className="text-[11px] text-white/45 leading-snug">
+                            <span style={{ color: '#f5c542' }}>&#10003;</span> {bullet}
+                          </p>
+                        ))}
                       </div>
                     </div>
                   </button>
@@ -77,25 +93,17 @@ export function ServicesSection() {
               </div>
             </div>
 
-            <div className="hidden lg:block">
-              <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-                <img
-                  src="/assets/team-working-branded.png"
-                  alt="Self-Maid professional cleaner at work"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  style={{ minHeight: '480px' }}
-                />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,13,0.6) 0%, transparent 40%)' }} />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-white/60 text-xs tracking-[2px] uppercase">16+ Years of Excellence</p>
-                </div>
-              </div>
+            <div className="hidden lg:block rounded-xl overflow-hidden" style={{ border: '1px solid rgba(245,197,66,0.08)' }}>
+              <img
+                src="/assets/team-working-branded.png"
+                alt="Self-Maid professional cleaner at work"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                style={{ minHeight: '420px' }}
+              />
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent)' }} />
       </section>
 
       <BookingModal
