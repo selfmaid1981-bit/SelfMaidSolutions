@@ -111,29 +111,29 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden bg-gray-50">
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(31 42 55 / 0.4) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
+    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(245, 197, 66, 0.3) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <div className="mb-10 bg-[#1F2A37] rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+        <div className="mb-10 rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl relative overflow-hidden" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
+          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(245,197,66,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
           <div className="flex items-center gap-4 text-white relative z-10">
-            <div className="w-12 h-12 bg-[#C6A969]/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-              <ShieldCheck className="w-7 h-7 flex-shrink-0" />
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(245,197,66,0.1)' }}>
+              <ShieldCheck className="w-7 h-7 flex-shrink-0" style={{ color: '#f5c542' }} />
             </div>
             <div>
               <h3 className="font-bold text-xl">100% Satisfaction Guarantee</h3>
-              <p className="text-white/60 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
+              <p className="text-white/50 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
             </div>
           </div>
-          <div className="flex items-center gap-6 text-white/90 text-sm relative z-10">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-lg">
-              <RefreshCw className="w-4 h-4 text-[#C6A969]" />
+          <div className="flex items-center gap-6 text-white/80 text-sm relative z-10">
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.1)' }}>
+              <RefreshCw className="w-4 h-4" style={{ color: '#f5c542' }} />
               <span>Free re-clean</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3.5 py-2 rounded-lg">
-              <Clock className="w-4 h-4 text-[#C6A969]" />
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.1)' }}>
+              <Clock className="w-4 h-4" style={{ color: '#f5c542' }} />
               <span>48hr response</span>
             </div>
           </div>
@@ -142,20 +142,20 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="mb-8">
-              <div className="inline-flex items-center gap-2 bg-[#C6A969]/10 text-[#1F2A37] px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-[#C6A969]/20">
-                <span className="w-2 h-2 rounded-full bg-[#C6A969] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4" style={{ background: 'rgba(245,197,66,0.08)', color: '#f5c542', border: '1px solid rgba(245,197,66,0.15)' }}>
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f5c542' }} />
                 We respond within 24 hours
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] mb-3 font-serif italic">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 font-serif italic">
                 Get in Touch
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-white/60">
                 Questions? Ready to book? We're here to help.
               </p>
             </div>
             
-            <Card className="bg-white/95 shadow-2xl border-0 rounded-2xl overflow-hidden relative">
-              <div className="h-1.5 bg-gradient-to-r from-[#1F2A37] via-[#C6A969] to-[#1F2A37]" />
+            <Card className="shadow-2xl border-0 rounded-2xl overflow-hidden relative" style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div className="h-1.5" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d, #f5c542)' }} />
               <CardContent className="p-8 relative">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="contact-form">
@@ -164,11 +164,11 @@ export function ContactSection() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Name</FormLabel>
+                          <FormLabel className="text-white/80 font-medium">Name</FormLabel>
                           <FormControl>
                             <Input 
                               {...field} 
-                              className="border-gray-200 rounded-xl h-12 focus:ring-2 focus:ring-[#C6A969]/20 focus:border-[#C6A969] transition-all bg-gray-50/50 hover:bg-white" 
+                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
                               data-testid="input-name" 
                             />
                           </FormControl>
@@ -182,12 +182,12 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Email</FormLabel>
+                          <FormLabel className="text-white/80 font-medium">Email</FormLabel>
                           <FormControl>
                             <Input 
                               type="email" 
                               {...field} 
-                              className="border-gray-200 rounded-xl h-12 focus:ring-2 focus:ring-[#C6A969]/20 focus:border-[#C6A969] transition-all bg-gray-50/50 hover:bg-white" 
+                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
                               data-testid="input-email" 
                             />
                           </FormControl>
@@ -201,15 +201,15 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">
-                            Phone <span className="text-gray-400 text-sm font-normal">(optional)</span>
+                          <FormLabel className="text-white/80 font-medium">
+                            Phone <span className="text-white/30 text-sm font-normal">(optional)</span>
                           </FormLabel>
                           <FormControl>
                             <Input 
                               type="tel" 
                               {...field} 
                               value={field.value || ''} 
-                              className="border-gray-200 rounded-xl h-12 focus:ring-2 focus:ring-[#C6A969]/20 focus:border-[#C6A969] transition-all bg-gray-50/50 hover:bg-white" 
+                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
                               data-testid="input-phone" 
                             />
                           </FormControl>
@@ -223,11 +223,11 @@ export function ContactSection() {
                       name="serviceType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Service Type</FormLabel>
+                          <FormLabel className="text-white/80 font-medium">Service Type</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger 
-                                className="border-gray-200 rounded-xl h-12 bg-gray-50/50 hover:bg-white transition-all" 
+                                className="border-white/10 rounded-xl h-12 bg-[#0a0a0d] hover:bg-[#111111] transition-all text-white" 
                                 data-testid="select-serviceType"
                               >
                                 <SelectValue placeholder="Select a service..." />
@@ -252,14 +252,14 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 font-medium">Message</FormLabel>
+                          <FormLabel className="text-white/80 font-medium">Message</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
                               value={field.value || ''}
                               rows={4} 
                               placeholder="Tell us about your cleaning needs..."
-                              className="border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-[#C6A969]/20 focus:border-[#C6A969] transition-all bg-gray-50/50 hover:bg-white"
+                              className="border-white/10 rounded-xl resize-none focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]"
                               data-testid="textarea-message"
                             />
                           </FormControl>
@@ -270,13 +270,14 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-[#1F2A37] hover:bg-[#2a3a4d] text-white font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group" 
+                      className="w-full font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group text-[#0a0a0d]" 
+                      style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)' }}
                       disabled={contactMutation.isPending}
                       data-testid="button-submit"
                     >
                       {contactMutation.isPending ? (
                         <span className="flex items-center justify-center gap-2">
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                           Sending...
                         </span>
                       ) : (
@@ -293,10 +294,10 @@ export function ContactSection() {
           </div>
           
           <div className="order-1 lg:order-2 text-center lg:text-left">
-            <div className="bg-[#1F2A37] rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C6A969] via-[#C6A969]/50 to-[#C6A969]" />
+            <div className="rounded-2xl p-8 shadow-2xl relative overflow-hidden" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
+              <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, #f5c542, rgba(245,197,66,0.3), #f5c542)' }} />
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2 relative z-10 font-serif italic">
-                <Sparkles className="w-5 h-5 text-[#C6A969]" />
+                <Sparkles className="w-5 h-5" style={{ color: '#f5c542' }} />
                 Contact Info
               </h3>
               
@@ -305,17 +306,17 @@ export function ContactSection() {
                   const Icon = info.icon;
                   return (
                     <div key={index} className="flex items-center group" data-testid={`contact-info-${index}`}>
-                      <div className="w-12 h-12 bg-[#C6A969]/15 rounded-xl flex items-center justify-center mr-4 group-hover:bg-[#C6A969]/25 group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-5 h-5 text-[#C6A969]" />
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mr-4 group-hover:scale-105 transition-all duration-300" style={{ background: 'rgba(245,197,66,0.1)' }}>
+                        <Icon className="w-5 h-5" style={{ color: '#f5c542' }} />
                       </div>
                       <div className="text-left">
-                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">{info.label}</p>
+                        <p className="text-xs text-white/40 uppercase tracking-wider mb-0.5">{info.label}</p>
                         {info.href ? (
                           <a 
                             href={info.href} 
                             target={info.href.startsWith('http') ? '_blank' : undefined}
                             rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            className="text-white hover:text-[#C6A969] font-medium transition-colors duration-200"
+                            className="text-white hover:text-[#f5c542] font-medium transition-colors duration-200"
                           >
                             {info.value}
                           </a>
@@ -328,9 +329,9 @@ export function ContactSection() {
                 })}
               </div>
               
-              <div className="mt-8 pt-6 border-t border-white/10 relative z-10">
-                <h4 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">Service Areas</h4>
-                <div className="rounded-xl overflow-hidden shadow-lg ring-1 ring-white/10">
+              <div className="mt-8 pt-6 relative z-10" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                <h4 className="text-sm font-semibold text-white/50 mb-3 uppercase tracking-wider">Service Areas</h4>
+                <div className="rounded-xl overflow-hidden shadow-lg" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
                   <iframe
                     title="Self-Maid Cleaning Solutions Service Areas - Montgomery, Prattville, Selma, Alabama"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d426458.8894091447!2d-86.62654674999999!3d32.3617899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888e8194b0d481f9%3A0x8e1b511d354285ff!2sMontgomery%2C%20AL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
@@ -344,7 +345,7 @@ export function ContactSection() {
                     data-testid="google-maps-embed"
                   />
                 </div>
-                <p className="text-xs text-slate-400 mt-3 text-center">
+                <p className="text-xs text-white/30 mt-3 text-center">
                   Serving Montgomery, Prattville, Selma, Homewood, Clanton & surrounding areas
                 </p>
               </div>

@@ -10,18 +10,19 @@ export function AboutSection() {
               src={ownerPhoto}
               alt="Michelle, Owner of Self-Maid Cleaning Solutions"
               className="rounded-2xl shadow-lg w-full max-w-sm object-cover"
+              style={{ border: '1px solid rgba(245,197,66,0.15)' }}
             />
           </div>
           <div className="text-center md:text-left">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] mb-4 font-serif italic">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 font-serif italic">
               Meet the Owner
             </h2>
-            <div className="w-16 h-[2px] bg-[#C6A969] mb-6 mx-auto md:mx-0" />
-            <p className="text-gray-700 text-base leading-relaxed mb-4">
+            <div className="w-16 h-[2px] mb-6 mx-auto md:mx-0" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
+            <p className="text-white/80 text-base leading-relaxed mb-4">
               Hi, I'm Michelle. I built Self-Maid to deliver a level of clean
               that feels calm, consistent, and truly professional — every time.
             </p>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-white/60 text-sm leading-relaxed">
               With 16+ years of experience and a team of trusted, background-checked
               professionals, we treat every home like our own. Your satisfaction
               isn't just a promise — it's our guarantee.

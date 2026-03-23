@@ -134,21 +134,21 @@ export default function Home() {
       
       <div className="min-h-screen marble-bg">
         <Navigation />
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C6A969] to-transparent" />
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#f5c542] to-transparent" />
         <HeroSection />
         <ServicesSection />
         <BeforeAfterGallery />
         
-        <section className="py-14 lg:py-20 bg-white">
+        <section className="py-14 lg:py-20" style={{ background: '#0a0a0d' }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
                 Our Team in Action
               </h2>
-              <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
-              <p className="text-gray-600 mt-3 text-sm">Professional, uniformed, and ready to make your space shine</p>
+              <div className="w-24 h-[2px] mx-auto mt-3" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
+              <p className="text-white/50 mt-3 text-sm">Professional, uniformed, and ready to make your space shine</p>
             </div>
-            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+            <div className="rounded-xl overflow-hidden shadow-lg" style={{ border: '1px solid rgba(245,197,66,0.15)' }}>
               <img
                 src="/assets/team-working-branded.png"
                 alt="Self-Maid cleaning team in navy branded uniforms working together in a living room"
@@ -167,18 +167,20 @@ export default function Home() {
         <ContactSection />
         <Footer />
         
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-xl px-3 py-3 safe-area-pb">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 shadow-xl px-3 py-3 safe-area-pb" style={{ background: 'rgba(10,10,13,0.97)', borderTop: '1px solid rgba(245,197,66,0.15)', backdropFilter: 'blur(12px)' }}>
           <div className="flex gap-2">
             <a 
               href="tel:334-877-9513"
-              className="flex-[1.2] inline-flex items-center justify-center gap-2 bg-[#C6A969] text-[#1F2A37] py-3.5 rounded-xl font-bold text-sm shadow-md"
+              className="flex-[1.2] inline-flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm shadow-md"
+              style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}
             >
               <Phone className="w-4 h-4" />
               Call Now
             </a>
             <button
               onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#1F2A37] text-white py-3.5 rounded-xl font-bold text-sm"
+              className="flex-1 inline-flex items-center justify-center gap-2 text-white py-3.5 rounded-xl font-bold text-sm"
+              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.1)' }}
             >
               <CalendarCheck className="w-4 h-4" />
               Book Online

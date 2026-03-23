@@ -45,8 +45,8 @@ function BeforeAfterSlider({ before, after, label }: { before: string; after: st
     <div className="space-y-3">
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-xl shadow-lg border border-gray-200 select-none touch-none cursor-col-resize"
-        style={{ aspectRatio: '4/3' }}
+        className="relative w-full overflow-hidden rounded-xl shadow-lg select-none touch-none cursor-col-resize"
+        style={{ aspectRatio: '4/3', border: '1px solid rgba(245,197,66,0.15)' }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -77,22 +77,22 @@ function BeforeAfterSlider({ before, after, label }: { before: string; after: st
           style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
         >
           <div className="w-[3px] h-full bg-white shadow-md" />
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-[#C6A969]">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full shadow-lg flex items-center justify-center" style={{ background: '#0a0a0d', border: '2px solid #f5c542' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5c542" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
               <polyline points="9 18 15 12 9 6" transform="translate(6,0)" />
             </svg>
           </div>
         </div>
 
-        <span className="absolute top-3 left-3 z-20 bg-[#1F2A37]/80 text-white text-xs font-bold px-3 py-1 rounded-sm">
+        <span className="absolute top-3 left-3 z-20 text-white text-xs font-bold px-3 py-1 rounded-sm" style={{ background: 'rgba(10,10,13,0.8)' }}>
           Before
         </span>
-        <span className="absolute top-3 right-3 z-20 bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-3 py-1 rounded-sm">
+        <span className="absolute top-3 right-3 z-20 text-xs font-bold px-3 py-1 rounded-sm" style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}>
           After
         </span>
       </div>
-      <p className="text-center text-gray-500 text-xs">{label}</p>
+      <p className="text-center text-white/40 text-xs">{label}</p>
     </div>
   );
 }
@@ -102,11 +102,11 @@ export default function BeforeAfterGallery() {
     <section className="py-14 lg:py-20 marble-bg">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
             See the Real Difference
           </h2>
-          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
-          <p className="text-gray-600 mt-3 text-sm">Real results from real Self-Maid clients</p>
+          <div className="w-24 h-[2px] mx-auto mt-3" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d)' }} />
+          <p className="text-white/50 mt-3 text-sm">Real results from real Self-Maid clients</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

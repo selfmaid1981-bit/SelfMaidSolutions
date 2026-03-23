@@ -97,8 +97,8 @@ export function Navigation() {
                 href="/"
                 className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 ${
                   location === '/' 
-                    ? 'text-[#C6A969] font-semibold' 
-                    : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
+                    ? 'text-[#f5c542] font-semibold' 
+                    : 'text-white/80 hover:text-[#f5c542] hover:bg-white/5'
                 }`}
                 data-testid="nav-home"
               >
@@ -115,8 +115,8 @@ export function Navigation() {
                   href="/services"
                   className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location === '/services' || location === '/airbnb-cleaning'
-                      ? 'text-[#C6A969] font-semibold' 
-                      : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
+                      ? 'text-[#f5c542] font-semibold' 
+                      : 'text-white/80 hover:text-[#f5c542] hover:bg-white/5'
                   }`}
                   data-testid="nav-services"
                 >
@@ -124,25 +124,25 @@ export function Navigation() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
                 </Link>
                 {servicesDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 mt-1 w-64 rounded-xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
                     {serviceTypes.map((service) => {
                       const Icon = service.icon;
                       return (
                         <Link
                           key={service.name}
                           href={service.href}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-[#C6A969]/10 dark:hover:bg-gray-700 hover:text-[#1F2A37] dark:hover:text-[#C6A969] transition-colors"
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5 hover:text-[#f5c542] transition-colors"
                           onClick={() => setServicesDropdownOpen(false)}
                         >
-                          <Icon className="w-4 h-4 text-[#C6A969]" />
+                          <Icon className="w-4 h-4 text-[#f5c542]" />
                           {service.name}
                         </Link>
                       );
                     })}
-                    <div className="border-t border-gray-100 dark:border-gray-700 mt-1 pt-1">
+                    <div className="mt-1 pt-1" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                       <Link
                         href="/services"
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-[#C6A969] dark:text-[#C6A969] hover:bg-[#C6A969]/10 dark:hover:bg-gray-700 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-[#f5c542] hover:bg-[#f5c542]/10 transition-colors"
                         onClick={() => setServicesDropdownOpen(false)}
                       >
                         View All Services
@@ -162,8 +162,8 @@ export function Navigation() {
                 <button
                   className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                     location.startsWith('/services/') 
-                      ? 'text-[#C6A969] font-semibold' 
-                      : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
+                      ? 'text-[#f5c542] font-semibold' 
+                      : 'text-white/80 hover:text-[#f5c542] hover:bg-white/5'
                   }`}
                   data-testid="nav-service-areas"
                 >
@@ -171,15 +171,15 @@ export function Navigation() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${areasDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {areasDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 mt-1 w-56 rounded-xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200" style={{ background: '#111111', border: '1px solid rgba(245,197,66,0.15)' }}>
                     {serviceAreas.map((area) => (
                       <Link
                         key={area.slug}
                         href={`/services/${area.slug}`}
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-[#C6A969]/10 dark:hover:bg-gray-700 hover:text-[#1F2A37] dark:hover:text-[#C6A969] transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5 hover:text-[#f5c542] transition-colors"
                         onClick={() => setAreasDropdownOpen(false)}
                       >
-                        <MapPin className="w-4 h-4 text-[#C6A969]" />
+                        <MapPin className="w-4 h-4 text-[#f5c542]" />
                         {area.name}, AL
                       </Link>
                     ))}
@@ -193,7 +193,7 @@ export function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href.replace('/', ''))}
-                    className="nav-link-enhanced relative text-white/80 hover:text-[#C6A969] px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 hover:bg-white/5"
+                    className="nav-link-enhanced relative text-white/80 hover:text-[#f5c542] px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 hover:bg-white/5"
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
                     {item.label}
@@ -204,8 +204,8 @@ export function Navigation() {
                     href={item.href}
                     className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 ${
                       isActive 
-                        ? 'text-[#C6A969] font-semibold' 
-                        : 'text-white/80 hover:text-[#C6A969] hover:bg-white/5'
+                        ? 'text-[#f5c542] font-semibold' 
+                        : 'text-white/80 hover:text-[#f5c542] hover:bg-white/5'
                     }`}
                     data-testid={`nav-${item.label.toLowerCase()}`}
                   >
@@ -263,15 +263,15 @@ export function Navigation() {
             href="/"
             className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200 ${
               location === '/'
-                ? 'text-[#1F2A37] bg-[#C6A969]/10 font-semibold shadow-sm'
-                : 'text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10'
+                ? 'text-[#f5c542] bg-[#f5c542]/10 font-semibold'
+                : 'text-white/70 hover:text-white hover:bg-white/5'
             }`}
             style={{ animationDelay: '0ms' }}
             onClick={() => setIsMobileMenuOpen(false)}
             data-testid="mobile-nav-home"
           >
             Home
-            {location === '/' && <span className="w-2 h-2 rounded-full bg-[#C6A969] flex-shrink-0" />}
+            {location === '/' && <span className="w-2 h-2 rounded-full bg-[#f5c542] flex-shrink-0" />}
           </Link>
 
           <div style={{ animationDelay: '50ms' }}>
@@ -279,8 +279,8 @@ export function Navigation() {
               onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
               className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200 ${
                 location === '/services' || location === '/airbnb-cleaning'
-                  ? 'text-[#1F2A37] bg-[#C6A969]/10 font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10'
+                  ? 'text-[#f5c542] bg-[#f5c542]/10 font-semibold'
+                  : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
               data-testid="mobile-nav-services"
             >
@@ -295,17 +295,17 @@ export function Navigation() {
                     <Link
                       key={service.name}
                       href={service.href}
-                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10 transition-colors"
+                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <Icon className="w-4 h-4 text-[#C6A969]" />
+                      <Icon className="w-4 h-4 text-[#f5c542]" />
                       {service.name}
                     </Link>
                   );
                 })}
                 <Link
                   href="/services"
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#C6A969] hover:bg-[#C6A969]/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold text-[#f5c542] hover:bg-[#f5c542]/10 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   View All Services
@@ -320,8 +320,8 @@ export function Navigation() {
               onClick={() => setMobileAreasOpen(!mobileAreasOpen)}
               className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200 ${
                 location.startsWith('/services/')
-                  ? 'text-[#1F2A37] bg-[#C6A969]/10 font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10'
+                  ? 'text-[#f5c542] bg-[#f5c542]/10 font-semibold'
+                  : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
               data-testid="mobile-nav-service-areas"
             >
@@ -334,10 +334,10 @@ export function Navigation() {
                   <Link
                     key={area.slug}
                     href={`/services/${area.slug}`}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10 transition-colors"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <MapPin className="w-4 h-4 text-[#C6A969]" />
+                    <MapPin className="w-4 h-4 text-[#f5c542]" />
                     {area.name}, AL
                   </Link>
                 ))}
@@ -354,7 +354,7 @@ export function Navigation() {
                   scrollToSection(item.href.replace('/', ''));
                   setIsMobileMenuOpen(false);
                 }}
-                className="mobile-nav-item text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10 flex items-center px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200"
+                className="mobile-nav-item text-white/70 hover:text-white hover:bg-white/5 flex items-center px-4 py-3 rounded-xl text-[15px] font-medium w-full text-left transition-all duration-200"
                 style={{ animationDelay: `${(index + 3) * 50}ms` }}
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
@@ -367,22 +367,22 @@ export function Navigation() {
                 href={item.href}
                 className={`mobile-nav-item flex items-center justify-between px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200 ${
                   isActive
-                    ? 'text-[#1F2A37] bg-[#C6A969]/10 font-semibold shadow-sm'
-                    : 'text-slate-600 hover:text-[#1F2A37] hover:bg-[#C6A969]/10'
+                    ? 'text-[#f5c542] bg-[#f5c542]/10 font-semibold'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
                 }`}
                 style={{ animationDelay: `${(index + 3) * 50}ms` }}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid={`mobile-nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
-                {isActive && <span className="w-2 h-2 rounded-full bg-[#C6A969] flex-shrink-0" />}
+                {isActive && <span className="w-2 h-2 rounded-full bg-[#f5c542] flex-shrink-0" />}
               </Link>
             );
           })}
-          <div className="flex gap-2 mt-3 pt-3 border-t border-slate-100/80">
+          <div className="flex gap-2 mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
             <button
               onClick={() => { setIsBookingModalOpen(true); setIsMobileMenuOpen(false); }}
-              className="flex-1 inline-flex items-center justify-center gap-2 nav-book-btn text-white px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
+              className="flex-1 inline-flex items-center justify-center gap-2 nav-book-btn px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
               data-testid="mobile-nav-book-now"
             >
               <CalendarCheck className="w-4 h-4" />
@@ -390,7 +390,8 @@ export function Navigation() {
             </button>
             <a 
               href="tel:334-877-9513" 
-              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
+              className="flex-1 text-white flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold shadow-md transition-all"
+              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.1)' }}
               data-testid="mobile-nav-phone"
             >
               <Phone className="w-4 h-4" />
