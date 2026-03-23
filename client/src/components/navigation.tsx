@@ -23,10 +23,9 @@ export function Navigation() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/services', label: 'Services' },
-    { href: '/about', label: 'About Us' },
     { href: '/#testimonials', label: 'Reviews' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/#services', label: 'Before & After' },
+    { href: '/about', label: 'Team' },
   ];
 
   const scrollToSection = (href: string) => {

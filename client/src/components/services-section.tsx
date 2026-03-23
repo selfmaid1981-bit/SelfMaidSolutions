@@ -10,7 +10,7 @@ const services = [
   },
   {
     id: 'moveout',
-    title: 'Move-In/Move-Out',
+    title: 'Move-In/Out',
     image: '/assets/services/icon-moveout-gold.png',
     desc: 'Perfect for turnovers',
   },
@@ -27,60 +27,42 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" className="relative" style={{ padding: '80px 10%' }}>
-        <div className="text-center mb-10">
-          <p className="text-xs tracking-[3px] uppercase text-white/60 mb-2">OUR SERVICES</p>
-          <h2 className="text-2xl lg:text-3xl font-bold text-white font-serif mb-1">
-            Experience the Self-Maid Difference
-          </h2>
-          <p className="text-white/70 text-sm">Premium Cleaning</p>
-        </div>
+      <section id="services" style={{ padding: '60px 10%', textAlign: 'center' }}>
+        <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8">Our Services</h2>
 
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
-          <div className="flex gap-5 flex-wrap lg:flex-nowrap">
-            {services.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => setIsBookingModalOpen(true)}
-                className="group text-left focus:outline-none"
-                data-testid={`service-card-${service.id}`}
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          {services.map((service) => (
+            <button
+              key={service.id}
+              onClick={() => setIsBookingModalOpen(true)}
+              className="group focus:outline-none"
+              data-testid={`service-card-${service.id}`}
+            >
+              <div
+                className="transition-all duration-300 group-hover:-translate-y-1 flex flex-col items-center text-center"
+                style={{
+                  background: '#111',
+                  padding: '20px',
+                  borderRadius: '10px',
+                  border: '1px solid #333',
+                  width: '180px'
+                }}
               >
-                <div
-                  className="rounded-[10px] p-5 transition-all duration-300 group-hover:-translate-y-1 flex flex-col items-center text-center"
-                  style={{
-                    background: '#111',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    width: '180px'
-                  }}
-                >
-                  <div className="w-16 h-16 mb-3">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                  <h3 className="text-sm font-bold text-white mb-1">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs text-white/50">{service.desc}</p>
+                <div className="w-16 h-16 mb-3">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                    width={64}
+                    height={64}
+                  />
                 </div>
-              </button>
-            ))}
-          </div>
-
-          <div className="hidden lg:block flex-shrink-0">
-            <img
-              src="/assets/services-cleaner-hero.png"
-              alt="Self-Maid professional cleaner at work"
-              className="object-cover rounded-[10px]"
-              loading="lazy"
-              style={{ width: '300px' }}
-            />
-          </div>
+                <h3 className="text-sm font-bold text-white mb-1">{service.title}</h3>
+                <p className="text-xs text-white/50">{service.desc}</p>
+              </div>
+            </button>
+          ))}
         </div>
       </section>
 
