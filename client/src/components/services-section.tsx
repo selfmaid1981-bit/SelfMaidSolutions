@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BookingModal } from './booking-modal';
+import { getSeasonalPromo } from '@/lib/dynamic-content';
+import { Sparkles } from 'lucide-react';
 
 const services = [
   {
@@ -24,6 +26,7 @@ const services = [
 
 export function ServicesSection() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const seasonal = getSeasonalPromo();
 
   return (
     <>
@@ -81,6 +84,23 @@ export function ServicesSection() {
               loading="lazy"
               style={{ width: '380px', maxHeight: '480px' }}
             />
+          </div>
+        </div>
+
+        <div className="mt-10 scroll-reveal">
+          <div className="rounded-xl p-4 flex items-center justify-center gap-3 flex-wrap" style={{ background: 'rgba(245,197,66,0.06)', border: '1px solid rgba(245,197,66,0.15)' }}>
+            <span className="text-[10px] font-bold px-2.5 py-1 rounded" style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}>
+              {seasonal.badge}
+            </span>
+            <span className="text-white/70 text-sm">{seasonal.tagline}</span>
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
+              className="text-sm font-bold flex items-center gap-1 transition-colors"
+              style={{ color: '#f5c542' }}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Book Now
+            </button>
           </div>
         </div>
       </section>

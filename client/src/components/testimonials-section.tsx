@@ -1,27 +1,9 @@
 import { Star } from 'lucide-react';
-
-const testimonials = [
-  {
-    id: 1,
-    text: "Excellent service! My home has never looked better. They were thorough, professional, and I could tell they genuinely cared about doing a great job.",
-    author: "Sarah L.",
-    location: "Montgomery, AL",
-  },
-  {
-    id: 2,
-    text: "Professional and reliable. Highly recommended! They showed up on time, communicated clearly, and left everything spotless. Will definitely use again.",
-    author: "James R.",
-    location: "Prattville, AL",
-  },
-  {
-    id: 3,
-    text: "They helped me get my full deposit back when I moved out! The landlord was impressed. Best cleaning service in the area, hands down.",
-    author: "David C.",
-    location: "Selma, AL",
-  },
-];
+import { getRotatingTestimonials } from '@/lib/dynamic-content';
 
 export function TestimonialsSection() {
+  const testimonials = getRotatingTestimonials();
+
   return (
     <section id="testimonials" className="py-24 lg:py-32" style={{ background: '#0a0a0d' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

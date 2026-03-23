@@ -1,7 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { Calculator, BedDouble, Bath, Ruler, Phone, PawPrint, Sparkles } from 'lucide-react';
+import { Calculator, BedDouble, Bath, Ruler, Phone, PawPrint, Sparkles, Clock } from 'lucide-react';
+import { getUrgencyMessage, getSeasonalPromo } from '@/lib/dynamic-content';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import {
@@ -332,7 +333,10 @@ export function HomepageQuoteCalculator() {
 
                 <div className="text-center">
                   <p className="text-white/30 text-[11px]">Final price confirmed after walkthrough</p>
-                  <p className="text-xs mt-1 font-medium" style={{ color: '#f5c542' }}>Limited availability this week — book now</p>
+                  <p className="text-xs mt-1 font-medium flex items-center justify-center gap-1" style={{ color: '#f5c542' }}>
+                    <Clock className="w-3 h-3" />
+                    {getUrgencyMessage()}
+                  </p>
                 </div>
 
                 <button

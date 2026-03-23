@@ -523,6 +523,24 @@
   flex-wrap: wrap;
 }
 
+.hero-trust-signals {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-trust-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.3px;
+}
+
 .hero-phone {
   color: rgba(255,255,255,0.6);
   text-decoration: none;

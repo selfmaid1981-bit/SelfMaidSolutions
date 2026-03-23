@@ -1,7 +1,14 @@
 import heroLogo from '@assets/hero-logo-transparent.png';
 import { GoldParticles } from './gold-particles';
+import { getRotatingSubtext, getRotatingTrustSignals } from '@/lib/dynamic-content';
+import { Shield, CheckCircle, Clock, Star, Heart, Leaf, Zap, Award } from 'lucide-react';
+
+const iconMap: Record<string, typeof Shield> = { shield: Shield, check: CheckCircle, clock: Clock, star: Star, heart: Heart, leaf: Leaf, zap: Zap, award: Award };
 
 export function HeroSection() {
+  const subtext = getRotatingSubtext();
+  const trustSignals = getRotatingTrustSignals(3);
+
   return (
     <section className="hero-section">
       <GoldParticles />
@@ -9,7 +16,7 @@ export function HeroSection() {
         <div className="hero-content">
           <h1>Spotless Homes.<br />Zero Stress.</h1>
           <p className="hero-subtext">
-            Premium cleaning that shows up on time — every time.
+            {subtext}
           </p>
           <ul className="hero-trust">
             <li>&#10004; Licensed, bonded, and insured</li>
@@ -32,6 +39,18 @@ export function HeroSection() {
             <a href="tel:334-877-9513" className="hero-phone">
               Or Call (334) 877-9513
             </a>
+          </div>
+
+          <div className="hero-trust-signals">
+            {trustSignals.map((signal) => {
+              const Icon = iconMap[signal.icon] || Shield;
+              return (
+                <span key={signal.text} className="hero-trust-signal">
+                  <Icon className="w-3.5 h-3.5" style={{ color: '#f5c542' }} />
+                  {signal.text}
+                </span>
+              );
+            })}
           </div>
         </div>
 
