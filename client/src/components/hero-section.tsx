@@ -1,4 +1,4 @@
-import heroLogo from '@assets/hero-logo-transparent.png';
+import heroLogo from '@assets/1002A1AE-EF4B-4A40-BBCA-AEA8E3385BAC_1774251413661.png';
 
 export function HeroSection() {
   return (
