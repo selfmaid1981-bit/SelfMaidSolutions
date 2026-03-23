@@ -23,9 +23,10 @@ export function Navigation() {
 
   const navItems = [
     { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/about', label: 'About Us' },
     { href: '/#testimonials', label: 'Reviews' },
-    { href: '/#services', label: 'Before & After' },
-    { href: '/about', label: 'Team' },
+    { href: '/#contact', label: 'Contact' },
   ];
 
   const scrollToSection = (href: string) => {
@@ -87,7 +88,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center">
             <button
               onClick={() => setIsBookingModalOpen(true)}
-              className="nav-book-btn px-6 py-2.5 text-[13px] font-bold tracking-[1px] uppercase"
+              className="hero-outline-btn px-6 py-2.5 text-[13px] font-bold tracking-[1px] uppercase"
               data-testid="nav-book-now"
             >
               GET A QUOTE

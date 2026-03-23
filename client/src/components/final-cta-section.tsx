@@ -9,6 +9,7 @@ const bookingFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Please enter a valid email'),
   phone: z.string().optional(),
+  date: z.string().optional(),
 });
 
 type BookingFormData = z.infer<typeof bookingFormSchema>;
@@ -18,7 +19,7 @@ export function FinalCtaSection() {
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingFormSchema),
-    defaultValues: { name: '', email: '', phone: '' },
+    defaultValues: { name: '', email: '', phone: '', date: '' },
   });
 
   const bookingMutation = useMutation({
@@ -32,7 +33,7 @@ export function FinalCtaSection() {
         email: data.email,
         phone: data.phone || null,
         serviceType: 'residential',
-        message: 'Booking inquiry from homepage form',
+        message: `Booking inquiry from homepage form${data.date ? ` — Preferred date: ${data.date}` : ''}`,
       });
     },
     onSuccess: () => {
@@ -46,12 +47,12 @@ export function FinalCtaSection() {
 
   const onSubmit = (data: BookingFormData) => bookingMutation.mutate(data);
 
-  const inputClass = "w-full block text-white bg-transparent border border-white/10 rounded-md placeholder:text-white/30 focus:outline-none focus:border-[#f5c542]/50 text-sm";
+  const inputClass = "w-full block text-white bg-transparent border border-white/20 rounded placeholder:text-white/40 focus:outline-none focus:border-[#f5c542]/50 text-sm";
 
   return (
     <section className="text-white" style={{ padding: '60px 10%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
       <div>
-        <h2 className="text-3xl lg:text-4xl font-bold leading-tight mb-6">
+        <h2 className="text-3xl lg:text-4xl font-bold font-serif leading-tight mb-6">
           Ready for a spotless home?
         </h2>
         <button
@@ -59,7 +60,7 @@ export function FinalCtaSection() {
             const el = document.getElementById('instant-quote');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="nav-book-btn text-sm tracking-[1px] uppercase"
+          className="hero-outline-btn text-sm tracking-[1px] uppercase font-bold"
           data-testid="cta-get-quote"
         >
           GET A QUOTE
@@ -72,10 +73,11 @@ export function FinalCtaSection() {
           padding: '30px',
           borderRadius: '10px',
           border: '1px solid #333',
-          width: '300px',
+          width: '340px',
           flexShrink: 0
         }}
       >
+        <h3 className="text-lg font-bold text-white mb-4 text-center">Book Your Cleaning</h3>
         <form onSubmit={form.handleSubmit(onSubmit)} data-testid="booking-form-cta">
           <input
             {...form.register('name')}
@@ -94,6 +96,12 @@ export function FinalCtaSection() {
             {...form.register('phone')}
             type="tel"
             placeholder="Phone"
+            className={inputClass}
+            style={{ margin: '10px 0', padding: '10px' }}
+          />
+          <input
+            {...form.register('date')}
+            type="date"
             className={inputClass}
             style={{ margin: '10px 0', padding: '10px' }}
           />

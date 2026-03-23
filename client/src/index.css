@@ -614,6 +614,22 @@ body {
   opacity: 0.9;
 }
 
+.hero-outline-btn {
+  background: transparent;
+  color: #f5c542;
+  border: 2px solid #f5c542;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-outline-btn:hover {
+  background: rgba(245, 197, 66, 0.08);
+  border-color: #f5d56a;
+}
+
 .mobile-menu-container {
   overflow: hidden;
   transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
