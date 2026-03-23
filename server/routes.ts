@@ -36,6 +36,7 @@ import {
 
 import { OWNER_EMAILS, FROM_EMAIL } from "./config";
 import { startDailyReportScheduler, sendDailyVisitorReport } from "./daily-visitor-report";
+import { syncDailyToSheets } from "./daily-sheets-sync";
 import { db } from "./db";
 import { pageViews, insertPageViewSchema } from "@shared/schema";
 import {
@@ -543,6 +544,15 @@ Host: https://selfmaidllc.com`;
     try {
       const sent = await sendDailyVisitorReport();
       res.json({ success: sent });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/sync-sheets", requireAdmin, async (req, res) => {
+    try {
+      const result = await syncDailyToSheets();
+      res.json({ success: true, spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${result.spreadsheetId}`, synced: result.synced });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

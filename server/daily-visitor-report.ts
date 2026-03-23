@@ -3,6 +3,7 @@ import { pageViews, quotes, contactMessages, bookings, leads } from "@shared/sch
 import { gte, sql, desc } from "drizzle-orm";
 import { sendEmail } from "./email";
 import { OWNER_EMAILS, BUSINESS_NAME } from "./config";
+import { syncDailyToSheets } from "./daily-sheets-sync";
 
 function get24hAgo(): Date {
   const d = new Date();
@@ -274,6 +275,14 @@ export async function sendDailyVisitorReport(): Promise<boolean> {
     } else {
       console.warn('[Daily Report] Failed to send email');
     }
+
+    try {
+      const sheetsResult = await syncDailyToSheets();
+      console.log(`[Daily Report] Sheets synced — ${JSON.stringify(sheetsResult.synced)}`);
+    } catch (sheetsError: any) {
+      console.warn('[Daily Report] Sheets sync failed:', sheetsError?.message || sheetsError);
+    }
+
     return success;
   } catch (error) {
     console.error('[Daily Report] Error:', error);
