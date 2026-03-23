@@ -50,10 +50,10 @@ export function FinalCtaSection() {
   const inputClass = "w-full block text-white bg-transparent border border-white/20 rounded placeholder:text-white/40 focus:outline-none focus:border-[#f5c542]/50 text-sm";
 
   return (
-    <section className="text-white" style={{ padding: '60px 10%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '40px', alignItems: 'flex-start' }}>
+    <section className="text-white section-warm" style={{ padding: '60px 10%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '40px', alignItems: 'center' }}>
       <div>
         <h2 className="text-3xl lg:text-4xl font-bold font-serif leading-tight mb-6">
-          Ready for a spotless home?
+          Ready for a <span className="gold-shine-text">spotless</span> home?
         </h2>
         <button
           onClick={() => {

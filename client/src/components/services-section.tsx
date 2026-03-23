@@ -27,13 +27,14 @@ export function ServicesSection() {
 
   return (
     <>
-      <section id="services" style={{ padding: '80px 10%' }}>
+      <div className="section-divider-gold" />
+      <section id="services" className="section-warm" style={{ padding: '80px 10%' }}>
         <div className="text-center mb-10">
           <p className="text-xs tracking-[3px] uppercase text-white/50 mb-3">
             ——— OUR SERVICES ———
           </p>
           <h2 className="text-2xl lg:text-3xl font-bold text-white font-serif mb-1">
-            Experience the Self-Maid Difference
+            Experience the <span className="gold-shine-text">Self-Maid</span> Difference
           </h2>
           <p className="text-white/50 text-sm flex items-center justify-center gap-3">
             <span className="w-12 h-px bg-white/20" />
@@ -42,7 +43,7 @@ export function ServicesSection() {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
           <div className="flex gap-5 flex-wrap lg:flex-nowrap">
             {services.map((service) => (
               <button
@@ -51,15 +52,8 @@ export function ServicesSection() {
                 className="group focus:outline-none"
                 data-testid={`service-card-${service.id}`}
               >
-                <div
-                  className="rounded-[10px] p-5 transition-all duration-300 group-hover:-translate-y-1 flex flex-col items-center text-center"
-                  style={{
-                    background: '#111',
-                    border: '1px solid #333',
-                    width: '180px'
-                  }}
-                >
-                  <div className="w-16 h-16 mb-3">
+                <div className="service-card-uniform">
+                  <div className="w-16 h-16 mb-3 relative z-10">
                     <img
                       src={service.image}
                       alt={service.title}
@@ -69,8 +63,8 @@ export function ServicesSection() {
                       height={64}
                     />
                   </div>
-                  <h3 className="text-sm font-bold text-white mb-1">{service.title}</h3>
-                  <p className="text-xs text-white/50 flex items-start gap-1">
+                  <h3 className="text-sm font-bold text-white mb-1 relative z-10">{service.title}</h3>
+                  <p className="text-xs text-white/50 flex items-start gap-1 relative z-10">
                     <span style={{ color: '#f5c542' }}>&#10004;</span>
                     {service.desc}
                   </p>
@@ -79,13 +73,13 @@ export function ServicesSection() {
             ))}
           </div>
 
-          <div className="hidden lg:block flex-shrink-0">
+          <div className="cleaner-photo-wrapper flex-shrink-0">
             <img
               src="/assets/services-cleaner-hero.png"
               alt="Self-Maid professional cleaner at work"
-              className="object-cover rounded-[10px]"
+              className="object-cover"
               loading="lazy"
-              style={{ width: '300px' }}
+              style={{ width: '320px', maxHeight: '400px' }}
             />
           </div>
         </div>

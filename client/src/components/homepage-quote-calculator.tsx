@@ -153,12 +153,12 @@ export function HomepageQuoteCalculator() {
         <div className="text-center mb-12">
           <p className="section-label text-white/50 tracking-[4px]">PRICING</p>
           <div className="editorial-divider-center" />
-          <h2 className="font-bold text-white font-serif">
-            Get Your <span className="italic" style={{ color: '#f5c542' }}>Exact</span> Price
+          <h2 className="font-bold text-white font-serif text-3xl lg:text-4xl">
+            Get Your <span className="italic gold-shine-text">Exact</span> Price
           </h2>
           <p className="text-white/35 mt-3 text-sm tracking-wide">Takes less than 30 seconds</p>
         </div>
-        <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="rounded-2xl overflow-hidden quote-calculator-glow" style={{ background: 'rgba(17,17,17,0.8)', border: '1px solid rgba(245,197,66,0.15)' }}>
           <div className="px-6 py-5 flex items-center justify-center gap-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
             <Calculator className="w-5 h-5" style={{ color: '#f5c542' }} />
             <h3 className="text-lg font-bold text-white font-serif italic">Instant Cleaning Estimate</h3>
