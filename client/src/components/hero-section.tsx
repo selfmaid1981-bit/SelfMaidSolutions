@@ -1,5 +1,3 @@
-import heroLogo from '@assets/hero-logo-transparent.png';
-
 export function HeroSection() {
   return (
     <section className="hero-section">
@@ -30,8 +28,8 @@ export function HeroSection() {
 
         <div className="hero-image">
           <img
-            src={heroLogo}
-            alt="Self-Maid Cleaning Solutions"
+            src="/assets/real-clean-home.png"
+            alt="Spotless clean kitchen by Self-Maid Cleaning Solutions"
             fetchPriority="high"
           />
         </div>
