@@ -10,6 +10,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   verifyPassword(password: string, passwordHash: string): Promise<boolean>;
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
+  getBookings(): Promise<Booking[]>;
   createBooking(booking: InsertBooking): Promise<Booking>;
   updateBookingPaymentIntent(id: string, paymentIntentId: string): Promise<Booking | undefined>;
   updateBookingStatus(id: string, status: string): Promise<Booking | undefined>;
@@ -129,6 +130,10 @@ export class DatabaseStorage implements IStorage {
       .values(insertMessage)
       .returning();
     return message;
+  }
+
+  async getBookings(): Promise<Booking[]> {
+    return db.select().from(bookings).orderBy(desc(bookings.createdAt));
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {

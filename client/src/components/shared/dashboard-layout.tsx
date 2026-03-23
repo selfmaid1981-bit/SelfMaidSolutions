@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Users, UserPlus, Calendar, Briefcase, BarChart3, ChevronLeft, Menu } from "lucide-react";
+import { LayoutDashboard, Users, UserPlus, Calendar, CalendarDays, Briefcase, BarChart3, ChevronLeft, Menu } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +13,7 @@ const crmNav: NavItem[] = [
   { label: "Dashboard", href: "/crm", icon: LayoutDashboard },
   { label: "Pipeline", href: "/crm/pipeline", icon: UserPlus },
   { label: "Contacts", href: "/crm/contacts", icon: Users },
+  { label: "Calendar", href: "/crm/calendar", icon: CalendarDays },
   { label: "Appointments", href: "/crm/appointments", icon: Calendar },
   { label: "Jobs", href: "/crm/jobs", icon: Briefcase },
   { label: "Analytics", href: "/crm/analytics", icon: BarChart3 },

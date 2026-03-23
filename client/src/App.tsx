@@ -34,6 +34,7 @@ import { FacebookPixel } from "@/components/facebook-pixel";
 import CrmDashboard from "@/pages/crm/dashboard";
 import CrmPipeline from "@/pages/crm/pipeline";
 import CrmContacts from "@/pages/crm/contacts";
+import CrmCalendar from "@/pages/crm/calendar";
 import CrmAppointments from "@/pages/crm/appointments";
 import CrmJobs from "@/pages/crm/jobs";
 import CrmAnalytics from "@/pages/crm/analytics";
@@ -84,6 +85,7 @@ function Router() {
         <Route path="/crm" component={CrmDashboard} />
         <Route path="/crm/pipeline" component={CrmPipeline} />
         <Route path="/crm/contacts" component={CrmContacts} />
+        <Route path="/crm/calendar" component={CrmCalendar} />
         <Route path="/crm/appointments" component={CrmAppointments} />
         <Route path="/crm/jobs" component={CrmJobs} />
         <Route path="/crm/analytics" component={CrmAnalytics} />

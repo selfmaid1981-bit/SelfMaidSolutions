@@ -368,4 +368,49 @@ router.patch("/referrals/:id", requireAdmin, async (req: Request, res: Response)
   }
 });
 
+router.get("/calendar", requireAdmin, async (_req: Request, res: Response) => {
+  try {
+    const [allAppointments, allBookings] = await Promise.all([
+      storage.getAppointments(),
+      storage.getBookings(),
+    ]);
+
+    const events = [
+      ...allAppointments.map((a: any) => ({
+        id: a.id,
+        type: "appointment" as const,
+        title: a.serviceType,
+        date: a.scheduledDate,
+        time: a.scheduledTime,
+        duration: a.durationMinutes || 120,
+        status: a.status,
+        address: [a.address, a.city, a.state].filter(Boolean).join(", "),
+        amount: a.amount,
+        notes: a.notes,
+        clientId: a.clientId,
+        assignedTo: a.assignedTo,
+      })),
+      ...allBookings.map((b: any) => ({
+        id: b.id,
+        type: "booking" as const,
+        title: b.serviceType,
+        date: b.preferredDate,
+        time: b.preferredTime,
+        duration: 120,
+        status: b.status,
+        address: `${b.address}, ${b.city}, ${b.state} ${b.zipCode}`,
+        amount: b.amount,
+        name: `${b.firstName} ${b.lastName}`,
+        email: b.email,
+        phone: b.phone,
+        notes: b.specialInstructions,
+      })),
+    ];
+
+    res.json(events);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;
