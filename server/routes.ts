@@ -37,6 +37,16 @@ import {
 import { OWNER_EMAILS, FROM_EMAIL } from "./config";
 import { startDailyReportScheduler, sendDailyVisitorReport } from "./daily-visitor-report";
 import { startWeeklyScheduleEmailer, sendWeeklyScheduleEmail } from "./weekly-schedule-email";
+import {
+  generateAdContent,
+  generateBatchAds,
+  saveAdCampaign,
+  getAdCampaigns,
+  updateAdStatus,
+  deleteAdCampaign,
+  getAvailablePlatforms,
+  getAvailableServices,
+} from "./ad-automation";
 import { syncDailyToSheets } from "./daily-sheets-sync";
 import { db } from "./db";
 import { pageViews, insertPageViewSchema } from "@shared/schema";
@@ -563,6 +573,75 @@ Host: https://selfmaidllc.com`;
     try {
       const sent = await sendWeeklyScheduleEmail();
       res.json({ success: sent });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/admin/ads/platforms", requireAdmin, (_req, res) => {
+    res.json({ platforms: getAvailablePlatforms(), services: getAvailableServices() });
+  });
+
+  app.get("/api/admin/ads", requireAdmin, async (_req, res) => {
+    try {
+      const ads = await getAdCampaigns();
+      res.json(ads);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/ads/generate", requireAdmin, async (req, res) => {
+    try {
+      const { platform, adType, serviceType, tone, promoOffer } = req.body;
+      if (!platform || !adType) {
+        return res.status(400).json({ message: "platform and adType are required" });
+      }
+      const content = await generateAdContent({ platform, adType, serviceType, tone, promoOffer });
+      res.json(content);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/ads/generate-batch", requireAdmin, async (req, res) => {
+    try {
+      const { platforms, serviceType, promoOffer, count } = req.body;
+      if (!platforms || !Array.isArray(platforms) || platforms.length === 0) {
+        return res.status(400).json({ message: "platforms array is required" });
+      }
+      const results = await generateBatchAds({ platforms, serviceType, promoOffer, count });
+      res.json(results);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/ads", requireAdmin, async (req, res) => {
+    try {
+      const saved = await saveAdCampaign(req.body);
+      res.json(saved);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  });
+
+  app.patch("/api/admin/ads/:id/status", requireAdmin, async (req, res) => {
+    try {
+      const { status } = req.body;
+      if (!status) return res.status(400).json({ message: "status required" });
+      const updated = await updateAdStatus(req.params.id, status);
+      if (!updated) return res.status(404).json({ message: "Ad not found" });
+      res.json(updated);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.delete("/api/admin/ads/:id", requireAdmin, async (req, res) => {
+    try {
+      await deleteAdCampaign(req.params.id);
+      res.json({ success: true });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

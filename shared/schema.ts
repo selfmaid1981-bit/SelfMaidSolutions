@@ -693,4 +693,24 @@ export type InsertCallTranscript = z.infer<typeof insertCallTranscriptSchema>;
 export type PageView = typeof pageViews.$inferSelect;
 export type InsertPageView = z.infer<typeof insertPageViewSchema>;
 
+export const adCampaigns = pgTable("ad_campaigns", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  platform: text("platform").notNull(),
+  adType: text("ad_type").notNull(),
+  serviceType: text("service_type"),
+  headline: text("headline").notNull(),
+  primaryText: text("primary_text").notNull(),
+  description: text("description"),
+  callToAction: text("call_to_action"),
+  hashtags: text("hashtags"),
+  targetAudience: text("target_audience"),
+  status: text("status").notNull().default("draft"),
+  scheduledDate: text("scheduled_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertAdCampaignSchema = createInsertSchema(adCampaigns).omit({ id: true, createdAt: true });
+export type AdCampaign = typeof adCampaigns.$inferSelect;
+export type InsertAdCampaign = z.infer<typeof insertAdCampaignSchema>;
+
 export * from "./models/chat";

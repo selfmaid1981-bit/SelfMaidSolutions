@@ -24,6 +24,7 @@ import AdminLeads from "@/pages/admin/leads";
 import LeadGenPage from "@/pages/admin/lead-gen";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
+import AdAutomation from "@/pages/admin/ad-automation";
 import ServiceArea from "@/pages/service-area";
 import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/pages/city-service";
 import GetStarted from "@/pages/get-started";
@@ -79,6 +80,7 @@ function Router() {
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
         <Route path="/admin/lead-gen" component={LeadGenPage} />
+        <Route path="/admin/ads" component={AdAutomation} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
