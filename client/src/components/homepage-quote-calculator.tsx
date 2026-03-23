@@ -177,7 +177,7 @@ export function HomepageQuoteCalculator() {
                           : 'hover:shadow-md hover:-translate-y-0.5'
                       }`}
                       style={cleanType === tier.value
-                        ? { borderColor: '#f5c542', background: '#1a1a1a', boxShadow: '0 0 20px rgba(245,197,66,0.1)', ringColor: 'rgba(245,197,66,0.3)' }
+                        ? { borderColor: '#f5c542', background: '#1a1a1a', boxShadow: '0 0 20px rgba(245,197,66,0.1), 0 0 0 1px rgba(245,197,66,0.3)' }
                         : { borderColor: 'rgba(255,255,255,0.08)', background: '#0d0d0d' }
                       }
                     >
