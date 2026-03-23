@@ -357,22 +357,22 @@
   font-size: 14px;
 }
 
-.hero-cta {
-  display: inline-block;
-  background: linear-gradient(135deg, #f5c542, #c89b2d);
-  color: #000;
-  padding: 14px 28px;
-  font-weight: bold;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: opacity 0.3s ease;
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.hero-cta:hover {
-  opacity: 0.9;
+.hero-phone {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.hero-phone:hover {
+  color: rgba(255,255,255,0.9);
 }
 
 .hero-image img {
