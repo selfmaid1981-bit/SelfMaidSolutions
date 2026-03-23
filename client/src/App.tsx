@@ -20,6 +20,7 @@ import AdminCampaigns from "@/pages/admin-campaigns";
 import MarketingMaterials from "@/pages/marketing-materials";
 import ViralMarketing from "@/pages/viral-marketing";
 import AdminLeads from "@/pages/admin/leads";
+import LeadGenPage from "@/pages/admin/lead-gen";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
 import ServiceArea from "@/pages/service-area";
@@ -74,6 +75,7 @@ function Router() {
         <Route path="/admin/leads" component={AdminLeads} />
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
+        <Route path="/admin/lead-gen" component={LeadGenPage} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />

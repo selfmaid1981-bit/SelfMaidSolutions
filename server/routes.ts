@@ -45,6 +45,8 @@ import {
   addSearch,
   removeSearch,
 } from "./lead-gen/pipeline";
+import { processCSV } from "./lead-gen/csv-processor";
+import multer from "multer";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -1329,6 +1331,28 @@ Host: https://selfmaidllc.com`;
       res.json({ success: true, config: getLeadGenConfig() });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
+    }
+  });
+
+  // CSV Lead Upload
+  const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+
+  app.post("/api/admin/lead-gen/upload-csv", requireAdmin, upload.single("file"), async (req: any, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "No CSV file uploaded" });
+      }
+
+      const csvContent = req.file.buffer.toString("utf-8");
+      const result = await processCSV(csvContent);
+
+      res.json({
+        success: true,
+        message: `Processed ${result.totalRows} rows: ${result.leadsAdded} new leads added, ${result.duplicatesRemoved} duplicates skipped, ${result.emailsFound} emails found`,
+        ...result,
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: "CSV processing failed: " + error.message });
     }
   });
 

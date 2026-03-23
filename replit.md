@@ -24,6 +24,7 @@ The application uses a bold, premium design with a deep navy/purple/red-black pa
 - **Marketing Automation**: Strategies for email and social media automation workflows.
 - **Admin Dashboard**: Features for managing email marketing campaigns, subscribers, and automated review requests.
 - **Automated Review System**: Triggers Google review requests via email and SMS after job completion.
+- **CSV Lead Generation Pipeline**: Upload Google Maps CSV exports (from Instant Data Scraper etc.) at `/admin/lead-gen`. System cleans, deduplicates (name+phone / name+address, cross-checked against DB and Google Sheet), enriches via free website email scraping (with SSRF protection), scores leads 0-3, and pushes to Google Sheet. No paid APIs required. Endpoint: `POST /api/admin/lead-gen/upload-csv` (multipart form, `file` field). Module: `server/lead-gen/csv-processor.ts`.
 - **Integration Hooks**: Centralized modules for Stripe subscriptions, Twilio SMS, Hunter.io email discovery, OpenAI utilities (text generation, extraction, call analysis, lead intent), automated review requests, and a 3-step automated follow-up sequence for unbooked quotes.
 - **CRM Module**: Full CRM backend with routes, pipeline management, scheduling, lead-to-client conversion, and dashboard metrics.
 - **SaaS Module**: Multi-tenant SaaS backend with company management, subscription tiers, and lead discovery engine.
