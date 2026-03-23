@@ -1,9 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { z } from 'zod';
@@ -22,12 +19,7 @@ export function FinalCtaSection() {
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingFormSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      date: '',
-    },
+    defaultValues: { name: '', email: '', phone: '', date: '' },
   });
 
   const bookingMutation = useMutation({
@@ -45,132 +37,80 @@ export function FinalCtaSection() {
       });
     },
     onSuccess: () => {
-      toast({
-        title: "Request Received!",
-        description: "We'll get back to you within 24 hours to confirm your booking.",
-      });
+      toast({ title: "Request Received!", description: "We'll get back to you within 24 hours to confirm your booking." });
       form.reset();
     },
     onError: (error: Error) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to submit. Please try again.",
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: error.message || "Failed to submit. Please try again.", variant: "destructive" });
     },
   });
 
-  const onSubmit = (data: BookingFormData) => {
-    bookingMutation.mutate(data);
-  };
+  const onSubmit = (data: BookingFormData) => bookingMutation.mutate(data);
+
+  const inputClass = "w-full my-2 px-3 py-2.5 bg-transparent text-white border border-white/10 rounded-md placeholder:text-white/30 focus:outline-none focus:border-[#f5c542]/50 text-sm";
 
   return (
-    <section className="text-white py-16 lg:py-24 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: `
-          radial-gradient(ellipse at 30% 40%, rgba(245,197,66,0.06) 0%, transparent 50%),
-          radial-gradient(ellipse at 70% 80%, rgba(180,130,30,0.05) 0%, transparent 40%),
-          linear-gradient(180deg, rgba(25,18,6,0.10) 0%, rgba(10,10,13,0) 50%, rgba(30,22,8,0.08) 100%)
-        `
-      }} />
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          <div className="pt-4">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 font-serif italic leading-tight">
-              Ready for a spotless home?
-            </h2>
-            <a
-              href="#instant-quote"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById('instant-quote');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="nav-book-btn inline-flex items-center gap-2 px-10 py-4 font-bold text-sm tracking-[1px] uppercase"
-              data-testid="cta-get-quote"
-            >
-              GET A QUOTE
-            </a>
-          </div>
+    <section className="text-white relative" style={{ padding: '80px 10%' }}>
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
+        <div>
+          <h2 className="text-3xl lg:text-4xl font-bold font-serif leading-tight mb-6">
+            Ready for a spotless home?
+          </h2>
+          <a
+            href="#instant-quote"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('instant-quote');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="nav-book-btn text-sm tracking-[1px] uppercase"
+            data-testid="cta-get-quote"
+          >
+            GET A QUOTE
+          </a>
+        </div>
 
-          <div className="rounded-lg overflow-hidden" style={{
-            background: 'linear-gradient(145deg, rgba(30,22,10,0.6) 0%, rgba(17,17,17,0.8) 100%)',
-            border: '1px solid rgba(245,197,66,0.15)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(245,197,66,0.05)'
-          }}>
-            <div className="p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-white mb-5 font-serif italic text-center">Book Your Cleaning</h3>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="booking-form-cta">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="Name"
-                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            {...field}
-                            placeholder="Email"
-                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            {...field}
-                            value={field.value || ''}
-                            placeholder="Phone"
-                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full font-bold py-5 rounded-md text-sm tracking-[1px] uppercase text-[#0a0a0d]"
-                    style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)' }}
-                    disabled={bookingMutation.isPending}
-                    data-testid="cta-submit"
-                  >
-                    {bookingMutation.isPending ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                        Submitting...
-                      </span>
-                    ) : 'SUBMIT'}
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </div>
+        <div
+          className="rounded-[10px] w-full lg:w-[300px] flex-shrink-0"
+          style={{
+            background: '#111',
+            border: '1px solid rgba(255,255,255,0.08)',
+            padding: '30px'
+          }}
+        >
+          <h3 className="text-lg font-bold text-white mb-3 text-center">Book Your Cleaning</h3>
+          <form onSubmit={form.handleSubmit(onSubmit)} data-testid="booking-form-cta">
+            <input
+              {...form.register('name')}
+              placeholder="Name"
+              className={inputClass}
+            />
+            <input
+              {...form.register('email')}
+              type="email"
+              placeholder="Email"
+              className={inputClass}
+            />
+            <input
+              {...form.register('phone')}
+              type="tel"
+              placeholder="Phone"
+              className={inputClass}
+            />
+            <input
+              {...form.register('date')}
+              type="date"
+              className={inputClass}
+            />
+            <button
+              type="submit"
+              className="nav-book-btn w-full mt-3 text-sm tracking-[1px] uppercase"
+              disabled={bookingMutation.isPending}
+              data-testid="cta-submit"
+            >
+              {bookingMutation.isPending ? 'Submitting...' : 'SUBMIT'}
+            </button>
+          </form>
         </div>
       </div>
     </section>

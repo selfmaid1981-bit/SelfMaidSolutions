@@ -44,8 +44,8 @@ export function Navigation() {
 
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : 'nav-top'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div style={{ padding: '0 10%' }}>
+        <div className="flex items-center justify-between" style={{ padding: '20px 0' }}>
           <Link href="/" className="flex items-center hover:opacity-90 transition-opacity flex-shrink-0" data-testid="logo-link">
             <img
               src={logoImage}
@@ -56,14 +56,14 @@ export function Navigation() {
             />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center" style={{ gap: '30px' }}>
             {navItems.map((item) => {
               const isActive = location === item.href;
               return item.href.startsWith('/#') ? (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href.replace('/', ''))}
-                  className="text-white/70 hover:text-white px-4 py-2 text-[13px] font-medium tracking-[1px] uppercase transition-colors"
+                  className="text-white/70 hover:text-white text-[14px] tracking-[1px] transition-colors"
                   data-testid={`nav-${item.label.toLowerCase().replace(/\s/g, '-')}`}
                 >
                   {item.label}
@@ -72,7 +72,7 @@ export function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-2 text-[13px] font-medium tracking-[1px] uppercase transition-colors ${
+                  className={`text-[14px] tracking-[1px] transition-colors ${
                     isActive
                       ? 'text-[#f5c542]'
                       : 'text-white/70 hover:text-white'
