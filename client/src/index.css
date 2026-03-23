@@ -97,6 +97,13 @@
     line-height: 1.05;
   }
 
+  h1.hero-headline {
+    font-size: clamp(44px, 5.5vw, 64px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.02;
+  }
+
   h2 {
     font-size: clamp(28px, 3.5vw, 44px);
     letter-spacing: -0.5px;
@@ -590,6 +597,14 @@ body {
 .nav-book-btn:hover {
   background: rgba(245, 197, 66, 0.08);
   border-color: #f5d56a;
+}
+
+.nav-book-btn.hero-cta {
+  box-shadow: 0 2px 12px rgba(245, 197, 66, 0.15);
+}
+
+.nav-book-btn.hero-cta:hover {
+  box-shadow: 0 4px 20px rgba(245, 197, 66, 0.22);
 }
 
 .mobile-menu-container {

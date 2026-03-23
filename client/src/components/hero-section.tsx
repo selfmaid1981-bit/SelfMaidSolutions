@@ -1,11 +1,12 @@
 import { CheckCircle2 } from 'lucide-react';
-import heroLogo from '@assets/1002A1AE-EF4B-4A40-BBCA-AEA8E3385BAC_1774251413661.png';
+import heroLogo from '@assets/hero-logo-transparent.png';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+    <section className="relative overflow-hidden" style={{ background: 'radial-gradient(ellipse at 55% 50%, #151518 0%, #0a0a0d 60%, #050507 100%)' }}>
       <div className="absolute inset-0 pointer-events-none" style={{
         background: `
+          linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 50%),
           radial-gradient(ellipse at 70% 50%, rgba(245,197,66,0.12) 0%, transparent 50%),
           radial-gradient(ellipse at 50% 100%, rgba(200,155,45,0.10) 0%, transparent 45%),
           radial-gradient(ellipse at 30% 80%, rgba(180,130,30,0.06) 0%, transparent 40%),
@@ -20,13 +21,13 @@ export function HeroSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 py-16 md:py-24 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           <div className="text-center lg:text-left">
-            <h1 className="font-bold text-white font-serif mb-5" style={{ lineHeight: 1.05, letterSpacing: '-1.5px' }}>
+            <h1 className="hero-headline font-bold text-white font-serif mb-5">
               Spotless Homes.
               <br />
               Zero Stress.
             </h1>
 
-            <p className="text-white/60 text-base sm:text-lg mb-7 max-w-md mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-white/60 text-base sm:text-lg mb-7 max-w-md mx-auto lg:mx-0 leading-relaxed" style={{ lineHeight: 1.75, letterSpacing: '0.01em' }}>
               Premium cleaning that shows up on time — every time.
             </p>
 
@@ -47,7 +48,7 @@ export function HeroSection() {
                   const el = document.getElementById('instant-quote');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="nav-book-btn inline-flex items-center gap-2 px-8 py-3.5 font-bold text-sm tracking-[1px] uppercase"
+                className="nav-book-btn hero-cta inline-flex items-center gap-2 px-12 py-[18px] font-bold text-sm tracking-[1.5px] uppercase"
                 data-testid="hero-get-quote"
               >
                 GET A QUOTE
@@ -70,7 +71,7 @@ export function HeroSection() {
               <img
                 src={heroLogo}
                 alt="Self-Maid Cleaning Solutions"
-                className="relative w-full max-w-[440px] object-contain"
+                className="relative w-full max-w-[390px] object-contain"
                 style={{ filter: 'drop-shadow(0 8px 30px rgba(245,197,66,0.2))' }}
                 fetchPriority="high"
               />
