@@ -357,6 +357,87 @@
   100% { opacity: 0.8; transform: scale(0.98); }
 }
 
+.white-marble-section {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(240,238,235,0.95) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(235,232,228,0.9) 0%, transparent 45%),
+    linear-gradient(160deg, #eae7e2 0%, #f2efe9 30%, #e8e4de 60%, #f0ece6 100%);
+  overflow: hidden;
+}
+
+.white-marble-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 50px,
+      rgba(180,175,165,0.12) 50px,
+      rgba(190,185,175,0.2) 51.5px,
+      rgba(180,175,165,0.08) 53px,
+      transparent 56px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 80px,
+      rgba(170,165,155,0.08) 80px,
+      rgba(185,180,170,0.15) 81.5px,
+      rgba(170,165,155,0.06) 83px,
+      transparent 86px
+    ),
+    repeating-linear-gradient(
+      100deg,
+      transparent 0px,
+      transparent 120px,
+      rgba(200,175,120,0.06) 120px,
+      rgba(210,185,130,0.1) 121px,
+      rgba(200,175,120,0.04) 122.5px,
+      transparent 125px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.white-marble-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(200,195,185,0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 20%, rgba(190,185,175,0.1) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 80%, rgba(200,180,130,0.08) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.white-marble-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.white-marble-section .section-label,
+.white-marble-section .text-white\/50,
+.white-marble-section .text-white\/35,
+.white-marble-section .text-white\/30 {
+  color: rgba(60,55,50,0.6) !important;
+}
+
+.white-marble-section h2.text-white {
+  color: #1a1816 !important;
+}
+
+.white-marble-section .gold-shine-text {
+  background: linear-gradient(135deg, #c89b2d 0%, #f5c542 40%, #a07820 60%, #c89b2d 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .nav-link {
   position: relative;
 }

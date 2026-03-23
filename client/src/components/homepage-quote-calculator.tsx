@@ -148,7 +148,7 @@ export function HomepageQuoteCalculator() {
   const inputClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2" + " " + "bg-[#111111] border border-white/10 text-white placeholder:text-white/30 focus:ring-[#f5c542]/40 focus:border-[#f5c542]";
 
   return (
-    <section className="py-24 lg:py-32" style={{ background: '#0a0a0d' }} id="instant-quote">
+    <section className="py-24 lg:py-32 white-marble-section" id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <p className="section-label text-white/50 tracking-[4px]">PRICING</p>
