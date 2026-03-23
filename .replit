@@ -64,3 +64,7 @@ LEADS_SPREADSHEET_ID = "1WHmQu9ncuBPB928E5W4W6OK4mW_DKINdUkQrquDDk7s"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
