@@ -295,22 +295,110 @@
   border-radius: 1px;
 }
 
-.hero-bg {
+.hero-section {
   position: relative;
-  background:
-    radial-gradient(ellipse at 70% 60%, rgba(245,197,66,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 80%, rgba(200,155,45,0.1) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 30%, rgba(245,197,66,0.08) 0%, transparent 35%),
-    linear-gradient(135deg, #0a0a0d 0%, #111 50%, #0a0a0d 100%);
-  background-size: cover;
-  background-position: center;
+  color: #fff;
+  padding: 80px 20px;
 }
 
-.hero-overlay {
+.hero-section::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(10,10,13,0.85), rgba(10,10,13,0.4));
+  background-image: url('/assets/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(11,11,11,0.92), rgba(11,11,11,0.5));
   z-index: 1;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 40px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hero-subtext {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.hero-trust {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.hero-trust li {
+  margin-bottom: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #f5c542, #c89b2d);
+  color: #000;
+  padding: 14px 28px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.hero-cta:hover {
+  opacity: 0.9;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  filter: drop-shadow(0 8px 30px rgba(245,197,66,0.2));
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .hero-image img {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 
 .premium-gradient {
