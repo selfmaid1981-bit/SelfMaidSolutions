@@ -65,7 +65,14 @@ export function FinalCtaSection() {
   };
 
   return (
-    <section className="text-white py-16 lg:py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0d 0%, #0d0d0d 50%, #0a0a0d 100%)' }}>
+    <section className="text-white py-16 lg:py-24 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: `
+          radial-gradient(ellipse at 30% 40%, rgba(245,197,66,0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 80%, rgba(180,130,30,0.05) 0%, transparent 40%),
+          linear-gradient(180deg, rgba(25,18,6,0.10) 0%, rgba(10,10,13,0) 50%, rgba(30,22,8,0.08) 100%)
+        `
+      }} />
       <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           <div className="pt-4">
@@ -87,9 +94,9 @@ export function FinalCtaSection() {
           </div>
 
           <div className="rounded-lg overflow-hidden" style={{
-            background: '#111111',
-            border: '1px solid rgba(245,197,66,0.12)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.4)'
+            background: 'linear-gradient(145deg, rgba(30,22,10,0.6) 0%, rgba(17,17,17,0.8) 100%)',
+            border: '1px solid rgba(245,197,66,0.15)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(245,197,66,0.05)'
           }}>
             <div className="p-6 sm:p-8">
               <h3 className="text-xl font-bold text-white mb-5 font-serif italic text-center">Book Your Cleaning</h3>
@@ -139,23 +146,6 @@ export function FinalCtaSection() {
                             {...field}
                             value={field.value || ''}
                             placeholder="Phone"
-                            className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            type="date"
-                            {...field}
-                            value={field.value || ''}
                             className="border-white/10 rounded-md h-11 bg-[#0a0a0d] text-white placeholder:text-white/30 focus:ring-1 focus:ring-[#f5c542]/30 focus:border-[#f5c542]/50"
                           />
                         </FormControl>

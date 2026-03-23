@@ -5,7 +5,16 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden" style={{ background: '#0a0a0d' }}>
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at 70% 40%, rgba(245,197,66,0.07) 0%, transparent 55%), radial-gradient(ellipse at 20% 70%, rgba(200,155,45,0.03) 0%, transparent 50%)'
+        background: `
+          radial-gradient(ellipse at 70% 50%, rgba(245,197,66,0.12) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 100%, rgba(200,155,45,0.10) 0%, transparent 45%),
+          radial-gradient(ellipse at 30% 80%, rgba(180,130,30,0.06) 0%, transparent 40%),
+          linear-gradient(180deg, rgba(10,10,13,0) 0%, rgba(30,22,8,0.15) 100%)
+        `
+      }} />
+
+      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{
+        background: 'linear-gradient(0deg, rgba(40,28,8,0.18) 0%, transparent 100%)'
       }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 py-16 md:py-24 lg:py-28">
@@ -54,15 +63,15 @@ export function HeroSection() {
 
           <div className="hidden lg:flex justify-center items-center">
             <div className="relative">
-              <div className="absolute -inset-8 pointer-events-none" style={{
-                background: 'radial-gradient(ellipse, rgba(245,197,66,0.08) 0%, transparent 65%)',
-                filter: 'blur(20px)'
+              <div className="absolute -inset-16 pointer-events-none" style={{
+                background: 'radial-gradient(ellipse, rgba(245,197,66,0.15) 0%, rgba(200,155,45,0.05) 40%, transparent 70%)',
+                filter: 'blur(30px)'
               }} />
               <img
                 src={heroLogo}
                 alt="Self-Maid Cleaning Solutions"
                 className="relative w-full max-w-[440px] object-contain"
-                style={{ filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.4))' }}
+                style={{ filter: 'drop-shadow(0 8px 30px rgba(245,197,66,0.2))' }}
                 fetchPriority="high"
               />
             </div>
@@ -70,7 +79,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent 10%, rgba(245,197,66,0.25) 50%, transparent 90%)' }} />
+      <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent 10%, rgba(245,197,66,0.3) 50%, transparent 90%)' }} />
     </section>
   );
 }
