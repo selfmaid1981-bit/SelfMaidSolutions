@@ -292,7 +292,6 @@
   background-image: url('/assets/marble-bg.jpeg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   opacity: 0.5;
   pointer-events: none;
   z-index: 1;
@@ -561,52 +560,77 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 70px 16px 50px;
+    padding: 70px 0 40px;
     min-height: auto;
+    overflow: hidden;
   }
 
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 20px;
-    padding: 0 8px;
+    gap: 16px;
+    padding: 0 16px;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .hero-content h1 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .hero-subtext {
     font-size: 15px;
   }
 
+  .hero-trust {
+    margin-bottom: 20px;
+  }
+
   .hero-trust li {
     font-size: 13px;
+    margin-bottom: 6px;
   }
 
   .hero-image {
     order: -1;
+    overflow: hidden;
+    max-width: 100%;
   }
 
   .hero-image img {
-    max-width: 95vw;
-    width: 95vw;
+    max-width: 340px;
+    width: 90%;
     margin: 0 auto;
+    filter:
+      drop-shadow(0 0 50px rgba(245,197,66,0.5))
+      drop-shadow(0 0 100px rgba(245,197,66,0.25))
+      drop-shadow(0 0 20px rgba(245,197,66,0.4));
   }
 
   .hero-image::before {
-    width: 180%;
-    height: 180%;
-    top: -40%;
-    left: -40%;
+    width: 160%;
+    height: 160%;
+    top: -30%;
+    left: -30%;
+    filter: blur(40px);
   }
 
   .hero-actions {
     justify-content: center;
+    gap: 14px;
+  }
+
+  .hero-phone {
+    font-size: 13px;
   }
 
   .hero-trust-signals {
     justify-content: center;
+    gap: 10px;
+  }
+
+  .hero-trust-signal {
+    font-size: 10px;
   }
 }
 
@@ -837,6 +861,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 @keyframes slideUp {
