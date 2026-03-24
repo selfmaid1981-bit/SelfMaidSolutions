@@ -21,6 +21,7 @@ export function Footer() {
     { name: 'FAQ', href: '/faq' },
     { name: 'Get a Quote', href: '/quote' },
     { name: 'Book Now', href: '/booking' },
+    { name: 'My Bookings', href: '/portal' },
   ];
 
   const socialLinks = [

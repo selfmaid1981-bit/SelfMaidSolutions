@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { storage } from "../storage";
 import { insertLeadSchema, insertClientSchema, insertAppointmentSchema, insertJobSchema, insertCleanerSchema, insertRecurringBookingSchema, insertReferralSchema } from "@shared/schema";
-import { onJobCompleted } from "../hooks/review-on-complete";
+import { onJobCompleted, scheduleReviewFollowUp } from "../hooks/review-on-complete";
 import { sendRecurringUpsell } from "../hooks/recurring-upsell";
 import { getFollowUpStats, processFollowUps } from "../hooks/quote-followup";
 
@@ -245,7 +245,11 @@ router.patch("/jobs/:id", requireAdmin, async (req: Request, res: Response) => {
     const job = await storage.updateJob(req.params.id, safe);
     if (!job) return res.status(404).json({ error: "Job not found" });
     if (previousJob.status !== "completed" && job.status === "completed") {
-      onJobCompleted(job.id).catch(err => console.error("[CRM] Review trigger failed:", err));
+      onJobCompleted(job.id).then(result => {
+        if (result.reviewRequestId) {
+          scheduleReviewFollowUp(result.reviewRequestId);
+        }
+      }).catch(err => console.error("[CRM] Review trigger failed:", err));
       setTimeout(() => {
         sendRecurringUpsell(job.id).catch(err => console.error("[CRM] Recurring upsell failed:", err));
       }, 2 * 60 * 60 * 1000);

@@ -16,7 +16,6 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import {
   serviceOptions,
-  timeSlots,
   getTomorrowDate,
   quoteServiceTypes,
   propertySizeOptions,
@@ -24,6 +23,7 @@ import {
   addOnServices,
   calculateQuotePrice,
 } from '@/lib/services';
+import { AvailabilityPicker } from '@/components/availability-picker';
 import { insertBookingSchema } from '@shared/schema';
 import { z } from 'zod';
 import { useLocation } from 'wouter';
@@ -542,48 +542,12 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
               {!isRecruitment && step === 3 && (
                 <div data-testid="booking-step-3">
                   <h3 className="text-lg font-semibold mb-4">3. Choose Date & Time</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="preferredDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Preferred Date</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="date" 
-                              min={minDate} 
-                              {...field}
-                              data-testid="input-preferredDate"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="preferredTime"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Preferred Time</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-preferredTime">
-                                <SelectValue placeholder="Select time" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {timeSlots.map((time) => (
-                                <SelectItem key={time} value={time}>{time}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <AvailabilityPicker
+                    selectedDate={form.watch("preferredDate")}
+                    selectedTime={form.watch("preferredTime")}
+                    onDateChange={(date) => form.setValue("preferredDate", date, { shouldValidate: true })}
+                    onTimeChange={(time) => form.setValue("preferredTime", time, { shouldValidate: true })}
+                  />
                   <div className="flex gap-4 mt-6">
                     <Button 
                       type="button" 

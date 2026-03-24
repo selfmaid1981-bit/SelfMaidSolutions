@@ -3,6 +3,7 @@ import express from "express";
 import { createServer, type Server } from "http";
 import { timingSafeEqual } from "crypto";
 import path from "path";
+import { sql } from "drizzle-orm";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
 import { getUncachableStripeClient } from "./stripeClient";
@@ -49,7 +50,7 @@ import {
 } from "./ad-automation";
 import { syncDailyToSheets } from "./daily-sheets-sync";
 import { db } from "./db";
-import { pageViews, insertPageViewSchema } from "@shared/schema";
+import { pageViews, insertPageViewSchema, bookings, appointments } from "@shared/schema";
 import {
   runPipeline,
   startLeadGenPipeline,
@@ -642,6 +643,133 @@ Host: https://selfmaidllc.com`;
     try {
       await deleteAdCampaign(req.params.id);
       res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/availability", async (req, res) => {
+    try {
+      const date = req.query.date as string;
+      if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        return res.status(400).json({ message: "Valid date parameter required (YYYY-MM-DD)" });
+      }
+
+      const allSlots = ["8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"];
+
+      const dayBookings = await db
+        .select({ time: bookings.preferredTime })
+        .from(bookings)
+        .where(sql`${bookings.preferredDate} = ${date} AND ${bookings.status} != 'cancelled'`);
+
+      const dayAppointments = await db
+        .select({ time: appointments.scheduledTime })
+        .from(appointments)
+        .where(sql`${appointments.scheduledDate} = ${date} AND ${appointments.status} != 'cancelled'`);
+
+      const normalize = (t: string) => t?.trim().toUpperCase().replace(/\s+/g, " ") || "";
+
+      const slots = allSlots.map((time) => {
+        const norm = normalize(time);
+        const bookingCount = [...dayBookings.map((b) => normalize(b.time)), ...dayAppointments.map((a) => normalize(a.time))].filter((t) => t === norm).length;
+        return {
+          time,
+          available: bookingCount < 2,
+          bookings: bookingCount,
+        };
+      });
+
+      res.json(slots);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  const portalRateLimit = new Map<string, { count: number; resetAt: number }>();
+  const PORTAL_MAX_ATTEMPTS = 5;
+  const PORTAL_WINDOW_MS = 15 * 60 * 1000;
+
+  function checkPortalRateLimit(email: string): boolean {
+    const key = email.toLowerCase();
+    const now = Date.now();
+    const entry = portalRateLimit.get(key);
+    if (!entry || now > entry.resetAt) {
+      portalRateLimit.set(key, { count: 1, resetAt: now + PORTAL_WINDOW_MS });
+      return true;
+    }
+    entry.count++;
+    return entry.count <= PORTAL_MAX_ATTEMPTS;
+  }
+
+  function buildPortalResponse(customerBookings: any[]) {
+    const first = customerBookings[0];
+    const totalSpent = customerBookings
+      .filter((b: any) => b.status !== "cancelled")
+      .reduce((sum: number, b: any) => sum + (b.amount || 0), 0);
+
+    return {
+      email: first.email,
+      firstName: first.firstName,
+      lastName: first.lastName,
+      phone: first.phone,
+      totalBookings: customerBookings.length,
+      totalSpent,
+      bookings: customerBookings.map((b: any) => ({
+        id: b.id,
+        serviceType: b.serviceType,
+        preferredDate: b.preferredDate,
+        preferredTime: b.preferredTime,
+        city: b.city,
+        state: b.state,
+        zipCode: b.zipCode,
+        amount: b.amount,
+        status: b.status,
+        createdAt: b.createdAt,
+      })),
+    };
+  }
+
+  app.post("/api/portal/login", async (req, res) => {
+    try {
+      const { email } = req.body;
+      if (!email) return res.status(400).json({ message: "Email is required" });
+
+      if (!checkPortalRateLimit(email)) {
+        return res.status(429).json({ message: "Too many attempts. Please try again later." });
+      }
+
+      const customerBookings = await db
+        .select()
+        .from(bookings)
+        .where(sql`LOWER(${bookings.email}) = LOWER(${email})`)
+        .orderBy(sql`${bookings.createdAt} DESC`);
+
+      if (customerBookings.length === 0) {
+        return res.status(404).json({ message: "No bookings found for this email" });
+      }
+
+      res.json(buildPortalResponse(customerBookings));
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/portal/customer", async (req, res) => {
+    try {
+      const email = req.query.email as string;
+      if (!email) return res.status(400).json({ message: "Email is required" });
+
+      const customerBookings = await db
+        .select()
+        .from(bookings)
+        .where(sql`LOWER(${bookings.email}) = LOWER(${email})`)
+        .orderBy(sql`${bookings.createdAt} DESC`);
+
+      if (customerBookings.length === 0) {
+        return res.status(404).json({ message: "No bookings found" });
+      }
+
+      res.json(buildPortalResponse(customerBookings));
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

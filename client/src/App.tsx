@@ -30,6 +30,7 @@ import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/page
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NeighborhoodPage from "@/pages/neighborhood";
+import CustomerPortal from "@/pages/customer-portal";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -85,6 +86,7 @@ function Router() {
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
+        <Route path="/portal" component={CustomerPortal} />
         <Route path="/crm" component={CrmDashboard} />
         <Route path="/crm/pipeline" component={CrmPipeline} />
         <Route path="/crm/contacts" component={CrmContacts} />
