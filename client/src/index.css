@@ -609,7 +609,7 @@
   background:
     radial-gradient(ellipse at 20% 50%, rgba(245,197,66,0.04) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 30%, rgba(245,197,66,0.03) 0%, transparent 50%),
-    linear-gradient(180deg, #131315 0%, #101012 40%, #0c0c0e 100%);
+    transparent;
 }
 
 .section-warm::before {

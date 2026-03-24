@@ -111,7 +111,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0d' }}>
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: 'transparent' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <div className="mb-16 rounded-xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}>

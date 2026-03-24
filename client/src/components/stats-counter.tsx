@@ -51,7 +51,7 @@ export function StatsCounter() {
   }, []);
 
   return (
-    <section ref={ref} className="py-20" style={{ background: '#0a0a0d' }}>
+    <section ref={ref} className="py-20" style={{ background: 'transparent' }}>
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
           {stats.map((stat) => {

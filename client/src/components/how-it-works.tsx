@@ -23,7 +23,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 lg:py-32" style={{ background: '#0a0a0d' }}>
+    <section className="py-24 lg:py-32" style={{ background: 'transparent' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="section-label text-white/50 tracking-[4px]">THE PROCESS</p>

@@ -50,7 +50,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative text-white overflow-hidden" style={{ background: '#0a0a0d', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative text-white overflow-hidden" style={{ background: 'transparent', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg, transparent 5%, rgba(245,197,66,0.4) 30%, rgba(255,220,120,0.6) 50%, rgba(245,197,66,0.4) 70%, transparent 95%)', backgroundSize: '200% 100%', animation: 'goldShimmer 4s ease-in-out infinite' }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">

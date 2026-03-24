@@ -2,7 +2,7 @@ import ownerPhoto from '@assets/808AA65C-8994-4D31-BAF3-4FDC2EC96722_17738739393
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-24 lg:py-32" style={{ background: '#0a0a0d' }}>
+    <section id="about" className="py-24 lg:py-32" style={{ background: 'transparent' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div className="flex justify-center md:justify-start scroll-reveal-left">
