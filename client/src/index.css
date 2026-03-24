@@ -289,10 +289,18 @@
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url('/assets/marble-bg.jpeg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.5;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 15%, rgba(60,65,80,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 85% 30%, rgba(50,55,70,0.4) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 60% at 50% 55%, rgba(45,50,65,0.3) 0%, transparent 40%),
+    radial-gradient(ellipse 60% 80% at 15% 80%, rgba(55,60,75,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 80% 75%, rgba(40,45,60,0.35) 0%, transparent 45%),
+
+    linear-gradient(145deg, transparent 25%, rgba(245,197,66,0.06) 35%, rgba(200,155,45,0.12) 36.5%, rgba(245,197,66,0.04) 38%, transparent 48%),
+    linear-gradient(35deg, transparent 50%, rgba(245,197,66,0.04) 60%, rgba(200,155,45,0.10) 61%, rgba(245,197,66,0.03) 62.5%, transparent 70%),
+    linear-gradient(170deg, transparent 15%, rgba(245,197,66,0.05) 30%, rgba(200,155,45,0.14) 31.5%, rgba(245,197,66,0.04) 33%, transparent 45%),
+    linear-gradient(80deg, transparent 40%, rgba(200,155,45,0.03) 55%, rgba(245,197,66,0.08) 56%, transparent 65%),
+    linear-gradient(200deg, transparent 60%, rgba(245,197,66,0.04) 72%, rgba(200,155,45,0.10) 73%, transparent 82%);
   pointer-events: none;
   z-index: 1;
 }
@@ -302,20 +310,20 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(245,197,66,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 25% 15%, rgba(245,197,66,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,155,45,0.05) 0%, transparent 45%),
-    radial-gradient(ellipse 70% 70% at 50% 70%, rgba(245,197,66,0.04) 0%, transparent 40%),
-    linear-gradient(180deg, rgba(10,10,13,0.3) 0%, rgba(10,10,13,0.1) 20%, rgba(10,10,13,0.1) 80%, rgba(10,10,13,0.5) 100%);
-  animation: ambientGlow 20s ease-in-out infinite alternate;
+    radial-gradient(ellipse 120% 80% at 30% 20%, rgba(50,55,70,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 100% at 70% 60%, rgba(45,50,65,0.2) 0%, transparent 45%),
+    radial-gradient(ellipse 80% 120% at 20% 70%, rgba(55,60,75,0.25) 0%, transparent 40%),
+    radial-gradient(ellipse at 55% 40%, rgba(245,197,66,0.05) 0%, transparent 35%),
+    radial-gradient(ellipse at 80% 80%, rgba(200,155,45,0.04) 0%, transparent 30%);
+  animation: ambientGlow 25s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 1;
 }
 
 @keyframes ambientGlow {
-  0% { opacity: 0.8; }
+  0% { opacity: 0.6; }
   50% { opacity: 1; }
-  100% { opacity: 0.85; }
+  100% { opacity: 0.7; }
 }
 
 .white-marble-section {
@@ -430,10 +438,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 120% 60% at 60% 0%, rgba(245,197,66,0.15) 0%, rgba(200,155,45,0.06) 30%, transparent 60%),
-    radial-gradient(ellipse 80% 80% at 75% 40%, rgba(245,197,66,0.10) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,155,45,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(10,10,13,0.8) 0%, transparent 60%);
+    radial-gradient(ellipse 120% 60% at 60% 0%, rgba(245,197,66,0.12) 0%, rgba(200,155,45,0.05) 30%, transparent 60%),
+    radial-gradient(ellipse 80% 80% at 75% 40%, rgba(245,197,66,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,155,45,0.05) 0%, transparent 50%);
   z-index: 0;
 }
 
@@ -441,7 +448,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20,16,8,0.2) 0%, transparent 40%, transparent 60%, rgba(10,10,13,0.6) 100%);
+  background: linear-gradient(180deg, transparent 0%, transparent 80%, rgba(10,10,13,0.4) 100%);
   z-index: 1;
 }
 
@@ -551,6 +558,7 @@
   z-index: 1;
   width: 140%;
   max-width: 900px;
+  mix-blend-mode: lighten;
   filter:
     drop-shadow(0 0 100px rgba(245,197,66,0.6))
     drop-shadow(0 0 200px rgba(245,197,66,0.3))
