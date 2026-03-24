@@ -22,14 +22,14 @@ export function GoldParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 80; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2.5 + 0.5,
-        speedY: -(Math.random() * 0.3 + 0.1),
-        speedX: (Math.random() - 0.5) * 0.2,
-        opacity: Math.random() * 0.5 + 0.1,
+        size: Math.random() * 3 + 0.3,
+        speedY: -(Math.random() * 0.4 + 0.05),
+        speedX: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.6 + 0.1,
         pulse: Math.random() * Math.PI * 2,
       });
     }
@@ -70,7 +70,7 @@ export function GoldParticles() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 2 }}
     />
   );
 }
