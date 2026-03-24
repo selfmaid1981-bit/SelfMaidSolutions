@@ -293,7 +293,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.35;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 1;
 }
@@ -303,10 +303,11 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 25% 15%, rgba(245,197,66,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,155,45,0.04) 0%, transparent 45%),
-    radial-gradient(ellipse 70% 70% at 50% 60%, rgba(245,197,66,0.03) 0%, transparent 40%),
-    linear-gradient(180deg, rgba(10,10,13,0.6) 0%, rgba(10,10,13,0.2) 30%, rgba(10,10,13,0.2) 70%, rgba(10,10,13,0.7) 100%);
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(245,197,66,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 25% 15%, rgba(245,197,66,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,155,45,0.05) 0%, transparent 45%),
+    radial-gradient(ellipse 70% 70% at 50% 70%, rgba(245,197,66,0.04) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(10,10,13,0.3) 0%, rgba(10,10,13,0.1) 20%, rgba(10,10,13,0.1) 80%, rgba(10,10,13,0.5) 100%);
   animation: ambientGlow 20s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 1;
@@ -430,8 +431,10 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 100% 80% at 70% 40%, rgba(245,197,66,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 100% at 30% 60%, rgba(200,155,45,0.05) 0%, transparent 50%);
+    radial-gradient(ellipse 120% 60% at 60% 0%, rgba(245,197,66,0.15) 0%, rgba(200,155,45,0.06) 30%, transparent 60%),
+    radial-gradient(ellipse 80% 80% at 75% 40%, rgba(245,197,66,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,155,45,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(10,10,13,0.8) 0%, transparent 60%);
   z-index: 0;
 }
 
@@ -439,7 +442,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8,8,15,0.3) 0%, transparent 30%, transparent 70%, rgba(8,8,15,0.5) 100%);
+  background: linear-gradient(180deg, rgba(20,16,8,0.2) 0%, transparent 40%, transparent 60%, rgba(10,10,13,0.6) 100%);
   z-index: 1;
 }
 
