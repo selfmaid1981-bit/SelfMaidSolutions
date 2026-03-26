@@ -60,6 +60,9 @@ id = "module:nodejs-20/formatter:prettier"
 
 [userenv.shared]
 LEADS_SPREADSHEET_ID = "1WHmQu9ncuBPB928E5W4W6OK4mW_DKINdUkQrquDDk7s"
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = "587"
+OWNER_EMAIL = "selfmaidclean@outlook.com"
 
 [[ports]]
 localPort = 5000
