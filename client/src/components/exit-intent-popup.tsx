@@ -41,8 +41,12 @@ export function ExitIntentPopup() {
   });
 
   useEffect(() => {
-    const alreadyClaimed = localStorage.getItem('exitPopupClaimed');
-    if (alreadyClaimed) return;
+    const dismissed = localStorage.getItem('exitPopupDismissed');
+    if (dismissed) {
+      const dismissedAt = parseInt(dismissed, 10);
+      const daysSince = (Date.now() - dismissedAt) / (1000 * 60 * 60 * 24);
+      if (daysSince < 7) return;
+    }
 
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !hasShown) {
@@ -55,7 +59,7 @@ export function ExitIntentPopup() {
       if (!hasShown) {
         document.addEventListener('mouseout', handleMouseLeave);
       }
-    }, 5000);
+    }, 45000);
 
     return () => {
       clearTimeout(timer);
@@ -76,7 +80,7 @@ export function ExitIntentPopup() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="relative rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-300" style={{ background: '#111111', border: '1px solid rgba(201,160,32,0.2)' }}>
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={() => { setIsVisible(false); localStorage.setItem('exitPopupDismissed', String(Date.now())); }}
           className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors z-10"
           data-testid="exit-popup-close"
         >
@@ -125,7 +129,7 @@ export function ExitIntentPopup() {
           </p>
 
           <button
-            onClick={() => setIsVisible(false)}
+            onClick={() => { setIsVisible(false); localStorage.setItem('exitPopupDismissed', String(Date.now())); }}
             className="w-full text-center text-sm text-white/30 hover:text-white/60 mt-4 underline"
             data-testid="exit-popup-no-thanks"
           >
