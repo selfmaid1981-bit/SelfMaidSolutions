@@ -32,9 +32,16 @@ export function Navigation() {
 
       <header className="site-header" role="banner">
         <div className="header-inner">
-          <Link href="/" className="logo" aria-label="Self-Maid Cleaning Solutions — Home">
+          <a href="/" className="logo" aria-label="Self-Maid Cleaning Solutions — Home" onClick={(e) => {
+            e.preventDefault();
+            if (location === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              window.location.href = '/';
+            }
+          }}>
             <img src={logoImage} alt="Self-Maid Cleaning Solutions Logo" className="logo-img" width="160" height="60" loading="eager" style={{ mixBlendMode: 'lighten' }} />
-          </Link>
+          </a>
 
           <nav className="desktop-nav" aria-label="Main navigation">
             <button onClick={() => scrollTo('services')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(245,240,232,.65)', fontFamily: 'var(--sm-fD)', fontSize: 'var(--sm-t-xs)', fontWeight: 400, letterSpacing: '.1em' }}>Services</button>
