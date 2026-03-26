@@ -2,6 +2,8 @@ import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
+import { HowItWorks } from '@/components/how-it-works';
+import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { CtaBandSection } from '@/components/final-cta-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { AboutSection } from '@/components/about-section';
@@ -133,6 +135,8 @@ export default function Home() {
         <Navigation />
         <HeroSection />
         <ServicesSection />
+        <HowItWorks />
+        <HomepageQuoteCalculator />
         <CtaBandSection />
         <TestimonialsSection />
         <AboutSection />

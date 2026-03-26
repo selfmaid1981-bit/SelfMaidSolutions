@@ -15,7 +15,8 @@ export function ExitIntentPopup() {
   const subscribeMutation = useMutation({
     mutationFn: async (email: string) => {
       return apiRequest('POST', '/api/contact', {
-        name: 'Newsletter Subscriber',
+        firstName: 'Newsletter',
+        lastName: 'Subscriber',
         email,
         phone: '',
         message: 'Exit popup subscription - 10% discount offer',
