@@ -354,7 +354,7 @@
 }
 .hero-logo-img {
   position: relative; z-index: 1; width: 100%; height: auto;
-  max-width: clamp(300px, 50vw, 680px);
+  max-width: clamp(320px, 55vw, 820px);
   filter:
     drop-shadow(0 0 40px rgba(201,160,32,.45))
     drop-shadow(0 0 80px rgba(201,160,32,.2))
@@ -362,10 +362,10 @@
   animation: floatLogo 6s ease-in-out infinite;
 }
 @media(min-width:768px) {
-  .hero-logo-img { max-width: clamp(380px, 48vw, 680px); }
+  .hero-logo-img { max-width: clamp(440px, 52vw, 820px); }
 }
 @media(min-width:1024px) {
-  .hero-logo-img { max-width: clamp(450px, 45vw, 680px); }
+  .hero-logo-img { max-width: clamp(540px, 50vw, 820px); }
 }
 @keyframes floatLogo { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 .hero-logo-sparkle {
