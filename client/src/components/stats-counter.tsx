@@ -58,8 +58,8 @@ export function StatsCounter() {
             const Icon = stat.icon;
             return (
               <div key={stat.label} className="text-center scroll-reveal">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.15)' }}>
-                  <Icon className="w-5 h-5" style={{ color: '#f5c542' }} />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4" style={{ background: 'rgba(201,160,32,0.08)', border: '1px solid rgba(201,160,32,0.15)' }}>
+                  <Icon className="w-5 h-5" style={{ color: '#c9a020' }} />
                 </div>
                 <div className="mb-2">
                   <AnimatedNumber target={stat.value} suffix={stat.suffix} decimals={stat.decimals} started={started} />

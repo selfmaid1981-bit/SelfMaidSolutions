@@ -145,8 +145,8 @@ export function HomepageQuoteCalculator() {
     setLocation(`/quote?${params.toString()}`);
   };
 
-  const selectClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 appearance-none" + " " + "bg-[#111111] border border-white/10 text-white focus:ring-[#f5c542]/40 focus:border-[#f5c542]";
-  const inputClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2" + " " + "bg-[#111111] border border-white/10 text-white placeholder:text-white/30 focus:ring-[#f5c542]/40 focus:border-[#f5c542]";
+  const selectClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 appearance-none" + " " + "bg-[#111111] border border-white/10 text-white focus:ring-[#c9a020]/40 focus:border-[#c9a020]";
+  const inputClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2" + " " + "bg-[#111111] border border-white/10 text-white placeholder:text-white/30 focus:ring-[#c9a020]/40 focus:border-[#c9a020]";
 
   return (
     <section className="py-24 lg:py-32 white-marble-section" id="instant-quote">
@@ -159,9 +159,9 @@ export function HomepageQuoteCalculator() {
           </h2>
           <p className="text-white/35 mt-3 text-sm tracking-wide">Takes less than 30 seconds</p>
         </div>
-        <div className="rounded-2xl overflow-hidden quote-calculator-glow" style={{ background: 'rgba(17,17,17,0.8)', border: '1px solid rgba(245,197,66,0.15)' }}>
+        <div className="rounded-2xl overflow-hidden quote-calculator-glow" style={{ background: 'rgba(17,17,17,0.8)', border: '1px solid rgba(201,160,32,0.15)' }}>
           <div className="px-6 py-5 flex items-center justify-center gap-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-            <Calculator className="w-5 h-5" style={{ color: '#f5c542' }} />
+            <Calculator className="w-5 h-5" style={{ color: '#c9a020' }} />
             <h3 className="text-lg font-bold text-white font-serif italic">Instant Cleaning Estimate</h3>
           </div>
 
@@ -180,12 +180,12 @@ export function HomepageQuoteCalculator() {
                           : 'hover:shadow-md hover:-translate-y-0.5'
                       }`}
                       style={cleanType === tier.value
-                        ? { borderColor: '#f5c542', background: '#1a1a1a', boxShadow: '0 0 20px rgba(245,197,66,0.1), 0 0 0 1px rgba(245,197,66,0.3)' }
+                        ? { borderColor: '#c9a020', background: '#1a1a1a', boxShadow: '0 0 20px rgba(201,160,32,0.1), 0 0 0 1px rgba(201,160,32,0.3)' }
                         : { borderColor: 'rgba(255,255,255,0.08)', background: '#0d0d0d' }
                       }
                     >
                       {tier.badge && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded inline-block mb-1" style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded inline-block mb-1" style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}>
                           {tier.badge}
                         </span>
                       )}
@@ -299,7 +299,7 @@ export function HomepageQuoteCalculator() {
                 </div>
 
                 {price > 0 && (
-                  <div className="rounded-xl p-4 text-center" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.2)' }} data-testid="home-quote-result">
+                  <div className="rounded-xl p-4 text-center" style={{ background: 'rgba(201,160,32,0.08)', border: '1px solid rgba(201,160,32,0.2)' }} data-testid="home-quote-result">
                     <p className="text-white/50 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
                     <p className="text-4xl font-black text-white" data-testid="home-quote-price">${price}</p>
                     <p className="text-white/50 text-xs mt-1">{selectedTier?.label} · {selectedService?.label} · {selectedFrequency.label}</p>
@@ -307,7 +307,7 @@ export function HomepageQuoteCalculator() {
                     <a
                       href="tel:334-877-9513"
                       className="mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold transition-colors"
-                      style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}
+                      style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
                     >
                       Call to Book — (334) 877-9513
                     </a>
@@ -318,7 +318,7 @@ export function HomepageQuoteCalculator() {
                   onClick={handleContinue}
                   disabled={!serviceType || estimatedSqFt <= 0}
                   className="w-full disabled:opacity-30 font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}
+                  style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
                   data-testid="home-quote-continue"
                 >
                   {price > 0 ? (
@@ -333,7 +333,7 @@ export function HomepageQuoteCalculator() {
 
                 <div className="text-center">
                   <p className="text-white/30 text-[11px]">Final price confirmed after walkthrough</p>
-                  <p className="text-xs mt-1 font-medium flex items-center justify-center gap-1" style={{ color: '#f5c542' }}>
+                  <p className="text-xs mt-1 font-medium flex items-center justify-center gap-1" style={{ color: '#c9a020' }}>
                     <Clock className="w-3 h-3" />
                     {getUrgencyMessage()}
                   </p>
@@ -341,14 +341,14 @@ export function HomepageQuoteCalculator() {
 
                 <button
                   onClick={handleSeeFullQuote}
-                  className="w-full text-white/40 hover:text-[#f5c542] text-xs py-1 transition-colors"
+                  className="w-full text-white/40 hover:text-[#c9a020] text-xs py-1 transition-colors"
                 >
                   Need add-ons or more options? See full calculator →
                 </button>
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="rounded-xl p-3 text-center" style={{ background: 'rgba(245,197,66,0.08)', border: '1px solid rgba(245,197,66,0.2)' }}>
+                <div className="rounded-xl p-3 text-center" style={{ background: 'rgba(201,160,32,0.08)', border: '1px solid rgba(201,160,32,0.2)' }}>
                   <p className="text-white/50 text-xs">Your Quote</p>
                   <p className="text-3xl font-black text-white">${price}</p>
                   <p className="text-white/50 text-xs">{selectedTier?.label} · {selectedService?.label} · {sizeLabel}</p>
@@ -394,7 +394,7 @@ export function HomepageQuoteCalculator() {
                   onClick={handleSubmit}
                   disabled={saveQuoteMutation.isPending}
                   className="w-full disabled:opacity-50 font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}
+                  style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
                   data-testid="home-quote-submit"
                 >
                   {saveQuoteMutation.isPending ? 'Saving...' : (
@@ -407,7 +407,7 @@ export function HomepageQuoteCalculator() {
 
                 <button
                   onClick={() => setStep('calc')}
-                  className="w-full text-white/40 hover:text-[#f5c542] text-xs py-1 transition-colors"
+                  className="w-full text-white/40 hover:text-[#c9a020] text-xs py-1 transition-colors"
                 >
                   ← Back to calculator
                 </button>

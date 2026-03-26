@@ -187,7 +187,7 @@ export function ContactSection() {
                   <label htmlFor="f-msg">MESSAGE</label>
                   <textarea id="f-msg" rows={3} value={message} onChange={e => setMessage(e.target.value)} placeholder="Anything else we should know?" data-testid="textarea-message" />
                 </div>
-                <button type="submit" className="btn btn-gold btn-full" disabled={contactMutation.isPending} data-testid="button-submit">
+                <button type="submit" className="btn btn-gold btn-full gold-shimmer" disabled={contactMutation.isPending} data-testid="button-submit">
                   {contactMutation.isPending ? 'SENDING\u2026' : 'GET MY FREE QUOTE'}
                 </button>
               </form>

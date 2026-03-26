@@ -17,7 +17,7 @@ export function CtaBandSection() {
             <p>Book today and see why 500+ families trust Self-Maid.</p>
           </div>
           <div className="cta-band-actions">
-            <button onClick={scrollToContact} className="btn btn-gold">GET A QUOTE</button>
+            <button onClick={scrollToContact} className="btn btn-gold gold-shimmer">GET A QUOTE</button>
             <a href="tel:3348779513" className="btn btn-outline-gold">CALL (334) 877-9513</a>
           </div>
         </div>

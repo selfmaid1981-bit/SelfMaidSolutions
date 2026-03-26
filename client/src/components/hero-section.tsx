@@ -1,15 +1,19 @@
 import { useEffect, useRef } from 'react';
 import heroLogo from '@assets/hero-logo-transparent.png';
+import heroBgImage from '@assets/684CD4DB-734B-4590-A13D-18C218898903_1774534125341.jpeg';
 
 function GoldParticlesCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    let W = 0, H = 0, raf = 0, active = true;
+    let W = 0, H = 0, raf = 0, active = true, visible = true;
 
     function resize() {
       if (!canvas) return;
@@ -20,26 +24,35 @@ function GoldParticlesCanvas() {
     }
 
     class Particle {
-      x = 0; y = 0; vx = 0; vy = 0; size = 0; life = 0; maxLife = 0;
+      x = 0; y = 0; vx = 0; vy = 0; size = 0; life = 0; maxLife = 0; sparkle = false;
       constructor(init = false) { this.reset(init); }
       reset(init = false) {
         this.x = Math.random() * W;
         this.y = init ? Math.random() * H : H + 10;
-        this.vy = -(Math.random() * .4 + .15);
-        this.vx = (Math.random() - .5) * .3;
-        this.size = Math.random() * 1.5 + .5;
+        this.vy = -(Math.random() * .5 + .1);
+        this.vx = (Math.random() - .5) * .4;
+        this.size = Math.random() * 2.5 + .5;
         this.life = 0;
-        this.maxLife = Math.random() * 200 + 100;
+        this.maxLife = Math.random() * 250 + 80;
+        this.sparkle = Math.random() > .7;
       }
       update() {
-        this.x += this.vx; this.y += this.vy; this.life++;
+        this.x += this.vx + Math.sin(this.life * .02) * .15;
+        this.y += this.vy;
+        this.life++;
         if (this.y < -10 || this.life > this.maxLife) this.reset();
       }
       draw() {
-        const alpha = Math.min(this.life / 30, 1) * Math.min((this.maxLife - this.life) / 30, 1) * .5;
+        const fade = Math.min(this.life / 25, 1) * Math.min((this.maxLife - this.life) / 25, 1);
+        const flicker = this.sparkle ? (.6 + .4 * Math.sin(this.life * .15)) : 1;
+        const alpha = fade * flicker * .7;
         ctx!.beginPath();
         ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(201,160,32,${alpha})`;
+        const gradient = ctx!.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+        gradient.addColorStop(0, `rgba(232,191,74,${alpha})`);
+        gradient.addColorStop(.5, `rgba(201,160,32,${alpha * .6})`);
+        gradient.addColorStop(1, `rgba(154,116,16,0)`);
+        ctx!.fillStyle = gradient;
         ctx!.fill();
       }
     }
@@ -47,10 +60,16 @@ function GoldParticlesCanvas() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
     const particles: Particle[] = [];
-    for (let i = 0; i < 60; i++) particles.push(new Particle(true));
+    for (let i = 0; i < 90; i++) particles.push(new Particle(true));
+
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && active) loop();
+    }, { threshold: 0.1 });
+    if (canvas.parentElement) observer.observe(canvas.parentElement);
 
     function loop() {
-      if (!active) return;
+      if (!active || !visible) return;
       ctx!.clearRect(0, 0, W, H);
       particles.forEach(p => { p.update(); p.draw(); });
       raf = requestAnimationFrame(loop);
@@ -61,10 +80,11 @@ function GoldParticlesCanvas() {
       active = false;
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
+      observer.disconnect();
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />;
+  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 2 }} />;
 }
 
 export function HeroSection() {
@@ -80,15 +100,15 @@ export function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-h1">
       <div className="hero-bg" aria-hidden="true">
-        <div className="hero-particles" aria-hidden="true">
-          <GoldParticlesCanvas />
-        </div>
-        <div className="hero-glow" aria-hidden="true" />
-        <div className="hero-vignette" aria-hidden="true" />
+        <img src={heroBgImage} alt="" className="hero-bg-image" loading="eager" />
+        <div className="hero-bg-overlay" />
+      </div>
+      <div className="hero-particles-layer" aria-hidden="true">
+        <GoldParticlesCanvas />
       </div>
 
       <div className="hero-grid">
-        <div>
+        <div className="hero-left">
           <div className="hero-badge">
             <span className="hb-star" aria-hidden="true">&#9733;</span>
             LICENSED &middot; BONDED &middot; INSURED
@@ -98,28 +118,33 @@ export function HeroSection() {
             <span className="h1-line1">Spotless Homes.</span>
             <span className="h1-line2">Zero Stress.</span>
           </h1>
-          <p className="hero-sub">Premium cleaning that shows up on time &mdash; every time.</p>
+          <p className="hero-sub">Premium cleaning that shows<br />up on time &mdash; every time.</p>
           <ul className="hero-checks" aria-label="Key selling points">
-            <li><span className="chk" aria-hidden="true">&#10003;</span> Licensed, bonded, and insured</li>
-            <li><span className="chk" aria-hidden="true">&#10003;</span> 100% satisfaction guaranteed</li>
-            <li><span className="chk" aria-hidden="true">&#10003;</span> Serving Montgomery, AL &amp; surrounding areas</li>
+            <li><span className="chk" aria-hidden="true">&#10004;</span> Licensed, bonded, and insured</li>
+            <li><span className="chk" aria-hidden="true">&#10004;</span> 100% satisfaction guaranteed</li>
+            <li><span className="chk" aria-hidden="true">&#10004;</span> Serving Montgomery, AL &amp; surrounding areas</li>
           </ul>
           <div className="hero-actions">
-            <button onClick={scrollToContact} className="btn btn-gold btn-lg">GET A QUOTE</button>
+            <button onClick={scrollToContact} className="btn btn-gold btn-lg gold-shimmer">GET A QUOTE</button>
             <span className="hero-or">Or Call</span>
-            <a href="tel:3348779513" className="hero-phone-link">(334) 877-9513</a>
+            <a href="tel:3348779513" className="hero-phone-link gold-shimmer-text">(334) 877-9513</a>
           </div>
         </div>
 
         <div className="hero-right" aria-hidden="true">
           <div className="hero-logo-wrap">
             <div className="hero-logo-glow" />
-            <img src={heroLogo} alt="" className="hero-logo-img" width="480" height="380" loading="eager" />
+            <div className="hero-logo-sparkle s1" />
+            <div className="hero-logo-sparkle s2" />
+            <div className="hero-logo-sparkle s3" />
+            <div className="hero-logo-sparkle s4" />
+            <div className="hero-logo-sparkle s5" />
+            <img src={heroLogo} alt="" className="hero-logo-img" width="600" height="500" loading="eager" />
           </div>
         </div>
       </div>
 
-      <div className="hero-bottom-bar" aria-label="Quick stats">
+      <div className="hero-bottom-bar gold-shimmer-bar" aria-label="Quick stats">
         <div className="hbb-item"><strong>16+</strong> Years Experience</div>
         <div className="hbb-sep" aria-hidden="true" />
         <div className="hbb-item"><strong>500+</strong> Happy Clients</div>

@@ -29,7 +29,7 @@ export function HowItWorks() {
           <p className="section-label text-white/50 tracking-[4px]">THE PROCESS</p>
           <div className="editorial-divider-center" />
           <h2 className="font-bold text-white font-serif">
-            How It <span className="italic" style={{ color: '#f5c542' }}>Works</span>
+            How It <span className="italic" style={{ color: '#c9a020' }}>Works</span>
           </h2>
         </div>
 
@@ -40,14 +40,14 @@ export function HowItWorks() {
               <div key={index} className="relative flex flex-col items-center text-center group">
                 {index < steps.length - 1 && (
                   <div className="hidden md:block absolute top-10 left-[60%] right-[-40%] z-0">
-                    <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, rgba(245,197,66,0.15), transparent)' }} />
+                    <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, rgba(201,160,32,0.15), transparent)' }} />
                   </div>
                 )}
 
                 <div className="relative z-10 mb-6">
-                  <span className="block text-xs font-mono tracking-widest mb-3" style={{ color: 'rgba(245,197,66,0.4)' }}>{step.number}</span>
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-105" style={{ background: 'rgba(245,197,66,0.06)', border: '1px solid rgba(245,197,66,0.12)' }}>
-                    <Icon className="w-7 h-7" style={{ color: '#f5c542' }} />
+                  <span className="block text-xs font-mono tracking-widest mb-3" style={{ color: 'rgba(201,160,32,0.4)' }}>{step.number}</span>
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-105" style={{ background: 'rgba(201,160,32,0.06)', border: '1px solid rgba(201,160,32,0.12)' }}>
+                    <Icon className="w-7 h-7" style={{ color: '#c9a020' }} />
                   </div>
                 </div>
 
