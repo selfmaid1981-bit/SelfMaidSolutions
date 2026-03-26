@@ -11,6 +11,7 @@ import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
 import { MobileCtaBar } from '@/components/mobile-cta-bar';
 import { ChatWidget } from '@/components/chat-widget';
+import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 
 const structuredData = {
@@ -142,6 +143,7 @@ export default function Home() {
         <MobileCtaBar />
       </div>
       <ChatWidget />
+      <ExitIntentPopup />
     </>
   );
 }
