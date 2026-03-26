@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import heroLogo from '@assets/hero-logo-transparent.png';
-import heroBgImage from '@assets/684CD4DB-734B-4590-A13D-18C218898903_1774534125341.jpeg';
+import heroBgImage from '@assets/684CD4DB-734B-4590-A13D-18C218898903_1774560504929.png';
 
 function GoldParticlesCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
