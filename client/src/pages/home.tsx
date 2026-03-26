@@ -2,23 +2,16 @@ import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
-import BeforeAfterGallery from '@/components/before-after-gallery';
-import { HowItWorks } from '@/components/how-it-works';
-import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
+import { CtaBandSection } from '@/components/final-cta-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { AboutSection } from '@/components/about-section';
-import { FinalCtaSection } from '@/components/final-cta-section';
+import { AreasSection } from '@/components/areas-section';
+import { FaqSection } from '@/components/faq-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
+import { MobileCtaBar } from '@/components/mobile-cta-bar';
 import { ChatWidget } from '@/components/chat-widget';
-import { ExitIntentPopup } from '@/components/exit-intent-popup';
-import { StickyQuoteBar } from '@/components/sticky-quote-bar';
-import { StatsCounter } from '@/components/stats-counter';
-import { ReferralSection } from '@/components/referral-section';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
-import { useState } from 'react';
-import { Phone, CalendarCheck } from 'lucide-react';
-import { BookingModal } from '@/components/booking-modal';
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -64,7 +57,7 @@ const structuredData = {
         "@type": "OfferCatalog",
         "name": "Cleaning Services",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Cleaning", "description": "Complete home cleaning starting at $80" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Cleaning", "description": "Complete home cleaning starting at $120" }},
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Cleaning", "description": "Professional office cleaning starting at $120" }},
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Airbnb Cleaning", "description": "Vacation rental turnover starting at $65" }},
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Move In/Out Cleaning", "description": "Deep cleaning for moving day starting at $150" }},
@@ -114,7 +107,7 @@ const structuredData = {
       "mainEntity": [
         { "@type": "Question", "name": "What areas do you serve in Alabama?", "acceptedAnswer": { "@type": "Answer", "text": "We serve Montgomery, Prattville, Selma, Homewood, Clanton, Millbrook, Wetumpka, Pike Road, and surrounding communities in central Alabama." }},
         { "@type": "Question", "name": "Are you insured and bonded?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Self-Maid Cleaning Solutions is fully insured and bonded. All team members undergo comprehensive background checks." }},
-        { "@type": "Question", "name": "How much do your cleaning services cost?", "acceptedAnswer": { "@type": "Answer", "text": "Prices start at $65 for Airbnb cleaning, $80 for residential, $108 for apartment turnover, $120 for commercial, $150 for move-in/out, and $250 for deep cleaning." }},
+        { "@type": "Question", "name": "How much do your cleaning services cost?", "acceptedAnswer": { "@type": "Answer", "text": "Prices start at $65 for Airbnb cleaning, $120 for residential, $108 for apartment turnover, $120 for commercial, $150 for move-in/out, and $250 for deep cleaning." }},
         { "@type": "Question", "name": "Do you use eco-friendly products?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we use safe, non-toxic, eco-friendly cleaning products that are safe for your family and pets." }}
       ]
     }
@@ -122,60 +115,33 @@ const structuredData = {
 };
 
 export default function Home() {
-  const [isMobileBookingOpen, setIsMobileBookingOpen] = useState(false);
   useScrollReveal();
 
   return (
     <>
       <SEOHead
-        title="Professional House Cleaning in Prattville AL | Self-Maid Cleaning Solutions"
-        description="Top-rated house cleaning services in Prattville, Montgomery, Millbrook, and Deatsville, Alabama. Residential, commercial, Airbnb, move-in/out cleaning. 16 years experience. Get an instant quote in under 30 seconds. Call (334) 877-9513!"
-        keywords="cleaning services Montgomery AL, cleaning services Prattville AL, house cleaning Montgomery, maid service Prattville, professional cleaners Montgomery Alabama, residential cleaning Montgomery, commercial cleaning Prattville, Airbnb cleaning Alabama, move out cleaning Montgomery, deep cleaning services Montgomery, cleaning company near me Montgomery, best cleaning service Prattville, affordable house cleaning Montgomery, Millbrook house cleaning, Wetumpka cleaning service"
+        title="Professional House Cleaning in Montgomery AL | Self-Maid Cleaning Solutions"
+        description="Top-rated house cleaning services in Montgomery, Prattville, Millbrook, and surrounding Alabama. Residential, commercial, Airbnb, move-in/out cleaning. 16+ years experience. Get a free quote. Call (334) 877-9513!"
+        keywords="cleaning services Montgomery AL, house cleaning Montgomery, maid service Prattville, professional cleaners Montgomery Alabama, Airbnb cleaning Alabama, deep cleaning services Montgomery"
         ogTitle="Self-Maid Cleaning Solutions - Central Alabama's Trusted Cleaning Service"
-        ogDescription="Professional cleaning services serving Montgomery, Prattville, Selma, Homewood, and Clanton, AL. From homes to offices, we make everything spotless with 16 years of experience."
+        ogDescription="Professional cleaning services serving Montgomery, Prattville, Selma, Homewood, and Clanton, AL. From homes to offices, we make everything spotless."
         structuredData={structuredData}
       />
-      <StickyQuoteBar />
-      
-      <div className="min-h-screen marble-bg">
+
+      <div className="marble-bg">
         <Navigation />
         <HeroSection />
-        <StatsCounter />
         <ServicesSection />
-        <BeforeAfterGallery />
-        <HowItWorks />
-        <HomepageQuoteCalculator />
+        <CtaBandSection />
         <TestimonialsSection />
         <AboutSection />
-        <ReferralSection />
-        <FinalCtaSection />
+        <AreasSection />
+        <FaqSection />
         <ContactSection />
         <Footer />
-        
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 shadow-xl px-3 py-3 safe-area-pb" style={{ background: 'rgba(10,10,13,0.97)', borderTop: '1px solid rgba(245,197,66,0.15)', backdropFilter: 'blur(12px)' }}>
-          <div className="flex gap-2">
-            <a 
-              href="tel:334-877-9513"
-              className="flex-[1.2] inline-flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm shadow-md"
-              style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}
-            >
-              <Phone className="w-4 h-4" />
-              Call Now
-            </a>
-            <button
-              onClick={() => setIsMobileBookingOpen(true)}
-              className="flex-1 inline-flex items-center justify-center gap-2 text-white py-3.5 rounded-xl font-bold text-sm"
-              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.1)' }}
-            >
-              <CalendarCheck className="w-4 h-4" />
-              Book Online
-            </button>
-          </div>
-        </div>
-        <BookingModal isOpen={isMobileBookingOpen} onClose={() => setIsMobileBookingOpen(false)} />
+        <MobileCtaBar />
       </div>
       <ChatWidget />
-      <ExitIntentPopup />
     </>
   );
 }

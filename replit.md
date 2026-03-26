@@ -9,7 +9,7 @@ Preferred communication style: Simple, everyday language.
 # System Architecture
 
 ## UI/UX Decisions
-The application uses a bold, premium design with a deep navy/purple/red-black palette and neon yellow accents (#0A0E1A Deep Navy, #6B21A8 Royal Purple, #4C1D95 Deeper Purple, #3B0A0A Rich Red-Black, #E5FF00 Neon Yellow), serif fonts, and subtle animations. It incorporates realistic stock photography. UI components are built with Radix UI and shadcn/ui for accessibility, responsiveness, and dark mode support.
+The homepage uses the "Leading Edge Growth OS" brand-v4 design system: dark backgrounds (#0a0800 black, #100d05 dark) with gold accents (#c9a020 gold, #e8bf4a light gold, #9a7410 dark gold). Typography uses Cinzel (headings/display) and Raleway (body). The homepage layout follows: Top Bar → Header → Hero (with gold particles, badge, two-line h1, stats bottom bar) → Services (6-card grid with pricing) → CTA Band → Reviews Carousel (auto-advancing with dot nav) → About (logo frame with sparkles) → Areas (chip grid) → FAQ (native details) → Contact (estimate calculator form) → Footer (4-col) → Mobile CTA Bar. All CSS variables are prefixed with --sm- in index.css. Admin/CRM/portal pages use Radix UI/shadcn components.
 
 ## Technical Implementations
 - **Frontend**: React 18 with TypeScript, Wouter, Tailwind CSS, Radix UI/shadcn/ui, TanStack Query, React Hook Form with Zod, and Vite.

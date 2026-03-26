@@ -1,349 +1,197 @@
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useEffect, useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, MapPin, Send, ShieldCheck, RefreshCw, Clock, Sparkles } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { z } from 'zod';
+import { useToast } from '@/hooks/use-toast';
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Please enter a valid email'),
-  phone: z.string().optional(),
-  serviceType: z.string().min(1, 'Please select a service type'),
-  message: z.string().optional(),
-});
+const serviceOptions = [
+  { value: '', label: 'Select a service\u2026' },
+  { value: 'ongoing', label: 'Regular Home Cleaning \u2014 from $120' },
+  { value: 'deep', label: 'Deep Cleaning \u2014 from $250' },
+  { value: 'moveinout', label: 'Move-In / Move-Out \u2014 from $150' },
+  { value: 'rental', label: 'Airbnb Turnover \u2014 from $65' },
+  { value: 'commercial', label: 'Commercial & Office \u2014 from $120' },
+  { value: 'apartment', label: 'Apartment Turnover \u2014 from $108' },
+];
 
-type ContactFormData = z.infer<typeof contactFormSchema>;
+const priceMap: Record<string, { base: number; bed: number; bath: number }> = {
+  ongoing:    { base: 120, bed: 25, bath: 20 },
+  deep:       { base: 250, bed: 30, bath: 25 },
+  moveinout:  { base: 150, bed: 25, bath: 20 },
+  rental:     { base: 65,  bed: 15, bath: 15 },
+  commercial: { base: 120, bed: 0,  bath: 20 },
+  apartment:  { base: 108, bed: 20, bath: 18 },
+};
 
 export function ContactSection() {
   const { toast } = useToast();
-  
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      serviceType: '',
-      message: '',
-    },
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [service, setService] = useState('');
+  const [beds, setBeds] = useState('');
+  const [baths, setBaths] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const service = urlParams.get('service');
-    const quoteAmount = urlParams.get('quote');
-    
-    if (service) {
-      form.setValue('serviceType', service);
-      
-      if (quoteAmount) {
-        const message = `I received a quote of $${quoteAmount} for ${service} and would like to proceed with booking.`;
-        form.setValue('message', message);
-      }
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('service');
+    const q = params.get('quote');
+    if (s) {
+      setService(s);
+      if (q) setMessage(`I received a quote of $${q} for ${s} and would like to proceed with booking.`);
     }
-  }, [form]);
+  }, []);
+
+  const estimate = useMemo(() => {
+    if (!service || !priceMap[service]) return null;
+    const p = priceMap[service];
+    const b = parseInt(beds) || 0;
+    const ba = parseInt(baths) || 0;
+    return p.base + (b * p.bed) + (ba * p.bath);
+  }, [service, beds, baths]);
 
   const contactMutation = useMutation({
-    mutationFn: (data: ContactFormData) => {
-      const nameParts = data.name.trim().split(' ');
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
-      
-      const backendData = {
-        firstName,
-        lastName,
-        email: data.email,
-        phone: data.phone || null,
-        serviceType: data.serviceType,
-        message: data.message || null,
-      };
-      
-      return apiRequest('POST', '/api/contact', backendData);
+    mutationFn: (data: { firstName: string; lastName: string; email: string; phone: string | null; serviceType: string; message: string | null }) => {
+      return apiRequest('POST', '/api/contact', data);
     },
     onSuccess: () => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. We'll get back to you within 24 hours.",
-      });
-      form.reset();
+      toast({ title: 'Message Sent!', description: "Thank you! We'll get back to you within 24 hours." });
+      setSubmitted(true);
     },
-    onError: (error: any) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
+    onError: (error: Error) => {
+      toast({ title: 'Error', description: error.message || 'Failed to send. Please try again.', variant: 'destructive' });
     },
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
+  const validate = () => {
+    const errs: Record<string, string> = {};
+    if (!name.trim()) errs.name = 'Name is required';
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.email = 'Valid email is required';
+    if (!service) errs.service = 'Please select a service';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '(334) 877-9513',
-      href: 'tel:334-877-9513'
-    },
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'selfmaidclean@outlook.com',
-      href: 'mailto:selfmaidclean@outlook.com'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Montgomery & Prattville, AL',
-      href: 'https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL'
-    }
-  ];
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    const nameParts = name.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    let msg = message || '';
+    if (estimate) msg = `Estimated quote: $${estimate}. ${msg}`;
+    contactMutation.mutate({
+      firstName,
+      lastName,
+      email,
+      phone: phone || null,
+      serviceType: service,
+      message: msg || null,
+    });
+  };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: 'transparent' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        <div className="mb-16 rounded-xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div className="flex items-center gap-4 text-white">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(245,197,66,0.06)' }}>
-              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#f5c542' }} />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg">100% Satisfaction Guarantee</h3>
-              <p className="text-white/35 text-sm">Not happy? We'll re-clean for free — no questions asked.</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 text-white/60 text-sm">
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <RefreshCw className="w-3.5 h-3.5" style={{ color: '#f5c542' }} />
-              <span>Free re-clean</span>
-            </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <Clock className="w-3.5 h-3.5" style={{ color: '#f5c542' }} />
-              <span>48hr response</span>
-            </div>
-          </div>
+    <section id="contact" className="contact-section section" aria-labelledby="contact-h2">
+      <div className="sm-container">
+        <div className="section-intro">
+          <div className="section-eyebrow">CONTACT</div>
+          <h2 id="contact-h2" className="section-title">Get Your <span className="gold-text">Free Quote</span></h2>
+          <div className="section-divider-line"><span>&mdash; No Obligation &mdash;</span></div>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
-          <div className="order-2 lg:order-1">
-            <div className="mb-8">
-              <p className="section-label text-white/50 tracking-[4px]">CONTACT</p>
-              <div className="editorial-divider" />
-              <h2 className="font-bold text-white mb-3 font-serif">
-                Get in <span className="italic" style={{ color: '#f5c542' }}>Touch</span>
-              </h2>
-              <p className="text-base text-white/40 leading-relaxed">
-                Questions? Ready to book? We're here to help.
-              </p>
+        <div className="contact-grid">
+          <div>
+            <p className="contact-body">
+              Ready to experience the Self-Maid difference? Fill out the form and we'll
+              respond within 24 hours with a detailed, no-obligation quote.
+              Prefer to talk? Call us anytime.
+            </p>
+            <div className="contact-items">
+              <a href="tel:3348779513" className="ci">
+                <span className="ci-ic" aria-hidden="true">&#128222;</span>
+                <div><strong>(334) 877-9513</strong><small>Mon-Sat, 8am-6pm</small></div>
+              </a>
+              <a href="mailto:selfmaidclean@outlook.com" className="ci">
+                <span className="ci-ic" aria-hidden="true">&#9993;&#65039;</span>
+                <div><strong>selfmaidclean@outlook.com</strong><small>We reply within 24 hours</small></div>
+              </a>
+              <a href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL" target="_blank" rel="noopener noreferrer" className="ci">
+                <span className="ci-ic" aria-hidden="true">&#128205;</span>
+                <div><strong>Montgomery, AL</strong><small>Serving Central Alabama</small></div>
+              </a>
             </div>
-            
-            <Card className="shadow-2xl border-0 rounded-2xl overflow-hidden relative" style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="h-1.5" style={{ background: 'linear-gradient(90deg, #f5c542, #c89b2d, #f5c542)' }} />
-              <CardContent className="p-8 relative">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" data-testid="contact-form">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80 font-medium">Name</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field} 
-                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
-                              data-testid="input-name" 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80 font-medium">Email</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email" 
-                              {...field} 
-                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
-                              data-testid="input-email" 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80 font-medium">
-                            Phone <span className="text-white/30 text-sm font-normal">(optional)</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="tel" 
-                              {...field} 
-                              value={field.value || ''} 
-                              className="border-white/10 rounded-xl h-12 focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]" 
-                              data-testid="input-phone" 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="serviceType"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80 font-medium">Service Type</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger 
-                                className="border-white/10 rounded-xl h-12 bg-[#0a0a0d] hover:bg-[#111111] transition-all text-white" 
-                                data-testid="select-serviceType"
-                              >
-                                <SelectValue placeholder="Select a service..." />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="residential">Residential Cleaning</SelectItem>
-                              <SelectItem value="commercial">Commercial/Office</SelectItem>
-                              <SelectItem value="airbnb">Airbnb Cleaning</SelectItem>
-                              <SelectItem value="moveout">Move In/Out</SelectItem>
-                              <SelectItem value="dorm">Student Dorm</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80 font-medium">Message</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              {...field} 
-                              value={field.value || ''}
-                              rows={4} 
-                              placeholder="Tell us about your cleaning needs..."
-                              className="border-white/10 rounded-xl resize-none focus:ring-2 focus:ring-[#f5c542]/20 focus:border-[#f5c542] transition-all bg-[#0a0a0d] text-white hover:bg-[#111111]"
-                              data-testid="textarea-message"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full font-bold py-6 rounded-xl text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group text-[#0a0a0d]" 
-                      style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)' }}
-                      disabled={contactMutation.isPending}
-                      data-testid="button-submit"
-                    >
-                      {contactMutation.isPending ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                          Sending...
-                        </span>
-                      ) : (
-                        <span className="flex items-center justify-center gap-2">
-                          <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                          Send Message
-                        </span>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
           </div>
-          
-          <div className="order-1 lg:order-2 text-center lg:text-left">
-            <div className="rounded-xl p-8 relative" style={{ background: 'rgba(17,17,17,0.5)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10 font-serif italic">
-                <Sparkles className="w-4 h-4" style={{ color: '#f5c542' }} />
-                Contact Info
-              </h3>
-              
-              <div className="space-y-4 relative z-10">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  return (
-                    <div key={index} className="flex items-center group" data-testid={`contact-info-${index}`}>
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mr-4 group-hover:scale-105 transition-all duration-300" style={{ background: 'rgba(245,197,66,0.1)' }}>
-                        <Icon className="w-5 h-5" style={{ color: '#f5c542' }} />
-                      </div>
-                      <div className="text-left">
-                        <p className="text-xs text-white/40 uppercase tracking-wider mb-0.5">{info.label}</p>
-                        {info.href ? (
-                          <a 
-                            href={info.href} 
-                            target={info.href.startsWith('http') ? '_blank' : undefined}
-                            rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            className="text-white hover:text-[#f5c542] font-medium transition-colors duration-200"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-white font-medium">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              
-              <div className="mt-8 pt-6 relative z-10" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                <h4 className="text-sm font-semibold text-white/50 mb-3 uppercase tracking-wider">Service Areas</h4>
-                <div className="rounded-xl overflow-hidden shadow-lg" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <iframe
-                    title="Self-Maid Cleaning Solutions Service Areas - Montgomery, Prattville, Selma, Alabama"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d426458.8894091447!2d-86.62654674999999!3d32.3617899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888e8194b0d481f9%3A0x8e1b511d354285ff!2sMontgomery%2C%20AL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-                    width="100%"
-                    height="200"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="rounded-xl"
-                    data-testid="google-maps-embed"
-                  />
-                </div>
-                <p className="text-xs text-white/30 mt-3 text-center">
-                  Serving Montgomery, Prattville, Selma, Homewood, Clanton & surrounding areas
-                </p>
-              </div>
+
+          <div className="form-panel" id="instant-quote">
+            <div className="fp-header">
+              <div className="fp-title">Request a Quote</div>
+              <div className="fp-sub">FREE &middot; NO OBLIGATION &middot; 24-HR RESPONSE</div>
             </div>
+            {submitted ? (
+              <div className="quote-form">
+                <div className="f-success">
+                  &#10004; <strong>Thank you!</strong> Your request has been received.
+                  We'll get back to you within 24 hours with a detailed quote.
+                  <br />Need faster service? <a href="tel:3348779513">Call (334) 877-9513</a>
+                </div>
+              </div>
+            ) : (
+              <form className="quote-form" onSubmit={handleSubmit} data-testid="contact-form" noValidate>
+                <div className="form-row">
+                  <div className="fg">
+                    <label htmlFor="f-name">NAME <span className="req">*</span></label>
+                    <input id="f-name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Your full name" className={errors.name ? 'invalid' : ''} data-testid="input-name" />
+                    <span className="ferr">{errors.name || ''}</span>
+                  </div>
+                  <div className="fg">
+                    <label htmlFor="f-email">EMAIL <span className="req">*</span></label>
+                    <input id="f-email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" className={errors.email ? 'invalid' : ''} data-testid="input-email" />
+                    <span className="ferr">{errors.email || ''}</span>
+                  </div>
+                </div>
+                <div className="fg">
+                  <label htmlFor="f-phone">PHONE</label>
+                  <input id="f-phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="(334) 000-0000" data-testid="input-phone" />
+                </div>
+                <div className="fg">
+                  <label htmlFor="f-service">SERVICE <span className="req">*</span></label>
+                  <select id="f-service" value={service} onChange={e => setService(e.target.value)} className={errors.service ? 'invalid' : ''} data-testid="select-serviceType">
+                    {serviceOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+                  </select>
+                  <span className="ferr">{errors.service || ''}</span>
+                </div>
+                <div className="form-row">
+                  <div className="fg">
+                    <label htmlFor="f-beds">BEDROOMS</label>
+                    <select id="f-beds" value={beds} onChange={e => setBeds(e.target.value)}>
+                      <option value="">Select</option>
+                      {[1, 2, 3, 4, 5].map(n => <option key={n} value={String(n)}>{n}</option>)}
+                    </select>
+                  </div>
+                  <div className="fg">
+                    <label htmlFor="f-baths">BATHROOMS</label>
+                    <select id="f-baths" value={baths} onChange={e => setBaths(e.target.value)}>
+                      <option value="">Select</option>
+                      {[1, 2, 3, 4].map(n => <option key={n} value={String(n)}>{n}</option>)}
+                    </select>
+                  </div>
+                </div>
+                {estimate !== null && (
+                  <div className="est-pill">
+                    <span>ESTIMATED QUOTE</span>
+                    <strong>${estimate}</strong>
+                  </div>
+                )}
+                <div className="fg">
+                  <label htmlFor="f-msg">MESSAGE</label>
+                  <textarea id="f-msg" rows={3} value={message} onChange={e => setMessage(e.target.value)} placeholder="Anything else we should know?" data-testid="textarea-message" />
+                </div>
+                <button type="submit" className="btn btn-gold btn-full" disabled={contactMutation.isPending} data-testid="button-submit">
+                  {contactMutation.isPending ? 'SENDING\u2026' : 'GET MY FREE QUOTE'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

@@ -1,114 +1,54 @@
-import { useState } from 'react';
-import { BookingModal } from './booking-modal';
-import { getSeasonalPromo } from '@/lib/dynamic-content';
-import { Sparkles } from 'lucide-react';
-
 const services = [
-  {
-    id: 'deep',
-    title: 'Deep Cleaning',
-    image: '/assets/services/icon-deep-gold.png',
-    desc: 'Thorough, detailed, no shortcuts',
-  },
-  {
-    id: 'moveout',
-    title: 'Move-In/Move-Out',
-    image: '/assets/services/icon-moveout-gold.png',
-    desc: 'Perfect for property turnovers',
-  },
-  {
-    id: 'airbnb',
-    title: 'Airbnb Turnover',
-    image: '/assets/services/icon-airbnb-gold.png',
-    desc: 'Fast & reliable service for hosts',
-  },
+  { id: 'ongoing', emoji: '\u{1F3E0}', name: 'Regular Home Cleaning', price: 120, bed: 25, bath: 20, tag: 'Save 15% weekly', desc: 'Weekly, bi-weekly, or monthly. Thorough, detailed, no shortcuts. Your home exactly how you like it \u2014 every time.' },
+  { id: 'deep', emoji: '\u2728', name: 'Deep Cleaning', price: 250, bed: 30, bath: 25, tag: 'Most Popular', desc: 'Our most intensive service. Top-to-bottom transformation. Every surface, every corner \u2014 pristine and immaculate.' },
+  { id: 'moveinout', emoji: '\u{1F4E6}', name: 'Move-In / Move-Out', price: 150, bed: 25, bath: 20, tag: 'Deposit Guarantee', desc: 'Perfect for property turnovers. Get your deposit back or start fresh. We leave no corner untouched.' },
+  { id: 'rental', emoji: '\u{1F3E1}', name: 'Airbnb Turnover', price: 65, bed: 15, bath: 15, tag: 'Same-Day Available', desc: 'Fast & reliable service for hosts. Same-day turnaround keeps your ratings high and guests happy.' },
+  { id: 'commercial', emoji: '\u{1F3E2}', name: 'Commercial & Office', price: 120, bed: 0, bath: 20, tag: '', desc: 'Professional workplace cleaning. Keep your team productive and your clients impressed. Recurring plans available.' },
+  { id: 'apartment', emoji: '\u{1F3D7}\uFE0F', name: 'Apartment Turnover', price: 108, bed: 20, bath: 18, tag: 'Volume Discounts', desc: 'For landlords and property managers. Same or next-day make-ready with photo documentation and volume pricing.' },
 ];
 
 export function ServicesSection() {
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const seasonal = getSeasonalPromo();
+  const scrollToContact = (serviceId?: string) => {
+    const el = document.getElementById('contact');
+    if (el) {
+      const headerH = document.querySelector('.site-header')?.clientHeight || 74;
+      const topBarH = document.querySelector('.top-bar')?.clientHeight || 36;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - headerH - topBarH - 8, behavior: 'smooth' });
+    }
+    if (serviceId) {
+      setTimeout(() => {
+        const select = document.getElementById('f-service') as HTMLSelectElement | null;
+        if (select) { select.value = serviceId; select.dispatchEvent(new Event('change', { bubbles: true })); }
+      }, 500);
+    }
+  };
 
   return (
-    <>
-      <div className="section-divider-gold" />
-      <section id="services" className="section-warm" style={{ padding: '80px 10%' }}>
-        <div className="text-center mb-10 scroll-reveal">
-          <p className="text-xs tracking-[3px] uppercase text-white/50 mb-3">
-            ——— OUR SERVICES ———
-          </p>
-          <h2 className="text-2xl lg:text-3xl font-bold text-white font-serif mb-1">
-            Experience the <span className="gold-shine-text">Self-Maid</span> Difference
-          </h2>
-          <p className="text-white/50 text-sm flex items-center justify-center gap-3">
-            <span className="w-12 h-px bg-white/20" />
-            Premium Cleaning
-            <span className="w-12 h-px bg-white/20" />
-          </p>
+    <section id="services" className="services-section section" aria-labelledby="services-h2">
+      <div className="sm-container">
+        <div className="section-intro">
+          <div className="section-eyebrow">OUR SERVICES</div>
+          <h2 id="services-h2" className="section-title">Experience the <span className="gold-text">Self-Maid</span> Difference</h2>
+          <div className="section-divider-line"><span>&mdash; Premium Cleaning &mdash;</span></div>
         </div>
-
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
-          <div className="flex gap-5 flex-wrap lg:flex-nowrap scroll-reveal-left">
-            {services.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => setIsBookingModalOpen(true)}
-                className="group focus:outline-none"
-                data-testid={`service-card-${service.id}`}
-              >
-                <div className="service-card-uniform">
-                  <div className="w-16 h-16 mb-3 relative z-10">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                  <h3 className="text-sm font-bold text-white mb-1 relative z-10">{service.title}</h3>
-                  <p className="text-xs text-white/50 flex items-start gap-1 relative z-10">
-                    <span style={{ color: '#f5c542' }}>&#10004;</span>
-                    {service.desc}
-                  </p>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          <div className="cleaner-photo-wrapper flex-shrink-0 scroll-reveal-right">
-            <img
-              src="/assets/services-cleaner-hero.png"
-              alt="Self-Maid professional cleaner at work"
-              className="object-cover"
-              loading="lazy"
-              style={{ width: '380px', maxHeight: '480px' }}
-            />
-          </div>
+        <div className="services-grid">
+          {services.map((s, i) => {
+            const featured = s.id === 'deep';
+            return (
+              <article key={s.id} className={`svc-card${featured ? ' featured' : ''}`} onClick={() => scrollToContact(s.id)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToContact(s.id); } }} tabIndex={0} role="button" aria-label={`Book ${s.name} - from $${s.price}`}>
+                {featured && <div className="popular-badge">MOST POPULAR</div>}
+                <div className="svc-num" aria-hidden="true">0{i + 1}</div>
+                <div className="svc-emoji" aria-hidden="true">{s.emoji}</div>
+                <h3 className="svc-name">{s.name}</h3>
+                <div className="svc-price">From <strong>${s.price}</strong></div>
+                {s.tag && <div className="svc-tag">{s.tag}</div>}
+                <p className="svc-desc">{s.desc}</p>
+                <span className="svc-cta">Book Now <span aria-hidden="true">&rarr;</span></span>
+              </article>
+            );
+          })}
         </div>
-
-        <div className="mt-10 scroll-reveal">
-          <div className="rounded-xl p-4 flex items-center justify-center gap-3 flex-wrap" style={{ background: 'rgba(245,197,66,0.06)', border: '1px solid rgba(245,197,66,0.15)' }}>
-            <span className="text-[10px] font-bold px-2.5 py-1 rounded" style={{ background: 'linear-gradient(135deg, #f5c542, #c89b2d)', color: '#0a0a0d' }}>
-              {seasonal.badge}
-            </span>
-            <span className="text-white/70 text-sm">{seasonal.tagline}</span>
-            <button
-              onClick={() => setIsBookingModalOpen(true)}
-              className="text-sm font-bold flex items-center gap-1 transition-colors"
-              style={{ color: '#f5c542' }}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              Book Now
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <BookingModal
-        isOpen={isBookingModalOpen}
-        onClose={() => setIsBookingModalOpen(false)}
-      />
-    </>
+      </div>
+    </section>
   );
 }

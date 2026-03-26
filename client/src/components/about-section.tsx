@@ -1,40 +1,60 @@
-import ownerPhoto from '@assets/808AA65C-8994-4D31-BAF3-4FDC2EC96722_1773873939311.png';
+import logoImage from '@assets/logo-gold-nobg.png';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-24 lg:py-32" style={{ background: 'transparent' }}>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <div className="flex justify-center md:justify-start scroll-reveal-left">
-            <div className="relative">
-              <div className="absolute -inset-3 rounded-2xl" style={{ background: 'radial-gradient(ellipse, rgba(245,197,66,0.04) 0%, transparent 70%)' }} />
-              <img
-                src={ownerPhoto}
-                alt="Michelle, Owner of Self-Maid Cleaning Solutions"
-                className="relative rounded-2xl w-full max-w-sm object-cover"
-                style={{ border: '1px solid rgba(255,255,255,0.06)' }}
-              />
-              <div className="absolute bottom-4 left-4 right-4 rounded-lg px-4 py-3" style={{ background: 'rgba(10,10,13,0.85)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <p className="text-white text-sm font-semibold">Michelle</p>
-                <p className="text-white/40 text-xs">Founder & Lead</p>
+    <section id="about" className="about-section section" aria-labelledby="about-h2">
+      <div className="sm-container">
+        <div className="about-grid">
+          <div className="about-frame" aria-hidden="false">
+            <div className="about-frame-inner">
+              <div className="about-badge-top">
+                <span className="ab-num">16+</span>
+                <span className="ab-lbl">YEARS EXPERIENCE</span>
               </div>
+              <img src={logoImage} alt="Self-Maid Cleaning Solutions" className="about-logo" width="280" height="200" loading="lazy" style={{ mixBlendMode: 'lighten' }} />
+              <span className="sparkle s1" aria-hidden="true">&#10024;</span>
+              <span className="sparkle s2" aria-hidden="true">&#10024;</span>
+              <span className="sparkle s3" aria-hidden="true">&#10024;</span>
             </div>
           </div>
-          <div className="text-center md:text-left scroll-reveal-right">
-            <p className="section-label text-white/50 tracking-[4px]">OUR STORY</p>
-            <div className="editorial-divider hidden md:block" />
-            <h2 className="font-bold text-white mb-6 font-serif">
-              Meet the <span className="italic gold-shine-text">Owner</span>
-            </h2>
-            <p className="text-white/60 text-base leading-[1.8] mb-5">
-              Hi, I'm Michelle. I built Self-Maid to deliver a level of clean
-              that feels calm, consistent, and truly professional — every time.
+
+          <div>
+            <div className="section-eyebrow left">OUR STORY</div>
+            <h2 id="about-h2" className="section-title left">Meet the <span className="gold-text">Owner</span></h2>
+            <div className="section-divider-line" style={{ justifyContent: 'flex-start' }}><span>&mdash; Since 2009 &mdash;</span></div>
+            <p className="about-body" style={{ marginTop: '1.5rem' }}>
+              Hi, I'm Michelle. I built Self-Maid to deliver a level of clean that feels
+              calm, consistent, and truly professional &mdash; every time. With 16+ years
+              of experience, we treat every home like our own.
             </p>
-            <p className="text-white/40 text-sm leading-[1.8]">
-              With 16+ years of experience and a team of trusted, background-checked
-              professionals, we treat every home like our own. Your satisfaction
-              isn't just a promise — it's our guarantee.
+            <p className="about-body">
+              Your satisfaction isn't just a promise &mdash; it's our guarantee.
+              Licensed, bonded, insured, and dedicated to excellence in the
+              Montgomery metro area.
             </p>
+            <ul className="about-creds">
+              <li>
+                <span className="cred-icon" aria-hidden="true">&#128737;&#65039;</span>
+                <div>
+                  <strong>Licensed &amp; Insured</strong>
+                  <span>Full liability coverage for your peace of mind</span>
+                </div>
+              </li>
+              <li>
+                <span className="cred-icon" aria-hidden="true">&#10004;&#65039;</span>
+                <div>
+                  <strong>Background-Checked Team</strong>
+                  <span>Every team member is vetted and trained</span>
+                </div>
+              </li>
+              <li>
+                <span className="cred-icon" aria-hidden="true">&#127807;</span>
+                <div>
+                  <strong>Eco-Friendly Products</strong>
+                  <span>Safe for your family, pets, and the planet</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
