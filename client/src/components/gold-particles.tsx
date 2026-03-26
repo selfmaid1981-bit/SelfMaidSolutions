@@ -48,12 +48,12 @@ export function GoldParticles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245, 197, 66, ${currentOpacity})`;
+        ctx.fillStyle = `rgba(201, 160, 32, ${currentOpacity})`;
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245, 197, 66, ${currentOpacity * 0.15})`;
+        ctx.fillStyle = `rgba(201, 160, 32, ${currentOpacity * 0.15})`;
         ctx.fill();
       });
       animationId = requestAnimationFrame(animate);

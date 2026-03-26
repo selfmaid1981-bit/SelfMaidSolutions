@@ -323,7 +323,7 @@ export default function ServiceArea() {
               <p className="text-sm text-gray-300">Licensed, bonded & background-checked</p>
             </div>
             <div>
-              <Star className="w-10 h-10 mx-auto mb-3 text-yellow-400" />
+              <Star className="w-10 h-10 mx-auto mb-3" style={{ color: '#c9a020' }} />
               <h3 className="font-bold text-lg mb-1">5-Star Rated</h3>
               <p className="text-sm text-gray-300">Consistently 5 stars on Google</p>
             </div>

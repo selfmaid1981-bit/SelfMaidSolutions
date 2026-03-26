@@ -838,7 +838,7 @@
 .mobile-menu-closed { max-height: 0; opacity: 0; }
 .mobile-menu-glass {
   background: rgba(10, 10, 13, 0.97); backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(245, 197, 66, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(201, 160, 32, 0.15); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 .mobile-nav-item { transform: translateY(0); transition: all 0.2s ease; }
 .mobile-menu-open .mobile-nav-item { animation: mobile-nav-slide-in 0.3s ease forwards; }

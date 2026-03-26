@@ -25,7 +25,8 @@ export function PromoSection() {
             <div className="flex items-center gap-3 flex-shrink-0">
               <button
                 onClick={() => setIsBookingModalOpen(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm"
+                className="inline-flex items-center gap-2 font-bold px-6 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm"
+                style={{ background: 'linear-gradient(to right, #c9a020, #9a7410)', color: '#050505' }}
               >
                 Claim My 15% Off
                 <ArrowRight className="w-4 h-4" />
