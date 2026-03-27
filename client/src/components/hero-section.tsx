@@ -1,4 +1,3 @@
-import heroLogo from '@assets/hero-logo-transparent.png';
 import heroBgImage from '@assets/stock_images/sparkling_clean_kitc_dc53ff93.jpg';
 
 export function HeroSection() {
@@ -16,34 +15,11 @@ export function HeroSection() {
       <div className="hero-overlay" aria-hidden="true" />
 
       <div className="hero-content">
-        <img src={heroLogo} alt="Self-Maid Cleaning Solutions" className="hero-logo-img" loading="eager" />
-
         <h1>Your Home's New<br />Cleaning Standard</h1>
-        <p className="hero-sub">Reliable. Detailed. Consistent.</p>
 
-        <button className="hero-cta" onClick={() => scrollTo('contact')}>
-          Get Your Instant Quote
+        <button className="hero-cta" onClick={() => scrollTo('instant-quote')}>
+          Get a Free Quote
         </button>
-
-        <div className="hero-phone">
-          <p>Call or Text</p>
-          <a href="tel:3348779513">(334) 877-9513</a>
-        </div>
-
-        <div className="hero-stats">
-          <div className="hero-stat">
-            <strong>16+</strong>
-            <span>Years</span>
-          </div>
-          <div className="hero-stat">
-            <strong>500+</strong>
-            <span>Happy Clients</span>
-          </div>
-          <div className="hero-stat">
-            <strong>5.0</strong>
-            <span>★ Google</span>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -135,11 +135,11 @@ export default function Home() {
         <Navigation />
         <HeroSection />
         <ServicesSection />
-        <HowItWorks />
         <HomepageQuoteCalculator />
+        <AboutSection />
         <CtaBandSection />
         <TestimonialsSection />
-        <AboutSection />
+        <HowItWorks />
         <AreasSection />
         <FaqSection />
         <ContactSection />

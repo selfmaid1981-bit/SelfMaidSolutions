@@ -1,14 +1,11 @@
-const services = [
-  { id: 'ongoing', name: 'Ongoing', desc: 'Maintenance clean', price: 120, popular: false },
-  { id: 'premium', name: 'Premium', desc: 'Detailed clean', price: 180, popular: true },
-  { id: 'deep', name: 'Deep Clean', desc: 'Full reset', price: 250, popular: false },
-  { id: 'moveinout', name: 'Move-In / Move-Out', desc: 'Perfect for property turnovers', price: 150, popular: false },
-  { id: 'rental', name: 'Airbnb Turnover', desc: 'Same-day turnaround for hosts', price: 65, popular: false },
-  { id: 'commercial', name: 'Commercial', desc: 'Office & workspace cleaning', price: 120, popular: false },
+const tiers = [
+  { id: 'ongoing', name: 'Ongoing Cleaning', desc: 'Weekly or Bi-Weekly Service', active: false },
+  { id: 'premium', name: 'Premium Cleaning', desc: 'Top-to-Bottom Luxury Clean', active: true },
+  { id: 'deep', name: 'Deep Cleaning', desc: 'Intensive Whole Home Refresh', active: false },
 ];
 
 export function ServicesSection() {
-  const scrollToQuote = (serviceId?: string) => {
+  const scrollToQuote = () => {
     const el = document.getElementById('instant-quote');
     if (el) {
       const headerH = document.querySelector('.site-header')?.clientHeight || 70;
@@ -17,31 +14,35 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="services-section section" aria-labelledby="services-h2">
+    <section id="services" className="section" style={{ background: 'transparent', paddingTop: '3rem', paddingBottom: '2rem' }}>
       <div className="sm-container">
-        <div className="section-intro">
-          <p className="section-eyebrow">OUR SERVICES</p>
-          <h2 id="services-h2" className="section-title">Our Services</h2>
-          <div className="section-divider" />
-        </div>
-
-        <div className="services-grid">
-          {services.map((s) => (
-            <article
-              key={s.id}
-              className="svc-card"
-              onClick={() => scrollToQuote(s.id)}
-              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToQuote(s.id); } }}
-              tabIndex={0}
-              role="button"
-              aria-label={`Book ${s.name} — from $${s.price}`}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', maxWidth: '800px', margin: '0 auto' }}>
+          {tiers.map((t) => (
+            <button
+              key={t.id}
+              onClick={scrollToQuote}
+              style={{
+                padding: '1.75rem 1.25rem',
+                borderRadius: '12px',
+                border: t.active ? '2px solid var(--sm-gold)' : '1px solid var(--sm-border)',
+                background: t.active ? 'linear-gradient(135deg, #C6A969, #A88B4A)' : 'var(--sm-white)',
+                color: t.active ? 'white' : 'var(--sm-navy)',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all .25s',
+                boxShadow: t.active ? '0 8px 24px rgba(198,169,105,.3)' : '0 2px 8px rgba(0,0,0,.04)',
+              }}
             >
-              {s.popular && <div className="popular-badge">MOST POPULAR</div>}
-              <h3 className="svc-name">{s.name}</h3>
-              <p className="svc-desc">{s.desc}</p>
-              <p className="svc-price">From ${s.price}</p>
-              <span className="svc-cta">Book Now →</span>
-            </article>
+              <h3 style={{
+                fontFamily: 'var(--sm-fD)', fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+                fontWeight: 600, marginBottom: '.5rem', lineHeight: 1.2,
+              }}>{t.name}</h3>
+              <p style={{
+                fontSize: '13px', lineHeight: 1.5,
+                color: t.active ? 'rgba(255,255,255,.85)' : 'var(--sm-gray)',
+                margin: 0,
+              }}>{t.desc}</p>
+            </button>
           ))}
         </div>
       </div>
