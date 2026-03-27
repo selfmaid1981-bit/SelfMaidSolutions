@@ -1,20 +1,57 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause } from 'lucide-react';
 
 import heroImg from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 
+const heroVideos = [
+  '/assets/videos/hero_cleaning_transformation.mp4',
+  '/assets/videos/service_detail_closeups.mp4',
+  '/assets/videos/deep_clean_kitchen.mp4',
+  '/assets/videos/airbnb_turnover.mp4',
+];
+
 export function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoARef = useRef<HTMLVideoElement>(null);
+  const videoBRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [activeSlot, setActiveSlot] = useState<'A' | 'B'>('A');
+  const currentIndex = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const crossfade = useCallback(() => {
+    const nextIndex = (currentIndex.current + 1) % heroVideos.length;
+    currentIndex.current = nextIndex;
+
+    const incoming = activeSlot === 'A' ? videoBRef.current : videoARef.current;
+    if (incoming) {
+      incoming.src = heroVideos[nextIndex];
+      incoming.load();
+      incoming.play().catch(() => {});
+    }
+    setActiveSlot((prev) => (prev === 'A' ? 'B' : 'A'));
+  }, [activeSlot]);
+
+  useEffect(() => {
+    if (paused || !videoLoaded) return;
+
+    timerRef.current = setInterval(() => {
+      crossfade();
+    }, 8000);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [paused, videoLoaded, crossfade]);
 
   const toggleVideo = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play();
+    const activeRef = activeSlot === 'A' ? videoARef.current : videoBRef.current;
+    if (!activeRef) return;
+    if (paused) {
+      activeRef.play();
       setPaused(false);
     } else {
-      videoRef.current.pause();
+      activeRef.pause();
       setPaused(true);
     }
   };
@@ -29,16 +66,23 @@ export function HeroSection() {
           style={{ objectPosition: 'center 40%' }}
         />
         <video
-          ref={videoRef}
+          ref={videoARef}
           autoPlay
           muted
           loop
           playsInline
           onCanPlay={() => setVideoLoaded(true)}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out ${activeSlot === 'A' ? 'opacity-100' : 'opacity-0'}`}
         >
-          <source src="/assets/videos/hero_cleaning_transformation.mp4" type="video/mp4" />
+          <source src={heroVideos[0]} type="video/mp4" />
         </video>
+        <video
+          ref={videoBRef}
+          muted
+          loop
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out ${activeSlot === 'B' ? 'opacity-100' : 'opacity-0'}`}
+        />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.78) 0%, rgba(18,32,38,0.72) 50%, rgba(15,28,46,0.78) 100%)' }} />
       </div>
 
