@@ -1,4 +1,4 @@
-import heroBgImage from '@assets/stock_images/sparkling_clean_kitc_dc53ff93.jpg';
+import heroBgImage from '@assets/C40E5A82-7E87-4927-809E-594B6CB93679_1774605599285.png';
 
 export function HeroSection() {
   const scrollTo = (id: string) => {

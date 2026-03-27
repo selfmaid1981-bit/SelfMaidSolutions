@@ -1,4 +1,4 @@
-import cleanImage from '@assets/stock_images/professional_female__5e240e0d.jpg';
+import michelleImage from '@assets/808AA65C-8994-4D31-BAF3-4FDC2EC96722_1774605599285.png';
 
 export function AboutSection() {
   return (
@@ -49,7 +49,7 @@ export function AboutSection() {
 
           <div className="order-1 md:order-2">
             <img
-              src={cleanImage}
+              src={michelleImage}
               alt="Michelle — Owner of Self-Maid Cleaning Solutions"
               className="rounded-lg shadow-md w-full max-w-sm mx-auto"
               style={{ objectFit: 'cover', height: '420px' }}
