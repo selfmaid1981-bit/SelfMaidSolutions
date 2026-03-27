@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/hero-section';
 import { TrustBar } from '@/components/trust-bar';
 import { ServicesSection } from '@/components/services-section';
 import BeforeAfterGallery from '@/components/before-after-gallery';
+import { VideoShowcase } from '@/components/video-showcase';
 import { HowItWorks } from '@/components/how-it-works';
 import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
 import { TestimonialsSection } from '@/components/testimonials-section';
@@ -138,6 +139,7 @@ export default function Home() {
         <HeroSection />
         <ServicesSection />
         <BeforeAfterGallery />
+        <VideoShowcase />
         <HowItWorks />
         <HomepageQuoteCalculator />
         <TestimonialsSection />

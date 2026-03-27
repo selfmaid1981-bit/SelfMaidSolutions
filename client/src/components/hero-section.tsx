@@ -1,19 +1,56 @@
-import { ArrowRight } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Play, Pause } from 'lucide-react';
 
 import heroImg from '@assets/89C624EB-3BF3-49AE-BA29-6CA4B6DA0ABB_1773813310714.png';
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [paused, setPaused] = useState(false);
+
+  const toggleVideo = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setPaused(false);
+    } else {
+      videoRef.current.pause();
+      setPaused(true);
+    }
+  };
+
   return (
     <section className="relative overflow-hidden min-h-[480px] lg:min-h-[560px]">
       <div className="absolute inset-0 z-0">
         <img
           src={heroImg}
           alt="Beautiful white marble kitchen interior"
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
           style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.78) 0%, rgba(18,32,38,0.75) 50%, rgba(15,28,46,0.78) 100%)' }} />
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onCanPlay={() => setVideoLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <source src="/assets/videos/hero_cleaning_transformation.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,28,46,0.78) 0%, rgba(18,32,38,0.72) 50%, rgba(15,28,46,0.78) 100%)' }} />
       </div>
+
+      {videoLoaded && (
+        <button
+          onClick={toggleVideo}
+          className="absolute bottom-4 right-4 z-20 bg-black/40 hover:bg-black/60 text-white/70 hover:text-white rounded-full p-2 transition-all"
+          aria-label={paused ? 'Play video' : 'Pause video'}
+        >
+          {paused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+        </button>
+      )}
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-10 md:py-16 lg:py-20 text-center">
         <p className="text-sm font-semibold text-[#C6A969] mb-5 tracking-wide">
