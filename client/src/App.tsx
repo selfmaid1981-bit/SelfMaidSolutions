@@ -27,7 +27,10 @@ import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/page
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NeighborhoodPage from "@/pages/neighborhood";
+import CustomerPortal from "@/pages/customer-portal";
+import AdAutomation from "@/pages/admin/ad-automation";
 import NotFound from "@/pages/not-found";
+import { ErrorBoundary } from "@/components/error-boundary";
 import { FacebookPixel } from "@/components/facebook-pixel";
 import CrmDashboard from "@/pages/crm/dashboard";
 import CrmPipeline from "@/pages/crm/pipeline";
@@ -47,6 +50,7 @@ function ScrollToTop() {
   
   useEffect(() => {
     window.scrollTo(0, 0);
+    import("@/lib/page-tracker").then(({ trackPageView }) => trackPageView(location));
   }, [location]);
   
   return null;
@@ -74,6 +78,8 @@ function Router() {
         <Route path="/admin/leads" component={AdminLeads} />
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
+        <Route path="/admin/ads" component={AdAutomation} />
+        <Route path="/portal" component={CustomerPortal} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
@@ -106,14 +112,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <FacebookPixel />
-        <JotFormAgent />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <FacebookPixel />
+          <JotFormAgent />
+          <Router />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

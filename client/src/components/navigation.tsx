@@ -215,14 +215,21 @@ export function Navigation() {
               })}
           </div>
 
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center hover:opacity-90 transition-opacity z-10" data-testid="logo-link">
+          <a href="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center hover:opacity-90 transition-opacity z-10" data-testid="logo-link" onClick={(e) => {
+            e.preventDefault();
+            if (location === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              window.location.href = '/';
+            }
+          }}>
             <img
               src={logoImage}
               alt="Self-Maid Cleaning Solutions"
               className="h-28 lg:h-40 w-auto object-contain drop-shadow-lg"
               data-testid="logo-image"
             />
-          </Link>
+          </a>
 
           <div className="hidden lg:flex items-center gap-1.5 flex-1 justify-end">
               <button
