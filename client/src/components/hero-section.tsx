@@ -19,9 +19,12 @@ export function HeroSection() {
   const currentIndex = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const isFirstClip = useRef(true);
+
   const crossfade = useCallback(() => {
     const nextIndex = (currentIndex.current + 1) % heroVideos.length;
     currentIndex.current = nextIndex;
+    isFirstClip.current = false;
 
     const incoming = activeSlot === 'A' ? videoBRef.current : videoARef.current;
     if (incoming) {
@@ -35,14 +38,15 @@ export function HeroSection() {
   useEffect(() => {
     if (paused || !videoLoaded) return;
 
-    timerRef.current = setInterval(() => {
+    const delay = isFirstClip.current ? 16000 : 8000;
+    timerRef.current = setTimeout(() => {
       crossfade();
-    }, 8000);
+    }, delay);
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [paused, videoLoaded, crossfade]);
+  }, [paused, videoLoaded, crossfade, activeSlot]);
 
   const toggleVideo = () => {
     const activeRef = activeSlot === 'A' ? videoARef.current : videoBRef.current;

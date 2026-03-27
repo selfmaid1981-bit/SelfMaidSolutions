@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react';
-import { Play, Volume2, VolumeX } from 'lucide-react';
+import { useRef, useEffect } from 'react';
 
 const showcaseVideos = [
   {
@@ -7,46 +6,49 @@ const showcaseVideos = [
     title: 'Deep Clean Process',
     description: 'See how our team transforms kitchens from top to bottom.',
     src: '/assets/videos/deep_clean_kitchen.mp4',
-    poster: '/assets/before-after/after-kitchen-clean.png',
   },
   {
     id: 'airbnb',
     title: 'Airbnb Turnovers',
     description: 'Guest-ready in hours — every detail covered.',
     src: '/assets/videos/airbnb_turnover.mp4',
-    poster: '/assets/services/icon-airbnb.png',
   },
   {
     id: 'detail-work',
     title: 'Attention to Detail',
     description: 'Close-up quality that sets us apart.',
     src: '/assets/videos/service_detail_closeups.mp4',
-    poster: '/assets/services/icon-standard.png',
   },
 ];
 
 function VideoCard({ video }: { video: typeof showcaseVideos[0] }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [muted, setMuted] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const toggle = () => {
-    if (!ref.current) return;
-    if (ref.current.paused) {
-      ref.current.play();
-      setPlaying(true);
-    } else {
-      ref.current.pause();
-      setPlaying(false);
-    }
-  };
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          ref.current?.play().catch(() => {});
+        } else {
+          ref.current?.pause();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="group relative rounded-xl overflow-hidden shadow-lg border border-[#C6A969]/20 bg-[#1F2A37]">
-      <div className="relative aspect-video cursor-pointer" onClick={toggle}>
+    <div ref={containerRef} className="group relative rounded-xl overflow-hidden shadow-lg border border-[#C6A969]/20 bg-[#1F2A37]">
+      <div className="relative aspect-video">
         <video
           ref={ref}
-          muted={muted}
+          muted
           loop
           playsInline
           preload="metadata"
@@ -54,25 +56,7 @@ function VideoCard({ video }: { video: typeof showcaseVideos[0] }) {
         >
           <source src={video.src} type="video/mp4" />
         </video>
-
-        {!playing && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity">
-            <div className="w-14 h-14 rounded-full bg-[#C6A969] flex items-center justify-center shadow-xl">
-              <Play className="w-6 h-6 text-[#1F2A37] ml-0.5" fill="#1F2A37" />
-            </div>
-          </div>
-        )}
       </div>
-
-      {playing && (
-        <button
-          onClick={() => { setMuted(!muted); if (ref.current) ref.current.muted = !muted; }}
-          className="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
-          aria-label={muted ? 'Unmute' : 'Mute'}
-        >
-          {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-        </button>
-      )}
 
       <div className="p-5">
         <h3 className="text-lg font-semibold text-white mb-1">{video.title}</h3>

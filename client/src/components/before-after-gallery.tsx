@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react';
-import { Play } from 'lucide-react';
+import { useRef, useEffect } from 'react';
 
 const galleryPairs = [
   {
@@ -20,22 +19,28 @@ const galleryPairs = [
 
 function TransformationVideo() {
   const ref = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const toggle = () => {
-    if (!ref.current) return;
-    if (ref.current.paused) {
-      ref.current.play();
-      setPlaying(true);
-    } else {
-      ref.current.pause();
-      setPlaying(false);
-    }
-  };
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          ref.current?.play().catch(() => {});
+        } else {
+          ref.current?.pause();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="mt-8">
-      <div className="relative rounded-xl overflow-hidden shadow-lg border border-[#C6A969]/30 cursor-pointer max-w-2xl mx-auto" onClick={toggle}>
+    <div className="mt-8" ref={containerRef}>
+      <div className="relative rounded-xl overflow-hidden shadow-lg border border-[#C6A969]/30 max-w-2xl mx-auto">
         <video
           ref={ref}
           muted
@@ -46,14 +51,7 @@ function TransformationVideo() {
         >
           <source src="/assets/videos/before_after_bathroom.mp4" type="video/mp4" />
         </video>
-        {!playing && (
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-[#C6A969] flex items-center justify-center shadow-xl">
-              <Play className="w-7 h-7 text-[#1F2A37] ml-0.5" fill="#1F2A37" />
-            </div>
-          </div>
-        )}
-        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-4 pointer-events-none">
           <p className="text-white font-semibold text-sm">Watch the Full Transformation</p>
           <p className="text-white/60 text-xs">From grimy to gleaming — see the Self-Maid difference</p>
         </div>
