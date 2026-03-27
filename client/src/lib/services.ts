@@ -110,9 +110,8 @@ export const frequencyOptions = [
 
 export const homepageFrequencyOptions = [
   { value: 'onetime', label: 'One-Time Cleaning', discount: 0, badge: null },
-  { value: 'weekly', label: 'Weekly Cleaning (15% off)', discount: 0.15, badge: null },
-  { value: 'biweekly', label: 'Biweekly Cleaning (10% off)', discount: 0.10, badge: 'Most Popular' as const },
-  { value: 'monthly', label: 'Monthly Cleaning (5% off)', discount: 0.05, badge: null },
+  { value: 'biweekly', label: 'Biweekly Cleaning', discount: 0.10, badge: 'Most Popular' as const },
+  { value: 'monthly', label: 'Monthly Cleaning', discount: 0.05, badge: null },
 ];
 
 export const fullQuoteFrequencyOptions = [
@@ -139,26 +138,10 @@ export function estimateSqFt(bedrooms: number, bathrooms: number): number {
   return Math.round(400 + (bedrooms * 250) + (bathrooms * 75));
 }
 
-export const cleanTypeTiers = [
-  { value: 'standard', label: 'Ongoing', description: 'Maintenance clean', multiplier: 1.0, badge: null, includes: [] as string[] },
-  { value: 'premium', label: 'Premium', description: 'More detailed, polished clean', multiplier: 1.25, badge: 'MOST POPULAR' as const, includes: ['Cabinet fronts', 'Baseboards (spot)', 'Mirrors & glass', 'Bed making'] },
-  { value: 'deep', label: 'Deep Clean', description: 'Full home reset', multiplier: 1.5, badge: null, includes: ['Oven & fridge', 'Grout scrubbing', 'Fixtures & fans', 'Window tracks'] },
-] as const;
-
-export type CleanType = typeof cleanTypeTiers[number]['value'];
-
-export function calcBasePrice(beds: number, baths: number, sqft: number, cleanType: CleanType = 'premium'): number {
-  let total = 120 + (beds * 25) + (baths * 20);
-
-  if (sqft > 3000) total += 40;
-  else if (sqft > 2000) total += 25;
-
-  const tier = cleanTypeTiers.find(t => t.value === cleanType);
-  total *= tier?.multiplier || 1;
-
-  if (total < 150) total = 150;
-
-  return Math.round(total / 10) * 10;
+export function calcBasePrice(beds: number, baths: number, sqft: number): number {
+  let base = 120 + (beds * 20) + (baths * 15);
+  if (sqft > 1500) base += (sqft - 1500) * 0.05;
+  return Math.round(base);
 }
 
 export function calculateQuotePrice(config: {
@@ -171,7 +154,6 @@ export function calculateQuotePrice(config: {
   bedrooms?: string;
   bathrooms?: string;
   pets?: string;
-  cleanType?: CleanType;
 }): number {
   const {
     serviceType,
@@ -183,7 +165,6 @@ export function calculateQuotePrice(config: {
     bedrooms = '',
     bathrooms = '',
     pets = 'no',
-    cleanType = 'premium',
   } = config;
   if (!serviceType) return 0;
 
@@ -196,6 +177,10 @@ export function calculateQuotePrice(config: {
   const beds = parseInt(bedrooms) || 0;
   const baths = parseFloat(bathrooms) || 0;
 
+  if (sqFt <= 0 && (beds > 0 || baths > 0)) {
+    sqFt = estimateSqFt(beds, baths);
+  }
+
   let basePrice = 0;
 
   if (serviceType === 'dorm' && numberOfRooms) {
@@ -205,11 +190,14 @@ export function calculateQuotePrice(config: {
     } else {
       return 0;
     }
-  } else if (beds > 0 || baths > 0 || sqFt > 0) {
-    if (sqFt <= 0 && (beds > 0 || baths > 0)) {
-      sqFt = estimateSqFt(beds, baths);
+  } else if (sqFt > 0) {
+    const ratePrice = Math.max(service.minCharge, sqFt * (service.baseRate || 0));
+    if (beds > 0 || baths > 0) {
+      const formulaPrice = calcBasePrice(beds, baths, sqFt);
+      basePrice = Math.round(Math.max(formulaPrice, ratePrice));
+    } else {
+      basePrice = Math.round(ratePrice);
     }
-    basePrice = Math.max(service.minCharge, calcBasePrice(beds, baths, sqFt, cleanType));
   } else if (propertySize) {
     const sizeOption = propertySizeOptions.find(s => s.value === propertySize);
     if (!sizeOption) return 0;
@@ -227,7 +215,5 @@ export function calculateQuotePrice(config: {
     return total + (addOn?.price || 0);
   }, 0);
 
-  let total = basePrice + addOnTotal;
-  if (total < 150) total = 150;
-  return Math.round(total / 10) * 10;
+  return Math.round(basePrice + addOnTotal);
 }

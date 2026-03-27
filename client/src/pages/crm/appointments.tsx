@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
-import { QueryErrorState } from "@/components/error-boundary";
 import { useToast } from "@/hooks/use-toast";
 import { crmApi } from "@/lib/crm-api";
 import { queryClient } from "@/lib/queryClient";
@@ -29,7 +28,7 @@ export default function CrmAppointments() {
     notes: "",
   });
 
-  const { data: appointments = [], isLoading, isError, refetch } = useQuery({
+  const { data: appointments = [], isLoading } = useQuery({
     queryKey: ["/api/crm/appointments"],
     queryFn: crmApi.getAppointments,
   });
@@ -109,8 +108,6 @@ export default function CrmAppointments() {
 
         {isLoading ? (
           <Skeleton className="h-[400px]" />
-        ) : isError ? (
-          <QueryErrorState message="Failed to load appointments" onRetry={() => refetch()} />
         ) : (
           <AppointmentCalendar
             appointments={appointments}

@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { storage } from "../storage";
 import { insertLeadSchema, insertClientSchema, insertAppointmentSchema, insertJobSchema, insertCleanerSchema, insertRecurringBookingSchema, insertReferralSchema } from "@shared/schema";
-import { onJobCompleted, scheduleReviewFollowUp } from "../hooks/review-on-complete";
+import { onJobCompleted } from "../hooks/review-on-complete";
 import { sendRecurringUpsell } from "../hooks/recurring-upsell";
 import { getFollowUpStats, processFollowUps } from "../hooks/quote-followup";
 
@@ -245,11 +245,7 @@ router.patch("/jobs/:id", requireAdmin, async (req: Request, res: Response) => {
     const job = await storage.updateJob(req.params.id, safe);
     if (!job) return res.status(404).json({ error: "Job not found" });
     if (previousJob.status !== "completed" && job.status === "completed") {
-      onJobCompleted(job.id).then(result => {
-        if (result.reviewRequestId) {
-          scheduleReviewFollowUp(result.reviewRequestId);
-        }
-      }).catch(err => console.error("[CRM] Review trigger failed:", err));
+      onJobCompleted(job.id).catch(err => console.error("[CRM] Review trigger failed:", err));
       setTimeout(() => {
         sendRecurringUpsell(job.id).catch(err => console.error("[CRM] Recurring upsell failed:", err));
       }, 2 * 60 * 60 * 1000);
@@ -369,51 +365,6 @@ router.patch("/referrals/:id", requireAdmin, async (req: Request, res: Response)
     res.json(item);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
-  }
-});
-
-router.get("/calendar", requireAdmin, async (_req: Request, res: Response) => {
-  try {
-    const [allAppointments, allBookings] = await Promise.all([
-      storage.getAppointments(),
-      storage.getBookings(),
-    ]);
-
-    const events = [
-      ...allAppointments.map((a: any) => ({
-        id: a.id,
-        type: "appointment" as const,
-        title: a.serviceType,
-        date: a.scheduledDate,
-        time: a.scheduledTime,
-        duration: a.durationMinutes || 120,
-        status: a.status,
-        address: [a.address, a.city, a.state].filter(Boolean).join(", "),
-        amount: a.amount,
-        notes: a.notes,
-        clientId: a.clientId,
-        assignedTo: a.assignedTo,
-      })),
-      ...allBookings.map((b: any) => ({
-        id: b.id,
-        type: "booking" as const,
-        title: b.serviceType,
-        date: b.preferredDate,
-        time: b.preferredTime,
-        duration: 120,
-        status: b.status,
-        address: `${b.address}, ${b.city}, ${b.state} ${b.zipCode}`,
-        amount: b.amount,
-        name: `${b.firstName} ${b.lastName}`,
-        email: b.email,
-        phone: b.phone,
-        notes: b.specialInstructions,
-      })),
-    ];
-
-    res.json(events);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
   }
 });
 

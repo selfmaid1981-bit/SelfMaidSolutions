@@ -143,30 +143,6 @@ export const quotes = pgTable(
   ]
 );
 
-export const pageViews = pgTable(
-  "page_views",
-  {
-    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-    path: text("path").notNull(),
-    referrer: text("referrer"),
-    userAgent: text("user_agent"),
-    ip: text("ip"),
-    sessionId: text("session_id"),
-    screenWidth: integer("screen_width"),
-    screenHeight: integer("screen_height"),
-    createdAt: timestamp("created_at").defaultNow(),
-  },
-  (table) => [
-    index("IDX_page_views_created").on(table.createdAt),
-    index("IDX_page_views_session").on(table.sessionId),
-  ]
-);
-
-export const insertPageViewSchema = createInsertSchema(pageViews).omit({
-  id: true,
-  createdAt: true,
-});
-
 export const emailCampaigns = pgTable(
   "email_campaigns",
   {
@@ -689,28 +665,5 @@ export type CallLog = typeof callLogs.$inferSelect;
 export type InsertCallLog = z.infer<typeof insertCallLogSchema>;
 export type CallTranscript = typeof callTranscripts.$inferSelect;
 export type InsertCallTranscript = z.infer<typeof insertCallTranscriptSchema>;
-
-export type PageView = typeof pageViews.$inferSelect;
-export type InsertPageView = z.infer<typeof insertPageViewSchema>;
-
-export const adCampaigns = pgTable("ad_campaigns", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  platform: text("platform").notNull(),
-  adType: text("ad_type").notNull(),
-  serviceType: text("service_type"),
-  headline: text("headline").notNull(),
-  primaryText: text("primary_text").notNull(),
-  description: text("description"),
-  callToAction: text("call_to_action"),
-  hashtags: text("hashtags"),
-  targetAudience: text("target_audience"),
-  status: text("status").notNull().default("draft"),
-  scheduledDate: text("scheduled_date"),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const insertAdCampaignSchema = createInsertSchema(adCampaigns).omit({ id: true, createdAt: true });
-export type AdCampaign = typeof adCampaigns.$inferSelect;
-export type InsertAdCampaign = z.infer<typeof insertAdCampaignSchema>;
 
 export * from "./models/chat";

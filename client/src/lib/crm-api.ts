@@ -31,7 +31,6 @@ export const crmApi = {
   getClient: (id: string) => crmFetch<any>(`/api/crm/clients/${id}`),
   createClient: (data: any) => crmFetch<any>("/api/crm/clients", { method: "POST", body: JSON.stringify(data) }),
   updateClient: (id: string, data: any) => crmFetch<any>(`/api/crm/clients/${id}`, { method: "PATCH", body: JSON.stringify(data) }),
-  getCalendarEvents: () => crmFetch<any[]>("/api/crm/calendar"),
   getAppointments: () => crmFetch<any[]>("/api/crm/appointments"),
   createAppointment: (data: any) => crmFetch<any>("/api/crm/appointments", { method: "POST", body: JSON.stringify(data) }),
   updateAppointment: (id: string, data: any) => crmFetch<any>(`/api/crm/appointments/${id}`, { method: "PATCH", body: JSON.stringify(data) }),

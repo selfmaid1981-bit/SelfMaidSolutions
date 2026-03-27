@@ -15,8 +15,7 @@ export function ExitIntentPopup() {
   const subscribeMutation = useMutation({
     mutationFn: async (email: string) => {
       return apiRequest('POST', '/api/contact', {
-        firstName: 'Newsletter',
-        lastName: 'Subscriber',
+        name: 'Newsletter Subscriber',
         email,
         phone: '',
         message: 'Exit popup subscription - 10% discount offer',
@@ -41,12 +40,8 @@ export function ExitIntentPopup() {
   });
 
   useEffect(() => {
-    const dismissed = localStorage.getItem('exitPopupDismissed');
-    if (dismissed) {
-      const dismissedAt = parseInt(dismissed, 10);
-      const daysSince = (Date.now() - dismissedAt) / (1000 * 60 * 60 * 24);
-      if (daysSince < 7) return;
-    }
+    const alreadyClaimed = localStorage.getItem('exitPopupClaimed');
+    if (alreadyClaimed) return;
 
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !hasShown) {
@@ -59,7 +54,7 @@ export function ExitIntentPopup() {
       if (!hasShown) {
         document.addEventListener('mouseout', handleMouseLeave);
       }
-    }, 45000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);
@@ -77,48 +72,45 @@ export function ExitIntentPopup() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300" style={{ background: 'rgba(31,42,55,.5)', backdropFilter: 'blur(8px)' }}>
-      <div className="relative rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-300" style={{ background: 'var(--sm-white)', border: '1px solid var(--sm-border)' }}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-300">
         <button
-          onClick={() => { setIsVisible(false); localStorage.setItem('exitPopupDismissed', String(Date.now())); }}
-          className="absolute top-4 right-4 transition-colors z-10"
-          style={{ color: 'var(--sm-gray-lt)' }}
+          onClick={() => setIsVisible(false)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
           data-testid="exit-popup-close"
         >
           <X className="w-6 h-6" />
         </button>
 
-        <div className="p-8 text-center" style={{ background: 'rgba(198,169,105,.06)' }}>
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(198,169,105,.1)', border: '1px solid var(--sm-border)' }}>
-            <Gift className="w-8 h-8" style={{ color: 'var(--sm-gold)' }} />
+        <div className="bg-gradient-to-br from-primary to-primary/80 text-white p-8 text-center">
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Gift className="w-8 h-8" />
           </div>
-          <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: 'var(--sm-fD)', color: 'var(--sm-navy)' }}>Wait! Don't Leave Yet!</h3>
-          <p style={{ color: 'var(--sm-gray)' }}>Get <span style={{ color: 'var(--sm-gold-dk)', fontWeight: 700 }}>10% OFF</span> your first cleaning service</p>
+          <h3 className="text-2xl font-bold mb-2">Wait! Don't Leave Yet!</h3>
+          <p className="text-white/90">Get 10% OFF your first cleaning service</p>
         </div>
 
         <div className="p-8">
-          <p className="text-center mb-6 text-sm" style={{ color: 'var(--sm-gray)' }}>
+          <p className="text-muted-foreground text-center mb-6">
             Enter your email below and we'll send you a special discount code for your first booking with Self-Maid Cleaning.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--sm-gray-lt)' }} />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="pl-10 h-12"
-                style={{ background: 'var(--sm-cream)', border: '1px solid var(--sm-border)', color: 'var(--sm-navy)' }}
                 required
                 data-testid="exit-popup-email"
               />
             </div>
-            <Button
-              type="submit"
+            <Button 
+              type="submit" 
               className="w-full h-12 text-lg font-bold"
-              style={{ background: 'var(--sm-gold)', color: 'white', borderRadius: '999px' }}
               disabled={subscribeMutation.isPending}
               data-testid="exit-popup-submit"
             >
@@ -126,14 +118,13 @@ export function ExitIntentPopup() {
             </Button>
           </form>
 
-          <p className="text-xs text-center mt-4" style={{ color: 'var(--sm-gray-lt)' }}>
+          <p className="text-xs text-muted-foreground text-center mt-4">
             No spam, ever. Unsubscribe anytime. By signing up you agree to our terms.
           </p>
 
           <button
-            onClick={() => { setIsVisible(false); localStorage.setItem('exitPopupDismissed', String(Date.now())); }}
-            className="w-full text-center text-sm mt-4 underline"
-            style={{ color: 'var(--sm-gray-lt)' }}
+            onClick={() => setIsVisible(false)}
+            className="w-full text-center text-sm text-muted-foreground hover:text-foreground mt-4 underline"
             data-testid="exit-popup-no-thanks"
           >
             No thanks, I'll pay full price

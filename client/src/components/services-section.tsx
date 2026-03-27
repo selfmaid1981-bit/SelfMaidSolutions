@@ -1,63 +1,101 @@
+import { useState } from 'react';
+import { BookingModal } from './booking-modal';
+
 const services = [
-  { id: 'ongoing', name: 'Ongoing', desc: 'Maintenance clean', price: 120, popular: false },
-  { id: 'premium', name: 'Premium', desc: 'Detailed clean', price: 180, popular: true },
-  { id: 'deep', name: 'Deep Clean', desc: 'Full reset', price: 250, popular: false },
+  {
+    id: 'residential',
+    title: 'Ongoing Home Cleaning',
+    description: 'Routine upkeep for a spotless home.',
+    image: '/assets/services/icon-standard.png',
+  },
+  {
+    id: 'deep',
+    title: 'Detailed Deep Cleaning',
+    description: 'Thorough top-to-bottom cleaning.',
+    image: '/assets/services/icon-deep.png',
+  },
+  {
+    id: 'moveout',
+    title: 'Move-Out & Turnover Cleaning',
+    description: 'Complete clean for a fresh start.',
+    image: '/assets/services/icon-moveout.png',
+  },
+  {
+    id: 'airbnb',
+    title: 'Short-Term Rental Turnovers',
+    description: 'Guest-ready cleaning for rentals.',
+    image: '/assets/services/icon-airbnb.png',
+  },
+  {
+    id: 'commercial',
+    title: 'Office Cleaning',
+    description: 'Professional office cleaning.',
+    image: '/assets/services/icon-office.png',
+  },
+  {
+    id: 'dorm',
+    title: 'Student Dorm',
+    description: 'Fast dorm turnovers for students.',
+    image: '/assets/services/icon-dorm.png',
+  },
+  {
+    id: 'multifamily',
+    title: 'Multi-Family Turnovers',
+    description: 'Unit-ready cleaning for property managers.',
+    image: '/assets/services/icon-multifamily.png',
+  },
 ];
 
 export function ServicesSection() {
-  const scrollToQuote = () => {
-    const el = document.getElementById('instant-quote');
-    if (el) {
-      const headerH = document.querySelector('.site-header')?.clientHeight || 70;
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - headerH - 8, behavior: 'smooth' });
-    }
-  };
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   return (
-    <section id="services" className="py-24 bg-white px-6">
-      <div className="max-w-5xl mx-auto">
-        <div style={{ width: '60px', height: '1px', background: 'linear-gradient(90deg, transparent, #C6A969, transparent)', margin: '0 auto 1.5rem' }} />
-        <h2 className="text-3xl text-center mb-10" style={{ fontFamily: 'var(--sm-fD)', fontWeight: 600, color: '#1F2A37' }}>
-          Our Services
-        </h2>
+    <>
+      <section id="services" className="py-14 lg:py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+              Our Services
+            </h2>
+            <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {services.map((s) => (
-            <div
-              key={s.id}
-              onClick={scrollToQuote}
-              className="rounded-xl text-center cursor-pointer transition-all duration-300 hover:-translate-y-1"
-              style={{
-                padding: '2rem 1.5rem',
-                border: s.popular ? '2px solid #C6A969' : '1px solid #E5E7EB',
-                background: 'white',
-                boxShadow: s.popular ? '0 8px 24px rgba(198,169,105,.15)' : '0 2px 8px rgba(0,0,0,.04)',
-              }}
-            >
-              {s.popular && (
-                <p style={{ fontSize: '11px', fontWeight: 700, color: '#C6A969', letterSpacing: '.1em', marginBottom: '8px' }}>MOST POPULAR</p>
-              )}
-              <h3 style={{ fontFamily: 'var(--sm-fD)', fontSize: '1.25rem', fontWeight: 600, color: '#1F2A37' }}>{s.name}</h3>
-              <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '8px' }}>{s.desc}</p>
-              <p style={{ fontSize: '14px', color: '#C6A969', fontWeight: 600, marginTop: '8px' }}>From ${s.price}</p>
-              <button style={{
-                marginTop: '16px',
-                fontSize: '13px',
-                color: 'white',
-                fontWeight: 600,
-                background: 'linear-gradient(135deg, #D4BC85, #C6A969, #A88B4A)',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '8px 24px',
-                borderRadius: '6px',
-                boxShadow: '0 2px 8px rgba(198,169,105,.2)',
-              }}>
-                Book Now →
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+            {services.map((service) => (
+              <button
+                key={service.id}
+                onClick={() => setIsBookingModalOpen(true)}
+                className="group text-center focus:outline-none"
+                data-testid={`service-card-${service.id}`}
+              >
+                <div className="border-2 border-[#C6A969]/30 hover:border-[#C6A969] rounded-2xl p-4 sm:p-5 transition-all duration-300 shadow-sm hover:shadow-md bg-white group-hover:-translate-y-1 h-full flex flex-col items-center">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <h3 className="text-sm font-bold text-[#1F2A37] mb-1">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
+    </>
   );
 }

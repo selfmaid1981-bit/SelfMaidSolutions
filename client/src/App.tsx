@@ -5,7 +5,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { JotFormAgent } from "@/components/jotform-agent";
-import { trackPageView } from "@/lib/page-tracker";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
 import About from "@/pages/about";
@@ -21,23 +20,18 @@ import AdminCampaigns from "@/pages/admin-campaigns";
 import MarketingMaterials from "@/pages/marketing-materials";
 import ViralMarketing from "@/pages/viral-marketing";
 import AdminLeads from "@/pages/admin/leads";
-import LeadGenPage from "@/pages/admin/lead-gen";
 import OutreachTemplates from "@/pages/admin/outreach-templates";
 import OutreachAutomation from "@/pages/admin/automation";
-import AdAutomation from "@/pages/admin/ad-automation";
 import ServiceArea from "@/pages/service-area";
 import CityServicePage, { allCityServiceCombinations, slugAliases } from "@/pages/city-service";
 import GetStarted from "@/pages/get-started";
 import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NeighborhoodPage from "@/pages/neighborhood";
-import CustomerPortal from "@/pages/customer-portal";
 import NotFound from "@/pages/not-found";
 import { FacebookPixel } from "@/components/facebook-pixel";
-import { ErrorBoundary } from "@/components/error-boundary";
 import CrmDashboard from "@/pages/crm/dashboard";
 import CrmPipeline from "@/pages/crm/pipeline";
 import CrmContacts from "@/pages/crm/contacts";
-import CrmCalendar from "@/pages/crm/calendar";
 import CrmAppointments from "@/pages/crm/appointments";
 import CrmJobs from "@/pages/crm/jobs";
 import CrmAnalytics from "@/pages/crm/analytics";
@@ -53,7 +47,6 @@ function ScrollToTop() {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    trackPageView(location);
   }, [location]);
   
   return null;
@@ -81,16 +74,12 @@ function Router() {
         <Route path="/admin/leads" component={AdminLeads} />
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
-        <Route path="/admin/lead-gen" component={LeadGenPage} />
-        <Route path="/admin/ads" component={AdAutomation} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />
         <Route path="/airbnb-cleaning" component={AirbnbCleaning} />
-        <Route path="/portal" component={CustomerPortal} />
         <Route path="/crm" component={CrmDashboard} />
         <Route path="/crm/pipeline" component={CrmPipeline} />
         <Route path="/crm/contacts" component={CrmContacts} />
-        <Route path="/crm/calendar" component={CrmCalendar} />
         <Route path="/crm/appointments" component={CrmAppointments} />
         <Route path="/crm/jobs" component={CrmJobs} />
         <Route path="/crm/analytics" component={CrmAnalytics} />
@@ -117,16 +106,14 @@ function Router() {
 
 function App() {
   return (
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <FacebookPixel />
-          <JotFormAgent />
-          <Router />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <FacebookPixel />
+        <JotFormAgent />
+        <Router />
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
 

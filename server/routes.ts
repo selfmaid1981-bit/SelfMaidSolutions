@@ -3,7 +3,6 @@ import express from "express";
 import { createServer, type Server } from "http";
 import { timingSafeEqual } from "crypto";
 import path from "path";
-import { sql } from "drizzle-orm";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema, insertUserSchema, insertQuoteSchema, insertEmailCampaignSchema } from "@shared/schema";
 import { getUncachableStripeClient } from "./stripeClient";
@@ -36,33 +35,6 @@ import {
 } from "./outreach-automation";
 
 import { OWNER_EMAILS, FROM_EMAIL } from "./config";
-import { startDailyReportScheduler, sendDailyVisitorReport } from "./daily-visitor-report";
-import { startWeeklyScheduleEmailer, sendWeeklyScheduleEmail } from "./weekly-schedule-email";
-import {
-  generateAdContent,
-  generateBatchAds,
-  saveAdCampaign,
-  getAdCampaigns,
-  updateAdStatus,
-  deleteAdCampaign,
-  getAvailablePlatforms,
-  getAvailableServices,
-} from "./ad-automation";
-import { syncDailyToSheets } from "./daily-sheets-sync";
-import { db } from "./db";
-import { pageViews, insertPageViewSchema, bookings, appointments } from "@shared/schema";
-import {
-  runPipeline,
-  startLeadGenPipeline,
-  stopLeadGenPipeline,
-  isPipelineRunning,
-  getLeadGenConfig,
-  updateLeadGenConfig,
-  addSearch,
-  removeSearch,
-} from "./lead-gen/pipeline";
-import { processCSV } from "./lead-gen/csv-processor";
-import multer from "multer";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -112,14 +84,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Start follow-up scheduler (checks every 60s for pending follow-ups)
   const { startFollowUpScheduler } = await import("./hooks/quote-followup");
   startFollowUpScheduler(60_000);
-
-  // Start B2B outreach automation (checks every 60 minutes for new leads)
-  if (process.env.LEADS_SPREADSHEET_ID) {
-    startOutreachAutomation(60);
-    console.log('[Server] B2B outreach automation started (60 min interval)');
-  } else {
-    console.log('[Server] B2B outreach automation skipped — no LEADS_SPREADSHEET_ID set');
-  }
 
   // Register SaaS routes
   const saasRoutes = (await import("./saas/routes")).default;
@@ -387,16 +351,12 @@ Allow: /
 Disallow: /checkout
 Disallow: /api/
 Disallow: /admin/
-Disallow: /marketing-materials
-Disallow: /viral-marketing
 
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 2
 
 User-agent: GPTBot
 Allow: /
@@ -413,25 +373,10 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: anthropic-ai
-Allow: /
-
 User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: Amazonbot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: YouBot
-Allow: /
-
-User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: facebookexternalhit
@@ -448,12 +393,6 @@ Host: https://selfmaidllc.com`;
 
     res.header("Content-Type", "text/plain");
     res.send(robotsTxt);
-  });
-
-  // LLMs.txt — AI-optimized plain text for LLM crawlers
-  app.get(["/llms.txt", "/.well-known/llms.txt"], (req, res) => {
-    res.header("Content-Type", "text/plain");
-    res.sendFile(path.resolve("public/llms.txt"));
   });
 
   // Get Stripe publishable key
@@ -525,253 +464,6 @@ Host: https://selfmaidllc.com`;
     } catch (error: any) {
       console.error('Login error:', error);
       res.status(500).json({ message: "Login failed: " + error.message });
-    }
-  });
-
-  app.post("/api/track", async (req, res) => {
-    try {
-      const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || '';
-      const path = typeof req.body.path === 'string' ? req.body.path.slice(0, 500) : '/';
-      const referrer = typeof req.body.referrer === 'string' ? req.body.referrer.slice(0, 1000) : null;
-      const sessionId = typeof req.body.sessionId === 'string' ? req.body.sessionId.slice(0, 100) : null;
-      const screenWidth = typeof req.body.screenWidth === 'number' && req.body.screenWidth > 0 && req.body.screenWidth < 10000 ? req.body.screenWidth : null;
-      const screenHeight = typeof req.body.screenHeight === 'number' && req.body.screenHeight > 0 && req.body.screenHeight < 10000 ? req.body.screenHeight : null;
-
-      await db.insert(pageViews).values({
-        path,
-        referrer,
-        userAgent: (req.headers['user-agent'] || '').slice(0, 500) || null,
-        ip: ip.slice(0, 45),
-        sessionId,
-        screenWidth,
-        screenHeight,
-      });
-      res.json({ ok: true });
-    } catch (error) {
-      res.json({ ok: true });
-    }
-  });
-
-  app.post("/api/admin/daily-report", requireAdmin, async (req, res) => {
-    try {
-      const sent = await sendDailyVisitorReport();
-      res.json({ success: sent });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/sync-sheets", requireAdmin, async (req, res) => {
-    try {
-      const result = await syncDailyToSheets();
-      res.json({ success: true, spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${result.spreadsheetId}`, synced: result.synced });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/weekly-schedule", requireAdmin, async (req, res) => {
-    try {
-      const sent = await sendWeeklyScheduleEmail();
-      res.json({ success: sent });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.get("/api/admin/ads/platforms", requireAdmin, (_req, res) => {
-    res.json({ platforms: getAvailablePlatforms(), services: getAvailableServices() });
-  });
-
-  app.get("/api/admin/ads", requireAdmin, async (_req, res) => {
-    try {
-      const ads = await getAdCampaigns();
-      res.json(ads);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/ads/generate", requireAdmin, async (req, res) => {
-    try {
-      const { platform, adType, serviceType, tone, promoOffer } = req.body;
-      if (!platform || !adType) {
-        return res.status(400).json({ message: "platform and adType are required" });
-      }
-      const content = await generateAdContent({ platform, adType, serviceType, tone, promoOffer });
-      res.json(content);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/ads/generate-batch", requireAdmin, async (req, res) => {
-    try {
-      const { platforms, serviceType, promoOffer, count } = req.body;
-      if (!platforms || !Array.isArray(platforms) || platforms.length === 0) {
-        return res.status(400).json({ message: "platforms array is required" });
-      }
-      const results = await generateBatchAds({ platforms, serviceType, promoOffer, count });
-      res.json(results);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/ads", requireAdmin, async (req, res) => {
-    try {
-      const saved = await saveAdCampaign(req.body);
-      res.json(saved);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  });
-
-  app.patch("/api/admin/ads/:id/status", requireAdmin, async (req, res) => {
-    try {
-      const { status } = req.body;
-      if (!status) return res.status(400).json({ message: "status required" });
-      const updated = await updateAdStatus(req.params.id, status);
-      if (!updated) return res.status(404).json({ message: "Ad not found" });
-      res.json(updated);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.delete("/api/admin/ads/:id", requireAdmin, async (req, res) => {
-    try {
-      await deleteAdCampaign(req.params.id);
-      res.json({ success: true });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.get("/api/availability", async (req, res) => {
-    try {
-      const date = req.query.date as string;
-      if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-        return res.status(400).json({ message: "Valid date parameter required (YYYY-MM-DD)" });
-      }
-
-      const allSlots = ["8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"];
-
-      const dayBookings = await db
-        .select({ time: bookings.preferredTime })
-        .from(bookings)
-        .where(sql`${bookings.preferredDate} = ${date} AND ${bookings.status} != 'cancelled'`);
-
-      const dayAppointments = await db
-        .select({ time: appointments.scheduledTime })
-        .from(appointments)
-        .where(sql`${appointments.scheduledDate} = ${date} AND ${appointments.status} != 'cancelled'`);
-
-      const normalize = (t: string) => t?.trim().toUpperCase().replace(/\s+/g, " ") || "";
-
-      const slots = allSlots.map((time) => {
-        const norm = normalize(time);
-        const bookingCount = [...dayBookings.map((b) => normalize(b.time)), ...dayAppointments.map((a) => normalize(a.time))].filter((t) => t === norm).length;
-        return {
-          time,
-          available: bookingCount < 2,
-          bookings: bookingCount,
-        };
-      });
-
-      res.json(slots);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  const portalRateLimit = new Map<string, { count: number; resetAt: number }>();
-  const PORTAL_MAX_ATTEMPTS = 5;
-  const PORTAL_WINDOW_MS = 15 * 60 * 1000;
-
-  function checkPortalRateLimit(email: string): boolean {
-    const key = email.toLowerCase();
-    const now = Date.now();
-    const entry = portalRateLimit.get(key);
-    if (!entry || now > entry.resetAt) {
-      portalRateLimit.set(key, { count: 1, resetAt: now + PORTAL_WINDOW_MS });
-      return true;
-    }
-    entry.count++;
-    return entry.count <= PORTAL_MAX_ATTEMPTS;
-  }
-
-  function buildPortalResponse(customerBookings: any[]) {
-    const first = customerBookings[0];
-    const totalSpent = customerBookings
-      .filter((b: any) => b.status !== "cancelled")
-      .reduce((sum: number, b: any) => sum + (b.amount || 0), 0);
-
-    return {
-      email: first.email,
-      firstName: first.firstName,
-      lastName: first.lastName,
-      phone: first.phone,
-      totalBookings: customerBookings.length,
-      totalSpent,
-      bookings: customerBookings.map((b: any) => ({
-        id: b.id,
-        serviceType: b.serviceType,
-        preferredDate: b.preferredDate,
-        preferredTime: b.preferredTime,
-        city: b.city,
-        state: b.state,
-        zipCode: b.zipCode,
-        amount: b.amount,
-        status: b.status,
-        createdAt: b.createdAt,
-      })),
-    };
-  }
-
-  app.post("/api/portal/login", async (req, res) => {
-    try {
-      const { email } = req.body;
-      if (!email) return res.status(400).json({ message: "Email is required" });
-
-      if (!checkPortalRateLimit(email)) {
-        return res.status(429).json({ message: "Too many attempts. Please try again later." });
-      }
-
-      const customerBookings = await db
-        .select()
-        .from(bookings)
-        .where(sql`LOWER(${bookings.email}) = LOWER(${email})`)
-        .orderBy(sql`${bookings.createdAt} DESC`);
-
-      if (customerBookings.length === 0) {
-        return res.status(404).json({ message: "No bookings found for this email" });
-      }
-
-      res.json(buildPortalResponse(customerBookings));
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.get("/api/portal/customer", async (req, res) => {
-    try {
-      const email = req.query.email as string;
-      if (!email) return res.status(400).json({ message: "Email is required" });
-
-      const customerBookings = await db
-        .select()
-        .from(bookings)
-        .where(sql`LOWER(${bookings.email}) = LOWER(${email})`)
-        .orderBy(sql`${bookings.createdAt} DESC`);
-
-      if (customerBookings.length === 0) {
-        return res.status(404).json({ message: "No bookings found" });
-      }
-
-      res.json(buildPortalResponse(customerBookings));
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
     }
   });
 
@@ -1527,110 +1219,6 @@ Host: https://selfmaidllc.com`;
   });
 
   startWeeklyReportScheduler();
-  startDailyReportScheduler();
-  startWeeklyScheduleEmailer();
-
-  // Lead Generation Pipeline Routes
-  app.post("/api/admin/lead-gen/start", requireAdmin, async (req, res) => {
-    try {
-      const { intervalMinutes } = req.body;
-      startLeadGenPipeline(intervalMinutes);
-      res.json({ success: true, message: `Lead gen pipeline started (every ${intervalMinutes || 60} min)` });
-    } catch (error: any) {
-      res.status(500).json({ message: "Failed to start pipeline: " + error.message });
-    }
-  });
-
-  app.post("/api/admin/lead-gen/stop", requireAdmin, async (req, res) => {
-    try {
-      stopLeadGenPipeline();
-      res.json({ success: true, message: "Lead gen pipeline stopped" });
-    } catch (error: any) {
-      res.status(500).json({ message: "Failed to stop pipeline: " + error.message });
-    }
-  });
-
-  app.post("/api/admin/lead-gen/run-now", requireAdmin, async (req, res) => {
-    try {
-      const result = await runPipeline();
-      res.json({ success: true, ...result });
-    } catch (error: any) {
-      res.status(500).json({ message: "Pipeline run failed: " + error.message });
-    }
-  });
-
-  app.get("/api/admin/lead-gen/config", requireAdmin, async (req, res) => {
-    try {
-      const config = getLeadGenConfig();
-      res.json({ ...config, active: isPipelineRunning() });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.put("/api/admin/lead-gen/config", requireAdmin, async (req, res) => {
-    try {
-      updateLeadGenConfig(req.body);
-      res.json({ success: true, config: getLeadGenConfig() });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.post("/api/admin/lead-gen/searches", requireAdmin, async (req, res) => {
-    try {
-      const { query, maxResults } = req.body;
-      if (!query) return res.status(400).json({ message: "query is required" });
-      addSearch(query, maxResults);
-      res.json({ success: true, config: getLeadGenConfig() });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  app.delete("/api/admin/lead-gen/searches", requireAdmin, async (req, res) => {
-    try {
-      const { query } = req.body;
-      if (!query) return res.status(400).json({ message: "query is required" });
-      removeSearch(query);
-      res.json({ success: true, config: getLeadGenConfig() });
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
-
-  // CSV Lead Upload
-  const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
-
-  app.post("/api/admin/lead-gen/upload-csv", requireAdmin, upload.single("file"), async (req: any, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ message: "No CSV file uploaded" });
-      }
-
-      const csvContent = req.file.buffer.toString("utf-8");
-      const result = await processCSV(csvContent);
-
-      res.json({
-        success: true,
-        message: `Processed ${result.totalRows} rows: ${result.leadsAdded} new leads added, ${result.duplicatesRemoved} duplicates skipped, ${result.emailsFound} emails found`,
-        ...result,
-      });
-    } catch (error: any) {
-      res.status(500).json({ message: "CSV processing failed: " + error.message });
-    }
-  });
-
-  // Auto-start lead gen pipeline if Google Places API key is set
-  if (process.env.GOOGLE_PLACES_API_KEY && process.env.LEADS_SPREADSHEET_ID) {
-    startLeadGenPipeline(60);
-    console.log('[Server] Lead generation pipeline started (60 min interval)');
-  } else {
-    const missing = [];
-    if (!process.env.GOOGLE_PLACES_API_KEY) missing.push('GOOGLE_PLACES_API_KEY');
-    if (!process.env.LEADS_SPREADSHEET_ID) missing.push('LEADS_SPREADSHEET_ID');
-    console.log(`[Server] Lead gen pipeline skipped — missing: ${missing.join(', ')}`);
-  }
 
   const httpServer = createServer(app);
   return httpServer;

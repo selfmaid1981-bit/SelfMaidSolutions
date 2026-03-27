@@ -8,10 +8,9 @@ import { crmApi } from "@/lib/crm-api";
 import { format } from "date-fns";
 import { Link } from "wouter";
 import { ArrowRight, ArrowDown, Clock, UserPlus, MessageSquare, Mail, Tag, TrendingUp, Calculator, CheckCircle2, Percent } from "lucide-react";
-import { QueryErrorState } from "@/components/error-boundary";
 
 export default function CrmDashboard() {
-  const { data: stats, isLoading, isError, refetch } = useQuery({
+  const { data: stats, isLoading } = useQuery({
     queryKey: ["/api/crm/stats"],
     queryFn: crmApi.getStats,
   });
@@ -38,8 +37,6 @@ export default function CrmDashboard() {
               <Skeleton key={i} className="h-24" />
             ))}
           </div>
-        ) : isError ? (
-          <QueryErrorState message="Failed to load dashboard stats" onRetry={() => refetch()} />
         ) : stats ? (
           <MetricsCards stats={stats} />
         ) : null}

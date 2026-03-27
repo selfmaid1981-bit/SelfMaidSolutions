@@ -1,4 +1,4 @@
-export { onJobCompleted, scheduleReviewFollowUp, sendReviewFollowUp } from "./review-on-complete";
+export { onJobCompleted } from "./review-on-complete";
 export type { ReviewTriggerResult } from "./review-on-complete";
 
 export {

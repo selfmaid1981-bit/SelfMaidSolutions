@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import {
   serviceOptions,
+  timeSlots,
   getTomorrowDate,
   quoteServiceTypes,
   propertySizeOptions,
@@ -23,7 +24,6 @@ import {
   addOnServices,
   calculateQuotePrice,
 } from '@/lib/services';
-import { AvailabilityPicker } from '@/components/availability-picker';
 import { insertBookingSchema } from '@shared/schema';
 import { z } from 'zod';
 import { useLocation } from 'wouter';
@@ -213,7 +213,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" style={{ background: '#111111', borderColor: 'rgba(201,160,32,0.15)', color: 'white' }} data-testid="booking-modal">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="booking-modal">
         <DialogHeader>
           <div className="flex justify-between items-center">
             <DialogTitle>{isRecruitment ? 'Join Our Team' : 'Book Your Cleaning Service'}</DialogTitle>
@@ -505,13 +505,13 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                   </div>
 
                   {calculatedPrice > 0 && (
-                    <div className="mt-6 rounded-xl p-4 text-white text-center" style={{ background: 'linear-gradient(135deg, rgba(201,160,32,0.15), rgba(200,155,45,0.1))', border: '1px solid rgba(201,160,32,0.25)' }} data-testid="live-price">
+                    <div className="mt-6 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-xl p-4 text-white text-center" data-testid="live-price">
                       <div className="flex items-center justify-center gap-2 mb-1">
-                        <Calculator className="w-4 h-4" style={{ color: '#c9a020' }} />
-                        <span className="text-sm font-medium text-white/70">Estimated Price</span>
+                        <Calculator className="w-4 h-4" />
+                        <span className="text-sm font-medium text-emerald-100">Estimated Price</span>
                       </div>
                       <div className="text-3xl font-bold">${calculatedPrice}</div>
-                      <p className="text-xs text-white/50 mt-1">
+                      <p className="text-xs text-emerald-100 mt-1">
                         {frequency !== 'onetime' ? 'per service' : 'one-time service'} · final price confirmed by Self-Maid
                       </p>
                     </div>
@@ -542,12 +542,48 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
               {!isRecruitment && step === 3 && (
                 <div data-testid="booking-step-3">
                   <h3 className="text-lg font-semibold mb-4">3. Choose Date & Time</h3>
-                  <AvailabilityPicker
-                    selectedDate={form.watch("preferredDate")}
-                    selectedTime={form.watch("preferredTime")}
-                    onDateChange={(date) => form.setValue("preferredDate", date, { shouldValidate: true })}
-                    onTimeChange={(time) => form.setValue("preferredTime", time, { shouldValidate: true })}
-                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="preferredDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Preferred Date</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="date" 
+                              min={minDate} 
+                              {...field}
+                              data-testid="input-preferredDate"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="preferredTime"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Preferred Time</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-preferredTime">
+                                <SelectValue placeholder="Select time" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {timeSlots.map((time) => (
+                                <SelectItem key={time} value={time}>{time}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <div className="flex gap-4 mt-6">
                     <Button 
                       type="button" 
@@ -752,7 +788,7 @@ export function BookingModal({ isOpen, onClose, defaultService = '', userData, i
                               return (
                                 <div key={id} className="flex items-center justify-between ml-2">
                                   <span className="flex items-center text-xs">
-                                    <Check className="w-3 h-3 mr-1" style={{ color: '#c9a020' }} />
+                                    <Check className="w-3 h-3 mr-1 text-green-600" />
                                     {addOn?.label}
                                   </span>
                                   <span className="text-xs font-medium">+${addOn?.price}</span>

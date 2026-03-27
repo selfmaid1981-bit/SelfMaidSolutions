@@ -1,15 +1,18 @@
-modules = ["nodejs-20", "web", "postgresql-16", "python3"]
+modules = ["nodejs-20", "web", "postgresql-16"]
 run = "npm run dev"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "zlib"]
 
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
 
 [env]
 PORT = "5000"
@@ -59,15 +62,3 @@ id = "module:nodejs-20/formatter:prettier"
 [userenv]
 
 [userenv.shared]
-LEADS_SPREADSHEET_ID = "1WHmQu9ncuBPB928E5W4W6OK4mW_DKINdUkQrquDDk7s"
-SMTP_HOST = "smtp.gmail.com"
-SMTP_PORT = "587"
-OWNER_EMAIL = "selfmaidclean@outlook.com"
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
-[postMerge]
-path = "scripts/post-merge.sh"
-timeoutMs = 20000

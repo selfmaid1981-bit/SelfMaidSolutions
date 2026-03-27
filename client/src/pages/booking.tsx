@@ -14,7 +14,6 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { Calendar, AlertTriangle, CheckCircle, Shield, Clock, Star } from 'lucide-react';
 import { UrgencyBanner, TrustSignals } from '@/components/urgency-banner';
-import { AvailabilityPicker } from '@/components/availability-picker';
 
 export default function Booking() {
   const [, setLocation] = useLocation();
@@ -55,9 +54,9 @@ export default function Booking() {
     const frequency = params.get('frequency');
     const propertySize = params.get('propertySize');
 
-    if (quoteId || serviceType) {
+    if (quoteId) {
       setQuoteData({
-        quoteId: quoteId || null,
+        quoteId,
         serviceType: serviceType || '',
         estimatedPrice: estimatedPrice ? parseInt(estimatedPrice) : 0,
         quoteName: quoteName || '',
@@ -319,15 +318,31 @@ export default function Booking() {
                     </div>
                   </div>
 
-                  {/* Preferred Date/Time with Availability */}
+                  {/* Preferred Date/Time */}
                   <div className="space-y-4">
                     <h3 className="font-semibold text-foreground">Preferred Appointment</h3>
-                    <AvailabilityPicker
-                      selectedDate={preferredDate}
-                      selectedTime={preferredTime}
-                      onDateChange={setPreferredDate}
-                      onTimeChange={setPreferredTime}
-                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="date">Preferred Date *</Label>
+                        <Input
+                          id="date"
+                          type="date"
+                          value={preferredDate}
+                          onChange={(e) => setPreferredDate(e.target.value)}
+                          data-testid="input-date"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="time">Preferred Time *</Label>
+                        <Input
+                          id="time"
+                          type="time"
+                          value={preferredTime}
+                          onChange={(e) => setPreferredTime(e.target.value)}
+                          data-testid="input-time"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Special Instructions */}
