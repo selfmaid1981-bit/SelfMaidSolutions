@@ -1,0 +1,174 @@
+import { useState, useEffect } from "react";
+
+export default function Quote() {
+  const [form, setForm] = useState({
+    beds: 3,
+    baths: 2,
+    sqft: 1800,
+    tier: "premium", // default (money maker)
+  });
+
+  const [price, setPrice] = useState(0);
+
+  // 🧠 PRICING ENGINE
+  const calculate = () => {
+    let { beds, baths, sqft, tier } = form;
+
+    let total = 120 + beds * 25 + baths * 20;
+
+    if (sqft > 3000) total += 40;
+    else if (sqft > 2000) total += 25;
+
+    const multipliers = {
+      ongoing: 1,
+      premium: 1.25,
+      deep: 1.5,
+    };
+
+    total *= multipliers[tier];
+
+    if (total < 150) total = 150;
+
+    return Math.round(total / 10) * 10;
+  };
+
+  useEffect(() => {
+    setPrice(calculate());
+  }, [form]);
+
+  // 🧠 SMART RECOMMENDATION
+  const isLarge = form.sqft > 2500;
+
+  // 🎨 CARD STYLE
+  const card = (type) => {
+    const active = form.tier === type;
+
+    return `
+      p-5 rounded-xl border text-center cursor-pointer transition-all duration-300
+      ${active
+        ? "border-gold shadow-lg scale-105 bg-white"
+        : "border-gray-200 bg-gray-50 hover:shadow-md"}
+    `;
+  };
+
+  return (
+    <section className="py-16 px-6 bg-marble">
+
+      <div className="max-w-xl mx-auto">
+
+        <h2 className="text-2xl font-serif text-center mb-8">
+          Get Your Instant Quote
+        </h2>
+
+        {/* 🏆 PACKAGE CARDS */}
+        <div className="grid md:grid-cols-3 gap-4 mb-8">
+
+          {/* ONGOING */}
+          <div
+            className={card("ongoing")}
+            onClick={() => setForm({ ...form, tier: "ongoing" })}
+          >
+            <h3 className="font-serif">Ongoing</h3>
+            <p className="text-sm text-gray-500 mt-2">
+              Maintenance clean
+            </p>
+          </div>
+
+          {/* PREMIUM */}
+          <div
+            className={card("premium")}
+            onClick={() => setForm({ ...form, tier: "premium" })}
+          >
+            <div className="text-xs text-gold mb-2">
+              MOST POPULAR
+            </div>
+
+            <h3 className="font-serif text-lg">Premium</h3>
+
+            <p className="text-sm text-gray-600 mt-2">
+              More detailed, polished clean
+            </p>
+
+            {isLarge && form.tier === "premium" && (
+              <p className="text-xs text-gold mt-2">
+                Recommended for your home
+              </p>
+            )}
+          </div>
+
+          {/* DEEP */}
+          <div
+            className={card("deep")}
+            onClick={() => setForm({ ...form, tier: "deep" })}
+          >
+            <h3 className="font-serif">Deep Clean</h3>
+            <p className="text-sm text-gray-500 mt-2">
+              Full home reset
+            </p>
+          </div>
+
+        </div>
+
+        {/* 🏠 INPUTS */}
+        <div className="space-y-4">
+
+          <input
+            type="number"
+            value={form.beds}
+            onChange={(e) =>
+              setForm({ ...form, beds: Math.max(0, +e.target.value) })
+            }
+            className="w-full border p-3 rounded"
+            placeholder="Bedrooms"
+          />
+
+          <input
+            type="number"
+            value={form.baths}
+            onChange={(e) =>
+              setForm({ ...form, baths: Math.max(0, +e.target.value) })
+            }
+            className="w-full border p-3 rounded"
+            placeholder="Bathrooms"
+          />
+
+          <input
+            type="number"
+            value={form.sqft}
+            onChange={(e) =>
+              setForm({ ...form, sqft: Math.max(0, +e.target.value) })
+            }
+            className="w-full border p-3 rounded"
+            placeholder="Square Footage"
+          />
+
+        </div>
+
+        {/* 💰 PRICE */}
+        <div className="text-center mt-8">
+
+          <p className="text-sm text-gray-500">
+            Most homes range between $180 – $350
+          </p>
+
+          <h3
+            key={price}
+            className="text-4xl font-bold text-navy mt-2 animate-pop"
+          >
+            ${price}
+          </h3>
+
+          <p className="text-sm text-gray-500 mt-2">
+            Final price confirmed after walkthrough
+          </p>
+
+          <p className="text-sm text-gold mt-2">
+            Limited availability this week — book now
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
