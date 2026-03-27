@@ -581,7 +581,69 @@
 .marble-bg {
   background: var(--sm-cream);
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(198,169,105,.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(198,169,105,.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(198,169,105,.02) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, rgba(198,169,105,.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(198,169,105,.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(198,169,105,.03) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
+}
+
+.gold-wave-divider {
+  position: relative;
+  height: 48px;
+  overflow: hidden;
+}
+.gold-wave-divider::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sm-gold-lt), var(--sm-gold), var(--sm-gold-lt), transparent);
+}
+.gold-wave-divider::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 8px; height: 8px;
+  background: var(--sm-gold);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px var(--sm-cream);
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding: 2.5rem 1.5rem;
+}
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  text-align: center;
+}
+.trust-badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: rgba(198,169,105,.1);
+  border: 1px solid rgba(198,169,105,.25);
+  color: var(--sm-gold-dk);
+}
+.trust-badge-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sm-navy);
+  letter-spacing: .04em;
+}
+@media(max-width:480px) {
+  .trust-badges { gap: 1.5rem; }
+  .trust-badge-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+  .trust-badge-label { font-size: 11px; }
 }

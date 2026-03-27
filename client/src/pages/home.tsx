@@ -2,19 +2,47 @@ import { SEOHead } from '@/components/ui/seo-head';
 import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
-import { HowItWorks } from '@/components/how-it-works';
 import { HomepageQuoteCalculator } from '@/components/homepage-quote-calculator';
-import { CtaBandSection } from '@/components/final-cta-section';
-import { TestimonialsSection } from '@/components/testimonials-section';
 import { AboutSection } from '@/components/about-section';
+import { TestimonialsSection } from '@/components/testimonials-section';
 import { AreasSection } from '@/components/areas-section';
 import { FaqSection } from '@/components/faq-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
-import { MobileCtaBar } from '@/components/mobile-cta-bar';
+import { FloatingCTA } from '@/components/floating-cta';
 import { ChatWidget } from '@/components/chat-widget';
 import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+
+function GoldDivider() {
+  return <div className="gold-wave-divider" />;
+}
+
+function TrustBar() {
+  return (
+    <div style={{ background: '#1F2A37', padding: '12px 1.5rem' }}>
+      <p style={{
+        textAlign: 'center', fontSize: '12px', fontWeight: 500,
+        color: 'rgba(255,255,255,.7)', letterSpacing: '.06em',
+      }}>
+        Fully Insured &nbsp;·&nbsp; Satisfaction Guaranteed &nbsp;·&nbsp; Free Estimates
+      </p>
+    </div>
+  );
+}
+
+function NavyCTA() {
+  return (
+    <div style={{ background: '#1F2A37', padding: '2.5rem 1.5rem', textAlign: 'center' }}>
+      <p style={{ fontFamily: 'var(--sm-fD)', fontSize: '1.5rem', fontWeight: 600, color: 'white', marginBottom: '4px' }}>
+        (334) 877-9513
+      </p>
+      <p style={{ fontSize: '13px', color: 'rgba(255,255,255,.5)' }}>
+        www.selfmaidllc.com
+      </p>
+    </div>
+  );
+}
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -134,17 +162,22 @@ export default function Home() {
       <div className="marble-bg">
         <Navigation />
         <HeroSection />
+        <TrustBar />
+        <GoldDivider />
         <ServicesSection />
+        <GoldDivider />
         <HomepageQuoteCalculator />
+        <GoldDivider />
         <AboutSection />
-        <CtaBandSection />
+        <GoldDivider />
         <TestimonialsSection />
-        <HowItWorks />
+        <GoldDivider />
         <AreasSection />
         <FaqSection />
         <ContactSection />
+        <NavyCTA />
         <Footer />
-        <MobileCtaBar />
+        <FloatingCTA />
       </div>
       <ChatWidget />
       <ExitIntentPopup />

@@ -1,7 +1,7 @@
-const tiers = [
-  { id: 'ongoing', name: 'Ongoing Cleaning', desc: 'Weekly or Bi-Weekly Service', active: false },
-  { id: 'premium', name: 'Premium Cleaning', desc: 'Top-to-Bottom Luxury Clean', active: true },
-  { id: 'deep', name: 'Deep Cleaning', desc: 'Intensive Whole Home Refresh', active: false },
+const services = [
+  { id: 'ongoing', name: 'Ongoing', desc: 'Maintenance clean', price: 120, popular: false },
+  { id: 'premium', name: 'Premium', desc: 'Detailed clean', price: 180, popular: true },
+  { id: 'deep', name: 'Deep Clean', desc: 'Full reset', price: 250, popular: false },
 ];
 
 export function ServicesSection() {
@@ -14,35 +14,47 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="section" style={{ background: 'transparent', paddingTop: '3rem', paddingBottom: '2rem' }}>
-      <div className="sm-container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', maxWidth: '800px', margin: '0 auto' }}>
-          {tiers.map((t) => (
-            <button
-              key={t.id}
+    <section id="services" className="py-24 bg-white px-6">
+      <div className="max-w-5xl mx-auto">
+        <div style={{ width: '60px', height: '1px', background: 'linear-gradient(90deg, transparent, #C6A969, transparent)', margin: '0 auto 1.5rem' }} />
+        <h2 className="text-3xl text-center mb-10" style={{ fontFamily: 'var(--sm-fD)', fontWeight: 600, color: '#1F2A37' }}>
+          Our Services
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {services.map((s) => (
+            <div
+              key={s.id}
               onClick={scrollToQuote}
+              className="rounded-xl text-center cursor-pointer transition-all duration-300 hover:-translate-y-1"
               style={{
-                padding: '1.75rem 1.25rem',
-                borderRadius: '12px',
-                border: t.active ? '2px solid var(--sm-gold)' : '1px solid var(--sm-border)',
-                background: t.active ? 'linear-gradient(135deg, #C6A969, #A88B4A)' : 'var(--sm-white)',
-                color: t.active ? 'white' : 'var(--sm-navy)',
-                cursor: 'pointer',
-                textAlign: 'center',
-                transition: 'all .25s',
-                boxShadow: t.active ? '0 8px 24px rgba(198,169,105,.3)' : '0 2px 8px rgba(0,0,0,.04)',
+                padding: '2rem 1.5rem',
+                border: s.popular ? '2px solid #C6A969' : '1px solid #E5E7EB',
+                background: 'white',
+                boxShadow: s.popular ? '0 8px 24px rgba(198,169,105,.15)' : '0 2px 8px rgba(0,0,0,.04)',
               }}
             >
-              <h3 style={{
-                fontFamily: 'var(--sm-fD)', fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                fontWeight: 600, marginBottom: '.5rem', lineHeight: 1.2,
-              }}>{t.name}</h3>
-              <p style={{
-                fontSize: '13px', lineHeight: 1.5,
-                color: t.active ? 'rgba(255,255,255,.85)' : 'var(--sm-gray)',
-                margin: 0,
-              }}>{t.desc}</p>
-            </button>
+              {s.popular && (
+                <p style={{ fontSize: '11px', fontWeight: 700, color: '#C6A969', letterSpacing: '.1em', marginBottom: '8px' }}>MOST POPULAR</p>
+              )}
+              <h3 style={{ fontFamily: 'var(--sm-fD)', fontSize: '1.25rem', fontWeight: 600, color: '#1F2A37' }}>{s.name}</h3>
+              <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '8px' }}>{s.desc}</p>
+              <p style={{ fontSize: '14px', color: '#C6A969', fontWeight: 600, marginTop: '8px' }}>From ${s.price}</p>
+              <button style={{
+                marginTop: '16px',
+                fontSize: '13px',
+                color: 'white',
+                fontWeight: 600,
+                background: 'linear-gradient(135deg, #D4BC85, #C6A969, #A88B4A)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '8px 24px',
+                borderRadius: '6px',
+                boxShadow: '0 2px 8px rgba(198,169,105,.2)',
+              }}>
+                Book Now →
+              </button>
+            </div>
           ))}
         </div>
       </div>
