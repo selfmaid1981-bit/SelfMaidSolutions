@@ -5,12 +5,12 @@ import { useToast } from '@/hooks/use-toast';
 
 const serviceOptions = [
   { value: '', label: 'Select a service\u2026' },
-  { value: 'ongoing', label: 'Regular Home Cleaning \u2014 from $120' },
-  { value: 'deep', label: 'Deep Cleaning \u2014 from $250' },
-  { value: 'moveinout', label: 'Move-In / Move-Out \u2014 from $150' },
-  { value: 'rental', label: 'Airbnb Turnover \u2014 from $65' },
-  { value: 'commercial', label: 'Commercial & Office \u2014 from $120' },
-  { value: 'apartment', label: 'Apartment Turnover \u2014 from $108' },
+  { value: 'ongoing', label: 'Regular Home Cleaning — from $120' },
+  { value: 'deep', label: 'Deep Cleaning — from $250' },
+  { value: 'moveinout', label: 'Move-In / Move-Out — from $150' },
+  { value: 'rental', label: 'Airbnb Turnover — from $65' },
+  { value: 'commercial', label: 'Commercial & Office — from $120' },
+  { value: 'apartment', label: 'Apartment Turnover — from $108' },
 ];
 
 const priceMap: Record<string, { base: number; bed: number; bath: number }> = {
@@ -96,9 +96,9 @@ export function ContactSection() {
     <section id="contact" className="contact-section section" aria-labelledby="contact-h2">
       <div className="sm-container">
         <div className="section-intro">
-          <div className="section-eyebrow">CONTACT</div>
-          <h2 id="contact-h2" className="section-title">Get Your <span className="gold-text">Free Quote</span></h2>
-          <div className="section-divider-line"><span>&mdash; No Obligation &mdash;</span></div>
+          <p className="section-eyebrow">CONTACT</p>
+          <h2 id="contact-h2" className="section-title">Get Your Free Quote</h2>
+          <div className="section-divider" />
         </div>
         <div className="contact-grid">
           <div>
@@ -109,29 +109,29 @@ export function ContactSection() {
             </p>
             <div className="contact-items">
               <a href="tel:3348779513" className="ci">
-                <span className="ci-ic" aria-hidden="true">&#128222;</span>
-                <div><strong>(334) 877-9513</strong><small>Mon-Sat, 8am-6pm</small></div>
+                <span className="ci-ic" aria-hidden="true">📞</span>
+                <div><strong>(334) 877-9513</strong><small>Mon–Sat, 8am–6pm</small></div>
               </a>
               <a href="mailto:selfmaidclean@outlook.com" className="ci">
-                <span className="ci-ic" aria-hidden="true">&#9993;&#65039;</span>
+                <span className="ci-ic" aria-hidden="true">✉️</span>
                 <div><strong>selfmaidclean@outlook.com</strong><small>We reply within 24 hours</small></div>
               </a>
               <a href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL" target="_blank" rel="noopener noreferrer" className="ci">
-                <span className="ci-ic" aria-hidden="true">&#128205;</span>
+                <span className="ci-ic" aria-hidden="true">📍</span>
                 <div><strong>Montgomery, AL</strong><small>Serving Central Alabama</small></div>
               </a>
             </div>
           </div>
 
-          <div className="form-panel" id="instant-quote">
+          <div className="form-panel" id="contact-form-panel">
             <div className="fp-header">
               <div className="fp-title">Request a Quote</div>
-              <div className="fp-sub">FREE &middot; NO OBLIGATION &middot; 24-HR RESPONSE</div>
+              <div className="fp-sub">FREE · NO OBLIGATION · 24-HR RESPONSE</div>
             </div>
             {submitted ? (
               <div className="quote-form">
                 <div className="f-success">
-                  &#10004; <strong>Thank you!</strong> Your request has been received.
+                  ✔ <strong>Thank you!</strong> Your request has been received.
                   We'll get back to you within 24 hours with a detailed quote.
                   <br />Need faster service? <a href="tel:3348779513">Call (334) 877-9513</a>
                 </div>
@@ -187,8 +187,8 @@ export function ContactSection() {
                   <label htmlFor="f-msg">MESSAGE</label>
                   <textarea id="f-msg" rows={3} value={message} onChange={e => setMessage(e.target.value)} placeholder="Anything else we should know?" data-testid="textarea-message" />
                 </div>
-                <button type="submit" className="btn btn-gold btn-full gold-shimmer" disabled={contactMutation.isPending} data-testid="button-submit">
-                  {contactMutation.isPending ? 'SENDING\u2026' : 'GET MY FREE QUOTE'}
+                <button type="submit" className="btn-submit" disabled={contactMutation.isPending} data-testid="button-submit">
+                  {contactMutation.isPending ? 'Sending…' : 'Get My Free Quote'}
                 </button>
               </form>
             )}

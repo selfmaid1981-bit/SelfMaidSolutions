@@ -1,8 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { Calculator, BedDouble, Bath, Ruler, Phone, PawPrint, Sparkles, Clock } from 'lucide-react';
-import { getUrgencyMessage, getSeasonalPromo } from '@/lib/dynamic-content';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import {
@@ -41,9 +39,7 @@ export function HomepageQuoteCalculator() {
 
   useEffect(() => {
     const sqFtVal = parseInt(sqft) || estimatedSqFt;
-    if (sqFtVal > 3000) {
-      setCleanType('deep');
-    }
+    if (sqFtVal > 3000) setCleanType('deep');
   }, [sqft, estimatedSqFt]);
 
   const price = useMemo(() => {
@@ -58,19 +54,6 @@ export function HomepageQuoteCalculator() {
       cleanType,
     });
   }, [serviceType, sqft, estimatedSqFt, frequency, bedrooms, bathrooms, pets, cleanType]);
-
-  const basePrice = useMemo(() => {
-    return calculateQuotePrice({
-      serviceType,
-      customSqFt: sqft || (estimatedSqFt > 0 ? String(estimatedSqFt) : ''),
-      frequency: 'onetime',
-      selectedAddOns: [],
-      bedrooms,
-      bathrooms,
-      pets: 'no',
-      cleanType,
-    });
-  }, [serviceType, sqft, estimatedSqFt, bedrooms, bathrooms, cleanType]);
 
   const sizeLabel = sqft
     ? `${sqft} sq ft`
@@ -145,153 +128,92 @@ export function HomepageQuoteCalculator() {
     setLocation(`/quote?${params.toString()}`);
   };
 
-  const selectClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 appearance-none" + " " + "bg-[#111111] border border-white/10 text-white focus:ring-[#c9a020]/40 focus:border-[#c9a020]";
-  const inputClass = "w-full rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2" + " " + "bg-[#111111] border border-white/10 text-white placeholder:text-white/30 focus:ring-[#c9a020]/40 focus:border-[#c9a020]";
+  const inputCls = "w-full border border-[var(--sm-border)] bg-[var(--sm-cream)] rounded-lg px-4 py-3 text-sm text-[var(--sm-navy)] placeholder:text-[var(--sm-gray-lt)] focus:outline-none focus:ring-2 focus:ring-[var(--sm-gold)]/30 focus:border-[var(--sm-gold)] transition-colors";
+  const selectCls = inputCls + " appearance-none";
 
   return (
-    <section className="py-24 lg:py-32 white-marble-section" id="instant-quote">
-      <div className="max-w-xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <p className="section-label text-white/50 tracking-[4px]">PRICING</p>
-          <div className="editorial-divider-center" />
-          <h2 className="font-bold text-white font-serif text-3xl lg:text-4xl">
-            Get Your <span className="italic gold-shine-text">Exact</span> Price
-          </h2>
-          <p className="text-white/35 mt-3 text-sm tracking-wide">Takes less than 30 seconds</p>
+    <section className="section" id="instant-quote" style={{ background: 'var(--sm-white)' }}>
+      <div style={{ maxWidth: '540px', margin: '0 auto', padding: '0 1.5rem' }}>
+        <div className="section-intro">
+          <p className="section-eyebrow">PRICING</p>
+          <h2 className="section-title">Get Your Instant Quote</h2>
+          <p className="section-subtitle">Takes less than 30 seconds</p>
+          <div className="section-divider" />
         </div>
-        <div className="rounded-2xl overflow-hidden quote-calculator-glow" style={{ background: 'rgba(17,17,17,0.8)', border: '1px solid rgba(201,160,32,0.15)' }}>
-          <div className="px-6 py-5 flex items-center justify-center gap-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-            <Calculator className="w-5 h-5" style={{ color: '#c9a020' }} />
-            <h3 className="text-lg font-bold text-white font-serif italic">Instant Cleaning Estimate</h3>
+
+        <div style={{ background: 'var(--sm-white)', border: '1px solid var(--sm-border)', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,.06)' }}>
+          <div style={{ background: 'var(--sm-navy)', padding: '1.25rem 1.5rem', textAlign: 'center' }}>
+            <h3 style={{ fontFamily: 'var(--sm-fD)', fontSize: '1.15rem', fontWeight: 600, color: 'white', margin: 0 }}>Instant Cleaning Estimate</h3>
           </div>
 
-          <div className="px-6 py-8">
+          <div style={{ padding: '1.75rem' }}>
             {step === 'calc' ? (
-              <div className="space-y-5">
-                <div className="grid grid-cols-3 gap-3">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
                   {cleanTypeTiers.map(tier => (
                     <button
                       key={tier.value}
                       type="button"
                       onClick={() => setCleanType(tier.value as CleanType)}
-                      className={`p-3 rounded-xl border cursor-pointer transition-all duration-300 text-center ${
-                        cleanType === tier.value
-                          ? 'scale-105 ring-1'
-                          : 'hover:shadow-md hover:-translate-y-0.5'
-                      }`}
-                      style={cleanType === tier.value
-                        ? { borderColor: '#c9a020', background: '#1a1a1a', boxShadow: '0 0 20px rgba(201,160,32,0.1), 0 0 0 1px rgba(201,160,32,0.3)' }
-                        : { borderColor: 'rgba(255,255,255,0.08)', background: '#0d0d0d' }
-                      }
+                      style={{
+                        padding: '1rem .75rem',
+                        borderRadius: '12px',
+                        border: cleanType === tier.value ? '2px solid var(--sm-gold)' : '1px solid var(--sm-border)',
+                        background: cleanType === tier.value ? 'rgba(198,169,105,.06)' : 'var(--sm-cream)',
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        transition: 'all .2s',
+                        transform: cleanType === tier.value ? 'scale(1.03)' : 'scale(1)',
+                        boxShadow: cleanType === tier.value ? '0 4px 16px rgba(198,169,105,.15)' : 'none',
+                      }}
                     >
                       {tier.badge && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded inline-block mb-1" style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}>
+                        <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--sm-gold-dk)', letterSpacing: '.1em', display: 'block', marginBottom: '4px' }}>
                           {tier.badge}
                         </span>
                       )}
-                      <span className={`font-semibold block ${cleanType === tier.value ? 'text-white' : 'text-white/70'} ${tier.value === 'premium' ? 'text-base' : 'text-sm'}`}>
+                      <span style={{ fontFamily: 'var(--sm-fD)', fontWeight: 600, fontSize: tier.value === 'premium' ? '1rem' : '0.9rem', color: 'var(--sm-navy)', display: 'block' }}>
                         {tier.label}
                       </span>
-                      <span className="text-[11px] text-white/40 block mt-0.5">{tier.description}</span>
-                      {cleanType === tier.value && tier.includes.length > 0 && (
-                        <ul className="text-[11px] text-white/60 mt-2 text-left space-y-0.5">
-                          {tier.includes.map(item => (
-                            <li key={item}>&#10004; {item}</li>
-                          ))}
-                        </ul>
-                      )}
+                      <span style={{ fontSize: '11px', color: 'var(--sm-gray)', display: 'block', marginTop: '2px' }}>{tier.description}</span>
                     </button>
                   ))}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                   <div>
-                    <label className="text-white text-xs font-semibold mb-1.5 flex items-center gap-1">
-                      <BedDouble className="w-3.5 h-3.5 text-white/40" /> Bedrooms
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="10"
-                      placeholder="e.g. 3"
-                      value={bedrooms}
-                      onChange={e => setBedrooms(e.target.value)}
-                      className={inputClass}
-                      data-testid="home-quote-bedrooms"
-                    />
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Bedrooms</label>
+                    <input type="number" min="0" max="10" placeholder="e.g. 3" value={bedrooms} onChange={e => setBedrooms(e.target.value)} className={inputCls} data-testid="home-quote-bedrooms" />
                   </div>
                   <div>
-                    <label className="text-white text-xs font-semibold mb-1.5 flex items-center gap-1">
-                      <Bath className="w-3.5 h-3.5 text-white/40" /> Bathrooms
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="10"
-                      step="0.5"
-                      placeholder="e.g. 2"
-                      value={bathrooms}
-                      onChange={e => setBathrooms(e.target.value)}
-                      className={inputClass}
-                      data-testid="home-quote-bathrooms"
-                    />
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Bathrooms</label>
+                    <input type="number" min="0" max="10" step="0.5" placeholder="e.g. 2" value={bathrooms} onChange={e => setBathrooms(e.target.value)} className={inputCls} data-testid="home-quote-bathrooms" />
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-white text-xs font-semibold mb-1.5 block">Type of Service</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <select
-                      value={serviceType}
-                      onChange={e => setServiceType(e.target.value)}
-                      className={selectClass}
-                      data-testid="home-quote-service"
-                    >
-                      {serviceTypes.map(s => (
-                        <option key={s.value} value={s.value}>{s.label}</option>
-                      ))}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Service Type</label>
+                    <select value={serviceType} onChange={e => setServiceType(e.target.value)} className={selectCls} data-testid="home-quote-service">
+                      {serviceTypes.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                     </select>
-                    <select
-                      value={frequency}
-                      onChange={e => setFrequency(e.target.value)}
-                      className={selectClass}
-                      data-testid="home-quote-frequency"
-                    >
-                      {frequencyOptions.map(f => (
-                        <option key={f.value} value={f.value}>
-                          {f.label}{f.discount > 0 ? ` (-${Math.round(f.discount * 100)}%)` : ''}
-                        </option>
-                      ))}
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Frequency</label>
+                    <select value={frequency} onChange={e => setFrequency(e.target.value)} className={selectCls} data-testid="home-quote-frequency">
+                      {frequencyOptions.map(f => <option key={f.value} value={f.value}>{f.label}{f.discount > 0 ? ` (-${Math.round(f.discount * 100)}%)` : ''}</option>)}
                     </select>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                   <div>
-                    <label className="text-white text-xs font-semibold mb-1.5 flex items-center gap-1">
-                      <Ruler className="w-3.5 h-3.5 text-white/40" /> Sq Ft
-                      <span className="text-white/30 text-[10px]">(optional)</span>
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      placeholder={estimatedSqFt > 0 && !sqft ? `~${estimatedSqFt}` : 'e.g. 1500'}
-                      value={sqft}
-                      onChange={e => setSqft(e.target.value)}
-                      className={inputClass}
-                      data-testid="home-quote-sqft"
-                    />
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Sq Ft <span style={{ color: 'var(--sm-gray-lt)', fontSize: '10px' }}>(optional)</span></label>
+                    <input type="number" min="0" placeholder={estimatedSqFt > 0 && !sqft ? `~${estimatedSqFt}` : 'e.g. 1500'} value={sqft} onChange={e => setSqft(e.target.value)} className={inputCls} data-testid="home-quote-sqft" />
                   </div>
                   <div>
-                    <label className="text-white text-xs font-semibold mb-1.5 flex items-center gap-1">
-                      <PawPrint className="w-3.5 h-3.5 text-white/40" /> Pets?
-                    </label>
-                    <select
-                      value={pets}
-                      onChange={e => setPets(e.target.value)}
-                      className={selectClass}
-                      data-testid="home-quote-pets"
-                    >
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Pets?</label>
+                    <select value={pets} onChange={e => setPets(e.target.value)} className={selectCls} data-testid="home-quote-pets">
                       <option value="no">No pets</option>
                       <option value="yes">Yes (+$25)</option>
                     </select>
@@ -299,15 +221,19 @@ export function HomepageQuoteCalculator() {
                 </div>
 
                 {price > 0 && (
-                  <div className="rounded-xl p-4 text-center" style={{ background: 'rgba(201,160,32,0.08)', border: '1px solid rgba(201,160,32,0.2)' }} data-testid="home-quote-result">
-                    <p className="text-white/50 text-xs uppercase tracking-wider mb-1">Your Estimated Price</p>
-                    <p className="text-4xl font-black text-white" data-testid="home-quote-price">${price}</p>
-                    <p className="text-white/50 text-xs mt-1">{selectedTier?.label} · {selectedService?.label} · {selectedFrequency.label}</p>
-                    <p className="text-white/30 text-[11px] mt-1">Most homes range between $180 – $350</p>
+                  <div style={{ background: 'rgba(198,169,105,.06)', border: '1px solid var(--sm-border)', borderRadius: '12px', padding: '1.25rem', textAlign: 'center' }} data-testid="home-quote-result">
+                    <p style={{ fontSize: '12px', color: 'var(--sm-gray)', letterSpacing: '.1em', marginBottom: '4px' }}>YOUR ESTIMATED PRICE</p>
+                    <p style={{ fontFamily: 'var(--sm-fD)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--sm-navy)', margin: '0' }} data-testid="home-quote-price">${price}</p>
+                    <p style={{ fontSize: '12px', color: 'var(--sm-gray)', marginTop: '4px' }}>{selectedTier?.label} · {selectedService?.label} · {selectedFrequency.label}</p>
+                    <p style={{ fontSize: '11px', color: 'var(--sm-gray-lt)', marginTop: '4px' }}>Most homes range between $180 – $350</p>
                     <a
                       href="tel:334-877-9513"
-                      className="mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold transition-colors"
-                      style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '.5rem',
+                        marginTop: '0.75rem', background: 'var(--sm-gold)', color: 'white',
+                        padding: '.6rem 1.5rem', borderRadius: '999px',
+                        fontSize: '13px', fontWeight: 600, transition: 'all .2s',
+                      }}
                     >
                       Call to Book — (334) 877-9513
                     </a>
@@ -317,97 +243,59 @@ export function HomepageQuoteCalculator() {
                 <button
                   onClick={handleContinue}
                   disabled={!serviceType || estimatedSqFt <= 0}
-                  className="w-full disabled:opacity-30 font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
+                  className="btn-submit"
                   data-testid="home-quote-continue"
                 >
-                  {price > 0 ? (
-                    <>Calculate Price</>
-                  ) : (
-                    <>
-                      <Calculator className="w-4 h-4" />
-                      Calculate Price
-                    </>
-                  )}
+                  {price > 0 ? 'Save Quote & Continue' : 'Calculate Price'}
                 </button>
 
-                <div className="text-center">
-                  <p className="text-white/30 text-[11px]">Final price confirmed after walkthrough</p>
-                  <p className="text-xs mt-1 font-medium flex items-center justify-center gap-1" style={{ color: '#c9a020' }}>
-                    <Clock className="w-3 h-3" />
-                    {getUrgencyMessage()}
+                <div style={{ textAlign: 'center' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--sm-gray-lt)' }}>Final price confirmed after walkthrough</p>
+                  <p style={{ fontSize: '12px', color: 'var(--sm-gold-dk)', fontWeight: 500, marginTop: '4px' }}>
+                    Limited availability this week — book now
                   </p>
                 </div>
 
                 <button
                   onClick={handleSeeFullQuote}
-                  className="w-full text-white/40 hover:text-[#c9a020] text-xs py-1 transition-colors"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', color: 'var(--sm-gray)', padding: '4px', transition: 'color .2s' }}
                 >
                   Need add-ons or more options? See full calculator →
                 </button>
               </div>
             ) : (
-              <div className="space-y-4">
-                <div className="rounded-xl p-3 text-center" style={{ background: 'rgba(201,160,32,0.08)', border: '1px solid rgba(201,160,32,0.2)' }}>
-                  <p className="text-white/50 text-xs">Your Quote</p>
-                  <p className="text-3xl font-black text-white">${price}</p>
-                  <p className="text-white/50 text-xs">{selectedTier?.label} · {selectedService?.label} · {sizeLabel}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ background: 'rgba(198,169,105,.06)', border: '1px solid var(--sm-border)', borderRadius: '12px', padding: '1rem', textAlign: 'center' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--sm-gray)' }}>Your Quote</p>
+                  <p style={{ fontFamily: 'var(--sm-fD)', fontSize: '2rem', fontWeight: 700, color: 'var(--sm-navy)', margin: '4px 0' }}>${price}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--sm-gray)' }}>{selectedTier?.label} · {selectedService?.label} · {sizeLabel}</p>
                 </div>
 
                 <div>
-                  <label className="text-white text-xs font-semibold mb-1.5 block">Name *</label>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    className={inputClass}
-                    data-testid="home-quote-name"
-                  />
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Name *</label>
+                  <input type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className={inputCls} data-testid="home-quote-name" />
                 </div>
                 <div>
-                  <label className="text-white text-xs font-semibold mb-1.5 block">Email *</label>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    className={inputClass}
-                    data-testid="home-quote-email"
-                  />
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Email *</label>
+                  <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} className={inputCls} data-testid="home-quote-email" />
                 </div>
                 <div>
-                  <label className="text-white text-xs font-semibold mb-1.5 flex items-center gap-1">
-                    <Phone className="w-3.5 h-3.5 text-white/40" /> Phone
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="(334) 555-0100"
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
-                    className={inputClass}
-                    data-testid="home-quote-phone"
-                  />
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--sm-navy-lt)', display: 'block', marginBottom: '6px' }}>Phone</label>
+                  <input type="tel" placeholder="(334) 555-0100" value={phone} onChange={e => setPhone(e.target.value)} className={inputCls} data-testid="home-quote-phone" />
                 </div>
 
                 <button
                   onClick={handleSubmit}
                   disabled={saveQuoteMutation.isPending}
-                  className="w-full disabled:opacity-50 font-bold py-4 rounded-xl text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #c9a020, #9a7410)', color: '#0a0a0d' }}
+                  className="btn-submit"
                   data-testid="home-quote-submit"
                 >
-                  {saveQuoteMutation.isPending ? 'Saving...' : (
-                    <>
-                      <Sparkles className="w-4 h-4" />
-                      Save Quote & Continue to Booking
-                    </>
-                  )}
+                  {saveQuoteMutation.isPending ? 'Saving...' : 'Save Quote & Continue to Booking'}
                 </button>
 
                 <button
                   onClick={() => setStep('calc')}
-                  className="w-full text-white/40 hover:text-[#c9a020] text-xs py-1 transition-colors"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', color: 'var(--sm-gray)', padding: '4px', transition: 'color .2s' }}
                 >
                   ← Back to calculator
                 </button>

@@ -1,7 +1,7 @@
 const faqs = [
   {
     q: 'How do I get a quote?',
-    a: 'Use the form on this page or call us at <a href="tel:3348779513">(334) 877-9513</a>. We\'ll ask a few quick questions and provide a transparent, no-obligation estimate \u2014 usually within minutes.',
+    a: 'Use the form on this page or call us at <a href="tel:3348779513">(334) 877-9513</a>. We\'ll ask a few quick questions and provide a transparent, no-obligation estimate — usually within minutes.',
   },
   {
     q: 'What cleaning products do you use?',
@@ -30,9 +30,9 @@ export function FaqSection() {
     <section id="faq" className="faq-section section" aria-labelledby="faq-h2">
       <div className="sm-container">
         <div className="section-intro">
-          <div className="section-eyebrow">FAQ</div>
-          <h2 id="faq-h2" className="section-title">Common <span className="gold-text">Questions</span></h2>
-          <div className="section-divider-line"><span>&mdash; Quick Answers &mdash;</span></div>
+          <p className="section-eyebrow">FAQ</p>
+          <h2 id="faq-h2" className="section-title">Common Questions</h2>
+          <div className="section-divider" />
         </div>
         <div className="faq-inner">
           <div className="faq-list">
