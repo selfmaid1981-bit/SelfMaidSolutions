@@ -92,7 +92,7 @@ export function Navigation() {
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : 'nav-top'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-32 lg:h-44 relative">
-          <div className="hidden lg:flex items-center gap-0.5 flex-1">
+          <div className="hidden lg:flex items-center gap-0.5 flex-1 max-w-[38%]">
               <Link
                 href="/"
                 className={`nav-link-enhanced relative px-3 py-2 rounded-lg text-[14px] font-medium transition-all duration-200 ${
