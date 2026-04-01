@@ -24,6 +24,11 @@ The application uses a bold, premium design with a deep navy/purple/red-black pa
 - **Marketing Automation**: Strategies for email and social media automation workflows.
 - **Admin Dashboard**: Features for managing email marketing campaigns, subscribers, and automated review requests.
 - **Automated Review System**: Triggers Google review requests via email and SMS after job completion.
+- **Organic Growth Engine** (`/admin/growth`): Unified dashboard for all organic growth channels:
+  - **AI Blog Generator**: OpenAI-powered SEO article creation with publish/unpublish workflow. Stored in `blog_articles` table. Public API at `/api/blog/articles`.
+  - **Social Media Scheduler**: AI-generated posts for Facebook, Instagram, TikTok, Google Business. Weekly batch generation. Stored in `social_posts` table.
+  - **Review Tracking**: Aggregated view of automated review request stats.
+  - **Referral Program Dashboard**: Stats and shareable referral link management.
 - **Integration Hooks**: Centralized modules for Stripe subscriptions, Twilio SMS, Hunter.io email discovery, OpenAI utilities (text generation, extraction, call analysis, lead intent), automated review requests, and a 3-step automated follow-up sequence for unbooked quotes.
 - **CRM Module**: Full CRM backend with routes, pipeline management, scheduling, lead-to-client conversion, and dashboard metrics.
 - **SaaS Module**: Multi-tenant SaaS backend with company management, subscription tiers, and lead discovery engine.

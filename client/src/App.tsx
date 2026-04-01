@@ -29,6 +29,7 @@ import AirbnbCleaning from "@/pages/airbnb-cleaning";
 import NeighborhoodPage from "@/pages/neighborhood";
 import CustomerPortal from "@/pages/customer-portal";
 import AdAutomation from "@/pages/admin/ad-automation";
+import GrowthDashboard from "@/pages/admin/growth-dashboard";
 import NotFound from "@/pages/not-found";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { FacebookPixel } from "@/components/facebook-pixel";
@@ -79,6 +80,7 @@ function Router() {
         <Route path="/admin/outreach" component={OutreachTemplates} />
         <Route path="/admin/automation" component={OutreachAutomation} />
         <Route path="/admin/ads" component={AdAutomation} />
+        <Route path="/admin/growth" component={GrowthDashboard} />
         <Route path="/portal" component={CustomerPortal} />
         <Route path="/services/:city" component={ServiceArea} />
         <Route path="/get-started" component={GetStarted} />

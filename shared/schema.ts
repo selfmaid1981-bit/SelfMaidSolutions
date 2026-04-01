@@ -713,4 +713,65 @@ export type InsertPageView = z.infer<typeof insertPageViewSchema>;
 export type AdCampaign = typeof adCampaigns.$inferSelect;
 export type InsertAdCampaign = z.infer<typeof insertAdCampaignSchema>;
 
+// ==================== ORGANIC GROWTH ENGINE ====================
+
+export const blogArticles = pgTable(
+  "blog_articles",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    title: text("title").notNull(),
+    slug: text("slug").unique().notNull(),
+    excerpt: text("excerpt").notNull(),
+    content: text("content").notNull(),
+    category: text("category").notNull(),
+    keywords: text("keywords").notNull(),
+    metaDescription: text("meta_description"),
+    readTime: text("read_time").default("5 min read"),
+    status: text("status").notNull().default("draft"),
+    publishedAt: timestamp("published_at"),
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (table) => [
+    index("IDX_blog_slug").on(table.slug),
+    index("IDX_blog_status").on(table.status),
+    index("IDX_blog_category").on(table.category),
+  ]
+);
+
+export const socialPosts = pgTable(
+  "social_posts",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    platform: text("platform").notNull(),
+    postType: text("post_type").notNull(),
+    content: text("content").notNull(),
+    hashtags: text("hashtags"),
+    mediaUrl: text("media_url"),
+    scheduledFor: timestamp("scheduled_for"),
+    status: text("status").notNull().default("draft"),
+    postedAt: timestamp("posted_at"),
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (table) => [
+    index("IDX_social_platform").on(table.platform),
+    index("IDX_social_status").on(table.status),
+    index("IDX_social_scheduled").on(table.scheduledFor),
+  ]
+);
+
+export const insertBlogArticleSchema = createInsertSchema(blogArticles).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertSocialPostSchema = createInsertSchema(socialPosts).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type BlogArticle = typeof blogArticles.$inferSelect;
+export type InsertBlogArticle = z.infer<typeof insertBlogArticleSchema>;
+export type SocialPost = typeof socialPosts.$inferSelect;
+export type InsertSocialPost = z.infer<typeof insertSocialPostSchema>;
+
 export * from "./models/chat";

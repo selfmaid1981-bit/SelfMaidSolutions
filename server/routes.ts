@@ -48,6 +48,23 @@ import {
   getAvailableServices,
 } from "./ad-automation";
 import { syncDailyToSheets } from "./daily-sheets-sync";
+import {
+  generateBlogArticle,
+  publishBlogArticle,
+  unpublishBlogArticle,
+  getBlogArticles,
+  getBlogArticleBySlug,
+  deleteBlogArticle,
+  getBlogStats,
+} from "./blog-generator";
+import {
+  generateSocialPost,
+  generateWeeklyBatch,
+  getSocialPosts,
+  updateSocialPostStatus,
+  deleteSocialPost,
+  getSocialStats,
+} from "./social-scheduler";
 import { db } from "./db";
 import { sql } from "drizzle-orm";
 import { pageViews, bookings, appointments } from "@shared/schema";
@@ -1425,6 +1442,171 @@ Host: https://selfmaidllc.com`;
       res.json({ success, message: success ? "Report sent" : "Failed to send report" });
     } catch (error: any) {
       res.status(500).json({ message: "Failed to send report: " + error.message });
+    }
+  });
+
+  // ==================== BLOG GENERATOR API ====================
+
+  app.get("/api/admin/blog/articles", requireAdmin, async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const articles = await getBlogArticles(status);
+      res.json(articles);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/blog/articles", async (req, res) => {
+    try {
+      const articles = await getBlogArticles("published");
+      res.json(articles);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/blog/articles/:slug", async (req, res) => {
+    try {
+      const article = await getBlogArticleBySlug(req.params.slug);
+      if (!article || article.status !== "published") return res.status(404).json({ message: "Article not found" });
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/blog/generate", requireAdmin, async (req, res) => {
+    try {
+      const result = await generateBlogArticle(req.body);
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.patch("/api/admin/blog/articles/:id/publish", requireAdmin, async (req, res) => {
+    try {
+      const article = await publishBlogArticle(req.params.id);
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.patch("/api/admin/blog/articles/:id/unpublish", requireAdmin, async (req, res) => {
+    try {
+      const article = await unpublishBlogArticle(req.params.id);
+      res.json(article);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.delete("/api/admin/blog/articles/:id", requireAdmin, async (req, res) => {
+    try {
+      await deleteBlogArticle(req.params.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/admin/blog/stats", requireAdmin, async (req, res) => {
+    try {
+      const stats = await getBlogStats();
+      res.json(stats);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // ==================== SOCIAL SCHEDULER API ====================
+
+  app.get("/api/admin/social/posts", requireAdmin, async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const posts = await getSocialPosts(status);
+      res.json(posts);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/social/generate", requireAdmin, async (req, res) => {
+    try {
+      const result = await generateSocialPost(req.body);
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.post("/api/admin/social/generate-week", requireAdmin, async (req, res) => {
+    try {
+      const result = await generateWeeklyBatch();
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.patch("/api/admin/social/posts/:id/status", requireAdmin, async (req, res) => {
+    try {
+      const { status } = req.body;
+      const post = await updateSocialPostStatus(req.params.id, status);
+      res.json(post);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.delete("/api/admin/social/posts/:id", requireAdmin, async (req, res) => {
+    try {
+      await deleteSocialPost(req.params.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.get("/api/admin/social/stats", requireAdmin, async (req, res) => {
+    try {
+      const stats = await getSocialStats();
+      res.json(stats);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // ==================== GROWTH DASHBOARD API ====================
+
+  app.get("/api/admin/growth/overview", requireAdmin, async (req, res) => {
+    try {
+      const [blogStats, socialStats] = await Promise.all([
+        getBlogStats(),
+        getSocialStats(),
+      ]);
+
+      const referralCount = await db.execute(sql`SELECT COUNT(*) as count FROM referrals`);
+      const reviewCount = await db.execute(sql`SELECT COUNT(*) as count FROM review_requests`);
+      const reviewCompleted = await db.execute(sql`SELECT COUNT(*) as count FROM review_requests WHERE review_completed = true`);
+      const leadCount = await db.execute(sql`SELECT COUNT(*) as count FROM leads`);
+      const bookingCount = await db.execute(sql`SELECT COUNT(*) as count FROM bookings`);
+
+      res.json({
+        blog: blogStats,
+        social: socialStats,
+        referrals: { total: Number(referralCount.rows[0]?.count || 0) },
+        reviews: {
+          total: Number(reviewCount.rows[0]?.count || 0),
+          completed: Number(reviewCompleted.rows[0]?.count || 0),
+        },
+        leads: { total: Number(leadCount.rows[0]?.count || 0) },
+        bookings: { total: Number(bookingCount.rows[0]?.count || 0) },
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   });
 
