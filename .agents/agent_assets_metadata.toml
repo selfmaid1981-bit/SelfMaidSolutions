@@ -24,6 +24,42 @@ uri = "file://public/assets/before-after/after-bathroom-clean.png"
 type = "image"
 title = "clean bathroom after cleaning"
 
+[[generated]]
+id = "L3Mv-iTP8JN8CFpXShi04"
+uri = "file://public/assets/services/photo-disinfecting.png"
+type = "image"
+title = "disinfecting service photo"
+
+[[generated]]
+id = "J_9_z5BBTYJARNbGy-ts-"
+uri = "file://public/assets/services/photo-residential.png"
+type = "image"
+title = "residential cleaning photo"
+
+[[generated]]
+id = "cy61u9ZBk3JvhqlZ8x_kT"
+uri = "file://public/assets/services/photo-office.png"
+type = "image"
+title = "office cleaning photo"
+
+[[generated]]
+id = "jW2o66Qg_16_Lfw-BsNE1"
+uri = "file://public/assets/services/photo-shortStay.png"
+type = "image"
+title = "short stay rental cleaning photo"
+
+[[generated]]
+id = "Zd0h4CgoIoWuSjLwNFwYF"
+uri = "file://public/assets/services/photo-commercial.png"
+type = "image"
+title = "commercial cleaning photo"
+
+[[generated]]
+id = "o-6D22MxJpIn70-BugPqB"
+uri = "file://public/assets/services/photo-multitenant.png"
+type = "image"
+title = "multi tenant building photo"
+
 [[outputs]]
 id = "7_v2xZJTlLhSIz3Y3U91a"
 uri = "file://.local/architecture-plan.md"
