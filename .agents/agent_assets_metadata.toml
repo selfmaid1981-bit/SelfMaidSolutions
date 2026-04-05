@@ -1,5 +1,28 @@
 uploads = []
-generated = []
+
+[[generated]]
+id = "UGmP0V45NdBUYtK3I4qJJ"
+uri = "file://public/assets/before-after/before-kitchen-dirty.png"
+type = "image"
+title = "dirty kitchen before cleaning"
+
+[[generated]]
+id = "HZHpX0vsF6YivbWwPq34r"
+uri = "file://public/assets/before-after/after-kitchen-clean.png"
+type = "image"
+title = "clean kitchen after cleaning"
+
+[[generated]]
+id = "d-lK59d-gnSe03HvGuv9C"
+uri = "file://public/assets/before-after/before-bathroom-dirty.png"
+type = "image"
+title = "dirty bathroom before cleaning"
+
+[[generated]]
+id = "gXQeSMM9Crg1LgEVOfUTk"
+uri = "file://public/assets/before-after/after-bathroom-clean.png"
+type = "image"
+title = "clean bathroom after cleaning"
 
 [[outputs]]
 id = "7_v2xZJTlLhSIz3Y3U91a"
