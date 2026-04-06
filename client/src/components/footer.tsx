@@ -62,7 +62,7 @@ export function Footer() {
 
   return (
     <footer className="relative text-white overflow-hidden deep-teal-bg">
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1E8E6A] via-[#C6A969] to-[#166B50]" />
+      <div className="absolute top-0 left-0 right-0 h-1.5 gold-bg" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

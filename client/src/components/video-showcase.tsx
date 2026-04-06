@@ -71,11 +71,11 @@ export function VideoShowcase() {
     <section className="py-14 lg:py-20 deep-teal-bg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <p className="text-[#C6A969] text-sm font-semibold tracking-widest uppercase mb-3">Our Work in Motion</p>
+          <p className="gold-text text-sm font-semibold tracking-widest uppercase mb-3">Our Work in Motion</p>
           <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
             See It. Believe It.
           </h2>
-          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-4" />
+          <div className="w-24 gold-divider mx-auto mt-4" />
           <p className="text-white/60 mt-4 max-w-lg mx-auto">
             Watch our team deliver the premium results that Montgomery homeowners trust.
           </p>

@@ -133,7 +133,7 @@ export function GoogleReviews() {
             </a>
             <a
               href="/quote"
-              className="inline-flex items-center gap-2 bg-[#C6A969] text-[#1F2A37] px-8 py-4 rounded-xl font-bold hover:bg-[#b89a5a] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 gold-bg text-[#1F2A37] px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all duration-300 shadow-md shadow-amber-500/20 hover:shadow-xl hover:-translate-y-0.5"
             >
               Get Your Free Quote
               <Star className="w-4 h-4 fill-[#1F2A37]" />

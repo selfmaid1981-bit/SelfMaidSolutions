@@ -110,7 +110,7 @@ export function PricingSection() {
                 <Button
                   className={`w-full font-semibold ${
                     service.highlight
-                      ? 'bg-[#C6A969] text-[#1F2A37] hover:bg-[#b89a5a]'
+                      ? 'gold-bg text-[#1F2A37] hover:opacity-90'
                       : 'bg-[#1F2A37] hover:bg-[#2a3a4d] text-[#C6A969]'
                   }`}
                 >

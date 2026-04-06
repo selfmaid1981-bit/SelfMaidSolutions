@@ -135,7 +135,7 @@ export default function Home() {
       
       <div className="min-h-screen marble-bg">
         <Navigation />
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C6A969] to-transparent" />
+        <div className="gold-divider" />
         <HeroSection />
         <ServicesSection />
         <BeforeAfterGallery />
@@ -152,7 +152,7 @@ export default function Home() {
           <div className="flex gap-2">
             <a 
               href="tel:334-877-9513"
-              className="flex-[1.2] inline-flex items-center justify-center gap-2 bg-[#C6A969] text-[#1F2A37] py-3.5 rounded-xl font-bold text-sm shadow-md"
+              className="flex-[1.2] inline-flex items-center justify-center gap-2 gold-bg text-[#1F2A37] py-3.5 rounded-xl font-bold text-sm shadow-md shadow-amber-500/20"
             >
               <Phone className="w-4 h-4" />
               Call Now

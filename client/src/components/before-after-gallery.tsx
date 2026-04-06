@@ -61,7 +61,7 @@ export default function BeforeAfterGallery() {
           <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
             See the Difference
           </h2>
-          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+          <div className="w-24 gold-divider mx-auto mt-3" />
         </div>
 
         <div className="max-w-2xl mx-auto">
@@ -92,7 +92,7 @@ export default function BeforeAfterGallery() {
                   height={300}
                 />
                 <div className="absolute bottom-3 right-3">
-                  <span className="inline-block bg-[#C6A969] text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
+                  <span className="inline-block gold-bg text-[#1F2A37] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md">
                     After
                   </span>
                 </div>

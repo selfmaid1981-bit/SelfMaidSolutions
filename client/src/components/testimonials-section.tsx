@@ -29,7 +29,7 @@ export function TestimonialsSection() {
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
             What Our Clients Are Saying
           </h2>
-          <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
+          <div className="w-24 gold-divider mx-auto mt-3" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
