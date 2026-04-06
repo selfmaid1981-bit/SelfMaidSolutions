@@ -10,9 +10,9 @@ import residentialImage from '@assets/stock_images/professional_house_c_e14d1c08
 import deepCleaningImage from '@assets/stock_images/deep_cleaning_kitche_676b17fb.jpg';
 import commercialImage from '@assets/stock_images/commercial_office_cl_ccd81be4.jpg';
 import airbnbImage from '@assets/stock_images/airbnb_vacation_rent_f4a32ec6.jpg';
-import moveoutImage from '@assets/stock_images/move_out_cleaning_em_6d539a21.jpg';
+import moveoutImage from '@assets/stock_images/move_out_cleaning_em_6d539a21.jpg.png';
 import apartmentImage from '@assets/stock_images/apartment_cleaning_p_7464443a.jpg';
-import dormImage from '@assets/stock_images/student_dorm_room_cl_f32964a4.jpg';
+import dormImage from '@assets/stock_images/student_dorm_room_cl_f32964a4.jpg.png';
 
 const serviceImages: Record<string, string> = {
   residential: residentialImage,

@@ -60,6 +60,18 @@ uri = "file://public/assets/services/photo-multitenant.png"
 type = "image"
 title = "multi tenant building photo"
 
+[[generated]]
+id = "lypbbiT8ay6vXDr_HVRE1"
+uri = "file://attached_assets/stock_images/move_out_cleaning_em_6d539a21.jpg.png"
+type = "image"
+title = "move out cleaning result"
+
+[[generated]]
+id = "Q0qGqM6qYQkoVsROITQlo"
+uri = "file://attached_assets/stock_images/student_dorm_room_cl_f32964a4.jpg.png"
+type = "image"
+title = "clean dorm room"
+
 [[outputs]]
 id = "7_v2xZJTlLhSIz3Y3U91a"
 uri = "file://.local/architecture-plan.md"
