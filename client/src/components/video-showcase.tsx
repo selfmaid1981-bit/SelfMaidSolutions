@@ -68,7 +68,7 @@ function VideoCard({ video }: { video: typeof showcaseVideos[0] }) {
 
 export function VideoShowcase() {
   return (
-    <section className="py-14 lg:py-20" style={{ background: 'linear-gradient(180deg, #1F2A37 0%, #1e2e35 100%)' }}>
+    <section className="py-14 lg:py-20 deep-teal-bg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <p className="text-[#C6A969] text-sm font-semibold tracking-widest uppercase mb-3">Our Work in Motion</p>

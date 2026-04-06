@@ -135,7 +135,7 @@ export function HomepageQuoteCalculator() {
   const inputClass = "w-full bg-white border border-gray-200 text-[#1F2A37] rounded-lg px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C6A969]/50 focus:border-[#C6A969]";
 
   return (
-    <section className="py-14 lg:py-20" style={{ background: 'linear-gradient(135deg, #1F2A37 0%, #1e2e35 50%, #1F2A37 100%)' }} id="instant-quote">
+    <section className="py-14 lg:py-20 deep-teal-bg" id="instant-quote">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">

@@ -55,7 +55,7 @@ function TransformationVideo() {
 
 export default function BeforeAfterGallery() {
   return (
-    <section className="py-14 lg:py-20" style={{ background: 'linear-gradient(135deg, #0a2a2f 0%, #0e3640 30%, #0f3a45 50%, #0c2e35 70%, #091e24 100%)' }}>
+    <section className="py-14 lg:py-20 deep-teal-bg">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">

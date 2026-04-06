@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function FinalCtaSection() {
   return (
-    <section className="text-white py-16 lg:py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1F2A37 0%, #1e2e35 50%, #1F2A37 100%)' }}>
+    <section className="text-white py-16 lg:py-20 relative overflow-hidden deep-teal-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold mb-3 font-serif italic">
           Ready for a Spotless Home?
