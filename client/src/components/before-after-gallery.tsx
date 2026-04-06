@@ -8,13 +8,6 @@ const galleryPairs = [
     beforeAlt: 'Kitchen before cleaning',
     afterAlt: 'Kitchen after Self-Maid cleaning',
   },
-  {
-    id: 'bathroom',
-    beforeImage: '/assets/before-after/before-bathroom-dirty.png',
-    afterImage: '/assets/before-after/after-bathroom-clean.png',
-    beforeAlt: 'Bathroom before cleaning',
-    afterAlt: 'Bathroom after Self-Maid cleaning',
-  },
 ];
 
 function TransformationVideo() {
@@ -62,18 +55,18 @@ function TransformationVideo() {
 
 export default function BeforeAfterGallery() {
   return (
-    <section className="py-14 lg:py-20 marble-bg">
+    <section className="py-14 lg:py-20" style={{ background: 'linear-gradient(135deg, #0a2a2f 0%, #0e3640 30%, #0f3a45 50%, #0c2e35 70%, #091e24 100%)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#1F2A37] font-serif italic">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif italic">
             See the Difference
           </h2>
           <div className="w-24 h-[2px] bg-[#C6A969] mx-auto mt-3" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-2xl mx-auto">
           {galleryPairs.map((pair) => (
-            <div key={pair.id} className="grid grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg border border-gray-200">
+            <div key={pair.id} className="grid grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-2xl border border-[#C6A969]/30">
               <div className="relative">
                 <img
                   src={pair.beforeImage}

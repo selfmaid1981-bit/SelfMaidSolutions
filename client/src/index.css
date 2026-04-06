@@ -370,13 +370,14 @@
 }
 
 .marble-bg {
-  background-color: #f5f0eb;
+  background-color: #f0f0f2;
   background-image:
-    radial-gradient(ellipse at 15% 30%, rgba(198, 169, 105, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 85% 70%, rgba(180, 160, 130, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 10%, rgba(220, 210, 195, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 80%, rgba(200, 190, 175, 0.08) 0%, transparent 50%),
-    linear-gradient(160deg, rgba(255,255,255,0.7) 0%, rgba(240,232,220,0.5) 30%, rgba(250,245,238,0.6) 60%, rgba(255,255,255,0.8) 100%);
+    radial-gradient(ellipse at 20% 50%, rgba(160, 170, 190, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(140, 155, 175, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 80%, rgba(170, 175, 195, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(180, 185, 200, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 60%, rgba(150, 160, 185, 0.10) 0%, transparent 50%),
+    linear-gradient(145deg, rgba(245,245,248,0.9) 0%, rgba(235,237,242,0.6) 25%, rgba(242,242,246,0.7) 50%, rgba(238,240,245,0.5) 75%, rgba(245,245,248,0.9) 100%);
 }
 
 .nav-link {

@@ -40,7 +40,7 @@ const plans = [
 
 export function RecurringPlansSection() {
   return (
-    <section className="py-20 lg:py-28 bg-white dark:bg-background">
+    <section className="py-20 lg:py-28 marble-bg dark:bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">

@@ -2,7 +2,7 @@ import { Star } from 'lucide-react';
 
 export function TrustBar() {
   return (
-    <div className="bg-white py-5 border-b border-gray-200">
+    <div className="marble-bg py-5 border-b border-gray-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap text-sm font-semibold text-gray-700">
           <span className="flex items-center gap-1.5">
