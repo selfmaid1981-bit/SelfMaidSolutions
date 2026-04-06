@@ -29,16 +29,16 @@ export function FloatingCTA() {
           <div className="flex flex-col gap-2 items-end animate-in slide-in-from-bottom-4 duration-200">
             <a
               href="tel:334-877-9513"
-              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-emerald-50 hover:border-emerald-300 transition-all whitespace-nowrap"
+              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-[#C6A969]/5 hover:border-[#C6A969]/30 transition-all whitespace-nowrap"
             >
-              <Phone className="w-4 h-4 text-emerald-500" />
+              <Phone className="w-4 h-4 text-[#C6A969]" />
               Call (334) 877-9513
             </a>
             <button
               onClick={() => { setIsBookingModalOpen(true); setExpanded(false); }}
-              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-emerald-50 hover:border-emerald-300 transition-all whitespace-nowrap"
+              className="flex items-center gap-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-5 py-3 rounded-2xl shadow-xl font-semibold text-sm hover:bg-[#C6A969]/5 hover:border-[#C6A969]/30 transition-all whitespace-nowrap"
             >
-              <Calendar className="w-4 h-4 text-emerald-500" />
+              <Calendar className="w-4 h-4 text-[#C6A969]" />
               Get a Quote
             </button>
           </div>
@@ -63,12 +63,12 @@ export function FloatingCTA() {
               }
             }}
             onContextMenu={(e) => { e.preventDefault(); setExpanded(!expanded); }}
-            className="relative group flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 hover:from-emerald-700 hover:via-emerald-600 hover:to-teal-600 text-white px-6 py-4 rounded-2xl shadow-2xl shadow-emerald-600/40 font-bold text-sm transition-all duration-300 hover:shadow-emerald-600/60 hover:-translate-y-0.5 active:translate-y-0"
+            className="relative group flex items-center gap-2.5 gold-bg text-[#1F2A37] px-6 py-4 rounded-2xl shadow-2xl shadow-amber-600/20 font-bold text-sm transition-all duration-300 hover:shadow-amber-600/40 hover:-translate-y-0.5 active:translate-y-0"
             aria-label="Book cleaning now"
             data-testid="floating-book-btn"
           >
             <span className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white animate-pulse" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-[#C6A969] rounded-full border-2 border-white animate-pulse" />
             <Calendar className="w-5 h-5 relative z-10" />
             <span className="relative z-10 font-extrabold tracking-wide">Book Now</span>
             <ChevronUp

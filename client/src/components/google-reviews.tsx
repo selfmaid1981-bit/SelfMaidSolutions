@@ -9,7 +9,7 @@ const reviews = [
     date: "2 weeks ago",
     text: "Self-Maid transformed our home! The team was professional, thorough, and left everything sparkling clean. They even got stains out of our carpet that we thought were permanent. Highly recommend!",
     avatar: "SM",
-    avatarGradient: "from-emerald-500 to-indigo-600"
+    avatarGradient: "from-[#1F2A37] to-[#2D3F52]"
   },
   {
     name: "Michael R.",
@@ -17,7 +17,7 @@ const reviews = [
     date: "1 month ago",
     text: "Best cleaning service in Montgomery. They've been cleaning our office for 2 years now. Always on time, always thorough. Our employees love coming to a spotless workspace!",
     avatar: "MR",
-    avatarGradient: "from-teal-500 to-emerald-600"
+    avatarGradient: "from-[#2D3F52] to-[#1F2A37]"
   },
   {
     name: "Jennifer T.",
@@ -25,7 +25,7 @@ const reviews = [
     date: "3 weeks ago",
     text: "Used Self-Maid for our move-out cleaning and got my full deposit back! They were flexible with scheduling and the price was very fair. Will definitely use again.",
     avatar: "JT",
-    avatarGradient: "from-violet-500 to-emerald-600"
+    avatarGradient: "from-violet-500 to-[#1F2A37]"
   },
 ];
 
@@ -61,12 +61,12 @@ export function GoogleReviews() {
           {reviews.map((review, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-200/70 dark:border-slate-700/40 bg-white/95 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:border-emerald-200/60 dark:hover:border-emerald-700/40"
+              className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-200/70 dark:border-slate-700/40 bg-white/95 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:border-[#C6A969]/30 dark:hover:border-[#C6A969]/20"
               data-testid={`google-review-${index}`}
             >
               <div className="h-1.5 bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
-                <div className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-emerald-400/5 to-teal-400/5 rounded-full group-hover:from-emerald-400/10 group-hover:to-teal-400/10 transition-all duration-500 pointer-events-none" />
+                <div className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-[#C6A969]/5 to-[#1F2A37]/5 rounded-full group-hover:from-[#C6A969]/10 group-hover:to-[#1F2A37]/10 transition-all duration-500 pointer-events-none" />
                 <div className="flex items-start gap-3 mb-4 relative">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${review.avatarGradient} flex items-center justify-center font-bold text-white text-sm shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 ring-2 ring-white/50 dark:ring-slate-700/50`}>
                     {review.avatar}
@@ -89,8 +89,8 @@ export function GoogleReviews() {
                 <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed italic">"{review.text}"</p>
                 <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-xs">
-                    <ThumbsUp className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">Verified Google Review</span>
+                    <ThumbsUp className="w-3.5 h-3.5 text-[#C6A969]" />
+                    <span className="text-[#1F2A37] dark:text-[#C6A969] font-medium">Verified Google Review</span>
                   </div>
                   <div className="flex items-center gap-1 text-xs text-slate-400">
                     <Shield className="w-3 h-3" />

@@ -87,18 +87,18 @@ function CountdownTimer({ seconds, onExpire }: { seconds: number; onExpire: () =
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Timer className={`w-4 h-4 ${isUrgent ? 'text-emerald-500 animate-pulse' : 'text-orange-500'}`} />
-          <span className={`text-sm font-semibold ${isUrgent ? 'text-emerald-600' : 'text-orange-600'}`}>
+          <Timer className={`w-4 h-4 ${isUrgent ? 'text-[#C6A969] animate-pulse' : 'text-orange-500'}`} />
+          <span className={`text-sm font-semibold ${isUrgent ? 'text-[#C6A969]' : 'text-orange-600'}`}>
             Offer expires in
           </span>
         </div>
-        <span className={`text-lg font-bold font-mono ${isUrgent ? 'text-emerald-600' : 'text-orange-700'}`}>
+        <span className={`text-lg font-bold font-mono ${isUrgent ? 'text-[#C6A969]' : 'text-orange-700'}`}>
           {mins}:{secs.toString().padStart(2, '0')}
         </span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-1.5">
         <div
-          className={`h-1.5 rounded-full transition-all duration-1000 ${isUrgent ? 'bg-emerald-500' : 'bg-orange-500'}`}
+          className={`h-1.5 rounded-full transition-all duration-1000 ${isUrgent ? 'bg-[#C6A969]' : 'bg-orange-500'}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -265,12 +265,12 @@ export default function Quote() {
         <section className="page-hero py-14 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl mb-6">
-              <Calculator className="w-8 h-8 text-teal-300" />
+              <Calculator className="w-8 h-8 text-[#C6A969]" />
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Get Your Free Quote
             </h1>
-            <p className="text-xl text-emerald-100/80 max-w-3xl mx-auto">
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
               Transparent pricing with no hidden fees. Enter your home details and see your price instantly.
             </p>
           </div>
@@ -281,10 +281,10 @@ export default function Quote() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
-                  <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-teal-500" />
+                  <div className="h-1.5 gold-bg" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#1F2A37] to-[#2D3F52] rounded-lg flex items-center justify-center">
                         <Calculator className="w-4 h-4 text-white" />
                       </div>
                       Your Home Details
@@ -310,7 +310,7 @@ export default function Quote() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <Label htmlFor="bedrooms" className="flex items-center gap-1.5">
-                          <BedDouble className="w-4 h-4 text-emerald-500" />
+                          <BedDouble className="w-4 h-4 text-[#C6A969]" />
                           Bedrooms
                         </Label>
                         <Input
@@ -326,7 +326,7 @@ export default function Quote() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="bathrooms" className="flex items-center gap-1.5">
-                          <Bath className="w-4 h-4 text-teal-500" />
+                          <Bath className="w-4 h-4 text-[#C6A969]" />
                           Bathrooms
                         </Label>
                         <Input
@@ -407,26 +407,26 @@ export default function Quote() {
 
               <div className="space-y-6">
                 <Card className="sticky top-24 rounded-2xl shadow-2xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden relative">
-                  <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500" />
+                  <div className="h-1.5 gold-bg" />
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-teal-500" />
+                      <Sparkles className="w-5 h-5 text-[#C6A969]" />
                       Your Estimated Quote
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     {hasInput ? (
                       <div className="space-y-6">
-                        <div className="text-center py-8 bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
+                        <div className="text-center py-8 bg-gradient-to-br from-[#1F2A37] to-[#2D3F52] rounded-2xl -mx-2 relative overflow-hidden shadow-lg">
                           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-                          <p className="text-emerald-100 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
+                          <p className="text-white/80 text-sm mb-2 font-semibold uppercase tracking-wider relative z-10">Estimated Total</p>
                           {showIncentive && !discountExpired ? (
                             <>
-                              <p className="text-2xl text-emerald-200/60 line-through relative z-10">${quote}</p>
+                              <p className="text-2xl text-white/40 line-through relative z-10">${quote}</p>
                               <p className="text-6xl font-black text-white relative z-10 drop-shadow-lg" data-testid="quote-total">
                                 ${discountedPrice}
                               </p>
-                              <div className="mt-2 inline-flex items-center gap-1.5 bg-emerald-500/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-bold relative z-10 animate-pulse">
+                              <div className="mt-2 inline-flex items-center gap-1.5 bg-[#C6A969]/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[#1F2A37] text-xs font-bold relative z-10 animate-pulse">
                                 <Zap className="w-3.5 h-3.5" />
                                 You save ${savings}!
                               </div>
@@ -438,7 +438,7 @@ export default function Quote() {
                               </p>
                             </>
                           )}
-                          <p className="text-emerald-100/80 text-sm mt-2 relative z-10">
+                          <p className="text-white/70 text-sm mt-2 relative z-10">
                             {frequency !== 'onetime' ? 'per service' : 'one-time service'}
                           </p>
                           <div className="mt-3 inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-semibold relative z-10">
@@ -493,7 +493,7 @@ export default function Quote() {
                         {showIncentive && !discountExpired && (
                           <div className="rounded-xl border-2 border-orange-400 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 p-4 space-y-3" data-testid="incentive-panel">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-[#C6A969] rounded-lg flex items-center justify-center">
                                 <Zap className="w-4 h-4 text-white" />
                               </div>
                               <div>
@@ -531,7 +531,7 @@ export default function Quote() {
                             <>
                               <Button
                                 onClick={() => setShowSaveForm(true)}
-                                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                className="w-full gold-bg text-[#1F2A37] hover:opacity-90"
                                 data-testid="show-save-form-button"
                               >
                                 <Save className="w-4 h-4 mr-2" />
@@ -553,8 +553,8 @@ export default function Quote() {
                                 size="lg"
                                 className={`w-full text-white font-bold text-lg py-6 shadow-lg transition-all ${
                                   !discountExpired
-                                    ? 'bg-gradient-to-r from-orange-500 to-emerald-500 hover:from-orange-600 hover:to-emerald-600 animate-pulse hover:animate-none'
-                                    : 'bg-emerald-600 hover:bg-emerald-700'
+                                    ? 'gold-bg animate-pulse hover:animate-none'
+                                    : 'bg-[#1F2A37] hover:bg-[#2D3F52]'
                                 }`}
                                 data-testid="button-book-with-discount"
                               >
@@ -575,7 +575,7 @@ export default function Quote() {
                           ) : (
                             <div className="space-y-4 bg-gradient-to-br from-muted/30 to-muted/10 p-5 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
                               <h4 className="font-semibold text-foreground flex items-center gap-2">
-                                <div className="w-7 h-7 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                                <div className="w-7 h-7 bg-gradient-to-br from-[#1F2A37] to-[#2D3F52] rounded-lg flex items-center justify-center">
                                   <Mail className="w-3.5 h-3.5 text-white" />
                                 </div>
                                 Your Information
@@ -618,7 +618,7 @@ export default function Quote() {
                                 <Button
                                   onClick={handleSaveQuote}
                                   disabled={saveQuoteMutation.isPending}
-                                  className="flex-1 bg-green-600 hover:bg-green-700"
+                                  className="flex-1 gold-bg text-[#1F2A37] hover:opacity-90"
                                   data-testid="button-save-quote"
                                 >
                                   {saveQuoteMutation.isPending ? 'Saving...' : 'Save & Email Quote'}
@@ -626,7 +626,7 @@ export default function Quote() {
                                 <Button
                                   onClick={handleBookThisQuote}
                                   disabled={!customerName || !customerEmail}
-                                  className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+                                  className="flex-1 bg-[#1F2A37] hover:bg-[#2D3F52]"
                                   data-testid="button-book-this-quote"
                                 >
                                   <BookOpen className="w-4 h-4 mr-2" />
@@ -659,10 +659,10 @@ export default function Quote() {
 
                 {showIncentive && (
                   <Card className="rounded-2xl shadow-xl border-slate-200/50 dark:border-slate-700/50 overflow-hidden" data-testid="available-slots-card">
-                    <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+                    <div className="h-1.5 gold-bg" />
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg font-bold flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-emerald-500" />
+                        <Calendar className="w-5 h-5 text-[#C6A969]" />
                         Available Booking Slots
                       </CardTitle>
                       <p className="text-xs text-muted-foreground">Select a time and we'll pre-fill your booking</p>
@@ -680,8 +680,8 @@ export default function Quote() {
                                   onClick={() => setSelectedSlot(isSelected ? null : { date: day.date, time: slot })}
                                   className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
                                     isSelected
-                                      ? 'bg-emerald-500 text-white border-emerald-500 shadow-md'
-                                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-emerald-400 hover:bg-emerald-50'
+                                      ? 'bg-[#1F2A37] text-white border-[#1F2A37] shadow-md'
+                                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#C6A969] hover:bg-[#C6A969]/5'
                                   }`}
                                   data-testid={`slot-${day.date}-${slot}`}
                                 >
@@ -694,9 +694,9 @@ export default function Quote() {
                         </div>
                       ))}
                       {selectedSlot && (
-                        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-lg p-3 flex items-center gap-2">
-                          <Check className="w-4 h-4 text-emerald-600" />
-                          <p className="text-sm text-emerald-700 dark:text-emerald-300">
+                        <div className="bg-[#C6A969]/10 dark:bg-[#C6A969]/10 rounded-lg p-3 flex items-center gap-2">
+                          <Check className="w-4 h-4 text-[#C6A969]" />
+                          <p className="text-sm text-[#1F2A37] dark:text-[#C6A969]">
                             Selected: <strong>{selectedSlot.time}</strong> on <strong>{selectedSlot.date}</strong>
                           </p>
                         </div>

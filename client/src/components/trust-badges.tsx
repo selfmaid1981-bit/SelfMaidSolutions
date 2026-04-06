@@ -5,13 +5,13 @@ const trustBadges = [
     icon: Award,
     title: '16 Years',
     subtitle: 'In Business',
-    color: 'text-emerald-600 dark:text-emerald-400'
+    color: 'text-[#C6A969] dark:text-[#C6A969]'
   },
   {
     icon: Shield,
     title: 'Fully Insured',
     subtitle: '& Bonded',
-    color: 'text-green-600 dark:text-green-400'
+    color: 'text-[#C6A969] dark:text-[#C6A969]'
   },
   {
     icon: Users,
@@ -29,13 +29,13 @@ const trustBadges = [
     icon: CheckCircle2,
     title: '100%',
     subtitle: 'Satisfaction Guarantee',
-    color: 'text-emerald-600 dark:text-emerald-400'
+    color: 'text-[#C6A969] dark:text-[#C6A969]'
   },
   {
     icon: Phone,
     title: '2-Hour',
     subtitle: 'Response Time',
-    color: 'text-emerald-600 dark:text-emerald-400'
+    color: 'text-[#C6A969] dark:text-[#C6A969]'
   }
 ];
 
@@ -49,7 +49,7 @@ export default function TrustBadges() {
             return (
               <div 
                 key={index}
-                className="flex flex-col items-center text-center p-4 rounded-lg bg-slate-800/50 dark:bg-slate-900/50 border border-slate-700 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all duration-300 hover:transform hover:scale-105"
+                className="flex flex-col items-center text-center p-4 rounded-lg bg-slate-800/50 dark:bg-slate-900/50 border border-slate-700 dark:border-slate-800 hover:border-[#C6A969] dark:hover:border-[#C6A969] transition-all duration-300 hover:transform hover:scale-105"
                 data-testid={`trust-badge-${index}`}
               >
                 <div className="mb-2">

@@ -41,7 +41,7 @@ export function RecruitmentSection() {
 
   return (
     <>
-      <section className="py-16 lg:py-24 deep-teal-bg dark:from-slate-900 dark:to-emerald-950">
+      <section className="py-16 lg:py-24 deep-teal-bg dark:from-slate-900 dark:to-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <div>

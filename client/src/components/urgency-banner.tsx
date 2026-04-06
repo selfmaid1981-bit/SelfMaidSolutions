@@ -21,19 +21,19 @@ export function UrgencyBanner({ variant = 'booking' }: UrgencyBannerProps) {
       icon: Calendar,
       text: `Only ${spotsLeft} spots left this week!`,
       subtext: 'Book now to secure your preferred time',
-      color: 'from-orange-500 to-emerald-500',
+      color: 'from-orange-500 to-[#C6A969]',
     },
     quote: {
       icon: Clock,
       text: 'Quote valid for 7 days',
       subtext: 'Lock in your price before rates increase',
-      color: 'from-emerald-500 to-emerald-500',
+      color: 'from-[#C6A969] to-[#C6A969]',
     },
     checkout: {
       icon: Users,
       text: `${viewingNow} people viewing this slot`,
       subtext: 'Complete payment to confirm your booking',
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-[#C6A969] to-[#C6A969]',
     },
   };
 
@@ -76,13 +76,13 @@ export function TrustSignals() {
   return (
     <div className="flex flex-wrap justify-center gap-3 text-xs md:text-sm text-muted-foreground">
       <span className="flex items-center gap-1">
-        <span className="text-green-500">✓</span> No upfront payment required
+        <span className="text-[#C6A969]">✓</span> No upfront payment required
       </span>
       <span className="flex items-center gap-1">
-        <span className="text-green-500">✓</span> Free cancellation 24h before
+        <span className="text-[#C6A969]">✓</span> Free cancellation 24h before
       </span>
       <span className="flex items-center gap-1">
-        <span className="text-green-500">✓</span> 100% satisfaction guarantee
+        <span className="text-[#C6A969]">✓</span> 100% satisfaction guarantee
       </span>
     </div>
   );

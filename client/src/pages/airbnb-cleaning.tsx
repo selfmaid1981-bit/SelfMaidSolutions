@@ -135,20 +135,20 @@ export default function AirbnbCleaning() {
         <Navigation />
 
         {/* Hero */}
-        <section className="relative bg-gradient-to-br from-teal-900 via-slate-800 to-emerald-900 text-white py-20 md:py-28 overflow-hidden">
+        <section className="relative deep-teal-bg text-white py-20 md:py-28 overflow-hidden">
           <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute top-10 right-10 w-72 h-72 bg-teal-500/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl" />
+          <div className="absolute top-10 right-10 w-72 h-72 bg-[#C6A969]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-64 h-64 bg-[#C6A969]/10 rounded-full blur-3xl" />
 
           <div className="relative container mx-auto px-4 text-center max-w-4xl">
-            <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-sm border border-teal-400/30 text-teal-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#C6A969]/20 backdrop-blur-sm border border-[#C6A969]/30 text-[#C6A969] px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Key className="w-4 h-4" />
               For Airbnb Hosts & Property Managers
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               5-Star Airbnb Cleaning<br />
-              <span className="text-teal-400">Done Right, Every Time</span>
+              <span className="text-[#C6A969]">Done Right, Every Time</span>
             </h1>
 
             <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-4">
@@ -157,19 +157,19 @@ export default function AirbnbCleaning() {
 
             <div className="flex flex-wrap justify-center gap-3 mb-8 text-sm">
               <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-                <TrendingUp className="w-4 h-4 text-teal-400" /> Boost Your Ratings
+                <TrendingUp className="w-4 h-4 text-[#C6A969]" /> Boost Your Ratings
               </span>
               <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
                 <Clock className="w-4 h-4 text-amber-400" /> Same-Day Available
               </span>
               <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-                <Shield className="w-4 h-4 text-emerald-400" /> Fully Insured
+                <Shield className="w-4 h-4 text-[#C6A969]" /> Fully Insured
               </span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/quote">
-                <Button size="lg" className="bg-teal-500 hover:bg-teal-400 text-white text-lg px-8 py-6 font-bold">
+                <Button size="lg" className="gold-bg text-[#1F2A37] text-lg px-8 py-6 font-bold hover:opacity-90">
                   Get Airbnb Quote <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
@@ -186,7 +186,7 @@ export default function AirbnbCleaning() {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+              <div className="inline-flex items-center gap-2 bg-[#C6A969]/10 dark:bg-[#C6A969]/20 text-[#1F2A37] dark:text-[#C6A969] px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                 <Sparkles className="w-4 h-4" /> Why Hosts Trust Self-Maid
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything Your Rental Needs to Succeed</h2>
@@ -201,7 +201,7 @@ export default function AirbnbCleaning() {
                 return (
                   <Card key={f.title} className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-slate-800">
                     <CardContent className="p-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4 shadow-md">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#1F2A37] to-[#2D3F52] rounded-xl flex items-center justify-center mb-4 shadow-md">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold mb-2">{f.title}</h3>
@@ -224,27 +224,27 @@ export default function AirbnbCleaning() {
 
             <div className="grid md:grid-cols-3 gap-6">
               {pricing.map((tier) => (
-                <Card key={tier.label} className={`relative overflow-hidden ${tier.popular ? 'border-2 border-teal-500 shadow-xl shadow-teal-500/10' : 'border shadow-md'}`}>
+                <Card key={tier.label} className={`relative overflow-hidden ${tier.popular ? 'border-2 border-[#C6A969] shadow-xl shadow-[#C6A969]/10' : 'border shadow-md'}`}>
                   {tier.popular && (
-                    <div className="absolute top-0 left-0 right-0 bg-teal-500 text-white text-xs font-bold text-center py-1.5 tracking-wider">
+                    <div className="absolute top-0 left-0 right-0 gold-bg text-[#1F2A37] text-xs font-bold text-center py-1.5 tracking-wider">
                       MOST POPULAR
                     </div>
                   )}
                   <CardContent className={`p-6 ${tier.popular ? 'pt-10' : 'pt-6'}`}>
                     <h3 className="text-lg font-bold mb-1">{tier.label}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{tier.note}</p>
-                    <div className="text-4xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">{tier.price}</div>
+                    <div className="text-4xl font-extrabold text-[#1F2A37] dark:text-[#C6A969] mb-1">{tier.price}</div>
                     <p className="text-xs text-muted-foreground mb-6">per turnover</p>
                     <ul className="space-y-2.5 mb-6">
                       {tier.features.map((feat) => (
                         <li key={feat} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0" />
+                          <CheckCircle className="w-4 h-4 text-[#C6A969] flex-shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
                     <Link href="/quote">
-                      <Button className={`w-full ${tier.popular ? 'bg-teal-500 hover:bg-teal-400 text-white' : ''}`} variant={tier.popular ? 'default' : 'outline'}>
+                      <Button className={`w-full ${tier.popular ? 'gold-bg text-[#1F2A37] hover:opacity-90' : ''}`} variant={tier.popular ? 'default' : 'outline'}>
                         Get Started
                       </Button>
                     </Link>
@@ -255,7 +255,7 @@ export default function AirbnbCleaning() {
 
             <p className="text-center text-sm text-muted-foreground mt-6">
               Prices may vary based on property condition. Deep cleaning and add-ons available.{' '}
-              <a href="tel:3348779513" className="text-teal-600 font-semibold hover:underline">Call for a custom quote.</a>
+              <a href="tel:3348779513" className="text-[#C6A969] font-semibold hover:underline">Call for a custom quote.</a>
             </p>
           </div>
         </section>
@@ -265,7 +265,7 @@ export default function AirbnbCleaning() {
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 bg-[#C6A969]/10 dark:bg-[#C6A969]/20 text-[#1F2A37] dark:text-[#C6A969] px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
                   <Award className="w-4 h-4" /> Our Turnover Checklist
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Every Item. Every Time.</h2>
@@ -274,7 +274,7 @@ export default function AirbnbCleaning() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link href="/booking">
-                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                    <Button className="gold-bg text-[#1F2A37] hover:opacity-90">
                       Book Your First Turnover
                     </Button>
                   </Link>
@@ -289,13 +289,13 @@ export default function AirbnbCleaning() {
                 <Card className="shadow-lg border-0">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-4">
-                      <Home className="w-5 h-5 text-teal-500" />
+                      <Home className="w-5 h-5 text-[#C6A969]" />
                       <span className="font-bold">Turnover Checklist</span>
                     </div>
                     <ul className="space-y-2.5">
                       {checklist.map((item) => (
                         <li key={item} className="flex items-start gap-2.5 text-sm">
-                          <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0 mt-0.5" />
+                          <CheckCircle className="w-4 h-4 text-[#C6A969] flex-shrink-0 mt-0.5" />
                           <span className="text-foreground/80">{item}</span>
                         </li>
                       ))}
@@ -308,11 +308,11 @@ export default function AirbnbCleaning() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-gradient-to-br from-teal-900 to-emerald-900 text-white">
+        <section className="py-20 deep-teal-bg text-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Hosts Love Self-Maid</h2>
-              <p className="text-teal-200 text-lg">Real results from real Airbnb hosts in Montgomery and Prattville</p>
+              <p className="text-white/70 text-lg">Real results from real Airbnb hosts in Montgomery and Prattville</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((t) => (
@@ -325,7 +325,7 @@ export default function AirbnbCleaning() {
                   <p className="text-white/85 text-sm leading-relaxed mb-4">"{t.text}"</p>
                   <div>
                     <div className="font-bold text-white text-sm">{t.name}</div>
-                    <div className="text-teal-300 text-xs">{t.location}</div>
+                    <div className="text-[#C6A969] text-xs">{t.location}</div>
                   </div>
                 </div>
               ))}
@@ -336,7 +336,7 @@ export default function AirbnbCleaning() {
         {/* CTA */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 text-center max-w-3xl">
-            <Sparkles className="w-10 h-10 text-teal-500 mx-auto mb-4" />
+            <Sparkles className="w-10 h-10 text-[#C6A969] mx-auto mb-4" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to Earn More 5-Star Reviews?
             </h2>
@@ -345,7 +345,7 @@ export default function AirbnbCleaning() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/quote">
-                <Button size="lg" className="bg-teal-500 hover:bg-teal-400 text-white text-lg px-8 py-6 font-bold">
+                <Button size="lg" className="gold-bg text-[#1F2A37] text-lg px-8 py-6 font-bold hover:opacity-90">
                   Get My Airbnb Quote <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>

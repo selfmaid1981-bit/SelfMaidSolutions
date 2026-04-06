@@ -88,7 +88,7 @@ export function AvailabilityPicker({ selectedDate, selectedTime, onDateChange, o
                 >
                   <span className="text-base">{slot.time}</span>
                   {slot.available ? (
-                    <span className="text-[10px] text-green-600 flex items-center gap-0.5 mt-0.5">
+                    <span className="text-[10px] text-[#C6A969] flex items-center gap-0.5 mt-0.5">
                       <CheckCircle2 className="w-3 h-3" /> Available
                     </span>
                   ) : (
@@ -104,7 +104,7 @@ export function AvailabilityPicker({ selectedDate, selectedTime, onDateChange, o
           )}
 
           {selectedTime && (
-            <Badge variant="outline" className="mt-2 text-green-700 border-green-200 bg-green-50">
+            <Badge variant="outline" className="mt-2 text-[#1F2A37] border-[#C6A969]/30 bg-[#C6A969]/10">
               <CheckCircle2 className="w-3 h-3 mr-1" /> {selectedTime} on {dayOfWeek}
             </Badge>
           )}

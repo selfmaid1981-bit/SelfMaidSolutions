@@ -21,7 +21,7 @@ const plans = [
     price: '$68+',
     originalPrice: '$80',
     perMonth: 'from $136/mo',
-    color: 'from-[#1F2A37] to-[#0f3a45]',
+    color: 'from-[#1F2A37] to-[#2D3F52]',
     badge: 'bg-[#1F2A37] text-[#C6A969]',
     features: ['Every two weeks', 'Consistent clean home', 'Priority scheduling', 'Free re-clean guarantee']
   },

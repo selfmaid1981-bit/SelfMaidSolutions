@@ -63,8 +63,8 @@ export function Footer() {
   return (
     <footer className="relative text-white overflow-hidden deep-teal-bg">
       <div className="absolute top-0 left-0 right-0 h-1.5 gold-bg" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#1F2A37]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#1F2A37]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
@@ -90,7 +90,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-slate-800/80 hover:bg-gradient-to-br hover:from-[#1E8E6A] hover:to-[#2D3F52] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 border border-slate-700/50 hover:border-transparent hover:shadow-lg hover:shadow-emerald-500/10 hover:scale-110"
+                    className="w-10 h-10 bg-slate-800/80 hover:bg-gradient-to-br hover:from-[#1F2A37] hover:to-[#2D3F52] rounded-xl flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 border border-slate-700/50 hover:border-transparent hover:shadow-lg hover:shadow-[#C6A969]/10 hover:scale-110"
                     aria-label={`Visit us on ${social.label}`}
                     data-testid={`social-${social.label.toLowerCase()}`}
                   >
@@ -119,7 +119,7 @@ export function Footer() {
                 <li key={index}>
                   <Link 
                     href={service.href} 
-                    className="text-slate-400 hover:text-emerald-300 transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
+                    className="text-slate-400 hover:text-[#C6A969] transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
                     data-testid={`footer-service-${index}`}
                   >
                     {service.name}
@@ -139,7 +139,7 @@ export function Footer() {
                 <li key={index}>
                   <Link 
                     href={link.href} 
-                    className="text-slate-400 hover:text-emerald-300 transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
+                    className="text-slate-400 hover:text-[#C6A969] transition-colors duration-200 text-sm hover:translate-x-1 inline-block"
                     data-testid={`footer-quick-link-${index}`}
                   >
                     {link.name}
@@ -161,8 +161,8 @@ export function Footer() {
                   className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center text-sm group"
                   data-testid="footer-phone"
                 >
-                  <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-2.5 group-hover:bg-emerald-500/20 transition-colors">
-                    <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-8 h-8 bg-[#C6A969]/10 rounded-lg flex items-center justify-center mr-2.5 group-hover:bg-[#C6A969]/20 transition-colors">
+                    <Phone className="w-3.5 h-3.5 text-[#C6A969]" />
                   </div>
                   (334) 877-9513
                 </a>
@@ -173,8 +173,8 @@ export function Footer() {
                   className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center text-sm group"
                   data-testid="footer-email"
                 >
-                  <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-2.5 flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                    <Mail className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-8 h-8 bg-[#C6A969]/10 rounded-lg flex items-center justify-center mr-2.5 flex-shrink-0 group-hover:bg-[#C6A969]/20 transition-colors">
+                    <Mail className="w-3.5 h-3.5 text-[#C6A969]" />
                   </div>
                   <span className="truncate">selfmaidclean@outlook.com</span>
                 </a>
@@ -187,8 +187,8 @@ export function Footer() {
                   className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center text-sm group"
                   data-testid="footer-maps"
                 >
-                  <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-2.5 flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-8 h-8 bg-[#C6A969]/10 rounded-lg flex items-center justify-center mr-2.5 flex-shrink-0 group-hover:bg-[#C6A969]/20 transition-colors">
+                    <MapPin className="w-3.5 h-3.5 text-[#C6A969]" />
                   </div>
                   Google Maps
                   <ExternalLink className="w-3 h-3 ml-1 opacity-50" />
@@ -210,7 +210,7 @@ export function Footer() {
                 { name: 'Alabaster', href: '/services/alabaster-al' },
               ].map((area, index, arr) => (
                 <span key={area.name}>
-                  <Link href={area.href} className="text-xs text-slate-500 hover:text-emerald-300 transition-colors">
+                  <Link href={area.href} className="text-xs text-slate-500 hover:text-[#C6A969] transition-colors">
                     {area.name}
                   </Link>
                   {index < arr.length - 1 && <span className="text-xs text-slate-600"> · </span>}
@@ -234,7 +234,7 @@ export function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-600 hover:text-emerald-300 transition-colors duration-200 px-2 py-0.5 rounded hover:bg-slate-800/60"
+                  className="text-slate-600 hover:text-[#C6A969] transition-colors duration-200 px-2 py-0.5 rounded hover:bg-slate-800/60"
                   data-testid={`directory-link-${index}`}
                 >
                   {link.name}
@@ -247,8 +247,8 @@ export function Footer() {
         <div className="border-t border-slate-800 py-5">
           <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs">
             {['Fully Insured','Bonded','Background Checked','Eco-Friendly','16 Yrs Experience','100% Guarantee'].map(badge => (
-              <span key={badge} className="flex items-center gap-1.5 text-slate-400 bg-slate-800/50 px-3.5 py-1.5 rounded-full border border-slate-700/40 hover:border-emerald-700/40 hover:text-emerald-300 transition-colors duration-200">
-                <span className="text-emerald-400 font-bold text-xs">✓</span>
+              <span key={badge} className="flex items-center gap-1.5 text-slate-400 bg-slate-800/50 px-3.5 py-1.5 rounded-full border border-slate-700/40 hover:border-[#C6A969]/40 hover:text-[#C6A969] transition-colors duration-200">
+                <span className="text-[#C6A969] font-bold text-xs">✓</span>
                 {badge}
               </span>
             ))}

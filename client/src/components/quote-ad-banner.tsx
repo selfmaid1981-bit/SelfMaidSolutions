@@ -43,7 +43,7 @@ export function QuoteAdBanner() {
         }}
       />
       <div className="absolute top-0 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#C6A969]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -58,7 +58,7 @@ export function QuoteAdBanner() {
               <span className="text-amber-300">in Seconds</span>
             </h2>
 
-            <p className="text-emerald-100/85 text-lg mb-7 leading-relaxed max-w-lg">
+            <p className="text-white/75 text-lg mb-7 leading-relaxed max-w-lg">
               Stop guessing. Use our instant quote calculator to get transparent,
               no-hidden-fee pricing tailored to your home — no phone call needed.
             </p>
@@ -66,7 +66,7 @@ export function QuoteAdBanner() {
             <ul className="space-y-3 mb-8">
               {features.map((f) => (
                 <li key={f} className="flex items-center gap-3 text-white/90">
-                  <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-[#C6A969] flex-shrink-0" />
                   <span className="text-[15px]">{f}</span>
                 </li>
               ))}
@@ -100,11 +100,11 @@ export function QuoteAdBanner() {
                   </div>
                   <div>
                     <p className="text-white font-bold text-sm">Quote Calculator</p>
-                    <p className="text-emerald-200/70 text-xs">selfmaidllc.com/quote</p>
+                    <p className="text-white/60 text-xs">selfmaidllc.com/quote</p>
                   </div>
-                  <div className="ml-auto flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 rounded-full px-2.5 py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-emerald-300 text-xs font-semibold">Live</span>
+                  <div className="ml-auto flex items-center gap-1.5 bg-[#C6A969]/20 border border-[#C6A969]/30 rounded-full px-2.5 py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C6A969] animate-pulse" />
+                    <span className="text-[#C6A969] text-xs font-semibold">Live</span>
                   </div>
                 </div>
 
@@ -138,14 +138,14 @@ export function QuoteAdBanner() {
 
                 <div className="grid grid-cols-2 gap-2.5 mb-5">
                   <div className="bg-white/8 border border-white/15 rounded-xl p-3 text-center">
-                    <DollarSign className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
+                    <DollarSign className="w-4 h-4 text-[#C6A969] mx-auto mb-1" />
                     <p className="text-white font-bold text-sm">No Hidden Fees</p>
-                    <p className="text-emerald-200/60 text-xs">What you see = what you pay</p>
+                    <p className="text-white/50 text-xs">What you see = what you pay</p>
                   </div>
                   <div className="bg-white/8 border border-white/15 rounded-xl p-3 text-center">
-                    <Clock className="w-4 h-4 text-emerald-300 mx-auto mb-1" />
+                    <Clock className="w-4 h-4 text-[#C6A969] mx-auto mb-1" />
                     <p className="text-white font-bold text-sm">Takes 60 Seconds</p>
-                    <p className="text-emerald-200/60 text-xs">Answer 4 quick questions</p>
+                    <p className="text-white/50 text-xs">Answer 4 quick questions</p>
                   </div>
                 </div>
 
@@ -156,7 +156,7 @@ export function QuoteAdBanner() {
                   Calculate My Price →
                 </a>
 
-                <p className="text-center text-emerald-200/50 text-xs mt-3">
+                <p className="text-center text-white/40 text-xs mt-3">
                   Free · Instant · No commitment
                 </p>
               </div>

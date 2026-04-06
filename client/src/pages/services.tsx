@@ -272,12 +272,12 @@ export default function Services() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                           <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                            <Check className="w-5 h-5 text-green-500" />
+                            <Check className="w-5 h-5 text-[#C6A969]" />
                             What's Included
                           </h3>
                           {service.features.map((feature, featureIndex) => (
                             <div key={featureIndex} className="flex items-start">
-                              <Check className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                              <Check className="w-4 h-4 text-[#C6A969] mr-2 mt-1 flex-shrink-0" />
                               <span className="text-muted-foreground text-sm">{feature}</span>
                             </div>
                           ))}
