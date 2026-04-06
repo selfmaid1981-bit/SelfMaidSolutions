@@ -111,7 +111,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden bg-gray-50">
+    <section id="contact" className="py-10 lg:py-16 relative overflow-hidden marble-bg">
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(31 42 55 / 0.4) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

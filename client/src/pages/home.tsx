@@ -137,15 +137,24 @@ export default function Home() {
         <Navigation />
         <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C6A969] to-transparent" />
         <HeroSection />
+        <div className="fade-dark-to-marble" />
         <ServicesSection />
+        <div className="fade-marble-to-teal" />
         <BeforeAfterGallery />
+        <div className="fade-teal-to-dark" />
         <VideoShowcase />
+        <div className="fade-dark-to-marble" />
         <HowItWorks />
+        <div className="fade-marble-to-dark" />
         <HomepageQuoteCalculator />
+        <div className="fade-dark-to-marble" />
         <TestimonialsSection />
         <AboutSection />
+        <div className="fade-marble-to-dark" />
         <FinalCtaSection />
+        <div className="fade-dark-to-marble" />
         <ContactSection />
+        <div className="fade-marble-to-dark" />
         <Footer />
         
         <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-xl px-3 py-3 safe-area-pb">

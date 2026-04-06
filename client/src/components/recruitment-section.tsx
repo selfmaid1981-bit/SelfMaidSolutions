@@ -41,15 +41,15 @@ export function RecruitmentSection() {
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-slate-900 dark:to-emerald-950">
+      <section className="py-16 lg:py-24 deep-teal-bg dark:from-slate-900 dark:to-emerald-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-serif">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 font-serif">
                 Join Our Team
               </h2>
               
-              <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
+              <p className="text-xl text-white/70 mb-8 leading-relaxed">
                 Be part of Alabama's most trusted cleaning service! We're looking for dedicated professionals 
                 who share our commitment to exceptional service, reliability, and customer satisfaction.
               </p>
@@ -57,7 +57,7 @@ export function RecruitmentSection() {
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button 
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl h-auto"
+                  className="bg-[#C6A969] hover:bg-[#b89a5a] text-[#1F2A37] px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl h-auto"
                   data-testid="recruitment-signup-button"
                 >
                   Apply Now
@@ -65,24 +65,24 @@ export function RecruitmentSection() {
                 
                 <a 
                   href="mailto:selfmaidclean@outlook.com?subject=Career Inquiry - Self-Maid Cleaning"
-                  className="inline-flex items-center justify-center bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 border-2 border-emerald-600 dark:border-emerald-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 dark:hover:bg-slate-700 transition-colors shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center justify-center bg-white/10 text-white border-2 border-[#C6A969]/40 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/20 transition-colors shadow-lg hover:shadow-xl"
                   data-testid="recruitment-email-button"
                 >
                   Email Us
                 </a>
               </div>
               
-              <div className="flex items-center space-x-8 text-slate-600 dark:text-slate-400">
+              <div className="flex items-center space-x-8 text-white/70">
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-[#C6A969] rounded-full mr-2"></div>
                   <span className="font-semibold">Service</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-[#C6A969] rounded-full mr-2"></div>
                   <span className="font-semibold">Reliability</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-[#C6A969] rounded-full mr-2"></div>
                   <span className="font-semibold">Trust</span>
                 </div>
               </div>
@@ -90,7 +90,7 @@ export function RecruitmentSection() {
           </div>
           
           <div className="mt-16">
-            <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-8 text-center font-serif">
+            <h3 className="text-3xl font-bold text-white mb-8 text-center font-serif">
               Why Work With Us?
             </h3>
             
@@ -100,15 +100,15 @@ export function RecruitmentSection() {
                 return (
                   <div 
                     key={index}
-                    className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700"
+                    className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-[#C6A969]/20"
                   >
-                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                    <div className="w-12 h-12 bg-[#C6A969]/20 rounded-lg flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#C6A969]" />
                     </div>
-                    <h4 className="font-bold text-lg text-slate-900 dark:text-white mb-2">
+                    <h4 className="font-bold text-lg text-white mb-2">
                       {benefit.title}
                     </h4>
-                    <p className="text-slate-600 dark:text-slate-400">
+                    <p className="text-white/70">
                       {benefit.description}
                     </p>
                   </div>

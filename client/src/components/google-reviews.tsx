@@ -32,29 +32,27 @@ const reviews = [
 export function GoogleReviews() {
   return (
     <section className="py-10 lg:py-14 relative overflow-hidden section-gradient-blue">
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(59 130 246 / 0.6) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-300/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-300/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(198,169,105,0.6) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 bg-white dark:bg-slate-800 shadow-xl px-6 py-3.5 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700 ring-1 ring-black/5 dark:ring-white/5">
+          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm shadow-xl px-6 py-3.5 rounded-2xl mb-6 border border-[#C6A969]/20">
             <FaGoogle className="w-6 h-6 flex-shrink-0" style={{ color: '#4285F4' }} />
-            <span className="font-bold text-slate-800 dark:text-white">Google Reviews</span>
-            <div className="w-px h-5 bg-slate-200 dark:bg-slate-600" />
+            <span className="font-bold text-white">Google Reviews</span>
+            <div className="w-px h-5 bg-white/20" />
             <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star key={star} className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-sm" />
               ))}
             </div>
-            <span className="font-black text-slate-900 dark:text-white text-lg">5.0</span>
-            <span className="text-slate-500 dark:text-slate-400 text-sm">(500+)</span>
+            <span className="font-black text-white text-lg">5.0</span>
+            <span className="text-white/60 text-sm">(500+)</span>
           </div>
 
-          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-3 font-serif">
+          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-3 font-serif">
             Real Reviews from Real Customers
           </h2>
-          <p className="text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="text-base text-white/70 max-w-2xl mx-auto">
             Don't take our word for it — see why 500+ customers across Alabama trust Self-Maid with their homes and businesses.
           </p>
         </div>
@@ -114,8 +112,8 @@ export function GoogleReviews() {
               width={80}
               height={80}
             />
-            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-bl-sm px-5 py-3 shadow-md max-w-xs">
-              <p className="text-slate-700 dark:text-slate-200 text-sm font-medium">
+            <div className="bg-white/10 backdrop-blur-sm border border-[#C6A969]/20 rounded-2xl rounded-bl-sm px-5 py-3 shadow-md max-w-xs">
+              <p className="text-white/90 text-sm font-medium">
                 Join 500+ happy customers! Your spotless home is just one quote away.
               </p>
             </div>

@@ -39,7 +39,7 @@ export function ReferralProgram() {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <section className="py-12 deep-teal-bg">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="border-2 border-primary/20 shadow-xl">
           <CardHeader className="text-center pb-4">

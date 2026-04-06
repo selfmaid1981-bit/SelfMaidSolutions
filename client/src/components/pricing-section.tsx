@@ -55,7 +55,7 @@ const services = [
 
 export function PricingSection() {
   return (
-    <section className="py-20 lg:py-28 bg-slate-50 dark:bg-slate-900/40">
+    <section className="py-20 lg:py-28 marble-bg dark:bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
