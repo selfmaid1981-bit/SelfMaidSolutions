@@ -10,8 +10,8 @@ const plans = [
     price: '$64+',
     originalPrice: '$80',
     perMonth: 'from $256/mo',
-    color: 'from-emerald-600 to-teal-500',
-    badge: 'bg-amber-400 text-amber-900',
+    color: 'from-[#C6A969] to-[#b89a5a]',
+    badge: 'bg-[#C6A969] text-[#1F2A37]',
     features: ['Every week, same day', 'Always fresh & spotless', 'Priority scheduling', 'Free re-clean guarantee']
   },
   {
@@ -21,8 +21,8 @@ const plans = [
     price: '$68+',
     originalPrice: '$80',
     perMonth: 'from $136/mo',
-    color: 'from-teal-500 to-emerald-500',
-    badge: 'bg-teal-500 text-white',
+    color: 'from-[#1F2A37] to-[#0f3a45]',
+    badge: 'bg-[#1F2A37] text-[#C6A969]',
     features: ['Every two weeks', 'Consistent clean home', 'Priority scheduling', 'Free re-clean guarantee']
   },
   {
@@ -32,8 +32,8 @@ const plans = [
     price: '$72+',
     originalPrice: '$80',
     perMonth: 'from $72/mo',
-    color: 'from-slate-500 to-emerald-500',
-    badge: 'bg-slate-500 text-white',
+    color: 'from-[#0c2e35] to-[#1F2A37]',
+    badge: 'bg-[#0c2e35] text-white',
     features: ['Once a month', 'Ideal for smaller homes', 'Flexible scheduling', 'Free re-clean guarantee']
   }
 ];
@@ -43,7 +43,7 @@ export function RecurringPlansSection() {
     <section className="py-20 lg:py-28 marble-bg dark:bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 bg-[#C6A969]/15 text-[#C6A969] px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
             <RefreshCw className="w-4 h-4" /> Recurring Cleaning Plans
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -77,7 +77,7 @@ export function RecurringPlansSection() {
                     <span className="text-3xl font-extrabold text-foreground">{plan.price}</span>
                     <span className="text-muted-foreground line-through text-sm">{plan.originalPrice}</span>
                   </div>
-                  <p className="text-sm text-teal-600 dark:text-teal-400 font-medium mt-1">
+                  <p className="text-sm text-[#C6A969] font-medium mt-1">
                     <TrendingDown className="w-3.5 h-3.5 inline mr-1" />
                     {plan.perMonth}
                   </p>
@@ -86,14 +86,14 @@ export function RecurringPlansSection() {
                 <ul className="space-y-2.5 mb-6">
                   {plan.features.map((feat) => (
                     <li key={feat} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-[#C6A969] flex-shrink-0" />
                       <span className="text-foreground/75">{feat}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link href="/booking">
-                  <Button className="w-full font-semibold bg-gradient-to-r from-emerald-600 to-teal-500 text-white hover:opacity-90">
+                  <Button className="w-full font-semibold bg-[#1F2A37] text-[#C6A969] hover:bg-[#2a3a4d]">
                     Start {plan.freq} Plan
                   </Button>
                 </Link>
@@ -102,14 +102,14 @@ export function RecurringPlansSection() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 text-center border border-emerald-100 dark:border-emerald-800">
-          <Heart className="w-8 h-8 text-rose-500 mx-auto mb-3" />
+        <div className="bg-[#1F2A37]/5 rounded-2xl p-8 text-center border border-[#C6A969]/20">
+          <Heart className="w-8 h-8 text-[#C6A969] mx-auto mb-3" />
           <h3 className="text-xl font-bold mb-2">100% Satisfaction Guarantee</h3>
           <p className="text-muted-foreground text-sm max-w-xl mx-auto mb-4">
             Not happy with your clean? We'll come back and fix it for free — no questions, no hassle. That's our promise to every recurring customer.
           </p>
           <Link href="/quote">
-            <Button variant="outline" className="font-semibold border-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30">
+            <Button variant="outline" className="font-semibold border-[#C6A969] text-[#1F2A37] hover:bg-[#C6A969]/10">
               Get My Recurring Quote <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

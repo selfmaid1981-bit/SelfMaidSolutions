@@ -124,7 +124,7 @@ export function GoogleReviews() {
               href="https://www.google.com/maps/search/Self-Maid+Cleaning+Solutions+Montgomery+AL"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 border-2 border-[#4285F4] text-[#4285F4] dark:text-emerald-400 px-8 py-4 rounded-xl font-bold hover:bg-[#4285F4] hover:text-white dark:hover:bg-emerald-600 dark:hover:text-white hover:border-[#4285F4] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border-2 border-[#C6A969]/40 text-white px-8 py-4 rounded-xl font-bold hover:bg-[#C6A969]/20 hover:border-[#C6A969] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
               data-testid="view-all-reviews-button"
             >
               <FaGoogle className="w-5 h-5" />
@@ -133,10 +133,10 @@ export function GoogleReviews() {
             </a>
             <a
               href="/quote"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E8E6A] to-[#2D3F52] text-white px-8 py-4 rounded-xl font-bold hover:from-[#1E8E6A] hover:to-[#1E8E6A] transition-all duration-300 shadow-md shadow-emerald-500/20 hover:shadow-xl hover:-translate-y-0.5 btn-shine"
+              className="inline-flex items-center gap-2 bg-[#C6A969] text-[#1F2A37] px-8 py-4 rounded-xl font-bold hover:bg-[#b89a5a] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
             >
               Get Your Free Quote
-              <Star className="w-4 h-4 fill-white" />
+              <Star className="w-4 h-4 fill-[#1F2A37]" />
             </a>
           </div>
         </div>

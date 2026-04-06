@@ -548,35 +548,6 @@ body {
   background: linear-gradient(135deg, #0a2a2f 0%, #0e3640 30%, #0f3a45 50%, #0c2e35 70%, #091e24 100%);
 }
 
-.fade-dark-to-marble {
-  height: 80px;
-  background: linear-gradient(to bottom, #1F2A37 0%, #1a2c34 30%, #f0f0f2 100%);
-}
-
-.fade-marble-to-dark {
-  height: 80px;
-  background: linear-gradient(to bottom, #f0f0f2 0%, #1a2c34 70%, #1F2A37 100%);
-}
-
-.fade-marble-to-teal {
-  height: 80px;
-  background: linear-gradient(to bottom, #f0f0f2 0%, #0c2e35 70%, #0a2a2f 100%);
-}
-
-.fade-teal-to-dark {
-  height: 80px;
-  background: linear-gradient(to bottom, #091e24 0%, #1a2c34 50%, #1F2A37 100%);
-}
-
-.fade-dark-to-teal {
-  height: 80px;
-  background: linear-gradient(to bottom, #1F2A37 0%, #0c2e35 50%, #0a2a2f 100%);
-}
-
-.fade-teal-to-marble {
-  height: 80px;
-  background: linear-gradient(to bottom, #091e24 0%, #1a2c34 30%, #f0f0f2 100%);
-}
 
 .section-gradient-teal {
   background: linear-gradient(
