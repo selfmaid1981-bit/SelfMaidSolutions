@@ -33,6 +33,7 @@ import GrowthDashboard from "@/pages/admin/growth-dashboard";
 import NotFound from "@/pages/not-found";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { FacebookPixel } from "@/components/facebook-pixel";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import CrmDashboard from "@/pages/crm/dashboard";
 import CrmPipeline from "@/pages/crm/pipeline";
 import CrmContacts from "@/pages/crm/contacts";
@@ -119,6 +120,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <FacebookPixel />
+          <SpeedInsights />
           <JotFormAgent />
           <Router />
         </TooltipProvider>
