@@ -69,6 +69,8 @@ import { db } from "./db";
 import { sql } from "drizzle-orm";
 import { pageViews, bookings, appointments } from "@shared/schema";
 
+const isVercelRuntime = process.env.VERCEL === "1";
+
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
   const adminKey = process.env.ADMIN_API_KEY;
@@ -114,9 +116,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const crmRoutes = (await import("./crm/routes")).default;
   app.use("/api/crm", crmRoutes);
 
-  // Start follow-up scheduler (checks every 60s for pending follow-ups)
-  const { startFollowUpScheduler } = await import("./hooks/quote-followup");
-  startFollowUpScheduler(60_000);
+  // In-process timers are valid on the persistent Replit server but are not
+  // reliable in Vercel's ephemeral runtime. Preview/production Vercel jobs will
+  // be migrated to explicit cron/function endpoints before activation.
+  if (!isVercelRuntime) {
+    const { startFollowUpScheduler } = await import("./hooks/quote-followup");
+    startFollowUpScheduler(60_000);
+  } else {
+    console.log("[runtime] Vercel detected; in-process quote follow-up scheduler disabled");
+  }
 
   // Register SaaS routes
   const saasRoutes = (await import("./saas/routes")).default;
@@ -1610,9 +1618,13 @@ Host: https://selfmaidllc.com`;
     }
   });
 
-  startWeeklyReportScheduler();
-  startDailyReportScheduler();
-  startWeeklyScheduleEmailer();
+  if (!isVercelRuntime) {
+    startWeeklyReportScheduler();
+    startDailyReportScheduler();
+    startWeeklyScheduleEmailer();
+  } else {
+    console.log("[runtime] Vercel detected; in-process report/schedule timers disabled");
+  }
 
   const httpServer = createServer(app);
   return httpServer;
