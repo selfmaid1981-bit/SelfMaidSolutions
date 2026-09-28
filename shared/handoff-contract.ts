@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { canonicalServiceTypeSchema } from "./ecosystem-service-types";
 
 export const ecosystemLifecycleStatuses = [
   "new",
@@ -44,7 +45,7 @@ export const ecosystemHandoffEventSchema = z.object({
     notes: z.string().optional(),
   }),
   service: z.object({
-    type: z.string().min(1),
+    type: canonicalServiceTypeSchema,
     area: z.object({
       address: z.string().optional(),
       city: z.string().optional(),
