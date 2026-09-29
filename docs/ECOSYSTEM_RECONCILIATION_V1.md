@@ -4,11 +4,17 @@ This branch reconciles the existing Self-Maid handoff adapter with the canonical
 
 ## Validation gap identified
 
-The current adapter validates that `service.type` is a non-empty string. The canonical ecosystem contract limits integration values to `residential`, `commercial`, `deep_clean`, `move_out`, `post_construction`, and `regular_maintenance`; unknown values must not be guessed.
+The current adapter previously validated that `service.type` was merely a non-empty string. The canonical ecosystem contract limits integration values to `residential`, `commercial`, `deep_clean`, `move_out`, `post_construction`, and `regular_maintenance`; unknown values must not be guessed.
 
-## Safe next code change
+## Completed
 
-Replace free-form service validation with the canonical enum and add a regression fixture proving an unknown service type is rejected. This is validation-only and does not enable persistence, production delivery, or customer communication.
+- Replaced free-form handoff service validation with the canonical service-type enum.
+- Added a dependency-free regression check that accepts every canonical service type and rejects unsupported values including `airbnb_turnover`, `window_only`, `unknown`, and an empty value.
+- Kept the change validation-only: no persistence, production delivery, or customer communication is enabled.
+
+## Next integration step
+
+Reconcile the canonical ecosystem event envelope with the existing Self-Maid adapter before adding durable idempotency storage. Preserve source identifiers and original qualification score during mapping rather than silently rewriting upstream data.
 
 ## Branch safety
 
