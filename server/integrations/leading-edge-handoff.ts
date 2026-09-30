@@ -6,6 +6,7 @@ import {
 
 export type SelfMaidInboundLead = {
   idempotencyKey: string;
+  sourceEventId: string;
   sourceLeadId: string;
   sourceSystem: "playhard" | "leading_edge" | "self_maid";
   sourceBrand: string;
@@ -28,6 +29,11 @@ export type SelfMaidInboundLead = {
     notes?: string;
   };
   qualificationScore?: number;
+  sourceQualificationScore?: {
+    value: number;
+    scaleMin: number;
+    scaleMax: number;
+  };
   routingTarget?: string;
   upstreamStatus: EcosystemHandoffEvent["lifecycleStatus"];
   notes?: string;
@@ -49,6 +55,7 @@ export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
 
   return {
     idempotencyKey: handoffIdempotencyKey(event),
+    sourceEventId: event.eventId,
     sourceLeadId: event.sourceLeadId,
     sourceSystem: event.sourceSystem,
     sourceBrand: event.sourceBrand,
@@ -71,6 +78,7 @@ export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
       notes: event.service.notes,
     },
     qualificationScore: event.qualification.score,
+    sourceQualificationScore: event.qualification.sourceScore,
     routingTarget: event.routing.target,
     upstreamStatus: event.lifecycleStatus,
     notes: event.notes,
