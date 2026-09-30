@@ -29,9 +29,17 @@ The current adapter previously validated that `service.type` was merely a non-em
 - Added dependency-free regression coverage for all three outcomes.
 - No database table, migration, or live write path has been activated.
 
+## Durable-storage boundary prepared
+
+- Added an explicitly unapplied SQL review artifact for a future `ecosystem_handoff_receipts` table. It is outside Drizzle's configured migration path and cannot be applied by the existing `db:push` command.
+- Added deterministic SHA-256 payload fingerprinting with stable object-key ordering.
+- Added regression coverage proving key-order independence, meaningful-change detection, and array-order sensitivity.
+- Preview responses now expose the payload fingerprint for integration inspection.
+- `SELFMAID_HANDOFF_PERSISTENCE_ENABLED` is recognized only as requested state; persistence remains hard-disabled because no durable store is wired. The receiver reports `persistenceAvailable: false` and `persisted: false`.
+
 ## Next integration step
 
-Define the durable receipt-table schema and migration artifact for review, but keep it unapplied. Then wire fingerprint generation and duplicate handling into the preview receiver behind an explicit disabled-by-default persistence flag.
+Add preview-only in-memory duplicate classification so repeated test deliveries can exercise the accept/duplicate/conflict policy without a database. Then standardize the outbound Leading Edge envelope builder against the same contract before any durable persistence is considered.
 
 ## Branch safety
 
