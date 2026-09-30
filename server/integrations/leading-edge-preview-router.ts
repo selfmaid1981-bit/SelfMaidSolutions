@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { timingSafeEqual } from "crypto";
 import { parseLeadingEdgeHandoff, mapInboundLeadToQuoteDraft, mapInboundLeadToBookingDraft } from "./leading-edge-handoff";
+import { fingerprintHandoffPayload } from "./handoff-fingerprint";
 
 function safeSecretMatch(actual: unknown, expected: string) {
   if (typeof actual !== "string" || actual.length !== expected.length) return false;
@@ -32,10 +33,16 @@ leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
 
   try {
     const lead = parseLeadingEdgeHandoff(req.body);
+    const payloadFingerprint = fingerprintHandoffPayload(req.body);
+    const persistenceEnabled = process.env.SELFMAID_HANDOFF_PERSISTENCE_ENABLED === "true";
+
+    // Persistence remains intentionally disabled. The flag is surfaced for review
+    // but cannot activate writes until a durable store is explicitly wired.
     return res.status(200).json({
       accepted: true,
       mode: "preview-validation-only",
       idempotencyKey: lead.idempotencyKey,
+      payloadFingerprint,
       sourceEventId: lead.sourceEventId,
       sourceLeadId: lead.sourceLeadId,
       upstreamStatus: lead.upstreamStatus,
@@ -45,6 +52,8 @@ leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
       },
       quoteDraft: mapInboundLeadToQuoteDraft(lead),
       bookingDraft: mapInboundLeadToBookingDraft(lead),
+      persistenceRequested: persistenceEnabled,
+      persistenceAvailable: false,
       persisted: false,
     });
   } catch (error) {
