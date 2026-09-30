@@ -2,6 +2,8 @@ import { Router } from "express";
 import { timingSafeEqual } from "crypto";
 import { parseLeadingEdgeHandoff, mapInboundLeadToQuoteDraft, mapInboundLeadToBookingDraft } from "./leading-edge-handoff";
 import { fingerprintHandoffPayload } from "./handoff-fingerprint";
+import { decideHandoffIdempotency } from "./handoff-idempotency";
+import { PreviewMemoryHandoffReceiptStore } from "./preview-memory-handoff-store";
 
 function safeSecretMatch(actual: unknown, expected: string) {
   if (typeof actual !== "string" || actual.length !== expected.length) return false;
@@ -13,8 +15,9 @@ function safeSecretMatch(actual: unknown, expected: string) {
 }
 
 export const leadingEdgeHandoffPreviewRouter = Router();
+const previewReceiptStore = new PreviewMemoryHandoffReceiptStore();
 
-leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
+leadingEdgeHandoffPreviewRouter.post("/preview", async (req, res) => {
   // Never expose this validation receiver as a production handoff endpoint.
   if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "preview") {
     return res.status(404).json({ message: "Not found" });
@@ -35,14 +38,26 @@ leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
     const lead = parseLeadingEdgeHandoff(req.body);
     const payloadFingerprint = fingerprintHandoffPayload(req.body);
     const persistenceEnabled = process.env.SELFMAID_HANDOFF_PERSISTENCE_ENABLED === "true";
+    const idempotency = await decideHandoffIdempotency(previewReceiptStore, {
+      idempotencyKey: lead.idempotencyKey,
+      sourceEventId: lead.sourceEventId,
+      payloadFingerprint,
+      firstReceivedAt: lead.receivedAt,
+    });
 
-    // Persistence remains intentionally disabled. The flag is surfaced for review
-    // but cannot activate writes until a durable store is explicitly wired.
-    return res.status(200).json({
+    if (idempotency.kind === "accept") {
+      await previewReceiptStore.save(idempotency.receipt);
+    }
+
+    // Persistence remains intentionally disabled. Duplicate classification uses
+    // process-local preview memory only and is cleared on server restart.
+    const statusCode = idempotency.kind === "conflict" ? 409 : 200;
+    return res.status(statusCode).json({
       accepted: true,
       mode: "preview-validation-only",
       idempotencyKey: lead.idempotencyKey,
       payloadFingerprint,
+      idempotencyStatus: idempotency.kind,
       sourceEventId: lead.sourceEventId,
       sourceLeadId: lead.sourceLeadId,
       upstreamStatus: lead.upstreamStatus,
@@ -55,6 +70,7 @@ leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
       persistenceRequested: persistenceEnabled,
       persistenceAvailable: false,
       persisted: false,
+      previewReceiptStored: idempotency.kind === "accept",
     });
   } catch (error) {
     return res.status(400).json({
