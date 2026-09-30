@@ -37,9 +37,17 @@ The current adapter previously validated that `service.type` was merely a non-em
 - Preview responses now expose the payload fingerprint for integration inspection.
 - `SELFMAID_HANDOFF_PERSISTENCE_ENABLED` is recognized only as requested state; persistence remains hard-disabled because no durable store is wired. The receiver reports `persistenceAvailable: false` and `persisted: false`.
 
+## Preview duplicate classification completed
+
+- Added a process-local preview receipt store; it is intentionally erased on server restart and is not production durability.
+- Preview deliveries now exercise the existing `accept / duplicate / conflict` policy.
+- First valid delivery is stored only in preview memory, exact redelivery is classified as `duplicate`, and conflicting reuse returns HTTP 409.
+- Durable persistence remains unavailable and no database writes were enabled.
+- Leading Edge outbound-envelope work now lives separately on `integration/ecosystem-outbound-v1`, keeping source and receiver changes independently reviewable.
+
 ## Next integration step
 
-Add preview-only in-memory duplicate classification so repeated test deliveries can exercise the accept/duplicate/conflict policy without a database. Then standardize the outbound Leading Edge envelope builder against the same contract before any durable persistence is considered.
+Cross-validate a Leading Edge-generated fixture against Self-Maid's shared v1 schema, then prepare a non-production delivery adapter with a fail-closed endpoint/secret configuration.
 
 ## Branch safety
 
