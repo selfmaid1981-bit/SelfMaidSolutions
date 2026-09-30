@@ -20,9 +20,18 @@ The current adapter previously validated that `service.type` was merely a non-em
 - Preview responses expose both canonical and source qualification values so mapping can be inspected without persistence.
 - Invalid source scores outside their declared range are rejected.
 
+## Idempotency policy prepared
+
+- Added a persistence-agnostic handoff receipt interface; it performs no database access by itself.
+- An unseen idempotency key is classified as `accept`.
+- An exact redelivery with the same event ID and payload fingerprint is classified as `duplicate`.
+- Reuse of an idempotency key with a different event ID or payload fingerprint is classified as `conflict` rather than silently overwriting prior data.
+- Added dependency-free regression coverage for all three outcomes.
+- No database table, migration, or live write path has been activated.
+
 ## Next integration step
 
-Add disabled, durable idempotency-event storage behind the preview receiver contract, but do not apply a production database migration or enable live writes until explicitly approved.
+Define the durable receipt-table schema and migration artifact for review, but keep it unapplied. Then wire fingerprint generation and duplicate handling into the preview receiver behind an explicit disabled-by-default persistence flag.
 
 ## Branch safety
 
