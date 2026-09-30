@@ -36,7 +36,13 @@ leadingEdgeHandoffPreviewRouter.post("/preview", (req, res) => {
       accepted: true,
       mode: "preview-validation-only",
       idempotencyKey: lead.idempotencyKey,
+      sourceEventId: lead.sourceEventId,
+      sourceLeadId: lead.sourceLeadId,
       upstreamStatus: lead.upstreamStatus,
+      qualification: {
+        canonicalScore: lead.qualificationScore,
+        sourceScore: lead.sourceQualificationScore,
+      },
       quoteDraft: mapInboundLeadToQuoteDraft(lead),
       bookingDraft: mapInboundLeadToBookingDraft(lead),
       persisted: false,
