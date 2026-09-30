@@ -57,7 +57,19 @@ export const ecosystemHandoffEventSchema = z.object({
   }),
   qualification: z.object({
     answers: z.record(z.unknown()).default({}),
+    // Canonical cross-system score. Ecosystem consumers can compare this on a 0-100 scale.
     score: z.number().min(0).max(100).optional(),
+    // Preserve the source system's untouched score and scale for auditability.
+    sourceScore: z.object({
+      value: z.number(),
+      scaleMin: z.number(),
+      scaleMax: z.number(),
+    }).refine(
+      (source) => source.scaleMax > source.scaleMin
+        && source.value >= source.scaleMin
+        && source.value <= source.scaleMax,
+      { message: "Source qualification score must fall within its declared scale." },
+    ).optional(),
   }).default({ answers: {} }),
   routing: z.object({
     target: z.string().optional(),
