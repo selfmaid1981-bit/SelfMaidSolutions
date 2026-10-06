@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { timingSafeEqual } from "crypto";
-import { parseLeadingEdgeHandoff, mapInboundLeadToQuoteDraft, mapInboundLeadToBookingDraft } from "./leading-edge-handoff";
+import { parseLeadingEdgeHandoffEvent, mapLeadingEdgeEventToInboundLead, mapInboundLeadToQuoteDraft, mapInboundLeadToBookingDraft } from "./leading-edge-handoff";
 import { fingerprintHandoffPayload } from "./handoff-fingerprint";
 import { decideHandoffIdempotency } from "./handoff-idempotency";
 import { PreviewMemoryHandoffReceiptStore } from "./preview-memory-handoff-store";
@@ -35,8 +35,9 @@ leadingEdgeHandoffPreviewRouter.post("/preview", async (req, res) => {
   }
 
   try {
-    const lead = parseLeadingEdgeHandoff(req.body);
-    const payloadFingerprint = fingerprintHandoffPayload(req.body);
+    const canonicalEvent = parseLeadingEdgeHandoffEvent(req.body);
+    const lead = mapLeadingEdgeEventToInboundLead(canonicalEvent);
+    const payloadFingerprint = fingerprintHandoffPayload(canonicalEvent);
     const persistenceEnabled = process.env.SELFMAID_HANDOFF_PERSISTENCE_ENABLED === "true";
     const idempotency = await decideHandoffIdempotency(previewReceiptStore, {
       idempotencyKey: lead.idempotencyKey,
