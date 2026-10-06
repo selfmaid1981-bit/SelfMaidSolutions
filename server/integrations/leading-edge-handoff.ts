@@ -40,7 +40,7 @@ export type SelfMaidInboundLead = {
   receivedAt: string;
 };
 
-export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
+export function parseLeadingEdgeHandoffEvent(input: unknown): EcosystemHandoffEvent {
   const event = ecosystemHandoffEventSchema.parse(input);
 
   if (event.sourceSystem !== "leading_edge") {
@@ -52,6 +52,11 @@ export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
       `Self-Maid cannot accept lifecycle status '${event.lifecycleStatus}' for a new operational handoff.`,
     );
   }
+
+  return event;
+}
+
+export function mapLeadingEdgeEventToInboundLead(event: EcosystemHandoffEvent): SelfMaidInboundLead {
 
   return {
     idempotencyKey: handoffIdempotencyKey(event),
@@ -84,6 +89,10 @@ export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
     notes: event.notes,
     receivedAt: new Date().toISOString(),
   };
+}
+
+export function parseLeadingEdgeHandoff(input: unknown): SelfMaidInboundLead {
+  return mapLeadingEdgeEventToInboundLead(parseLeadingEdgeHandoffEvent(input));
 }
 
 export function mapInboundLeadToQuoteDraft(lead: SelfMaidInboundLead) {
