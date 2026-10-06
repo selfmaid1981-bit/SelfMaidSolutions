@@ -52,3 +52,12 @@ Cross-validate a Leading Edge-generated fixture against Self-Maid's shared v1 sc
 ## Branch safety
 
 No deployment, database migration, secret provisioning, billing change, domain change, or live webhook activation is part of this branch.
+
+
+## Canonical fingerprint hardening
+
+- The preview receiver now parses the shared v1 envelope first and fingerprints the canonical validated event rather than raw request JSON.
+- Unknown transport-only fields therefore cannot create false idempotency conflicts.
+- Meaningful fields retained by the shared contract still change the fingerprint.
+- Regression coverage records both behaviors.
+- No persistence, production routing, or live customer handoff was enabled by this change.
