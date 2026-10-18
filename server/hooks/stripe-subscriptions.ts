@@ -133,7 +133,7 @@ export async function handleSubscriptionWebhook(event: any): Promise<void> {
     .update(companies)
     .set({
       subscriptionTier: tier,
-      subscriptionStatus: stripeSubscription.status,
+      subscriptionStatus: sub.status,
       updatedAt: new Date(),
     })
     .where(eq(companies.id, companyId));

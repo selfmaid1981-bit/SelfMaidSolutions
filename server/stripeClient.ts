@@ -1,8 +1,15 @@
+import { environmentCredentials } from "./environment-credentials";
 import Stripe from 'stripe';
 
 let connectionSettings: any;
 
 async function getCredentials() {
+  const configured = environmentCredentials(['STRIPE_PUBLISHABLE_KEY', 'STRIPE_SECRET_KEY']);
+  if (configured) {
+    const [publishableKey, secretKey] = configured;
+    return { publishableKey, secretKey };
+  }
+
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
   const xReplitToken = process.env.REPL_IDENTITY
     ? 'repl ' + process.env.REPL_IDENTITY

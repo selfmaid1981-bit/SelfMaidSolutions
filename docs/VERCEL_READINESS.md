@@ -33,3 +33,25 @@ Before production:
 - test Stripe in a non-production environment
 - verify the Contract v1 handoff receiver
 - keep production domains unchanged until all checks pass
+
+## Portable service credentials
+
+Stripe, SendGrid, and Twilio now accept complete server-side environment variable groups, without requiring a Replit connector token:
+
+- Stripe: `STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`
+- SendGrid: `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`
+- Twilio: `TWILIO_ACCOUNT_SID`, `TWILIO_API_KEY`, `TWILIO_API_KEY_SECRET`, `TWILIO_PHONE_NUMBER`
+
+Configure these in Vercel, never in browser-prefixed variables or git. On Vercel a missing credential group produces an explicit missing-variable error rather than attempting Replit credentials. Outside Vercel, existing connector behavior remains when no direct variables are supplied. Partial groups fail rather than mixing credentials from different accounts. This does not send messages or create payments.
+
+## Remaining deployment work
+
+The successful Vercel commit status only confirms a build/deployment was produced; it does not establish working API routes, authentication, cron jobs, or a production domain cutover. The app currently starts a persistent Express listener and does not define a serverless API entrypoint in this branch. Authentication still requires Replit OIDC configuration. Before cutover, inspect the actual Vercel project configuration, database access, service secrets, API runtime, scheduler replacement, handoff contract, and domain settings. Do not disable the Replit deployment until those checks pass.
+
+## Validation
+
+- `npm run build`
+- `npm run check`
+- `node --import tsx --test tests/environment-credentials.test.ts`
+
+TypeScript validation also exposed and corrected an undefined subscription webhook variable, an outdated p-retry AbortError reference, and missing image-response guards. No client layout or styles are changed.
