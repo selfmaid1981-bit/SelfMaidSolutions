@@ -7,7 +7,16 @@ import { WebhookHandlers } from "./webhookHandlers";
 
 const app = express();
 
+// Vercel Functions are ephemeral. Replit-specific startup side effects must not
+// run just because a preview/serverless instance starts.
+const isVercelRuntime = process.env.VERCEL === "1";
+
 async function initStripe() {
+  if (isVercelRuntime) {
+    log("Vercel runtime detected; skipping Replit-managed Stripe webhook initialization");
+    return;
+  }
+
   const databaseUrl = process.env.DATABASE_URL;
 
   if (!databaseUrl) {

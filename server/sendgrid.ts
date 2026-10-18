@@ -1,8 +1,15 @@
+import { environmentCredentials } from "./environment-credentials";
 import sgMail from '@sendgrid/mail';
 
 let connectionSettings: any;
 
 async function getCredentials() {
+  const configured = environmentCredentials(['SENDGRID_API_KEY', 'SENDGRID_FROM_EMAIL']);
+  if (configured) {
+    const [apiKey, email] = configured;
+    return { apiKey, email };
+  }
+
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME
   const xReplitToken = process.env.REPL_IDENTITY 
     ? 'repl ' + process.env.REPL_IDENTITY 

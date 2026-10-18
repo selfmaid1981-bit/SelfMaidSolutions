@@ -1,8 +1,15 @@
+import { environmentCredentials } from "./environment-credentials";
 import twilio from 'twilio';
 
 let connectionSettings: any;
 
 async function getCredentials() {
+  const configured = environmentCredentials(['TWILIO_ACCOUNT_SID', 'TWILIO_API_KEY', 'TWILIO_API_KEY_SECRET', 'TWILIO_PHONE_NUMBER']);
+  if (configured) {
+    const [accountSid, apiKey, apiKeySecret, phoneNumber] = configured;
+    return { accountSid, apiKey, apiKeySecret, phoneNumber };
+  }
+
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME
   const xReplitToken = process.env.REPL_IDENTITY 
     ? 'repl ' + process.env.REPL_IDENTITY 
