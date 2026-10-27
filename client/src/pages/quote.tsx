@@ -119,6 +119,7 @@ export default function Quote() {
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [showSaveForm, setShowSaveForm] = useState(false);
+  const [contactAllowed, setContactAllowed] = useState(false);
   const [savedQuoteId, setSavedQuoteId] = useState<string | null>(null);
   const [showIncentive, setShowIncentive] = useState(false);
   const [discountExpired, setDiscountExpired] = useState(false);
@@ -179,18 +180,21 @@ export default function Quote() {
         frequency: freq?.label || frequency,
         addOns: selectedAddOns.map(id => addOns.find(a => a.id === id)?.label || id),
         estimatedPrice: quote,
+        contactAllowed,
       });
-      return res.json();
+      const result = await res.json();
+      if (!result?.quoteId) throw new Error('The receiving service did not confirm this request. Please retry.');
+      return result;
     },
     onSuccess: (data) => {
       toast({
         title: "Quote Saved!",
         description: "Your quote request has been received. We will contact you to confirm the details.",
       });
-      setSavedQuoteId(data.quoteId || 'q-' + Date.now().toString(36));
+      setSavedQuoteId(String(data.quoteId));
       setShowSaveForm(false);
       setShowIncentive(true);
-      setDiscountExpired(false);
+      setDiscountExpired(true);
     },
     onError: (error: any) => {
       toast({
@@ -202,8 +206,8 @@ export default function Quote() {
   });
 
   const handleSaveQuote = () => {
-    if (!customerName || !customerEmail) {
-      toast({ title: "Missing Information", description: "Please provide your name and email to save your quote.", variant: "destructive" });
+    if (!customerName || !customerEmail || !contactAllowed) {
+      toast({ title: "Missing Information", description: "Provide your name, email and permission to contact you about this request.", variant: "destructive" });
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -215,10 +219,15 @@ export default function Quote() {
   };
 
   const handleBookWithDiscount = () => {
-    const useDiscount = showIncentive && !discountExpired;
+    if (!savedQuoteId) {
+      setShowSaveForm(true);
+      toast({ title: 'Save estimate first', description: 'Save the estimate and consent to follow-up before requesting an appointment.', variant: 'destructive' });
+      return;
+    }
+    const useDiscount = false;
     const finalPrice = useDiscount ? discountedPrice : quote;
     const params = new URLSearchParams({
-      quoteId: savedQuoteId || 'q-' + Date.now().toString(36),
+      quoteId: savedQuoteId,
       serviceType: selectedService?.label || '',
       estimatedPrice: finalPrice.toString(),
       quoteName: customerName,
@@ -507,8 +516,8 @@ export default function Quote() {
 
                         {showIncentive && discountExpired && (
                           <div className="rounded-xl border border-gray-200 bg-gray-50 dark:bg-gray-900 p-4 text-center" data-testid="incentive-expired">
-                            <p className="text-sm text-gray-500">Discount offer has expired</p>
-                            <p className="text-xs text-gray-400 mt-1">You can still book at the regular price</p>
+                            <p className="text-sm text-gray-500">Estimate request received</p>
+                            <p className="text-xs text-gray-400 mt-1">Preferred appointment time and final pricing require confirmation.</p>
                           </div>
                         )}
 
@@ -524,7 +533,7 @@ export default function Quote() {
                             This is an estimate. Final price may vary based on specific conditions.
                           </p>
 
-                          <UrgencyBanner variant="quote" />
+                          
                           <TrustSignals />
 
                           {!showSaveForm && !showIncentive ? (
@@ -561,7 +570,7 @@ export default function Quote() {
                                 <BookOpen className="w-5 h-5 mr-2" />
                                 {!discountExpired
                                   ? `Book Now — $${discountedPrice} (Save $${savings}!)`
-                                  : `Book Now — $${quote}`
+                                  : `Request Appointment — estimate ${quote}`
                                 }
                               </Button>
                               <a
@@ -614,6 +623,10 @@ export default function Quote() {
                                   />
                                 </div>
                               </div>
+                              <label className="flex items-start gap-3 rounded-lg border p-3 text-xs leading-5">
+                                <input type="checkbox" checked={contactAllowed} onChange={e => setContactAllowed(e.target.checked)} className="mt-1 h-4 w-4" />
+                                <span>I agree to be contacted by Self-Maid about this specific estimate and appointment request. This does not authorize unrelated marketing.</span>
+                              </label>
                               <div className="flex gap-2">
                                 <Button
                                   onClick={handleSaveQuote}
@@ -621,16 +634,16 @@ export default function Quote() {
                                   className="flex-1 gold-bg text-[#1F2A37] hover:opacity-90"
                                   data-testid="button-save-quote"
                                 >
-                                  {saveQuoteMutation.isPending ? 'Saving...' : 'Save & Email Quote'}
+                                  {saveQuoteMutation.isPending ? 'Saving...' : 'Save Estimate & Request Follow-up'}
                                 </Button>
                                 <Button
                                   onClick={handleBookThisQuote}
-                                  disabled={!customerName || !customerEmail}
+                                  disabled={!savedQuoteId}
                                   className="flex-1 bg-[#1F2A37] hover:bg-[#2D3F52]"
                                   data-testid="button-book-this-quote"
                                 >
                                   <BookOpen className="w-4 h-4 mr-2" />
-                                  Book Now
+                                  Request Appointment
                                 </Button>
                               </div>
                               <Button
@@ -663,9 +676,9 @@ export default function Quote() {
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg font-bold flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-[#C6A969]" />
-                        Available Booking Slots
+                        Preferred Appointment Times
                       </CardTitle>
-                      <p className="text-xs text-muted-foreground">Select a time and we'll pre-fill your booking</p>
+                      <p className="text-xs text-muted-foreground">Suggested request windows only; these are not verified openings.</p>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {availableSlots.slice(0, 4).map(day => (
@@ -697,7 +710,7 @@ export default function Quote() {
                         <div className="bg-[#C6A969]/10 dark:bg-[#C6A969]/10 rounded-lg p-3 flex items-center gap-2">
                           <Check className="w-4 h-4 text-[#C6A969]" />
                           <p className="text-sm text-[#1F2A37] dark:text-[#C6A969]">
-                            Selected: <strong>{selectedSlot.time}</strong> on <strong>{selectedSlot.date}</strong>
+                            Requested: <strong>{selectedSlot.time}</strong> on <strong>{selectedSlot.date}</strong> (unconfirmed)
                           </p>
                         </div>
                       )}
