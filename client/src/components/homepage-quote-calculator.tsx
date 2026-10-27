@@ -77,12 +77,14 @@ export function HomepageQuoteCalculator() {
         addOns: pets === 'yes' ? ['Pet Surcharge'] : [],
         estimatedPrice: price,
       });
-      return res.json();
+      const data = await res.json();
+      if (!data.quoteId) throw new Error('The quote was not confirmed. Please try again or call us.');
+      return data;
     },
     onSuccess: (data) => {
-      toast({ title: "Quote Saved!", description: "Check your email for details." });
+      toast({ title: "Quote Saved!", description: "Your request was received. Continue to provide booking preferences." });
       const params = new URLSearchParams({
-        quoteId: data.quoteId || 'q-' + Date.now().toString(36),
+        quoteId: data.quoteId,
         serviceType: selectedService?.label || '',
         estimatedPrice: price.toString(),
         quoteName: name,
