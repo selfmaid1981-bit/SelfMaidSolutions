@@ -91,7 +91,7 @@ export function Navigation() {
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : 'nav-top'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-32 lg:h-44 relative">
+        <div className="flex items-center h-24 lg:h-28 relative">
           <div className="hidden lg:flex items-center gap-0.5 flex-1 max-w-[38%]">
               <Link
                 href="/"
@@ -226,7 +226,7 @@ export function Navigation() {
             <img
               src={logoImage}
               alt="Self-Maid Cleaning Solutions"
-              className="h-28 lg:h-40 w-auto object-contain drop-shadow-lg"
+              className="h-20 lg:h-24 w-auto object-contain drop-shadow-lg"
               data-testid="logo-image"
             />
           </a>
