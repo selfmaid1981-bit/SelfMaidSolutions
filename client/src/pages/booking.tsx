@@ -160,7 +160,7 @@ export default function Booking() {
     <>
       <SEOHead
         title="Book Cleaning Service | Montgomery & Prattville AL | Self-Maid"
-        description="Schedule your professional cleaning service in Montgomery and Prattville, AL. Easy online booking with flexible payment options."
+        description="Schedule your professional cleaning service in Montgomery and Prattville, AL. Request a cleaning appointment online. We will confirm availability and payment arrangements."
         noindex={true}
       />
       
@@ -381,6 +381,7 @@ export default function Booking() {
                         <input
                           type="radio"
                           id="payNow"
+                          disabled
                           name="payment"
                           value="now"
                           checked={paymentOption === 'now'}
@@ -389,7 +390,7 @@ export default function Booking() {
                           data-testid="radio-pay-now"
                         />
                         <label htmlFor="payNow" className="ml-2 cursor-pointer text-sm">
-                          Pay Now - Proceed to secure payment
+                          Pay Now - Online payment temporarily unavailable; request a booking instead
                         </label>
                       </div>
                     </div>
