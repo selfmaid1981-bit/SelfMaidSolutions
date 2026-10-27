@@ -185,7 +185,7 @@ export default function Quote() {
     onSuccess: (data) => {
       toast({
         title: "Quote Saved!",
-        description: "Your quote has been saved and sent to your email. Check out your limited-time offer below!",
+        description: "Your quote request has been received. We will contact you to confirm the details.",
       });
       setSavedQuoteId(data.quoteId || 'q-' + Date.now().toString(36));
       setShowSaveForm(false);
