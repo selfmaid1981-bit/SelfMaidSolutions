@@ -13,7 +13,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { Calendar, AlertTriangle, CheckCircle, Shield, Clock, Star } from 'lucide-react';
-import { UrgencyBanner, TrustSignals } from '@/components/urgency-banner';
+import { TrustSignals } from '@/components/urgency-banner';
 
 export default function Booking() {
   const [, setLocation] = useLocation();
@@ -180,7 +180,7 @@ export default function Booking() {
                 {quoteData ? 'Complete your booking based on your quote' : 'Book a professional cleaning service'}
               </p>
               
-              <UrgencyBanner variant="booking" />
+              <p className="mt-4 text-sm text-white/75">Choose your preferred date and time. We will confirm availability before scheduling.</p>
               
               <div className="mt-4">
                 <TrustSignals />
