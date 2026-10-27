@@ -13,7 +13,6 @@ import { FinalCtaSection } from '@/components/final-cta-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
 import { ChatWidget } from '@/components/chat-widget';
-import { ExitIntentPopup } from '@/components/exit-intent-popup';
 import { useState } from 'react';
 import { Phone, CalendarCheck } from 'lucide-react';
 import { BookingModal } from '@/components/booking-modal';
@@ -169,7 +168,6 @@ export default function Home() {
         <BookingModal isOpen={isMobileBookingOpen} onClose={() => setIsMobileBookingOpen(false)} />
       </div>
       <ChatWidget />
-      <ExitIntentPopup />
     </>
   );
 }
