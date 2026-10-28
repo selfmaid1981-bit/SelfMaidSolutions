@@ -68,6 +68,9 @@ import {
 import { db } from "./db";
 import { sql } from "drizzle-orm";
 import { pageViews, bookings, appointments } from "@shared/schema";
+import { leadingEdgeHandoffPreviewRouter } from "./integrations/leading-edge-preview-router";
+
+const isVercelRuntime = process.env.VERCEL === "1";
 
 // Simple authentication middleware for admin routes
 function requireAdmin(req: any, res: any, next: any) {
@@ -110,13 +113,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Register AI Chat routes
   registerAIChatRoutes(app);
 
+  // Preview-only, validation-only ecosystem receiver. It never writes to the database.
+  app.use("/api/integrations/leading-edge/handoff", leadingEdgeHandoffPreviewRouter);
+
   // Register CRM routes
   const crmRoutes = (await import("./crm/routes")).default;
   app.use("/api/crm", crmRoutes);
 
-  // Start follow-up scheduler (checks every 60s for pending follow-ups)
-  const { startFollowUpScheduler } = await import("./hooks/quote-followup");
-  startFollowUpScheduler(60_000);
+  // Persistent process timers are valid on Replit but not on Vercel Functions.
+  if (!isVercelRuntime) {
+    const { startFollowUpScheduler } = await import("./hooks/quote-followup");
+    startFollowUpScheduler(60_000);
+  } else {
+    console.log("[runtime] Vercel detected; in-process quote follow-up scheduler disabled");
+  }
 
   // Register SaaS routes
   const saasRoutes = (await import("./saas/routes")).default;
@@ -1610,9 +1620,13 @@ Host: https://selfmaidllc.com`;
     }
   });
 
-  startWeeklyReportScheduler();
-  startDailyReportScheduler();
-  startWeeklyScheduleEmailer();
+  if (!isVercelRuntime) {
+    startWeeklyReportScheduler();
+    startDailyReportScheduler();
+    startWeeklyScheduleEmailer();
+  } else {
+    console.log("[runtime] Vercel detected; in-process report/schedule timers disabled");
+  }
 
   const httpServer = createServer(app);
   return httpServer;
